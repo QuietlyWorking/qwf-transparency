@@ -14,10 +14,7 @@ The online meeting world #OMW exists to provide a place for the people of the #Q
 
 ## Rules 
 The #OMW is a place of hope, love, joy, and peace. The [QWU Values](/living-proof/values/) will reign throughout this community, and it's rules will support those values in action.
-- We accept
-
-## Sketch
-![[QWU Online Meeting World (OMW) Sketch.canvas|QWU Online Meeting World (OMW) Sketch]]
+- We accept everyone... no matter your background, beliefs, or where you are in the world. You belong here.
 
 ## Usage
 
@@ -28,6 +25,3 @@ The #OMW is a place of hope, love, joy, and peace. The [QWU Values](/living-proo
 		1. Ask who they had a meeting with?
 		2. And offer to get ahold of that person.
 			1. If they think they have a meeting with Chaplain TIG, please text me their contact info to (949) 371-5844.
-
-
-[[Splinter - Luminara Story for MP]]

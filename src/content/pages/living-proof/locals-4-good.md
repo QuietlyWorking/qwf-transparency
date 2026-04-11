@@ -2,12 +2,21 @@
 title: "Locals 4 Good"
 slug: "locals-4-good"
 pillar: "living-proof"
-description: "|Month|Color Name|Hex Code|Represents|"
+description: "Locals 4 Good is a Quietly Working Foundation fundraising program that creates direct mail postcards connecting local businesses with affluent households in the"
 tags: []
 isHome: false
 ---
 # Locals 4 Good
 
+## What is Locals 4 Good?
+
+Locals 4 Good is a Quietly Working Foundation fundraising program that creates direct mail postcards connecting local businesses with affluent households in their communities. All proceeds support QWF's charitable mission... and the program provides essential real-world training for Missing Pixel students learning graphic design, prepress, print production, and client relations.
+
+Every postcard that goes out does two things at once... it helps a local business reach their neighbors, and it helps a young person build career skills that actually matter. That's the heart of L4G.
+
+To learn more about Quietly Working Foundation and all of our programs, visit [quietlyworking.org](https://quietlyworking.org).
+
+---
 
 # 12 Monthly Colors - Soft Pastel Palette
 
