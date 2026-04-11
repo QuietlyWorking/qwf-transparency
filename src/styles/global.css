@@ -210,6 +210,11 @@ img {
   margin-top: 4rem;
 }
 
+.footer-ecosystem {
+  max-width: 40rem;
+  margin: 0 auto 2.5rem;
+}
+
 .footer-inner {
   max-width: var(--content-max-width);
   margin: 0 auto;

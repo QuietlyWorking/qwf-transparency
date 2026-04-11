@@ -1,8 +1,15 @@
 ---
+import EcosystemFooterWidget from './islands/EcosystemFooterWidget.svelte';
+import ecosystemData from '../data/ecosystem.json';
+
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
+  <div class="footer-ecosystem">
+    <EcosystemFooterWidget client:visible data={ecosystemData} />
+  </div>
+
   <div class="footer-inner">
     <div class="footer-brand">
       <strong>Quietly Working Foundation</strong>
