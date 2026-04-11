@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-11 20:56 | Source version: 4.92
+> Generated: 2026-04-11 21:53 | Source version: 4.93
 
 # QWU Backoffice User Manual
 
@@ -3707,6 +3707,7 @@ The transparency site is an **Astro 5.x** static site on **Cloudflare Pages** wi
 **Interactive Svelte islands (loaded only when scrolled into view):**
 - **CostTicker** — Monthly operating cost breakdown with budget bar (homepage)
 - **EcosystemMap** — Filterable entity grid with health indicators (Living Proof page)
+- **ToolShedFilter** — Search, category/tier filters, multi-sort for 49 tools with QWS scores (Tool Shed page). Data extracted from vault markdown via `extract_tool_shed_data.py` during sync (Step 6b).
 
 **To publish a note:**
 1. Add `dg-publish: true` to frontmatter
@@ -3733,7 +3734,8 @@ The transparency site is an **Astro 5.x** static site on **Cloudflare Pages** wi
 **Key files:**
 | File | Purpose |
 |------|---------|
-| `005 Operations/Execution/sync_transparency_site_v2.py` | Sync script v2 (Astro output, v2.0.0) |
+| `005 Operations/Execution/sync_transparency_site_v2.py` | Sync script v2 (Astro output, v2.0.0) — includes Tool Shed extraction |
+| `005 Operations/Execution/extract_tool_shed_data.py` | Parses Tool Shed markdown → `src/data/tool-shed.json` (49 tools, v1.0.0) |
 | `005 Operations/Execution/sync_transparency_site.py` | **Deprecated** — v1 (Eleventy/Vercel) |
 | `005 Operations/Directives/sync_transparency_site.md` | Directive/SOP |
 | `005 Operations/Workflows/transparency-site-sync.json` | n8n workflow (daily 4 AM Pacific) |
@@ -4376,8 +4378,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v4.92 by generate_public_manual.py"
-generated: "2026-04-11 20:56"
+source: "Auto-generated from private manual v4.93 by generate_public_manual.py"
+generated: "2026-04-11 21:53"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10291,4 +10293,4 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ---
 
-*Last updated: 2026-04-11 20:56 (v4.92)*
+*Last updated: 2026-04-11 21:53 (v4.93)*
