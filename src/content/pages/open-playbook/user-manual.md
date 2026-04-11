@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-11 23:05 | Source version: 4.96
+> Generated: 2026-04-11 23:30 | Source version: 4.97
 
 # QWU Backoffice User Manual
 
@@ -3218,7 +3218,7 @@ The backoffice includes a comprehensive lead generation and enrichment system su
 **Full L4G Technical Documentation:** `003 Entities/Organizations/Locals 4 Good.md`
 
 The L4G system includes:
-- **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026). **SvelteKit migration in progress** — Phase 4 (SEO-critical public pages) complete on `sveltekit-migration` branch. All public pages SSR-rendered for Google visibility. Phases 5-11 remain (checkout, portal, admin, email mirror, deploy). Backend unchanged.
+- **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026). **SvelteKit migration in progress** — Phase 5 (checkout flow) complete on `sveltekit-migration` branch. All public pages + full checkout SSR-rendered. Phases 6-11 remain (portal, admin, email mirror, CX compliance, deploy, dry run). Backend unchanged.
 - **Data Layer:** Supabase (`<SUPABASE_PROJECT_ID_L4G>`) — 20 tables, migrated from Google Sheets
 - **APIs:** 8 Supabase Edge Functions (submit-contact-form, create-checkout-session, check-availability, expire-stale-holds, submit-category-request, subscribe-to-push, send-push-notification, ezer-chat)
 - **Payments:** Stripe Checkout via `create-checkout-session` edge function + n8n `L4G Stripe Payment Handler v1.3` webhook (E2E verified Mar 18, 2026)
@@ -4387,8 +4387,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v4.96 by generate_public_manual.py"
-generated: "2026-04-11 23:05"
+source: "Auto-generated from private manual v4.97 by generate_public_manual.py"
+generated: "2026-04-11 23:30"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10302,4 +10302,4 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ---
 
-*Last updated: 2026-04-11 23:05 (v4.96)*
+*Last updated: 2026-04-11 23:30 (v4.97)*
