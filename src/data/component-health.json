@@ -1,1 +1,91 @@
-{}
+{
+  "audit_date": "2026-04-11",
+  "overall_health": 80,
+  "prev_health": 80,
+  "health_trend": "stable",
+  "components": [
+    {
+      "name": "Email Processing",
+      "health": 100,
+      "status": "Active",
+      "visual_status": "healthy"
+    },
+    {
+      "name": "Meeting Intelligence",
+      "health": 100,
+      "status": "Active",
+      "visual_status": "healthy"
+    },
+    {
+      "name": "Morning Briefing",
+      "health": 100,
+      "status": "Active",
+      "visual_status": "healthy"
+    },
+    {
+      "name": "Daily Synthesis",
+      "health": 100,
+      "status": "Active",
+      "visual_status": "healthy"
+    },
+    {
+      "name": "Expert Monitoring",
+      "health": 100,
+      "status": "Active",
+      "visual_status": "healthy"
+    },
+    {
+      "name": "BNI Member Enrichment",
+      "health": 100,
+      "status": "Active",
+      "visual_status": "healthy"
+    },
+    {
+      "name": "Inbox Processing",
+      "health": 90,
+      "status": "Active",
+      "visual_status": "healthy"
+    },
+    {
+      "name": "Wisdom Synthesis",
+      "health": 90,
+      "status": "Active",
+      "visual_status": "healthy"
+    },
+    {
+      "name": "Lead Enrichment",
+      "health": 85,
+      "status": "Partial",
+      "visual_status": "warning"
+    },
+    {
+      "name": "Document Sync",
+      "health": 60,
+      "status": "Partial",
+      "visual_status": "warning"
+    },
+    {
+      "name": "Calendar/Scheduling",
+      "health": 50,
+      "status": "Partial",
+      "visual_status": "warning"
+    },
+    {
+      "name": "Lead Generation",
+      "health": 40,
+      "status": "Defined",
+      "visual_status": "critical"
+    },
+    {
+      "name": "QWF Creative",
+      "health": 30,
+      "status": "Defined",
+      "visual_status": "critical"
+    }
+  ],
+  "gap_count": 35,
+  "total_directives": 180,
+  "total_scripts": 399,
+  "azure_mtd_cost": null,
+  "azure_yesterday_cost": null
+}

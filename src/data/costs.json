@@ -1,1 +1,223 @@
-{}
+{
+  "generated_at": "2026-04-11T19:08:03.218423",
+  "cache_ttl_seconds": 300,
+  "monthly_summary": {
+    "total_mtd": 338.21,
+    "month": "April 2026",
+    "day_of_month": 11,
+    "sources": {
+      "llm": 102.62,
+      "azure": 0,
+      "supabase": 135.0,
+      "apify": 97.5851,
+      "esp": 3.0,
+      "betterstack": 0.0,
+      "email": 0.0
+    }
+  },
+  "llm": {
+    "mtd_cost": 102.62,
+    "mtd_calls": 3216,
+    "last_24h_cost": 8.06,
+    "last_24h_calls": 249,
+    "by_tier": {
+      "standard": {
+        "cost": 19.51,
+        "calls": 790
+      },
+      "flagship": {
+        "cost": 83.1,
+        "calls": 2426
+      }
+    },
+    "by_model": {
+      "anthropic/claude-sonnet-4.5": {
+        "cost": 19.23,
+        "calls": 768
+      },
+      "anthropic/claude-opus-4.6": {
+        "cost": 83.1,
+        "calls": 2426
+      },
+      "perplexity/sonar": {
+        "cost": 0.28,
+        "calls": 22
+      }
+    },
+    "top_scripts": [
+      {
+        "script": "process_video_content.py",
+        "cost": 25.83,
+        "calls": 338
+      },
+      {
+        "script": "wisdom_indexer.py",
+        "cost": 24.91,
+        "calls": 1612
+      },
+      {
+        "script": "generate_connection_report.py",
+        "cost": 21.4,
+        "calls": 282
+      },
+      {
+        "script": "qwr_wisdom_monitor.py",
+        "cost": 16.29,
+        "calls": 683
+      },
+      {
+        "script": "extract_meeting_person_insights.py",
+        "cost": 3.91,
+        "calls": 22
+      },
+      {
+        "script": "qwr_competitor_intel.py",
+        "cost": 2.78,
+        "calls": 77
+      },
+      {
+        "script": "email_classify.py",
+        "cost": 2.28,
+        "calls": 76
+      },
+      {
+        "script": "route_content_programs.py",
+        "cost": 1.89,
+        "calls": 58
+      },
+      {
+        "script": "meeting_intel_analyze.py",
+        "cost": 1.29,
+        "calls": 7
+      },
+      {
+        "script": "adapt_content_voice.py",
+        "cost": 0.86,
+        "calls": 10
+      }
+    ]
+  },
+  "infrastructure": {
+    "azure": {
+      "mtd": 0,
+      "yesterday": 0,
+      "monthly_budget": 200.0
+    },
+    "supabase": {
+      "monthly": 135.0,
+      "breakdown": "12 MICRO ($10 ea) + org $25 - $10 credit"
+    },
+    "esp": {
+      "monthly": 3.0,
+      "annual": 35.49,
+      "note": "Self-hosted email platform"
+    },
+    "betterstack": {
+      "monthly": 0.0,
+      "note": "Lifetime AppSumo license"
+    },
+    "email": {
+      "monthly": 0.0,
+      "note": "Included in M365"
+    },
+    "fixed_total": 138.0
+  },
+  "scraping": {
+    "total_cost": 97.5851,
+    "run_count": 1373,
+    "by_actor": {
+      "apidojo/tweet-scraper": {
+        "runs": 121,
+        "cost": 10.352,
+        "succeeded": 121,
+        "failed": 0
+      },
+      "apify/puppeteer-scraper": {
+        "runs": 17,
+        "cost": 0.3193,
+        "succeeded": 16,
+        "failed": 1
+      },
+      "apify/rag-web-browser": {
+        "runs": 87,
+        "cost": 0.3301,
+        "succeeded": 87,
+        "failed": 0
+      },
+      "compass/Google-Maps-Reviews-Scraper": {
+        "runs": 31,
+        "cost": 0.2639,
+        "succeeded": 30,
+        "failed": 1
+      },
+      "compass/crawler-google-places": {
+        "runs": 30,
+        "cost": 1.026,
+        "succeeded": 30,
+        "failed": 0
+      },
+      "apimaestro/linkedin-profile-posts": {
+        "runs": 1022,
+        "cost": 50.01,
+        "succeeded": 1022,
+        "failed": 0
+      },
+      "dev_fusion/Linkedin-Profile-Scraper": {
+        "runs": 11,
+        "cost": 0.11,
+        "succeeded": 11,
+        "failed": 0
+      },
+      "apify/google-search-scraper": {
+        "runs": 10,
+        "cost": 0.0325,
+        "succeeded": 10,
+        "failed": 0
+      },
+      "starvibe/youtube-video-transcript": {
+        "runs": 4,
+        "cost": 0.02,
+        "succeeded": 4,
+        "failed": 0
+      },
+      "trudax/reddit-scraper-lite": {
+        "runs": 36,
+        "cost": 35.0472,
+        "succeeded": 35,
+        "failed": 1
+      },
+      "thescrappa/linkedin-profile-scraper": {
+        "runs": 1,
+        "cost": 0.0003,
+        "succeeded": 1,
+        "failed": 0
+      },
+      "apify/website-content-crawler": {
+        "runs": 1,
+        "cost": 0.0158,
+        "succeeded": 1,
+        "failed": 0
+      },
+      "apimaestro/linkedin-company-posts": {
+        "runs": 1,
+        "cost": 0.05,
+        "succeeded": 1,
+        "failed": 0
+      },
+      "dev_fusion/Linkedin-Company-Scraper": {
+        "runs": 1,
+        "cost": 0.008,
+        "succeeded": 1,
+        "failed": 0
+      }
+    }
+  },
+  "budget": {
+    "monthly_variable": 400.0,
+    "monthly_fixed": 138.0,
+    "monthly_total_budget": 538.0,
+    "used_variable": 200.21,
+    "percent_used": 50.1,
+    "projected_month_end": 546.01
+  }
+}

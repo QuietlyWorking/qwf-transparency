@@ -1,6 +1,7 @@
 ---
 import Pillar from '@/layouts/Pillar.astro';
 import PillarCard from '@/components/PillarCard.astro';
+import EcosystemMap from '@/components/islands/EcosystemMap.svelte';
 import { getCollection } from 'astro:content';
 
 const pages = await getCollection('pages', (entry) =>
@@ -8,6 +9,14 @@ const pages = await getCollection('pages', (entry) =>
 );
 
 const sorted = pages.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+// Load ecosystem data
+let ecosystemData: Record<string, any> = {};
+try {
+  ecosystemData = await import('@/data/ecosystem.json');
+} catch { /* graceful fallback */ }
+
+const hasEcosystem = ecosystemData?.summary != null;
 ---
 
 <Pillar
@@ -16,6 +25,13 @@ const sorted = pages.sort((a, b) => a.data.title.localeCompare(b.data.title));
   accentColor="var(--cosmic-magenta)"
   pillarSlug="living-proof"
 >
+  {hasEcosystem && (
+    <div class="ecosystem-section">
+      <h2>QWF Ecosystem</h2>
+      <EcosystemMap client:visible data={ecosystemData} />
+    </div>
+  )}
+
   {sorted.map(page => (
     <PillarCard
       title={page.data.title}
@@ -26,3 +42,17 @@ const sorted = pages.sort((a, b) => a.data.title.localeCompare(b.data.title));
     />
   ))}
 </Pillar>
+
+<style>
+  .ecosystem-section {
+    grid-column: 1 / -1;
+    margin-bottom: 1rem;
+  }
+
+  .ecosystem-section h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    margin-bottom: 1rem;
+  }
+</style>

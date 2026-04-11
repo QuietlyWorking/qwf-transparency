@@ -1,1 +1,2001 @@
-{}
+{
+  "generated_at": "2026-04-11T19:09:55.182803",
+  "cache_ttl": 60,
+  "version": "2.0.0",
+  "summary": {
+    "total_entities": 50,
+    "apps_online": 7,
+    "programs_active": 7,
+    "system_health_pct": 90,
+    "relationship_health_pct": 85,
+    "supervisor_success_pct": 99,
+    "status_breakdown": {
+      "active": 33,
+      "production": 4,
+      "alpha": 3,
+      "building": 4,
+      "planning": 5,
+      "standby": 1
+    }
+  },
+  "categories": [
+    {
+      "id": "app",
+      "label": "Apps",
+      "icon": "grid",
+      "color": "#6366f1",
+      "description": "SaaS fundraising products with student training components",
+      "count": 10,
+      "live_count": 4
+    },
+    {
+      "id": "program",
+      "label": "Programs",
+      "icon": "heart",
+      "color": "#ef4444",
+      "description": "QWF nonprofit programs serving youth and communities",
+      "count": 7,
+      "live_count": 7
+    },
+    {
+      "id": "system",
+      "label": "Systems",
+      "icon": "cog",
+      "color": "#9b3d8f",
+      "description": "Meta-systems powering QWF operations",
+      "count": 10,
+      "live_count": 5
+    },
+    {
+      "id": "infra",
+      "label": "Infrastructure",
+      "icon": "server",
+      "color": "#0ea5e9",
+      "description": "Servers, platforms, and services keeping everything running",
+      "count": 5,
+      "live_count": 4
+    },
+    {
+      "id": "pedagogy",
+      "label": "Teaching",
+      "icon": "book",
+      "color": "#f59e0b",
+      "description": "Frameworks and methodologies for youth development",
+      "count": 3,
+      "live_count": 3
+    },
+    {
+      "id": "content",
+      "label": "Content",
+      "icon": "pen",
+      "color": "#10b981",
+      "description": "Content creation and knowledge systems",
+      "count": 4,
+      "live_count": 3
+    },
+    {
+      "id": "site",
+      "label": "Sites",
+      "icon": "globe",
+      "color": "#2dd4bf",
+      "description": "QWF web presences across the internet",
+      "count": 11,
+      "live_count": 11
+    }
+  ],
+  "entities": [
+    {
+      "id": "qwr",
+      "name": "Quietly Writing",
+      "tagline": "AI-powered content creation for service businesses",
+      "category": "app",
+      "subcategory": "saas",
+      "status": "production",
+      "icon": "pencil",
+      "color": "#6366f1",
+      "url": "https://quietlywriting.org",
+      "metrics_source": "hq_observatory",
+      "featured": true,
+      "sort_order": 1,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "Press releases, blog posts, and SEO content. The first QWF SaaS fundraising product.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "Quietly Writing helps home service businesses create professional content in minutes, not days. Press releases, blog posts, and SEO content are generated with AI assistance and reviewed before publication. Every donation supports student training through The Missing Pixel Project.",
+        "highlights": [
+          "AI-powered content creation for press releases, blogs, and SEO",
+          "Built for home service businesses (roofing, HVAC, plumbing, etc.)",
+          "Every supporter helps train the next generation of technical artists"
+        ],
+        "cta_label": "Learn More",
+        "cta_url": "https://quietlywriting.org",
+        "connections": [
+          "Missing Pixel Project",
+          "QWF Passport",
+          "Quietly Spotting",
+          "Supabase Platform",
+          "FORGE",
+          "Content Pipeline",
+          "Newsletter"
+        ],
+        "media": {
+          "boilerplate": "Quietly Writing is a QWF fundraising program helping home service businesses create professional content in minutes. AI-powered press releases, blog posts, and SEO content... built by Missing Pixel students, supporting youth with every donation."
+        }
+      }
+    },
+    {
+      "id": "qqt",
+      "name": "Quietly Quoting",
+      "tagline": "Embeddable quote calculators for service businesses",
+      "category": "app",
+      "subcategory": "saas",
+      "status": "production",
+      "icon": "calculator",
+      "color": "#10b981",
+      "url": "https://quietlyquoting.org",
+      "metrics_source": "hq_observatory",
+      "featured": true,
+      "sort_order": 2,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "Instant home service estimates with satellite roof measurement. Widget embeds on any website.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "Quietly Quoting gives home service businesses an embeddable quote calculator that generates instant estimates using satellite roof measurement. Visitors get a price in seconds, businesses get qualified leads. Widget drops into any website with one line of code.",
+        "highlights": [
+          "Satellite roof measurement for instant estimates",
+          "Embeddable widget works on any website",
+          "MP students contribute to development and design"
+        ],
+        "cta_label": "See It in Action",
+        "cta_url": "https://quietlyquoting.org",
+        "connections": [
+          "Missing Pixel Project",
+          "QWF Passport",
+          "Quietly Spotting",
+          "Supabase Platform",
+          "FORGE",
+          "n8n Workflows"
+        ],
+        "media": {
+          "boilerplate": "Quietly Quoting is a QWF fundraising program providing embeddable quote calculators for service businesses. Every donation supports student training through The Missing Pixel Project."
+        }
+      }
+    },
+    {
+      "id": "qnt",
+      "name": "Quietly Networking",
+      "tagline": "BNI chapter management with relationship intelligence",
+      "category": "app",
+      "subcategory": "saas",
+      "status": "alpha",
+      "icon": "handshake",
+      "color": "#8b5cf6",
+      "url": null,
+      "metrics_source": "hq_observatory",
+      "featured": true,
+      "sort_order": 3,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "Visitor enrichment, speaker scheduling, and networking analytics for BNI chapters.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "Quietly Networking transforms BNI chapter management with visitor enrichment, speaker scheduling, and relationship intelligence. Automatically enriches visitor data, tracks networking patterns, and helps chapter leaders make data-driven decisions.",
+        "highlights": [
+          "Automatic visitor data enrichment from LinkedIn and Google",
+          "Speaker scheduling with smart rotation",
+          "Relationship strength tracking and analytics"
+        ],
+        "connections": [
+          "Missing Pixel Project",
+          "EPIC",
+          "Content Pipeline",
+          "Supabase Platform",
+          "OMW",
+          "HQ Command Center"
+        ],
+        "media": {
+          "boilerplate": "Quietly Networking is a QWF fundraising program for BNI chapter management with relationship intelligence. Built by Missing Pixel students, supporting QWF's mission to serve youth."
+        }
+      }
+    },
+    {
+      "id": "qkn",
+      "name": "Quietly Knocking",
+      "tagline": "Warm/cold lead development and email marketing",
+      "category": "app",
+      "subcategory": "saas",
+      "status": "planning",
+      "icon": "door",
+      "color": "#f97316",
+      "url": null,
+      "metrics_source": "hq_observatory",
+      "featured": false,
+      "sort_order": 4,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "Personalized landing pages and email campaigns for service businesses.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "Quietly Knocking will be the lead development arm of the QWF app family. Personalized landing pages, warm and cold email campaigns, and lead nurturing sequences designed specifically for service businesses.",
+        "highlights": [
+          "Personalized landing pages for each prospect",
+          "AI-assisted email campaigns",
+          "Lead scoring and nurturing automation"
+        ],
+        "connections": [
+          "Quietly Writing",
+          "FORGE",
+          "Missing Pixel Project",
+          "Locals 4 Good",
+          "Supabase Platform",
+          "n8n Workflows"
+        ],
+        "media": {
+          "boilerplate": "Quietly Knocking is a QWF fundraising program for warm and cold lead development with email marketing intelligence. Every donation supports student training through The Missing Pixel Project."
+        }
+      }
+    },
+    {
+      "id": "qsp",
+      "name": "Quietly Spotting",
+      "tagline": "Multi-tenant command center for QWF supporters",
+      "category": "app",
+      "subcategory": "saas",
+      "status": "production",
+      "icon": "telescope",
+      "color": "#f59e0b",
+      "url": "https://quietlyspotting.org",
+      "metrics_source": "hq_observatory",
+      "featured": true,
+      "sort_order": 5,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "One dashboard to see all your QWF products. The free command center for supporters.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "Quietly Spotting is the free command center for all QWF supporters. One dashboard to see every product you support, manage your subscriptions, and discover new tools. Think of it as mission control for your QWF journey.",
+        "highlights": [
+          "Free for all QWF supporters",
+          "Unified dashboard for all QWF products",
+          "Discover new tools that fit your business"
+        ],
+        "cta_label": "Get Started Free",
+        "cta_url": "https://quietlyspotting.org",
+        "connections": [
+          "QWF Passport",
+          "HQ Command Center",
+          "Supabase Platform",
+          "Digital Twin",
+          "Quietly Writing",
+          "Quietly Quoting"
+        ],
+        "media": {
+          "boilerplate": "Quietly Spotting is a QWF fundraising program... a multi-tenant command center for QWF supporters providing real-time operational dashboards and KPI tracking."
+        }
+      }
+    },
+    {
+      "id": "qrp",
+      "name": "Quietly Managing",
+      "tagline": "Property management with AI bill scanning",
+      "category": "app",
+      "subcategory": "saas",
+      "status": "alpha",
+      "icon": "house",
+      "color": "#ef4444",
+      "url": "https://quietlymanaging.org",
+      "metrics_source": "hq_observatory",
+      "featured": false,
+      "sort_order": 6,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "Dashboard for small landlords and property managers. AI-powered bill scanning and expense tracking.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "Quietly Managing helps small landlords and property managers stay on top of their properties. AI-powered bill scanning extracts amounts and categories automatically. Track expenses, manage tenants, and see the full picture.",
+        "highlights": [
+          "AI bill scanning with automatic categorization",
+          "Expense tracking across multiple properties",
+          "Tenant management and communication tools"
+        ],
+        "cta_label": "Early Access",
+        "cta_url": "https://quietlymanaging.org",
+        "connections": [
+          "QWF Passport",
+          "Quietly Spotting",
+          "Supabase Platform",
+          "Missing Pixel Project",
+          "FORGE"
+        ]
+      }
+    },
+    {
+      "id": "hq",
+      "name": "HQ Command Center",
+      "tagline": "QWF operations nerve center",
+      "category": "app",
+      "subcategory": "internal",
+      "status": "production",
+      "icon": "target",
+      "color": "#0ea5e9",
+      "url": "https://hq.quietlyworking.org",
+      "metrics_source": "hq_observatory",
+      "featured": false,
+      "sort_order": 7,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Tasks, relationships, meetings, and the App Observatory. Internal operations dashboard.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "HQ is the internal operations nerve center for The Quietly Working Foundation. Tasks, relationships, meetings, and the App Observatory that monitors the health of every QWF product in real-time.",
+        "highlights": [
+          "App Observatory monitors 8 QWF apps daily",
+          "Task management and relationship intelligence",
+          "Meeting prep and follow-up automation"
+        ],
+        "connections": [
+          "Digital Twin",
+          "Content Pipeline",
+          "Ezer Omnibus",
+          "n8n Workflows",
+          "Supabase Platform",
+          "Quietly Spotting"
+        ]
+      }
+    },
+    {
+      "id": "pocket_ez",
+      "name": "Pocket Ez",
+      "tagline": "AI companion for grief, depression, and chronic pain",
+      "category": "app",
+      "subcategory": "saas",
+      "status": "alpha",
+      "icon": "heart-pulse",
+      "color": "#a855f7",
+      "url": "https://pocketez.org",
+      "metrics_source": "hq_observatory",
+      "featured": true,
+      "sort_order": 8,
+      "sensitivity": "medium",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Bioluminescent AI companion. 8 conversation modes from gentle check-ins to deep reflection.",
+      "lore_connection": "splinter",
+      "public_link": true,
+      "detail": {
+        "summary": "Pocket Ez is a bioluminescent AI companion designed for people navigating grief, depression, and chronic pain. Eight conversation modes range from gentle check-ins to deep reflection. Pocket Ez does not replace therapy. She walks alongside you in the in-between moments.",
+        "highlights": [
+          "8 conversation modes from gentle to deep",
+          "Bioluminescent visual design that responds to your mood",
+          "Cross-channel memory with Ezer Omnibus"
+        ],
+        "cta_label": "Meet Pocket Ez",
+        "cta_url": "https://pocketez.org",
+        "connections": [
+          "Ezer Omnibus",
+          "Splinter",
+          "War on Hopelessness",
+          "WHELHO App",
+          "Missing Pixel Project",
+          "GUILD"
+        ]
+      }
+    },
+    {
+      "id": "whelho",
+      "name": "WHELHO App",
+      "tagline": "Personal development wheel for whole-life balance",
+      "category": "app",
+      "subcategory": "saas",
+      "status": "planning",
+      "icon": "circle-dot",
+      "color": "#14b8a6",
+      "url": null,
+      "metrics_source": null,
+      "featured": false,
+      "sort_order": 9,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "woh",
+      "description": "8-slice wheel: Spirit, Mind, Body, Charity, Work, Money, Recreation, Purpose. Track your whole-life health.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "The WHELHO App will bring the personal development wheel to your phone. Track your whole-life health across 8 dimensions: Spirit, Mind, Body, Charity, Work, Money, Recreation, and Purpose.",
+        "highlights": [
+          "8-slice development wheel",
+          "Track progress over time",
+          "Connected to WOH community"
+        ],
+        "connections": [
+          "War on Hopelessness",
+          "whelho.org",
+          "Pocket Ez",
+          "GUILD",
+          "Missing Pixel Project"
+        ]
+      }
+    },
+    {
+      "id": "heart_draft",
+      "name": "Heart Draft",
+      "tagline": "Send Out Cards companion for meaningful connections",
+      "category": "app",
+      "subcategory": "saas",
+      "status": "planning",
+      "icon": "mail-heart",
+      "color": "#ec4899",
+      "url": null,
+      "metrics_source": null,
+      "featured": false,
+      "sort_order": 10,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Draft heartfelt cards and messages with AI assistance. Companion to Send Out Cards.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "Heart Draft will help you write heartfelt cards and messages with AI assistance. A companion to Send Out Cards, making it easy to maintain meaningful connections.",
+        "highlights": [
+          "AI-assisted message drafting",
+          "Send Out Cards integration",
+          "Relationship-driven communication"
+        ],
+        "connections": [
+          "Ezer Omnibus",
+          "EPIC",
+          "Missing Pixel Project",
+          "Splinter",
+          "Content Pipeline"
+        ]
+      }
+    },
+    {
+      "id": "qwf",
+      "name": "The Quietly Working Foundation",
+      "tagline": "Serving youth. Supporting those who serve youth.",
+      "category": "program",
+      "subcategory": "parent",
+      "status": "active",
+      "icon": "shield",
+      "color": "#2dd4bf",
+      "url": "https://quietlyworking.org",
+      "metrics_source": null,
+      "featured": true,
+      "sort_order": 1,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": null,
+      "description": "501(c)(3) nonprofit parent organization. Building toward 100% financial self-sufficiency through product-based fundraising.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "Founded in 1999, The Quietly Working Foundation is a 501(c)(3) nonprofit serving youth 30 and younger. Born from a commercial creative agency (1996) and transformed when founder [Chaplain TIG clinically died on March 25, 2013](https://chaplaintig.com) and was brought back after 7 minutes. We love them, come alongside them, help them see hope, discover purpose, build it, live it, and create legacy.",
+        "highlights": [
+          "501(c)(3) nonprofit since 1999",
+          "Born from 30 years of creative expertise, reborn for mission",
+          "Every product trains students through The Missing Pixel Project",
+          "Supporting youth service organizations worldwide"
+        ],
+        "cta_label": "Visit Our Site",
+        "cta_url": "https://quietlyworking.org",
+        "connections": [
+          "FORGE",
+          "GUILD",
+          "Missing Pixel Project",
+          "TWAPE",
+          "Ezer Omnibus",
+          "Digital Twin",
+          "quietlyworking.org"
+        ],
+        "media": {
+          "logos": [
+            {
+              "label": "QWF Logo 650x300",
+              "url": "https://quietlyworking.org/wp-content/uploads/2023/11/qwfLogo_650x300.png",
+              "format": "PNG"
+            },
+            {
+              "label": "QWF Logo 400x200",
+              "url": "https://quietlyworking.org/wp-content/uploads/2016/09/qwfLogo_400x200.png",
+              "format": "PNG"
+            },
+            {
+              "label": "QW Logo 1k",
+              "url": "https://quietlyworking.org/wp-content/uploads/2019/02/qw_Logo_1k.png",
+              "format": "PNG"
+            },
+            {
+              "label": "QW Rock + Logo Set",
+              "url": "https://quietlyworking.org/wp-content/uploads/2025/03/qwRockAndLogoSet_257.png",
+              "format": "PNG"
+            }
+          ],
+          "social": {
+            "instagram": "@quietlyworking",
+            "facebook": "/quietlyworking",
+            "x": "@quietlyworking",
+            "linkedin": "/company/quietlyworking",
+            "youtube": "@quietlyworking"
+          },
+          "boilerplate": "The Quietly Working Foundation is a 501(c)(3) nonprofit empowering youth 30 and younger to discover purpose, build it, live it, and create a legacy that lives beyond them. With 30 years of creative production heritage, QWF builds fundraising programs that train Missing Pixel students through real-world experience while generating sustainable funding for the mission."
+        }
+      }
+    },
+    {
+      "id": "acofh",
+      "name": "America's Children of Fallen Heroes",
+      "tagline": "Honoring the children left behind",
+      "category": "program",
+      "subcategory": "direct-service",
+      "status": "active",
+      "icon": "medal",
+      "color": "#dc2626",
+      "url": "https://heroeskids.org",
+      "metrics_source": null,
+      "featured": true,
+      "sort_order": 2,
+      "sensitivity": "high",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Supporting children who lost military and first responder parents. QWF's first and most sensitive program.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "QWF's first effort, founded in 1999 as 'Children of Fallen Soldiers' and rebranded ~2010 to include first responder families. Honors the young people left behind when military members and first responders make the ultimate sacrifice. The program that started it all \u2014 and whose younglings later sparked The Missing Pixel Project.",
+        "highlights": [
+          "QWF's founding effort since 1999",
+          "Serving children of fallen military and first responders",
+          "The program whose younglings sparked Missing Pixel",
+          "Handled with extreme sensitivity and care"
+        ],
+        "cta_label": "Learn More",
+        "cta_url": "https://heroeskids.org",
+        "connections": [
+          "The Quietly Working Foundation",
+          "heroeskids.org",
+          "FORGE",
+          "GUILD",
+          "War on Hopelessness",
+          "Missing Pixel Project"
+        ],
+        "media": {
+          "logos": [
+            {
+              "label": "ACOFH Logo 1k",
+              "url": "https://quietlyworking.org/wp-content/uploads/2016/09/ACoFH_Logo_1k.png",
+              "format": "PNG"
+            },
+            {
+              "label": "ACOFH Logo 750x400",
+              "url": "https://quietlyworking.org/wp-content/uploads/2016/09/ACoFH_Logo_750x400.png",
+              "format": "PNG"
+            }
+          ],
+          "social": {
+            "instagram": "@heroeskids",
+            "facebook": "/heroeskids",
+            "x": "@heroeskids"
+          },
+          "boilerplate": "America's Children of Fallen Heroes serves young people who have lost a parent in military service or as a first responder. ACOFH was the first QWF effort, honoring the children left behind and connecting them with resources, community, and hope."
+        }
+      }
+    },
+    {
+      "id": "mp",
+      "name": "The Missing Pixel Project",
+      "tagline": "Technical artistry training for underserved youth",
+      "category": "program",
+      "subcategory": "direct-service",
+      "status": "active",
+      "icon": "palette",
+      "color": "#8b5cf6",
+      "url": "https://missingpixel.org",
+      "metrics_source": null,
+      "featured": true,
+      "sort_order": 3,
+      "sensitivity": "medium",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "4-stage progression: Observer, Contributor, Builder, Maintainer. Students build real products for real organizations.",
+      "lore_connection": "splinter",
+      "public_link": true,
+      "detail": {
+        "summary": "Sparked in ~2019 when a heroeskids youngling learning Maya 3D asked 'Why aren't we teaching this to other kids in worse positions?' The Missing Pixel Project trains underserved youth in technical artistry through a 4-stage progression: Observer, Contributor, Builder, Maintainer. Students build real products for real organizations. The name comes from the belief that every picture is missing a pixel, and every team is missing a person.",
+        "highlights": [
+          "4-stage progression: Observer to Maintainer",
+          "Students build real products for real organizations",
+          "Every QWF app doubles as a training ground"
+        ],
+        "cta_label": "Meet Missing Pixel",
+        "cta_url": "https://missingpixel.org",
+        "connections": [
+          "I Built That",
+          "GUILD",
+          "Splinter",
+          "7 Steps of Mentorship",
+          "The Quietly Working Foundation",
+          "FORGE",
+          "SDF Moment"
+        ],
+        "media": {
+          "logos": [
+            {
+              "label": "MP Logo Vertical",
+              "url": "https://quietlyworking.org/wp-content/uploads/2023/11/MissingPixelLogo_vert.png",
+              "format": "PNG"
+            },
+            {
+              "label": "MP Logo 500x500",
+              "url": "https://quietlyworking.org/wp-content/uploads/2023/11/mp_logo_colorBlock_500x500.png",
+              "format": "PNG"
+            },
+            {
+              "label": "MP Logo 250x75",
+              "url": "https://quietlyworking.org/wp-content/uploads/2023/08/mp_logo_250x75.png",
+              "format": "PNG"
+            },
+            {
+              "label": "MP Icon 50x50",
+              "url": "https://quietlyworking.org/wp-content/uploads/2023/11/mp_logo_colorBlock_50x50.png",
+              "format": "PNG"
+            }
+          ],
+          "social": {
+            "instagram": "@missingpixel",
+            "facebook": "/missingpixel",
+            "x": "@missingpixel",
+            "tiktok": "@missingpixel"
+          },
+          "boilerplate": "The Missing Pixel Project is QWF's student training program, teaching young people professional creative production skills through real-world projects. Students build the very apps and systems that fund the nonprofit mission... learning by doing, not just studying."
+        }
+      }
+    },
+    {
+      "id": "iysr",
+      "name": "International Youth Service Registry",
+      "tagline": "Connecting youth-serving organizations worldwide",
+      "category": "program",
+      "subcategory": "network",
+      "status": "active",
+      "icon": "network",
+      "color": "#0ea5e9",
+      "url": "https://iysr.org",
+      "metrics_source": null,
+      "featured": true,
+      "sort_order": 4,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Registry and network for youth service organizations. Because we're better together.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "The International Youth Service Registry connects youth-serving organizations worldwide. Because we're better together. A network for organizations that share QWF's mission of serving young people.",
+        "highlights": [
+          "Global registry of youth service organizations",
+          "Network for collaboration and shared resources",
+          "Because we're better together"
+        ],
+        "cta_label": "Join the Registry",
+        "cta_url": "https://iysr.org",
+        "connections": [
+          "The Quietly Working Foundation",
+          "iysr.org",
+          "GUILD",
+          "Missing Pixel Project",
+          "FORGE"
+        ],
+        "media": {
+          "logos": [
+            {
+              "label": "IYSR Logo 1k",
+              "url": "https://quietlyworking.org/wp-content/uploads/2016/09/IYSR_Logo_1k.png",
+              "format": "PNG"
+            }
+          ],
+          "social": {
+            "instagram": "@iysr_org",
+            "facebook": "/iysrorg",
+            "x": "@iysr_org",
+            "linkedin": "/company/iysr"
+          },
+          "boilerplate": "The International Youth Service Registry connects youth-serving organizations worldwide, because we're better together. IYSR helps communities discover and partner with organizations already doing the work of serving young people."
+        }
+      }
+    },
+    {
+      "id": "woh",
+      "name": "War on Hopelessness",
+      "tagline": "Combat-positive lifestyle brand for youth facing adversity",
+      "category": "program",
+      "subcategory": "brand",
+      "status": "active",
+      "icon": "flame",
+      "color": "#f97316",
+      "url": "https://waronhopelessness.org",
+      "metrics_source": null,
+      "featured": true,
+      "sort_order": 5,
+      "sensitivity": "medium",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Apparel and volunteer hub. Volunteers support all QWF programs. Combat-positive framing, not dwelling on pain.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "War on Hopelessness is a combat-positive lifestyle brand for youth facing adversity. Apparel, volunteer hub, and community. WOH volunteers support all QWF programs.",
+        "highlights": [
+          "Combat-positive lifestyle brand",
+          "Volunteer hub supporting all QWF programs",
+          "Apparel with purpose and meaning"
+        ],
+        "cta_label": "Join the Fight",
+        "cta_url": "https://waronhopelessness.org",
+        "connections": [
+          "WHELHO App",
+          "GUILD",
+          "Pocket Ez",
+          "The Quietly Working Foundation",
+          "FORGE",
+          "waronhopelessness.org",
+          "Missing Pixel Project"
+        ],
+        "media": {
+          "social": {
+            "instagram": "@waronhopelessness",
+            "facebook": "/waronhopelessness",
+            "x": "@waronhopelessness",
+            "tiktok": "@waronhopelessness"
+          },
+          "boilerplate": "War on Hopelessness is QWF's combat-positive lifestyle brand... a movement for youth facing adversity. WOH channels energy into purpose, turning pain into power and hopelessness into legacy."
+        }
+      }
+    },
+    {
+      "id": "qwc",
+      "name": "Quietly Working Creative",
+      "tagline": "30 years of creative mastery, now building the next generation",
+      "category": "program",
+      "subcategory": "revenue",
+      "status": "active",
+      "icon": "sparkles",
+      "color": "#d946ef",
+      "url": null,
+      "metrics_source": null,
+      "featured": true,
+      "sort_order": 6,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "Three decades of award-winning creative expertise \u2014 reborn as QWF's engine for student training, nonprofit sustainability, and youth service organization support.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "Born in 1996 as an award-winning creative agency serving Disney and major brands, Quietly Working Creative was completely dissolved and reborn inside QWF after founder [Chaplain TIG clinically died on March 25, 2013](https://chaplaintig.com) and was brought back after 7 minutes by a combat Marine. Every project now serves a dual purpose: real-world training for Missing Pixel students and sustainable funding for the mission. 30 years of mistakes survived, turned into empowered wisdom for the next generation.",
+        "highlights": [
+          "30 years of creative expertise serving the nonprofit mission",
+          "Every client project is a student training ground",
+          "Award-winning work in film, VFX, branding, and business development",
+          "Driving QWF toward 100% financial self-sufficiency"
+        ],
+        "connections": [
+          "Missing Pixel Project",
+          "The Quietly Working Foundation",
+          "Content Pipeline",
+          "Newsletter",
+          "Quietly Writing",
+          "IYSR",
+          "Locals 4 Good"
+        ],
+        "media": {
+          "social": {
+            "instagram": "@quietlyworkingcreative",
+            "linkedin": "/company/qwcreative"
+          },
+          "boilerplate": "Quietly Working Creative is QWF's fundraising program offering professional creative services... 30 years of agency expertise now building the next generation of creative professionals through Missing Pixel student training."
+        }
+      }
+    },
+    {
+      "id": "l4g",
+      "name": "Locals 4 Good",
+      "tagline": "Beautiful postcards connecting local businesses to communities",
+      "category": "program",
+      "subcategory": "revenue",
+      "status": "active",
+      "icon": "mailbox",
+      "color": "#22c55e",
+      "url": "https://locals4good.org",
+      "metrics_source": null,
+      "featured": true,
+      "sort_order": 7,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "9x12 postcards mailed to 10,000 affluent households. One business per category. MP students create the ads.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "Locals 4 Good sends beautiful 9x12 postcards to 10,000 affluent households in targeted communities. One business per category ensures exclusivity. Missing Pixel students create the ad designs.",
+        "highlights": [
+          "10,000 households per mailing via USPS EDDM",
+          "One business per category (exclusive)",
+          "MP students create the ad designs",
+          "Tax-deductible donations from $250 to $4,900"
+        ],
+        "cta_label": "Reserve Your Spot",
+        "cta_url": "https://locals4good.org",
+        "connections": [
+          "Missing Pixel Project",
+          "The Quietly Working Foundation",
+          "Quietly Knocking",
+          "FORGE",
+          "locals4good.org",
+          "WordPress Multisite"
+        ],
+        "media": {
+          "logos": [
+            {
+              "label": "L4G Logo 500x500",
+              "url": "https://quietlyworking.org/wp-content/uploads/2025/03/locals4Good_logo_500x500.png",
+              "format": "PNG"
+            }
+          ],
+          "social": {
+            "instagram": "@locals4good",
+            "facebook": "/locals4good",
+            "linkedin": "/company/locals4good"
+          },
+          "boilerplate": "Locals 4 Good is a QWF fundraising program connecting local businesses with their communities through beautiful direct mail postcards. Every postcard is designed by Missing Pixel students, and every donation supports QWF's mission to serve youth."
+        }
+      }
+    },
+    {
+      "id": "forge",
+      "name": "FORGE",
+      "tagline": "Funder Outreach & Relationship Growth Engine",
+      "category": "system",
+      "subcategory": "fundraising",
+      "status": "building",
+      "icon": "flame",
+      "color": "#d4782c",
+      "url": null,
+      "metrics_source": null,
+      "featured": true,
+      "sort_order": 1,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "8 fuel lines: ORE (grants), ALLOY (corporate), CRUCIBLE (major donors), KINDLE (recurring), BELLOWS (community), TRIBUTE (memorial), EMBER (planned giving), INGOT (non-cash).",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "FORGE (Funder Outreach & Relationship Growth Engine) is QWF's comprehensive fundraising system with 8 distinct fuel lines. Each fuel line represents a different path to financial sustainability.",
+        "highlights": [
+          "ORE: Grant writing and foundation funding",
+          "ALLOY: Corporate partnerships and sponsorships",
+          "CRUCIBLE: Major donor cultivation",
+          "KINDLE: Recurring monthly supporters",
+          "BELLOWS: Community campaigns and events",
+          "TRIBUTE: Memorial and honorary giving",
+          "EMBER: Planned giving and bequests",
+          "INGOT: Non-cash gifts and in-kind donations"
+        ],
+        "connections": [
+          "GUILD",
+          "The Quietly Working Foundation",
+          "Quietly Writing",
+          "Quietly Quoting",
+          "Quietly Knocking",
+          "Locals 4 Good",
+          "TWAPE"
+        ]
+      }
+    },
+    {
+      "id": "guild",
+      "name": "GUILD",
+      "tagline": "Growth-focused Unified Integration for Leaders & Doers",
+      "category": "system",
+      "subcategory": "volunteer",
+      "status": "building",
+      "icon": "users",
+      "color": "#a855f7",
+      "url": null,
+      "metrics_source": null,
+      "featured": true,
+      "sort_order": 2,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "Volunteer management with medieval guild progression. 6 tiers: Prospect, Apprentice, Journeyman, Artisan, Master, Guildmaster.",
+      "lore_connection": "splinter",
+      "public_link": false,
+      "detail": {
+        "summary": "GUILD (Growth-focused Unified Integration for Leaders & Doers) manages QWF's volunteer ecosystem using a medieval guild progression. Six tiers create a gamified, meaningful pathway for contributors.",
+        "highlights": [
+          "6 tiers: Prospect, Apprentice, Journeyman, Artisan, Master, Guildmaster",
+          "Gamified progression with meaningful milestones",
+          "Manages volunteers across all QWF programs"
+        ],
+        "connections": [
+          "War on Hopelessness",
+          "Missing Pixel Project",
+          "FORGE",
+          "Splinter",
+          "I Built That",
+          "7 Steps of Mentorship",
+          "America's Children of Fallen Heroes"
+        ]
+      }
+    },
+    {
+      "id": "twape",
+      "name": "TWAPE",
+      "tagline": "The Worst Affiliate Program Ever",
+      "category": "system",
+      "subcategory": "engagement",
+      "status": "active",
+      "icon": "coins",
+      "color": "#eab308",
+      "url": "https://worstaffiliateprogramever.com",
+      "metrics_source": null,
+      "featured": true,
+      "sort_order": 3,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "1 penny per referral. Not about money \u2014 about telling the story. Milestones at 1, 10, 25, 100 referrals.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "The Worst Affiliate Program Ever pays 1 penny per referral. That's it. One cent. It's not about the money. It's about telling the story. Milestones at 1, 10, 25, and 100 referrals unlock recognition.",
+        "highlights": [
+          "1 penny per referral (yes, really)",
+          "Milestone badges at 1, 10, 25, 100 referrals",
+          "It's about telling the story, not the money"
+        ],
+        "cta_label": "Join TWAPE",
+        "cta_url": "https://worstaffiliateprogramever.com",
+        "connections": [
+          "The Quietly Working Foundation",
+          "GUILD",
+          "FORGE",
+          "Missing Pixel Project",
+          "Ezer Omnibus"
+        ]
+      }
+    },
+    {
+      "id": "ezer",
+      "name": "Ezer Omnibus",
+      "tagline": "AI assistant across 6 channels",
+      "category": "system",
+      "subcategory": "ai",
+      "status": "active",
+      "icon": "bot",
+      "color": "#00ff88",
+      "url": null,
+      "metrics_source": "supervisor",
+      "featured": true,
+      "sort_order": 4,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Ezer Aion lives across SMS, Discord, Web Widget, Email, Terminal, and Pocket Ez. 5-tier progressive trust. Cross-channel memory.",
+      "lore_connection": "splinter",
+      "public_link": false,
+      "detail": {
+        "summary": "Ezer Ai\u00f3n (Hebrew \"helper who runs toward\" + Greek \"eternal age\") lives across 6 channels: SMS, Discord, Web Widget, Email, Terminal, and Pocket Ez. She maintains cross-channel memory and operates under a 5-tier progressive trust system.",
+        "highlights": [
+          "6 channels: SMS, Discord, Web, Email, Terminal, Pocket Ez",
+          "5-tier progressive trust system",
+          "Cross-channel memory and context awareness"
+        ],
+        "connections": [
+          "Pocket Ez",
+          "Digital Twin",
+          "Splinter",
+          "Content Pipeline",
+          "n8n Workflows",
+          "Preference Center",
+          "HQ Command Center"
+        ]
+      }
+    },
+    {
+      "id": "digital_twin",
+      "name": "Digital Twin",
+      "tagline": "Live operational mirror of the entire backoffice",
+      "category": "system",
+      "subcategory": "operations",
+      "status": "active",
+      "icon": "activity",
+      "color": "#2dd4bf",
+      "url": "https://twin.quietlyworking.org",
+      "metrics_source": "self",
+      "featured": false,
+      "sort_order": 5,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "25 REST endpoints serving real-time system metrics. 5 supervisor domains. Cost transparency. Preference center.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "The Digital Twin is a live operational mirror of the entire QWF backoffice. 25 REST endpoints serve real-time metrics. Cost transparency, system health, and the ecosystem widget you're looking at right now are all powered by this system.",
+        "highlights": [
+          "25 REST endpoints for real-time operational data",
+          "5 supervisor domains: Operations, Content, Relationships, Lead Intelligence, Meeting Prep",
+          "Powers this ecosystem widget, dashboards, and system audits"
+        ],
+        "connections": [
+          "HQ Command Center",
+          "Ezer Omnibus",
+          "n8n Workflows",
+          "Content Pipeline",
+          "Azure Cloud",
+          "Quietly Spotting",
+          "QWF Transparency Project"
+        ]
+      },
+      "live": {
+        "health": "healthy",
+        "success_rate": 100.0
+      }
+    },
+    {
+      "id": "splinter",
+      "name": "Splinter",
+      "tagline": "The lore layer woven through everything",
+      "category": "system",
+      "subcategory": "lore",
+      "status": "active",
+      "icon": "sparkle",
+      "color": "#4a1a6b",
+      "url": null,
+      "metrics_source": null,
+      "featured": false,
+      "sort_order": 6,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "Luminara, the Three-Sided Stone, ciphers, and hidden connections. 'Find the pix.' The story beneath the story.",
+      "lore_connection": "self",
+      "public_link": false,
+      "detail": {
+        "summary": "Splinter is the lore layer woven through everything QWF builds. Luminara, the Three-Sided Stone, ciphers, and hidden connections. \"Find the pix.\" The story beneath the story.",
+        "highlights": [
+          "Luminara: the guiding light in QWF's narrative",
+          "The Three-Sided Stone: a symbol appearing across apps",
+          "Hidden ciphers and connections for those who look closely"
+        ],
+        "connections": [
+          "Pocket Ez",
+          "Missing Pixel Project",
+          "GUILD",
+          "Ezer Omnibus",
+          "FORGE",
+          "Heart Draft"
+        ]
+      }
+    },
+    {
+      "id": "infra_wordpress",
+      "name": "WordPress Multisite",
+      "tagline": "11 QWF websites on one server",
+      "category": "infra",
+      "subcategory": "hosting",
+      "status": "active",
+      "icon": "layout",
+      "color": "#0ea5e9",
+      "url": null,
+      "metrics_source": "betterstack",
+      "featured": false,
+      "sort_order": 1,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "AWS Lightsail. WordPress 6.9, Divi theme. Hosts all QWF program websites.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "QWF's WordPress Multisite runs on AWS Lightsail, hosting all 11 program websites on a single server. WordPress 6.9 with the Divi theme provides a consistent design language across all sites.",
+        "highlights": [
+          "11 QWF websites on one server",
+          "AWS Lightsail with daily auto-snapshots",
+          "WordPress 6.9 with Divi theme",
+          "Betterstack uptime monitoring"
+        ],
+        "connections": [
+          "quietlyworking.org",
+          "heroeskids.org",
+          "waronhopelessness.org",
+          "Azure Cloud",
+          "Locals 4 Good",
+          "locals4good.org"
+        ]
+      }
+    },
+    {
+      "id": "infra_n8n",
+      "name": "n8n Workflows",
+      "tagline": "Automation orchestration engine",
+      "category": "infra",
+      "subcategory": "automation",
+      "status": "active",
+      "icon": "workflow",
+      "color": "#ff6d5a",
+      "url": "https://n8n.quietlyworking.org",
+      "metrics_source": "supervisor",
+      "featured": false,
+      "sort_order": 2,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Self-hosted workflow automation. 60+ active workflows. Schedule triggers, SSH execution, Discord alerts.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "n8n is QWF's self-hosted workflow automation engine. Over 60 active workflows handle everything from meeting reminders to app health monitoring to Discord alerts.",
+        "highlights": [
+          "60+ active workflows",
+          "Self-hosted on Azure VM for full control",
+          "Connects to Discord, Supabase, Email, and more",
+          "Nightly database backups to Azure Blob storage"
+        ],
+        "connections": [
+          "Digital Twin",
+          "Azure Cloud",
+          "Ezer Omnibus",
+          "Email Service Provider",
+          "HQ Command Center",
+          "Content Pipeline"
+        ]
+      },
+      "live": {
+        "health": "healthy",
+        "success_rate": 100.0
+      }
+    },
+    {
+      "id": "infra_supabase",
+      "name": "Supabase Platform",
+      "tagline": "Database and auth for all QWF apps",
+      "category": "infra",
+      "subcategory": "database",
+      "status": "active",
+      "icon": "database",
+      "color": "#3ecf8e",
+      "url": null,
+      "metrics_source": "hq_observatory",
+      "featured": false,
+      "sort_order": 3,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "10 Supabase projects powering all QWF apps. Auth, database, edge functions, storage.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "Supabase provides the database, authentication, and edge functions for every QWF app. 10 separate projects ensure isolation between apps while sharing common patterns.",
+        "highlights": [
+          "10 Supabase projects across the app family",
+          "Auth, database, edge functions, and storage",
+          "PostgreSQL with real-time subscriptions",
+          "Row-level security for data isolation"
+        ],
+        "connections": [
+          "Quietly Writing",
+          "Quietly Quoting",
+          "QWF Passport",
+          "Quietly Spotting",
+          "HQ Command Center",
+          "Quietly Networking"
+        ]
+      }
+    },
+    {
+      "id": "infra_esp",
+      "name": "Email Service Provider",
+      "tagline": "Self-hosted email marketing platform",
+      "category": "infra",
+      "subcategory": "email",
+      "status": "standby",
+      "icon": "mail",
+      "color": "#6366f1",
+      "url": "https://esp.quietlyworking.org",
+      "metrics_source": null,
+      "featured": false,
+      "sort_order": 4,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "EmailDelivery.com Community Edition on Amazon SES. Future newsletters, drip sequences, student training.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "QWF's self-hosted Email Service Provider runs EmailDelivery.com Community Edition on Amazon SES. Currently in standby, it will power newsletters, drip sequences, and student training.",
+        "highlights": [
+          "Self-hosted on RackNerd VPS",
+          "Amazon SES for delivery",
+          "Future: newsletters, drip sequences, student training"
+        ],
+        "connections": [
+          "Newsletter",
+          "Missing Pixel Project",
+          "Azure Cloud",
+          "Ezer Omnibus",
+          "Preference Center",
+          "n8n Workflows"
+        ]
+      }
+    },
+    {
+      "id": "infra_azure",
+      "name": "Azure Cloud",
+      "tagline": "Virtual machines and cloud compute",
+      "category": "infra",
+      "subcategory": "compute",
+      "status": "active",
+      "icon": "cloud",
+      "color": "#0078d4",
+      "url": null,
+      "metrics_source": "audit",
+      "featured": false,
+      "sort_order": 5,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Backoffice VM (claude-dev) and n8n VM. The physical foundation everything runs on.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "Azure Cloud provides the virtual machines that run QWF's backoffice and automation engine. The physical foundation that everything else sits on top of.",
+        "highlights": [
+          "Backoffice VM: 4 vCPU, 16 GB RAM, 128 GB NVMe",
+          "n8n VM: separate instance for workflow isolation",
+          "Azure Blob storage for offsite backups"
+        ],
+        "connections": [
+          "n8n Workflows",
+          "Digital Twin",
+          "WordPress Multisite",
+          "Supabase Platform",
+          "Email Service Provider",
+          "HQ Command Center"
+        ]
+      }
+    },
+    {
+      "id": "pedagogy_ibt",
+      "name": "I Built That",
+      "tagline": "Transforming 'I can't' into 'I did'",
+      "category": "pedagogy",
+      "subcategory": "framework",
+      "status": "active",
+      "icon": "trophy",
+      "color": "#f59e0b",
+      "url": null,
+      "metrics_source": null,
+      "featured": true,
+      "sort_order": 1,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "mp",
+      "description": "6 steps: Stretch Assignment, 'I Can't' Moment, SDF Moment, Supported Struggle, Completion Celebration, Legacy Anchor.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "\"I Built That\" is the core pedagogical framework used across all Missing Pixel Project training. Six steps take a student from \"I can't\" to \"I did.\"",
+        "highlights": [
+          "Step 1: Stretch Assignment \u2014 task just beyond comfort zone",
+          "Step 2: \"I Can't\" Moment \u2014 the expected wall",
+          "Step 3: SDF Moment \u2014 \"What if I totally can?\"",
+          "Step 4: Supported Struggle \u2014 mentor walks alongside",
+          "Step 5: Completion Celebration \u2014 public recognition",
+          "Step 6: Legacy Anchor \u2014 student teaches the next one"
+        ],
+        "connections": [
+          "Missing Pixel Project",
+          "SDF Moment",
+          "7 Steps of Mentorship",
+          "GUILD",
+          "The Quietly Working Foundation",
+          "FORGE"
+        ]
+      }
+    },
+    {
+      "id": "pedagogy_7steps",
+      "name": "7 Steps of Mentorship",
+      "tagline": "The mentor's journey from first meeting to lasting impact",
+      "category": "pedagogy",
+      "subcategory": "framework",
+      "status": "active",
+      "icon": "footprints",
+      "color": "#d946ef",
+      "url": null,
+      "metrics_source": null,
+      "featured": false,
+      "sort_order": 2,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "mp",
+      "description": "Structured mentorship progression used across all QWF programs. Also adapted for the EPIC appointment journey.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "The 7 Steps of Mentorship define the mentor's journey from first meeting to lasting impact. Used across all QWF programs and adapted for EPIC.",
+        "highlights": [
+          "Structured progression for mentors",
+          "Adapted for the EPIC appointment system",
+          "Used across all QWF youth programs"
+        ],
+        "connections": [
+          "I Built That",
+          "EPIC",
+          "Missing Pixel Project",
+          "GUILD",
+          "FORGE",
+          "SDF Moment"
+        ]
+      }
+    },
+    {
+      "id": "pedagogy_sdf",
+      "name": "SDF Moment",
+      "tagline": "Stop. Drop. Focus.",
+      "category": "pedagogy",
+      "subcategory": "technique",
+      "status": "active",
+      "icon": "zap",
+      "color": "#eab308",
+      "url": null,
+      "metrics_source": null,
+      "featured": false,
+      "sort_order": 3,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "pedagogy_ibt",
+      "description": "The pivot point. 'What if I totally can?' The moment where belief transfers from mentor to student.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "Stop. Drop. Focus. The SDF Moment is the pivot point in the \"I Built That\" framework. The moment where a mentor says \"What if I totally can?\" and belief transfers from mentor to student.",
+        "highlights": [
+          "The pivot point: \"What if I totally can?\"",
+          "Belief transfer from mentor to student",
+          "Smallest intervention, biggest impact"
+        ],
+        "connections": [
+          "I Built That",
+          "Missing Pixel Project",
+          "7 Steps of Mentorship",
+          "GUILD",
+          "The Quietly Working Foundation"
+        ]
+      }
+    },
+    {
+      "id": "content_newsletter",
+      "name": "Newsletter",
+      "tagline": "QWF community newsletter",
+      "category": "content",
+      "subcategory": "publishing",
+      "status": "planning",
+      "icon": "newspaper",
+      "color": "#10b981",
+      "url": null,
+      "metrics_source": null,
+      "featured": false,
+      "sort_order": 1,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "qwf",
+      "description": "Seedling stage. No name, no template yet. Will connect the QWF community with stories and updates.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "The QWF community newsletter is in seedling stage. No name, no template yet. It will connect the QWF community with stories and updates.",
+        "highlights": [
+          "Seedling stage \u2014 coming soon",
+          "Will feature community stories and updates",
+          "Student-created content through Missing Pixel"
+        ],
+        "connections": [
+          "Content Pipeline",
+          "Email Service Provider",
+          "Missing Pixel Project",
+          "Quietly Writing",
+          "Wisdom System",
+          "Quietly Working Creative"
+        ]
+      }
+    },
+    {
+      "id": "content_pipeline",
+      "name": "Content Pipeline",
+      "tagline": "Expert monitoring and content queue",
+      "category": "content",
+      "subcategory": "operations",
+      "status": "active",
+      "icon": "layers",
+      "color": "#8b5cf6",
+      "url": null,
+      "metrics_source": "supervisor",
+      "featured": false,
+      "sort_order": 2,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "24 scripts monitoring experts, processing YouTube content, managing wisdom and TIG izms.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "The Content Pipeline is a 24-script system that monitors thought leaders, processes YouTube content, and manages the wisdom and TIG izms collections.",
+        "highlights": [
+          "24 scripts monitoring experts and processing content",
+          "YouTube content extraction and analysis",
+          "Feeds the Wisdom System and future newsletter"
+        ],
+        "connections": [
+          "Wisdom System",
+          "Newsletter",
+          "Digital Twin",
+          "Ezer Omnibus",
+          "n8n Workflows",
+          "HQ Command Center"
+        ]
+      }
+    },
+    {
+      "id": "content_wisdom",
+      "name": "Wisdom System",
+      "tagline": "Curated insights from thought leaders",
+      "category": "content",
+      "subcategory": "knowledge",
+      "status": "active",
+      "icon": "lightbulb",
+      "color": "#f59e0b",
+      "url": null,
+      "metrics_source": null,
+      "featured": false,
+      "sort_order": 3,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Extracted wisdom from expert videos and articles. Feeds content pipeline and future newsletter.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "The Wisdom System curates and preserves insights from thought leaders. Extracted from expert videos, articles, and conversations.",
+        "highlights": [
+          "Curated insights from thought leaders",
+          "Extracted from video and written content",
+          "Feeds content pipeline and newsletter"
+        ],
+        "connections": [
+          "Content Pipeline",
+          "Newsletter",
+          "Ezer Omnibus",
+          "Digital Twin",
+          "The Quietly Working Foundation"
+        ]
+      }
+    },
+    {
+      "id": "site_qwf",
+      "name": "quietlyworking.org",
+      "tagline": "QWF primary website",
+      "category": "site",
+      "subcategory": "primary",
+      "status": "active",
+      "icon": "globe",
+      "color": "#2dd4bf",
+      "url": "https://quietlyworking.org",
+      "metrics_source": "betterstack",
+      "featured": false,
+      "sort_order": 1,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Primary website for The Quietly Working Foundation.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "Primary website for The Quietly Working Foundation.",
+        "connections": [
+          "The Quietly Working Foundation",
+          "WordPress Multisite",
+          "FORGE",
+          "Digital Twin",
+          "QWF Transparency Project"
+        ]
+      }
+    },
+    {
+      "id": "site_heroeskids",
+      "name": "heroeskids.org",
+      "tagline": "ACOFH program website",
+      "category": "site",
+      "subcategory": "program",
+      "status": "active",
+      "icon": "globe",
+      "color": "#dc2626",
+      "url": "https://heroeskids.org",
+      "metrics_source": "betterstack",
+      "featured": false,
+      "sort_order": 2,
+      "sensitivity": "high",
+      "student_training": false,
+      "parent": "acofh",
+      "description": "Website for America's Children of Fallen Heroes program.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "Website for America's Children of Fallen Heroes program.",
+        "connections": [
+          "America's Children of Fallen Heroes",
+          "WordPress Multisite",
+          "The Quietly Working Foundation",
+          "War on Hopelessness"
+        ]
+      }
+    },
+    {
+      "id": "site_woh",
+      "name": "waronhopelessness.org",
+      "tagline": "WOH lifestyle brand and volunteer hub",
+      "category": "site",
+      "subcategory": "program",
+      "status": "active",
+      "icon": "globe",
+      "color": "#f97316",
+      "url": "https://waronhopelessness.org",
+      "metrics_source": "betterstack",
+      "featured": false,
+      "sort_order": 3,
+      "sensitivity": "medium",
+      "student_training": false,
+      "parent": "woh",
+      "description": "War on Hopelessness apparel and volunteer recruitment.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "War on Hopelessness apparel and volunteer recruitment.",
+        "connections": [
+          "War on Hopelessness",
+          "WordPress Multisite",
+          "WHELHO App",
+          "GUILD",
+          "Pocket Ez"
+        ]
+      }
+    },
+    {
+      "id": "site_whelho",
+      "name": "whelho.org",
+      "tagline": "Personal development community",
+      "category": "site",
+      "subcategory": "program",
+      "status": "active",
+      "icon": "globe",
+      "color": "#14b8a6",
+      "url": "https://whelho.org",
+      "metrics_source": "betterstack",
+      "featured": false,
+      "sort_order": 4,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "woh",
+      "description": "WHELHO personal development wheel community site.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "WHELHO personal development wheel community site.",
+        "connections": [
+          "WHELHO App",
+          "War on Hopelessness",
+          "WordPress Multisite",
+          "Pocket Ez"
+        ]
+      }
+    },
+    {
+      "id": "site_mp",
+      "name": "missingpixel.org",
+      "tagline": "MP technical training program",
+      "category": "site",
+      "subcategory": "program",
+      "status": "active",
+      "icon": "globe",
+      "color": "#8b5cf6",
+      "url": "https://missingpixel.org",
+      "metrics_source": "betterstack",
+      "featured": false,
+      "sort_order": 5,
+      "sensitivity": "medium",
+      "student_training": true,
+      "parent": "mp",
+      "description": "The Missing Pixel Project student training program site.",
+      "lore_connection": "splinter",
+      "public_link": true,
+      "detail": {
+        "summary": "The Missing Pixel Project student training program site.",
+        "connections": [
+          "The Missing Pixel Project",
+          "WordPress Multisite",
+          "I Built That",
+          "GUILD",
+          "Splinter"
+        ]
+      }
+    },
+    {
+      "id": "site_tig",
+      "name": "chaplaintig.com",
+      "tagline": "TIG's personal site",
+      "category": "site",
+      "subcategory": "personal",
+      "status": "active",
+      "icon": "globe",
+      "color": "#6b7280",
+      "url": "https://chaplaintig.com",
+      "metrics_source": "betterstack",
+      "featured": false,
+      "sort_order": 6,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Chaplain TIG's personal website.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "Chaplain TIG's personal website.",
+        "connections": [
+          "The Quietly Working Foundation",
+          "WordPress Multisite",
+          "chaplaintig.com"
+        ]
+      }
+    },
+    {
+      "id": "site_l4g",
+      "name": "locals4good.org",
+      "tagline": "L4G postcard program",
+      "category": "site",
+      "subcategory": "program",
+      "status": "active",
+      "icon": "globe",
+      "color": "#22c55e",
+      "url": "https://locals4good.org",
+      "metrics_source": "betterstack",
+      "featured": false,
+      "sort_order": 7,
+      "sensitivity": "low",
+      "student_training": true,
+      "parent": "l4g",
+      "description": "Locals 4 Good postcard fundraising program site.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "Locals 4 Good postcard fundraising program site.",
+        "connections": [
+          "Locals 4 Good",
+          "WordPress Multisite",
+          "Quietly Knocking",
+          "FORGE"
+        ]
+      }
+    },
+    {
+      "id": "site_iysr",
+      "name": "iysr.org",
+      "tagline": "Youth Service Registry",
+      "category": "site",
+      "subcategory": "program",
+      "status": "active",
+      "icon": "globe",
+      "color": "#0ea5e9",
+      "url": "https://iysr.org",
+      "metrics_source": "betterstack",
+      "featured": false,
+      "sort_order": 8,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "iysr",
+      "description": "International Youth Service Registry website.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "International Youth Service Registry website.",
+        "connections": [
+          "International Youth Service Registry",
+          "WordPress Multisite",
+          "The Quietly Working Foundation"
+        ]
+      }
+    },
+    {
+      "id": "site_howtos",
+      "name": "how-tosandreviews.com",
+      "tagline": "How-to guides and reviews",
+      "category": "site",
+      "subcategory": "content",
+      "status": "active",
+      "icon": "globe",
+      "color": "#6b7280",
+      "url": "https://how-tosandreviews.com",
+      "metrics_source": "betterstack",
+      "featured": false,
+      "sort_order": 9,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "How-to guides and technology reviews.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "How-to guides and technology reviews.",
+        "connections": [
+          "The Quietly Working Foundation",
+          "WordPress Multisite",
+          "Content Pipeline"
+        ]
+      }
+    },
+    {
+      "id": "site_qwus",
+      "name": "quietlyworking.us",
+      "tagline": "QWF alternate domain",
+      "category": "site",
+      "subcategory": "primary",
+      "status": "active",
+      "icon": "globe",
+      "color": "#2dd4bf",
+      "url": "https://quietlyworking.us",
+      "metrics_source": "betterstack",
+      "featured": false,
+      "sort_order": 10,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Alternate QWF domain.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "Alternate QWF domain.",
+        "connections": [
+          "The Quietly Working Foundation",
+          "WordPress Multisite",
+          "QWF Transparency Project"
+        ]
+      }
+    },
+    {
+      "id": "site_dream",
+      "name": "dreamdevelopmentproject.com",
+      "tagline": "Dream Development Project",
+      "category": "site",
+      "subcategory": "program",
+      "status": "active",
+      "icon": "globe",
+      "color": "#6b7280",
+      "url": "https://dreamdevelopmentproject.com",
+      "metrics_source": "betterstack",
+      "featured": false,
+      "sort_order": 11,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Dream Development Project website.",
+      "lore_connection": null,
+      "public_link": true,
+      "detail": {
+        "summary": "Dream Development Project website.",
+        "connections": [
+          "The Quietly Working Foundation",
+          "WordPress Multisite",
+          "War on Hopelessness"
+        ]
+      }
+    },
+    {
+      "id": "other_passport",
+      "name": "QWF Passport",
+      "tagline": "One-click cross-app authentication",
+      "category": "system",
+      "subcategory": "auth",
+      "status": "building",
+      "icon": "key",
+      "color": "#2dd4bf",
+      "url": null,
+      "metrics_source": null,
+      "featured": false,
+      "sort_order": 7,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "HMAC-signed JWT SSO across all QWF apps. One account, every product.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "QWF Passport provides one-click cross-app authentication across the entire QWF app family. Sign up once, access every product.",
+        "highlights": [
+          "One account for every QWF product",
+          "HMAC-signed JWT single sign-on",
+          "Seamless cross-app authentication"
+        ],
+        "connections": [
+          "Quietly Spotting",
+          "Quietly Writing",
+          "Quietly Quoting",
+          "Quietly Managing",
+          "Supabase Platform",
+          "Quietly Networking"
+        ]
+      }
+    },
+    {
+      "id": "other_epic",
+      "name": "EPIC",
+      "tagline": "Appointment Intelligence System",
+      "category": "system",
+      "subcategory": "engagement",
+      "status": "building",
+      "icon": "calendar",
+      "color": "#6366f1",
+      "url": null,
+      "metrics_source": null,
+      "featured": false,
+      "sort_order": 8,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Transforms 8-month booking wait into a nurturing journey using the 7 Steps of Mentorship.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "EPIC transforms QWF's 8-month booking wait into a nurturing journey. Using the 7 Steps of Mentorship framework, EPIC keeps supporters engaged and growing.",
+        "highlights": [
+          "Transforms wait time into growth time",
+          "Built on the 7 Steps of Mentorship framework",
+          "Automated nurturing sequences"
+        ],
+        "connections": [
+          "7 Steps of Mentorship",
+          "Ezer Omnibus",
+          "FORGE",
+          "Quietly Networking",
+          "HQ Command Center",
+          "Heart Draft"
+        ]
+      }
+    },
+    {
+      "id": "other_omw",
+      "name": "OMW",
+      "tagline": "Online Meeting World",
+      "category": "system",
+      "subcategory": "tools",
+      "status": "planning",
+      "icon": "video",
+      "color": "#2d8cff",
+      "url": null,
+      "metrics_source": null,
+      "featured": false,
+      "sort_order": 9,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Online meeting management and intelligence.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "Online Meeting World will provide meeting management and intelligence for QWF's growing network of virtual interactions. Still in planning stage.",
+        "highlights": [
+          "Meeting management and intelligence",
+          "Planning stage"
+        ],
+        "connections": [
+          "HQ Command Center",
+          "Quietly Networking",
+          "Ezer Omnibus",
+          "Digital Twin",
+          "Missing Pixel Project"
+        ]
+      }
+    },
+    {
+      "id": "other_transparency",
+      "name": "QWF Transparency Project",
+      "tagline": "Public accountability for nonprofit operations",
+      "category": "content",
+      "subcategory": "governance",
+      "status": "active",
+      "icon": "eye",
+      "color": "#2dd4bf",
+      "url": null,
+      "metrics_source": null,
+      "featured": false,
+      "sort_order": 4,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Public documentation of QWF operations, financials, and decision-making. Radical nonprofit transparency.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "The QWF Transparency Project is radical nonprofit transparency in action. Public documentation of operations, financials, and decision-making.",
+        "highlights": [
+          "Public documentation of all operations",
+          "Financial transparency and accountability",
+          "Decision-making processes open for review"
+        ],
+        "connections": [
+          "The Quietly Working Foundation",
+          "Digital Twin",
+          "HQ Command Center",
+          "quietlyworking.org",
+          "Content Pipeline"
+        ]
+      }
+    },
+    {
+      "id": "other_preference",
+      "name": "Preference Center",
+      "tagline": "Self-service communication preferences",
+      "category": "system",
+      "subcategory": "privacy",
+      "status": "active",
+      "icon": "settings",
+      "color": "#6b7280",
+      "url": "https://preferences.quietlyworking.org",
+      "metrics_source": null,
+      "featured": false,
+      "sort_order": 10,
+      "sensitivity": "low",
+      "student_training": false,
+      "parent": "qwf",
+      "description": "Magic link-based opt-out system. No passwords needed. Respects communication preferences across all channels.",
+      "lore_connection": null,
+      "public_link": false,
+      "detail": {
+        "summary": "The Preference Center gives QWF supporters self-service control over their communication preferences. Magic link-based access means no passwords needed.",
+        "highlights": [
+          "Magic link access \u2014 no passwords needed",
+          "Control preferences across all QWF channels",
+          "Respects your choices immediately"
+        ],
+        "cta_label": "Manage Preferences",
+        "cta_url": "https://preferences.quietlyworking.org",
+        "connections": [
+          "Ezer Omnibus",
+          "Email Service Provider",
+          "Newsletter",
+          "n8n Workflows",
+          "Quietly Writing"
+        ]
+      }
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 ---
 import Base from '@/layouts/Base.astro';
 import PillarCard from '@/components/PillarCard.astro';
+import CostTicker from '@/components/islands/CostTicker.svelte';
 import { getCollection } from 'astro:content';
 
 const allPages = await getCollection('pages');
@@ -13,13 +14,12 @@ const featured = allPages
   });
 
 // Load Digital Twin cost data (baked at build time)
-let costData: { monthly_summary?: { total_mtd?: number; month?: string } } = {};
+let costData: Record<string, any> = {};
 try {
   costData = await import('@/data/costs.json');
 } catch { /* graceful fallback */ }
 
-const totalCost = costData?.monthly_summary?.total_mtd;
-const costMonth = costData?.monthly_summary?.month;
+const hasCostData = costData?.monthly_summary?.total_mtd != null;
 
 const pillars = [
   {
@@ -72,20 +72,10 @@ const pillars = [
     ))}
   </section>
 
-  <!-- Cost Teaser -->
-  {totalCost && (
+  <!-- Cost Transparency (Interactive Island) -->
+  {hasCostData && (
     <section class="cost-teaser">
-      <div class="cost-inner">
-        <div class="cost-label">
-          <span class="cost-eyebrow">Operating Cost Transparency</span>
-          <span class="cost-month">{costMonth}</span>
-        </div>
-        <div class="cost-value">
-          ${totalCost.toFixed(2)}
-          <span class="cost-unit">month to date</span>
-        </div>
-        <a href="/open-playbook/the-tool-shed/" class="cost-link">See the full breakdown &rarr;</a>
-      </div>
+      <CostTicker client:visible data={costData} />
     </section>
   )}
 
