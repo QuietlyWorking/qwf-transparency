@@ -45,3 +45,17 @@ Excellence is not perfection... it's the relentless pursuit of doing our best wo
 
 ### Community
 We are better together. The Quietly Working Universe exists because no single person or organization can solve the problems we care about alone. Community means showing up for each other... celebrating wins, sharing burdens, and building something bigger than any one of us could build on our own.
+
+---
+
+## Values in Action: The 7 Steps
+
+These values aren't abstract. They come alive through every interaction in the QWF family. We call it [The Dream Development Framework](/open-playbook/the-dream-development-framework/)... and it looks like this:
+
+1. **Love them** like they've never been loved before.
+2. **Come alongside** so they know they're not alone.
+3. **Help them see hope** for a better future.
+4. **Help them discover** their purpose.
+5. **Help them build it.**
+6. **Help them live it.**
+7. **Help them create a legacy** that lives beyond them.

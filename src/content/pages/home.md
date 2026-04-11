@@ -18,7 +18,8 @@ isHome: true
 - Privacy Statement
 - Terms of Service
 ### Quietly Working Foundation #QWF
-- 
+- [The Dream Development Framework](/open-playbook/the-dream-development-framework/) — The 10-year journey at the heart of everything QWF does
+- [QWU Values](/living-proof/values/) — Love, Courage, Focus... and the values that shape how we operate
 ### Quietly Working Creative #QWC
 ### International Youth Service Registry #IYSR
 ### The Missing Pixel Project #MP
