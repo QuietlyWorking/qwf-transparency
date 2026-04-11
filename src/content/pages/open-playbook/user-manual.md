@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-11 22:35 | Source version: 4.96
+> Generated: 2026-04-11 22:58 | Source version: 4.96
 
 # QWU Backoffice User Manual
 
@@ -2474,7 +2474,7 @@ Each voice profile folder contains:
 
 | Profile | Path | Vault Version | QWR Supabase Version | Use Case |
 |---------|------|---------------|---------------------|----------|
-| Chaplain TIG | `003 Entities/Voice Profiles/Chaplain TIG/` | v2.1 (260326) | v3 (260326) | Personal content, QWU, Missing Pixel |
+| Chaplain TIG | `003 Entities/Voice Profiles/Chaplain TIG/` | v2.2 (260411) | v3 (260326) | Personal content, QWU, Missing Pixel |
 | Ezer Aión | `003 Entities/Voice Profiles/Ezer Aión/` | — | — | QWU Backoffice assistant, automated outreach, verification |
 | GreenCal Construction | `003 Entities/Voice Profiles/GreenCal Construction/` | — | — | Client: roofing/construction company |
 
@@ -3256,7 +3256,7 @@ The L4G system includes:
 | `send_l4g_welcome_email.py` | Post-payment welcome email (Exempt, MS Graph) | v1.0.0 |
 | `send_l4g_queue_notification.py` | Queue notification when slot opens | v1.0.0 |
 | `send_l4g_journey_email.py` | 6 milestone email templates (Enhancement, MS Graph) | v1.0.0 |
-| `check_l4g_milestones.py` | Polls for state changes, triggers journey emails | v1.0.0 |
+| `check_l4g_milestones.py` | Polls for state changes, triggers journey emails (v1.1.0: fixed post_mail_checkin timing) | v1.1.0 |
 | `enrich_donor_company.py` | Website scraper for brand signals | v1.0.0 |
 | `generate_brand_identity.py` | AI brand guide from intake data (Claude FLAGSHIP) | v1.0.0 |
 | `generate_ad_briefs.py` | AI brief generation — 3 concept approaches | v1.0.0 |
@@ -3268,6 +3268,13 @@ The L4G system includes:
 | `import_l4g_postal_routes.py` | Import EDDM route CSV to l4g_postal_routes (--dry-run, --geocode, on_conflict upsert) | v1.1.0 |
 | `extract_l4g_zip_boundaries.py` | Extract ZIP boundary GeoJSON from Census TIGER API | v1.0.0 |
 | `enrich_l4g_demographics.py` | Census ACS 5-Year enrichment (42 vars, batched). Flat JSONB output, column sync. Income, home values, education, occupation, housing age, vehicles, household profile, family stats, veterans. Home Services Score + Best For + market summary. Flags: --slug, --all, --dry-run | v2.0.0 |
+| `add_l4g_donor_booking.py` | Admin donor onboarding — creates auth user, donor_partner, booking, ad_proof, updates inventory. For donors who commit outside website checkout (SuiteDash, phone, in-person). --dry-run, --send-welcome | v1.0.0 |
+| `upload_l4g_proof.py` | Upload proof image to Supabase Storage, update ad_proof record to 'submitted'. --booking-id, --image-path, --dry-run | v1.0.0 |
+| `run_l4g_concept_pipeline.py` | End-to-end "MP Creates" AI pipeline: website enrichment → brand identity → 3 ad briefs → concept proof placeholders → donor notification (2x Claude FLAGSHIP) | v1.0.0 |
+| `process_l4g_concept_choice.py` | Process donor's concept selection — marks chosen proof as in_progress, others as not_selected, updates booking to design_in_progress | v1.0.0 |
+| `send_l4g_conversation_email.py` | Email mirror for booking conversation threads (Exempt, MS Graph). Notifies recipient when new message posted | v1.0.0 |
+| `advance_l4g_print_batch.py` | Batch print status advancement for all bookings in an area/month. Wraps update_l4g_print_status.py. 7-state forward-only machine | v1.0.0 |
+| `process_l4g_feedback.py` | Post-delivery donor feedback — stores emoji rating, response count, testimonial, would-recommend. Syncs to HQ, Discord notification | v1.0.0 |
 
 **Lead Generation Webhook:** `https://n8n.quietlyworking.org/webhook/lead-request`
 
@@ -4381,7 +4388,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v4.96 by generate_public_manual.py"
-generated: "2026-04-11 22:35"
+generated: "2026-04-11 22:58"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -9951,7 +9958,7 @@ Centralized registry of all QWF apps with hosting, database, domain, and develop
 | **QKN** | Quietly Knocking | Lovable | → SvelteKit (P5) | — | `quietlyknocking.org` | `mepdsaqmsooxmjsmlcut` | Alpha |
 | **QSP** | Quietly Spotting | CF Pages | React → SvelteKit (P2) | `quietly-spotting` | `quietlyspotting.org` | `lsfplhkgpiakhvtvsfic` | Production |
 | **QTR** | Quietly Tracking | Lovable | → SvelteKit (P6) | — | `quietlytracking.org` | `ipdrexcbaqoazhpohfco` | Foundation |
-| **L4G** | Locals 4 Good | CF Pages | React (stay) | `locals4good` | `locals4good.org` | `<SUPABASE_PROJECT_ID_L4G>` | Beta |
+| **L4G** | Locals 4 Good | CF Pages | React → SvelteKit | `locals4good` | `locals4good.org` | `<SUPABASE_PROJECT_ID_L4G>` | Beta |
 | **HQ** | Command Center | Lovable | Lovable (stay) | — | `hq.quietlyworking.org` | `<SUPABASE_PROJECT_ID>` (shared with QWR) | Production |
 | **WHL** | WHELHO | CF Pages | React | `whelho` | `whelho.org` | `nvimpjmhiondaxtrwlny` | Alpha |
 | **PEZ** | Pocket Ez | Lovable | — | — | — | `<SUPABASE_PROJECT_POCKET>` | Planned |
@@ -9967,7 +9974,7 @@ Centralized registry of all QWF apps with hosting, database, domain, and develop
 | **CF Pages** (QWR, QSP, L4G, QNT, WHL, AH) | React (current) / SvelteKit (target) | Direct code commits to GitHub repo | Push to `main` → GitHub Actions → `wrangler pages deploy` (auto) |
 | **Lovable** (HQ only) | React (Lovable-managed) | Write numbered Lovable prompt files | Paste prompt into Lovable editor → preview → deploy |
 
-**SvelteKit migration (decided 2026-04-11):** All supporter-facing apps migrate to SvelteKit before onboarding active supporters. Zero current supporters = zero risk window. QWB is the greenfield template app (P1). QSP migrates during Content tab build (P2). QWR migrates frontend (P3). Lovable apps (QQT/QKN/QTR) skip React entirely → go directly to SvelteKit/CF Pages (P4-6). L4G and HQ stay on current frameworks. See `005 Operations/Directives/qwf_content_intelligence_platform.md`.
+**SvelteKit migration (decided 2026-04-11):** All supporter-facing apps migrate to SvelteKit before onboarding active supporters. Zero current supporters = zero risk window. QWB is the greenfield template app (P1). QSP migrates during Content tab build (P2). QWR migrates frontend (P3). Lovable apps (QQT/QKN/QTR) skip React entirely → go directly to SvelteKit/CF Pages (P4-6). L4G SvelteKit scaffold on `sveltekit-migration` branch (Session 207) — adapter-cloudflare, Supabase SSR auth, Mailbox Walk CSS ported. HQ stays on Lovable. See `005 Operations/Directives/qwf_content_intelligence_platform.md`.
 
 ### Content Intelligence Platform (Decided 2026-04-11)
 
@@ -10295,4 +10302,4 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ---
 
-*Last updated: 2026-04-11 22:35 (v4.96)*
+*Last updated: 2026-04-11 22:58 (v4.96)*
