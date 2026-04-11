@@ -36,7 +36,7 @@ isHome: true
 These are the tools that the #QWU uses.
 - [The QWU Tool Shed](/open-playbook/the-tool-shed/) — All 48+ tools we use, scored on Heart, Soul, and 12 other metrics
 - [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) — Free and discounted tech programs for nonprofits, with honest application notes
-- [Code and Tips Swipe Page](/open-playbook/code-and-tips/) — Code snippets and tips from our work
+- [[Code and Tips Swipe Page]] — Code snippets and tips from our work
 
 ### QWU CRM & Family Portal
 family.quietlyworking.org
