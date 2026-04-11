@@ -31,6 +31,7 @@ isHome: true
 *Real problems we face running AI-powered nonprofit operations... and the real solutions we build. Every fix exists because something failed first. We show the receipts.*
 
 - [Vol 1 — When Your AI Agent Keeps Forgetting What It Already Knows](/built-from-broken/when-your-ai-agent-keeps-forgetting/) — How a 50-line Python hook stopped our AI agent from repeatedly ignoring its own documentation
+- [Vol 2 — When Your Documentation Rots Faster Than You Can Write It](/built-from-broken/when-your-documentation-rots-faster/) — How we turned documentation into a deployment artifact so our runbooks stop lying about what's actually deployed
 
 ## Tools
 These are the tools that the #QWU uses.
