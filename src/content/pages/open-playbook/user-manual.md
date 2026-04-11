@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-11 18:02 | Source version: 4.90
+> Generated: 2026-04-11 20:43 | Source version: 4.91
 
 # QWU Backoffice User Manual
 
@@ -3218,7 +3218,7 @@ The backoffice includes a comprehensive lead generation and enrichment system su
 **Full L4G Technical Documentation:** `003 Entities/Organizations/Locals 4 Good.md`
 
 The L4G system includes:
-- **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026)
+- **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026). **SvelteKit migration decided 2026-04-11** — React SPA invisible to Google; SEO critical for donor-partner acquisition; Astro rejected (80% app / 20% content). Backend unchanged.
 - **Data Layer:** Supabase (`<SUPABASE_PROJECT_ID_L4G>`) — 20 tables, migrated from Google Sheets
 - **APIs:** 8 Supabase Edge Functions (submit-contact-form, create-checkout-session, check-availability, expire-stale-holds, submit-category-request, subscribe-to-push, send-push-notification, ezer-chat)
 - **Payments:** Stripe Checkout via `create-checkout-session` edge function + n8n `L4G Stripe Payment Handler v1.3` webhook (E2E verified Mar 18, 2026)
@@ -3226,6 +3226,8 @@ The L4G system includes:
 - **Category Concierge:** Public category request form → admin queue at `/admin/category-requests` → approve/map/decline actions → auto-inventory population (18 months × all areas) → automated response emails via `send_l4g_concierge_response.py`. Multi-channel admin notifications (Discord + SMS via Twilio) via `dispatch_l4g_category_notification.py`
 - **HQ Visibility:** L4G Operations module in HQ Command Center — Kanban pipeline, production calendar, deadline alerts via `sync_hq_l4g.py` (every 15 min)
 - **Migration:** Data migrated from Google Sheets → Supabase via `migrate_l4g_sheets_to_supabase.py` (Feb 27, 2026)
+- **Youth Protection:** `qwf_youth_protection_standard.md` (foundational directive, added 2026-04-11) — NEVER use students in marketing/promotion until pre-employment stage. No names, photos, or identifying details externally. Applies across all QWF programs (MP, L4G, ACOFH, WOH). Overrides CX framework elements that conflict.
+- **After-Purchase CX Vision (2026-04-11):** Two-path architecture: "Supporter Creates" (templates + upload + multi-area management) and "MP Creates" (smart wizard + brand identity + 3 concepts → 3 layouts with open conversation thread + email mirror). Merge into Postcard Tracker (package-tracking UX), celebration, feedback, physical sample + frameable thank-you. QTR integration from day one (QR codes + tracking URLs). v1: TIG creates in Photoshop; long-term: Pomelli-like AI engine.
 - **Post-Checkout Fork:** `artwork_track` ('self'|'create') on `l4g_bookings` routes donors to artwork upload or Brand Clarity Wizard
 - **Brand Clarity Wizard:** 3-step guided intake at `/portal/brand` — saves to 9 brand fields on `l4g_donor_partners`
 - **Journey Milestones:** `check_l4g_milestones.py` (15-min n8n poll) → `send_l4g_journey_email.py` (6 TIG-voice templates) with dedup via `l4g_journey_events`
@@ -4349,8 +4351,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v4.90 by generate_public_manual.py"
-generated: "2026-04-11 18:02"
+source: "Auto-generated from private manual v4.91 by generate_public_manual.py"
+generated: "2026-04-11 20:43"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10264,4 +10266,4 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ---
 
-*Last updated: 2026-04-11 18:02 (v4.90)*
+*Last updated: 2026-04-11 20:43 (v4.91)*
