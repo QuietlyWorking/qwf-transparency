@@ -1,0 +1,136 @@
+/* ============================================
+   OBSIDIAN CALLOUT STYLES
+   Supports: note, info, tip, warning, danger,
+   bug, example, quote, faq, success, failure
+   ============================================ */
+
+.callout {
+  border-left: 4px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  background: var(--bg-secondary);
+}
+
+.callout-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.callout-body {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.callout-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Collapsible callout (details/summary) */
+details.callout {
+  padding: 0;
+}
+
+details.callout > summary.callout-title {
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+details.callout > summary.callout-title::before {
+  content: '\25B6';
+  font-size: 0.7em;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+details.callout[open] > summary.callout-title::before {
+  transform: rotate(90deg);
+}
+
+details.callout > .callout-body {
+  padding: 0 1.25rem 1rem;
+}
+
+/* Type-specific colors */
+.callout-note {
+  border-left-color: #4a90d9;
+  background: rgba(74, 144, 217, 0.05);
+}
+.callout-note .callout-title { color: #4a90d9; }
+
+.callout-info {
+  border-left-color: var(--color-info);
+  background: rgba(155, 61, 143, 0.05);
+}
+.callout-info .callout-title { color: var(--color-info); }
+
+.callout-tip {
+  border-left-color: var(--aurora-teal);
+  background: rgba(45, 212, 191, 0.05);
+}
+.callout-tip .callout-title { color: var(--aurora-teal); }
+
+.callout-warning {
+  border-left-color: var(--color-warning);
+  background: rgba(212, 120, 44, 0.05);
+}
+.callout-warning .callout-title { color: var(--color-warning); }
+
+.callout-danger {
+  border-left-color: var(--color-error);
+  background: rgba(232, 93, 117, 0.05);
+}
+.callout-danger .callout-title { color: var(--color-error); }
+
+.callout-bug {
+  border-left-color: var(--color-error);
+  background: rgba(232, 93, 117, 0.05);
+}
+.callout-bug .callout-title { color: var(--color-error); }
+
+.callout-example {
+  border-left-color: var(--cosmic-magenta);
+  background: rgba(155, 61, 143, 0.05);
+}
+.callout-example .callout-title { color: var(--cosmic-magenta); }
+
+.callout-quote {
+  border-left-color: var(--dim-star);
+  background: rgba(107, 103, 128, 0.05);
+}
+.callout-quote .callout-title { color: var(--dim-star); }
+
+.callout-faq {
+  border-left-color: var(--stellar-orange);
+  background: rgba(212, 120, 44, 0.05);
+}
+.callout-faq .callout-title { color: var(--stellar-orange); }
+
+.callout-abstract {
+  border-left-color: #4a90d9;
+  background: rgba(74, 144, 217, 0.05);
+}
+.callout-abstract .callout-title { color: #4a90d9; }
+
+.callout-success {
+  border-left-color: var(--color-success);
+  background: rgba(45, 212, 191, 0.05);
+}
+.callout-success .callout-title { color: var(--color-success); }
+
+.callout-failure {
+  border-left-color: var(--color-error);
+  background: rgba(232, 93, 117, 0.05);
+}
+.callout-failure .callout-title { color: var(--color-error); }
+
+.callout-question {
+  border-left-color: var(--stellar-orange);
+  background: rgba(212, 120, 44, 0.05);
+}
+.callout-question .callout-title { color: var(--stellar-orange); }

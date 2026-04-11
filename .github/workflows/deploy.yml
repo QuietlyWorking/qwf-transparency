@@ -1,0 +1,35 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Fetch Digital Twin data
+        run: |
+          mkdir -p src/data
+          curl -sf --max-time 10 https://twin.quietlyworking.org/api/costs > src/data/costs.json || echo '{}' > src/data/costs.json
+          curl -sf --max-time 10 https://twin.quietlyworking.org/api/ecosystem > src/data/ecosystem.json || echo '{}' > src/data/ecosystem.json
+          curl -sf --max-time 10 https://twin.quietlyworking.org/api/component-health > src/data/component-health.json || echo '{}' > src/data/component-health.json
+
+      - run: npm install
+      - run: npm run build
+
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=qwf-transparency

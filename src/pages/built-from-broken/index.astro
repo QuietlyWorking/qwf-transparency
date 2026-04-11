@@ -1,0 +1,38 @@
+---
+import Pillar from '@/layouts/Pillar.astro';
+import PillarCard from '@/components/PillarCard.astro';
+import { getCollection } from 'astro:content';
+
+const pages = await getCollection('pages', (entry) =>
+  entry.data.pillar === 'built-from-broken'
+);
+
+// Sort: series volumes first (by volume number), then non-series by title
+const sorted = pages.sort((a, b) => {
+  if (a.data.series && b.data.series) {
+    return (b.data.volume ?? 0) - (a.data.volume ?? 0); // newest first
+  }
+  if (a.data.series) return -1;
+  if (b.data.series) return 1;
+  return a.data.title.localeCompare(b.data.title);
+});
+---
+
+<Pillar
+  title="Built from Broken"
+  description="Real problems we face running AI-powered nonprofit operations... and the real solutions we build. Every fix exists because something failed first. We show the receipts."
+  accentColor="var(--stellar-orange)"
+  pillarSlug="built-from-broken"
+>
+  {sorted.map(page => (
+    <PillarCard
+      title={page.data.title}
+      description={page.data.description}
+      slug={page.data.slug}
+      pillar={page.data.pillar}
+      tags={page.data.tags}
+      series={page.data.series}
+      volume={page.data.volume}
+    />
+  ))}
+</Pillar>

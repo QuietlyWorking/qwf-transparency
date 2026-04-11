@@ -1,0 +1,49 @@
+---
+interface Props {
+  series: string;
+  volume?: number;
+}
+
+const { series, volume } = Astro.props;
+---
+
+<div class="series-banner">
+  <span class="series-label">{series}</span>
+  {volume && <span class="series-vol">Volume {volume}</span>}
+  <p class="series-tagline">
+    Real problems we face running AI-powered nonprofit operations... and the real
+    solutions we build. Every fix exists because something failed first. We show
+    the receipts.
+  </p>
+</div>
+
+<style>
+  .series-banner {
+    background: linear-gradient(135deg, rgba(212, 120, 44, 0.08), rgba(212, 120, 44, 0.02));
+    border: 1px solid rgba(212, 120, 44, 0.2);
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .series-label {
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--stellar-orange);
+  }
+
+  .series-vol {
+    font-size: 0.85rem;
+    color: var(--dim-star);
+    margin-left: 0.75rem;
+  }
+
+  .series-tagline {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+</style>

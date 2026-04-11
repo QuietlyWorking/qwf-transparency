@@ -1,0 +1,276 @@
+/* ============================================
+   QWF TRANSPARENCY SITE — COSMIC PALETTE
+   Derived from QWU Digital Twin v2.4
+   "Dark but kind space, a playground of galaxies"
+   ============================================ */
+
+:root {
+  /* Core Cosmic Colors */
+  --deep-space: #0a0a14;
+  --cosmos: #12121f;
+  --nebula-dark: #1a1a2e;
+  --nebula-purple: #4a1a6b;
+  --cosmic-magenta: #9b3d8f;
+  --stellar-orange: #d4782c;
+  --aurora-teal: #2dd4bf;
+  --stardust: #e8e4f0;
+  --moonlight: #a8a4b8;
+  --dim-star: #6b6780;
+
+  /* Semantic Colors */
+  --color-success: #2dd4bf;
+  --color-warning: #d4782c;
+  --color-error: #e85d75;
+  --color-info: #9b3d8f;
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+  /* Dark theme (default) */
+  --bg-primary: var(--deep-space);
+  --bg-secondary: var(--cosmos);
+  --bg-tertiary: var(--nebula-dark);
+  --bg-card: var(--cosmos);
+  --border-color: rgba(74, 26, 107, 0.4);
+  --border-hover: rgba(155, 61, 143, 0.6);
+  --text-primary: var(--stardust);
+  --text-secondary: var(--moonlight);
+  --text-heading: #ffffff;
+  --header-bg: linear-gradient(135deg, var(--deep-space) 0%, var(--nebula-purple) 100%);
+  --glow-color: rgba(155, 61, 143, 0.3);
+
+  /* Layout */
+  --content-max-width: 72rem;
+  --content-padding: 1.5rem;
+
+  /* Pillar accent colors */
+  --pillar-broken: var(--stellar-orange);
+  --pillar-playbook: var(--aurora-teal);
+  --pillar-proof: var(--cosmic-magenta);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-primary: #f8f7fc;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f0eef5;
+    --bg-card: #ffffff;
+    --border-color: #d0d0e0;
+    --border-hover: var(--cosmic-magenta);
+    --text-primary: var(--nebula-dark);
+    --text-secondary: #4a4860;
+    --text-heading: var(--nebula-dark);
+    --header-bg: linear-gradient(135deg, var(--nebula-purple) 0%, var(--cosmic-magenta) 100%);
+    --glow-color: rgba(155, 61, 143, 0.2);
+  }
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--aurora-teal);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+a:hover {
+  color: var(--cosmic-magenta);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+
+.site-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.site-main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 2rem var(--content-padding);
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+.site-nav {
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem var(--content-padding);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.nav-inner {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.nav-brand:hover {
+  color: var(--aurora-teal);
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.nav-links a {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.nav-links a:hover,
+.nav-links a[aria-current="page"] {
+  color: var(--text-heading);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile nav */
+@media (max-width: 768px) {
+  .nav-inner {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-links a {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.site-footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 3rem var(--content-padding);
+  margin-top: 4rem;
+}
+
+.footer-inner {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.footer-brand p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+.footer-links h3 {
+  color: var(--text-heading);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li + li {
+  margin-top: 0.4rem;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+  color: var(--aurora-teal);
+}
+
+.footer-bottom {
+  max-width: var(--content-max-width);
+  margin: 2rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--dim-star);
+  font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+}

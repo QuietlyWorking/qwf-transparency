@@ -1,0 +1,116 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  pillar: string;
+  tags?: string[];
+  series?: string;
+  volume?: number;
+}
+
+const { title, description, slug, pillar, tags = [], series, volume } = Astro.props;
+
+const href = pillar === 'root' ? `/${slug}/` : `/${pillar}/${slug}/`;
+
+const pillarAccents: Record<string, string> = {
+  'built-from-broken': 'var(--stellar-orange)',
+  'open-playbook': 'var(--aurora-teal)',
+  'living-proof': 'var(--cosmic-magenta)',
+};
+const accent = pillarAccents[pillar] || 'var(--dim-star)';
+---
+
+<a href={href} class="pillar-card" style={`--card-accent: ${accent}`}>
+  {series && volume && (
+    <span class="card-series">Vol. {volume}</span>
+  )}
+  <h3>{title}</h3>
+  {description && <p>{description}</p>}
+  {tags.length > 0 && (
+    <div class="card-tags">
+      {tags.slice(0, 3).map((tag: string) => (
+        <span class="card-tag">{tag}</span>
+      ))}
+    </div>
+  )}
+</a>
+
+<style>
+  .pillar-card {
+    display: block;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: all var(--duration-normal) var(--ease-out);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--card-accent);
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-out);
+  }
+
+  .pillar-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .pillar-card:hover::before {
+    opacity: 1;
+  }
+
+  .card-series {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--card-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .pillar-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .pillar-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.75rem;
+  }
+
+  .card-tag {
+    background: var(--bg-tertiary);
+    color: var(--dim-star);
+    padding: 0.1rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+  }
+</style>

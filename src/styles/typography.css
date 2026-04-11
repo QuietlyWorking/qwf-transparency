@@ -1,0 +1,172 @@
+/* ============================================
+   TYPOGRAPHY — Content pages
+   ============================================ */
+
+.prose {
+  max-width: 48rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.prose h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--text-heading);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.prose h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-top: 3rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.prose h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose p {
+  margin-bottom: 1.25rem;
+}
+
+.prose strong {
+  color: var(--text-heading);
+  font-weight: 600;
+}
+
+.prose em {
+  color: var(--moonlight);
+}
+
+.prose a {
+  color: var(--aurora-teal);
+  text-decoration: underline;
+  text-decoration-color: rgba(45, 212, 191, 0.3);
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  text-decoration-color: var(--aurora-teal);
+}
+
+.prose ul, .prose ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.4rem;
+}
+
+.prose li::marker {
+  color: var(--dim-star);
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--cosmic-magenta);
+  padding: 0.75rem 1.25rem;
+  margin: 1.5rem 0;
+  background: rgba(155, 61, 143, 0.05);
+  color: var(--text-secondary);
+}
+
+.prose pre {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.prose code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  font-size: 0.88em;
+}
+
+.prose :not(pre) > code {
+  background: var(--bg-tertiary);
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  color: var(--aurora-teal);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.prose th {
+  background: var(--bg-secondary);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-heading);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.prose td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.prose tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 2.5rem 0;
+}
+
+.prose img {
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Table overflow on mobile */
+.table-wrapper {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .prose {
+    font-size: 1rem;
+  }
+
+  .prose h1 {
+    font-size: 1.75rem;
+  }
+
+  .prose h2 {
+    font-size: 1.35rem;
+  }
+
+  .prose pre {
+    font-size: 0.82rem;
+    padding: 1rem;
+  }
+}

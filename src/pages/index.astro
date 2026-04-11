@@ -1,0 +1,358 @@
+---
+import Base from '@/layouts/Base.astro';
+import PillarCard from '@/components/PillarCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPages = await getCollection('pages');
+
+const featured = allPages
+  .filter(p => ['when-your-ai-agent-keeps-forgetting', 'how-to-give-your-ai-agent-superpowers', 'the-tool-shed'].includes(p.data.slug))
+  .sort((a, b) => {
+    const order = ['when-your-ai-agent-keeps-forgetting', 'how-to-give-your-ai-agent-superpowers', 'the-tool-shed'];
+    return order.indexOf(a.data.slug) - order.indexOf(b.data.slug);
+  });
+
+// Load Digital Twin cost data (baked at build time)
+let costData: { monthly_summary?: { total_mtd?: number; month?: string } } = {};
+try {
+  costData = await import('@/data/costs.json');
+} catch { /* graceful fallback */ }
+
+const totalCost = costData?.monthly_summary?.total_mtd;
+const costMonth = costData?.monthly_summary?.month;
+
+const pillars = [
+  {
+    title: 'Built from Broken',
+    description: 'What we broke, how we fixed it, and how you can build it too.',
+    href: '/built-from-broken/',
+    accent: 'var(--stellar-orange)',
+    icon: '\u{1F527}',
+  },
+  {
+    title: 'The Open Playbook',
+    description: 'Our tools, costs, and SOPs... copy what works for your org.',
+    href: '/open-playbook/',
+    accent: 'var(--aurora-teal)',
+    icon: '\u{1F4D6}',
+  },
+  {
+    title: 'Living Proof',
+    description: 'See our systems running. Values, programs, ecosystem health.',
+    href: '/living-proof/',
+    accent: 'var(--cosmic-magenta)',
+    icon: '\u{1F4E1}',
+  },
+];
+---
+
+<Base title="Home">
+  <!-- Hero Section -->
+  <section class="hero">
+    <p class="hero-eyebrow">Quietly Working Foundation</p>
+    <h1 class="hero-title">
+      Most organizations hide how they work.<br />
+      <span class="hero-accent">We publish ours.</span>
+    </h1>
+    <p class="hero-sub">
+      QWF is a 501(c)(3) nonprofit building toward 100% self-sufficiency through
+      product-based fundraising... with student-run AI operations. Everything you see
+      here is real. The wins, the fails, the receipts.
+    </p>
+  </section>
+
+  <!-- Three Pillars -->
+  <section class="pillars">
+    {pillars.map(p => (
+      <a href={p.href} class="pillar-hero-card" style={`--accent: ${p.accent}`}>
+        <span class="pillar-icon">{p.icon}</span>
+        <h2>{p.title}</h2>
+        <p>{p.description}</p>
+      </a>
+    ))}
+  </section>
+
+  <!-- Cost Teaser -->
+  {totalCost && (
+    <section class="cost-teaser">
+      <div class="cost-inner">
+        <div class="cost-label">
+          <span class="cost-eyebrow">Operating Cost Transparency</span>
+          <span class="cost-month">{costMonth}</span>
+        </div>
+        <div class="cost-value">
+          ${totalCost.toFixed(2)}
+          <span class="cost-unit">month to date</span>
+        </div>
+        <a href="/open-playbook/the-tool-shed/" class="cost-link">See the full breakdown &rarr;</a>
+      </div>
+    </section>
+  )}
+
+  <!-- Featured Content -->
+  {featured.length > 0 && (
+    <section class="featured">
+      <h2 class="section-title">Featured</h2>
+      <div class="featured-grid">
+        {featured.map(page => (
+          <PillarCard
+            title={page.data.title}
+            description={page.data.description}
+            slug={page.data.slug}
+            pillar={page.data.pillar}
+            tags={page.data.tags}
+            series={page.data.series}
+            volume={page.data.volume}
+          />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Digital Twin CTA -->
+  <section class="twin-cta">
+    <div class="twin-inner">
+      <h2>See our systems running live</h2>
+      <p>
+        The QWU Digital Twin is a real-time operational dashboard showing system health,
+        component status, and operating costs... updated every 60 seconds.
+      </p>
+      <a href="https://twin.quietlyworking.org" target="_blank" rel="noopener" class="twin-button">
+        Open the Digital Twin &rarr;
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 4rem 0 3rem;
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--aurora-teal);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--text-heading);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-accent {
+    background: linear-gradient(135deg, var(--aurora-teal), var(--cosmic-magenta));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 38rem;
+    margin: 0 auto;
+  }
+
+  /* Pillars */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 3rem 0;
+  }
+
+  .pillar-hero-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    text-decoration: none;
+    transition: all var(--duration-normal) var(--ease-out);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pillar-hero-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+
+  .pillar-hero-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .pillar-hero-card:hover::after {
+    opacity: 1;
+  }
+
+  .pillar-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .pillar-hero-card h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    margin-bottom: 0.5rem;
+  }
+
+  .pillar-hero-card p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Cost Teaser */
+  .cost-teaser {
+    margin: 3rem 0;
+  }
+
+  .cost-inner {
+    background: linear-gradient(135deg, rgba(45, 212, 191, 0.06), rgba(155, 61, 143, 0.06));
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .cost-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--aurora-teal);
+    display: block;
+  }
+
+  .cost-month {
+    font-size: 0.85rem;
+    color: var(--dim-star);
+  }
+
+  .cost-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-heading);
+  }
+
+  .cost-unit {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-left: 0.5rem;
+  }
+
+  .cost-link {
+    font-size: 0.9rem;
+    color: var(--aurora-teal);
+    font-weight: 500;
+  }
+
+  /* Featured */
+  .featured {
+    margin: 4rem 0;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    margin-bottom: 1.5rem;
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* Digital Twin CTA */
+  .twin-cta {
+    margin: 4rem 0;
+  }
+
+  .twin-inner {
+    background: linear-gradient(135deg, var(--nebula-dark), var(--cosmos));
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 3rem;
+    text-align: center;
+  }
+
+  .twin-inner h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    margin-bottom: 0.75rem;
+  }
+
+  .twin-inner p {
+    color: var(--text-secondary);
+    max-width: 32rem;
+    margin: 0 auto 1.5rem;
+    line-height: 1.6;
+  }
+
+  .twin-button {
+    display: inline-block;
+    background: var(--cosmic-magenta);
+    color: #fff;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all var(--duration-fast) var(--ease-out);
+  }
+
+  .twin-button:hover {
+    background: var(--nebula-purple);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .pillars {
+      grid-template-columns: 1fr;
+    }
+
+    .cost-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .cost-value {
+      font-size: 2rem;
+    }
+  }
+</style>

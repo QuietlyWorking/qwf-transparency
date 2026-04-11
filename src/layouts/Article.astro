@@ -1,0 +1,151 @@
+---
+import Base from './Base.astro';
+import SeriesBanner from '@/components/SeriesBanner.astro';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description?: string;
+    publishDate?: string;
+    modifiedDate?: string;
+    tags?: string[];
+    series?: string;
+    volume?: number;
+    pillar: string;
+    slug: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const pillarLabels: Record<string, string> = {
+  'built-from-broken': 'Built from Broken',
+  'open-playbook': 'The Open Playbook',
+  'living-proof': 'Living Proof',
+};
+const pillarLabel = pillarLabels[frontmatter.pillar] || '';
+const pillarUrl = frontmatter.pillar !== 'root' ? `/${frontmatter.pillar}/` : '/';
+---
+
+<Base title={frontmatter.title} description={frontmatter.description}>
+  <article class="article">
+    {frontmatter.pillar !== 'root' && (
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <a href={pillarUrl}>{pillarLabel}</a>
+        <span class="sep">/</span>
+        <span class="current">{frontmatter.title}</span>
+      </nav>
+    )}
+
+    {frontmatter.series && (
+      <SeriesBanner series={frontmatter.series} volume={frontmatter.volume} />
+    )}
+
+    <header class="article-header">
+      <h1>{frontmatter.title}</h1>
+      <div class="article-meta">
+        {frontmatter.publishDate && (
+          <time datetime={frontmatter.publishDate}>
+            {new Date(frontmatter.publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+        )}
+        {frontmatter.tags && frontmatter.tags.length > 0 && (
+          <div class="article-tags">
+            {frontmatter.tags.map((tag: string) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </header>
+
+    <div class="prose">
+      <slot />
+    </div>
+
+    {frontmatter.modifiedDate && (
+      <footer class="article-footer">
+        <p>Last updated: {new Date(frontmatter.modifiedDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+      </footer>
+    )}
+  </article>
+</Base>
+
+<style>
+  .article {
+    max-width: 48rem;
+  }
+
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--dim-star);
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb a {
+    color: var(--text-secondary);
+  }
+
+  .breadcrumb a:hover {
+    color: var(--aurora-teal);
+  }
+
+  .breadcrumb .sep {
+    margin: 0 0.5rem;
+    color: var(--dim-star);
+  }
+
+  .breadcrumb .current {
+    color: var(--text-primary);
+  }
+
+  .article-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .article-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    padding: 0.15rem 0.6rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .article-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--dim-star);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    .article-header h1 {
+      font-size: 1.75rem;
+    }
+  }
+</style>

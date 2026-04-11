@@ -1,0 +1,28 @@
+---
+import Pillar from '@/layouts/Pillar.astro';
+import PillarCard from '@/components/PillarCard.astro';
+import { getCollection } from 'astro:content';
+
+const pages = await getCollection('pages', (entry) =>
+  entry.data.pillar === 'living-proof'
+);
+
+const sorted = pages.sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<Pillar
+  title="Living Proof"
+  description="See our systems running. Our values, programs, and ecosystem health... updated continuously."
+  accentColor="var(--cosmic-magenta)"
+  pillarSlug="living-proof"
+>
+  {sorted.map(page => (
+    <PillarCard
+      title={page.data.title}
+      description={page.data.description}
+      slug={page.data.slug}
+      pillar={page.data.pillar}
+      tags={page.data.tags}
+    />
+  ))}
+</Pillar>
