@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-11 20:43 | Source version: 4.91
+> Generated: 2026-04-11 20:56 | Source version: 4.92
 
 # QWU Backoffice User Manual
 
@@ -3676,30 +3676,54 @@ Every SOP includes at the bottom:
 
 ### Publishing to Transparency Site
 
-Notes with `dg-publish: true` in YAML frontmatter become eligible for transparency.quietlyworking.org. Publishing is fully automated — no Obsidian Digital Garden plugin needed.
+Notes with `dg-publish: true` in YAML frontmatter become eligible for transparency.quietlyworking.org. Publishing is fully automated.
+
+**Architecture (v2 — migrated Apr 2026):**
+The transparency site is an **Astro 5.x** static site on **Cloudflare Pages** with Svelte interactive islands. Content syncs from the Obsidian vault via `sync_transparency_site_v2.py`, which assigns each page to one of three content pillars.
+
+| Component | Technology | Location |
+|-----------|-----------|----------|
+| Framework | Astro 5.x + Svelte islands | `QuietlyWorking/qwf-transparency` |
+| Hosting | Cloudflare Pages | `qwf-transparency.pages.dev` |
+| CI/CD | GitHub Actions | `.github/workflows/deploy.yml` |
+| Sync script | Python | `005 Operations/Execution/sync_transparency_site_v2.py` |
+| Domain | `transparency.quietlyworking.org` | CNAME → `qwf-transparency.pages.dev` |
+
+**Three content pillars:**
+| Pillar | URL | Content |
+|--------|-----|---------|
+| Built from Broken | `/built-from-broken/` | BfB series, Agent Superpowers, Content Intelligence |
+| The Open Playbook | `/open-playbook/` | Tool Shed, Nonprofit Tech Guide, User Manual |
+| Living Proof | `/living-proof/` | QWF Values, program descriptions, ecosystem health |
 
 **How it works:**
-1. `sync_transparency_site.py` scans the vault for all `.md` files with `dg-publish: true` in YAML frontmatter
-2. Transforms each file: YAML frontmatter → JSON frontmatter, generates permalink, resolves wikilinks
-3. Pushes to `QuietlyWorking/qwu_transparency` GitHub repo
-4. Vercel auto-deploys on push (~15 seconds)
+1. `sync_transparency_site_v2.py` scans the vault for `.md` files with `dg-publish: true`
+2. Assigns each file to a pillar via `PILLAR_MAP` (explicit mapping + tag-based fallback)
+3. Generates YAML frontmatter for Astro Content Collections (title, slug, pillar, description, tags)
+4. Resolves wikilinks to standard Markdown links (`[[Page]]` → `[Page](/pillar/slug/)`)
+5. Pushes to `QuietlyWorking/qwf-transparency` GitHub repo
+6. GitHub Actions auto-deploys: fetches Digital Twin data → Astro build → wrangler deploy (~45s)
+
+**Interactive Svelte islands (loaded only when scrolled into view):**
+- **CostTicker** — Monthly operating cost breakdown with budget bar (homepage)
+- **EcosystemMap** — Filterable entity grid with health indicators (Living Proof page)
 
 **To publish a note:**
 1. Add `dg-publish: true` to frontmatter
-2. Run: `python "005 Operations/Execution/sync_transparency_site.py" --json`
+2. Run: `python "005 Operations/Execution/sync_transparency_site_v2.py" --json`
 3. Site updates live at transparency.quietlyworking.org
 
 **To keep private:**
 - Omit the field, or set `dg-publish: false`
 
 **Automated sync:**
-- **Immediately after pushing any `dg-publish: true` file** — agents run the sync as a follow-up step (CLAUDE.md v1.32.2 rule)
+- **Immediately after pushing any `dg-publish: true` file** — agents run the sync as a follow-up step (CLAUDE.md rule)
 - After every `/session-wrap-up` (Step 4C)
 - Daily at 4 AM Pacific via n8n workflow `YnawyFKfnrOao12P`
 - Discord notification to `#system-status` on success/failure
 
 **Content series on the transparency site:**
-- **Built from Broken** — Problems we face running AI-powered nonprofit operations and the real solutions we build. Series guide at `Quietly Working Universe Public Transparency Project/Built from Broken/_Series-Guide.md` (not published). Each volume gets `dg-publish: true` + `series: Built from Broken` + `built-from-broken` tag in frontmatter.
+- **Built from Broken** — Problems we face running AI-powered nonprofit operations and the real solutions we build. Series guide at `Quietly Working Universe Public Transparency Project/Built from Broken/_Series-Guide.md` (not published). Each volume gets `dg-publish: true` + `series: Built from Broken` + `built-from-broken` tag + a PILLAR_MAP entry in the v2 sync script.
 
 **Safety features:**
 - Private User Manual (`QWU Backoffice User Manual.md`) is blocklisted by filename stem — only the `[PUBLIC]` version passes
@@ -3709,15 +3733,16 @@ Notes with `dg-publish: true` in YAML frontmatter become eligible for transparen
 **Key files:**
 | File | Purpose |
 |------|---------|
-| `005 Operations/Execution/sync_transparency_site.py` | Sync script (v1.0.0) |
+| `005 Operations/Execution/sync_transparency_site_v2.py` | Sync script v2 (Astro output, v2.0.0) |
+| `005 Operations/Execution/sync_transparency_site.py` | **Deprecated** — v1 (Eleventy/Vercel) |
 | `005 Operations/Directives/sync_transparency_site.md` | Directive/SOP |
 | `005 Operations/Workflows/transparency-site-sync.json` | n8n workflow (daily 4 AM Pacific) |
 
-**Currently published pages (14 files):**
-- Table of Contents (home), QWU Values, Tool Shed, Nonprofit Tech Access Guide
-- QWC, Locals 4 Good, Code & Tips Swipe Page, OMW, IP Rights
-- 3 SOPs (User Manual [PUBLIC], BNI Workflow, Automation Workflow)
-- 2 Resource pages (Unreal Hotkeys, GoBrunch Media Note)
+**Currently published pages (12 files):**
+- Homepage (3-pillar landing), QWU Values, Tool Shed, Nonprofit Tech Access Guide
+- QWC, Locals 4 Good, OMW, IP Rights, Content Intelligence Architecture
+- Built from Broken Vol 1, How to Give Your AI Agent Superpowers
+- User Manual [PUBLIC]
 
 ---
 
@@ -4351,8 +4376,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v4.91 by generate_public_manual.py"
-generated: "2026-04-11 20:43"
+source: "Auto-generated from private manual v4.92 by generate_public_manual.py"
+generated: "2026-04-11 20:56"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10266,4 +10291,4 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ---
 
-*Last updated: 2026-04-11 20:43 (v4.91)*
+*Last updated: 2026-04-11 20:56 (v4.92)*
