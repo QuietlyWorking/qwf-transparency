@@ -211,7 +211,7 @@ img {
 }
 
 .footer-ecosystem {
-  max-width: 52rem;
+  max-width: var(--content-max-width);
   margin: 0 auto 2.5rem;
 }
 
