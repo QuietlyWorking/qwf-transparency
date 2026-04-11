@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-11 21:53 | Source version: 4.93
+> Generated: 2026-04-11 22:12 | Source version: 4.94
 
 # QWU Backoffice User Manual
 
@@ -3740,10 +3740,10 @@ The transparency site is an **Astro 5.x** static site on **Cloudflare Pages** wi
 | `005 Operations/Directives/sync_transparency_site.md` | Directive/SOP |
 | `005 Operations/Workflows/transparency-site-sync.json` | n8n workflow (daily 4 AM Pacific) |
 
-**Currently published pages (12 files):**
+**Currently published pages (13 files):**
 - Homepage (3-pillar landing), QWU Values, Tool Shed, Nonprofit Tech Access Guide
 - QWC, Locals 4 Good, OMW, IP Rights, Content Intelligence Architecture
-- Built from Broken Vol 1, How to Give Your AI Agent Superpowers
+- Built from Broken Vol 1, Built from Broken Vol 2, How to Give Your AI Agent Superpowers
 - User Manual [PUBLIC]
 
 ---
@@ -4378,8 +4378,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v4.93 by generate_public_manual.py"
-generated: "2026-04-11 21:53"
+source: "Auto-generated from private manual v4.94 by generate_public_manual.py"
+generated: "2026-04-11 22:12"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10293,4 +10293,4 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ---
 
-*Last updated: 2026-04-11 21:53 (v4.93)*
+*Last updated: 2026-04-11 22:12 (v4.94)*
