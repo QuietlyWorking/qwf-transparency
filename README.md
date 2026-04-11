@@ -1,2 +1,1 @@
-# qwf-transparency
-QWF Transparency Site — Astro on Cloudflare Pages
+# QWF Transparency Site\n\nAstro on Cloudflare Pages. Content synced from Obsidian vault.
