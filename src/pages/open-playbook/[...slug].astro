@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Article from '@/layouts/Article.astro';
+import ToolShedFilter from '@/components/islands/ToolShedFilter.svelte';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages', (entry) =>
@@ -14,8 +15,41 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await render(page);
+
+// Load Tool Shed data for interactive filter
+let toolShedData: Record<string, any> | null = null;
+if (page.data.slug === 'the-tool-shed') {
+  try {
+    toolShedData = await import('@/data/tool-shed.json');
+  } catch { /* graceful fallback — static table still renders below */ }
+}
+const hasToolShed = toolShedData?.tools?.length > 0;
 ---
 
 <Article frontmatter={page.data}>
+  {hasToolShed && (
+    <div class="tool-shed-island">
+      <ToolShedFilter client:visible data={toolShedData} />
+    </div>
+  )}
   <Content />
 </Article>
+
+<style>
+  .tool-shed-island {
+    margin-bottom: 2rem;
+    max-width: 100%;
+    /* Let the island break out of the article's max-width */
+    width: calc(100% + 4rem);
+    margin-left: -2rem;
+    margin-right: -2rem;
+  }
+
+  @media (max-width: 640px) {
+    .tool-shed-island {
+      width: calc(100% + 2rem);
+      margin-left: -1rem;
+      margin-right: -1rem;
+    }
+  }
+</style>

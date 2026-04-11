@@ -1,0 +1,568 @@
+{
+  "tools": [
+    {
+      "name": "Obsidian",
+      "category": "Productivity",
+      "tier": 1,
+      "tierName": "Star Content",
+      "heart": 4.0,
+      "childInv": 5.0,
+      "qwsScore": 4.9,
+      "description": "Our entire knowledge base, daily operations, and this transparency site run on it. Bootstrapped, founder-led, free for personal use, local-first data ownership."
+    },
+    {
+      "name": "Supabase",
+      "category": "Database/Backend",
+      "tier": 1,
+      "tierName": "Star Content",
+      "heart": 5.0,
+      "childInv": 4.0,
+      "qwsScore": 4.6,
+      "description": "Powers 8 projects across QWF. Open source, strong nonprofit support, active founder (Paul Copplestone)."
+    },
+    {
+      "name": "BetterStack",
+      "category": "Monitoring",
+      "tier": 1,
+      "tierName": "Star Content",
+      "heart": 5.0,
+      "childInv": null,
+      "qwsScore": 4.5,
+      "description": "Uptime monitoring and status page for all QWF services. Generous free tier, founder-led, loves nonprofits."
+    },
+    {
+      "name": "n8n",
+      "category": "Automation",
+      "tier": 1,
+      "tierName": "Star Content",
+      "heart": 4.0,
+      "childInv": 4.0,
+      "qwsScore": 4.4,
+      "description": "50+ workflows automating everything from meeting prep to daily operations. Self-hostable, open source core, founder still active."
+    },
+    {
+      "name": "Stripe",
+      "category": "Payments",
+      "tier": 1,
+      "tierName": "Star Content",
+      "heart": 3.0,
+      "childInv": 5.0,
+      "qwsScore": 4.2,
+      "description": "Processes all QWF donations. Patrick Collison still CEO, rock-solid, universal."
+    },
+    {
+      "name": "SuiteDash",
+      "category": "CRM",
+      "tier": 1,
+      "tierName": "Star Content",
+      "heart": 4.0,
+      "childInv": 5.0,
+      "qwsScore": 4.2,
+      "description": "Our family portal (family.quietlyworking.org). Bootstrapped, founder active in community, lifetime deal roots, all-in-one."
+    },
+    {
+      "name": "Cloudflare",
+      "category": "DNS/Security",
+      "tier": 1,
+      "tierName": "Star Content",
+      "heart": 4.0,
+      "childInv": 4.0,
+      "qwsScore": 4.2,
+      "description": "DNS and security for every QWF domain. Incredible free tier, public company but not PE."
+    },
+    {
+      "name": "Claude / Anthropic",
+      "category": "AI",
+      "tier": 1,
+      "tierName": "Star Content",
+      "heart": 4.0,
+      "childInv": 4.0,
+      "qwsScore": 4.0,
+      "description": "Primary AI for all QWF operations. Safety-focused mission, Dario Amodei founder-led."
+    },
+    {
+      "name": "Claude Code",
+      "category": "AI/Dev Tools",
+      "tier": 1,
+      "tierName": "Star Content",
+      "heart": null,
+      "childInv": 4.0,
+      "qwsScore": 4.0,
+      "description": "The agent that literally runs our backoffice. This page was synced by a script it helped build."
+    },
+    {
+      "name": "Lovable",
+      "category": "AI/Frontend",
+      "tier": 1,
+      "tierName": "Star Content",
+      "heart": 4.0,
+      "childInv": 5.0,
+      "qwsScore": 4.2,
+      "description": "Builds our web apps (HQ Command Center, Quietly Spotting, and more). Founder (Anton Osika) deeply involved, early stage, genuine heart \u2014 20% NPO discount, Valentine's Day 50% off credits, and 24 hours of free usage for *everyone* on International Women's Day 2026."
+    },
+    {
+      "name": "Let's Encrypt",
+      "category": "SSL/Security",
+      "tier": 2,
+      "tierName": "Strong Content",
+      "heart": 5.0,
+      "childInv": 5.0,
+      "qwsScore": 5.0,
+      "description": "Free SSL certificates for everything. Nonprofit (ISRG), free forever, changed the internet. Perfect Heart score."
+    },
+    {
+      "name": "OpenRouter",
+      "category": "AI Gateway",
+      "tier": 2,
+      "tierName": "Strong Content",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": 4.2,
+      "description": "One API for all AI models. Founder-led, great developer experience."
+    },
+    {
+      "name": "EmailDelivery.com",
+      "category": "Email/ESP",
+      "tier": 2,
+      "tierName": "Strong Content",
+      "heart": null,
+      "childInv": 5.0,
+      "qwsScore": 4.2,
+      "description": "Self-hosted email platform. Open source, MIT license. Our ESP runs for $35/year."
+    },
+    {
+      "name": "Docker",
+      "category": "Infrastructure",
+      "tier": 2,
+      "tierName": "Strong Content",
+      "heart": 3.0,
+      "childInv": 2.0,
+      "qwsScore": 3.5,
+      "description": "Containers for n8n, ESP, and local services. The technology is foundational even if Docker Inc. has had ownership drama."
+    },
+    {
+      "name": "Vista Social",
+      "category": "Social Media",
+      "tier": 2,
+      "tierName": "Strong Content",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Daily social media management. Needs research on company."
+    },
+    {
+      "name": "RackNerd",
+      "category": "Hosting",
+      "tier": 2,
+      "tierName": "Strong Content",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Budget VPS hosting. Our ESP runs on a $35/year VPS that actually works."
+    },
+    {
+      "name": "Amazon SES",
+      "category": "Email Delivery",
+      "tier": 2,
+      "tierName": "Strong Content",
+      "heart": 2.0,
+      "childInv": 1.0,
+      "qwsScore": 3.0,
+      "description": "Email sending at $0.10 per 1,000 emails. AWS is the opposite of founder-led, but unbeatable value."
+    },
+    {
+      "name": "Twilio",
+      "category": "Communications",
+      "tier": 2,
+      "tierName": "Strong Content",
+      "heart": 5.0,
+      "childInv": 2.0,
+      "qwsScore": 3.5,
+      "description": "SMS and voice for all QWF communications. Twilio.org provides tools AND grant funds to nonprofits... we've never paid a penny. Their nonprofit program is EPIC."
+    },
+    {
+      "name": "GitHub",
+      "category": "Development",
+      "tier": 2,
+      "tierName": "Strong Content",
+      "heart": 3.0,
+      "childInv": 1.0,
+      "qwsScore": 3.3,
+      "description": "All our repos including this transparency site. Microsoft-owned, but the free tier is generous."
+    },
+    {
+      "name": "VS Code",
+      "category": "Development",
+      "tier": 2,
+      "tierName": "Strong Content",
+      "heart": 4.0,
+      "childInv": 1.0,
+      "qwsScore": 3.7,
+      "description": "Primary code editor. Microsoft-owned but fully open source, incredible community."
+    },
+    {
+      "name": "PostgreSQL",
+      "category": "Database",
+      "tier": 3,
+      "tierName": "Solid Reviews",
+      "heart": 5.0,
+      "childInv": 5.0,
+      "qwsScore": 5.0,
+      "description": "Community-governed, open source, no corporate owner. The gold standard."
+    },
+    {
+      "name": "Caddy",
+      "category": "Web Server",
+      "tier": 3,
+      "tierName": "Solid Reviews",
+      "heart": 5.0,
+      "childInv": 5.0,
+      "qwsScore": 5.0,
+      "description": "Open source, founder-led, automatic HTTPS. Elegant."
+    },
+    {
+      "name": "WordPress",
+      "category": "CMS",
+      "tier": 3,
+      "tierName": "Solid Reviews",
+      "heart": 5.0,
+      "childInv": 5.0,
+      "qwsScore": 4.5,
+      "description": "Powers 11 QWF sites. Open source, nonprofit foundation (despite 2024-25 Automattic drama)."
+    },
+    {
+      "name": "DreamHost",
+      "category": "Hosting",
+      "tier": 3,
+      "tierName": "Solid Reviews",
+      "heart": 4.0,
+      "childInv": 5.0,
+      "qwsScore": 4.0,
+      "description": "Employee-owned, 28+ years, strong nonprofit support. Hosts our L4G site."
+    },
+    {
+      "name": "Apify",
+      "category": "Web Scraping",
+      "tier": 3,
+      "tierName": "Solid Reviews",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": 4.0,
+      "description": "Founder-led, strong community, good free tier."
+    },
+    {
+      "name": "Redis",
+      "category": "Cache/DB",
+      "tier": 3,
+      "tierName": "Solid Reviews",
+      "heart": 4.0,
+      "childInv": 3.0,
+      "qwsScore": 4.0,
+      "description": "Open source (with recent license changes), fast, universal."
+    },
+    {
+      "name": "Divi",
+      "category": "WordPress Theme",
+      "tier": 3,
+      "tierName": "Solid Reviews",
+      "heart": 3.0,
+      "childInv": 5.0,
+      "qwsScore": 3.8,
+      "description": "Nick Roach still leads Elegant Themes. Bootstrapped."
+    },
+    {
+      "name": "Discord",
+      "category": "Communication",
+      "tier": 3,
+      "tierName": "Solid Reviews",
+      "heart": 3.0,
+      "childInv": 2.0,
+      "qwsScore": 3.5,
+      "description": "Internal team communication. Free tier is incredible, community-first DNA."
+    },
+    {
+      "name": "Circle",
+      "category": "Community",
+      "tier": 3,
+      "tierName": "Solid Reviews",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": 3.5,
+      "description": "Founder-led SaaS community platform."
+    },
+    {
+      "name": "Atlassian (Loom)",
+      "category": "Video/Productivity",
+      "tier": 3,
+      "tierName": "Solid Reviews",
+      "heart": 5.0,
+      "childInv": 2.0,
+      "qwsScore": 4.0,
+      "description": "We use Loom for video. As of Feb 2026, Atlassian offers 100% off Jira, Confluence, Loom, and Teamwork Collection for social impact teams (25 seats or less). Previously 75% off. EPIC."
+    },
+    {
+      "name": "Zoom",
+      "category": "Meetings",
+      "tier": 3,
+      "tierName": "Solid Reviews",
+      "heart": 4.0,
+      "childInv": 2.0,
+      "qwsScore": 3.2,
+      "description": "All QWF meetings. 50% nonprofit discount via GoodStack (approved Feb 2026). Eric Yuan still CEO."
+    },
+    {
+      "name": "Google Workspace",
+      "category": "Productivity",
+      "tier": 3,
+      "tierName": "Solid Reviews",
+      "heart": 3.0,
+      "childInv": 1.0,
+      "qwsScore": 2.8,
+      "description": "Great product. Zero soul. We use it because everyone else does."
+    },
+    {
+      "name": "Microsoft 365",
+      "category": "Email/Office",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "We use Graph API heavily for email automation"
+    },
+    {
+      "name": "Azure",
+      "category": "Cloud Hosting",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Our primary VMs run here (2 servers)"
+    },
+    {
+      "name": "Google Maps API",
+      "category": "Geolocation",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Powers our local lead research"
+    },
+    {
+      "name": "Google Voice",
+      "category": "Phone",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Free phone line for a small nonprofit"
+    },
+    {
+      "name": "SQLite",
+      "category": "Database",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "The most deployed database on earth. Powers our local data stores."
+    },
+    {
+      "name": "DeepSeek",
+      "category": "AI (Fast Tier)",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Fast and cheap for mechanical pattern matching"
+    },
+    {
+      "name": "Google Gemini",
+      "category": "AI (Video)",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Video content processing"
+    },
+    {
+      "name": "Whisper (OpenAI)",
+      "category": "AI (Audio)",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Meeting transcription"
+    },
+    {
+      "name": "Apollo.io",
+      "category": "Lead Data",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Lead research and enrichment"
+    },
+    {
+      "name": "AnyMail Finder",
+      "category": "Email Finding",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Email discovery and verification"
+    },
+    {
+      "name": "DataForSEO",
+      "category": "SEO Data",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "SEO research and analysis"
+    },
+    {
+      "name": "Crunchbase",
+      "category": "Business Intel",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Company research for QWS reviews"
+    },
+    {
+      "name": "Instantly",
+      "category": "Email Warmup",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Domain warmup and cold outreach"
+    },
+    {
+      "name": "DMARC Report",
+      "category": "Email Auth",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Email authentication monitoring"
+    },
+    {
+      "name": "Reoon",
+      "category": "Email Validation",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Bulk email validation"
+    },
+    {
+      "name": "Yelp",
+      "category": "Business Data",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Local business research"
+    },
+    {
+      "name": "YellowPages",
+      "category": "Business Data",
+      "tier": 4,
+      "tierName": "Reference Tools",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": null,
+      "description": "Local business directory"
+    }
+  ],
+  "categories": [
+    "AI",
+    "AI (Audio)",
+    "AI (Fast Tier)",
+    "AI (Video)",
+    "AI Gateway",
+    "AI/Dev Tools",
+    "AI/Frontend",
+    "Automation",
+    "Business Data",
+    "Business Intel",
+    "CMS",
+    "CRM",
+    "Cache/DB",
+    "Cloud Hosting",
+    "Communication",
+    "Communications",
+    "Community",
+    "DNS/Security",
+    "Database",
+    "Database/Backend",
+    "Development",
+    "Email Auth",
+    "Email Delivery",
+    "Email Finding",
+    "Email Validation",
+    "Email Warmup",
+    "Email/ESP",
+    "Email/Office",
+    "Geolocation",
+    "Hosting",
+    "Infrastructure",
+    "Lead Data",
+    "Meetings",
+    "Monitoring",
+    "Payments",
+    "Phone",
+    "Productivity",
+    "SEO Data",
+    "SSL/Security",
+    "Social Media",
+    "Video/Productivity",
+    "Web Scraping",
+    "Web Server",
+    "WordPress Theme"
+  ],
+  "tiers": [
+    {
+      "id": 1,
+      "name": "Star Content",
+      "count": 10
+    },
+    {
+      "id": 2,
+      "name": "Strong Content",
+      "count": 10
+    },
+    {
+      "id": 3,
+      "name": "Solid Reviews",
+      "count": 12
+    },
+    {
+      "id": 4,
+      "name": "Reference Tools",
+      "count": 17
+    }
+  ],
+  "stats": {
+    "total": 49,
+    "scored": 30,
+    "avgScore": 4.03
+  },
+  "generated_at": "2026-04-11T21:39:49.897824+00:00"
+}
