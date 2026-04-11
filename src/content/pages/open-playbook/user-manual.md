@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 4.88 | Started: 251223 | Updated: 260410**"
+description: "**Version: 4.96 | Started: 251223 | Updated: 260411**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-04-11"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -11,11 +11,11 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-11 22:23 | Source version: 4.95
+> Generated: 2026-04-11 22:35 | Source version: 4.96
 
 # QWU Backoffice User Manual
 
-**Version: 4.88 | Started: 251223 | Updated: 260410**
+**Version: 4.96 | Started: 251223 | Updated: 260411**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -3230,7 +3230,9 @@ The L4G system includes:
 - **After-Purchase CX Vision (2026-04-11):** Two-path architecture: "Supporter Creates" (templates + upload + multi-area management) and "MP Creates" (smart wizard + brand identity + 3 concepts → 3 layouts with open conversation thread + email mirror). Merge into Postcard Tracker (package-tracking UX), celebration, feedback, physical sample + frameable thank-you. QTR integration from day one (QR codes + tracking URLs). v1: TIG creates in Photoshop; long-term: Pomelli-like AI engine.
 - **Post-Checkout Fork:** `artwork_track` ('self'|'create') on `l4g_bookings` routes donors to artwork upload or Brand Clarity Wizard
 - **Brand Clarity Wizard:** 3-step guided intake at `/portal/brand` — saves to 9 brand fields on `l4g_donor_partners`
-- **Journey Milestones:** `check_l4g_milestones.py` (15-min n8n poll) → `send_l4g_journey_email.py` (6 TIG-voice templates) with dedup via `l4g_journey_events`
+- **Journey Milestones:** `check_l4g_milestones.py` v1.1.0 (15-min n8n poll) → `send_l4g_journey_email.py` (6 TIG-voice templates) with dedup via `l4g_journey_events`. v1.1.0 fixed `post_mail_checkin` timing bug (was firing immediately instead of 3 days after mailed status)
+- **CX Automation Backend (Session 207):** 6 scripts covering the full after-purchase journey — proof upload, AI concept pipeline (enrich → brand identity → 3 briefs), concept choice processing, conversation email mirror, batch print advancement, post-delivery feedback. Plus `add_l4g_donor_booking.py` for admin onboarding outside website checkout.
+- **SvelteKit Migration Scaffold (Session 207):** `sveltekit-migration` branch — adapter-cloudflare, Supabase SSR auth, Mailbox Walk CSS ported, builds in 2.4s. `L4G-Phase-Prompts.md` contains 8 copy-paste prompts for remaining migration phases 4-11.
 - **AI Ad Pipeline:** `enrich_donor_company.py` → `generate_brand_identity.py` → `generate_ad_briefs.py` (Claude FLAGSHIP, 3 approaches: Trust Builder/Value Driver/Story Teller)
 - **Print Management:** `populate_l4g_postcard_config.py` (36 rows, 3 areas × 12 months) + `update_l4g_print_status.py` (7-state forward-only machine)
 - **Live Postcard Display:** Multi-size packing algorithm (XS/SM/MD/LG/XL/Massive), booking data join, dynamic grid layout. Only booked slots shown; CTA only when entire half-section is empty.
@@ -4378,8 +4380,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v4.95 by generate_public_manual.py"
-generated: "2026-04-11 22:23"
+source: "Auto-generated from private manual v4.96 by generate_public_manual.py"
+generated: "2026-04-11 22:35"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10293,4 +10295,4 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ---
 
-*Last updated: 2026-04-11 22:23 (v4.95)*
+*Last updated: 2026-04-11 22:35 (v4.96)*
