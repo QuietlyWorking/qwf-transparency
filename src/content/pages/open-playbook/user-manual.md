@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-12 02:21 | Source version: 5.03
+> Generated: 2026-04-12 03:18 | Source version: 5.04
 
 # QWU Backoffice User Manual
 
@@ -4398,8 +4398,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.03 by generate_public_manual.py"
-generated: "2026-04-12 02:21"
+source: "Auto-generated from private manual v5.04 by generate_public_manual.py"
+generated: "2026-04-12 03:18"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5937,7 +5937,7 @@ Defense-in-depth opt-out system using the self-service Preference Center:
 Users can manage their own preferences via:
 1. **Ezer Chat:** Say "manage my preferences" or "unsubscribe" at terminal.quietlyworking.org
 2. **Email Footer:** All automated emails include a preferences link
-3. **Direct URL:** https://preferences.quietlyworking.org (requires magic link)
+3. **Direct URL:** https://preferences.quietlyworking.org (requires magic link). Root URL (`/`) serves the preferences page in landing mode. Token-based access via `/p/{token}`. (Fixed Apr 2026: root was previously redirecting to Architecture Map due to shared digital_twin_server.py — now checks `Host` header.)
 
 **Available Products:**
 | Code | Display Name | Description |
@@ -9546,6 +9546,44 @@ ssh bitnami@<WP_SERVER_IP> "sudo cp /tmp/qwf-ecosystem-widget.php /opt/bitnami/w
 - **User Manual:** `002 Projects/_QWF Ecosystem Widget/User-Manual.md`
 - **Directive (landing section):** `005 Operations/Directives/qwf_ecosystem_landing_section.md` (separate — Lovable apps only)
 
+### Transparency Site Native Version (Svelte/Astro)
+
+**Added: April 11, 2026**
+
+The transparency site (`transparency.quietlyworking.org`) has its own native implementation of the ecosystem widget — a Svelte 5 island component that renders at build time using `ecosystem.json` data (no client-side API polling).
+
+**Component:** `src/components/islands/EcosystemFooterWidget.svelte` (in `QuietlyWorking/qwf-transparency`)
+
+**Differences from WordPress widget:**
+
+| Feature | WordPress (Preact) | Transparency (Svelte) |
+|---------|-------------------|----------------------|
+| Framework | Preact + Shadow DOM | Svelte 5 + `client:visible` |
+| Data source | API polling (60s) | Build-time JSON |
+| JavaScript | 17 KB bundle | Zero JS until scrolled into view |
+| Mode | Block or Page | Page mode (always expanded) |
+| Theming | CSS custom properties + Shadow DOM | Inherits site CSS variables |
+
+**Feature parity with WordPress widget:**
+- Page-mode layout with sidebar filters (search, category checkboxes, status filters)
+- Entity cards with emoji icons, pulse indicators, taglines, MP badges
+- Entity detail panel: summary, highlights, connection graph, live metrics, CTA buttons
+- SVG connection graph with animated pulses, glow filters, hover tooltips
+- Inline wiki links (auto-linkify entity names in text, longest-first matching)
+- Media Kit: logo downloads, social SVG icons, boilerplate with copy button
+- Animated stat counters (IntersectionObserver + requestAnimationFrame)
+- Rainbow gradient pulse bar
+- `prefers-reduced-motion` support
+
+**Integration:** Loaded in `src/components/Footer.astro` with `client:visible` directive. Container is full-width (no max-width constraint).
+
+**Key files:**
+| File | Repo | Purpose |
+|------|------|---------|
+| `src/components/islands/EcosystemFooterWidget.svelte` | qwf-transparency | The component |
+| `src/data/ecosystem.json` | qwf-transparency | Build-time data (fetched in CI) |
+| `src/components/Footer.astro` | qwf-transparency | Integration point |
+
 ### 🎓 Missing Pixel Training Opportunities
 
 | Component | Skills Developed | Difficulty |
@@ -10373,4 +10411,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-12 02:21 (v5.03)*
+*Last updated: 2026-04-12 03:18 (v5.04)*
