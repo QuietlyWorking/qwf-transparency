@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 5.01 | Started: 251223 | Updated: 260412**"
+description: "**Version: 5.02 | Started: 251223 | Updated: 260412**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-04-12"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -11,11 +11,11 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-12 01:35 | Source version: 5.01
+> Generated: 2026-04-12 02:02 | Source version: 5.02
 
 # QWU Backoffice User Manual
 
-**Version: 5.01 | Started: 251223 | Updated: 260412**
+**Version: 5.02 | Started: 251223 | Updated: 260412**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -3218,7 +3218,7 @@ The backoffice includes a comprehensive lead generation and enrichment system su
 **Full L4G Technical Documentation:** `003 Entities/Organizations/Locals 4 Good.md`
 
 The L4G system includes:
-- **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026). **SvelteKit migration in progress** — Phases 0-8 complete on `sveltekit-migration` branch. Public pages + checkout + full donor-partner portal (10 pages) + admin suite (13 pages) + email mirror + push notifications. Phase 6 portal includes: dashboard with postcard tracker, bookings with conversation threads (Supabase Realtime), concept selection (3 AI concepts), proof review with approve/revision form actions, supporter-creates upload with area intelligence, brand clarity wizard, post-delivery feedback with celebration animation, settings. Two new tables: `l4g_conversations` (RLS + Realtime), `l4g_feedback`. Schema v1.3.0. Phases 9-11 remain (CX compliance, deploy, dry run).
+- **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026). **SvelteKit migration complete** — `sveltekit-migration` branch merged to `main` (Session 216, Apr 12, 2026). All 20 routes verified on production (200 for public, 303 for auth-guarded). SSR confirmed: area demographics render in HTML source. Host-based redirects working (www/.com → canonical .org) via `hooks.server.ts`. GitHub Actions `deploy.yml` updated: output dir `.svelte-kit/cloudflare`, `PUBLIC_SUPABASE_URL` + `PUBLIC_SUPABASE_ANON_KEY` env vars added as GitHub Actions secrets. Static assets: `sitemap.xml` + `robots.txt` in `static/`. Fixed SSR crash: `$state(() => {...})` stores function reference — changed to inline expression. Public pages + checkout + full donor-partner portal (10 pages) + admin suite (13 pages) + email mirror + push notifications. Phase 6 portal includes: dashboard with postcard tracker, bookings with conversation threads (Supabase Realtime), concept selection (3 AI concepts), proof review with approve/revision form actions, supporter-creates upload with area intelligence, brand clarity wizard, post-delivery feedback with celebration animation, settings. Two new tables: `l4g_conversations` (RLS + Realtime), `l4g_feedback`. Schema v1.3.0.
 - **Data Layer:** Supabase (`<SUPABASE_PROJECT_ID_L4G>`) — 23 tables (schema v1.3.0), migrated from Google Sheets + new tables for conversations and feedback
 - **APIs:** 8 Supabase Edge Functions (submit-contact-form, create-checkout-session, check-availability, expire-stale-holds, submit-category-request, subscribe-to-push, send-push-notification, ezer-chat)
 - **Payments:** Stripe Checkout via `create-checkout-session` edge function + n8n `L4G Stripe Payment Handler v1.3` webhook (E2E verified Mar 18, 2026)
@@ -4397,8 +4397,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.01 by generate_public_manual.py"
-generated: "2026-04-12 01:35"
+source: "Auto-generated from private manual v5.02 by generate_public_manual.py"
+generated: "2026-04-12 02:02"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -9984,7 +9984,7 @@ Centralized registry of all QWF apps with hosting, database, domain, and develop
 | **CF Pages** (QWR, QSP, L4G, QNT, WHL, AH) | React (current) / SvelteKit (target) | Direct code commits to GitHub repo | Push to `main` → GitHub Actions → `wrangler pages deploy` (auto) |
 | **Lovable** (HQ only) | React (Lovable-managed) | Write numbered Lovable prompt files | Paste prompt into Lovable editor → preview → deploy |
 
-**SvelteKit migration (decided 2026-04-11):** All supporter-facing apps migrate to SvelteKit before onboarding active supporters. Zero current supporters = zero risk window. QWB is the greenfield template app (P1). QSP migrates during Content tab build (P2). QWR migrates frontend (P3). Lovable apps (QQT/QKN/QTR) skip React entirely → go directly to SvelteKit/CF Pages (P4-6). L4G SvelteKit scaffold on `sveltekit-migration` branch (Session 207) — adapter-cloudflare, Supabase SSR auth, Mailbox Walk CSS ported. HQ stays on Lovable. See `005 Operations/Directives/qwf_content_intelligence_platform.md`.
+**SvelteKit migration (decided 2026-04-11):** All supporter-facing apps migrate to SvelteKit before onboarding active supporters. Zero current supporters = zero risk window. QWB is the greenfield template app (P1). QSP migrates during Content tab build (P2). QWR migrates frontend (P3). Lovable apps (QQT/QKN/QTR) skip React entirely → go directly to SvelteKit/CF Pages (P4-6). **L4G SvelteKit migration complete (Session 216, Apr 12, 2026)** — `sveltekit-migration` branch merged to `main`, all 20 routes verified on production. SSR live (area demographics in HTML source). `deploy.yml` updated (output dir `.svelte-kit/cloudflare`, Supabase env vars as GH secrets). Host-based redirects via `hooks.server.ts`. HQ stays on Lovable. See `005 Operations/Directives/qwf_content_intelligence_platform.md`.
 
 ### Content Intelligence Platform (Decided 2026-04-11)
 
@@ -10312,4 +10312,4 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ---
 
-*Last updated: 2026-04-12 01:35 (v5.01)*
+*Last updated: 2026-04-12 02:02 (v5.02)*
