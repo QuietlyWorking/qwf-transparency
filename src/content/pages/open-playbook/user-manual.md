@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-12 23:03 | Source version: 5.09
+> Generated: 2026-04-12 23:58 | Source version: 5.10
 
 # QWU Backoffice User Manual
 
@@ -2297,9 +2297,9 @@ ssh bitnami@<WP_SERVER_IP> "chmod 644 /tmp/content.html && \
 - TIG Izm pull-quotes — carried from v1.1.0
 - SEO VideoObject JSON-LD — carried from v1.1.0
 
-### Social Video Clip Generation (Remotion) — Evaluation Phase
+### Social Video Clip Generation (Remotion)
 
-Remotion is a React-based programmatic video framework (MIT licensed) being evaluated for generating branded social media video clips from chaplaintig.com articles. Each clip is a 30-66 second kinetic typography animation designed as a teaser linking back to the full article.
+Automated pipeline generating branded social media video clips from chaplaintig.com articles at scale. Each clip is a 30-60 second kinetic typography animation designed as a teaser linking back to the full article. Target: 791+ articles ready for batch rendering.
 
 **Project Location:** `/home/<VM_USER>/chaplaintig-video-clips/` (outside the vault — Node.js project)
 
@@ -2307,29 +2307,45 @@ Remotion is a React-based programmatic video framework (MIT licensed) being eval
 
 **How it works:**
 ```
-Article content files → Creative brief (quote selection, scene assembly)
-  → Remotion React composition → Headless Chrome render → MP4
+Article content files → generate_creative_brief.py (FLAGSHIP + thinking, ~$0.08/brief)
+  → ArticleClipSchema JSON props → Remotion ArticleClip composition
+  → Headless Chrome render → MP4 + PNG thumbnail
 ```
+
+**Component Library (`src/`):**
+- **Scenes:** `HookScene`, `QuoteScene`, `TurnScene`, `LandingScene`, `CloseScene` — each accepts props, auto-calculates internal timing
+- **Shared:** `RevealText`, `AccentLine`, `BreathingBackground`, `Particles`, `SceneLayout`
+- **Wonder effects:** `EllipsisHeartbeat` (auto-detects "..." — TIG's signature punctuation), `ConstellationPulse` (thesis reveal)
+- **Schema:** `ArticleClipSchema` (Zod) — interface contract between Python orchestrator and React components
+- **Compositions:** `ArticleClip-Reels` (1080x1920), `ArticleClip-Square` (1080x1080), `ArticleClip-Landscape` (1920x1080), `ArticleClip-Thumbnail` (PNG)
+- **Semantic Color Shift:** `accentColor` prop flows through all components. WHELHO realm routing: Work Hard = `#d4782c`, Enjoy Life = `#33e8d8`, Help Others = `#9b3d8f`
 
 **Brand Rules (locked in):**
 - **Pacing:** 10-13 seconds per scene (1-3 lines), 15-17 seconds (4+ lines), 2-3 second gaps between text reveals
 - **Colors:** Dark bg `#0a0a1a`, Aurora Teal accent `#33e8d8`, Stardust text `#e8e4f0`
-- **Fonts:** PT Serif (quotes, headlines), PT Sans (labels, CTAs) — loaded via `@remotion/google-fonts` (CSS @import fails in headless render)
-- **Animation:** Spring physics for all text reveals (no linear interpolation)
-- **Output:** 1080x1920 vertical (Reels/TikTok primary), square and landscape variants planned
+- **Fonts:** PT Serif (quotes, headlines), PT Sans (labels, CTAs) — loaded via `@remotion/google-fonts`
+- **Animation:** Spring physics for all text reveals; `random('seed')` for deterministic randomness
 - **Mood:** "Late night conversation about things that matter" — contemplative, cinematic, not flashy
 
-**Scene Types:** HOOK → QUOTE → TURN → LANDING → CLOSE (mix per article)
+**Python Orchestration (`005 Operations/Execution/`):**
+- `generate_creative_brief.py` — AI-powered quote selection, scene assembly, WHELHO color routing
+- `render_social_clip.py` — Brief caching, Remotion render, quality gate (ffprobe), thumbnail
+- `batch_render_clips.py` — Resume-safe batch processing with progress tracking
 
 **Rendering:**
 ```bash
+# Single article via orchestrator
+python render_social_clip.py --article-uid "20250601-ping-pong-bryant-park"
+
+# Batch (791 articles ready)
+python batch_render_clips.py --limit 10
+
+# Direct Remotion render
 cd /home/<VM_USER>/chaplaintig-video-clips
-npx remotion render PingPongClip --output out/ping-pong-teaser.mp4
+npx remotion render ArticleClip-Reels --props='{"hookLine":"...","articleUid":"..."}' --output out/clip.mp4
 ```
 
-Render time: ~90 seconds for a 66-second clip on claude-dev VM (2 concurrent threads). No duration limits — Remotion renders frame-by-frame.
-
-**Status:** Proof of concept complete (ping pong article, 3 iterations). Brand guide written. Next: parameterized `ArticleClip` component + `render_social_clip.py` orchestrator script for pipeline integration.
+Render time: ~90 seconds for a 60-second clip on claude-dev VM (2 concurrent threads).
 
 ### Environment Variables
 
@@ -4417,8 +4433,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.09 by generate_public_manual.py"
-generated: "2026-04-12 23:03"
+source: "Auto-generated from private manual v5.10 by generate_public_manual.py"
+generated: "2026-04-12 23:58"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10473,4 +10489,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-12 23:03 (v5.09)*
+*Last updated: 2026-04-12 23:58 (v5.10)*
