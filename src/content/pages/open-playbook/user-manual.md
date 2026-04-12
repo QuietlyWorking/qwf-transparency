@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 4.96 | Started: 251223 | Updated: 260411**"
+description: "**Version: 5.01 | Started: 251223 | Updated: 260412**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-04-12"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -11,11 +11,11 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-12 01:33 | Source version: 5.0
+> Generated: 2026-04-12 01:35 | Source version: 5.01
 
 # QWU Backoffice User Manual
 
-**Version: 4.96 | Started: 251223 | Updated: 260411**
+**Version: 5.01 | Started: 251223 | Updated: 260412**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -3218,11 +3218,11 @@ The backoffice includes a comprehensive lead generation and enrichment system su
 **Full L4G Technical Documentation:** `003 Entities/Organizations/Locals 4 Good.md`
 
 The L4G system includes:
-- **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026). **SvelteKit migration in progress** — Phases 0-7 complete on `sveltekit-migration` branch. Public pages + checkout + full donor-partner portal (10 pages) + admin suite (13 pages). Phase 6 portal includes: dashboard with postcard tracker, bookings with conversation threads (Supabase Realtime), concept selection (3 AI concepts), proof review with approve/revision form actions, supporter-creates upload with area intelligence, brand clarity wizard, post-delivery feedback with celebration animation, settings. Two new tables: `l4g_conversations` (RLS + Realtime), `l4g_feedback`. Schema v1.3.0. Phases 8-11 remain (email mirror, CX compliance, deploy, dry run).
+- **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026). **SvelteKit migration in progress** — Phases 0-8 complete on `sveltekit-migration` branch. Public pages + checkout + full donor-partner portal (10 pages) + admin suite (13 pages) + email mirror + push notifications. Phase 6 portal includes: dashboard with postcard tracker, bookings with conversation threads (Supabase Realtime), concept selection (3 AI concepts), proof review with approve/revision form actions, supporter-creates upload with area intelligence, brand clarity wizard, post-delivery feedback with celebration animation, settings. Two new tables: `l4g_conversations` (RLS + Realtime), `l4g_feedback`. Schema v1.3.0. Phases 9-11 remain (CX compliance, deploy, dry run).
 - **Data Layer:** Supabase (`<SUPABASE_PROJECT_ID_L4G>`) — 23 tables (schema v1.3.0), migrated from Google Sheets + new tables for conversations and feedback
 - **APIs:** 8 Supabase Edge Functions (submit-contact-form, create-checkout-session, check-availability, expire-stale-holds, submit-category-request, subscribe-to-push, send-push-notification, ezer-chat)
 - **Payments:** Stripe Checkout via `create-checkout-session` edge function + n8n `L4G Stripe Payment Handler v1.3` webhook (E2E verified Mar 18, 2026)
-- **Automation:** n8n workflows for payment processing, hold expiry, HQ sync, category request notifications, concierge response emails
+- **Automation:** n8n workflows for payment processing, hold expiry, HQ sync, category request notifications, concierge response emails, conversation email mirror (webhook), email reply polling (2-min schedule)
 - **Category Concierge:** Public category request form → admin queue at `/admin/category-requests` → approve/map/decline actions → auto-inventory population (18 months × all areas) → automated response emails via `send_l4g_concierge_response.py`. Multi-channel admin notifications (Discord + SMS via Twilio) via `dispatch_l4g_category_notification.py`
 - **HQ Visibility:** L4G Operations module in HQ Command Center — Kanban pipeline, production calendar, deadline alerts via `sync_hq_l4g.py` (every 15 min)
 - **Migration:** Data migrated from Google Sheets → Supabase via `migrate_l4g_sheets_to_supabase.py` (Feb 27, 2026)
@@ -3230,7 +3230,8 @@ The L4G system includes:
 - **After-Purchase CX Vision (2026-04-11):** Two-path architecture: "Supporter Creates" (templates + upload + multi-area management) and "MP Creates" (smart wizard + brand identity + 3 concepts → 3 layouts with open conversation thread + email mirror). Merge into Postcard Tracker (package-tracking UX), celebration, feedback, physical sample + frameable thank-you. QTR integration from day one (QR codes + tracking URLs). v1: TIG creates in Photoshop; long-term: Pomelli-like AI engine.
 - **Post-Checkout Fork:** `artwork_track` ('self'|'create') on `l4g_bookings` routes donors to artwork upload or Brand Clarity Wizard
 - **Brand Clarity Wizard:** 3-step guided intake at `/portal/brand` — saves to 9 brand fields on `l4g_donor_partners`
-- **Journey Milestones:** `check_l4g_milestones.py` v1.1.0 (15-min n8n poll) → `send_l4g_journey_email.py` (6 TIG-voice templates) with dedup via `l4g_journey_events`. v1.1.0 fixed `post_mail_checkin` timing bug (was firing immediately instead of 3 days after mailed status)
+- **Journey Milestones:** `check_l4g_milestones.py` v1.2.0 (15-min n8n poll) → `send_l4g_journey_email.py` v1.2.0 (6 TIG-voice templates with portal deep links and Mailbox Walk gradient CTA buttons) + push notifications for proof_ready, proof_approved, going_to_print, postcards_mailed. Dedup via `l4g_journey_events`. v1.2.0 fires push notifications alongside journey emails.
+- **Email Mirror + Notification System (Session 215):** `send_l4g_conversation_email.py` v1.1.0 adds Reply-To headers (`l4g-reply+{booking_id}@quietlyworking.org`) and X-L4G-Booking-ID internet message header for email-to-thread routing. `poll_l4g_email_replies.py` v1.0.0 polls Ezer inbox via MS Graph for replies matching `l4g-reply+` pattern, strips quoted content, inserts into `l4g_conversations`, moves to L4G-Processed folder (state: `.tmp/l4g_reply_processed_ids.json`, runs every 2 min via n8n). `send_l4g_push_notification.py` v1.0.0 wraps `send-push-notification` edge function with 7 event templates (print_status_change, new_message_donor/team, proof_ready, concept_ready, proof_approved, feedback_submitted). Supabase `pg_net` trigger `notify_l4g_conversation_insert()` on `l4g_conversations` INSERT → POSTs to n8n webhook for real-time email mirror.
 - **CX Automation Backend (Session 207):** 6 scripts covering the full after-purchase journey — proof upload, AI concept pipeline (enrich → brand identity → 3 briefs), concept choice processing, conversation email mirror, batch print advancement, post-delivery feedback. Plus `add_l4g_donor_booking.py` for admin onboarding outside website checkout.
 - **SvelteKit Migration Scaffold (Session 207):** `sveltekit-migration` branch — adapter-cloudflare, Supabase SSR auth, Mailbox Walk CSS ported, builds in 2.4s. `L4G-Phase-Prompts.md` contains 8 copy-paste prompts for remaining migration phases 4-11.
 - **AI Ad Pipeline:** `enrich_donor_company.py` → `generate_brand_identity.py` → `generate_ad_briefs.py` (Claude FLAGSHIP, 3 approaches: Trust Builder/Value Driver/Story Teller)
@@ -3255,8 +3256,8 @@ The L4G system includes:
 |--------|---------|---------|
 | `send_l4g_welcome_email.py` | Post-payment welcome email (Exempt, MS Graph) | v1.0.0 |
 | `send_l4g_queue_notification.py` | Queue notification when slot opens | v1.0.0 |
-| `send_l4g_journey_email.py` | 6 milestone email templates (Enhancement, MS Graph) | v1.0.0 |
-| `check_l4g_milestones.py` | Polls for state changes, triggers journey emails (v1.1.0: fixed post_mail_checkin timing) | v1.1.0 |
+| `send_l4g_journey_email.py` | 6 milestone email templates with portal deep links + Mailbox Walk gradient CTAs (Enhancement, MS Graph) | v1.2.0 |
+| `check_l4g_milestones.py` | Polls for state changes, triggers journey emails + push notifications (v1.2.0: added push for proof_ready/approved/going_to_print/mailed) | v1.2.0 |
 | `enrich_donor_company.py` | Website scraper for brand signals | v1.0.0 |
 | `generate_brand_identity.py` | AI brand guide from intake data (Claude FLAGSHIP) | v1.0.0 |
 | `generate_ad_briefs.py` | AI brief generation — 3 concept approaches | v1.0.0 |
@@ -3272,9 +3273,18 @@ The L4G system includes:
 | `upload_l4g_proof.py` | Upload proof image to Supabase Storage, update ad_proof record to 'submitted'. --booking-id, --image-path, --dry-run | v1.0.0 |
 | `run_l4g_concept_pipeline.py` | End-to-end "MP Creates" AI pipeline: website enrichment → brand identity → 3 ad briefs → concept proof placeholders → donor notification (2x Claude FLAGSHIP) | v1.0.0 |
 | `process_l4g_concept_choice.py` | Process donor's concept selection — marks chosen proof as in_progress, others as not_selected, updates booking to design_in_progress | v1.0.0 |
-| `send_l4g_conversation_email.py` | Email mirror for booking conversation threads (Exempt, MS Graph). Notifies recipient when new message posted | v1.0.0 |
+| `send_l4g_conversation_email.py` | Email mirror for booking conversation threads (Exempt, MS Graph). Reply-To headers for email→thread routing, X-L4G-Booking-ID header | v1.1.0 |
 | `advance_l4g_print_batch.py` | Batch print status advancement for all bookings in an area/month. Wraps update_l4g_print_status.py. 7-state forward-only machine | v1.0.0 |
 | `process_l4g_feedback.py` | Post-delivery donor feedback — stores emoji rating, response count, testimonial, would-recommend. Syncs to HQ, Discord notification | v1.0.0 |
+| `poll_l4g_email_replies.py` | Polls Ezer inbox via MS Graph for l4g-reply+ replies, strips quoted content, inserts into l4g_conversations, moves to L4G-Processed folder. State: `.tmp/l4g_reply_processed_ids.json`. Runs every 2 min via n8n | v1.0.0 |
+| `send_l4g_push_notification.py` | Web Push wrapper calling send-push-notification edge function. 7 event templates (print_status_change, new_message_donor/team, proof_ready, concept_ready, proof_approved, feedback_submitted). Manual and event modes | v1.0.0 |
+
+**L4G n8n Workflows:**
+
+| Workflow | ID | Schedule/Trigger | Purpose |
+|----------|----|-----------------|---------|
+| L4G Conversation Email Mirror v1.0 | `kbmulgoO0thPNAZK` | Webhook (`l4g-conversation-mirror`) | Receives pg_net POST on l4g_conversations INSERT, triggers email mirror to conversation participants |
+| L4G Email Reply Poller v1.0 | `eLESO5sr6qgDqFbU` | Every 2 minutes | Runs `poll_l4g_email_replies.py` to capture email replies back into conversation threads |
 
 **Lead Generation Webhook:** `https://n8n.quietlyworking.org/webhook/lead-request`
 
@@ -4387,8 +4397,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.0 by generate_public_manual.py"
-generated: "2026-04-12 01:33"
+source: "Auto-generated from private manual v5.01 by generate_public_manual.py"
+generated: "2026-04-12 01:35"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10302,4 +10312,4 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ---
 
-*Last updated: 2026-04-12 01:33 (v5.0)*
+*Last updated: 2026-04-12 01:35 (v5.01)*
