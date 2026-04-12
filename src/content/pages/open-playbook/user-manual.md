@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-12 02:02 | Source version: 5.02
+> Generated: 2026-04-12 02:03 | Source version: 5.02
 
 # QWU Backoffice User Manual
 
@@ -4398,7 +4398,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.02 by generate_public_manual.py"
-generated: "2026-04-12 02:02"
+generated: "2026-04-12 02:03"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -9968,7 +9968,7 @@ Centralized registry of all QWF apps with hosting, database, domain, and develop
 | **QKN** | Quietly Knocking | Lovable | → SvelteKit (P5) | — | `quietlyknocking.org` | `mepdsaqmsooxmjsmlcut` | Alpha |
 | **QSP** | Quietly Spotting | CF Pages | React → SvelteKit (P2) | `quietly-spotting` | `quietlyspotting.org` | `lsfplhkgpiakhvtvsfic` | Production |
 | **QTR** | Quietly Tracking | Lovable | → SvelteKit (P6) | — | `quietlytracking.org` | `ipdrexcbaqoazhpohfco` | Foundation |
-| **L4G** | Locals 4 Good | CF Pages | React → SvelteKit | `locals4good` | `locals4good.org` | `<SUPABASE_PROJECT_ID_L4G>` | Beta |
+| **L4G** | Locals 4 Good | CF Pages | SvelteKit ✅ | `locals4good` | `locals4good.org` | `<SUPABASE_PROJECT_ID_L4G>` | Beta |
 | **HQ** | Command Center | Lovable | Lovable (stay) | — | `hq.quietlyworking.org` | `<SUPABASE_PROJECT_ID>` (shared with QWR) | Production |
 | **WHL** | WHELHO | CF Pages | React | `whelho` | `whelho.org` | `nvimpjmhiondaxtrwlny` | Alpha |
 | **PEZ** | Pocket Ez | Lovable | — | — | — | `<SUPABASE_PROJECT_POCKET>` | Planned |
@@ -10312,4 +10312,4 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ---
 
-*Last updated: 2026-04-12 02:02 (v5.02)*
+*Last updated: 2026-04-12 02:03 (v5.02)*
