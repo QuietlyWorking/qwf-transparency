@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 5.05 | Started: 251223 | Updated: 260412**"
+description: "**Version: 5.08 | Started: 251223 | Updated: 260412**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-04-12"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -11,11 +11,11 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-12 21:39 | Source version: 5.06
+> Generated: 2026-04-12 22:07 | Source version: 5.08
 
 # QWU Backoffice User Manual
 
-**Version: 5.05 | Started: 251223 | Updated: 260412**
+**Version: 5.08 | Started: 251223 | Updated: 260412**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -2178,6 +2178,16 @@ The pipeline auto-detects whether a video has visual value worth capturing as fr
 
 **Legacy:** Discord commands (approve/reject/edit) are deprecated in `process_content_review.py` v1.3.0. CLI `--approve`/`--reject` flags still work for direct vault operations.
 
+### Pipeline Orchestrator Bug Fix (v1.6.0)
+
+**Fixed in Session 218 (April 12, 2026):** `tig_video_pipeline_orchestrator.py` v1.5.0 → v1.6.0.
+
+**Root cause:** `run_content_router()` was called at step 2.6 (before the `hq_video_articles` row was created at step 5). The Supabase PATCH silently matched zero rows because the article record did not yet exist. Result: `content_atoms` and `program_routing` fields were never populated in HQ Content Review — all 153 existing articles were missing this data.
+
+**Fix:** Moved `run_content_router()` to step 5.5 (immediately after HQ record insert). All future videos now correctly populate routing data at the right pipeline stage.
+
+**Backfill:** Full backfill of all 153 existing `hq_video_articles` rows completed — zero failures. `content_atoms` and `program_routing` now present on all articles in HQ Content Review.
+
 ### Unified Content Distribution System (v1.0.0)
 
 After approval, content flows through 4 automated phases:
@@ -2600,6 +2610,14 @@ Monitor thought leaders and subject matter experts across **four platforms** (Yo
 > - **Troubleshooting** - SSH authentication, rate limiting, API quotas
 >
 > Students can shadow a working production system, then build their own expert monitoring pipeline for a topic of interest.
+
+### Expert Roster (Notable Additions)
+
+| Expert | Fields | Priority | Added |
+|--------|--------|----------|-------|
+| Wes Bos | frontend dev, web dev, CSS, JavaScript | — | 2026-04-12 |
+
+**Wes Bos** (`003 Entities/Experts/Wes Bos.md`) — Frontend web developer, educator, and co-host of the Syntax podcast. Known for practical CSS/JS courses and tool tutorials. First captured via his "Pretext is a bigger deal than you think" video (UID: 20260412-200733), which triggered the Pretext TWL creation.
 
 ### Expert Profiles
 
@@ -4398,8 +4416,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.06 by generate_public_manual.py"
-generated: "2026-04-12 21:39"
+source: "Auto-generated from private manual v5.08 by generate_public_manual.py"
+generated: "2026-04-12 22:07"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -9425,7 +9443,7 @@ No free tier. 30-day trial. **QWF ecosystem bundle:** Full Pro access included f
 
 **Added: February 28, 2026**
 
-A living, interactive visualization of the entire Quietly Working Universe — 50 entities across 7 categories, served as an embeddable widget with Shadow DOM isolation. One JavaScript file, 17 KB gzip, drops onto any QWF website. Includes per-entity Media Kit sections (logo downloads, social links, boilerplate copy) since v2.3.0.
+A living, interactive visualization of the entire Quietly Working Universe — 52 entities across 7 categories, served as an embeddable widget with Shadow DOM isolation. One JavaScript file, 17 KB gzip, drops onto any QWF website. Includes per-entity Media Kit sections (logo downloads, social links, boilerplate copy) since v2.3.0.
 
 ### Architecture
 
@@ -9435,7 +9453,7 @@ WordPress Site (any of 11 QWF sites)
     → widget.js loader (0.48 KB)
       → widget.bundle.js (17 KB, Preact + Shadow DOM)
         → GET /api/ecosystem (Digital Twin, port 8767)
-          → ecosystem_registry.json (50 entities)
+          → ecosystem_registry.json (52 entities)
           → live metrics (Supabase, Betterstack, supervisors)
 ```
 
@@ -9464,7 +9482,7 @@ Media data is stored in `detail.media` in `ecosystem_registry.json`. 12 entities
 
 ### Connection System
 
-- 273 connections across 50 entities (avg 5.5 per entity)
+- 273+ connections across 52 entities
 - 100% resolution rate (every connection name maps to a real entity)
 - Connections stored as name strings in `detail.connections` arrays in `ecosystem_registry.json`
 - Animated pulse particles travel along connection lines
@@ -9515,12 +9533,12 @@ Overrides applied as CSS custom properties on Shadow DOM root. Partial overrides
 |------|---------|
 | `100 Resources/ecosystem-widget/src/` | Widget source (11 Preact components, styles, types) |
 | `100 Resources/ecosystem-widget/qwf-ecosystem-widget.php` | WordPress mu-plugin |
-| `005 Operations/Data/ecosystem_registry.json` | Entity data (50 entities, single source of truth) |
+| `005 Operations/Data/ecosystem_registry.json` | Entity data (52 entities, single source of truth) |
 | `005 Operations/Execution/digital_twin_server.py` | API server (`/api/ecosystem` endpoint) |
 
 ### Entity Registry
 
-Edit `005 Operations/Data/ecosystem_registry.json` to add/remove/modify entities. No code rebuild needed — the API serves whatever is in the registry (60s cache).
+Edit `005 Operations/Data/ecosystem_registry.json` to add/remove/modify entities. No code rebuild needed — the API serves whatever is in the registry (60s cache). Identity fields (name, short_name, category, status, color_hex, emoji, tagline, website) auto-sync to `hq_app_registry` via `sync_hq_app_registry.py` v1.0.0 (runs daily in HQ Daily Sync n8n workflow v6.0.0). Operational fields in `hq_app_registry` (metrics, hosting, etc.) are preserved during sync.
 
 7 categories: Apps (10), Programs (7), Systems (10), Infrastructure (5), Teaching (3), Content (4), Sites (11)
 
@@ -10264,9 +10282,9 @@ A UserPromptSubmit hook that automatically detects domain keywords in user messa
 3. If matched, injects a system reminder: "Read [TWL directive] before proceeding"
 4. Agent reads the TWL, gaining access to gotchas, working examples, and vendor intelligence
 
-### Domain Coverage (18 domains)
+### Domain Coverage (19 domains)
 
-All 19 TWLs on disk are mapped (added SvelteKit, Cloudflare Pages, Claude Agent SDK in Session 204), plus additional domains for supporter systems, email, QSP, ESP. Keywords include tool names, common abbreviations, and related concepts.
+All 22 TWLs on disk are mapped (added Pretext in Session 218), plus additional domains for supporter systems, email, QSP, ESP. Keywords include tool names, common abbreviations, and related concepts.
 
 ### Drift Detection (Session Wrap-Up Step 3B)
 
@@ -10411,4 +10429,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-12 21:39 (v5.06)*
+*Last updated: 2026-04-12 22:07 (v5.08)*
