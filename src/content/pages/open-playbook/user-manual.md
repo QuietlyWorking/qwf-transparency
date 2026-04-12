@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-12 22:07 | Source version: 5.08
+> Generated: 2026-04-12 23:03 | Source version: 5.09
 
 # QWU Backoffice User Manual
 
@@ -106,6 +106,7 @@ A comprehensive guide to the QWU Backoffice agent workspace, covering architectu
 79. [[#Testimonial Intelligence Pipeline ⭐ NEW]]
 80. [[#QSP Local Growth Engine ⭐ NEW]]
 81. [[#TWL Preload Hook ⭐ NEW]]
+82. [[#Date/Time Output Validation Hook ⭐ NEW]]
 82. [[#QWB Quietly Webbing ⭐ NEW]]
 83. [[#L4G Locals 4 Good Platform ⭐ NEW]]
 84. [[#Session Log]]
@@ -4416,8 +4417,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.08 by generate_public_manual.py"
-generated: "2026-04-12 22:07"
+source: "Auto-generated from private manual v5.09 by generate_public_manual.py"
+generated: "2026-04-12 23:03"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10305,6 +10306,49 @@ The `/session-wrap-up` skill now includes a drift detection step that compares T
 
 ---
 
+## Date/Time Output Validation Hook ⭐ NEW
+
+**Added: April 12, 2026** | **Reference:** Built from Broken Vol. 3
+
+A PreToolUse hook that validates day-of-week names against actual calendar dates before any Bash, Write, or Edit tool call can execute. Catches hallucinated day names in emails, files, and any output before they reach the real world.
+
+### How It Works
+
+1. Agent attempts to run a Bash command, write a file, or edit content
+2. `.claude/hooks/date_validation_hook.py` scans the tool input for day-of-week names near recognizable dates
+3. Supports three date formats: text ("April 9th, 2026"), ISO ("2026-04-09"), US ("04/09/2026")
+4. Uses 200-character proximity threshold to pair day names with dates (avoids false positives across paragraphs)
+5. Computes actual calendar day via Python `datetime`
+6. If mismatch: **blocks the tool call** with a specific error naming the correct day
+7. If match or no date/day pairs found: passes through silently
+
+### Origin
+
+Session 220 (April 12, 2026). Agent composed an email containing a date with the wrong day-of-week name attached. The date itself was correct but the day name was fabricated. A memory rule was initially created but immediately recognized as the same probabilistic failure pattern solved by the TWL preload hook in Vol. 1. Deterministic hook > memory rule.
+
+### Key Design Decisions
+
+- **PreToolUse, not PostToolUse:** Blocks BEFORE the output exists, not after. No wrong data reaches any destination.
+- **Exempt paths:** `.tmp/`, `.claude/hooks/`, `/tmp/` are skipped. Test fixtures and hook source code contain intentional bad data.
+- **Fail-open on parse errors:** If the hook can't parse content, it allows through. Only blocks on verifiable mismatches.
+- **Complements qwu_datetime.py:** That utility solves INPUT (what day is it now?). This hook validates OUTPUT (is the day name I just wrote correct?).
+
+### File Locations
+
+- Hook script: `.claude/hooks/date_validation_hook.py`
+- Hook configuration: `.claude/settings.json` (registered as PreToolUse hook on Bash, Write, Edit)
+- Test suite: `.tmp/test_date_hook.py`
+
+### Training Opportunities
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| PreToolUse hook design | Event-driven validation, JSON stdin/stdout contract, permission decisions | ⭐⭐ |
+| Date parsing & validation | Regex, datetime, multi-format parsing, proximity matching | ⭐⭐ |
+| Bootstrapping problem | Self-referential test challenges, exempt path design | ⭐⭐⭐ |
+
+---
+
 ## QWB Quietly Webbing ⭐ NEW
 
 **Added: April 8, 2026**
@@ -10429,4 +10473,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-12 22:07 (v5.08)*
+*Last updated: 2026-04-12 23:03 (v5.09)*
