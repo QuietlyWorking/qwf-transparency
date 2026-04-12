@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 4.96 | Started: 251223 | Updated: 260411**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-04-11"
+modifiedDate: "2026-04-12"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-12 00:00 | Source version: 4.98
+> Generated: 2026-04-12 00:03 | Source version: 4.99
 
 # QWU Backoffice User Manual
 
@@ -3218,8 +3218,8 @@ The backoffice includes a comprehensive lead generation and enrichment system su
 **Full L4G Technical Documentation:** `003 Entities/Organizations/Locals 4 Good.md`
 
 The L4G system includes:
-- **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026). **SvelteKit migration in progress** — Phase 5 (checkout flow) complete on `sveltekit-migration` branch. All public pages + full checkout SSR-rendered. Phases 6-11 remain (portal, admin, email mirror, CX compliance, deploy, dry run). Backend unchanged.
-- **Data Layer:** Supabase (`<SUPABASE_PROJECT_ID_L4G>`) — 20 tables, migrated from Google Sheets
+- **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026). **SvelteKit migration in progress** — Phases 0-7 complete on `sveltekit-migration` branch. Public pages + checkout + full donor-partner portal (10 pages) + admin suite (13 pages). Phase 6 portal includes: dashboard with postcard tracker, bookings with conversation threads (Supabase Realtime), concept selection (3 AI concepts), proof review with approve/revision form actions, supporter-creates upload with area intelligence, brand clarity wizard, post-delivery feedback with celebration animation, settings. Two new tables: `l4g_conversations` (RLS + Realtime), `l4g_feedback`. Schema v1.3.0. Phases 8-11 remain (email mirror, CX compliance, deploy, dry run).
+- **Data Layer:** Supabase (`<SUPABASE_PROJECT_ID_L4G>`) — 23 tables (schema v1.3.0), migrated from Google Sheets + new tables for conversations and feedback
 - **APIs:** 8 Supabase Edge Functions (submit-contact-form, create-checkout-session, check-availability, expire-stale-holds, submit-category-request, subscribe-to-push, send-push-notification, ezer-chat)
 - **Payments:** Stripe Checkout via `create-checkout-session` edge function + n8n `L4G Stripe Payment Handler v1.3` webhook (E2E verified Mar 18, 2026)
 - **Automation:** n8n workflows for payment processing, hold expiry, HQ sync, category request notifications, concierge response emails
@@ -4387,8 +4387,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v4.98 by generate_public_manual.py"
-generated: "2026-04-12 00:00"
+source: "Auto-generated from private manual v4.99 by generate_public_manual.py"
+generated: "2026-04-12 00:03"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10302,4 +10302,4 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ---
 
-*Last updated: 2026-04-12 00:00 (v4.98)*
+*Last updated: 2026-04-12 00:03 (v4.99)*
