@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 5.02 | Started: 251223 | Updated: 260412**"
+description: "**Version: 5.03 | Started: 251223 | Updated: 260412**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-04-12"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -11,11 +11,11 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-12 02:03 | Source version: 5.02
+> Generated: 2026-04-12 02:21 | Source version: 5.03
 
 # QWU Backoffice User Manual
 
-**Version: 5.02 | Started: 251223 | Updated: 260412**
+**Version: 5.03 | Started: 251223 | Updated: 260412**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -107,7 +107,8 @@ A comprehensive guide to the QWU Backoffice agent workspace, covering architectu
 80. [[#QSP Local Growth Engine ⭐ NEW]]
 81. [[#TWL Preload Hook ⭐ NEW]]
 82. [[#QWB Quietly Webbing ⭐ NEW]]
-83. [[#Session Log]]
+83. [[#L4G Locals 4 Good Platform ⭐ NEW]]
+84. [[#Session Log]]
 
 ---
 
@@ -4397,8 +4398,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.02 by generate_public_manual.py"
-generated: "2026-04-12 02:03"
+source: "Auto-generated from private manual v5.03 by generate_public_manual.py"
+generated: "2026-04-12 02:21"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10301,6 +10302,66 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ---
 
+## L4G Locals 4 Good Platform ⭐ NEW
+
+L4G is a nonprofit postcard fundraiser — local businesses donate to appear on EDDM postcards mailed to 10,000+ households, funding Missing Pixel student training. **NOT an advertising business.**
+
+### Infrastructure
+
+| Component | Detail |
+|-----------|--------|
+| **Frontend** | SvelteKit on CF Pages — `locals4good.org` |
+| **Backend** | Supabase `<SUPABASE_PROJECT_ID_L4G>` (Pro plan, us-west-1) |
+| **Payments** | Stripe via `create-checkout-session` edge function |
+| **Email** | MS Graph API (TIG-voiced, Ezer Aión personality) |
+| **Workflows** | 8 n8n workflows (Stripe handler, category notifier, concierge, conversation mirror, reply poller, etc.) |
+| **Print Vendor** | Printing4SuperCheap (P4SC) — full-service EDDM |
+| **GitHub** | `QuietlyWorking/locals4good` — auto-deploy via GitHub Actions |
+
+### CX Scripts (10 in `005 Operations/Execution/`)
+
+| Script | Purpose |
+|--------|---------|
+| `add_l4g_donor_booking.py` | Manually add donor-partner with booking (outside checkout) |
+| `run_l4g_concept_pipeline.py` | AI concept generation: enrichment → brand identity → 3 ad briefs |
+| `process_l4g_concept_choice.py` | Process donor's concept selection |
+| `upload_l4g_proof.py` | Upload Photoshop proof to Supabase Storage |
+| `advance_l4g_print_batch.py` | Batch print status advancement (7-stage pipeline) |
+| `check_l4g_milestones.py` | Poll for journey state changes, trigger emails + push |
+| `process_l4g_feedback.py` | Post-delivery feedback processing |
+| `send_l4g_journey_email.py` | 6 milestone email templates |
+| `send_l4g_conversation_email.py` | Email mirror for conversation threads |
+| `poll_l4g_email_replies.py` | Poll inbox for email replies → thread |
+
+### Print Status Pipeline
+
+```
+not_started → layout_ready → sent_to_printer → printing → shipped → delivered_to_po → mailed
+```
+
+Milestone emails trigger at `printing` (going_to_print) and `mailed` (postcards_mailed). Postcard tracker in portal shows package-tracking UX.
+
+### Two Artwork Paths
+
+- **MP Creates**: Brand Clarity Wizard → AI concept pipeline → 3 concepts → donor selects → TIG designs in Photoshop → proof review → approval
+- **Supporter Creates**: Upload own artwork → proof review → approval
+
+### Phase 11 Dry Run Results (Apr 12, 2026)
+
+All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths verified. One bug fixed (`process_l4g_concept_choice.py` queried non-existent `notes` column → fixed to `reviewer_notes`). **Platform verified — ready for May 2026 mailing.**
+
+**Open items:** Welcome email doesn't differentiate artwork tracks; no May 2026 bookings entered yet; background/spine images not uploaded for RPV West May 2026 postcard config.
+
+### References
+
+- System Status: `002 Projects/_Locals 4 Good/L4G-System-Status.md`
+- CX Framework: `002 Projects/_Locals 4 Good/L4G Customer Experience Framework.md`
+- Visual Flow Spec: `002 Projects/_Locals 4 Good/L4G-Visual-Flow-Specification-v1.0.md`
+- Memory: `memory/l4g.md`
+- SvelteKit TWL: `005 Operations/Directives/sveltekit_tool_wisdom.md`
+
+---
+
 ## Session Log
 
 > [!NOTE] Session Log Redacted
@@ -10312,4 +10373,4 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ---
 
-*Last updated: 2026-04-12 02:03 (v5.02)*
+*Last updated: 2026-04-12 02:21 (v5.03)*
