@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-12 23:58 | Source version: 5.10
+> Generated: 2026-04-12 23:59 | Source version: 5.10
 
 # QWU Backoffice User Manual
 
@@ -3801,6 +3801,43 @@ The transparency site is an **Astro 5.x** static site on **Cloudflare Pages** wi
 - Built from Broken Vol 1, Built from Broken Vol 2, How to Give Your AI Agent Superpowers
 - User Manual [PUBLIC]
 
+### Transparency Content Distribution Pipeline
+
+After the transparency site syncs, a content distribution pipeline scores articles for chaplaintig.com companion potential and queues qualifying ones to HQ Command Center for TIG's review.
+
+**How it works:**
+1. `score_transparency_relevance.py` scans synced articles, applies pillar-based baselines (built-from-broken=60, open-playbook=30, living-proof=20), then uses FLAGSHIP LLM to score against 5 signals (problem-solution arc, transferable frameworks, real incidents, teaching value, chaplaintig.com fit). Final score = baseline + LLM score (cap 100). Threshold: 80%.
+2. `generate_transparency_companion.py` creates a chaplaintig.com companion piece (500-800 words in TIG's brand voice) plus 3 social atoms (LinkedIn, Twitter/X, Instagram) for each qualifying article. Social atoms link to the transparency site, not chaplaintig.
+3. `queue_transparency_to_hq.py` inserts into `hq_action_queue` with priority mapped from score. Actions: Approve & Publish, Edit Draft, Skip. Deduplicates against existing pending entries.
+
+**Approval flow:** When approved in HQ, `write_back_dirty_items.py` publishes the companion to chaplaintig.com (WordPress blog_id 10) as draft and schedules social atoms via Vista Social.
+
+**Integration:** Triggered automatically as Step 4D in session wrap-up when `files_synced > 0`. Also available via n8n daily cron or manual invocation.
+
+**Commands:**
+```bash
+# Score all existing articles (backfill)
+python "005 Operations/Execution/score_transparency_relevance.py" --backfill
+
+# Score + generate + queue (dry-run)
+python "005 Operations/Execution/score_transparency_relevance.py" --dry-run
+
+# Force-process a specific article regardless of score
+python "005 Operations/Execution/score_transparency_relevance.py" --force-slug content-intelligence-architecture
+```
+
+**Key files:**
+
+| File | Purpose |
+|------|---------|
+| `005 Operations/Execution/score_transparency_relevance.py` | LLM scoring pipeline (v1.0.0) |
+| `005 Operations/Execution/generate_transparency_companion.py` | Companion + social atoms generator (v1.0.0) |
+| `005 Operations/Execution/queue_transparency_to_hq.py` | HQ action queue inserter (v1.0.0) |
+| `005 Operations/Directives/transparency_content_distribution.md` | Full directive/SOP |
+| `.tmp/transparency_companions/` | Output directory (scoring logs, companion articles, social atoms) |
+
+**Backfill results (2026-04-12):** 12 articles scanned, 8 qualified (5 built-from-broken at score 100, 3 open-playbook at 82-95), 4 below threshold (living-proof pages, user manual). All 8 queued to HQ with companion articles (654-763 words) and social atoms (LinkedIn + X + Instagram).
+
 ---
 
 ## Docker Fundamentals: Running Isolated Tasks
@@ -4434,7 +4471,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.10 by generate_public_manual.py"
-generated: "2026-04-12 23:58"
+generated: "2026-04-12 23:59"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10489,4 +10526,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-12 23:58 (v5.10)*
+*Last updated: 2026-04-12 23:59 (v5.10)*
