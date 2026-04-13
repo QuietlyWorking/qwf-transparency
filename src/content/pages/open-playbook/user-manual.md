@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-13 22:56 | Source version: 5.13
+> Generated: 2026-04-13 22:58 | Source version: 5.14
 
 # QWU Backoffice User Manual
 
@@ -4494,8 +4494,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.13 by generate_public_manual.py"
-generated: "2026-04-13 22:56"
+source: "Auto-generated from private manual v5.14 by generate_public_manual.py"
+generated: "2026-04-13 22:58"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10360,9 +10360,9 @@ A UserPromptSubmit hook that automatically detects domain keywords in user messa
 3. If matched, injects a system reminder: "Read [TWL directive] before proceeding"
 4. Agent reads the TWL, gaining access to gotchas, working examples, and vendor intelligence
 
-### Domain Coverage (19 domains)
+### Domain Coverage (23 domains)
 
-All 22 TWLs on disk are mapped (added Pretext in Session 218), plus additional domains for supporter systems, email, QSP, ESP. Keywords include tool names, common abbreviations, and related concepts.
+All 26 TWLs on disk are mapped (added DaVinci Resolve, DaVinci Fusion, Blackmagic Cloud, BMPCC 6K Pro in Session 219), plus additional domains for supporter systems, email, QSP, ESP. Keywords include tool names, common abbreviations, and related concepts.
 
 ### Drift Detection (Session Wrap-Up Step 3B)
 
@@ -10550,4 +10550,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-13 22:56 (v5.13)*
+*Last updated: 2026-04-13 22:58 (v5.14)*
