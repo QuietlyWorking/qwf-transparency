@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-13 05:00 | Source version: 5.12
+> Generated: 2026-04-13 07:17 | Source version: 5.13
 
 # QWU Backoffice User Manual
 
@@ -3808,9 +3808,9 @@ After the transparency site syncs, a content distribution pipeline scores articl
 **How it works:**
 1. `score_transparency_relevance.py` scans synced articles, applies pillar-based baselines (built-from-broken=60, open-playbook=30, living-proof=20), then uses FLAGSHIP LLM to score against 5 signals (problem-solution arc, transferable frameworks, real incidents, teaching value, chaplaintig.com fit). Final score = baseline + LLM score (cap 100). Threshold: 80%.
 2. `generate_transparency_companion.py` creates a chaplaintig.com companion piece (500-800 words in TIG's brand voice) plus 3 social atoms (LinkedIn, Twitter/X, Instagram) for each qualifying article. Social atoms link to the transparency site, not chaplaintig.
-3. `queue_transparency_to_hq.py` inserts into `hq_action_queue` with priority mapped from score. Actions: Approve & Publish, Edit Draft, Skip. Deduplicates against existing pending entries.
+3. `queue_transparency_to_hq.py` creates a WordPress draft on chaplaintig.com (blog_id 10) via SSH + WP-CLI eval-file (same pattern as video pipeline), then inserts into `hq_action_queue` with the WP preview URL. Actions: Approve & Publish, Edit Draft, Skip. Deduplicates against existing pending entries.
 
-**Approval flow:** When approved in HQ, `write_back_dirty_items.py` publishes the companion to chaplaintig.com (WordPress blog_id 10) as draft and schedules social atoms via Vista Social.
+**Approval flow:** "Edit Draft" opens the WordPress preview on chaplaintig.com for review. When approved in HQ, `write_back_dirty_items.py` publishes the existing draft (changes status from draft to publish via `sudo wp post update --post_status=publish --allow-root`). Social atom scheduling via Vista Social is manual for now (different format than video social_variants).
 
 **Integration:** Triggered automatically as Step 4D in session wrap-up when `files_synced > 0`. Also available via n8n daily cron or manual invocation.
 
@@ -3832,11 +3832,11 @@ python "005 Operations/Execution/score_transparency_relevance.py" --force-slug c
 |------|---------|
 | `005 Operations/Execution/score_transparency_relevance.py` | LLM scoring pipeline (v1.0.0) |
 | `005 Operations/Execution/generate_transparency_companion.py` | Companion + social atoms generator (v1.0.0) |
-| `005 Operations/Execution/queue_transparency_to_hq.py` | HQ action queue inserter (v1.0.0) |
+| `005 Operations/Execution/queue_transparency_to_hq.py` | WP draft creation + HQ action queue inserter (v1.1.0) |
 | `005 Operations/Directives/transparency_content_distribution.md` | Full directive/SOP |
 | `.tmp/transparency_companions/` | Output directory (scoring logs, companion articles, social atoms) |
 
-**Backfill results (2026-04-12):** 12 articles scanned, 8 qualified (5 built-from-broken at score 100, 3 open-playbook at 82-95), 4 below threshold (living-proof pages, user manual). All 8 queued to HQ with companion articles (654-763 words) and social atoms (LinkedIn + X + Instagram).
+**Backfill results (2026-04-12):** 12 articles scanned, 8 qualified (5 built-from-broken at score 100, 3 open-playbook at 82-95), 4 below threshold (living-proof pages, user manual). All 8 queued to HQ with WordPress drafts (post IDs 29778-29785), companion articles (654-763 words), and social atoms (LinkedIn + X + Instagram). First approval: "The QWU Tool Shed" companion published live on chaplaintig.com.
 
 ---
 
@@ -4470,8 +4470,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.12 by generate_public_manual.py"
-generated: "2026-04-13 05:00"
+source: "Auto-generated from private manual v5.13 by generate_public_manual.py"
+generated: "2026-04-13 07:17"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10526,4 +10526,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-13 05:00 (v5.12)*
+*Last updated: 2026-04-13 07:17 (v5.13)*
