@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-12 23:59 | Source version: 5.10
+> Generated: 2026-04-13 04:52 | Source version: 5.11
 
 # QWU Backoffice User Manual
 
@@ -171,11 +171,11 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 
 **External Monitoring (Betterstack)**
 - **Plan:** AppSumo lifetime deal (2 stacked codes) — 200 monitors, 10 status pages, 5 members
-- **17 HTTP monitors** (updated 2026-03-11): 10 WPMU sites, 5 infrastructure services, QWR app, OCN supporter site
+- **23 HTTP monitors** (updated 2026-04-12): 10 WPMU sites, 6 QWF apps (QNT, QQT, QKN, QSP, L4G, QTR), 5 infrastructure services, QWR app, OCN supporter site
 - **4 heartbeat monitors:** claude-dev, n8n, WPMU VM, OCN VM (all every 6 hours)
 - Alerts: phone call + SMS + email + push notification
 - Outgoing webhook (ID 80218) fires on incident events → triggers auto-remediation (see [[#Auto-Remediation System ⭐ NEW]])
-- **Status page:** [status.quietlyworking.org](https://status.quietlyworking.org) — two sections: "[Supporter Organization]" (supporter, first position) and "QWU Infrastructure" (all QWF sites + apps + infra + heartbeats)
+- **Status page:** [status.quietlyworking.org](https://status.quietlyworking.org) — single section "QWU Infrastructure" (all QWF sites + apps + infra + heartbeats). Supporter monitors (OCN) run internally for alerting but are not displayed on the public status page — supporters access their status via SuiteDash portal embeds.
 - WPMU and OCN Lightsail CPU alarms deleted (2026-03-11) — they flapped due to WP-Cron bursts and xmlrpc attacks; Betterstack uptime monitoring is more useful
 
 **Internal Health Checks**
@@ -4470,8 +4470,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.10 by generate_public_manual.py"
-generated: "2026-04-12 23:59"
+source: "Auto-generated from private manual v5.11 by generate_public_manual.py"
+generated: "2026-04-13 04:52"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10526,4 +10526,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-12 23:59 (v5.10)*
+*Last updated: 2026-04-13 04:52 (v5.11)*
