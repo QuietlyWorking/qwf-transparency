@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-13 08:02 | Source version: 5.13
+> Generated: 2026-04-13 21:43 | Source version: 5.13
 
 # QWU Backoffice User Manual
 
@@ -2347,6 +2347,30 @@ npx remotion render ArticleClip-Reels --props='{"hookLine":"...","articleUid":".
 
 Render time: ~90 seconds for a 60-second clip on claude-dev VM (2 concurrent threads).
 
+### HeyGen AI Avatar Videos (SHELVED)
+
+**Status:** Evaluated 2026-04-13. Quality not brand-ready — shelved until rendering improves.
+
+**What it is:** AI avatar video generation via API. A text prompt produces a complete video with avatar presenter, motion graphics, voiceover, and captions. 1,282 stock avatars available.
+
+**Plan:** Creator ($24/mo web) + API pay-as-you-go credits (1,371 remaining, 12-month expiry).
+
+**Integration:**
+- API key: `HEYGEN_API_KEY` in `.env` (agent type, named `qwu-backoffice-agent`)
+- 11 Claude Code skills installed at `~/.claude/skills/` (create-video, avatar-video, ai-video-gen, text-to-speech, video-translate, video-edit, video-download, video-understand, faceswap, visual-style, heygen)
+- MCP server configured in `.mcp.json` (OAuth — requires browser, untested from VM)
+- TWL: `005 Operations/Directives/heygen_tool_wisdom.md`
+
+**Key findings from evaluation:**
+- Over-specifying avatar descriptions causes infinite retry loops (wasted 65 credits)
+- Let Video Agent pick avatars — simplified prompts work, detailed ones don't
+- API credits are separate from web plan credits (not obvious)
+- Actual cost: ~1 credit/second (not ~2 credits/min as docs claim)
+- Total generation time: ~11 minutes for a 64-second video
+- Output quality: adequate for generic content, not for QWF brand standards
+
+**Future exploration:** Custom avatar as branded mascot (different quality expectations), Remotion + HeyGen compositing (kinetic typography + avatar segments), video translation (12+ languages).
+
 ### Environment Variables
 
 ```bash
@@ -4471,7 +4495,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.13 by generate_public_manual.py"
-generated: "2026-04-13 08:02"
+generated: "2026-04-13 21:43"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10526,4 +10550,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-13 08:02 (v5.13)*
+*Last updated: 2026-04-13 21:43 (v5.13)*
