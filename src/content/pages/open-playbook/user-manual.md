@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.14 | Started: 251223 | Updated: 260413**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-04-13"
+modifiedDate: "2026-04-14"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-13 23:22 | Source version: 5.14
+> Generated: 2026-04-14 06:21 | Source version: 5.15
 
 # QWU Backoffice User Manual
 
@@ -4494,8 +4494,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.14 by generate_public_manual.py"
-generated: "2026-04-13 23:22"
+source: "Auto-generated from private manual v5.15 by generate_public_manual.py"
+generated: "2026-04-14 06:21"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -8439,10 +8439,17 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 | Permission controls | Edit controls respect impersonation (useEffectiveUser), card builder has ownership check (Apr 9, 2026) |
 | Alpha readiness | Alpha badge, bug reporter, landing page alpha gate (Prompt 029) |
 | Branding | Custom logo, fern icon, favicon suite, botanical palette deployed |
-| Aim High website | `aimhighbni.com` — Astro 5 SSR on CF Pages (migrated from React SPA 2026-04-09), multi-tenant middleware, live data from QNT Supabase. Client JS: ~5KB (form islands only). |
+| Aim High website | `aimhighbni.com` — Astro 5 SSR on CF Pages (migrated from React SPA 2026-04-09), multi-tenant middleware, live data from QNT Supabase. Client JS: ~6KB (form islands only). |
 | Business cards | `generate_business_cards.py` — Pillow-based card generator, 18 cards, trackable sharing via `card_shares`/`card_clicks` tables |
 | Card sharing | `/card/[slug]` Astro API route with OG meta tags for social previews, `increment_card_share_clicks` RPC |
-| Form backends | `/api/rsvp` (→ `visitors` table), `/api/testimonial` (→ `chapter_testimonials` table) — Astro API routes with CF runtime env |
+| Form backends | `/api/rsvp` (→ `visitors` table), `/api/testimonial` (→ `chapter_testimonials` table, slug→UUID resolution, author→member matching, triggers notification) — Astro API routes with CF runtime env |
+| Testimonial flow | "Write a Note" clickable card on member profiles → optional email → API resolves slug/author → Postgres trigger creates notification → member approves in QNT My Testimonials page → "Show on profile" toggle → appears on website. Reciprocal: "Say thanks" email + "Write one back" link for fellow members (Apr 13, 2026) |
+| My Testimonials | QNT page (`/my-testimonials`): pending review cards, approve/dismiss, profile visibility toggle, source badges (Website, BNI Review, Google, LinkedIn, Yelp). Notification bell targeting via `target_member_id` (Apr 13, 2026) |
+| Meeting preview | `/meeting` — agenda timeline, visitor host promise, FAQs with expandable answers (Apr 13, 2026) |
+| Events page | `/events` — scattered Polaroid photo layout (alternating sides), "Here's what you missed" past events section with photo stacks. `/events/[slug]` — detail pages with photo gallery, Google Maps embed, schema.org Event structured data (Apr 13, 2026) |
+| Event photos | Upload promo photos in QNT EventForm, recap photos in EventDetail Photos tab. `event-images` storage bucket (public, 10MB, jpg/png/webp). Hero/gallery/recap cascade to public site. Series inheritance via "Apply to all" toggle (Apr 13, 2026) |
+| SEO profession pages | `/find` — directory of 18 professions. `/find/[profession]` — auto-generated landing pages per profession with member profiles, testimonials, contact links. Targets "find a [profession] in Southern California" queries (Apr 13, 2026) |
+| Recurring event mgmt | "Apply changes to entire series" toggle in QNT EventForm — updates name, time, location, format, visibility, photos across all siblings. `useUpdateRecurringSeries` mutation (Apr 13, 2026) |
 
 ### Reference
 
@@ -10550,4 +10557,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-13 23:22 (v5.14)*
+*Last updated: 2026-04-14 06:21 (v5.15)*
