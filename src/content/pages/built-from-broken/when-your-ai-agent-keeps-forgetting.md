@@ -2,11 +2,12 @@
 title: "Built from Broken: Vol. 1"
 slug: "when-your-ai-agent-keeps-forgetting"
 pillar: "built-from-broken"
-description: "At the Quietly Working Foundation (QWF), we run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Clau"
+description: "Your agent has the docs. It just doesn't read them. A 50-line Python hook that fires before every prompt... and the Self-Annealing Triad that makes it stick."
 publishDate: "2026-04-08"
 tags: ["QWF", "QWU", "built-from-broken", "ai-agent", "claude-code", "transparency"]
 series: "Built from Broken"
 volume: 1
+hook: "The docs existed. The agent didn't read them. 40 minutes of debugging... for a fix on line 47."
 isHome: false
 ---
 # Built from Broken: Vol. 1
@@ -16,41 +17,9 @@ isHome: false
 
 ---
 
-## The Series
-
-At the Quietly Working Foundation (QWF), we run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Claude Code (Anthropic's CLI-based AI coding agent). We have a three-layer architecture... Directives (what to do), Orchestration (the AI agent making decisions), and Execution (deterministic Python scripts doing the work).
-
-We build tools. We break things. We fix them. Then we write down what happened so you don't have to learn it the hard way.
-
-This is Volume 1.
-
----
-
-## The Math That Should Scare You
-
-Before we get to the problem... let's talk about why it matters.
-
-AI agents are probabilistic. They don't execute instructions like a script. They *interpret* them. And every interpretation step has a chance of going sideways.
-
-Here's the math:
-
-| Accuracy Per Step | Over 3 Steps | Over 5 Steps | Over 10 Steps |
-|:-:|:-:|:-:|:-:|
-| 99% | 97% | 95% | 90% |
-| 95% | 86% | 77% | 60% |
-| 90% | 73% | 59% | 35% |
-
-At 90% accuracy per step... a five-step task succeeds only 59% of the time.
-
-That's not a rounding error. That's a coin flip with extra steps.
-
-The takeaway: **every avoidable mistake your agent makes compounds into system-level unreliability.** You don't need your agent to be perfect. You need to stop it from making the *same* mistake twice.
-
-That's what this volume is about.
-
----
-
 ## The Problem: Documented Wisdom, Voluntarily Ignored
+
+At 90% accuracy per step, a five-step AI agent task succeeds only 59% of the time. That's not a rounding error... that's a coin flip with extra steps. And every avoidable mistake compounds into system-level unreliability. You don't need your agent to be perfect. You need to stop it from making the *same* mistake twice.
 
 ### What We Built (Before It Broke)
 
@@ -489,7 +458,7 @@ Before the hook, we thought about documentation as a resource the agent *could* 
 
 ### The compound math works in reverse too.
 
-Remember the scary table from the top? Here's the flip side. Every gotcha the hook prevents is a step that doesn't fail. If the hook prevents one mistake per five-step task, you go from 59% to 66% success rate (at 90% base). Prevent two mistakes? 73%. The math compounds in your favor when you eliminate known failure modes.
+Every gotcha the hook prevents is a step that doesn't fail. If the hook prevents one mistake per five-step task, you go from 59% to 66% success rate (at 90% base accuracy). Prevent two mistakes? 73%. The math compounds in your favor when you eliminate known failure modes.
 
 ---
 
@@ -535,24 +504,11 @@ Copy that. Paste it into a new Claude Code session. Your agent will interview yo
 
 ---
 
-## What's Next
-
-This hook is one piece of a larger system. Future volumes in this series will cover:
-
-- **How we structure agent instructions** so AI can reliably find and follow them (the three-layer architecture)
-- **How we handle agent memory** across sessions when the agent starts fresh every time
-- **How we test AI-generated code** without racking up API bills
-- **How we keep documentation from rotting** when the system changes faster than anyone can write
-
-Each volume follows the same format: the math, the problem, the real incidents, the solution, the blueprint, and the prompt to build it yourself.
-
----
-
 ## About This Series
 
 **Built from Broken** is published by the [Quietly Working Foundation](https://quietlyworking.org) (QWF), a 501(c)(3) nonprofit. Our mission is to serve youth 30 and younger... helping them discover purpose, build skills, and create legacy. We do this through product-based fundraising programs and student training.
 
-Our entire backoffice infrastructure is AI-agent-powered and we believe in radical transparency. Everything we learn, we share. If any of this helps your organization operate better or scale more effectively, use it freely under our open-source-with-attribution policy.
+We run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Claude Code (Anthropic's CLI-based AI coding agent), built on a three-layer architecture... Directives (what to do), Orchestration (the AI agent making decisions), and Execution (deterministic Python scripts doing the work). We build tools, we break things, we fix them... and then we write down what happened so you don't have to learn it the hard way.
 
 **The name:** "Built from Broken" comes from a core belief... that brokenness isn't something to hide. It's proof of what's possible. Every solution in this series exists because something failed. We show the scars, not to complain, but because someone else is hitting the same wall right now... and the fastest way through is knowing they're not alone.
 

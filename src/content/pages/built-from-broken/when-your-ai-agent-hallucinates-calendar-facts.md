@@ -2,11 +2,12 @@
 title: "Built from Broken: Vol. 3"
 slug: "when-your-ai-agent-hallucinates-calendar-facts"
 pillar: "built-from-broken"
-description: "At the Quietly Working Foundation (QWF), we run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Clau"
+description: "The agent had the date right. It fabricated the day name. A PreToolUse hook that blocks tool calls when calendar math doesn't add up."
 publishDate: "2026-04-12"
 tags: ["QWF", "QWU", "built-from-broken", "ai-agent", "claude-code", "hooks", "date-validation", "hallucination"]
 series: "Built from Broken"
 volume: 3
+hook: "Correct date. Wrong day name. Written with full confidence into an email to a real person."
 isHome: false
 ---
 # Built from Broken: Vol. 3
@@ -16,38 +17,9 @@ isHome: false
 
 ---
 
-## The Series
-
-At the Quietly Working Foundation (QWF), we run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Claude Code (Anthropic's CLI-based AI coding agent). We have a three-layer architecture... Directives (what to do), Orchestration (the AI agent making decisions), and Execution (deterministic Python scripts doing the work).
-
-We build tools. We break things. We fix them. Then we write down what happened so you don't have to learn it the hard way.
-
-This is Volume 3.
-
----
-
-## The Math That Erodes Trust
-
-Small factual errors are worse than big failures.
-
-That sounds backwards. But think about it. A big failure... a crashed server, a broken deployment, a total outage... that's visible. Alarming. It gets fixed because everyone notices. A wrong day-of-week in an email? That's the kind of error the recipient notices, questions your competence over, and never mentions to you.
-
-Let's do the math on an AI agent that composes emails with dates:
-
-| Emails/Week | Hallucination Rate | Wrong Dates/Year | Trust Impact |
-|:-----------:|:------------------:|:----------------:|:------------:|
-| 10 | 5% | 26 | Noticeable pattern |
-| 20 | 5% | 52 | One per week |
-| 20 | 10% | 104 | Two per week |
-| 50 | 5% | 130 | Reputation damage |
-
-At 20 emails per week with a 5% hallucination rate, you're sending one factually incorrect email every single week. Fifty-two trust-eroding errors per year. Each one small enough to dismiss individually. Together? A pattern that makes people stop trusting your communications.
-
-The scary part: the agent doesn't know it's wrong. It had the correct date. It just fabricated the day name. And it does this with complete confidence.
-
----
-
 ## The Problem: Correct Data, Fabricated Context
+
+At 20 emails per week with a 5% hallucination rate, you're sending one factually incorrect email every single week. Fifty-two trust-eroding errors per year. Each one small enough to dismiss individually. Together? A pattern that makes people stop trusting your communications. And small factual errors are worse than big failures... a crashed server gets fixed because everyone notices. A wrong day-of-week in an email? The recipient notices, questions your competence, and never mentions it to you.
 
 ### What Happened
 
@@ -587,21 +559,11 @@ Copy that. Paste it. Your agent builds the guardrail.
 
 ---
 
-## What's Next
-
-This volume and Vol. 1 form two halves of a pattern: validate what the agent reads, validate what the agent writes. Future volumes will explore:
-
-- **How we prevent agents from making risky changes** to systems they don't own (The Guest Principle)
-- **How we handle agent memory across sessions** when the agent starts fresh every time (Persistent Intelligence Architecture)
-- **How we test AI scripts without burning paid API credits** (The Cheapskate Testing Protocol)
-
-Each volume: the math, the problem, the real incidents, the solution, the blueprint, and the prompt to build it yourself.
-
----
-
 ## About This Series
 
 **Built from Broken** is published by the [Quietly Working Foundation](https://quietlyworking.org) (QWF), a 501(c)(3) nonprofit. Our mission is to serve youth 30 and younger... helping them discover purpose, build skills, and create legacy. We do this through product-based fundraising programs and student training.
+
+We run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Claude Code (Anthropic's CLI-based AI coding agent), built on a three-layer architecture... Directives (what to do), Orchestration (the AI agent making decisions), and Execution (deterministic Python scripts doing the work). We build tools, we break things, we fix them... and then we write down what happened so you don't have to learn it the hard way.
 
 This volume grew from a single wrong day name in a single email... the kind of error most people would fix and forget. We didn't forget. We built a hook that makes it impossible for the error to reach output, and in the process discovered that the humans building the fix couldn't get day names right either. Brokenness isn't limited to AI. Neither are the solutions.
 

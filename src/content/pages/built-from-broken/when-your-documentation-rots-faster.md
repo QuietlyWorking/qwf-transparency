@@ -2,11 +2,12 @@
 title: "Built from Broken: Vol. 2"
 slug: "when-your-documentation-rots-faster"
 pillar: "built-from-broken"
-description: "At the Quietly Working Foundation (QWF), we run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Clau"
+description: "Your runbooks describe what should exist... not what does. How we turned documentation into a deployment artifact so it can't drift from reality."
 publishDate: "2026-04-11"
 tags: ["QWF", "QWU", "built-from-broken", "ai-agent", "claude-code", "documentation", "deployment", "drift-detection"]
 series: "Built from Broken"
 volume: 2
+hook: "8 fixes in 6 weeks. Same pipeline. Every fix built on documentation that was already wrong."
 isHome: false
 ---
 # Built from Broken: Vol. 2
@@ -16,38 +17,11 @@ isHome: false
 
 ---
 
-## The Series
+## The Problem: Vision Masquerading as Reality
 
-At the Quietly Working Foundation (QWF), we run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Claude Code (Anthropic's CLI-based AI coding agent). We have a three-layer architecture... Directives (what to do), Orchestration (the AI agent making decisions), and Execution (deterministic Python scripts doing the work).
-
-We build tools. We break things. We fix them. Then we write down what happened so you don't have to learn it the hard way.
-
-This is Volume 2.
-
----
-
-## The Number That Should Keep You Up at Night
-
-We updated one of our core processing pipelines 8 times in 6 weeks.
-
-Each update was a fix. Each fix was responding to a failure. And each failure existed because the documentation from the previous fix didn't match what was actually deployed.
-
-Here's what that looked like:
-
-| Fix # | What Documentation Said | What Was Actually Deployed | Discovery Lag |
-|:-----:|-------------------------|---------------------------|:-------------:|
-| 1 | "Webhook receives recording, processes automatically" | No retry logic. Transient failures became permanent. | 11 days |
-| 2 | "Resolve participants from calendar" | Calendar API keys were wrong since day one. Zero participants resolved. Ever. | Unknown (found during fix #1) |
-| 3 | "Daily reconciliation at 9 PM catches misses" | Reconciliation permanently skipped anything without content. Webhook was inactive from a server restart. | 11 days |
-| 4 | "Max 3 retries with transient status" | 3 concurrent triggers burned all retries in 75 minutes... before the recording was even ready | 9 days |
-
-Four different failures. Same root cause every time: **the documentation described what we intended to build, not what we actually built.**
+We updated one of our core processing pipelines 8 times in 6 weeks. Each update was a fix. Each fix was responding to a failure. And each failure existed because the documentation from the previous fix didn't match what was actually deployed. Four different failures, same root cause every time... **the documentation described what we intended to build, not what we actually built.**
 
 That's documentation drift. And it doesn't just waste time... it compounds. Each agent session that reads stale instructions builds on a lie. The more sessions that pass, the further reality drifts from the map.
-
----
-
-## The Problem: Vision Masquerading as Reality
 
 ### What We Built (Before It Broke)
 
@@ -498,21 +472,11 @@ Copy that. Paste it. Your agent builds the system.
 
 ---
 
-## What's Next
-
-Future volumes in this series will cover:
-
-- **How we handle agent memory across sessions** when the agent starts fresh every time (Persistent Intelligence Architecture)
-- **How we test AI scripts without burning paid API credits** (The Cheapskate Testing Protocol)
-- **How we prevent agents from making risky changes** to systems they don't own (The Guest Principle)
-
-Each volume: the math, the problem, the real incidents, the solution, the blueprint, and the prompt to build it yourself.
-
----
-
 ## About This Series
 
 **Built from Broken** is published by the [Quietly Working Foundation](https://quietlyworking.org) (QWF), a 501(c)(3) nonprofit. Our mission is to serve youth 30 and younger... helping them discover purpose, build skills, and create legacy. We do this through product-based fundraising programs and student training.
+
+We run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Claude Code (Anthropic's CLI-based AI coding agent), built on a three-layer architecture... Directives (what to do), Orchestration (the AI agent making decisions), and Execution (deterministic Python scripts doing the work). We build tools, we break things, we fix them... and then we write down what happened so you don't have to learn it the hard way.
 
 This volume grew from 6 weeks of cascading failures in our meeting intelligence pipeline... failures that existed not because the code was bad, but because the documentation describing the code was wrong. Every system we built to fix it is now part of our standard operating procedures, and we use them daily across 40+ directives managing our nonprofit's AI-powered infrastructure.
 

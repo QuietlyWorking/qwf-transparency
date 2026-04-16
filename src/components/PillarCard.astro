@@ -7,9 +7,14 @@ interface Props {
   tags?: string[];
   series?: string;
   volume?: number;
+  hook?: string;
 }
 
-const { title, description, slug, pillar, tags = [], series, volume } = Astro.props;
+const { title, description, slug, pillar, tags = [], series, volume, hook } = Astro.props;
+
+// Filter out common taxonomy tags so cards show topic-specific tags
+const commonTags = new Set(['QWF', 'QWU', 'built-from-broken', 'open-playbook', 'living-proof', 'transparency']);
+const topicTags = tags.filter((t: string) => !commonTags.has(t));
 
 const href = pillar === 'root' ? `/${slug}/` : `/${pillar}/${slug}/`;
 
@@ -26,10 +31,11 @@ const accent = pillarAccents[pillar] || 'var(--dim-star)';
     <span class="card-series">Vol. {volume}</span>
   )}
   <h3>{title}</h3>
-  {description && <p>{description}</p>}
-  {tags.length > 0 && (
+  {hook && <p class="card-hook">{hook}</p>}
+  {!hook && description && <p>{description}</p>}
+  {topicTags.length > 0 && (
     <div class="card-tags">
-      {tags.slice(0, 3).map((tag: string) => (
+      {topicTags.slice(0, 3).map((tag: string) => (
         <span class="card-tag">{tag}</span>
       ))}
     </div>
@@ -97,6 +103,12 @@ const accent = pillarAccents[pillar] || 'var(--dim-star)';
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .card-hook {
+    color: var(--text-primary);
+    font-style: italic;
+    font-size: 0.95rem;
   }
 
   .card-tags {

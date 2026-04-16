@@ -2,11 +2,12 @@
 title: "Built from Broken: Vol. 4"
 slug: "vol-4-when-your-ai-agent-breaks-your-other-ai-agent"
 pillar: "built-from-broken"
-description: "At the Quietly Working Foundation (QWF), we run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Clau"
+description: "One agent started a debug server. Another agent's production service couldn't start. 35 minutes of downtime... and The Autonomous Roommate Problem that makes it"
 publishDate: "2026-04-15"
 tags: ["QWF", "QWU", "built-from-broken", "ai-agent", "claude-code", "infrastructure", "systemd", "shared-resources"]
 series: "Built from Broken"
 volume: 4
+hook: "35 minutes of downtime. Two agents. One port. Neither knew the other existed."
 isHome: false
 ---
 # Built from Broken: Vol. 4
@@ -16,45 +17,11 @@ isHome: false
 
 ---
 
-## The Series
-
-At the Quietly Working Foundation (QWF), we run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Claude Code (Anthropic's CLI-based AI coding agent). We have a three-layer architecture... Directives (what to do), Orchestration (the AI agent making decisions), and Execution (deterministic Python scripts doing the work).
-
-We build tools. We break things. We fix them. Then we write down what happened so you don't have to learn it the hard way.
-
-This is Volume 4.
-
----
-
-## The Math That Nobody Warned You About
-
-You start with one agent session. Everything works perfectly. Clean, predictable, reliable.
-
-Then you start running two sessions at once. Maybe three. One's handling your webhook server. One's doing a research task. One's debugging something. You're getting more done than ever.
-
-And then one of them kills the other one. Not maliciously. Not even carelessly. It just... didn't know the other one existed.
-
-Here's the math:
-
-| Concurrent Agents | Shared Resources (ports, files, processes) | Collision Probability Over 30 Days |
-|:-----------------:|:------------------------------------------:|:----------------------------------:|
-| 1 | Any | 0% |
-| 2 | 3 | ~15% |
-| 3 | 3 | ~35% |
-| 4 | 3 | ~55% |
-| 5 | 3 | ~70% |
-
-These aren't theoretical numbers. They're estimates from our experience running multiple Claude Code sessions on a single VM with shared ports, temp directories, and background services. The probability isn't about any single collision... it's about the compounding chance over time that *something* will step on *something else*.
-
-And here's the thing that nobody tells you: **this is a sign of success, not failure.**
-
-If you've reached the point where agent sessions are colliding with each other, it means you've built enough real infrastructure for conflicts to be possible. You've graduated from "one agent doing one thing" to an actual multi-agent system. That's a milestone.
-
-It just doesn't feel like one when your SMS gateway is down.
-
----
-
 ## The Problem: Roommates Who Never Met
+
+You start running two agent sessions at once. Maybe three. One's handling your webhook server. One's doing research. One's debugging something. You're getting more done than ever. And then one of them kills the other one. Not maliciously. Not even carelessly. It just... didn't know the other one existed.
+
+Here's the thing nobody tells you... **this is a sign of success, not failure.** If agent sessions are colliding with each other, it means you've built enough real infrastructure for conflicts to be possible. You've graduated from "one agent doing one thing" to an actual multi-agent system. That's a milestone. It just doesn't feel like one when your SMS gateway is down.
 
 ### What Happened
 
@@ -590,21 +557,11 @@ Copy that. Paste it. Your agent builds the safety net.
 
 ---
 
-## What's Next
-
-This volume addressed infrastructure-level conflicts between agents. Future volumes will explore:
-
-- **How we prevent agents from making risky changes** to systems they don't own (The Guest Principle)
-- **How we handle agent memory across sessions** when the agent starts fresh every time (Persistent Intelligence Architecture)
-- **How we test AI scripts without burning paid API credits** (The Cheapskate Testing Protocol)
-
-Each volume: the math, the problem, the real incidents, the solution, the blueprint, and the prompt to build it yourself.
-
----
-
 ## About This Series
 
 **Built from Broken** is published by the [Quietly Working Foundation](https://quietlyworking.org) (QWF), a 501(c)(3) nonprofit. Our mission is to serve youth 30 and younger... helping them discover purpose, build skills, and create legacy. We do this through product-based fundraising programs and student training.
+
+We run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Claude Code (Anthropic's CLI-based AI coding agent), built on a three-layer architecture... Directives (what to do), Orchestration (the AI agent making decisions), and Execution (deterministic Python scripts doing the work). We build tools, we break things, we fix them... and then we write down what happened so you don't have to learn it the hard way.
 
 This volume grew from a 35-minute outage at 11:56 PM... one agent session starting a debug server that killed another agent's production service. The kind of thing that makes you question whether running multiple agents is worth the complexity. It is. You just have to build the kitchen so the roommates can't burn it down... even when they don't know the other one's cooking.
 

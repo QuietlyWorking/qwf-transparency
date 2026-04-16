@@ -13,6 +13,7 @@ const pages = defineCollection({
     tags: z.array(z.string()).default([]),
     series: z.string().optional(),
     volume: z.number().optional(),
+    hook: z.string().optional(),
     isHome: z.boolean().default(false),
     vaultPath: z.string().optional(),
   }),
