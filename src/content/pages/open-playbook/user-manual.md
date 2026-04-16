@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-15 06:04 | Source version: 5.18
+> Generated: 2026-04-16 01:25 | Source version: 5.19
 
 # QWU Backoffice User Manual
 
@@ -4494,8 +4494,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.18 by generate_public_manual.py"
-generated: "2026-04-15 06:04"
+source: "Auto-generated from private manual v5.19 by generate_public_manual.py"
+generated: "2026-04-16 01:25"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5362,9 +5362,9 @@ Twilio → sms.quietlyworking.org → Caddy (SSL) → twilio_webhook_server.py �
 **Components:**
 | Component | Purpose |
 |-----------|---------|
-| `twilio_webhook_server.py` | HTTP server on port 8765, receives Twilio webhooks |
+| `twilio_webhook_server.py` | HTTP server on port 8765, receives Twilio webhooks (v3.5.1 — `SO_REUSEADDR` via `ReusableHTTPServer`) |
 | Caddy reverse proxy | SSL termination, proxies to webhook server |
-| `sms-webhook.service` | systemd service for persistence |
+| `sms-webhook.service` | systemd service for persistence; `ExecStartPre` kills port squatters via `port-cleanup.conf` drop-in |
 
 **Should This Be Reported?**
 Yes. This appears to be a legitimate bug in the n8n REST API. The behavior is:
@@ -10557,4 +10557,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-15 06:04 (v5.18)*
+*Last updated: 2026-04-16 01:25 (v5.19)*
