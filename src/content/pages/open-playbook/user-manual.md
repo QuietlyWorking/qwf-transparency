@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 5.15 | Started: 251223 | Updated: 260414**"
+description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-04-16"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -11,11 +11,11 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-16 06:47 | Source version: 5.19
+> Generated: 2026-04-16 06:49 | Source version: 5.20
 
 # QWU Backoffice User Manual
 
-**Version: 5.15 | Started: 251223 | Updated: 260414**
+**Version: 5.20 | Started: 251223 | Updated: 260416**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -1308,7 +1308,7 @@ QCM is a homegrown context management system (v2.1.0) that automatically recover
 
 **Redundancy detection (v2.1.0):** Inspired by DeepSeek's Engram paper ("Conditional Memory via Scalable Lookup"), the redundancy detector measures how often the agent re-reads the same file or re-runs the same search within a session — wasted "compute" that could be served from cache. Baseline (52 sessions): 29.2% average redundancy ratio, ~9,471 wasted tokens/session. Files read in 5+ distinct sessions are flagged as "engram candidates" for potential persistent caching. Metrics sync daily to HQ Supabase via `sync_hq_agent_efficiency.py` and display on the HQ Command Center dashboard.
 
-**TWL Preload Hook (v1.0.0, Session 195):** A separate UserPromptSubmit hook (`.claude/hooks/twl_preload.py`) that scans user messages for domain keywords and injects reminders to read relevant Tool Wisdom Libraries. Not part of QCM proper but follows the same hook architecture pattern. 14 domains mapped. See [[#TWL Preload Hook ⭐ NEW]] for details.
+**TWL Preload Hook (v1.0.0, Session 195):** A separate UserPromptSubmit hook (`.claude/hooks/twl_preload.py`) that scans user messages for domain keywords and injects reminders to read relevant Tool Wisdom Libraries. Not part of QCM proper but follows the same hook architecture pattern. 25 domains mapped (28 TWLs on disk). See [[#TWL Preload Hook ⭐ NEW]] for details.
 
 **Security design:** Zero external dependencies (Python stdlib only), no network access, no credential access, fail-open (never blocks Claude), all data in `.tmp/` (ephemeral). Built in-house after security analysis rejected context-mode (npm supply chain risk with 30+ API keys on the VM).
 
@@ -2494,6 +2494,48 @@ Cron (2 AM Pacific, 15 videos) OR Cron (8 AM/2 PM/8 PM Pacific, 5 videos)
 **Read Next Backfill & wpautop Fix (Session 172):** `wp_post_id` was NULL for all 112 rows in tig_graph.db — the column existed but was never populated because `tig_publish_article.py` didn't write it back after publishing. Matched 41 published WP posts to graph articles via `_tig_pipeline_uid` post meta. Backfilled wp_post_id in both tig_graph.db and 41 wp_article.json files. Fixed `tig_publish_article.py` (v1.0.1 → v1.1.0) to auto-write-back wp_post_id on publish. Fixed `build_read_next_section()` to skip unpublished articles (url=None). Discovered WordPress `wpautop` breaks `<div>` inside `<a>` tags — creates empty card bars. Fix: use `<span style="display:block">` instead of `<div>` for elements inside anchor tags. Rebuilt Read Next on 37 live articles (4 skipped — no published neighbors). See `memory/feedback_wpautop_gotcha.md`.
 
 **Smart Linking & Cross-Referencing (Session 168):** Five interconnection enhancements deployed across all 62 articles via `tig_backfill_enhancements.py` v1.0.0: (1) **Clickable wiki links** — `[[Concept]]` resolves to article URL (`/?p=ID`) from tig_graph.db or falls back to WordPress search (`/?s=...`); teal for matched, dim for search. (2) **WordPress tags** — semantic tags from tig_graph.db auto-created as WP post_tag taxonomy via `wp_set_post_terms` in PHP eval-file; 423 tags set across 62 articles. (3) **Backlink awareness** — "Referenced by X articles" bar below constellation, queries bidirectional `article_edges` table. (4) **wisdom.db-powered Echoes** — third source in `build_quote_threads()` queries `wisdom_query.py` by article topics, deduplicates, authority-ranks (vendor_official > expert_validated > community); actionable wisdom gets gold border (#E8B833) + lightning bolt prefix. (5) **Read Next** — top 3 related articles as clickable cards with one-liners and shared tags, positioned as standalone Divi section between article body and Echoes; Chapters sidebar includes "Read Next ↓" anchor link. Backfill script fetches `wp_post_id` from HQ Supabase (not local JSON). Key gotcha: semantic tags live in `tig_graph.db`, NOT `_metadata.json`.
+
+---
+
+## chaplaintig.com Personal Site
+
+### Architecture
+- **Platform:** SvelteKit on Cloudflare Pages (migrated from WordPress/Divi)
+- **Repo:** `/home/<VM_USER>/chaplaintig/` → `github.com/QuietlyWorking/chaplaintig.git`
+- **Live URL:** `chaplaintig.pages.dev` (DNS cutover from WordPress pending)
+- **Supabase project:** `rtpmnqehreecuccgamxl`
+- **Tables:** `tig_articles` (170), `tig_izms` (173), `tig_wisdom` (2,885), `tig_graph` (3,816 edges)
+- **Design:** Dark theme (#0A0A1A), PT Sans/PT Serif, WHELHO realm color system
+
+### Homepage Sections (13 total)
+All components in `src/lib/components/home/`:
+1. HeroQuote — tagline + Firefly quote + CTAs
+2. NdeCinematic — "I died." cinematic with animated heartbeat SVG
+3. CbsInterview — media social proof
+4. IdentityCards — 4 identity cards + weaknesses block
+5. RealmsPreview — WHELHO 10-realm color grid
+6. TestimonialsWall — masonry layout, all testimonials visible
+7. SpeakingSection — 5 speaking topic cards + CTA
+8. BigDream — dream statement, napkin sketch, 2035 goal
+9. JourneyTimeline — 8 milestones (1978-2035), realm-colored
+10. BuiltFromBroken — series callout, 4 volume cards
+11. LatestPosts — server-loaded from Supabase (4 cards)
+12. PhotoGallery — 5 clusters with filter tabs
+13. ConnectSection — 9 social links + phone + email
+
+### Key Utilities
+- `src/lib/utils/scroll-reveal.ts` — IntersectionObserver-based scroll animations (Svelte `use:action`)
+- `src/routes/(public)/+page.server.ts` — Server-side Supabase data loader for latest posts
+
+### Deploy Process
+Push to `main` → GitHub → CF Pages auto-deploys (~60s)
+
+### Remaining Tasks
+- Photo gallery: placeholder URLs need real WP media images
+- Testimonial quotes: verify against WordPress originals
+- Built from Broken slugs: match to Supabase article slugs
+- DNS cutover: point chaplaintig.com from WordPress to CF Pages
+- Pipeline update: article builder needs to push to Supabase (currently WordPress only)
 
 ---
 
@@ -4501,8 +4543,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.19 by generate_public_manual.py"
-generated: "2026-04-16 06:47"
+source: "Auto-generated from private manual v5.20 by generate_public_manual.py"
+generated: "2026-04-16 06:49"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10374,9 +10416,9 @@ A UserPromptSubmit hook that automatically detects domain keywords in user messa
 3. If matched, injects a system reminder: "Read [TWL directive] before proceeding"
 4. Agent reads the TWL, gaining access to gotchas, working examples, and vendor intelligence
 
-### Domain Coverage (23 domains)
+### Domain Coverage (25 domains)
 
-All 26 TWLs on disk are mapped (added DaVinci Resolve, DaVinci Fusion, Blackmagic Cloud, BMPCC 6K Pro in Session 219), plus additional domains for supporter systems, email, QSP, ESP. Keywords include tool names, common abbreviations, and related concepts.
+All 28 TWLs on disk are mapped (added Descript, FFmpeg in Session 228; DaVinci Resolve, DaVinci Fusion, Blackmagic Cloud, BMPCC 6K Pro in Session 219), plus additional domains for supporter systems, email, QSP, ESP. Keywords include tool names, common abbreviations, and related concepts.
 
 ### Drift Detection (Session Wrap-Up Step 3B)
 
@@ -10564,4 +10606,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-16 06:47 (v5.19)*
+*Last updated: 2026-04-16 06:49 (v5.20)*
