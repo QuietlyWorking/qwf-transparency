@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-16 06:49 | Source version: 5.20
+> Generated: 2026-04-16 20:49 | Source version: 5.21
 
 # QWU Backoffice User Manual
 
@@ -1308,7 +1308,7 @@ QCM is a homegrown context management system (v2.1.0) that automatically recover
 
 **Redundancy detection (v2.1.0):** Inspired by DeepSeek's Engram paper ("Conditional Memory via Scalable Lookup"), the redundancy detector measures how often the agent re-reads the same file or re-runs the same search within a session — wasted "compute" that could be served from cache. Baseline (52 sessions): 29.2% average redundancy ratio, ~9,471 wasted tokens/session. Files read in 5+ distinct sessions are flagged as "engram candidates" for potential persistent caching. Metrics sync daily to HQ Supabase via `sync_hq_agent_efficiency.py` and display on the HQ Command Center dashboard.
 
-**TWL Preload Hook (v1.0.0, Session 195):** A separate UserPromptSubmit hook (`.claude/hooks/twl_preload.py`) that scans user messages for domain keywords and injects reminders to read relevant Tool Wisdom Libraries. Not part of QCM proper but follows the same hook architecture pattern. 25 domains mapped (28 TWLs on disk). See [[#TWL Preload Hook ⭐ NEW]] for details.
+**TWL Preload Hook (v1.0.0, Session 195):** A separate UserPromptSubmit hook (`.claude/hooks/twl_preload.py`) that scans user messages for domain keywords and injects reminders to read relevant Tool Wisdom Libraries. Not part of QCM proper but follows the same hook architecture pattern. 32 domains mapped (28 TWLs on disk). See [[#TWL Preload Hook ⭐ NEW]] for details.
 
 **Security design:** Zero external dependencies (Python stdlib only), no network access, no credential access, fail-open (never blocks Claude), all data in `.tmp/` (ephemeral). Built in-house after security analysis rejected context-mode (npm supply chain risk with 30+ API keys on the VM).
 
@@ -2700,8 +2700,11 @@ Monitor thought leaders and subject matter experts across **four platforms** (Yo
 | Expert | Fields | Priority | Added |
 |--------|--------|----------|-------|
 | Wes Bos | frontend dev, web dev, CSS, JavaScript | — | 2026-04-12 |
+| GaryVee | social media marketing, content strategy, entrepreneurship, brand-building, AI adoption | A | 2026-04-16 |
 
 **Wes Bos** (`003 Entities/Experts/Wes Bos.md`) — Frontend web developer, educator, and co-host of the Syntax podcast. Known for practical CSS/JS courses and tool tutorials. First captured via his "Pretext is a bigger deal than you think" video (UID: 20260412-200733), which triggered the Pretext TWL creation.
+
+**GaryVee** (`003 Entities/Experts/GaryVee.md`) — Gary Vaynerchuk, Chairman of VaynerX and CEO of VaynerMedia. Social media marketing evangelist, content strategy authority, and early-platform adopter (YouTube 2006, Twitter 2007, AI 2023+). Bulk-onboarded with 20 most recent landscape (non-Shorts) videos through the content pipeline, generating ~343 wisdom entries (Stop Wasting Money on Ads — 22 entries; The Internet Changed... — 22; 1 man VS 100 Billion AI Creators — 21). Total wisdom DB footprint: 409 entries across 53 unique sources. Captures span content strategy, AI adoption urgency, brand-as-moat philosophy, social media future, and team/leadership frameworks — directly applicable to QWR product development and QWF program communications.
 
 ### Expert Profiles
 
@@ -4543,8 +4546,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.20 by generate_public_manual.py"
-generated: "2026-04-16 06:49"
+source: "Auto-generated from private manual v5.21 by generate_public_manual.py"
+generated: "2026-04-16 20:49"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10416,9 +10419,9 @@ A UserPromptSubmit hook that automatically detects domain keywords in user messa
 3. If matched, injects a system reminder: "Read [TWL directive] before proceeding"
 4. Agent reads the TWL, gaining access to gotchas, working examples, and vendor intelligence
 
-### Domain Coverage (25 domains)
+### Domain Coverage (32 domains)
 
-All 28 TWLs on disk are mapped (added Descript, FFmpeg in Session 228; DaVinci Resolve, DaVinci Fusion, Blackmagic Cloud, BMPCC 6K Pro in Session 219), plus additional domains for supporter systems, email, QSP, ESP. Keywords include tool names, common abbreviations, and related concepts.
+All 28 TWLs on disk are mapped (added Descript, FFmpeg in Session 228; DaVinci Resolve, DaVinci Fusion, Blackmagic Cloud, BMPCC 6K Pro in Session 219), plus additional domains for supporter systems, email, QSP, ESP, and WordPress. Keywords include tool names, common abbreviations, and related concepts.
 
 ### Drift Detection (Session Wrap-Up Step 3B)
 
@@ -10606,4 +10609,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-16 06:49 (v5.20)*
+*Last updated: 2026-04-16 20:49 (v5.21)*

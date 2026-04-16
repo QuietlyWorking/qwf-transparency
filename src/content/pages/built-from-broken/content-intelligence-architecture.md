@@ -1248,7 +1248,7 @@ Every LLM call in the QWU Backoffice follows a "Flagship First" strategy, manage
 
 | Tier | Model | When We Use It |
 |------|-------|---------------|
-| FLAGSHIP (default) | Claude Opus 4.6 (1M context, adaptive thinking) | Everything requiring judgment — content analysis, wisdom classification, routing decisions, voice adaptation |
+| FLAGSHIP (default) | Claude Opus 4.7 (1M context, adaptive thinking) | Everything requiring judgment — content analysis, wisdom classification, routing decisions, voice adaptation |
 | SYNTHESIS | Claude Sonnet 4.5 (1M context) | Large-context tasks where flagship cost isn't justified |
 | STANDARD | Claude Sonnet 4.5 | Genuinely categorical classification tasks |
 | FAST | DeepSeek | Mechanical pattern matching only (name parsing, format conversion) |
@@ -1277,7 +1277,7 @@ response = llm_call(
 )
 ```
 
-**Adaptive thinking (Claude Opus 4.6):**
+**Adaptive thinking (Claude Opus 4.7):**
 
 Opus supports adaptive thinking — Claude decides when and how much to reason before responding. For complex analysis tasks (meeting intelligence, content routing), enabling thinking produces noticeably better results:
 
@@ -1304,7 +1304,7 @@ response = llm_call(
 | Tool | Role in the Pipeline | Why We Chose It |
 |------|---------------------|----------------|
 | **Claude Code** | Orchestration layer (Layer 2) — reads directives, calls scripts, handles errors, self-anneals | Best AI coding assistant available; runs on our VM via terminal |
-| **Claude Opus 4.6** | All content analysis, classification, routing, and generation | Quality-First strategy — best reasoning model available |
+| **Claude Opus 4.7** | All content analysis, classification, routing, and generation | Quality-First strategy — best reasoning model available |
 | **Google Gemini** | Video transcription (multimodal — watches video) and frame verification (Gemini Vision) | Only model that processes full video files natively |
 | **YouTube Data API v3** | Ground truth metadata, playlist monitoring | Authoritative source for video attribution |
 | **Python** | All execution scripts (Layer 3) | Universal, well-supported, extensive library ecosystem |
