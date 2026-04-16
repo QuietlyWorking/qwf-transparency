@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-16 01:25 | Source version: 5.19
+> Generated: 2026-04-16 06:45 | Source version: 5.19
 
 # QWU Backoffice User Manual
 
@@ -3802,8 +3802,13 @@ The transparency site is an **Astro 5.x** static site on **Cloudflare Pages** wi
 - Daily at 4 AM Pacific via n8n workflow `YnawyFKfnrOao12P`
 - Discord notification to `#system-status` on success/failure
 
-**Content series on the transparency site:**
-- **Built from Broken** — Problems we face running AI-powered nonprofit operations and the real solutions we build. Series guide at `Quietly Working Universe Public Transparency Project/Built from Broken/_Series-Guide.md` (not published). Each volume gets `dg-publish: true` + `series: Built from Broken` + `built-from-broken` tag + a PILLAR_MAP entry in the v2 sync script.
+**Content series and collections on the transparency site:**
+- **Built from Broken** — Problems we face running AI-powered nonprofit operations and the real solutions we build. 4 volumes. Series guide at `Quietly Working Universe Public Transparency Project/Built from Broken/_Series-Guide.md` (not published). Each volume gets `dg-publish: true` + `series: Built from Broken` + `built-from-broken` tag + a PILLAR_MAP entry in the v2 sync script. Reader-first structure: Problem opens with stakes hook, no preamble sections, series context in footer.
+- **Architecture Blueprints** — 5 ASCII art architecture maps published under Open Playbook. Green terminal styling (`#00ff00`, container-query font scaling). Source: `005 Operations/Dashboards/Architecture-Map-Page*.md`. Published versions in `Quietly Working Universe Public Transparency Project/Architecture Blueprints/`.
+
+**Frontmatter enhancements (Apr 2026):**
+- `hook` field — punchy one-liner for card display (used instead of `description` on listing pages). Sync script passes it through; content schema accepts it.
+- PillarCard filters common tags (`QWF`, `QWU`, `built-from-broken`, etc.) from card display — only topic-specific tags shown.
 
 **Safety features:**
 - Private User Manual (`QWU Backoffice User Manual.md`) is blocklisted by filename stem — only the `[PUBLIC]` version passes
@@ -3819,10 +3824,11 @@ The transparency site is an **Astro 5.x** static site on **Cloudflare Pages** wi
 | `005 Operations/Directives/sync_transparency_site.md` | Directive/SOP |
 | `005 Operations/Workflows/transparency-site-sync.json` | n8n workflow (daily 4 AM Pacific) |
 
-**Currently published pages (13 files):**
-- Homepage (3-pillar landing), QWU Values, Tool Shed, Nonprofit Tech Access Guide
+**Currently published pages (21 files):**
+- Homepage (3-pillar landing), QWU Values, Tool Shed, Nonprofit Tech Access Guide, User Manual [PUBLIC]
 - QWC, Locals 4 Good, OMW, IP Rights, Content Intelligence Architecture
-- Built from Broken Vol 1, Built from Broken Vol 2, How to Give Your AI Agent Superpowers
+- Built from Broken Vol 1–4, How to Give Your AI Agent Superpowers
+- Architecture Blueprints (5): Mission Control, Data Flow, Integrations, Entities, Schedule
 - User Manual [PUBLIC]
 
 ### Transparency Content Distribution Pipeline
@@ -4495,7 +4501,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.19 by generate_public_manual.py"
-generated: "2026-04-16 01:25"
+generated: "2026-04-16 06:45"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10557,4 +10563,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-16 01:25 (v5.19)*
+*Last updated: 2026-04-16 06:45 (v5.19)*
