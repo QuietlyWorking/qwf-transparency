@@ -144,7 +144,11 @@ const isBlueprint = frontmatter.slug?.startsWith('blueprint-');
     font-size: 0.85rem;
   }
 
-  /* Blueprint articles — full-viewport green terminal code blocks */
+  /* Blueprint articles — wide green terminal code blocks */
+  .article--blueprint {
+    max-width: var(--content-max-width);
+  }
+
   .article--blueprint :global(pre) {
     background: #0a0a14 !important;
     border: 2px solid #00ff00;
@@ -153,13 +157,9 @@ const isBlueprint = frontmatter.slug?.startsWith('blueprint-');
     margin: 1.5rem 0;
     overflow-x: auto;
     line-height: 1.3;
-    /* Break out of article + site-main constraints to use full viewport */
-    width: 100vw;
-    max-width: 100vw;
-    margin-left: calc(-50vw + 50%);
     box-sizing: border-box;
-    /* Scale font to fit ~171 chars without scrolling */
-    font-size: clamp(0.45rem, 0.58vw, 0.75rem);
+    /* Scale font so ~171 chars fit within the content max-width */
+    font-size: clamp(0.45rem, 0.55vw, 0.72rem);
   }
 
   .article--blueprint :global(pre code) {
