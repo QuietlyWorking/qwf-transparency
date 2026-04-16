@@ -34,6 +34,7 @@ isHome: true
 - [Vol 1 — When Your AI Agent Keeps Forgetting What It Already Knows](/built-from-broken/when-your-ai-agent-keeps-forgetting/) — How a 50-line Python hook stopped our AI agent from repeatedly ignoring its own documentation
 - [Vol 2 — When Your Documentation Rots Faster Than You Can Write It](/built-from-broken/when-your-documentation-rots-faster/) — How we turned documentation into a deployment artifact so our runbooks stop lying about what's actually deployed
 - [Vol 3 — When Your AI Agent Hallucinates Calendar Facts](/built-from-broken/when-your-ai-agent-hallucinates-calendar-facts/) — How a PreToolUse hook catches fabricated day-of-week names before they reach emails, files, or any output
+- [Vol 4 — When Your AI Agent Breaks Your Other AI Agent](/built-from-broken/vol-4-when-your-ai-agent-breaks-your-other-ai-agent/) — How self-resolving infrastructure prevents multi-agent resource collisions from becoming outages
 
 ## Tools
 These are the tools that the #QWU uses.
