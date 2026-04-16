@@ -1,6 +1,6 @@
 ---
 title: "Built from Broken: Vol. 4"
-slug: "vol-4-when-your-ai-agent-breaks-your-other-ai-agent"
+slug: "when-your-ai-agent-breaks-your-other-ai-agent"
 pillar: "built-from-broken"
 description: "One agent started a debug server. Another agent's production service couldn't start. 35 minutes of downtime... and The Autonomous Roommate Problem that makes it"
 publishDate: "2026-04-15"
