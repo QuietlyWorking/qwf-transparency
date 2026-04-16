@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-16 20:50 | Source version: 5.21
+> Generated: 2026-04-16 23:26 | Source version: 5.22
 
 # QWU Backoffice User Manual
 
@@ -4546,8 +4546,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.21 by generate_public_manual.py"
-generated: "2026-04-16 20:50"
+source: "Auto-generated from private manual v5.22 by generate_public_manual.py"
+generated: "2026-04-16 23:26"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -8479,7 +8479,7 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 | Stripe | Configured (TEST MODE) — 2 products, 4 prices, webhook |
 | Alpha tenant | Aim High BNI — 27 members (17 active, 2 on leave, 8 alumni), 2,373 historical visitors imported |
 | Timezone fix | Prompt 021 deployed — 8 affected areas fixed |
-| Database | 35 tables, 12 migrations, full RLS (added: `chapter_testimonials`, `card_shares`, `card_clicks`) |
+| Database | 35 tables, 16 migrations, full RLS (added: `chapter_testimonials`, `card_shares`, `card_clicks`; per-member privacy columns `testimonials_enabled`, `card_shareable`, `card_redirect_url`) |
 | Newsletter system | 3-step composer, 11 section types, template management, send-newsletter edge function |
 | Recognition engine | "You Got Caught" member appreciation with public web archive |
 | Speaker management | Meeting templates, speaker queue, materials collection, planning timeline, message sequences, dues tracking |
@@ -8502,6 +8502,10 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 | Event photos | Upload promo photos in QNT EventForm, recap photos in EventDetail Photos tab. `event-images` storage bucket (public, 10MB, jpg/png/webp). Hero/gallery/recap cascade to public site. Series inheritance via "Apply to all" toggle (Apr 13, 2026) |
 | SEO profession pages | `/find` — directory of 18 professions. `/find/[profession]` — auto-generated landing pages per profession with member profiles, testimonials, contact links. Targets "find a [profession] in Southern California" queries (Apr 13, 2026) |
 | Recurring event mgmt | "Apply changes to entire series" toggle in QNT EventForm — updates name, time, location, format, visibility, photos across all siblings. `useUpdateRecurringSeries` mutation (Apr 13, 2026) |
+| Per-member privacy controls | Three independent boolean toggles on `members` (default true): `public_profile` (existing — appearance on public chapter website), `testimonials_enabled` (testimonial form + display), `card_shareable` (digital business card sharing). Plus `card_redirect_url` text — fallback URL when card sharing is off. Admin via `MemberForm` Privacy section; member self-service via `MyTestimonials` (testimonials) and `BusinessCardBuilder` (card). Self-service uses two SECURITY DEFINER RPCs: `set_my_testimonials_enabled(boolean)` and `set_my_card_settings(boolean, text)` — both `authenticated`-only, no broader UPDATE on members. Website enforcement: `[slug].astro` hides TestimonialForm, `/api/testimonial` returns 403, `public_chapter_testimonials` view filters approved testimonials about disabled members, `/card/<slug>` 302-redirects to `card_redirect_url` (clean URL — `?s=` token stripped) or 404s. Click tracking + sharer attribution preserved through redirects. `public_profile` audit closed two leaks (`fetchMember`, `fetchUpcomingSpeakers`) in `aim-high-bni/src/lib/supabase.ts`. First user: Mark Denali (Edward Jones) flipped all three off for regulatory compliance (Apr 16, 2026) |
+| Testimonial author bylines | Member profile testimonial cards now display "— Author Name" below each quote. Previously the author was discarded by mapping to `from: null`. Legacy renewal-review entries renamed from "Anonymous Member" → "Anonymous Fan" (14 rows) for warmer attribution (Apr 16, 2026) |
+| Notification dropdown scrolling | Replaced Radix `<ScrollArea max-h-[400px]>` with native `<div className="max-h-[400px] overflow-y-auto">`. The Radix viewport's `h-full` requires explicit parent height, not `max-h` — without it, overflow never engages and the scrollbar never appears. Native scroll is the right fit for popover lists (Apr 16, 2026) |
+| Hand-written type drift fixes | Aligned `src/types/database.ts` Member interface with actual DB columns: `instagram` → `instagram_handle`, `joined_date` → `join_date`, `last_enriched_at` → `enriched_at`. Saving member edits had been crashing with "Could not find the X column"; reads silently returned undefined (Instagram links never rendered, member tenure showed "—", enrichment recency pill missing) (Apr 16, 2026) |
 
 ### Reference
 
@@ -8513,7 +8517,7 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 - **Backend Scripts:** `005 Operations/Execution/qnt_webhook_receiver.py` (v1.4.0), `qnt_visitor_pipeline.py`, `qnt_roster_sync.py`, `qnt_import_historical_visitors.py`, `qnt_newsletter_pipeline.py`, `qnt_meeting_pipeline.py`, `process_presentation_media.py`, `generate_business_cards.py`
 - **Edge Functions:** `enrich-visitor`, `verify-crossover-token` (QWF Passport), `sync-roster`, `create-checkout-session`, `create-portal-session`, `stripe-webhook`, `sync-member-count`, `send-newsletter`, `submit-contact-form`
 - **Astro API Routes (aim-high-bni):** `/card/[slug]` (OG card sharing + click tracking), `/api/rsvp` (visitor registration), `/api/testimonial` (testimonial submission)
-- **Supabase RPC:** `increment_card_share_clicks` (atomic click counter for card shares)
+- **Supabase RPC:** `increment_card_share_clicks` (atomic click counter for card shares), `set_my_testimonials_enabled(boolean)` (member self-toggle for testimonials_enabled), `set_my_card_settings(boolean, text)` (member self-toggle for card_shareable + card_redirect_url, validates `https?://` prefix)
 - **CF Pages Env Vars (aim-high-bni):** `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `AIM_HIGH_ORG_ID`, `QNT_SERVICE_ROLE_KEY` (runtime SSR + API routes)
 
 ---
@@ -10609,4 +10613,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-16 20:50 (v5.21)*
+*Last updated: 2026-04-16 23:26 (v5.22)*
