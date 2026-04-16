@@ -144,22 +144,27 @@ const isBlueprint = frontmatter.slug?.startsWith('blueprint-');
     font-size: 0.85rem;
   }
 
-  /* Blueprint articles — wide green terminal code blocks */
+  /* Blueprint articles — wide green terminal code blocks, no scroll */
   .article--blueprint {
     max-width: var(--content-max-width);
+    container-type: inline-size;
   }
 
   .article--blueprint :global(pre) {
     background: #0a0a14 !important;
     border: 2px solid #00ff00;
     border-radius: 0.5rem;
-    padding: 1.5rem;
+    padding: 1rem;
     margin: 1.5rem 0;
-    overflow-x: auto;
-    line-height: 1.3;
+    overflow: hidden;
+    line-height: 1.25;
     box-sizing: border-box;
-    /* Scale font so ~171 chars fit within the content max-width */
-    font-size: clamp(0.45rem, 0.55vw, 0.72rem);
+    /*
+     * ASCII art is ~171 chars wide. Use container query units
+     * so font scales to always fit the article width. No scrolling.
+     * 100cqi / 178 accounts for 171 chars + padding/border buffer.
+     */
+    font-size: min(0.75rem, 0.56cqi);
   }
 
   .article--blueprint :global(pre code) {
