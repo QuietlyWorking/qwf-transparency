@@ -33,8 +33,8 @@ This is Page 3 of 5 in the QWU Backoffice Architecture Map series... the integra
 ║   │   ║   ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐ ┌───────────────────┐   Philosophy: FLAGSHIP default.         ║  │ ║
 ║   │   ║   │ ★ FLAGSHIP (def)  │ │    SYNTHESIS      │ │    STANDARD       │ │      FAST         │ │     IMAGE         │   Downgrade only with justification.   ║  │ ║
 ║   │   ║   │ ───────────────── │ │ ───────────────── │ │ ───────────────── │ │ ───────────────── │ │ ───────────────── │   ─────────────────────────────────    ║  │ ║
-║   │   ║   │ Claude Opus 4.5   │ │ Claude Sonnet 4.5 │ │ Claude Sonnet 4.5 │ │ DeepSeek Chat     │ │ Gemini 3 Pro      │   • 24 scripts using LLM calls         ║  │ ║
-║   │   ║   │ 200K context      │ │ 1M context        │ │ 1M context        │ │ 64K context       │ │ 1M context        │   • 15 at FLAGSHIP tier                ║  │ ║
+║   │   ║   │ Claude Opus 4.7   │ │ Claude Sonnet 4.5 │ │ Claude Sonnet 4.5 │ │ DeepSeek Chat     │ │ Gemini 3 Pro      │   • 24 scripts using LLM calls         ║  │ ║
+║   │   ║   │ 1M context (beta) │ │ 1M context        │ │ 1M context        │ │ 64K context       │ │ 1M context        │   • 20 at FLAGSHIP tier                ║  │ ║
 ║   │   ║   │ ───────────────── │ │ ───────────────── │ │ ───────────────── │ │ ───────────────── │ │ ───────────────── │   • Cost diff: ~$15-20/mo              ║  │ ║
 ║   │   ║   │ Comprehension     │ │ Extended context  │ │ Classification    │ │ Pattern matching  │ │ OCR + visual      │                                        ║  │ ║
 ║   │   ║   │ Judgment, comms   │ │ Cross-reference   │ │ Categorical only  │ │ Name parsing      │ │ Spatial reasoning │   Credential: OPENROUTER_API_KEY      ║  │ ║
