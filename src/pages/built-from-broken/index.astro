@@ -10,7 +10,7 @@ const pages = await getCollection('pages', (entry) =>
 // Sort: series volumes first (by volume number), then non-series by title
 const sorted = pages.sort((a, b) => {
   if (a.data.series && b.data.series) {
-    return (b.data.volume ?? 0) - (a.data.volume ?? 0); // newest first
+    return (a.data.volume ?? 0) - (b.data.volume ?? 0); // Vol 1 first, left to right
   }
   if (a.data.series) return -1;
   if (b.data.series) return 1;
