@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-16 23:26 | Source version: 5.22
+> Generated: 2026-04-17 20:35 | Source version: 5.23
 
 # QWU Backoffice User Manual
 
@@ -4546,8 +4546,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.22 by generate_public_manual.py"
-generated: "2026-04-16 23:26"
+source: "Auto-generated from private manual v5.23 by generate_public_manual.py"
+generated: "2026-04-17 20:35"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -9960,21 +9960,27 @@ Weavy offers an App Mode that provides a simplified interface for students: sing
 
 ## WHL WHELHO App ⭐ NEW
 
-**Added: March 18, 2026**
+**Added: March 18, 2026 · Major rewrite: April 17, 2026 (SvelteKit migration + health module + nutrition system)**
 
 WHELHO is a personal development app built around the planet metaphor — your life as a celestial body with 8 realms, a values-driven core, and elements that orbit between crust (where you are) and core (where you're pulled). It uses Spline 3D for real-time planet visualization and serves as both a FORGE product fuel line and the Missing Pixel pre-student pipeline gatekeeper.
+
+As of April 17, 2026 the app also ships a **full personal health management platform** within the Body realm — bloodwork intelligence, pantry-backed food logging, water tracking, body-stats-derived daily targets, chronic-condition management, surgical timeline, immunizations, allergies, insurance, family history, and emergency contacts. This module is production-used daily by TIG.
 
 ### Architecture
 
 ```
 Cloudflare Pages (whelho.org)
-    → Vite + React 18 + React Router 6 + TypeScript
-        → Spline 3D (@splinetool/react-spline)
-            → Supabase SDK
-                → Supabase (nvimpjmhiondaxtrwlny, us-west-1)
+    → SvelteKit 2.57 + Svelte 5 runes + TypeScript + @sveltejs/adapter-cloudflare
+        → Spline 3D (@splinetool/runtime, dynamic onMount import)
+            → @supabase/ssr (SSR cookie-based auth, 1-year persistent sessions)
+                → Supabase PostgreSQL (nvimpjmhiondaxtrwlny, us-west-1) with RLS per user_id
                     ← Edge Functions (submit-contact-form)
-                        ← n8n webhooks (planned)
+                        ← Claude Opus 4.7 API for lab/photo/text extraction
+                            ← Open Food Facts API for barcode lookup
+                                ← ZXing for in-browser barcode scanning
 ```
+
+Migrated React 18 → SvelteKit on 2026-04-16 with zero data loss (Supabase untouched). Rollback tag `react-final-20260416` pinned in case of emergency.
 
 ### Ecosystem Position
 
@@ -9993,53 +9999,81 @@ WHELHO occupies a unique dual role in QWF:
 - **Spline Integration:** Planet designed in Spline's browser editor, embedded via `@splinetool/react-spline`. Events: `onSplineMouseDown` for realm clicks, `emitEvent()` for animations, Variables API for dynamic control
 - **Own Brand:** `whelho.org` (not a "Quietly ___" app), but follows QWF App Family patterns
 
-### Current State (March 18, 2026)
+### Current State (April 17, 2026)
 
 | Component | Status |
 |-----------|--------|
 | Supabase project | ACTIVE_HEALTHY — `nvimpjmhiondaxtrwlny` (us-west-1, free tier) |
 | Domain | `whelho.org` — Live on CF Pages, SSL valid |
-| CF Pages project | `whelho` (deployed via `wrangler pages deploy`) |
+| CF Pages project | `whelho` — GitHub Actions auto-deploy on push to main |
 | GitHub repo | `QuietlyWorking/whelho` (private) |
-| Database schema | v1.0.0 — 12 tables with RLS |
-| Auth | Configured — email/password + magic links, email verification required |
-| Phase 0: Foundation | ✅ Complete — infrastructure, schema, scaffold, DNS, deploy pipeline |
-| Phase 1: Planet + Onboarding | In Progress — Track A components built, Track B (Spline scene) not started |
+| Database schema | v2 — 28+ tables with RLS |
+| Auth | `@supabase/ssr` + 1-year persistent cookies on both server + browser client |
+| Phase 0: Foundation | ✅ Complete |
+| Phase 1: Planet + Onboarding | Track A ✅ (SvelteKit rewrite), Track B (Spline scene) design brief complete, not yet built |
 | Alpha stage | ✅ Deployed — invitation-only gate, access request form, bug reports, alpha badge |
 | Contact form edge function | ✅ Deployed — `submit-contact-form` with honeypot, rate limiting, duplicate detection |
-| Spline scene | Design brief complete (pie slices, simple stylized, wooden signs). Scene build pending in Spline editor. |
-| GitHub Actions deploy | Pending — `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets not yet set |
+| Health module | ✅ Production-used — 13 sections (food log + pantry + vitals + bloodwork + conditions + procedures + allergies + immunizations + insurance + family history + emergency contacts + providers + medications + referrals) |
+| Nutrition system | ✅ Production — barcode scan + OFF lookup, Claude vision label extraction, Claude text-describe, 30 quick-picks, auto-pantry, 27-key micronutrient tracking, body-stats-derived target rings, educational NOVA/Nutri-Score popups |
+| Water tracking | ✅ Production — named containers, vertical water bar on Today card, streak flame, afternoon nudge, tennis-day bump |
 
-### Database Schema (12 Tables)
+### Database Schema (28+ Tables)
+
+**Core identity:**
 
 | Table | Purpose |
 |-------|---------|
 | `profiles` | User profiles, planet name, subscription status |
 | `values` | Core values discovered via Values Discovery |
-| `realms` | 8 realms per user (Spirit, Mind, Body, etc.) |
-| `elements` | Items within realms (crust/core positions) |
+| `realms` | 8 realms per user |
+| `elements` | Items within realms (now extended with slug/description/goal_kind/target_value/icon for health-alignment goals) |
 | `element_values` | Element-value connections (magnetic pull) |
 | `discovery_responses` | Values Discovery freeform answers |
 | `checkins` | Conversational reflections on elements |
-| `breadcrumbs` | Purpose Window insights (Work+Charity) |
-| `student_applications` | Student verification for free tier |
+| `breadcrumbs` | Purpose Window insights |
+| `student_applications` | Student verification |
 | `planet_snapshots` | Year-over-year planet state |
-| `contact_submissions` | Access requests, contact form (anon insert) |
-| `bug_reports` | Alpha/beta bug reports (auth insert + select own) |
-| `atmosphere_elements` | External factors per realm (temperature, inflation, etc.) with severity scale |
-| `atmosphere_checkins` | Temporal snapshots of atmosphere element readings |
+| `contact_submissions` | Access requests |
+| `bug_reports` | Alpha/beta bug reports |
+
+**Health module (added 2026-04):**
+
+| Table | Purpose |
+|-------|---------|
+| `health_profile` | Body stats (sex, DOB, height_cm, weight_kg, activity_level, calorie_goal, custom targets, daily_water_target_oz) — drives all daily-target rings |
+| `health_food_log` | Every eaten item with full macros + detailed fats + added sugar + cholesterol + ingredients + allergens + facility allergens + 27-key micronutrients JSONB + NOVA + Nutri-Score + photo + alignments to realm elements |
+| `health_meal_templates` | Pantry of frequently-eaten items (auto-populates on every log, dedupes by barcode/name). Shares nutrition fields with health_food_log plus photo_url, back_photo_url, emoji, use_count, last_used_at |
+| `food_element_alignments` | Many-to-many food↔realm-element linkage (supports/undermines with direction) |
+| `health_providers` | Care team with address, phone, portal URL, specialty, primary-care flag |
+| `health_medications` | Prescriptions with dosage, frequency, prescriber link |
+| `health_conditions` | Chronic + active diagnoses with category/status/severity/diagnosed_at/primary_provider |
+| `health_condition_medications` | Join table linking conditions to their managing medications |
+| `health_procedures` | Surgical + implant + diagnostic timeline with is_implant flag + device_details |
+| `health_lab_reports` | Uploaded labs with Opus 4.7 extracted biomarkers (JSONB) + ai_summary + red_flags |
+| `health_referrals` + `health_referral_milestones` | 6-step specialist workflow with auth-letter photo capture |
+| `health_vitals` | Row-per-metric capture of 22 measurement types with reading_group_id for multi-metric bundles |
+| `health_allergies` | Substance × category × severity 4-tier |
+| `health_immunizations` | Vaccine history with dose number/total, manufacturer, lot, next-due |
+| `health_insurance` | 6 coverage types with carrier/plan/member/group/phone/effective-dates |
+| `health_family_history` | 16 relation types × condition × age_at_onset × deceased flags |
+| `health_emergency_contacts` | Tappable tel/mailto with primary flag + display order |
+| `health_shares` | Time-limited public share links for sending labs to family/caregivers |
+| `health_ai_insights` | Cached AI-generated feeling patterns + food-lab correlations (reserved for Phase 5) |
+
+**Storage:** `medical-docs` private bucket with per-user folder RLS isolation. Stores lab PDFs, pantry front+back photos, food-log photos.
 
 ### Phase Roadmap
 
 | Phase | Scope | Status |
 |-------|-------|--------|
 | 0: Foundation | CF Pages + Supabase, auth, deploy pipeline, cosmic theme | ✅ Complete |
-| 1: Planet + Onboarding | Spline 3D planet, formation animation, realm interactions, React-Spline integration | In Progress |
-| 2: Values Discovery | Excavation → Commitment arc, AI-assisted pattern detection, core glow | Not Started |
-| 3: Realms + Elements | Realm zoom, element CRUD, crust/core positions, magnetic pull visualization | Not Started |
-| 4: Living Practice + Atmosphere | Conversational check-ins, progress on planet, celebration particles, atmosphere layer (external factors, wobble mechanics, empathy prompts) | Not Started |
-| 5: Purpose Window | Work + Charity pattern detection, breadcrumb surfacing | Not Started |
-| 6: Polish + Launch | Mobile optimization, MP bridge, beta, landing page, launch | Not Started |
+| 1: Planet + Onboarding | Spline 3D planet, formation animation, realm interactions | Track A (code) done; Track B (Spline scene) pending |
+| 2: Values Discovery | Excavation → Commitment arc, AI-assisted pattern detection | Not Started |
+| 3: Realms + Elements | Realm zoom, element CRUD, crust/core positions | ✅ Elements CRUD done; realm zoom + crust/core viz pending |
+| 4: Health module (inserted — Body realm went deep) | Bloodwork + food log + vitals + conditions + procedures + allergies + immunizations + insurance + family history + emergency contacts + providers + medications + referrals + water tracking + educational overlays + daily target rings | ✅ Shipped 2026-04-16 → 2026-04-17 |
+| 5: Living Practice + Atmosphere | Conversational check-ins, progress on planet, celebration particles, atmosphere layer | Not Started |
+| 6: Purpose Window | Work + Charity pattern detection, breadcrumb surfacing | Not Started |
+| 7: Polish + Launch | Mobile optimization, MP bridge, beta, landing page, launch | Not Started |
 
 ### Reference
 
@@ -10613,4 +10647,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-16 23:26 (v5.22)*
+*Last updated: 2026-04-17 20:35 (v5.23)*
