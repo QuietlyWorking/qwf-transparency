@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-17 20:35 | Source version: 5.23
+> Generated: 2026-04-17 22:11 | Source version: 5.23
 
 # QWU Backoffice User Manual
 
@@ -4547,7 +4547,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.23 by generate_public_manual.py"
-generated: "2026-04-17 20:35"
+generated: "2026-04-17 22:11"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10090,11 +10090,18 @@ WHELHO occupies a unique dual role in QWF:
 | Component | Skills Developed | Difficulty |
 |-----------|------------------|------------|
 | Spline 3D Planet Design (Track B) | 3D modeling, materials, lighting, particles, camera choreography | ⭐⭐⭐ |
-| React-Spline Integration (Track A) | React lazy loading, Spline events API, state management | ⭐⭐⭐ |
-| Values Discovery UX | Conversational UI, multi-step flows, AI pattern detection | ⭐⭐⭐ |
-| Alpha Stage Components | Auth gating, bug reporting, contact forms, edge functions | ⭐⭐ |
-| CF Pages Deployment | Vite builds, wrangler CLI, GitHub Actions, DNS management | ⭐⭐ |
-| Purpose Window Algorithm | Pattern matching, breadcrumb surfacing, data visualization | ⭐⭐⭐ |
+| SvelteKit + Supabase SSR auth | Svelte 5 runes, cookie-based sessions, RLS policies, adapter-cloudflare | ⭐⭐⭐ |
+| Claude vision pipeline (photo → structured JSON) | Multimodal API calls, adaptive thinking, structured extraction, confidence grading, variant disambiguation | ⭐⭐⭐ |
+| Claude text-describe with fallback heuristics | Prompt engineering, JSON schema enforcement, ambiguity detection patterns | ⭐⭐⭐ |
+| Schema migrations + PostgREST cache | ALTER TABLE IF NOT EXISTS patterns, NOTIFY pgrst reload, RLS policy design, JSONB vs. normalized columns | ⭐⭐ |
+| Data backfill from markdown to Supabase | Regex parsing of tabular markdown, bulk INSERT batching via Management API, dedup by normalized keys | ⭐⭐ |
+| Client-side image compression (Canvas + fallback chain) | createImageBitmap / HTMLImageElement decoder chain, EXIF orientation, quality vs. readability tradeoffs | ⭐⭐ |
+| Mobile-first UI patterns | Horizontal-scroll → grid + chips + see-all, dropdown menu consolidation, tappable address deep links, water bar + bottom sheet | ⭐⭐ |
+| Persistent session gotcha (both-sides cookies) | @supabase/ssr cookieOptions on createBrowserClient AND hooks.server.ts setAll | ⭐⭐⭐ |
+| PWA service worker + install prompt flow | Manifest, beforeinstallprompt, iOS vs Android install UX, 14-day dismissal cooldown | ⭐⭐ |
+| Storage orphan cleanup | Set-difference between bucket listing and DB-referenced paths, Supabase Storage REST delete | ⭐ |
+| Values Discovery UX (future) | Conversational UI, multi-step flows, AI pattern detection | ⭐⭐⭐ |
+| Purpose Window Algorithm (future) | Pattern matching, breadcrumb surfacing, data visualization | ⭐⭐⭐ |
 
 ---
 
@@ -10647,4 +10654,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-17 20:35 (v5.23)*
+*Last updated: 2026-04-17 22:11 (v5.23)*
