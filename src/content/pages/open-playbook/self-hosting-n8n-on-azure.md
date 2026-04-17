@@ -1,6 +1,6 @@
 ---
 title: "Self-Hosting n8n on Azure"
-slug: "self-hosting-n8n-on-azure-the-guide-i-wish-existed"
+slug: "self-hosting-n8n-on-azure"
 pillar: "open-playbook"
 description: "*The guide I wish existed before I built all of this the hard way.*"
 tags: ["how-to", "n8n", "azure", "self-hosting", "automation"]
