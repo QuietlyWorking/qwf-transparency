@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-19 04:22 | Source version: 5.24
+> Generated: 2026-04-19 06:00 | Source version: 5.24
 
 # QWU Backoffice User Manual
 
@@ -107,7 +107,8 @@ A comprehensive guide to the QWU Backoffice agent workspace, covering architectu
 80. [[#Testimonial Intelligence Pipeline ⭐ NEW]]
 81. [[#QSP Local Growth Engine ⭐ NEW]]
 82. [[#TWL Preload Hook ⭐ NEW]]
-83. [[#Date/Time Output Validation Hook ⭐ NEW]]
+83. [[#HQ Issues Preload Hook ⭐ NEW]]
+84. [[#Date/Time Output Validation Hook ⭐ NEW]]
 83. [[#QWB Quietly Webbing ⭐ NEW]]
 84. [[#L4G Locals 4 Good Platform ⭐ NEW]]
 85. [[#Session Log]]
@@ -4547,7 +4548,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.24 by generate_public_manual.py"
-generated: "2026-04-19 04:22"
+generated: "2026-04-19 06:00"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10488,6 +10489,61 @@ The `/session-wrap-up` skill now includes a drift detection step that compares T
 
 ---
 
+## HQ Issues Preload Hook ⭐ NEW
+
+**Added: April 18, 2026** | **Reference:** `005 Operations/Directives/hq_issues_preload_system.md` · Built from Broken Vol. 5
+
+A UserPromptSubmit hook that auto-surfaces open HQ Issue Tracker items for any QWF app mentioned in a prompt. Closes the GTD trust loop by ensuring captured ideas resurface at the right context, not just when the user remembers to look.
+
+### How It Works
+
+1. User submits a message mentioning a QWF app (acronym like "QWR" OR full name like "Quietly Writing")
+2. `.claude/hooks/hq_issues_preload.py` scans the message against a 16-app keyword map (strong triggers only — short acronyms like "HQ" or "MP" require longer phrases to fire)
+3. For matched apps, batched query to `hq_contact_submissions` for strictly-open items (`status IN ('pending','acknowledged','in_progress')`)
+4. Per-session 5-min cache + cross-session per-app `last_seen` tracking
+5. Injects a compact `<hq-open-items>` system message with priority-coded items, stalled-item warnings, "🆕 new since last touch" highlights, and cross-app label crosslinks
+
+### The Trusted Inbox Triad
+
+The hook is one of three required parts. Skip any → trust breaks:
+
+1. **Capture (frictionless):** `/hq-add` slash command inserts items in one line, no UI switch
+2. **Surface (automatic):** the hook (this section)
+3. **Decay (close-the-loop):** session-wrap-up Step 3C lists items per app touched this session and prompts status updates
+
+### Operating Modes
+
+| Mode | Purpose |
+|------|---------|
+| (no args, JSON stdin) | Hook mode — UserPromptSubmit |
+| `--close-the-loop` | Wrap-up: list items per app touched in last 24h |
+| `--list-apps` | Drift check: keyword map vs. `hq_app_registry` |
+| `--app <code>` | Debug: force-fetch one app |
+| `--test` | Smoke-test HQ Supabase reachability |
+
+### File Locations
+
+- Hook script: `.claude/hooks/hq_issues_preload.py`
+- Hook configuration: `.claude/settings.json` (UserPromptSubmit, 6s timeout)
+- Capture skill: `.claude/skills/hq-add/SKILL.md`
+- Wrap-up integration: `.claude/skills/session-wrap-up/SKILL.md` Step 3C
+- Cache: `.tmp/hq_issues_cache.json` (5-min TTL per session)
+- Last-seen: `.tmp/hq_issues_last_seen.json` (persists across sessions)
+
+### Origin
+
+Session 246 (April 18, 2026). TIG had a Bugs/Ideas/Suggestions panel in HQ for capture, but items piled up unseen. A 4-week-old "decommission GCC" item that had passed its target date by 18 days was discovered only when the new hook surfaced it on its first run. Same architectural family as the TWL Preload Hook (Vol 1) — same UserPromptSubmit pattern, different data plane (live DB rows vs. static docs). Documented publicly as Built from Broken Vol 5.
+
+### Training Opportunities
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Hook + DB query layer | UserPromptSubmit pattern, PostgREST queries, env-based auth | ⭐⭐ |
+| Cache + last-seen design | Session-scoped TTL, persistent state files, JSON serialization | ⭐⭐ |
+| The Trusted Inbox Triad | GTD principles, capture-surface-decay loop design | ⭐⭐⭐ |
+
+---
+
 ## Date/Time Output Validation Hook ⭐ NEW
 
 **Added: April 12, 2026** | **Reference:** Built from Broken Vol. 3
@@ -10655,4 +10711,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-19 04:22 (v5.24)*
+*Last updated: 2026-04-19 06:00 (v5.24)*
