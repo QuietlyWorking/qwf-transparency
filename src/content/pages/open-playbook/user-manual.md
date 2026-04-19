@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-04-18"
+modifiedDate: "2026-04-19"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-19 06:00 | Source version: 5.24
+> Generated: 2026-04-19 07:13 | Source version: 5.25
 
 # QWU Backoffice User Manual
 
@@ -4370,7 +4370,7 @@ Contact History (last contact date, relationship health assessment)
 **Scripts:**
 | File | Purpose | Version |
 |------|---------|---------|
-| `send_meeting_prep_email.py` | 7-day emails + 30-day briefings | v1.0.0 |
+| `send_meeting_prep_email.py` | 7-day emails + 30-day briefings | v1.2.0 |
 
 **n8n Workflows:**
 | Workflow | Schedule | Purpose |
@@ -4547,8 +4547,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.24 by generate_public_manual.py"
-generated: "2026-04-19 06:00"
+source: "Auto-generated from private manual v5.25 by generate_public_manual.py"
+generated: "2026-04-19 07:13"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6434,6 +6434,8 @@ CATHIE_VISITOR_SPREADSHEET_ID="spreadsheet-id"
 | Creating referral trigger lists | Business development, market research |
 | Processing visitor data from sheets | Data entry, spreadsheet skills |
 | Testing email templates | QA, attention to detail |
+| Auditing Ezer email templates for voice consistency | QA, Python reading, pattern recognition — trace a bug from the user-facing artifact back through f-strings and data sources (Intermediate, ~1 hr) |
+| Writing defensive data normalizers (`normalize_first_name` pattern) | Python functions, edge-case design, idempotence, smoke testing — start with a naive `.capitalize()` then discover why "iPhone" breaks it (Beginner → Intermediate, ~45 min) |
 
 ---
 
@@ -6820,6 +6822,16 @@ Ezer Aión | Assistant to Chaplain TIG
 Quietly Working Foundation
 quietlyworking.org
 ```
+
+### Name Normalization Helper (Added 2026-04-19)
+
+Raw first names pulled from external data sources (Google Calendar profile names, Supabase CRM rows, BNI rosters) are often stored in all-lowercase because users type their own names that way during signup. When those strings get substituted into hardcoded email f-strings, recipients see disrespectful output like "Howdy megan!".
+
+**Fix:** `005 Operations/Execution/name_utils.py` exports `normalize_first_name(raw, fallback="there")`. It only uppercases the first character when the input is entirely lowercase — preserving deliberate interior capitalization like "McKenzie", "DeShawn", "iPhone", and "JANE".
+
+Every Ezer-voiced email script that substitutes a first name into template text now normalizes through this helper: `send_meeting_prep_email.py`, `send_meeting_followup.py` (already used `.title()`), `generate_bni_followup_emails.py`, `ezer_respond.py`, `send_l4g_welcome_email.py`, `send_l4g_queue_notification.py`, `qwr_notify_article_ready.py`.
+
+**Voice profile rule:** Brand Voice.md v1.1 (2026-04-19) added an explicit "Capitalization of Proper Names" subsection so LLM-composed emails (the flagship `ezer_respond.py` path) also follow the rule. This closes the gap where hardcoded templates and LLM output could disagree on voice.
 
 ### Email Conventions
 
@@ -10711,4 +10723,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-19 06:00 (v5.24)*
+*Last updated: 2026-04-19 07:13 (v5.25)*
