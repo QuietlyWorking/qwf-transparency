@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-04-16"
+modifiedDate: "2026-04-18"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-17 22:11 | Source version: 5.23
+> Generated: 2026-04-19 04:22 | Source version: 5.24
 
 # QWU Backoffice User Manual
 
@@ -4546,8 +4546,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.23 by generate_public_manual.py"
-generated: "2026-04-17 22:11"
+source: "Auto-generated from private manual v5.24 by generate_public_manual.py"
+generated: "2026-04-19 04:22"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10111,18 +10111,17 @@ WHELHO occupies a unique dual role in QWF:
 
 Cloudflare manages DNS, Pages hosting, and Workers for all QWF domains. This section documents the dual-token pattern, zone management, and common operations.
 
-### Dual API Token Pattern
+### Unified API Token
 
-QWU uses **two** Cloudflare API tokens with different permission scopes:
+QWU uses **one** Cloudflare API token covering all operations:
 
 | Token | Env Var | Permissions | Use For |
 |-------|---------|-------------|---------|
-| **Pages Token** | `CLOUDFLARE_API_TOKEN` | Pages, Workers, Analytics | `wrangler pages deploy`, CF Pages project management, Workers |
-| **DNS Token** | `CLOUDFLARE_API_TOKEN_OLD` | DNS read/write, Zone management | DNS record CRUD on any QWF domain |
+| **Account Token** | `CLOUDFLARE_API_TOKEN` | Pages Edit, Workers Scripts, DNS Edit/Read, SSL Edit/Read, WAF Edit/Read, Zone Edit/Read, Zone Settings, Access (apps/policies/groups), Waiting Rooms, Load Balancers, Zone Versioning, Analytics, Logs | All CF operations: deploys, project management, DNS CRUD, SSL, zone admin, Access apps |
 
-**Why two tokens:** Session 119 (2026-03-10) created a new Account API Token for QWR's Lovable-to-CF-Pages migration. The new token has Pages/Workers/Analytics permissions but intentionally excludes DNS scope. The old token was marked "deprecated" but never revoked — it's still active and required for all DNS operations.
+**History:** Session 119 (2026-03-10) created a Pages-only Account API Token for QWR's Lovable-to-CF-Pages migration. A separate DNS-only token (`CLOUDFLARE_API_TOKEN_OLD`) was kept for DNS operations. On 2026-04-19 the main token's permissions were expanded to cover everything QWU needs, and the old DNS-only token was retired.
 
-**Critical rule:** When doing DNS work on ANY QWF domain, use `CLOUDFLARE_API_TOKEN_OLD`. When deploying to CF Pages or managing Workers, use `CLOUDFLARE_API_TOKEN`.
+**Does NOT have:** User-scope permissions (can't revoke tokens via API — must use the dashboard). Redirect Rules (rulesets) permissions — host-based redirects go through CF Pages Functions middleware instead.
 
 ### Account & Zone Registry
 
@@ -10142,11 +10141,13 @@ QWU uses **two** Cloudflare API tokens with different permission scopes:
 
 **Cloudflare Account ID:** see `CLOUDFLARE_ACCOUNT_ID` in `.env`
 
+**Supporter zones on the same account:** [Supporter Organization] (OCN) has 40 subsite zones (e.g., `orangecountynewspapers.com`, `tustinpostdispatch.com`, …) on this CF account — delegated admin for a supporter system. **Do not modify OCN zones** unless the task is explicitly authorized for OCN infrastructure. See `002 Projects/_[Supporter Organization] Projects/` and `CLAUDE.md` → "Supporter Systems". OCN migration from Namecheap DNS to CF completed 2026-04-18 — see `OCN-Cloudflare-Migration.md` for the full zone list, IP-lockdown pattern, and Phase 4 hardening artifacts.
+
 ### DNS Management Script
 
 **Script:** `005 Operations/Execution/cloudflare_api.py` (v1.0.0)
 
-Full CRUD for DNS records using the DNS token (`CLOUDFLARE_API_TOKEN_OLD`). Supports:
+Full CRUD for DNS records using `CLOUDFLARE_API_TOKEN`. Supports:
 - List all records for a zone
 - Create A, AAAA, CNAME, TXT, MX records
 - Update existing records
@@ -10170,7 +10171,7 @@ npx wrangler pages deploy dist --project-name=whelho
 
 **Check DNS records:**
 ```bash
-TOKEN=$(grep "^CLOUDFLARE_API_TOKEN_OLD=" .env | cut -d'=' -f2- | tr -d '\r\n ')
+TOKEN=$(grep "^CLOUDFLARE_API_TOKEN=" .env | cut -d'=' -f2- | tr -d '\r\n ')
 ZONE_ID="4e73ca94aad582ed7157175b5a1f6fca"
 curl -s -H "Authorization: Bearer $TOKEN" \
   "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records" | python3 -m json.tool
@@ -10185,7 +10186,7 @@ curl -s -X POST -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/
 
 ### Known Issues
 
-- The `CLOUDFLARE_API_TOKEN` (Pages token) can read zone info but **cannot** list or modify DNS records — use `CLOUDFLARE_API_TOKEN_OLD` for DNS
+- `CLOUDFLARE_API_TOKEN` does NOT have User-scope permissions (can't revoke tokens via API — must use the dashboard) or Redirect Rules (rulesets) permissions — use CF Pages Functions middleware for host-based redirects instead
 - GitHub fine-grained PATs with `admin: True` do NOT include Actions Secrets management — a separate "Secrets" permission is needed to set repo secrets via API
 - WHELHO's GitHub Actions deploy workflow exists but fails until `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets are set in the repo
 
@@ -10654,4 +10655,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-17 22:11 (v5.23)*
+*Last updated: 2026-04-19 04:22 (v5.24)*
