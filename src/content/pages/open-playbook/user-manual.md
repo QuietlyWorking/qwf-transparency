@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-19 07:13 | Source version: 5.25
+> Generated: 2026-04-19 19:36 | Source version: 5.26
 
 # QWU Backoffice User Manual
 
@@ -2512,7 +2512,7 @@ Cron (2 AM Pacific, 15 videos) OR Cron (8 AM/2 PM/8 PM Pacific, 5 videos)
 All components in `src/lib/components/home/`:
 1. HeroQuote — tagline + Firefly quote + CTAs
 2. NdeCinematic — "I died." cinematic with animated heartbeat SVG
-3. CbsInterview — media social proof
+3. CbsInterview — original 2014 CBS Radio *Eye on the Community* interview audio player + link to `/heritage/cbs-2014/` transcript
 4. IdentityCards — 4 identity cards + weaknesses block
 5. RealmsPreview — WHELHO 10-realm color grid
 6. TestimonialsWall — masonry layout, all testimonials visible
@@ -2525,8 +2525,9 @@ All components in `src/lib/components/home/`:
 13. ConnectSection — 9 social links + phone + email
 
 ### Key Utilities
-- `src/lib/utils/scroll-reveal.ts` — IntersectionObserver-based scroll animations (Svelte `use:action`)
+- `src/lib/utils/scroll-reveal.ts` — IntersectionObserver-based scroll animations (Svelte `use:action`). **Includes tall-element threshold cap** (April 2026) — for elements taller than half the viewport, effective threshold falls back to ~200px visible so reveal triggers reliably regardless of section height. Gotcha captured in `sveltekit_tool_wisdom.md`.
 - `src/routes/(public)/+page.server.ts` — Server-side Supabase data loader for latest posts
+- `src/routes/(public)/heritage/cbs-2014/+page.svelte` — Canonical primary-source page for the 2014 CBS interview. Audio player + full transcript with pull-quotes. Source MP3 lives in `static/audio/cbs-eye-on-the-community-2014.mp3` (re-encoded to mono 64kbps → 11.8MB, under CF Pages' 25MB per-file limit).
 
 ### Deploy Process
 Push to `main` → GitHub → CF Pages auto-deploys (~60s)
@@ -4547,8 +4548,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.25 by generate_public_manual.py"
-generated: "2026-04-19 07:13"
+source: "Auto-generated from private manual v5.26 by generate_public_manual.py"
+generated: "2026-04-19 19:36"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10723,4 +10724,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-19 07:13 (v5.25)*
+*Last updated: 2026-04-19 19:36 (v5.26)*
