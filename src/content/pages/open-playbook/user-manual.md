@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-20 07:07 | Source version: 5.26
+> Generated: 2026-04-20 19:13 | Source version: 5.26
 
 # QWU Backoffice User Manual
 
@@ -4549,7 +4549,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.26 by generate_public_manual.py"
-generated: "2026-04-20 07:07"
+generated: "2026-04-20 19:13"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -9974,6 +9974,25 @@ Weavy offers an App Mode that provides a simplified interface for students: sing
 
 ## WHL WHELHO App ⭐ NEW
 
+**Added: March 18, 2026 · Major rewrite: April 17, 2026 (SvelteKit migration + health module + nutrition system) · UX pass: April 20, 2026 (user-local timezone, mobile nav, /you hub)**
+
+### April 20, 2026 — UX Pass
+
+Three architectural upgrades landed in rapid succession after TIG noticed a day-of-week drift bug (the tennis-day water bump fired on the wrong calendar day when Pacific and UTC disagreed late in the evening).
+
+**1. User-local timezone architecture (8 commits across Phases 1, 2, 4).** Every WHELHO user profile now carries `timezone` (IANA name), `home_city` (display-only), and `tennis_days` (SMALLINT[] of day-of-week indices). `src/lib/timezone.ts` generalized with `getLocalDayOfWeek/Hour/DayKey(tz)` helpers — Pacific is the fallback, never the assumption. Food page's `isTennisDay()`, streak day-keys, `inferMealType()`, and afternoon nudge all now read the user's tz. Onboarding auto-detects browser tz via `Intl.DateTimeFormat().resolvedOptions().timeZone` and lets the user confirm/edit. A new `<TravelBanner>` compares browser tz vs profile tz on every portal page and offers a one-tap switch when they differ (transparency-first — never silently follows device). The backoffice gained a `check_timezone_hygiene.py` guard script scanning any supporter-app `src/` for raw `new Date().getDay()/getHours()/getDate()` patterns. `timezone_standard.md` amended to document two operating modes (Pacific for backoffice, user-local for supporter apps). `qwf_app_family_standard.md` section 3 split into 3a (user-local) + 3b (Pacific legacy). WHELHO is the canonical reference.
+
+**2. Navigation refactor — PlanetNav desktop breadcrumb + mobile bottom tabs + /you hub.** Deep portal pages were requiring back-back-back navigation to reach anywhere outside the current branch. New `PlanetNav.svelte` renders a sticky top bar on every portal page except `/dashboard` (custom header) and `/onboarding` — top-left Nano A orb links to dashboard, clickable breadcrumb trail reconstructed from URL segments, right-side "You" link. New `BottomTabs.svelte` pins 5 tabs to the bottom of every portal page on mobile only (`sm:hidden`): Planet · Health · Library · You · +Log. `+Log` opens a `QuickLogSheet.svelte` bottom sheet with water quick-log chips (tap container → POSTs `logFromPantry` → banner confirm → zero navigation) and a 2×2 nav tile grid (Food/Scan/Vitals/Intake). Dashboard's custom top header wrapped in `hidden sm:flex` so mobile shows only the planet; Ezer + Bug Report moved to `/you` to preserve mobile access. New `/you` route is the identity & settings hub — planet name, email, Time & Location (moved wholesale from `/health/profile`), Ezer + Bug Report, Sign out. `/health/profile` shrinks to body stats + daily nutrition targets only.
+
+**3. Pantry + Food log polish.**
+- **Pantry one-tap log icon**: ClipboardPlus button on every pantry row's action cluster. POSTs to `logFromPantry` with meal_type inferred from user-local hour; 3s success banner; no navigation.
+- **Water bar on past days**: Navigating to any past day now shows that day's water intake, that day's goal, and that day's extra-hydration bump. Computed client-side per the user's timezone + `tennis_days`. Streak flame hidden on past days. Tap-to-log disabled — bar renders as `<div>` via `svelte:element` with opacity reduction for read-only affordance.
+- **Day-nav arrow fix**: Day label now uses `min-w-[10rem] sm:min-w-[11rem] text-center tabular-nums` so the right chevron stops drifting as labels change width. Click-click-click forward works identically to backward.
+
+**Design principles encoded this session** (now memory feedback entries — apply to every QWF app):
+- **Meaningful WHY for every permission/data ask** — opt-in default, always-editable in settings (`feedback_meaningful_why_for_permissions.md`)
+- **Ask once on context change, always editable** — travel/locale: ask plain question, remember answer, never silently follow device (`feedback_ask_once_always_editable.md`)
+
 **Added: March 18, 2026 · Major rewrite: April 17, 2026 (SvelteKit migration + health module + nutrition system)**
 
 WHELHO is a personal development app built around the planet metaphor — your life as a celestial body with 8 realms, a values-driven core, and elements that orbit between crust (where you are) and core (where you're pulled). It uses Spline 3D for real-time planet visualization and serves as both a FORGE product fuel line and the Missing Pixel pre-student pipeline gatekeeper.
@@ -10732,4 +10751,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-20 07:07 (v5.26)*
+*Last updated: 2026-04-20 19:13 (v5.26)*
