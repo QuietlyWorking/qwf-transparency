@@ -36,6 +36,7 @@ isHome: true
 - [Vol 3 — When Your AI Agent Hallucinates Calendar Facts](/built-from-broken/when-your-ai-agent-hallucinates-calendar-facts/) — How a PreToolUse hook catches fabricated day-of-week names before they reach emails, files, or any output
 - [Vol 4 — When Your AI Agent Breaks Your Other AI Agent](/built-from-broken/when-your-ai-agent-breaks-your-other-ai-agent/) — How self-resolving infrastructure prevents multi-agent resource collisions from becoming outages
 - [Vol 5 — When Your Capture System Doesn't Capture You Back](/built-from-broken/vol-5-when-your-capture-system-doesn-t-capture-you-back/) — How a UserPromptSubmit hook turned a static issue tracker into a trusted GTD inbox by surfacing open items the moment you mention an app
+- [Vol 6 — When Every New Chat Silently Spawns a Helper You Rarely Use](/built-from-broken/vol-6-when-every-new-chat-silently-spawns-a-helper-you-rarely-use/) — How swapping an MCP server from stdio to hosted HTTP transport reclaimed gigabytes of idle RAM across every concurrent chat session
 
 ## Tools
 These are the tools that the #QWU uses.
