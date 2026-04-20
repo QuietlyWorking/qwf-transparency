@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-19 19:36 | Source version: 5.26
+> Generated: 2026-04-20 07:07 | Source version: 5.26
 
 # QWU Backoffice User Manual
 
@@ -4549,7 +4549,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.26 by generate_public_manual.py"
-generated: "2026-04-19 19:36"
+generated: "2026-04-20 07:07"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10639,13 +10639,21 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ### Proof of Concept: GreenCal Construction
 
-- **Sandbox:** `sandbox.greencalinc.org` (live, 22 pages)
-- **Repo:** `QuietlyWorking/greencal-website` (private)
-- **Stack:** Astro static site on CF Pages (migrated from React 2026-04-09). Zero JS shipped, Lighthouse projected 95+.
-- **Status:** Audit fix sprint complete (9/10 top fixes applied, 35 files modified, 612+ lines fabricated content removed). Formspree integration for lead capture. Visual polish ongoing in separate chat.
+- **Sandbox:** `sandbox.greencalinc.org` (live, **29 pages** + `/about-us` 301 → `/about`)
+- **Repo:** `QuietlyWorking/greencal-website` (public)
+- **Stack:** Astro static + Cloudflare Pages Functions for `/api/lead` + `/api/feedback`. Zero JS at the page level (Pills/Form scripts inline-compiled); Lighthouse projected 95+.
+- **Stage:** `alpha` — PUBLIC_SITE_STAGE env var gates alpha banner + feedback pill visibility. Flip to `production` in `.github/workflows/deploy.yml` to hide widgets after sign-off.
+- **Primitives:** 14 canonical components in `src/components/primitives/` (NavHeader, Footer, CalloutBanner, Hero, Features, Gallery, Testimonials, LogoWall, CtaBand, FaqAccordion, EmbedBlock, TeamGrid, ArticleList, RichTextContent, StatsStrip, TagCloud, LeadForm, FeedbackPill).
+- **Lead pipeline:** `/api/lead` dual-writes to QSP Supabase `website_leads` (tenant_id scoped) + MS Graph email to `hello@greencalinc.com`.
+- **Feedback pipeline (alpha-only):** `/api/feedback` dual-writes to HQ `hq_contact_submissions` (source_app=site_greencal) + private MS Graph email to TIG only. Screenshots supported (file pick / drag / paste / clipboard), client-resized to 1920px, uploaded to HQ Supabase Storage bucket `site-feedback-screenshots`, rendered inline in notification email and (after HQ prompt 127) in HQ detail view.
+- **Social proof:** 60 real 5-star Google reviews in a CSS-columns masonry wall, Google source badges, 8 AI-extracted praise themes (Opus 4.7 analyzed from the full corpus), multi-source trust stats replacing the old "4.5★" single line.
+- **Status (2026-04-20, Session 249):** Alpha review begins. Hazel + Megan + Gabrielle + rest of GreenCal team invited via announcement email to walk the site and submit via the private feedback pill. Known gaps: Blog/Gallery/Videos detail pages not yet clickable (data ready in JSON), Get Started form not yet wired, FAQ expansion pending. Six open business decisions awaiting Hazel.
+- **Full System Status:** `002 Projects/_GreenCal Projects/GreenCal-Website/GreenCal-Website-System-Status.md`
 
 ### Key Documents
 
+- GreenCal site System Status: `002 Projects/_GreenCal Projects/GreenCal-Website/GreenCal-Website-System-Status.md`
+- Gap audit: `.tmp/greencal-site-audit/30-gap-report.md`
 - Ecosystem vision: `002 Projects/_QWF App Ecosystem/QWF-App-Ecosystem-Vision.md`
 - Architecture decisions: `memory/qwb_architecture_chat.md`
 - Program genesis: `memory/project_qwb_quietly_webbing.md`
@@ -10724,4 +10732,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-19 19:36 (v5.26)*
+*Last updated: 2026-04-20 07:07 (v5.26)*
