@@ -271,6 +271,10 @@ This is where we stop talking tools and start talking about the *structured know
 
 **HQ Command Center.** TIG's personal dashboard. Not a public dashboard. The single pane where decisions surface, where daily tasks live, where the Issue Tracker lives, where approval workflows route. Every other system feeds this one.
 
+We built HQ for ourselves. And the moment we built it, we realized every working founder and Executive Director needs one. So we're shipping a public version... **[Quietly Spotting](https://quietlyspotting.org)**. QSP gives you your own **SPOT** (Single Point of Truth) where every tool you already use, every data source you already pull from, and every workflow you already run feeds into one dashboard you actually control. Currently in active development and adding features weekly. If what you're reading in this section made you lean forward, that's your signal to go look at it.
+
+*Want to see the full picture of what QWF is building across all programs? The [QWF Ecosystem widget at quietlyspotting.org](https://quietlyspotting.org/#ecosystem) is the living map. All nine apps, all the connections, no PowerPoint deck required.*
+
 **The Entity Graph.** 77+ expert profiles, hundreds of people and organizations in [[003 Entities]], structured the way an org chart would be. When our agent talks about "Chris Jamison," it has a file. When it references "Ethan Mollick," it has a file. It's not improvising identity.
 
 **Ezer Aión.** Our AI agent with name and role. Not a vendor's chatbot. A purpose-built assistant with memory, scope, and a voice of her own. Built to run a specific subset of QWF's work day-to-day.
@@ -366,6 +370,10 @@ We're quietly working. Hope some of this helps.
 💙
 
 ---
+
+## See The Whole Ecosystem
+
+QWF builds an interconnected family of apps. [Quietly Spotting](https://quietlyspotting.org) is the hub. Around it orbit Quietly Writing, Quietly Quoting, Quietly Networking, Quietly Knocking, Quietly Tracking, and more. See the [live ecosystem map](https://quietlyspotting.org/#ecosystem) for what's shipped, what's building, and how it all connects.
 
 ## Related Reading
 
