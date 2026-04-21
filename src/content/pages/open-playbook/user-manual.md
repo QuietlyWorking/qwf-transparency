@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-21 04:31 | Source version: 5.28
+> Generated: 2026-04-21 06:13 | Source version: 5.29
 
 # QWU Backoffice User Manual
 
@@ -2425,7 +2425,7 @@ When the primary Gemini transcription path fails (frame limit exceeded on long v
 ### Related Files
 
 - **Directive:** `005 Operations/Directives/process_video_content.md`
-- **Scripts:** `005 Operations/Execution/process_video_content.py` (v2.5.0), `extract_video_frames.py` (v1.2.0), `process_content_review.py`, `tig_connection_engine.py` (v1.0.0), `tig_article_builder.py` (v1.2.0)
+- **Scripts:** `005 Operations/Execution/process_video_content.py` (v2.7.0), `extract_video_frames.py` (v1.2.0), `process_content_review.py`, `tig_connection_engine.py` (v1.0.0), `tig_article_builder.py` (v1.2.0), `youtube_video_utils.py` (v1.1.0 — landscape gate helper), `youtube_monitor.py` (v1.3.0)
 - **Database:** `005 Operations/Data/tig_graph.db` (semantic_tags, article_edges, concepts tables)
 - **Workflow:** `005 Operations/Workflows/content-review-workflow.json`
 
@@ -2459,7 +2459,7 @@ Cron (2 AM Pacific, 15 videos) OR Cron (8 AM/2 PM/8 PM Pacific, 5 videos)
 | `tig_connection_engine.py` | v1.0.0 | Semantic tag extraction, edge computation, constellation SVG generation, quote threading |
 | `generate_constellation_map.py` | v1.0.0 | Full-universe D3.js constellation map: tig_graph.db → 85+ nodes → WordPress post 29573 (`/map/`). Auto-triggered by orchestrator |
 | `generate_tier1_priority_list.py` | v1.0.0 | Rank all YouTube videos by visitor value → select Tier 1 (50) across 10 clusters. Output: `.tmp/tier1_priority_list.json` |
-| `process_video_content.py` | v2.5.0 | Gemini transcribe + Claude article + semantic_tags in LLM prompt |
+| `process_video_content.py` | v2.7.0 | Gemini transcribe + Claude article + semantic_tags in LLM prompt; step 1b Wisdom Library landscape gate rejects Shorts/vertical clips before Gemini call (`--force` overrides) |
 | `tig_publish_article.py` | v1.2.0 | Publish approved WP drafts + write back wp_post_id (social distribution handled by distribute_content_social.py) |
 | `route_content_programs.py` | v1.0.0 | Score content against 7 QWF programs, generate Big Why statements, extract content atoms |
 | `adapt_content_voice.py` | v1.0.0 | Voice-adapted social posts per program/platform (tig-standard, woh-combat, l4g-b2b) |
@@ -2746,7 +2746,7 @@ platforms:
 
 ### Source 1: YouTube Monitoring
 
-Monitor expert YouTube channels for new full-length videos, then process through the content pipeline. **Shorts (<=60 seconds) are automatically filtered out** — most creators use shorts to promote clips from their full content, so capturing them creates noise and duplicates. This filter applies globally to all watched channels (v1.2.0).
+Monitor expert YouTube channels for new full landscape 16:9 videos, then process through the content pipeline. **Shorts AND vertical clips (including 1–3 minute "long-Shorts") are automatically filtered out** — creators use these to promote pull-quotes from full content, so capturing them creates noise and duplicates in the Wisdom Library. Detection method: HEAD probe against `youtube.com/shorts/<id>` — YouTube redirects landscape videos to `/watch` (3xx) and keeps Shorts/vertical clips at `/shorts/` (200). No API quota used, ~100ms per probe, catches classic Shorts AND long-Shorts regardless of duration (v1.3.0). Direct `process_video_content.py` invocations are also gated (step 1b); `--force` overrides.
 
 ```bash
 # Check all channels for new videos
@@ -4548,8 +4548,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.28 by generate_public_manual.py"
-generated: "2026-04-21 04:31"
+source: "Auto-generated from private manual v5.29 by generate_public_manual.py"
+generated: "2026-04-21 06:13"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10751,4 +10751,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-21 04:31 (v5.28)*
+*Last updated: 2026-04-21 06:13 (v5.29)*
