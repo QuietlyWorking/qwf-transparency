@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-04-19"
+modifiedDate: "2026-04-21"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-20 19:13 | Source version: 5.26
+> Generated: 2026-04-21 03:19 | Source version: 5.27
 
 # QWU Backoffice User Manual
 
@@ -4548,8 +4548,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.26 by generate_public_manual.py"
-generated: "2026-04-20 19:13"
+source: "Auto-generated from private manual v5.27 by generate_public_manual.py"
+generated: "2026-04-21 03:19"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10751,4 +10751,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-20 19:13 (v5.26)*
+*Last updated: 2026-04-21 03:19 (v5.27)*
