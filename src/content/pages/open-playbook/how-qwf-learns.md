@@ -26,6 +26,8 @@ This is written for one specific person... the one in daily operations. The Exec
 
 You are the learning function in your org. Nobody's handing you a curated research digest. Here's how we do it at QWF, and here's every source we'd recommend if you asked.
 
+If you haven't seen it yet, this article lives alongside a few others that make more sense together than apart... our [QWU Values](/living-proof/values/) (why we publish any of this), [How to Give Your AI Agent Superpowers](/built-from-broken/how-to-give-your-ai-agent-superpowers/) (the architecture that makes the learning compound), [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) (how nonprofits actually get software discounts worth learning about), and [The Tool Shed](/open-playbook/the-tool-shed/) (what we actually run). Read them in any order. They all feed each other.
+
 ---
 
 ## The Method First... Then The Sources
@@ -210,19 +212,84 @@ Selectively curated. This is TIG's chaplain-and-ED shelf. No padding.
 
 ## The Tools That Hold It All Together
 
-Subscribing to sources is easy. Turning that flow into something useful is the real work. Here's the stack we actually use.
+Subscribing to sources is easy. Turning that flow into something useful is the real work.
 
-**[Readwise Reader](https://readwise.io/read)** ($9.99/mo) is the most important tool in our stack. It pulls articles, PDFs, newsletters, tweets, and YouTube transcripts into one queue. Everything you highlight syncs to Obsidian automatically. Email becomes a task inbox again. Reading happens somewhere designed for it.
+Before I list tools... an honest warning. What follows is a *three-level ladder*, not a single stack. Almost every guide you read online shows you Level 1 and implies that's all there is. Then people try it, hit hallucinations on their tenth query, and conclude AI isn't reliable enough for their org. **The AI isn't broken. The architecture is.**
+
+QWF runs on all three levels. Most readers should start at Level 1 and stay there until it stops working. When it stops working, come back and build Level 2.
+
+### Level 1 ... The Starter Kit (Where 90% Of You Should Begin)
+
+This is genuinely enough for most solo operators and small teams for a long time.
+
+**[Readwise Reader](https://readwise.io/read)** ($9.99/mo) pulls articles, PDFs, newsletters, tweets, and YouTube transcripts into one queue. Highlights sync to Obsidian automatically. Email becomes a task inbox again. Reading happens somewhere designed for it.
 
 **[Obsidian](https://obsidian.md/)** (free) is where the highlights live forever. Markdown files, local-first, no cloud lock-in. When the AI hype cycle ends and tools we love today get acquired and killed, our notes will still be here.
 
-**[Feedly](https://feedly.com/)** or **[Inoreader](https://www.inoreader.com/)** (free to $6/mo) for RSS triage across many sources at speed. RSS adoption climbed 34% year-over-year in 2026. It's not dead... it just waited out the algorithmic-feed era. Come home.
+**[Feedly](https://feedly.com/)** or **[Inoreader](https://www.inoreader.com/)** (free to $6/mo) for RSS triage across many sources at speed. RSS adoption climbed 34% year-over-year in 2026. It isn't dead... it just waited out the algorithmic-feed era. Come home.
 
-**[NotebookLM](https://notebooklm.google.com/)** (free) for topical research sessions. Dump 10 PDFs and a few transcripts, ask questions, get answers grounded in your sources. Different beast from ChatGPT... it won't hallucinate outside what you fed it.
+**[NotebookLM](https://notebooklm.google.com/)** (free) for topical research sessions. Dump 10 PDFs and a few transcripts, ask questions, get answers grounded *only* in your sources. Different beast from general ChatGPT... it won't hallucinate outside what you fed it.
 
 **[Claude Projects](https://claude.ai/)** ($20/mo) for reasoning-heavy work. Pin your source documents, write a system prompt that encodes *your* priorities, query repeatedly. The second and tenth queries are where the value lives. Never paste a 90-minute transcript asking it to "just summarize." Build a proper project and it'll be a genuine research partner.
 
-The pattern that wins: **Readwise Reader ingests. Obsidian stores forever. NotebookLM and Claude handle ephemeral reasoning.** Each tool does one job.
+**The Level 1 pattern:** Readwise ingests. Obsidian stores forever. NotebookLM and Claude handle ephemeral reasoning. Each tool does one job.
+
+This works beautifully for a team of one to three. It will start to strain around ten active projects and hundreds of sources. That's when you need Level 2.
+
+### Level 2 ... The Architecture Leap (When Scale Breaks the Starter Kit)
+
+At some point the research assistant can't hold everything. Projects contradict each other. The same question gets asked six times across six threads. Hallucinations creep in because the model has to guess what you mean by "our standard approach."
+
+The answer isn't a smarter model. The answer is a **three-layer architecture** that separates what the AI does from what deterministic code does.
+
+| Layer | What Lives Here | Why |
+|-------|-----------------|-----|
+| **Directive** (what to do) | SOPs in plain markdown. Every recurring process gets a directive. | Humans and agents both read the same source of truth. |
+| **Orchestration** (decision making) | The agent itself. Reads directives, picks the right tool, asks for clarification. | This is the probabilistic layer. It's allowed to reason. |
+| **Execution** (doing the work) | Deterministic scripts that handle API calls, data work, file operations. Reliable, testable, fast. | This layer is NOT allowed to hallucinate. It just runs. |
+
+Why it matters... if your agent is 90% accurate at any single step, chaining five steps gives you 59% success. A coin flip. You fix that not with a better model but by pushing complexity into code that always runs the same way, and keeping the agent focused on *decisions*.
+
+We wrote the full guide on this separately. Read [How to Give Your AI Agent Superpowers](/built-from-broken/how-to-give-your-ai-agent-superpowers/) for the complete architecture, including the shell structure, the directive format, and the sidebar on why naming conventions matter more than you think.
+
+The tooling at Level 2:
+
+- **[Claude Code](https://www.anthropic.com/claude-code)** ($20/mo Pro or API billing) ... the CLI version of Claude that can read files, run scripts, and actually execute work on your computer. Not "Claude Projects in a terminal." A fundamentally different beast with filesystem access and tool use.
+- **[n8n](https://n8n.io/) self-hosted** (~$38/mo all-in) ... your automation layer. Receives events, runs workflows, talks to everything. We documented how we self-host on Azure in [Self-Hosting n8n on Azure - The Guide I Wish Existed](/open-playbook/self-hosting-n8n-on-azure/).
+- **Supabase** (free to $25/mo) ... your data backbone. Postgres with auth, storage, and edge functions baked in. Find them at supabase dot com.
+- **Your existing Obsidian vault** ... now serving double duty as the human-readable surface of the system.
+
+This is where real operators stop being "AI users" and start being **AI operators**.
+
+### Level 3 ... The Compounding System (Where Our Actual Advantage Lives)
+
+This is where we stop talking tools and start talking about the *structured knowledge* the system runs on. This level is what makes the difference between "my agent hallucinated again" and "my agent just saved me four hours."
+
+**The Wisdom Library.** 12,000+ indexed insights from every expert, podcast, paper, and video we've captured. Tagged by expert, topic, vertical, concern, and tool. Our agent queries this when it needs "what has the sector actually said about X?" instead of making something up. Full guide to how we built it is forthcoming... for now, the short version: every piece of content we consume gets distilled into structured rows, not just saved as highlights.
+
+**Tool Wisdom Libraries (TWLs).** A dedicated directive for each tool we use heavily. 24 of them and growing. Each TWL contains the gotchas, working code examples, and "here's what breaks and why" notes we've discovered in practice. When our agent needs to work with n8n or Supabase or Cloudflare Pages, it reads the TWL first. No hallucinations about API behavior because the truth is on disk.
+
+**HQ Command Center.** TIG's personal dashboard. Not a public dashboard. The single pane where decisions surface, where daily tasks live, where the Issue Tracker lives, where approval workflows route. Every other system feeds this one.
+
+**The Entity Graph.** 77+ expert profiles, hundreds of people and organizations in [[003 Entities]], structured the way an org chart would be. When our agent talks about "Chris Jamison," it has a file. When it references "Ethan Mollick," it has a file. It's not improvising identity.
+
+**Ezer Aión.** Our AI agent with name and role. Not a vendor's chatbot. A purpose-built assistant with memory, scope, and a voice of her own. Built to run a specific subset of QWF's work day-to-day.
+
+**The [Tool Shed](/open-playbook/the-tool-shed/)** (public).  What we use across the org, documented for our community.
+
+This isn't a flex. It's the *actual reason* our AI stack produces real work instead of plausible-sounding fabrications. At this level, the question stops being "did the model hallucinate?" and becomes "did we miss something when we wrote the directive?"
+
+### The Honest Warning
+
+If you try to run a real operation on Level 1 alone, you will hit hallucinations. You will conclude AI isn't ready. You'll tell other operators that AI isn't ready. You'll miss the compounding benefit because you gave up at the wrong layer.
+
+Don't do that.
+
+Level 1 is a flashlight. Great tool. Built for its job. If you're walking one person across one room, a flashlight is all you need.
+
+Level 3 is a power grid. Different problem, different infrastructure. If you're lighting up an entire operation, flashlights won't scale.
+
+Most people need the flashlight. Start there. Stay there until it actually stops working for you. Then build the ladder up.
 
 ---
 
@@ -302,9 +369,16 @@ We're quietly working. Hope some of this helps.
 
 ## Related Reading
 
+Everything on the transparency site is designed to interconnect. Start anywhere. Follow the links.
+
+- [QWU Values](/living-proof/values/) ... why we publish any of this
+- [How to Give Your AI Agent Superpowers](/built-from-broken/how-to-give-your-ai-agent-superpowers/) ... the three-layer architecture that takes you from flashlight to power grid
+- [Self-Hosting n8n on Azure - The Guide I Wish Existed](/open-playbook/self-hosting-n8n-on-azure/) ... the automation layer that runs our workflows
 - [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) ... how nonprofits actually get software discounts
-- [Self-Hosting n8n on Azure - The Guide I Wish Existed](/open-playbook/self-hosting-n8n-on-azure/) ... what we learned building our automation layer
-- [How to Give Your AI Agent Superpowers](/built-from-broken/how-to-give-your-ai-agent-superpowers/) ... how we use Claude day-to-day
+- [The Tool Shed](/open-playbook/the-tool-shed/) ... what QWF actually runs across the whole org
+- [The Dream Development Framework](/open-playbook/the-dream-development-framework/) ... how we decide what to build next
+- [Quietly Working Creative Department (QWC)](/living-proof/quietly-working-creative/) ... our creative arm and the content production side of the house
+- [QWU Online Meeting World (OMW)](/living-proof/online-meeting-world/) ... how we run meetings that aren't soul-crushing
 
 ## Acknowledgments
 
