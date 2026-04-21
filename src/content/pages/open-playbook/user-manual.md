@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-21 06:13 | Source version: 5.29
+> Generated: 2026-04-21 08:51 | Source version: 5.32
 
 # QWU Backoffice User Manual
 
@@ -4548,8 +4548,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.29 by generate_public_manual.py"
-generated: "2026-04-21 06:13"
+source: "Auto-generated from private manual v5.32 by generate_public_manual.py"
+generated: "2026-04-21 08:51"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10418,9 +10418,9 @@ Pipeline states: extracted → giver_pending → giver_approved → tig_pending 
 
 ## Puzzle Operations Blueprint ⭐ NEW
 
-**Added: April 7, 2026** | **Reference:** `memory/puzzle_relationship.md`
+**Added: April 7, 2026** | **TWL:** `005 Operations/Directives/puzzle_tool_wisdom.md` | **Entity:** `003 Entities/Tools/Puzzle.md`
 
-Puzzle is the visual operations layer for QWF — mapping teams, roles, processes, and tools into an interactive blueprint. Future foundation for QOP (Quietly Operating).
+Puzzle is the visual operations layer for QWF — mapping teams, roles, processes, and tools into an interactive blueprint. Future foundation for QOP (Quietly Operating). Full operational knowledge (capabilities, gotchas, patterns, vendor relationship) lives in the Tool Wisdom Library directive.
 
 ### Setup
 
@@ -10462,6 +10462,30 @@ Section names prefixed with workflow context (e.g., "Content Pipeline: Capture")
 ### Tab Organization (Pending)
 
 All workflows currently share one canvas tab. Feature request submitted to Puzzle team (April 9, 2026) for MCP tab creation/management. Feedback board: `feedback.puzzleapp.io`. Until available, manual tab creation in UI or wait for MCP endpoint.
+
+### MCP Usage Patterns — Duplicate Prevention (Verified April 21, 2026)
+
+Auto-layout works correctly for fresh creates — verified experimentally:
+
+- `create_process` with NO connections → steps lay out in a 2x2 grid (Graphviz fallback)
+- `create_process` WITH connections → steps spread left-to-right with arrows
+- Multiple sections on same tab → spaced horizontally, not stacked
+
+**The "stacked vertically" complaint is NOT a layout bug.** Root cause: iterating with Claude on an existing workflow using repeated `create_process` calls. Each call spawns NEW step entities at the same (x,y) Graphviz computes for the same logical structure. Old steps never delete. Result: a "deck of cards" shadow under each node where 3-4 step records pile at identical coordinates.
+
+**Correct pattern for modifications:**
+
+1. `list_sections` + `list_steps` to find existing IDs
+2. Propose precise diff (mirrors Brian Ragone's "Do not make any changes yet" video pattern)
+3. `update_workflow` for in-place edits (takes IDs, edits fields)
+4. `delete` for removals
+5. `create_process` ONLY for brand-new sections/steps
+
+**Prompt prefix that prevents duplicates:**
+
+> *"Before modifying any existing workflow, first call `list_sections` and `list_steps` to find current IDs. Then propose what you'll change as a diff. Use `update_workflow` for in-place edits and `delete` for removals. Only call `create_process` for brand-new sections or steps that don't exist yet."*
+
+This issue was diagnosed while helping Josefa Savu in the Puzzle Circle community forum (Session 261).
 
 ### Known Issues
 
@@ -10751,4 +10775,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-21 06:13 (v5.29)*
+*Last updated: 2026-04-21 08:51 (v5.32)*
