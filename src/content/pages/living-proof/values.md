@@ -3,7 +3,7 @@ title: "QWU Values"
 slug: "values"
 pillar: "living-proof"
 description: "Our values create the gravity for our world. The stronger values are believed, the more effective rules of action can be created and adhered to."
-tags: []
+tags: ["values", "transparency", "ecosystem", "qsp"]
 isHome: false
 ---
 # QWU Values
@@ -40,6 +40,8 @@ A childlike curiosity is a superpower. It's the willingness to ask "why?" and "w
 ### Transparency
 We operate in the open. Our processes, our decisions, our finances, our mistakes... we share them because trust is built through honesty, not polish. This transparency site exists because we believe the people who support us deserve to see how we work, not just what we produce.
 
+We built [Quietly Spotting](https://quietlyspotting.org) for the same reason... to put the same operational visibility we use internally into the hands of every supporter. Your own **SPOT** (Single Point of Truth). One pane. Your data. Your clarity.
+
 ### Excellence
 Excellence is not perfection... it's the relentless pursuit of doing our best work with the resources we have. Every postcard, every line of code, every interaction with a donor-partner or student reflects who we are. We don't cut corners, and we don't settle for "good enough" when better is within reach.
 
@@ -59,3 +61,19 @@ These values aren't abstract. They come alive through every interaction in the Q
 5. **Help them build it.**
 6. **Help them live it.**
 7. **Help them create a legacy** that lives beyond them.
+
+---
+
+## See The Whole Ecosystem
+
+QWF builds an interconnected family of apps. [Quietly Spotting](https://quietlyspotting.org) is the hub. Around it orbit Quietly Writing, Quietly Quoting, Quietly Networking, Quietly Knocking, Quietly Tracking, and more. See the [live ecosystem map](https://quietlyspotting.org/#ecosystem) for what's shipped, what's building, and how it all connects.
+
+## Related Reading
+
+These values aren't just philosophy... they shape everything we publish. Start anywhere. Follow the threads.
+
+- [The Dream Development Framework](/open-playbook/the-dream-development-framework/) ... how the 7 Steps come alive in practice
+- [How QWF Learns](/open-playbook/how-qwf-learns/) ... how we stay honest about what actually works
+- [How to Give Your AI Agent Superpowers](/built-from-broken/how-to-give-your-ai-agent-superpowers/) ... how the transparency value extends into our tooling
+- [The Tool Shed](/open-playbook/the-tool-shed/) ... transparency applied to every tool in our stack
+- [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) ... transparency applied to the benefits we've found

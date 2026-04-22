@@ -3,7 +3,7 @@ title: "How to Give Your AI Agent Superpowers"
 slug: "how-to-give-your-ai-agent-superpowers"
 pillar: "built-from-broken"
 description: "*A field guide for Claude Code users who want more than a fancy autocomplete.*"
-tags: []
+tags: ["how-to", "ai", "architecture", "ecosystem", "qsp"]
 isHome: false
 ---
 # How to Give Your AI Agent Superpowers
