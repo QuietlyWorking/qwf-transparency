@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-04-21"
+modifiedDate: "2026-04-22"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-22 19:51 | Source version: 5.32
+> Generated: 2026-04-22 23:34 | Source version: 5.33
 
 # QWU Backoffice User Manual
 
@@ -4548,8 +4548,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.32 by generate_public_manual.py"
-generated: "2026-04-22 19:51"
+source: "Auto-generated from private manual v5.33 by generate_public_manual.py"
+generated: "2026-04-22 23:34"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -8319,13 +8319,15 @@ Shared Supabase database with `tenant_id` column + RLS (following QQT's proven p
 
 New QSP module providing local SEO services to all supporters. Replaces $1,500-3,000+/mo external SEO agency with built-in capabilities.
 
-**External Integration:** BrightLocal Track agency account ($79/mo, 6-10 locations). QWF absorbs cost. Covers QWF internal properties (5) + GreenCal (4 companies). No nonprofit discount available (confirmed via support email thread, Session 195).
+**External Integration:** BrightLocal Track agency account. **Paid plan activated 2026-04-21: Track, 11-20 locations, monthly billing (~$99/mo).** Monthly chosen over annual ($74/mo) to preserve cash flow flexibility until L4G ramps. Covers QWF internal properties (5) + GreenCal (4 companies) with headroom to 20 locations. QWF absorbs cost. No nonprofit discount available (confirmed via support email thread, Session 195).
 
-**BrightLocal API Status (as of April 7, 2026):**
+**BrightLocal API Status (as of April 22, 2026):**
 - Single API key for all endpoints (Management + Data APIs share one key)
-- CT (Citation Tracker) Data API works via GET requests (docs incorrectly say POST)
-- LSRC, GBP, and Reviews Data API endpoints returning 404 — under investigation by BrightLocal support (ticket #710654)
-- Bug report drafted and sent as Outlook reply to support thread
+- API key rotated 2026-04-21 after subscribing — rotation did NOT unlock any additional endpoints
+- CT (Citation Tracker) Data API works via GET requests (docs incorrectly say POST) — live GreenCal data flowing (score 31, 31 active citations, 25 possible)
+- LSRC, GBP, Reviews, and Local Search Audit Data API endpoints still returning 404 — BrightLocal support (Carmi) confirmed these require a separate "Data API agreement" beyond the Track subscription
+- New support ticket opened 2026-04-21 (companion to #710654) requesting Data API agreement terms. Response drafted and sent by TIG 2026-04-22 scoping our use case (5 endpoints, per-location sync, pilot + scale plan)
+- Note: Original 2026-04-02 research concluded GBP Post Scheduler was included in Track. The 2026-04-21 pricing page shows it's Manage-tier+ only. Vista Social remains Plan B for QWR → GBP routing (already owned, integrated)
 
 **BrightLocal Track Features Used:**
 - Citation Tracker (NAP consistency across 50-300+ directories)
@@ -10775,4 +10777,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-22 19:51 (v5.32)*
+*Last updated: 2026-04-22 23:34 (v5.33)*
