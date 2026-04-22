@@ -3,7 +3,7 @@ title: "Self-Hosting n8n on Azure"
 slug: "self-hosting-n8n-on-azure"
 pillar: "open-playbook"
 description: "*The guide I wish existed before I built all of this the hard way.*"
-tags: ["how-to", "n8n", "azure", "self-hosting", "automation"]
+tags: ["how-to", "n8n", "azure", "self-hosting", "automation", "ecosystem", "qsp"]
 isHome: false
 ---
 # Self-Hosting n8n on Azure
@@ -1053,6 +1053,22 @@ The real power shows up after week one, when you stop thinking about whether you
 If you're stuck on a step, tried all the gotchas, and something's still weird... reach out. Every question I get asked becomes a new paragraph in the next version of this guide.
 
 Quietly building. 🏗️
+
+---
+
+## See The Whole Ecosystem
+
+Automation is one plane of a bigger system. QWF builds an interconnected family of apps. [Quietly Spotting](https://quietlyspotting.org) is the hub. Around it orbit Quietly Writing, Quietly Quoting, Quietly Networking, Quietly Knocking, Quietly Tracking, and more. See the [live ecosystem map](https://quietlyspotting.org/#ecosystem) for what's shipped, what's building, and how it all connects.
+
+## Related Reading
+
+n8n is the execution floor. Above it sits orchestration, below it sits infrastructure, and around it sits the rest of the stack. Start anywhere. Follow the threads.
+
+- [How to Give Your AI Agent Superpowers](/built-from-broken/how-to-give-your-ai-agent-superpowers/) ... the three-layer architecture that sits above n8n as the orchestration layer
+- [The Tool Shed](/open-playbook/the-tool-shed/) ... why n8n earned a Heart-of-4, Child-of-4 QWS score
+- [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) ... the Azure for Nonprofits credit that covers most of this VM's cost
+- [How QWF Learns](/open-playbook/how-qwf-learns/) ... the discipline behind picking self-hosted over "someone else's floor"
+- [QWU Values](/living-proof/values/) ... why Excellence means protecting your automations from someone else's data-center hiccup
 
 ---
 

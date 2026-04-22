@@ -431,6 +431,8 @@ For any project with deployed infrastructure (servers talking to servers, webhoo
 
 The key insight... **this file is read at the START of every work session on that project.** Before Claude touches anything, it reads the status file. No false assumptions about what's deployed. No guessing at URLs. No re-discovering what was already figured out.
 
+We built [Quietly Spotting](https://quietlyspotting.org) to put this same single-point-of-truth pattern into the hands of every supporter. Your own **SPOT** (Single Point of Truth) where every tool you run, every metric you track, and every status you care about feeds into one pane you control. QSP is the System Status file... productized.
+
 ---
 
 ## 3. Skills and Agents... Your Agent's Toolbox
@@ -853,6 +855,22 @@ That's what this architecture builds. Not a smarter model. A smarter system arou
 Build it slow. Build it intentional. Let the system grow alongside your work.
 
 And if you get stuck... reach out. I'm quietly working on this stuff every day, and I'd love to help you figure it out. 💙
+
+---
+
+## See The Whole Ecosystem
+
+QWF builds an interconnected family of apps. [Quietly Spotting](https://quietlyspotting.org) is the hub. Around it orbit Quietly Writing, Quietly Quoting, Quietly Networking, Quietly Knocking, Quietly Tracking, and more. See the [live ecosystem map](https://quietlyspotting.org/#ecosystem) for what's shipped, what's building, and how it all connects.
+
+## Related Reading
+
+Architecture works best when you see the whole system. The method, the tools, the values, the infrastructure... each piece makes the others sharper. Start anywhere. Follow the threads.
+
+- [How QWF Learns](/open-playbook/how-qwf-learns/) ... the sources and methods that feed the directives
+- [Self-Hosting n8n on Azure - The Guide I Wish Existed](/open-playbook/self-hosting-n8n-on-azure/) ... the automation layer that runs the workflows
+- [The Tool Shed](/open-playbook/the-tool-shed/) ... what we actually run across the whole org
+- [QWU Values](/living-proof/values/) ... why we publish any of this
+- [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) ... how nonprofits access many of these tools at no or low cost
 
 ---
 

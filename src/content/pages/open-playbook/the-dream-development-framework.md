@@ -3,7 +3,7 @@ title: "The Dream Development Framework"
 slug: "the-dream-development-framework"
 pillar: "open-playbook"
 description: "*The process that runs through everything QWF does.*"
-tags: []
+tags: ["framework", "mission", "dream-development", "ecosystem", "qsp"]
 isHome: false
 ---
 # The Dream Development Framework
@@ -94,3 +94,19 @@ WHELHO (Work Hard | Enjoy Life | Help Others) is the personal development system
 The Dream Development Project began as part of America's Children of Fallen Heroes... QWF's first effort serving children of fallen military and first responders. But the framework was always bigger than any one population. It applies to every young person QWF serves... because every human being has a dream worth developing.
 
 ACOFH was the first expression of the mission, not the boundary.
+
+---
+
+## See The Whole Ecosystem
+
+The framework is the journey. The apps are the scaffolding that makes it run. QWF builds an interconnected family of apps. [Quietly Spotting](https://quietlyspotting.org) is the hub. Around it orbit Quietly Writing, Quietly Quoting, Quietly Networking, Quietly Knocking, Quietly Tracking, and more. See the [live ecosystem map](https://quietlyspotting.org/#ecosystem) for what's shipped, what's building, and how it all connects.
+
+## Related Reading
+
+The framework is the journey. The values are the compass. Everything else is how we operate in practice. Start anywhere. Follow the threads.
+
+- [QWU Values](/living-proof/values/) ... the values arc (Hope → Wisdom → Faith → Courage → Love) that runs through every stage
+- [How QWF Learns](/open-playbook/how-qwf-learns/) ... how a disciplined learning stack feeds the wisdom stage
+- [The Tool Shed](/open-playbook/the-tool-shed/) ... the tools that hold the mentorship infrastructure together
+- [How to Give Your AI Agent Superpowers](/built-from-broken/how-to-give-your-ai-agent-superpowers/) ... how we scale mentorship discipline with architecture instead of more people
+- [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) ... how we fund this framework on free or discounted infrastructure

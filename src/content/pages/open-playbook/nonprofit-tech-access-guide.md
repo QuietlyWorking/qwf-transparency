@@ -3,7 +3,7 @@ title: "Nonprofit Tech Access Guide"
 slug: "nonprofit-tech-access-guide"
 pillar: "open-playbook"
 description: "There are millions of dollars in free and discounted technology available to nonprofits right now. Most small organizations never access it... not because they "
-tags: []
+tags: ["nonprofit-tech", "how-to", "reference", "ecosystem", "qsp"]
 isHome: false
 ---
 # Nonprofit Tech Access Guide
@@ -268,6 +268,21 @@ Learn more at **iysr.org** — and if you're a youth-serving organization that c
 
 ---
 
+## See The Whole Ecosystem
+
+Access is one layer of a bigger picture. QWF builds an interconnected family of apps. [Quietly Spotting](https://quietlyspotting.org) is the hub. Around it orbit Quietly Writing, Quietly Quoting, Quietly Networking, Quietly Knocking, Quietly Tracking, and more. See the [live ecosystem map](https://quietlyspotting.org/#ecosystem) for what's shipped, what's building, and how it all connects.
+
+## Related Reading
+
+Free tools are one edge of the story. The tools you pick, how you connect them, and why it matters... that's the whole picture. Start anywhere. Follow the threads.
+
+- [The Tool Shed](/open-playbook/the-tool-shed/) ... our full tool inventory with QWS Scorecard scores (Soul, Heart, Child/Inv)
+- [How QWF Learns](/open-playbook/how-qwf-learns/) ... how to evaluate tools without drowning in newsletter hype
+- [How to Give Your AI Agent Superpowers](/built-from-broken/how-to-give-your-ai-agent-superpowers/) ... the architecture that turns individual tools into a compounding system
+- [Self-Hosting n8n on Azure - The Guide I Wish Existed](/open-playbook/self-hosting-n8n-on-azure/) ... the full build guide for one of our highest-scored open-source tools
+- [QWU Values](/living-proof/values/) ... the transparency principle behind publishing this guide at all
+
+---
+
 *Last updated: 2026-02-26*
 *This guide is based on QWF's direct experience as a verified 501(c)(3). Eligibility and offerings may change. Always verify current terms at each vendor's website.*
-*See [The QWU Tool Shed](/open-playbook/the-tool-shed/) for our full tool inventory and QWS Scorecard scores.*

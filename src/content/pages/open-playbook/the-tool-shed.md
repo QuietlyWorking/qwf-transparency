@@ -3,7 +3,7 @@ title: "The QWU Tool Shed"
 slug: "the-tool-shed"
 pillar: "open-playbook"
 description: "We run a 501(c)(3) nonprofit on 48+ tools. This page is a transparent look at every single one of them... what we use, why we chose it, and what kind of company"
-tags: []
+tags: ["tools", "transparency", "ecosystem", "qsp", "reference"]
 isHome: false
 ---
 # The QWU Tool Shed
@@ -136,6 +136,8 @@ As of February 2026, QWF runs on:
 
 Total monthly cost for all of this: less than you'd think. Several of our highest-scored tools have free tiers generous enough to run real operations on. That's Heart in action.
 
+Watching all of this coordinate is what [Quietly Spotting](https://quietlyspotting.org) exists to do. Your own **SPOT** (Single Point of Truth)... one pane where every tool you run, every metric you care about, every status you monitor lives together. We built QSP because seeing all 48 tools through one lens is what turns a collection into a stack.
+
 > **Are you a nonprofit?** Check out our [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) — a transparent, experience-based guide to every free and discounted tech program we've found, with honest notes on what the application process actually looks like.
 
 ---
@@ -165,6 +167,22 @@ A few principles we hold ourselves to:
 4. **Companies can respond.** We publish their response alongside our review.
 5. **Conflicts of interest disclosed.** If a company gives us a discount, we say so.
 6. **Negative reviews stay up.** We don't remove reviews because a company asked.
+
+---
+
+## See The Whole Ecosystem
+
+QWF builds an interconnected family of apps. [Quietly Spotting](https://quietlyspotting.org) is the hub. Around it orbit Quietly Writing, Quietly Quoting, Quietly Networking, Quietly Knocking, Quietly Tracking, and more. See the [live ecosystem map](https://quietlyspotting.org/#ecosystem) for what's shipped, what's building, and how it all connects.
+
+## Related Reading
+
+Tool choices are value choices. What we run, how we evaluate, what's behind the logo... each piece connects. Start anywhere. Follow the threads.
+
+- [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) ... how nonprofits actually get software discounts worth evaluating
+- [How QWF Learns](/open-playbook/how-qwf-learns/) ... the discipline behind choosing tools instead of collecting them
+- [How to Give Your AI Agent Superpowers](/built-from-broken/how-to-give-your-ai-agent-superpowers/) ... why the architecture around your tools matters more than the tools themselves
+- [Self-Hosting n8n on Azure - The Guide I Wish Existed](/open-playbook/self-hosting-n8n-on-azure/) ... how we run one of our highest-scored tools on infrastructure we control
+- [QWU Values](/living-proof/values/) ... why Soul counts for 30% of the QWS Scorecard
 
 ---
 

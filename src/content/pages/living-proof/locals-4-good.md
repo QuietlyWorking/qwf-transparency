@@ -3,7 +3,7 @@ title: "Locals 4 Good"
 slug: "locals-4-good"
 pillar: "living-proof"
 description: "Locals 4 Good is a Quietly Working Foundation fundraising program that creates direct mail postcards connecting local businesses with affluent households in the"
-tags: []
+tags: ["program", "l4g", "direct-mail", "ecosystem", "qsp"]
 isHome: false
 ---
 # Locals 4 Good
@@ -251,5 +251,21 @@ SEP #D7CCC8  OCT #FFCC80  NOV #A5A58D  DEC #D4E6D4
 Each color tells the story of its month, flowing naturally through the seasons while maintaining a soft, gentle aesthetic. From winter's frosty blues to spring's fresh greens, summer's warm golds, and autumn's rich harvests - this palette captures the essence of the entire year in 12 distinctive, beautiful colors.
 
 > **Design Note**: All colors are specifically crafted to be distinguishable from each other while maintaining the same light, airy pastel quality. Each represents the unique character, holidays, and natural phenomena that make each month special.
+
+---
+
+## See The Whole Ecosystem
+
+One postcard. One program. One piece of a bigger family. QWF builds an interconnected family of apps. [Quietly Spotting](https://quietlyspotting.org) is the hub. Around it orbit Quietly Writing, Quietly Quoting, Quietly Networking, Quietly Knocking, Quietly Tracking, and more. See the [live ecosystem map](https://quietlyspotting.org/#ecosystem) for what's shipped, what's building, and how it all connects.
+
+## Related Reading
+
+L4G is one fundraising program inside a larger mission. The values driving it, the framework guiding it, the tools behind it... each piece connects. Start anywhere. Follow the threads.
+
+- [QWU Values](/living-proof/values/) ... the values that shape every postcard that goes out
+- [The Dream Development Framework](/open-playbook/the-dream-development-framework/) ... the 7-step journey L4G supports through its training component
+- [Quietly Working Creative Department (QWC)](/living-proof/quietly-working-creative/) ... the creative engine behind every design
+- [The Tool Shed](/open-playbook/the-tool-shed/) ... the tools we run to coordinate print, mailing, and reporting
+- [How QWF Learns](/open-playbook/how-qwf-learns/) ... how we stay honest about what's actually working in local direct mail
 
 ---
