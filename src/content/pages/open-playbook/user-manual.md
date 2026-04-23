@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-04-22"
+modifiedDate: "2026-04-23"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-23 07:00 | Source version: 5.34
+> Generated: 2026-04-23 19:22 | Source version: 5.35
 
 # QWU Backoffice User Manual
 
@@ -4548,8 +4548,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.34 by generate_public_manual.py"
-generated: "2026-04-23 07:00"
+source: "Auto-generated from private manual v5.35 by generate_public_manual.py"
+generated: "2026-04-23 19:22"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10645,6 +10645,65 @@ Session 220 (April 12, 2026). Agent composed an email containing a date with the
 
 ---
 
+## CLAUDE.md Values Block Generator ⭐ NEW
+
+**Added: April 23, 2026** | **Reference:** `002 Projects/_QOP Quietly Operating/QOP-System-Status.md` · `002 Projects/_QOP Quietly Operating/Values-Editor-Spec-v1.md`
+
+`generate_claude_md_block.py` reads a resolved `values.json` file and writes a managed marker-block section into `CLAUDE.md` so every Claude Code session starts with TIG's compass, hard rules, forbidden vocabulary, encouraged vocabulary, decision filters, and ethical boundaries injected structurally. The V layer of VOSPA is now load-bearing infrastructure, not advisory memory.
+
+### How It Works
+
+1. Loads `005 Operations/Values/QWF.values.resolved.json` (falls back to `QWF.values.json` for root files, wrapping with a trivial `_resolution` block at read time).
+2. Renders each startup-priority section per the `formatTemplate` enum — compass-block, hard-rule-block, forbidden-table, encouraged-table, filter-questions, boundaries-list.
+3. Inserts a managed block before `## Directive Structure` in `CLAUDE.md`. The `## QWF Values & Decision Filters` heading is owned by the block, so rename protection works.
+4. Wraps content in BEGIN/END marker comments with sha256 of the source payload (minus `_resolution`) for drift detection.
+5. Atomically writes the new `CLAUDE.md` after backing up the prior state to `.tmp/claude_md_backups/`.
+
+### CLI Flags
+
+| Flag | Purpose |
+|------|---------|
+| `--org <shortName>` | Which values file to read. Default: `QWF`. |
+| `--target <path>` | Target CLAUDE.md path. Default: project CLAUDE.md. |
+| `--dry-run` | Print the managed block to stdout, do not modify target. |
+| `--force` | Regenerate even when source hash matches the existing marker (for testing or stale companion files). |
+| `--rollback` | Restore the most recent backup from `.tmp/claude_md_backups/`; a safety backup of the pre-rollback state is written first. |
+
+Exit codes: `0` success / in-sync, `1` user error, `2` file not found, `3` validation failure, `4` rollback used.
+
+### Dog-Food Compliance
+
+Every prose string the script writes into CLAUDE.md or stdout uses ellipsis, never em dashes. When a source field contains an em dash, the generator:
+1. Substitutes to ellipsis at render time
+2. Emits a stderr warning with the exact field path
+3. Increments a substitution counter
+4. Prints an end-of-run summary: "N em-dash substitutions performed. Source file has N drift instances that should be fixed at source in a follow-up session."
+
+The only em dash permitted in the managed block is the Pattern cell for `punctuation-em-dash` in the Forbidden Vocabulary table, where the character is the labeled specimen being forbidden (analogous to a test-fixture).
+
+### When To Run
+
+- Any time `QWF.values.json` (or a child program's values file) changes.
+- After running `resolve_values.py` on a child.
+- To verify idempotency: re-running on an unchanged source prints `CLAUDE.md in sync` and exits without touching the file.
+- To restore a prior CLAUDE.md state: `--rollback` uses the most recent `.tmp/claude_md_backups/` entry.
+
+### Known Limitations (Session Log: Session 269)
+
+- `resolve_values.py` cannot self-resolve a root file (no parent to cascade from). The generator side-steps this by wrapping unresolved roots with a trivial `_resolution` block at read time. Fix needed: `--root` flag or auto-detect in `resolve_values.py`. Tracked in `QOP-System-Status.md` Known Issues.
+- Drift-detection cron (auto-regenerate when source hash drifts from marker hash) not yet scheduled. Planned for a future session.
+
+### Training Opportunities
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Marker-block pattern | Auto-generated content blocks with sha256 drift detection — same pattern linters and code generators use | ⭐⭐ |
+| Atomic file writes | Write to temp, rename; backup-before-write; rollback from backups | ⭐⭐ |
+| Specimen-vs-prose distinction | Self-validating schemas where the rule-subject legitimately appears in the rule declaration | ⭐⭐ |
+| CLI + importable module pattern | Single Python file that works standalone AND as a library for future in-app use | ⭐⭐ |
+
+---
+
 ## QWB Quietly Webbing ⭐ NEW
 
 **Added: April 8, 2026**
@@ -10777,4 +10836,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-23 07:00 (v5.34)*
+*Last updated: 2026-04-23 19:22 (v5.35)*
