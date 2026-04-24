@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-23 20:35 | Source version: 5.36
+> Generated: 2026-04-24 01:24 | Source version: 5.37
 
 # QWU Backoffice User Manual
 
@@ -3190,7 +3190,7 @@ All execution scripts have been updated to use qwu_datetime:
 | `qwu_datetime.py` | v1.0.0 | Core module |
 | `morning_briefing.py` | v1.6.0 | ✅ Goals integration |
 | `calendar_events.py` | v1.2.0 | ✅ Updated |
-| `summarize_session.py` | v1.4.0 | ✅ Goals alignment |
+| `summarize_session.py` | v1.7.0 | ✅ Goals alignment + stale-tmp archive guard |
 | `process_inbox.py` | v2.6.0 | ✅ Duplicate detection |
 | `api_logger.py` | v1.1.0 | ✅ Updated |
 | `api_rate_limiter.py` | v1.1.0 | ✅ Updated |
@@ -4548,8 +4548,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.36 by generate_public_manual.py"
-generated: "2026-04-23 20:35"
+source: "Auto-generated from private manual v5.37 by generate_public_manual.py"
+generated: "2026-04-24 01:24"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10836,4 +10836,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-23 20:35 (v5.36)*
+*Last updated: 2026-04-24 01:24 (v5.37)*
