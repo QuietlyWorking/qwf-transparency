@@ -134,7 +134,7 @@ As of February 2026, QWF runs on:
 - **3 virtual machines** (backoffice, automation, email)
 - **37+ API integrations** connecting everything
 
-Total monthly cost for all of this: less than you'd think. Several of our highest-scored tools have free tiers generous enough to run real operations on. That's Heart in action.
+**Total monthly cost for all of this:** see [What It Costs To Run QWF](/open-playbook/infrastructure-costs/) for the full per-line breakdown, auto-generated from our backoffice constants and reconciled against the actual Azure invoice every month. Several of our highest-scored tools have free tiers generous enough to run real operations on. That's Heart in action.
 
 Watching all of this coordinate is what [Quietly Spotting](https://quietlyspotting.org) exists to do. Your own **SPOT** (Single Point of Truth)... one pane where every tool you run, every metric you care about, every status you monitor lives together. We built QSP because seeing all 48 tools through one lens is what turns a collection into a stack.
 
