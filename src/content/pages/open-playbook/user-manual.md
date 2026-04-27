@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-04-27"
+modifiedDate: "2026-04-26"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-27 05:59 | Source version: 5.41
+> Generated: 2026-04-27 06:08 | Source version: 5.42
 
 # QWU Backoffice User Manual
 
@@ -3336,7 +3336,7 @@ Cost reporting was hardened across 5 phases on 2026-04-26. Every cost figure now
 
 **Public surface:** https://transparency.quietlyworking.org/open-playbook/infrastructure-costs/ — auto-generated per-line breakdown, regenerates whenever `cost_constants.py` or `audit_trends.db` changes (per session-wrap-up step 4C).
 
-**Credential rotation:** see `005 Operations/Directives/credential_rotation_playbook.md` for procedures; 9 high-value credentials tracked with annual cadence in `CREDENTIAL_ROTATIONS` constant in `audit_emergency_recovery.py`.
+**Credential rotation:** see `005 Operations/Directives/credential_rotation_playbook.md` for procedures; 10 credentials tracked with annual cadence in `CREDENTIAL_ROTATIONS` constant in `audit_emergency_recovery.py` (8 High tier + 2 Medium). First real-rotation precedent set 2026-04-26 with `OPENROUTER_API_KEY` (Pattern B, executed via `OPENROUTER_MGMT_KEY` provisioning API).
 
 **Emergency recovery:** see `005 Operations/Directives/qwu_emergency_recovery_capabilities.md`. The `qwu-vm-automation` SP has the 3 RBAC roles needed to recover the VM without human-in-the-loop authentication.
 
@@ -4588,8 +4588,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.41 by generate_public_manual.py"
-generated: "2026-04-27 05:59"
+source: "Auto-generated from private manual v5.42 by generate_public_manual.py"
+generated: "2026-04-27 06:08"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10876,4 +10876,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-27 05:59 (v5.41)*
+*Last updated: 2026-04-27 06:08 (v5.42)*
