@@ -24,7 +24,7 @@ _Last regenerated: 2026-04-26 (Pacific). Constants verified: 2026-04-25._
 
 That funds 13 active apps, ~50 automation workflows, ~280 Python scripts, and the entire backoffice that keeps QWF running.
 
-**Most recent month-to-date Azure spend (live):** $169.13 as of 2026-04-26.
+**Most recent month-to-date Azure spend (live):** $175.57 as of 2026-04-26.
 
 ---
 

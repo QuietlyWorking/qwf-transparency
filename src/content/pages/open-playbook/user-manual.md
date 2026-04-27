@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-25 06:01 | Source version: 5.38
+> Generated: 2026-04-27 04:29 | Source version: 5.39
 
 # QWU Backoffice User Manual
 
@@ -3317,6 +3317,29 @@ Daily breakdown:
   2026-01-07: $0.42
 ```
 
+### Daily Audit & Reconciliation Infrastructure (Apr 2026)
+
+Cost reporting was hardened across 5 phases on 2026-04-26. Every cost figure now flows through one credential path with continuous verification.
+
+| Layer | Script | Cron | Output |
+|-------|--------|------|--------|
+| Daily audit (cost drift, freshness, gaps, capability check) | `audit_system.py` | `0 6 * * *` | `audit_trends.db`, Discord `#daily-digest`, `005 Operations/Audits/{date}-system-audit.md` |
+| Three-way reconciliation (expected / actual / allocated) | `reconcile_costs.py` | called by audit_system | gaps in `audit_trends.db` |
+| Monthly invoice reconciliation (5% threshold) | `reconcile_azure_invoice.py` | `0 9 8 * *` | `005 Operations/Audits/{YYYY-MM}-azure-invoice-reconciliation.md` |
+| SP RBAC + credential rotation audit | `audit_emergency_recovery.py` | called by audit_system | gaps; verifies VM Contributor + Disk Snapshot Contributor + Cost Management Reader |
+| Orphaned-writer detection (sync_*/collect_*/refresh_*/poll_* not in cron) | `check_orphaned_writers.py` | called by audit_system | gaps |
+| Public transparency page generator | `generate_cost_transparency.py` | manual + session-wrap-up auto-trigger | `Infrastructure-Costs.md` (`dg-publish: true`) |
+| HQ Dashboard SYSTEMS card refresh | `sync_hq_system_health.py` | `*/30 * * * *` | `hq_system_health` Supabase row |
+| Per-app cost attribution | `collect_app_metrics.py` | `0 1 * * *` | `hq_app_metrics` Supabase rows |
+
+**Single source of truth:** `005 Operations/Execution/cost_constants.py`. Every cost number on every surface (transparency site, Digital Twin, HQ dashboard, internal reports) reads from this file. Includes `__VERIFIED_AT__` for staleness detection (warn at 60d, gap at 90d).
+
+**Public surface:** https://transparency.quietlyworking.org/open-playbook/infrastructure-costs/ — auto-generated per-line breakdown, regenerates whenever `cost_constants.py` or `audit_trends.db` changes (per session-wrap-up step 4C).
+
+**Credential rotation:** see `005 Operations/Directives/credential_rotation_playbook.md` for procedures; 9 high-value credentials tracked with annual cadence in `CREDENTIAL_ROTATIONS` constant in `audit_emergency_recovery.py`.
+
+**Emergency recovery:** see `005 Operations/Directives/qwu_emergency_recovery_capabilities.md`. The `qwu-vm-automation` SP has the 3 RBAC roles needed to recover the VM without human-in-the-loop authentication.
+
 ---
 
 ## Lead Generation System
@@ -4548,8 +4571,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.38 by generate_public_manual.py"
-generated: "2026-04-25 06:01"
+source: "Auto-generated from private manual v5.39 by generate_public_manual.py"
+generated: "2026-04-27 04:29"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10836,4 +10859,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-25 06:01 (v5.38)*
+*Last updated: 2026-04-27 04:29 (v5.39)*
