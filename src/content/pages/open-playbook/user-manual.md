@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-04-23"
+modifiedDate: "2026-04-27"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-27 04:29 | Source version: 5.39
+> Generated: 2026-04-27 05:16 | Source version: 5.40
 
 # QWU Backoffice User Manual
 
@@ -3340,6 +3340,23 @@ Cost reporting was hardened across 5 phases on 2026-04-26. Every cost figure now
 
 **Emergency recovery:** see `005 Operations/Directives/qwu_emergency_recovery_capabilities.md`. The `qwu-vm-automation` SP has the 3 RBAC roles needed to recover the VM without human-in-the-loop authentication.
 
+### MP Training Opportunities ⭐
+
+This cost reporting infrastructure was built across one continuous arc on 2026-04-26. Several teachable units came out of it:
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Reading existing crontab patterns and adding a new entry that matches (cd + venv + log redirect) | First real DevOps task; pattern-matching discipline | Beginner |
+| Single source of truth + auto-generated transparency page (`cost_constants.py` → `Infrastructure-Costs.md` → site) | Clean architecture; "edit one place, propagate everywhere" | Beginner |
+| Diagnosing a silent-pipeline-dead script (collect_app_metrics.py: 4 root causes layered) | Real debugging walkthrough; ImportError → missing imports → schema mismatch → upsert misuse | Intermediate |
+| Three-way reconciliation design (expected vs actual vs allocated, all independent data sources) | Software-as-truth-system; distinguishing "what we think" from "what is" from "what we allocate" | Intermediate |
+| PostgREST upsert with explicit `on_conflict` parameter (not just `Prefer: resolution=merge-duplicates`) | Supabase-specific gotcha worth teaching; why "obvious" upsert fails | Intermediate |
+| Active-probe fallback for distributed-system eventual consistency (Azure RBAC list lag) | Reasoning about systems that say "no" before they say "yes"; verify by trying | Advanced |
+| Filename-as-contract: detecting orphaned writers via `sync_*` / `collect_*` / `refresh_*` / `poll_*` prefixes | Naming conventions as machine-readable intent; how to add audits that prevent recurring patterns | Advanced |
+| Multi-script integration: wiring a new check into `audit_system.py` main loop | Software composition without rewriting; how to add capability to a running system | Intermediate |
+
+**Most valuable MP exercise:** the silent-pipeline-dead diagnostic story. It's a real situation (HQ widget displaying $20.63 for 80 days) with a clear arc (TIG noticed → trace data source → find the script → diagnose 4 layered problems → fix → cron → verify the widget updates). Includes everything: API debugging, schema migration awareness, port confusion (8765 vs 8767), credential-helper failure, and a structural fix (`check_orphaned_writers.py`) so the same pattern can't bite again.
+
 ---
 
 ## Lead Generation System
@@ -4571,8 +4588,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.39 by generate_public_manual.py"
-generated: "2026-04-27 04:29"
+source: "Auto-generated from private manual v5.40 by generate_public_manual.py"
+generated: "2026-04-27 05:16"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -8398,10 +8415,10 @@ Each tenant stores QQT/QWR API keys in the `integrations` table. Python sync scr
 | `sync_qsp_sending_accounts.py` | Instantly API v2 `/accounts` | `sending_accounts` | Every 2h |
 | `sync_qsp_dmarc_domains.py` | DMARC Report API v2 `/all_domains.json` | `dmarc_domains` | Every 2h |
 | `sync_qsp_campaigns.py` | Instantly API v2 `/campaigns` | `campaigns`, `campaign_metrics` | Every 4h |
-| `sync_qsp_reviews.py` | Google Maps via Apify | `reviews` | Every 6h (pending n8n) |
+| `sync_qsp_reviews.py` | Google Maps via Apify | `reviews` | Every 6h (cron stopgap; n8n still pending — see HQ issue `935bb95b`) |
 | `compute_kpi_snapshots.py` | All QSP source tables | `kpi_snapshots` | Nightly (pending n8n) |
 | `check_qsp_alerts.py` | `alert_rules` → `alert_history` | SMS, Discord, in-app | Post-sync (pending n8n) |
-| `sync_acculynx_data.py` | AccuLynx CRM API v2 | `acculynx_jobs`, `acculynx_appointments` | Manual (v1.1.0, safety gate integrated) |
+| `sync_acculynx_data.py` | AccuLynx CRM API v2 | `acculynx_jobs`, `acculynx_appointments` | Every 4h (v1.1.0, safety gate integrated) |
 | `extract_acculynx_past_customers.py` | AccuLynx CRM API v2 | CSV output (`.tmp/`) | Manual (v1.0.0, warm campaign extraction) |
 | `sync_brightlocal_data.py` | BrightLocal CT Data API | `qsp_citation_health` | Manual (v1.0.0, first GreenCal sync complete) |
 | `sync_safety_gate.py` | Pre/post-sync validation module | `sync_audit_log` | Called by sync scripts |
@@ -10859,4 +10876,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-27 04:29 (v5.39)*
+*Last updated: 2026-04-27 05:16 (v5.40)*
