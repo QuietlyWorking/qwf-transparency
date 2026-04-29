@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-04-27 06:08 | Source version: 5.42
+> Generated: 2026-04-29 03:29 | Source version: 5.42
 
 # QWU Backoffice User Manual
 
@@ -4589,7 +4589,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.42 by generate_public_manual.py"
-generated: "2026-04-27 06:08"
+generated: "2026-04-29 03:29"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10876,4 +10876,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-04-27 06:08 (v5.42)*
+*Last updated: 2026-04-29 03:29 (v5.42)*
