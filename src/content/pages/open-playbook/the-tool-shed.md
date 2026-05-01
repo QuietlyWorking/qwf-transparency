@@ -53,6 +53,7 @@ These tools have the broadest audience appeal, strongest stories, and highest QW
 | **Claude / Anthropic** | AI | 4 | 4 | **4.0** | Primary AI for all QWF operations. Safety-focused mission, Dario Amodei founder-led. |
 | **Claude Code** | AI/Dev Tools | ? | 4 | **4.0** | The agent that literally runs our backoffice. This page was synced by a script it helped build. |
 | **Lovable** | AI/Frontend | 4 | 5 | **4.2** | Builds our web apps (HQ Command Center, Quietly Spotting, and more). Founder (Anton Osika) deeply involved, early stage, genuine heart — 20% NPO discount, Valentine's Day 50% off credits, and 24 hours of free usage for *everyone* on International Women's Day 2026. |
+| **monday.com** | Project Management | 5 | ? | **4.0** | Visual project planning with Gantt baselines for supporter portfolio rollups. **10 free Pro seats** for nonprofits with full features (Gantt baselines, formula columns, GraphQL API, webhooks). Adopted late April 2026 after years of mental dismissal — the proof that "revisit, don't dismiss" matters. Founders Roy Mann + Eran Zinman; public co since 2021 (Owner Involved score pending verification). One of the strongest nonprofit programs in our entire stack. |
 
 ---
 
