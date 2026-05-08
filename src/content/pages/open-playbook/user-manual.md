@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-05-06 19:12 | Source version: 5.43
+> Generated: 2026-05-08 21:27 | Source version: 5.43
 
 # QWU Backoffice User Manual
 
@@ -4589,7 +4589,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.43 by generate_public_manual.py"
-generated: "2026-05-06 19:12"
+generated: "2026-05-08 21:27"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -8361,13 +8361,12 @@ New QSP module providing local SEO services to all supporters. Replaces $1,500-3
 
 **External Integration:** BrightLocal Track agency account. **Paid plan activated 2026-04-21: Track, 11-20 locations, monthly billing (~$99/mo).** Monthly chosen over annual ($74/mo) to preserve cash flow flexibility until L4G ramps. Covers QWF internal properties (5) + GreenCal (4 companies) with headroom to 20 locations. QWF absorbs cost. No nonprofit discount available (confirmed via support email thread, Session 195).
 
-**BrightLocal API Status (as of April 22, 2026):**
-- Single API key for all endpoints (Management + Data APIs share one key)
-- API key rotated 2026-04-21 after subscribing — rotation did NOT unlock any additional endpoints
-- CT (Citation Tracker) Data API works via GET requests (docs incorrectly say POST) — live GreenCal data flowing (score 31, 31 active citations, 25 possible)
-- LSRC, GBP, Reviews, and Local Search Audit Data API endpoints still returning 404 — BrightLocal support (Carmi) confirmed these require a separate "Data API agreement" beyond the Track subscription
-- New support ticket opened 2026-04-21 (companion to #710654) requesting Data API agreement terms. Response drafted and sent by TIG 2026-04-22 scoping our use case (5 endpoints, per-location sync, pilot + scale plan)
-- Note: Original 2026-04-02 research concluded GBP Post Scheduler was included in Track. The 2026-04-21 pricing page shows it's Manage-tier+ only. Vista Social remains Plan B for QWR → GBP routing (already owned, integrated)
+**BrightLocal API Status (as of May 8, 2026):**
+- Single API key on all three hosts: `tools.brightlocal.com/seo-tools/api/v2/`, `/v4/`, and `api.brightlocal.com/manage/v1/`
+- Three deprecation map corrections from Harvey Godden (BrightLocal Sales) on 2026-04-30 collapsed the earlier "Data API agreement" framing as a misconception ... the Track-plan key has live Management API access, no separate agreement needed
+- All five sync modules now wired in `sync_brightlocal_data.py` v2.0.0: citation health (`/v2/ct/get-results`), keyword rankings (`/v4/gpw/{id}/results.keywords`), GBP audit (`/v4/gpw/{id}/results.summary` + locally-computed completeness score), multi-site reviews (`/manage/v1/rm/reports/{id}/reviews`, paginated 20/page fixed), composite SEO health (locally-computed 25/35/25/15 weighted from the four component scores)
+- One open question with Harvey (on annual leave per Connie 2026-05-05): LRT rankings-fetch path. Workaround: `/v4/gpw/{id}/results.keywords[*].client_rank` carries the same data and is sufficient for QSP
+- Note: GBP Post Scheduler is Manage-tier+ only (correction from original 2026-04-02 research). Vista Social remains Plan B for QWR → GBP routing
 
 **BrightLocal Track Features Used:**
 - Citation Tracker (NAP consistency across 50-300+ directories)
@@ -8381,7 +8380,7 @@ New QSP module providing local SEO services to all supporters. Replaces $1,500-3
 **Built-In Features (No External Cost):**
 - Schema Markup Generator — JSON-LD from QSP business data (LocalBusiness, Service, FAQ, Review, BreadcrumbList, Organization)
 - On-Page SEO Audit — Google Lighthouse API crawl with prioritized fix list
-- Monthly Performance Report — Cross-product pull (QWR + QSP + QQT + QNT + BrightLocal), AI-generated insights, exportable PDF
+- Monthly Performance Report v2 — Supporter-deliverable PDF with branded supporter cover (centered logo, supporter brand color cascade), Local SEO Performance section (5 cards: composite SEO Health, Citation Health, Keyword Rankings, GBP Profile Snapshot, Multi-Site Reviews) backed by per-card 6-month TrendCharts (vanilla SVG, stoplight zones, smart-label dedup), tier-aware content sections (TransparencySection, HighlightCallouts, ActionChecklistV2 with purple QWF / supporter-brand-color ownership badges), period-bounded BL queries that respect the period selector, full chrome suppression in print, page numbers via `@page` counters. Service tier on tenants determines the engagement-model framing per supporter (vospa / diy / hybrid)
 - GBP Optimization Queue — Actionable task cards from BrightLocal audit data
 - Local Keyword Matrix — Service x city keyword combinations via QWR DataForSEO
 
@@ -10876,4 +10875,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-05-06 19:12 (v5.43)*
+*Last updated: 2026-05-08 21:27 (v5.43)*
