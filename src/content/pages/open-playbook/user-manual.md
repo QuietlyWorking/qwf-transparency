@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-05-01"
+modifiedDate: "2026-05-10"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-05-08 21:27 | Source version: 5.43
+> Generated: 2026-05-11 04:48 | Source version: 5.45
 
 # QWU Backoffice User Manual
 
@@ -103,6 +103,7 @@ A comprehensive guide to the QWU Backoffice agent workspace, covering architectu
 77. [[#WHL WHELHO App ⭐ NEW]]
 78. [[#Cloudflare & DNS Management ⭐ NEW]]
 79. [[#Puzzle Operations Blueprint ⭐ NEW]]
+79. [[#Trails AI SOP + Video Pair ⭐ NEW]]
 79. [[#QWF App Registry ⭐ NEW]]
 80. [[#Testimonial Intelligence Pipeline ⭐ NEW]]
 81. [[#QSP Local Growth Engine ⭐ NEW]]
@@ -4588,8 +4589,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.43 by generate_public_manual.py"
-generated: "2026-05-08 21:27"
+source: "Auto-generated from private manual v5.45 by generate_public_manual.py"
+generated: "2026-05-11 04:48"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10550,6 +10551,69 @@ This issue was diagnosed while helping Josefa Savu in the Puzzle Circle communit
 
 ---
 
+## Trails AI SOP + Video Pair ⭐ NEW
+
+**Added: May 9, 2026** | **TWL:** `005 Operations/Directives/trails_tool_wisdom.md` | **Entity:** `003 Entities/Tools/Trails.md`
+
+Trails (trails.so) is the click-by-click documentation layer that pairs with Puzzle. Where Puzzle answers WHO/WHAT/WHY (process map, roles, RACI), Trails answers HOW (the exact keystrokes, narrated). Every recording produces a polished step-by-step written guide AND an AI-narrated branded video in one pass... edit the guide text, the video auto-re-renders. Full operational knowledge (capabilities, gotchas, patterns, plan comparison) lives in the Tool Wisdom Library directive.
+
+### Setup
+
+- **Plan:** Business plan, $40/month (negotiated by Mike Cooch / SuiteDash partnership; retail is $299/mo or $240/mo annual)
+- **Seats:** Unlimited users
+- **Translations:** Spanish, German, French, Italian (Business-tier only)
+- **Capture surfaces:** Chrome Extension, Desktop App, or upload existing video
+- **Output pair:** branded video (AI voiceover) + written step-by-step guide, both at sharable URLs
+- **Sharing:** public link, private, team-shared, iframe embed for knowledge bases / /docs centers / SuiteDash
+
+### The Strategic Pair: Puzzle + Trails
+
+The single most valuable pattern. Each tool covers one axis of an SOP that the other can't:
+
+| Axis | Tool | What it answers |
+|------|------|-----------------|
+| Architectural | Puzzle | Who does this? What's the sequence? Which tools? Where does data flow? What's the org context? |
+| Operational | Trails | When you sit down to do step 4, exactly what do you click? What does the screen look like? |
+
+A Puzzle workflow step description links out to the corresponding Trails guide URL. Supporter sees the diagram (Puzzle), clicks into a step, watches the click-by-click execution (Trails). This is the difference between "here's the map" and "here's the GPS-narrated drive." Pattern documented in `trails_tool_wisdom.md` §Patterns.
+
+### Acknowledged Gaps (per Trails' own competitive analysis)
+
+- No SSO/SAML (enterprise identity not supported)
+- No public API/webhook/MCP (no programmatic guide creation, no n8n integration)
+- No view analytics (can't tell what supporters actually watched)
+- No LMS features (quizzes, completion tracking, certificates absent)
+- Translations limited to 4 languages (ES/DE/FR/IT)
+
+If we ever need any of these, wrap Trails embeds in our own analytics layer / pair with a separate LMS / use HeyGen for languages Trails doesn't cover.
+
+### Embedding into QWF Surfaces
+
+Embed support is confirmed across all paid tiers, but the exact mechanism (iframe code format, private-guide auth behavior, CSP compatibility with SuiteDash) needs hands-on verification at first login. Pending checklist documented in TWL Implementation Status. Expected-to-work targets: QWF /docs centers (Astro), SvelteKit apps, SuiteDash supporter portals (verify CSP), Notion embed blocks, transparency site.
+
+### Workflow Discipline
+
+- **Record-Edit-Don't-Re-record:** AI auto-cleans fillers/restarts. Mistakes during recording are fine; fix wording in text afterward and the video re-renders.
+- **Narrate live:** voice transcription becomes the guide text directly. Faster than recording silently and writing descriptions afterward.
+- **Blur after, not during:** mask sensitive regions in the editor; recording naturally is faster.
+- **Per-workspace branding:** set QWF logo + colors once; every recording inherits.
+
+### Key Contacts
+
+- **Mike Cooch** — SuiteDash founder, partnership broker for the $40/mo Business rate. Treat the deal as a SuiteDash-originated benefit; verify terms before promising it to supporters.
+
+### 🎓 Missing Pixel Training Opportunities
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Recording an SOP | Process decomposition, on-camera narration, screen capture hygiene | ⭐ |
+| AI-cleanup mindset | Understanding when to trust automation vs re-record; text-first editing discipline | ⭐ |
+| Embed integration | iframe deployment, CSP debugging, /docs center authoring | ⭐⭐ |
+| Puzzle+Trails pairing | Linking architectural diagrams to operational walkthroughs; layered documentation design | ⭐⭐ |
+| Supporter onboarding pack creation | Translation strategy, blur/privacy review, branded asset preparation | ⭐⭐ |
+
+---
+
 ## TWL Preload Hook ⭐ NEW
 
 **Added: April 7, 2026** | **Reference:** `005 Operations/Directives/context_management.md`
@@ -10875,4 +10939,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-05-08 21:27 (v5.43)*
+*Last updated: 2026-05-11 04:48 (v5.45)*
