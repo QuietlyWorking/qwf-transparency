@@ -33,6 +33,8 @@ The prose was correct. The prose was also voluntary. An agent under time pressur
 
 So we built something different. We took the values themselves and encoded them as a JSON schema. A formal one. The schema names every core value (e.g., "Unified Identity"), every absolute rule derived from those values (e.g., "no product is ever spun off; every external surface reinforces QWF"), every forbidden vocabulary item with a replacement (e.g., "business" replaced by "fundraising program"), every decision filter (a numbered checklist of questions the agent walks through before acting). Each entry has a `why:` line explaining *why* the rule exists, so the agent can judge edge cases instead of mechanically matching strings.
 
+The schema is called `values.v1`. We're publishing it (along with its siblings `voice.v1` and `content.v1`) as part of an open standard at [quietlyos.org](https://quietlyos.org) ... the **Quietly Operating Standard** (QOS), free for any nonprofit to fork. What this article documents is QOS catching one of its own author's worst moments. It's the standard's first public receipt.
+
 Then we wrote a script that resolves the schema (applying inheritance, validating absolute rules, scrubbing forbidden punctuation) and stamps the resolved output into a managed marker block inside our `CLAUDE.md` file. `CLAUDE.md` is the file Claude Code loads into the agent's context at the start of every session... it's how we communicate persistent rules and conventions to the agent without re-pasting them every conversation. Anything inside the marker block is regenerated from schema on every push. Anything outside the markers is hand-written and preserved. The block looked like this in the agent's view:
 
 ```markdown
@@ -543,6 +545,12 @@ The mechanism is Claude Code's startup-context loading, but the principle is old
 
 What's new is that the conscience doesn't have to live in a person's memory or a binder or a Slack channel. It can live in the working context of the agent that touches every decision. And when it does, the leader is finally free to make fast decisions, because the slow-time decisions they already made are watching their back.
 
+### The standard behind the framework, and the brain behind the standard
+
+The schemas in this article are the first public implementation of the **Quietly Operating Standard** (QOS) ... an open standard for running a nonprofit on agent infrastructure, free at [quietlyos.org](https://quietlyos.org). `values.v1`, `voice.v1`, and `content.v1` are the canonical schemas; your own `values.json` is your specific instance of the standard. Fork them, adapt them to your org, generate the marker block, and you have the same framework Vol 7 describes running against your own non-negotiables.
+
+The harder part of adoption isn't the rendering, though. It's the authoring ... the slow-time conversation where a leader pressure-tests their own non-negotiables before encoding them. We're building [brain.quietlyos.org](https://brain.quietlyos.org) to be that conversation partner: an Advisor Brain that interviews a nonprofit's leadership, drafts a first-pass `values.v1` file, and stress-tests it against the kinds of decisions that erode mission. If this volume is about the catch, the Brain is about the authoring that makes the catch possible.
+
 ---
 
 ## What We Learned
@@ -653,7 +661,7 @@ Copy that. Paste it into a fresh agent session. The agent will interview you, ge
 
 **Built from Broken** is published by the [Quietly Working Foundation](https://quietlyworking.org) (QWF), a 501(c)(3) nonprofit. Our mission is to serve youth 30 and younger... helping them discover purpose, build skills, and create legacy. We do this through product-based fundraising programs and student training.
 
-We run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Claude Code (Anthropic's CLI-based AI coding agent), built on a three-layer architecture... Directives (what to do), Orchestration (the AI agent making decisions), and Execution (deterministic Python scripts doing the work). We build tools, we break things, we fix them... and then we write down what happened so you don't have to learn it the hard way.
+We run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is an Obsidian vault orchestrated by Claude Code (Anthropic's CLI-based AI coding agent), built on a three-layer architecture... Directives (what to do), Orchestration (the AI agent making decisions), and Execution (deterministic Python scripts doing the work). The values schemas in this volume are the first public implementation of the **Quietly Operating Standard** ([quietlyos.org](https://quietlyos.org)) ... an open standard we're publishing so other nonprofits don't have to figure this out alone. Vol 7 documents the standard's first real-world catch. The legacy we're trying to leave isn't the specific schemas... it's the proof that they work, and a public path for any nonprofit to walk.
 
 This volume is the moment the series stopped being a collection of technical fixes and started being something I hadn't quite seen coming. The first six volumes each documented a way our infrastructure catches drift in a specific technical surface. This one documents the moment that same infrastructure caught a different kind of drift... the directional kind, the kind a leader can't see from inside their own momentum. The framework I'd written in slow time to keep the mission safe was, in that moment, keeping the mission safe from me. If you take one thing away from this volume, let it be that. Your values are not safe in your head. They are safe when they live in the working context of the system that helps you make decisions, with the explicit permission to push back at exactly the moment that matters most.
 
