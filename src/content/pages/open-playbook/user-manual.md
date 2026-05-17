@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-05-10"
+modifiedDate: "2026-05-17"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-05-11 04:48 | Source version: 5.45
+> Generated: 2026-05-17 19:03 | Source version: 5.46
 
 # QWU Backoffice User Manual
 
@@ -791,10 +791,15 @@ With 24/7 operation, we follow a maintenance schedule:
 
 | Frequency | Task | How |
 |-----------|------|-----|
-| **Daily** | Health check | n8n workflow at 6 AM |
-| **Weekly** | Scheduled restart | Sunday 3 AM Pacific |
+| **Every 5 min** | Memory pressure monitor | `/etc/cron.d/qwu-memory-pressure-monitor` runs `monitor_memory_pressure.py` ... SMS+Discord on RED, Discord on YELLOW |
+| **Every 6 hr** | Health check | `check_vm_health.py` cron ... Discord #system-status + Betterstack heartbeat |
+| **Weekly (Sat)** | Scheduled restart | `/etc/cron.d/qwu-weekly-reboot` ... fires `0 4 * * SAT` Pacific, `shutdown -r +5` (5-min warning, cancellable via `sudo shutdown -c`) |
 | **Monthly** | Security updates review | Manual check of applied patches |
 | **Quarterly** | Deep maintenance | Disk cleanup, Docker prune, log rotation |
+
+**Reboot cadence updated 2026-05-17 (Session 349)** from the old Sun 3 AM schedule to the new Sat 04:00 PT schedule, after a VM crash where a single login scope reached 28.3 GB peak following 22 days of uptime. The memory pressure monitor + 8-signal `/pulse` skill catch accumulation BEFORE it locks the VM; the weekly reboot is the periodic reset.
+
+**Operating limits** (TIG-set after 2026-05-17 incident): 8 active Claude Code processes max regardless of free RAM, 8-hour session age cap, one session per task closed when done. Trust swap pressure, not free RAM. See `.claude/skills/pulse/SKILL.md` v2.0.0 for the accumulation-aware health model.
 
 See `server_maintenance.md` directive for full procedures.
 
@@ -4589,8 +4594,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.45 by generate_public_manual.py"
-generated: "2026-05-11 04:48"
+source: "Auto-generated from private manual v5.46 by generate_public_manual.py"
+generated: "2026-05-17 19:03"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10939,4 +10944,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-05-11 04:48 (v5.45)*
+*Last updated: 2026-05-17 19:03 (v5.46)*
