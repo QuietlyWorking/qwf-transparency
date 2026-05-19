@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-05-17"
+modifiedDate: "2026-05-19"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-05-17 19:03 | Source version: 5.46
+> Generated: 2026-05-19 21:34 | Source version: 5.47
 
 # QWU Backoffice User Manual
 
@@ -797,9 +797,17 @@ With 24/7 operation, we follow a maintenance schedule:
 | **Monthly** | Security updates review | Manual check of applied patches |
 | **Quarterly** | Deep maintenance | Disk cleanup, Docker prune, log rotation |
 
-**Reboot cadence updated 2026-05-17 (Session 349)** from the old Sun 3 AM schedule to the new Sat 04:00 PT schedule, after a VM crash where a single login scope reached 28.3 GB peak following 22 days of uptime. The memory pressure monitor + 8-signal `/pulse` skill catch accumulation BEFORE it locks the VM; the weekly reboot is the periodic reset.
+**Reboot cadence updated 2026-05-17 (Session 349)** from the old Sun 3 AM schedule to the new Sat 04:00 PT schedule, after a VM crash where a single login scope reached 28.3 GB peak following 22 days of uptime. The memory pressure monitor + `/pulse` skill catch accumulation BEFORE it locks the VM; the weekly reboot is the periodic reset.
 
-**Operating limits** (TIG-set after 2026-05-17 incident): 8 active Claude Code processes max regardless of free RAM, 8-hour session age cap, one session per task closed when done. Trust swap pressure, not free RAM. See `.claude/skills/pulse/SKILL.md` v2.0.0 for the accumulation-aware health model.
+**Monitoring model — v2.1.0** (2026-05-19): The pulse skill (`.claude/skills/pulse/SKILL.md`) and memory pressure monitor (`005 Operations/Execution/monitor_memory_pressure.py`) share core logic via Python import from `pulse.py` ... they cannot drift out of sync. v2.1.0 dropped two v2.0 thresholds that caused false alerts:
+- **The 8-session count cap** ... counts treat all sessions as equal weight; 12 simple chats are safer than 2 multi-agent fan-outs. Replaced with per-PID classification (chat / medium / fan-out) and spawn-budget verdicts (Simple ✅ / Medium ✅ / Fan-out ❌).
+- **The 16 GB scope-size threshold** ... `cgroup.memory.current` includes reclaimable kernel page cache (VSCode + MCP servers can sit at 20 GB without any real pressure). Replaced with PSI memory.pressure (kernel-honest stall percentages).
+
+**Current RED conditions** (any one triggers SMS): swap > 500 MB, available RAM < 4 GB, top Claude process > 3 GB, PSI memory.pressure some > 30% OR full > 5%, max growth slope > 200 MB/min. SMS body names the offending PID + classification so you know which session to close: `[QWU VM RED] PSI some=42.3 ... Close pid <MONITOR_ID> (fan-out, 4200 MB, 6.1h).`
+
+**Background heartbeat**: cron `*/5 * * * *` writes `005 Operations/Data/pulse_history.jsonl` so slopes (Δ RSS / Δ time per PID) populate within 10 minutes of any session starting.
+
+**Operating discipline** (replaces the v2.0 "8 sessions max" cap): one session per task, close it when done. Don't think in session count ... think in classification mix. Watch slope, not just RSS. Trust swap and PSI over free RAM.
 
 See `server_maintenance.md` directive for full procedures.
 
@@ -4594,8 +4602,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.46 by generate_public_manual.py"
-generated: "2026-05-17 19:03"
+source: "Auto-generated from private manual v5.47 by generate_public_manual.py"
+generated: "2026-05-19 21:34"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10944,4 +10952,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-05-17 19:03 (v5.46)*
+*Last updated: 2026-05-19 21:34 (v5.47)*
