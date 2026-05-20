@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-05-19"
+modifiedDate: "2026-05-20"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-05-19 21:34 | Source version: 5.47
+> Generated: 2026-05-20 04:47 | Source version: 5.48
 
 # QWU Backoffice User Manual
 
@@ -60,7 +60,8 @@ A comprehensive guide to the QWU Backoffice agent workspace, covering architectu
 35. [[#Transcript Extraction System (Planned)]]
 36. [[#Ez/Ezer Mascot]]
 37. [[#Ez Terminal (Scheduler) ⭐ NEW]]
-38. [[#Troubleshooting]]
+38. [[#Chat Leak Prevention System ⭐ NEW]]
+39. [[#Troubleshooting]]
 38. [[#Resources]]
 39. [[#BNI Member Dossier System]]
 40. [[#BNI Meeting Recap System ⭐ NEW]]
@@ -3345,6 +3346,8 @@ Cost reporting was hardened across 5 phases on 2026-04-26. Every cost figure now
 | Public transparency page generator | `generate_cost_transparency.py` | manual + session-wrap-up auto-trigger | `Infrastructure-Costs.md` (`dg-publish: true`) |
 | HQ Dashboard SYSTEMS card refresh | `sync_hq_system_health.py` | `*/30 * * * *` | `hq_system_health` Supabase row |
 | Per-app cost attribution | `collect_app_metrics.py` | `0 1 * * *` | `hq_app_metrics` Supabase rows |
+| Git remote drift (LEAK-RISK / HTTPS-bare) | `audit_system.check_git_remote_drift()` (v1.5.0+) | called by audit_system | gaps; detects userinfo-embedded credentials in git remote URLs (Incident #4 vector class) and HTTPS-bare-where-SSH-expected per chat_leak_prevention.md §7.1 |
+| Credential pattern coverage (`.env` vs `credential_patterns.py`) | `audit_system.check_credential_patterns_coverage()` (v1.6.0+) | called by audit_system | ONE Low summary gap + full uncovered-keys list at `.tmp/security/credential_patterns_coverage.txt`; walks `.env` keys matching `*_KEY` / `*_TOKEN` / `*_SECRET` / etc. and verifies each value matches one of the 11 registered patterns per chat_leak_prevention.md item #4 |
 
 **Single source of truth:** `005 Operations/Execution/cost_constants.py`. Every cost number on every surface (transparency site, Digital Twin, HQ dashboard, internal reports) reads from this file. Includes `__VERIFIED_AT__` for staleness detection (warn at 60d, gap at 90d).
 
@@ -4602,8 +4605,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.47 by generate_public_manual.py"
-generated: "2026-05-19 21:34"
+source: "Auto-generated from private manual v5.48 by generate_public_manual.py"
+generated: "2026-05-20 04:47"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5178,6 +5181,39 @@ The Ez Terminal demonstrates several teachable concepts:
 - More trivia categories
 - Theme creator tool
 - Mobile gesture support
+
+---
+
+## Chat Leak Prevention System ⭐ NEW
+
+**Status:** Phase 1 complete 2026-05-20 (5 of 5 items shipped, 74-test suite passing). 90-day evaluation 2026-08-18.
+
+**What it protects:** Prevents agent → chat credential leakage in Claude Code sessions. Reduces baseline of 3 documented leaks per 30 days (pre-2026-05-19) to ≤2 leaks per 90 days post-deploy, with zero leaks from covered surfaces.
+
+**Authoritative SOP:** `005 Operations/Directives/chat_leak_prevention.md` ... read this if you need to operate, extend, or troubleshoot the system. Components, edge cases, success criteria all there.
+
+**Component summary:**
+
+| # | Component | Location | Behavior |
+|---|---|---|---|
+| 1 | Permission denies | `~/.claude/settings.json` | 32 deny rules block `.env` Read tool + Bash patterns (`cat`/`head`/`tail`/`awk`/`grep`/bare `env`) |
+| 2 | `safe_select_jsonb.py` | `005 Operations/Execution/` | Two-pass safe SELECT against Supabase JSONB tables; hash-gated vetted-allowlist bypass via `safe_jsonb_allowlists.yml` |
+| 3 | `safe_env_read.py` | `005 Operations/Execution/` | Sealed-destination .env reader; `--to PATH` (mode 0600 file) or `--exec CMD ARGS` (subprocess env), never stdout/chat |
+| 4 | Chat-scan hook | `.claude/hooks/credential_chat_scan.py` + `005 Operations/Execution/credential_patterns.py` | Alert-only on credential-shape patterns in last assistant message; banner + log at `.tmp/security/leak_alerts.jsonl`. NEVER blocks. NEVER auto-rotates. |
+| 5a | SSH conversion | All QWU local git repos | Eliminates embedded-credential-in-remote-URL vector class permanently (Incident #4, 2026-05-19) |
+| 5b | Audit drift checks | `audit_system.py` v1.6.0+ | `check_git_remote_drift()` + `check_credential_patterns_coverage()` run daily 6 AM Pacific |
+
+**What an operator sees:**
+
+- **Banner in chat** containing `CREDENTIAL-SHAPE DETECTED IN CHAT OUTPUT (chat_leak_prevention #4)` followed by vendor, description, shape (≤8 chars visible), session id, and next-action instructions ... means the chat-scan hook caught a credential pattern. Treat as compromised; rotate per `credential_rotation_playbook.md`; write postmortem within 7 days at `002 Projects/_Chat Leak Prevention/2026-XX-XX-Incident-N-*.md`.
+
+- **`Permission denied`** when trying to `Read(.env)` or `Bash(cat .env)` and variants ... item #1 working as designed. Use `safe_env_read.py` for legitimate reads, or ask TIG for permission with stronger justification.
+
+- **Daily Discord summary mentions `audit_system` gaps for git remote drift or credential-patterns coverage** ... investigate via the gap recommendation text. Coverage gaps surface uncovered .env vendors (backlog: 77 at Phase 1 launch); look up the vendor's documented prefix shape from PUBLIC docs, add a pattern + tests to `credential_patterns.py`.
+
+**Phase 2 forward:** Credential vault MCP server documented as architectural target in the brainstorm doc §12 (`002 Projects/_Chat Leak Prevention/Chat-Leak-Prevention-Brainstorm.md`). Triggered by 90-day evaluation outcome. ~20-30hr scope, deferred until Phase 1 earns its place.
+
+**90-day evaluation reminder:** paired Alerts-calendar event for 2026-08-18 11:00 AM Pacific fires automatically; kickoff prompt at `002 Projects/_Chat Leak Prevention/Kickoff Prompts/chat-leak-prevention-90-day-evaluation-kickoff.md` resumes evaluation cleanly.
 
 ---
 
@@ -10952,4 +10988,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-05-19 21:34 (v5.47)*
+*Last updated: 2026-05-20 04:47 (v5.48)*
