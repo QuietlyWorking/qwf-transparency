@@ -11,9 +11,9 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description = 'QWF builds nonprofit technology in the open. See our systems, costs, tools, and lessons learned.', ogImage } = Astro.props;
+const { title, description = "Nobody's done this before. So everyone's making it up. We're publishing our drafts so you don't have to start from zero.", ogImage } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const fullTitle = title === 'Home' ? 'QWF Transparency' : `${title} | QWF Transparency`;
+const fullTitle = title === 'Home' ? 'Building an Agentic Backoffice in the Open' : `${title} | Building in the Open`;
 ---
 
 <!DOCTYPE html>
@@ -29,7 +29,7 @@ const fullTitle = title === 'Home' ? 'QWF Transparency' : `${title} | QWF Transp
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonicalURL} />
-  <meta property="og:site_name" content="QWF Transparency" />
+  <meta property="og:site_name" content="Building an Agentic Backoffice in the Open" />
   <meta property="og:type" content="website" />
   {ogImage && <meta property="og:image" content={ogImage} />}
 
