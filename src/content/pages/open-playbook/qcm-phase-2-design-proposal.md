@@ -2,17 +2,17 @@
 title: "Quietly CRM (QCM) ... Phase 2 Design Proposal"
 slug: "qcm-phase-2-design-proposal"
 pillar: "open-playbook"
-description: "**Date:** 2026-05-19 (drafting in progress)"
+description: "**Date:** 2026-05-19 (initial draft 2026-05-19; verdict pass complete 2026-05-19)"
 tags: []
 isHome: false
 ---
 # Quietly CRM (QCM) ... Phase 2 Design Proposal
 
-**Date:** 2026-05-19 (drafting in progress)
-**Status:** DRAFT ... awaiting TIG verdict pass on 8 open Qs (Q3.1 through Q3.8)
+**Date:** 2026-05-19 (initial draft 2026-05-19; verdict pass complete 2026-05-19)
+**Status:** **LOCKED** ... 8 open Qs (Q3.1 through Q3.8) verdicted by TIG; locked as D-024 through D-031 in [Decisions.md](Decisions.md). Phase 2.0 Migration 021 authoring unblocked.
 **Predecessor:** [QCM-Phase-1-Design-Proposal.md](QCM-Phase-1-Design-Proposal.md) (Phase 1 SHIPPED 2026-05-17 at architectural level; operational rollout in-flight)
 **Brainstorm:** [Brainstorm Prompts/Contact-Methods-Multi-Context-Brainstorm.md](Brainstorm%20Prompts/Contact-Methods-Multi-Context-Brainstorm.md) (B1-B6 verdicts locked Session 363)
-**Locked decisions:** D-001 through D-022 in [Decisions.md](Decisions.md). D-023 lands during this proposal authoring (Organizations vocabulary; full rename scope).
+**Locked decisions:** D-001 through D-031 in [Decisions.md](Decisions.md). D-017 → D-022 (Phase 2 architecture from Session 363 brainstorm) + D-023 (Organizations vocabulary; locked mid-pass on 2026-05-19) + D-024 → D-031 (Phase 2 verdict pass on 2026-05-19; this proposal's 8 open Qs).
 **Bar (unchanged from Phase 0 + Phase 1):** Zero TIG UI clicks for configuration. Every feature passes "can the agent do this with no human in the configuration loop?"
 
 ### Revision log
@@ -2596,7 +2596,7 @@ QWF uses **Organizations** as the single entity term covering for-profit + nonpr
 
 These become D-024, D-025, etc. as TIG verdicts during proposal review. Per HARD RULE inline questions, each is presented as a numbered list with bracketed options.
 
-#### Q3.1: Audit pattern ... unified vs per-entity audit tables
+#### Q3.1: Audit pattern ... unified vs per-entity audit tables  →  **LOCKED as D-024**
 
 Phase 2 introduces 3 new audit log tables (`contact_state_audit_log`, `contact_method_audit_log`, `contact_state_consent_audit_log`) mirroring Phase 1's `appointment_audit_log` pattern. The alternative is a unified `entity_audit_log` table with `(entity_type, entity_id, action, changes, ...)` columns that captures audit rows for ALL entities in one table.
 
@@ -2610,7 +2610,7 @@ Which audit pattern for Phase 2.0?
 2. Unified `entity_audit_log` table ... simpler queries; single template
 3. Different ... you tell me
 
-#### Q3.2: Merge surface state-handling
+#### Q3.2: Merge surface state-handling  →  **LOCKED as D-025**
 
 When merging two contacts that both have states (e.g., Sian pushed twice creates 2 contacts each with personal + employment states), how should the merge surface resolve state-level dedup?
 
@@ -2618,7 +2618,7 @@ When merging two contacts that both have states (e.g., Sian pushed twice creates
 2. State-by-state preserve ... merge keeps both contact's states explicitly (no dedup); 2 personal states allowed under same contact (rare but possible)
 3. Different ... you tell me
 
-#### Q3.3: Default state on inbound push (when source-app payload doesn't include `states[]` array)
+#### Q3.3: Default state on inbound push (when source-app payload doesn't include `states[]` array)  →  **LOCKED as D-026**
 
 Phase 2 inbound push handler synthesizes a default state for legacy flat-field payloads. What state_type for the default synthesized state?
 
@@ -2627,7 +2627,7 @@ Phase 2 inbound push handler synthesizes a default state for legacy flat-field p
 3. state_type='personal' with organization_id=null ... assumes inbound is personal-context until proven otherwise
 4. Different ... you tell me
 
-#### Q3.4: Per-state primary contact method ... per-type or per-state-overall
+#### Q3.4: Per-state primary contact method ... per-type or per-state-overall  →  **LOCKED as D-027**
 
 When a state has multiple methods (state_type='employment' has work email + work phone + LinkedIn), is `is_primary_for_state` per-method-type (one primary email + one primary phone per state) OR per-state-overall (one primary method overall per state)?
 
@@ -2635,7 +2635,7 @@ When a state has multiple methods (state_type='employment' has work email + work
 2. Per-state-overall ... one primary method total per state; cleaner constraint but loses per-channel primary
 3. Different ... you tell me
 
-#### Q3.5: State_type extensibility
+#### Q3.5: State_type extensibility  →  **LOCKED as D-028**
 
 If a new state type is needed (e.g., "podcaster" / "speaker" / "fellow"), does it require Migration to add to the CHECK enum, OR do we have a `state_types` lookup table from day 1 that operators can extend without Migration?
 
@@ -2643,7 +2643,7 @@ If a new state type is needed (e.g., "podcaster" / "speaker" / "fellow"), does i
 2. `state_types` lookup table with operator-extensible rows ... no Migration needed for new types; but adds JOIN cost to every state read + RLS gymnastics
 3. Different ... you tell me
 
-#### Q3.6: Portal auth model (Phase 2.5)
+#### Q3.6: Portal auth model (Phase 2.5)  →  **LOCKED as D-029**
 
 What auth mechanism for the Phase 2.5 contact portal?
 
@@ -2652,7 +2652,7 @@ What auth mechanism for the Phase 2.5 contact portal?
 3. Magic-link + OAuth in parallel ... contact chooses at login; UX complexity higher
 4. Different ... you tell me
 
-#### Q3.7: Transparency export rate limits
+#### Q3.7: Transparency export rate limits  →  **LOCKED as D-030**
 
 What rate limits for `/v1/contacts/{id}/export` and `/v1/portal/me/export`?
 
@@ -2661,7 +2661,7 @@ What rate limits for `/v1/contacts/{id}/export` and `/v1/portal/me/export`?
 3. Phase 2.5 portal-self-service: 1 per contact per 7d ... longer cooldown; reduces support load for accidental re-requests
 4. Different ... you tell me
 
-#### Q3.8: Denormalized `contacts.organization_id` retention (post-D-023 atomic rename)
+#### Q3.8: Denormalized `contacts.organization_id` retention (post-D-023 atomic rename)  →  **LOCKED as D-031**
 
 Phase 2.0 Migration 021 atomically renames `contacts.company_id` to `contacts.organization_id`. Once `contact_states` is the canonical source of truth for "what organization(s) does a contact belong to," should the column on `contacts` be:
 
