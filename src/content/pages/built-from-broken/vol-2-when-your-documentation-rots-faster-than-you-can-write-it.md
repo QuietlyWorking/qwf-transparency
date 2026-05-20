@@ -1,6 +1,6 @@
 ---
 title: "Built from Broken: Vol. 2"
-slug: "when-your-documentation-rots-faster"
+slug: "vol-2-when-your-documentation-rots-faster-than-you-can-write-it"
 pillar: "built-from-broken"
 description: "Your runbooks describe what should exist... not what does. How we turned documentation into a deployment artifact so it can't drift from reality."
 publishDate: "2026-04-11"

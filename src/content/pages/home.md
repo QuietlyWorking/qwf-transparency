@@ -31,13 +31,13 @@ isHome: true
 ## Built from Broken
 *Real problems we face running AI-powered nonprofit operations... and the real solutions we build. Every fix exists because something failed first. We show the receipts.*
 
-- [Vol 1 — When Your AI Agent Keeps Forgetting What It Already Knows](/built-from-broken/when-your-ai-agent-keeps-forgetting/) — How a 50-line Python hook stopped our AI agent from repeatedly ignoring its own documentation
-- [Vol 2 — When Your Documentation Rots Faster Than You Can Write It](/built-from-broken/when-your-documentation-rots-faster/) — How we turned documentation into a deployment artifact so our runbooks stop lying about what's actually deployed
-- [Vol 3 — When Your AI Agent Hallucinates Calendar Facts](/built-from-broken/when-your-ai-agent-hallucinates-calendar-facts/) — How a PreToolUse hook catches fabricated day-of-week names before they reach emails, files, or any output
-- [Vol 4 — When Your AI Agent Breaks Your Other AI Agent](/built-from-broken/when-your-ai-agent-breaks-your-other-ai-agent/) — How self-resolving infrastructure prevents multi-agent resource collisions from becoming outages
-- [Vol 5 — When Your Capture System Doesn't Capture You Back](/built-from-broken/vol-5-when-your-capture-system-doesn-t-capture-you-back/) — How a UserPromptSubmit hook turned a static issue tracker into a trusted GTD inbox by surfacing open items the moment you mention an app
-- [Vol 6 — When Every New Chat Silently Spawns a Helper You Rarely Use](/built-from-broken/vol-6-when-every-new-chat-silently-spawns-a-helper-you-rarely-use/) — How swapping an MCP server from stdio to hosted HTTP transport reclaimed gigabytes of idle RAM across every concurrent chat session
-- [Vol 7 — When You're About to Erode the Thing You Built the Framework to Protect](/built-from-broken/vol-7-when-you-re-about-to-erode-the-thing-you-built-the-framework-to-protect/) — How encoding organizational values into machine-readable schemas loaded into the agent's context every session catches leader drift before it silently re-frames the mission
+- [Vol 1 ... When Your AI Agent Keeps Forgetting What It Already Knows](/built-from-broken/vol-1-when-your-ai-agent-keeps-forgetting-what-it-already-knows/) — How a 50-line Python hook stopped our AI agent from repeatedly ignoring its own documentation
+- [Vol 2 ... When Your Documentation Rots Faster Than You Can Write It](/built-from-broken/vol-2-when-your-documentation-rots-faster-than-you-can-write-it/) — How we turned documentation into a deployment artifact so our runbooks stop lying about what's actually deployed
+- [Vol 3 ... When Your AI Agent Hallucinates Calendar Facts](/built-from-broken/vol-3-when-your-ai-agent-hallucinates-calendar-facts/) — How a PreToolUse hook catches fabricated day-of-week names before they reach emails, files, or any output
+- [Vol 4 ... When Your AI Agent Breaks Your Other AI Agent](/built-from-broken/vol-4-when-your-ai-agent-breaks-your-other-ai-agent/) — How self-resolving infrastructure prevents multi-agent resource collisions from becoming outages
+- [Vol 5 ... When Your Capture System Doesn't Capture You Back](/built-from-broken/vol-5-when-your-capture-system-doesn-t-capture-you-back/) — How a UserPromptSubmit hook turned a static issue tracker into a trusted GTD inbox by surfacing open items the moment you mention an app
+- [Vol 6 ... When Every New Chat Silently Spawns a Helper You Rarely Use](/built-from-broken/vol-6-when-every-new-chat-silently-spawns-a-helper-you-rarely-use/) — How swapping an MCP server from stdio to hosted HTTP transport reclaimed gigabytes of idle RAM across every concurrent chat session
+- [Vol 7 ... When You're About to Erode the Thing You Built the Framework to Protect](/built-from-broken/vol-7-when-you-re-about-to-erode-the-thing-you-built-the-framework-to-protect/) — How encoding organizational values into machine-readable schemas loaded into the agent's context every session catches leader drift before it silently re-frames the mission
 
 ## Tools
 These are the tools that the #QWU uses.

@@ -1,6 +1,6 @@
 ---
 title: "Built from Broken: Vol. 1"
-slug: "when-your-ai-agent-keeps-forgetting"
+slug: "vol-1-when-your-ai-agent-keeps-forgetting-what-it-already-knows"
 pillar: "built-from-broken"
 description: "Your agent has the docs. It just doesn't read them. A 50-line Python hook that fires before every prompt... and the Self-Annealing Triad that makes it stick."
 publishDate: "2026-04-08"

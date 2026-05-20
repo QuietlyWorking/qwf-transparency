@@ -1,6 +1,6 @@
 ---
 title: "Built from Broken: Vol. 3"
-slug: "when-your-ai-agent-hallucinates-calendar-facts"
+slug: "vol-3-when-your-ai-agent-hallucinates-calendar-facts"
 pillar: "built-from-broken"
 description: "The agent had the date right. It fabricated the day name. A PreToolUse hook that blocks tool calls when calendar math doesn't add up."
 publishDate: "2026-04-12"
