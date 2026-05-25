@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-05-20"
+modifiedDate: "2026-05-25"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-05-20 04:47 | Source version: 5.48
+> Generated: 2026-05-25 01:07 | Source version: 5.49
 
 # QWU Backoffice User Manual
 
@@ -4605,8 +4605,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.48 by generate_public_manual.py"
-generated: "2026-05-20 04:47"
+source: "Auto-generated from private manual v5.49 by generate_public_manual.py"
+generated: "2026-05-25 01:07"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5214,6 +5214,26 @@ The Ez Terminal demonstrates several teachable concepts:
 **Phase 2 forward:** Credential vault MCP server documented as architectural target in the brainstorm doc §12 (`002 Projects/_Chat Leak Prevention/Chat-Leak-Prevention-Brainstorm.md`). Triggered by 90-day evaluation outcome. ~20-30hr scope, deferred until Phase 1 earns its place.
 
 **90-day evaluation reminder:** paired Alerts-calendar event for 2026-08-18 11:00 AM Pacific fires automatically; kickoff prompt at `002 Projects/_Chat Leak Prevention/Kickoff Prompts/chat-leak-prevention-90-day-evaluation-kickoff.md` resumes evaluation cleanly.
+
+### MP Training Opportunities ⭐
+
+This Phase 1 build (2026-05-19 → 2026-05-20) produced an unusually rich set of teachable units across security, testing, and systems-design skills.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Permission denies in user-level `~/.claude/settings.json` (declarative Read/Bash pattern syntax) | Declarative-over-imperative security; scoped enforcement (user vs project); graceful degradation philosophy | Beginner |
+| Two-pass safe SELECT pattern (`safe_select_jsonb.py`: `--inspect` then `--allowlist`) | Forced inspection discipline; allowlist-over-blocklist thinking; the alt-name-coverage trap (Incident #2 root cause) | Intermediate |
+| Sealed-destination wrapper (`safe_env_read.py`: `--to` mode 0600 or `--exec` env propagation) | Unix file modes; `os.open()` with O_CREAT\|O_TRUNC; `os.execvpe()` for subprocess env injection; refuse-overwrite-without-force | Intermediate |
+| Vendor-prefix regex design with positive + negative tests per pattern (`credential_patterns.py`) | Regex anchoring + length constraints + character classes; test-gated additions prevent false-positive drift | Intermediate |
+| Stop / SubagentStop hook design (`credential_chat_scan.py`) | Claude Code hook contract; JSONL transcript parsing; content-block traversal; graceful failure (always exit 0 even on error) | Advanced |
+| pytest patterns (monkeypatch, tmp_path, capsys, subprocess testing, importing scripts as modules via `sys.path`) | Industry-standard testing tooling; the 74-test suite is reusable as a study reference | Beginner-Intermediate |
+| Hash-gated config for drift detection (`safe_jsonb_allowlists.yml` schema_hash check) | Cryptographic-fingerprint-based drift detection; "config that catches its own staleness" pattern | Advanced |
+| Defense-in-depth observability trade-off (the discipline layer blocked hook verification through behavioral test) | System-level security thinking: two interlocking defenses can each prevent the other from being tested | Advanced |
+| Brainstorm → Directive graduation (with §11 Decision Record archived, directive becomes operational SOP) | Knowledge-management lifecycle; the "documented but unbuilt" anti-pattern detection (gap #1) | Intermediate |
+| Summary-gap-with-detail-file pattern (`audit_system.check_credential_patterns_coverage()` emits 1 row, writes 77 details to file) | Monitoring noise control; one Discord line per audit period, full forensic detail persisted to disk | Intermediate |
+| Postmortem-on-test-alert discipline (deliberate verification alerts still get documented) | Forensic integrity over operational convenience; the leak_alerts.jsonl chain stays clean | Intermediate |
+
+These could anchor a **"Security Engineering Fundamentals"** curriculum track for MP students. Each pattern has a concrete artifact in the repo (script + tests) that students can study, modify, and re-test.
 
 ---
 
@@ -10988,4 +11008,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-05-20 04:47 (v5.48)*
+*Last updated: 2026-05-25 01:07 (v5.49)*
