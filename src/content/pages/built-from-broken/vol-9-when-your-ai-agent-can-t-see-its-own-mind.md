@@ -94,7 +94,7 @@ A PostToolUse hook that fires after every tool call. It reads the transcript JSO
 
 Three thresholds, not five. We picked 70 / 90 / 95 after a design conversation that started at "alert every 10%" and ended at "every alert costs agent attention; redundant alerts become noise; pick the meaningful transitions." The 70% alert is awareness-only. The 90% alert is HANDOFF MODE. The 95% alert is EMERGENCY HANDOFF.
 
-The 90% line is empirically calibrated. The `/session-wrap-up` skill (which commits in-flight work, writes a fresh-session kickoff prompt, updates memory, etc.) consumes less than 10% of context budget in real-world runs. So 90% is the bulletproof line. Earlier-than-90% lines waste productive capacity for a safety margin the system has proven it doesn't need.
+The 90% line is empirically calibrated. The [`/session-wrap-up` skill](https://transparency.quietlyworking.org/open-playbook/user-manual/#qcm--qwu-context-manager) (which commits in-flight work, writes a fresh-session kickoff prompt, updates memory, etc.) consumes less than 10% of context budget in real-world runs. So 90% is the bulletproof line. Earlier-than-90% lines waste productive capacity for a safety margin the system has proven it doesn't need.
 
 ### Piece 2: Tiered Wrap-Up
 
