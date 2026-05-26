@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-05-25 05:02 | Source version: 5.49
+> Generated: 2026-05-25 23:41 | Source version: 5.50
 
 # QWU Backoffice User Manual
 
@@ -1278,9 +1278,11 @@ Claude Code maintains persistent memory across conversations through a layered s
 
 ### QCM — QWU Context Manager
 
-QCM is a homegrown context management system (v2.1.0) that automatically recovers working state after context compaction and measures agent efficiency. Built as 5 Python hook scripts with zero external dependencies (no npm packages, no MCP servers).
+QCM is a homegrown context management system (v2.2.1, Session 378) that drives intentional fresh-session handoff before compaction AND recovers working state if compaction happens anyway. Built as 7 Python hook scripts with zero external dependencies (no npm packages, no MCP servers).
 
-**What it solves:** During long sessions, Claude Code's context window fills and compacts. When this happens, Claude loses track of which files were being edited, what tasks remained, what decisions were made, and what errors were diagnosed. QCM captures all of this automatically and restores it after compaction.
+**v2.2.0+ operating model:** PRIMARY goal is to AVOID compaction entirely by triggering session handoff at 90% context fill. Compaction is lossy summarization that silently degrades agent recall (specific code, line numbers, exact decisions, rejected approaches, the reasoning chain that led to a decision all get fuzzed). Long context also degrades attention quality even within the stated window. A fresh session at 100% capacity outperforms a compacted session every time. The Stop-hook snapshot system is now the SECONDARY safety net for cases where the handoff discipline fails.
+
+**What it solves:** During long sessions, Claude Code's context window fills. v2.2.0+ triggers an intentional handoff at 90% (via `/session-wrap-up`) so the next session starts fresh with full reasoning capacity. If compaction fires anyway, the v2.1.0 snapshot system still recovers state.
 
 **Architecture:**
 
@@ -1291,6 +1293,8 @@ QCM is a homegrown context management system (v2.1.0) that automatically recover
 | `qcm_session_restore.py` | SessionStart | Injects the snapshot as additionalContext after compaction |
 | `qcm_output_compressor.py` | PostToolUse (Bash) | Compresses large outputs (>3KB) — saves full output to disk, returns summary to context |
 | `qcm_redundancy_detector.py` | Stop (after snapshot) | Detects repeated file reads and searches within a session, tracks per-session and cross-session metrics |
+| `qcm_threshold_monitor.py` (v2.2.0) | PostToolUse | Fires 70/90/95% context-fill alerts using ground-truth token counts from transcript JSONL `usage` blocks. Drives intentional handoff before compaction |
+| `qcm_precompact_handler.py` (v2.2.0) | PreCompact | Defensive fallback: clears threshold_alerts + wrap_up_completions if compaction fires anyway (signal that handoff discipline failed) |
 
 **Priority tiers:**
 
@@ -1303,14 +1307,23 @@ QCM is a homegrown context management system (v2.1.0) that automatically recover
 | Git status | Uncommitted changes ("in-flight" work) | 500 bytes |
 | P4 (low) | File reads, searches | Dropped from snapshot |
 
-**Recommended all-day workflow — task-boundary segments:**
-- Work in focused segments (45-90 min, 0-1 compactions each), segmented by **concern boundary** (frontend / edge functions / scripts), not by time
-- Run `/session-wrap-up` at each boundary to persist state, then start a new chat
-- Git commits are the handoff between sessions — more reliable than any 3KB snapshot
-- At each new chat, state the goal clearly: "We finished X, now I need Y, relevant files are Z"
-- QCM is a **safety net** for mid-task compaction, not a strategy for marathon sessions
-- Exception: deep cross-stack debugging that requires the full mental model — stay in one chat for diagnosis, then segment the implementation
-- **Why segments beat marathons:** Compaction preserves "what" (files, scripts, commits) but destroys "why" (reasoning chains, tradeoff analysis, discovered constraints). After 3+ compactions, Claude operates on summaries of summaries with false confidence. Fresh sessions at 100% capacity outperform degraded sessions every time.
+**Threshold ladder (v2.2.0+) — handoff before compaction:**
+
+| Threshold | Hook Alert | Agent Action |
+|-----------|-----------|--------------|
+| 70% | Awareness | Note marker; identify a clean commit boundary in next stretch. **No new long-running background sub-agents past this point** — they may not return before 90% handoff |
+| 90% | **HANDOFF MODE** | Wrap up at next safe point. No new work. Safe = no uncommitted + no in-flight sub-agents + not mid-response. Run `/session-wrap-up` when safe |
+| 95% | **EMERGENCY** | Compaction imminent. Run `/session-wrap-up --scope=essential` (Tier 1 only; Tier 2 deferred to fresh session via Step 7 kickoff prompt) |
+
+Token counting uses ground-truth from the Anthropic API (transcript JSONL `usage` block: `input_tokens + cache_read_input_tokens + cache_creation_input_tokens`). No estimation. Context window detected via `QCM_CONTEXT_WINDOW` env var > hook stdin `context_window` field (future-proof) > `DEFAULT_CONTEXT_WINDOW = 1_000_000` constant. Per-session cache in `session_context_window` table.
+
+**Recommended all-day workflow — handoff at 90%, not marathon sessions:**
+- Let the threshold monitor drive session boundaries; trust the 90% alert
+- Run `/session-wrap-up` at the alert to write Step 7 kickoff prompt → fresh session continues with full capacity
+- Git commits + Step 7 kickoff prompt = the handoff (more reliable than any snapshot)
+- Tier 1 / Tier 2 split: `--scope=essential` protects only non-reconstructable work (commits, memory, System Status, kickoff, sentinel) at 95%; Tier 2 (user manual, transparency sync, AAR) deferred and listed for fresh session
+- Snapshot system remains as safety net for cases where handoff discipline fails (PreCompact hook fires = that signal)
+- **Why handoff beats compaction:** Compaction preserves "what" (files, scripts, commits) but destroys "why" (reasoning chains, tradeoff analysis, discovered constraints). After 3+ compactions, Claude operates on summaries of summaries with false confidence. Fresh sessions at 100% capacity outperform degraded sessions every time. v2.2.0 operationalizes this preference rather than relying on user discipline.
 
 **File locations:**
 - Hook scripts: `.claude/hooks/qcm_*.py`
@@ -1318,9 +1331,11 @@ QCM is a homegrown context management system (v2.1.0) that automatically recover
 - Snapshots: `.tmp/context/snapshots/snapshot_{session_id}.md`
 - Compressed outputs: `.tmp/context/compressed/{hash}.txt`
 - Redundancy reports: `.tmp/context/redundancy/redundancy_{session_id}.md` (per-session) and `cross_session_patterns.md` (cross-session "engram candidates")
-- Redundancy metrics: `redundancy_metrics` table in `session_events.db`
+- DB tables: `sessions`, `events`, `compressed_outputs`, `redundancy_metrics`, `threshold_alerts` (v2.2.0), `wrap_up_completions` (v2.2.0), `session_context_window` (v2.2.1)
 - Hook configuration: `.claude/settings.json` (hooks section)
 - Directive: `005 Operations/Directives/context_management.md`
+
+**Sibling system: Parallel-Session Worktrees (v1.0.0, Session 378)** ... structural fix for the parallel-session-git-collision class of bug. When 2+ Claude sessions work the same repo simultaneously, broader `git add` operations in one session can sweep uncommitted edits from another into the wrong commit. Helper: `005 Operations/Execution/qcm_worktree_spawn.py` (create/list/info/cleanup/prune subcommands). Each parallel session spawns at `/home/<VM_USER>/qwu_backOffice_worktrees/<label>/` on throwaway branch `session/<label>` (separate working tree + index, shared `.git` store). Full SOP: `005 Operations/Directives/parallel_session_worktrees.md`. Trigger criteria: any planned parallel session >15 min, any orchestrator-spawned sub-agent that will commit, any time two terminals are working the repo concurrently.
 
 **Redundancy detection (v2.1.0):** Inspired by DeepSeek's Engram paper ("Conditional Memory via Scalable Lookup"), the redundancy detector measures how often the agent re-reads the same file or re-runs the same search within a session — wasted "compute" that could be served from cache. Baseline (52 sessions): 29.2% average redundancy ratio, ~9,471 wasted tokens/session. Files read in 5+ distinct sessions are flagged as "engram candidates" for potential persistent caching. Metrics sync daily to HQ Supabase via `sync_hq_agent_efficiency.py` and display on the HQ Command Center dashboard.
 
@@ -4605,8 +4620,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.49 by generate_public_manual.py"
-generated: "2026-05-25 05:02"
+source: "Auto-generated from private manual v5.50 by generate_public_manual.py"
+generated: "2026-05-25 23:41"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11008,4 +11023,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-05-25 05:02 (v5.49)*
+*Last updated: 2026-05-25 23:41 (v5.50)*

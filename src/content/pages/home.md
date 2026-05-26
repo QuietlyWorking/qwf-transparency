@@ -38,6 +38,8 @@ isHome: true
 - [Vol 5 ... When Your Capture System Doesn't Capture You Back](/built-from-broken/vol-5-when-your-capture-system-doesn-t-capture-you-back/) — How a UserPromptSubmit hook turned a static issue tracker into a trusted GTD inbox by surfacing open items the moment you mention an app
 - [Vol 6 ... When Every New Chat Silently Spawns a Helper You Rarely Use](/built-from-broken/vol-6-when-every-new-chat-silently-spawns-a-helper-you-rarely-use/) — How swapping an MCP server from stdio to hosted HTTP transport reclaimed gigabytes of idle RAM across every concurrent chat session
 - [Vol 7 ... When You're About to Erode the Thing You Built the Framework to Protect](/built-from-broken/vol-7-when-you-re-about-to-erode-the-thing-you-built-the-framework-to-protect/) — How encoding organizational values into machine-readable schemas loaded into the agent's context every session catches leader drift before it silently re-frames the mission
+- [Vol 8 ... When Three Parallel Agents Crash and the System Still Holds](/built-from-broken/vol-8-when-three-parallel-agents-crash-and-the-system-still-holds/) — How atomic migrations, a vault auto-commit cron, and a verify-first triage runbook turned a six-hour multi-agent crash recovery into a ninety-minute forensic pass
+- [Vol 9 ... When Your AI Agent Can't See Its Own Mind](/built-from-broken/vol-9-when-your-ai-agent-can-t-see-its-own-mind/) — How transcript-JSONL ground-truth token counts, a 70/90/95 handoff ladder, a tiered emergency wrap-up, and per-session git worktrees keep long agent sessions sharp and parallel sessions structurally isolated
 
 ## Tools
 These are the tools that the #QWU uses.
