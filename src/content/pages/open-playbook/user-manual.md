@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-05-26"
+modifiedDate: "2026-05-27"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-05-26 22:20 | Source version: 5.51
+> Generated: 2026-06-02 19:00 | Source version: 5.52
 
 # QWU Backoffice User Manual
 
@@ -195,6 +195,13 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 - Validates HQ Command Center's `google-calendar-events` Supabase edge function
 - Auto-redeploys known-good source via Supabase CLI if broken
 - Posts to Discord `#system-status` (healthy/healed/still-broken)
+
+**SEO Data Health Checks** ⭐ NEW (2026-05-27)
+- `check_seo_silent_death.py` runs daily at 13:05 PT via cron on claude-dev
+- **Deliberately VM-cron, not n8n** — the alerter must be independent of n8n itself, so an n8n outage can never silence the alarm about the n8n outage
+- Three detector families: (1) data freshness — alerts when QWR/QSP SEO tables (`seo_position_history`, `seo_citation_tracking`, `qsp_seo_health`, `qsp_analytics_traffic`) miss their expected cadence; (2) DataForSEO balance floor — alerts when the account drops below $10; (3) active-but-empty — flags any n8n workflow `active=True` whose target table is stale or empty (gated on table freshness so n8n's pruned execution history can't false-positive)
+- Posts to Discord `#system-status` only when something trips; self-events land in `integration_events` (the alerter is itself observable)
+- Built after the 2026-05-27 audit found three live silent failures (position tracker dead 11 weeks on a DataForSEO 402, Vista Social gateway NXDOMAIN since March, GA-sync deployed-but-not-feeding). Operationalizes the "active/deployed is NOT producing — probe the output table" rule (`memory/feedback_active_deployed_not_producing_probe_output.md`).
 
 **Agent Memory Health Checks**
 - `audit_memory_health.py` runs daily at 5 AM PT via cron on claude-dev
@@ -4620,8 +4627,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.51 by generate_public_manual.py"
-generated: "2026-05-26 22:20"
+source: "Auto-generated from private manual v5.52 by generate_public_manual.py"
+generated: "2026-06-02 19:00"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11023,4 +11030,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-05-26 22:20 (v5.51)*
+*Last updated: 2026-06-02 19:00 (v5.52)*
