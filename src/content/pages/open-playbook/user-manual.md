@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-06-11 06:09 | Source version: 5.53
+> Generated: 2026-06-11 07:15 | Source version: 5.54
 
 # QWU Backoffice User Manual
 
@@ -4630,8 +4630,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.53 by generate_public_manual.py"
-generated: "2026-06-11 06:09"
+source: "Auto-generated from private manual v5.54 by generate_public_manual.py"
+generated: "2026-06-11 07:15"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -8918,6 +8918,18 @@ OUTPUT SURFACES
   └── CLI → model_config.py --usage, azure_costs.py, collect_apify_costs.py
 ```
 
+### Azure Nonprofit Credit Tracking
+
+**Added: June 11, 2026**
+
+The $2,000/year Azure nonprofit sponsorship credit is tracked by `check_azure_credit_balance.py` (weekly cron, Mon 7 AM Pacific) so exhaustion never lands as a surprise credit-card charge. Key mechanics learned from the 2026-06 investigation:
+
+- **Billing structure:** MCA billing account/profile ("Chaplain TIG Heaslet"); credits are granted as 12-month lots. Past card charges traced to a **32-day gap between grant lots** (old lot expired 3/13/2026 mostly forfeited; new lot started 4/14/2026), NOT to SKU eligibility or overflow.
+- **Two modes:** `estimate` (live; `AZURE_CREDIT_GRANT_AMOUNT` + `AZURE_CREDIT_GRANT_START` in `.env`, balance = grant minus Cost Management spend since start) and `api` (exact lot data; requires the `qwu-vm-automation` SP to hold a Reader billing role, which is a separate ACL from Azure RBAC — auto-upgrades when granted).
+- **Outputs:** Discord `#system-status` (🟢/🟡 <3 mo runway/🔴 <1 mo/⛔ exhausted), HQ Ecosystem Vitals widget (via single-row `hq_azure_credit` table in HQ Supabase), structured JSON.
+- **Operational date:** re-request the nonprofit grant well before each April 14 lot expiry to avoid another gap.
+- Sponsorship credits never cover Marketplace products, support plans, or savings plans/reservations (those bill the card directly).
+
 ### Cost Sources
 
 | Source | Monthly Cost | Collection Method | Granularity |
@@ -11033,4 +11045,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-06-11 06:09 (v5.53)*
+*Last updated: 2026-06-11 07:15 (v5.54)*
