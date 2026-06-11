@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-06-02 19:00 | Source version: 5.52
+> Generated: 2026-06-11 06:09 | Source version: 5.53
 
 # QWU Backoffice User Manual
 
@@ -3294,6 +3294,9 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 | `Intl.DateTimeFormat` API | Browser APIs, locale formatting, IANA timezones | Intermediate |
 | Systematic Codebase Audit | Pattern matching, regex search, impact analysis | Intermediate |
 | Prevention Architecture | Convention design, agent instruction, defense-in-depth | Advanced |
+| SEO Silent-Death Detector (2026-05-27) | Cron jobs, Discord webhooks, Supabase PostgREST probes, "active ≠ producing" debugging mindset, freshness-gated alerts | Intermediate |
+| Senior-Reviewer Multi-Agent Fan-Out | Sub-agent orchestration, independent fact-checking with probes, commit-protocol discipline (SR owns commits), ground-truth verification | Advanced |
+| n8n Workflow Deploy + Cleanup | scp → docker cp → `import:workflow` → `publish:workflow` → restart pattern; `isArchived=true` over delete (reversible); export-before-archive for reversibility | Intermediate |
 
 ---
 
@@ -4627,8 +4630,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.52 by generate_public_manual.py"
-generated: "2026-06-02 19:00"
+source: "Auto-generated from private manual v5.53 by generate_public_manual.py"
+generated: "2026-06-11 06:09"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11030,4 +11033,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-06-02 19:00 (v5.52)*
+*Last updated: 2026-06-11 06:09 (v5.53)*
