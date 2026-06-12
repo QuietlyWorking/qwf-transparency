@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-06-11 07:20 | Source version: 5.54
+> Generated: 2026-06-12 01:15 | Source version: 5.56
 
 # QWU Backoffice User Manual
 
@@ -4630,8 +4630,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.54 by generate_public_manual.py"
-generated: "2026-06-11 07:20"
+source: "Auto-generated from private manual v5.56 by generate_public_manual.py"
+generated: "2026-06-12 01:15"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -4691,6 +4691,37 @@ Potential enhancements:
 - ~~Pre-meeting prep emails~~ → ✅ Built (`send_meeting_prep_email.py` — preference footer, opt-out check)
 - Meeting pattern analytics
 - Voice capture for quick context additions
+
+---
+
+## QWF Email Transport Layer (SES Primary) ⭐ NEW
+
+### Overview
+
+All backoffice Python email senders route through a single shared transport module: `005 Operations/Execution/qwf_email_transport.py`. Amazon SES is the primary provider; Microsoft Graph is a gated fallback. Born 2026-06-11 during the M365 tenant block, kept permanently so supporter-facing email never again depends on a single vendor.
+
+### Why It Exists (the 2026-06-11 incident)
+
+Microsoft retired the donated nonprofit Business Premium grant (effective 2025-07-01); QWF's subscription auto-canceled at renewal. The Tenant External Recipient Rate Limit (TERRL) quota is derived from purchased license count, so it collapsed to zero and ALL external sends bounced with `550 5.7.233` ... while internal mail and Graph API reads kept working, masking the outage from internal-only checks. Graph sendMail returned 202-accepted and then bounced (a lying 202). Twenty sender scripts were rerouted to SES the same day.
+
+### How It Works
+
+| Piece | Detail |
+|---|---|
+| API | `send_email(to, subject, html_body, text_body, from_persona, ...)` returns `{success, provider_used, message_id, error}` |
+| Personas | `ezer` (Ezer Aión), `tig`, `noreply` ... locked by the scoped IAM policy |
+| Provider routing | `QWF_EMAIL_PRIMARY_PROVIDER` (ses) + `QWF_EMAIL_GRAPH_FALLBACK` (off during M365 degradation; on = true dual-provider failover) |
+| BCC convention | EZER_BCC_EMAIL with recipient==bcc guard, owned by the transport (callers never add their own) |
+| Observability | SES config set `backoffice-emails` → SNS → QSP `ses-event-webhook` → `integration_events` |
+| Suppression | Shared AWS account-level list, mirrored hourly to HQ (Phase 2B infrastructure) |
+
+### Canary
+
+`check_email_transport_health.py` runs via n8n (`QWFEmailCanary01`) every 6 hours: (1) SES leg sends to the SES mailbox simulator and verifies the `email.delivered` event lands in `integration_events`; (2) M365 recovery leg sends a Graph probe externally and reads the NDR ... NDR present = still blocked (silent), NDR absent = recovery detected (Discord alert). State file: `.tmp/email_transport_canary_state.json`.
+
+### Rules for New Sender Scripts
+
+Never write inline Graph sendMail or smtplib code. Import the transport. Footers, opt-out checks, and templates stay in the calling script (Enhancement/Exempt classification is per-script policy). Full reference: `005 Operations/Directives/qwf_email_infrastructure.md` §Backoffice Transactional Rerouting.
 
 ---
 
@@ -11045,4 +11076,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-06-11 07:20 (v5.54)*
+*Last updated: 2026-06-12 01:15 (v5.56)*
