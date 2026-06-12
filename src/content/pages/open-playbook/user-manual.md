@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-06-12 01:15 | Source version: 5.56
+> Generated: 2026-06-12 01:19 | Source version: 5.56
 
 # QWU Backoffice User Manual
 
@@ -4631,7 +4631,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.56 by generate_public_manual.py"
-generated: "2026-06-12 01:15"
+generated: "2026-06-12 01:19"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -4722,6 +4722,15 @@ Microsoft retired the donated nonprofit Business Premium grant (effective 2025-0
 ### Rules for New Sender Scripts
 
 Never write inline Graph sendMail or smtplib code. Import the transport. Footers, opt-out checks, and templates stay in the calling script (Enhancement/Exempt classification is per-script policy). Full reference: `005 Operations/Directives/qwf_email_infrastructure.md` §Backoffice Transactional Rerouting.
+
+### Training Opportunities
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Email outage diagnosis (NDR forensics) | SMTP error codes, SPF/DKIM/DMARC, reading bounce diagnostics, internal-vs-external probe design | ⭐⭐⭐ |
+| Provider abstraction (transport seam) | Adapter pattern, failover chains, kill-switch env flags, structured returns | ⭐⭐⭐ |
+| SES + SNS + webhook event pipeline | AWS IAM least-privilege, SES config sets, SNS subscriptions, event-driven observability | ⭐⭐⭐⭐ |
+| Canary monitoring design | Health probes, state files, alert-on-change vs alert-always, simulator endpoints | ⭐⭐ |
 
 ---
 
@@ -11076,4 +11085,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-06-12 01:15 (v5.56)*
+*Last updated: 2026-06-12 01:19 (v5.56)*
