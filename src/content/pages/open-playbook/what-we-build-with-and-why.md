@@ -1,12 +1,12 @@
 ---
-title: "What We Build With... And Why"
+title: "Don't Panic"
 slug: "what-we-build-with-and-why"
 pillar: "open-playbook"
 description: "*A field guide to our tech stack, for every kind of nerd.*"
 tags: ["how-to", "architecture", "stack", "sveltekit", "cloudflare", "supabase", "ai", "ecosystem", "qsp"]
 isHome: false
 ---
-# What We Build With... And Why
+# Don't Panic
 
 *A field guide to our tech stack, for every kind of nerd.*
 
