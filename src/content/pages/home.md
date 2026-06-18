@@ -43,6 +43,7 @@ isHome: true
 
 ## Tools
 These are the tools that the #QWU uses.
+- [What We Build With (And Why)](/open-playbook/what-we-build-with-and-why/) — Our whole tech stack explained at three levels, from Hobbit to Wizard... the trailhead for everything else here
 - [The QWU Tool Shed](/open-playbook/the-tool-shed/) — All 48+ tools we use, scored on Heart, Soul, and 12 other metrics
 - [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) — Free and discounted tech programs for nonprofits, with honest application notes
 - [[Code and Tips Swipe Page]] — Code snippets and tips from our work
