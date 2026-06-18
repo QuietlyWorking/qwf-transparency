@@ -1,5 +1,5 @@
 ---
-title: "Don't Panic"
+title: "What We Build With... And Why"
 slug: "what-we-build-with-and-why"
 pillar: "open-playbook"
 description: "*A field guide to our tech stack, for every kind of nerd.*"
