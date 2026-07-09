@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-06-29"
+modifiedDate: "2026-07-09"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-06-29 16:52 | Source version: 5.57
+> Generated: 2026-07-09 00:35 | Source version: 5.58
 
 # QWU Backoffice User Manual
 
@@ -1467,6 +1467,20 @@ Navigate and edit commands without arrow keys:
 | `git push` | Send to remote |
 | `git log --oneline -5` | Recent commits |
 | `git diff` | See unstaged changes |
+
+### Em-Dash Pre-Commit Gate (safety net)
+
+A deterministic Layer-3 gate keeps our-voice em-dashes (the ABSOLUTE ban ... use the ellipsis) from drifting into a commit, so the rule no longer relies on memory alone.
+
+| Piece | Path | Role |
+|-------|------|------|
+| Detector | `005 Operations/Execution/check_emdash_staged.py` | Scans staged files (`git diff --cached`); exit 1 if any our-voice em-dash found, 0 if clean. Read-only. |
+| Hook | `.claude/hooks/emdash_precommit_gate.py` | PreToolUse (Bash) scoped to `git commit`; warn-and-confirm (exit 2 blocks, stderr shown so the agent fixes). |
+| Reference | `memory/reference_emdash_precommit_gate.md` | Design + hardening backlog. |
+
+**Asymmetric rule it honors** (per `memory/feedback_two_rule_asymmetric_em_dash.md`): the ban is a VOICE rule (author = us), not a data-handling rule. **Exempt (preserve, never flag):** any `.../Reviews/` path (reviewer/audit artifacts), supporter-source subtrees (folders with a `_SUPPORTER-SYSTEM.md` marker + known supporter projects ... that content is the supporter's voice), a file whose head contains the literal `em-dash-exempt` opt-out, and the character-as-label case (a line spelling "em dash" while mentioning the character). **Enforced everywhere else** our voice is staged: canonical/publishable/internal docs, our-voice code comments, memory files, drafts.
+
+**Scope note:** the hook fires ONLY when the agent runs `git commit` via Bash. It never touches the vault auto-committer (which commits outside the agent tool loop), so vault sweeps are untouched. Bypass a genuine missed-exemption with the standard `git commit --no-verify`.
 
 ### VS Code Remote Shortcuts
 
@@ -3435,7 +3449,7 @@ The L4G system includes:
 - **Mobile Admin Navigation:** Admin bottom nav upgraded from 5 hardcoded items to a "More" bottom sheet exposing all 12 admin pages. Eliminates dead-end navigation on mobile.
 - **Postcard Capacity Validation:** 3-level check (AdSizeSelector UX, client-side guard, server-side edge function) ensures total slots_used ≤ 16 columns. Prevents postcard overflow for multi-size ad bookings.
 - **Postcard Config Admin:** `/admin/postcard-config` — upload background/spine images per area/month to Supabase Storage `l4g-assets`
-- **Ezer Chat Guide:** Conversational AI widget on all public pages. `ezer-chat` edge function streams responses via Anthropic Messages API (Claude Opus 4.7, SSE, max_tokens 500). 5-part system prompt: Ezer identity/voice rules, L4G knowledge base (areas, pricing, volume discounts), dynamic area demographics (from `l4g_areas.demographics` JSONB when on area pages), navigation rules with `[NAV:/path]` token pattern for ask-then-navigate, guardrails. 8 React components in `src/components/ezer/`: Widget orchestrator, FAB (custom octopus, Deep Forest gradient, pulsing glow), Panel (desktop 380x520 fixed + mobile vaul Drawer 85vh), MessageList (auto-scroll, streaming cursor, three-dot thinking animation), Message (markdown-lite rendering, internal link detection, "Take me there" navigation button), Input (textarea, 500-char limit, Enter to send), Greeting (contextual quick-start chips by page type), ezer-utils (nav token extraction, link parsing). `EzerChatContext` (React Context + useReducer) wraps PublicLayout — state survives React Router navigation. Trust Tier 0: anonymous, ephemeral, session-scoped (crypto.randomUUID). Rate limit: 20 msgs/10min/IP. Conversation cap: 60 messages. Activity logged to HQ `hq_ezer_activity`. Secrets: `ANTHROPIC_API_KEY`, `HQ_SUPABASE_URL`, `HQ_SUPABASE_SERVICE_KEY` on L4G Supabase.
+- **Ezer Chat Guide:** Conversational AI widget on all public pages. `ezer-chat` edge function streams responses via Anthropic Messages API (Claude Opus 4.8 as of 2026-07-06, SSE, max_tokens 500). 5-part system prompt: Ezer identity/voice rules, L4G knowledge base (areas, pricing, volume discounts), dynamic area demographics (from `l4g_areas.demographics` JSONB when on area pages), navigation rules with `[NAV:/path]` token pattern for ask-then-navigate, guardrails. 8 React components in `src/components/ezer/`: Widget orchestrator, FAB (custom octopus, Deep Forest gradient, pulsing glow), Panel (desktop 380x520 fixed + mobile vaul Drawer 85vh), MessageList (auto-scroll, streaming cursor, three-dot thinking animation), Message (markdown-lite rendering, internal link detection, "Take me there" navigation button), Input (textarea, 500-char limit, Enter to send), Greeting (contextual quick-start chips by page type), ezer-utils (nav token extraction, link parsing). `EzerChatContext` (React Context + useReducer) wraps PublicLayout — state survives React Router navigation. Trust Tier 0: anonymous, ephemeral, session-scoped (crypto.randomUUID). Rate limit: 20 msgs/10min/IP. Conversation cap: 60 messages. Activity logged to HQ `hq_ezer_activity`. Secrets: `ANTHROPIC_API_KEY`, `HQ_SUPABASE_URL`, `HQ_SUPABASE_SERVICE_KEY` on L4G Supabase.
 - **Postal Route Explorer:** Two-panel interactive section on area detail page (between Demographics and Benefits). Left: scrollable route card list with animated reach counter, sort toggles, demographic chips. Right: Mapbox GL map with golden delivery area boundary (#C49A3C 3-layer glow), ZIP boundaries (Census TIGER GeoJSON, 10 ZIPs), custom route markers with stagger animation, fly-to on click, styled popup cards. Lazy-loaded (separate chunk, ~472KB gz). Graceful empty state when no route data. RPV West: 23 real EDDM routes (10,786 homes across 90274 + 90275, replacing 5 placeholder routes). Admin page at `/admin/postal-routes` (CRUD + bulk CSV import). Mapbox token: `VITE_MAPBOX_TOKEN` (GitHub secret set, URL-restricted to locals4good.org). `l4g_postal_routes` table with RLS (public SELECT + authenticated INSERT/UPDATE/DELETE). Unique constraint: `(area_id, zip_code, route_code)` — fixed from `(area_id, route_code)` to support same route codes across different ZIP codes.
 - **Visual Flow Specification (v1.0.1):** Design spec at `L4G-Visual-Flow-Specification-v1.0.md` — companion to Mailbox Walk Palette defining HOW to compose sections. Four systems: (1) Section Rhythm — 4 background lanes (Rest/Engage/Focus/Act) with rule: never same lane back-to-back, max 2 Focus per page, Act bookends only. (2) Card Hierarchy — 3 weights (Primary=dominant oversized, Standard=grid with sage border, Supporting=compact). (3) CTA Repetition — 4 touchpoints with escalating commitment, unique framing each. (4) Page Blueprints — 13-section landing page restructured around visitor psychology (questions answered in order visitors ask them), 9-section area detail page. Gradient Direction Rule: all L4G gradients must be 135deg dark-to-light. Implementation CSS utility classes included. **Hero section now matches the old WordPress site design (oldl4g.quietlyworking.org):** reduced top padding, removed CTA buttons/trust line below hero headline, hero card edge-to-edge via `.l4g-hero-card` class. All 13 section cards use the old site's floating card shadow style (`box-shadow: 0 10px 40px`, `border-radius: 30px`).
 - **Partner Tribute Page:** Dedicated story page at `/partners/printing4supercheap` (`PartnerPage.tsx`) honoring Printing4SuperCheap (P4SC) as L4G's ultimate partner. Includes: origin story (they offered Elite pricing before L4G had a name), blockquote from Chaplain TIG, "Journey of Every Postcard" 4-step visual, Jake Lorraine bio (Structure Marketing Inc., High Response Marketing ecosystem), CTA buttons to P4SC site + High Response Marketing + L4G areas. `PartnerSpotlight.tsx` card on landing page (heart icon, "Made Possible By", both P4SC name instances link to partner page). Entity file: `003 Entities/Organizations/Printing4SuperCheap.md`. P4SC does full-service EDDM: print, bundle, prep, ship to USPS. Will support nonprofit indicia once QWF obtains it.
@@ -4630,8 +4644,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.57 by generate_public_manual.py"
-generated: "2026-06-29 16:52"
+source: "Auto-generated from private manual v5.58 by generate_public_manual.py"
+generated: "2026-07-09 00:35"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11085,4 +11099,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-06-29 16:52 (v5.57)*
+*Last updated: 2026-07-09 00:35 (v5.58)*
