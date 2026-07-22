@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-07-09"
+modifiedDate: "2026-07-22"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-07-09 00:35 | Source version: 5.58
+> Generated: 2026-07-22 16:43 | Source version: 5.59
 
 # QWU Backoffice User Manual
 
@@ -648,13 +648,13 @@ Students completing this module will learn:
 
 The self-hosted n8n instance uses pinned version tags for stability.
 
-**Current Version:** 2.17.5 (upgraded 2026-04-23 from 2.14.2 — emergency security patch closing 6 advisories incl. 2 critical unauthenticated RCE)
+**Current Version:** 2.31.5 (upgraded 2026-07-22 from 2.17.5 — catch-up security upgrade closing 45 advisories, incl. the same-morning batch of 15 that 2.31.5 was released to patch)
 
 | Property | Value |
 |----------|-------|
-| Image | `docker.n8n.io/n8nio/n8n:2.17.5` |
+| Image | `docker.n8n.io/n8nio/n8n:2.31.5` |
 | Location | `~/n8n/docker-compose.yml` on qwu-n8n |
-| Monitor Workflow | "n8n Version Monitor" (checks Mondays 9 AM) |
+| Monitor | `monitor_n8n_releases.py` hourly cron :41 on backoffice VM (live version via SSH + GHSA advisories; replaced the retired "n8n Version Monitor" workflow 2026-07-21) |
 | Port Binding | `127.0.0.1:5678` (localhost only, Caddy proxies HTTPS) |
 
 **Security Hardening (2026-04-04):**
@@ -674,8 +674,8 @@ cd ~/n8n
 ~/scripts/backup_n8n_postgres.sh
 docker exec n8n-postgres pg_dump -U n8n n8n | gzip > backups/backup_pre_upgrade_$(date +%Y%m%d).sql.gz
 
-# 3. Update version in docker-compose.yml
-# Change: image: docker.n8n.io/n8nio/n8n:2.17.5
+# 3. Update version in docker-compose.yml (sed with .bak for instant rollback)
+# Change: image: docker.n8n.io/n8nio/n8n:<current>
 # To:     image: docker.n8n.io/n8nio/n8n:X.Y.Z
 
 # 4. Pull new image and restart
@@ -4644,8 +4644,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.58 by generate_public_manual.py"
-generated: "2026-07-09 00:35"
+source: "Auto-generated from private manual v5.59 by generate_public_manual.py"
+generated: "2026-07-22 16:43"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11099,4 +11099,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-07-09 00:35 (v5.58)*
+*Last updated: 2026-07-22 16:43 (v5.59)*
