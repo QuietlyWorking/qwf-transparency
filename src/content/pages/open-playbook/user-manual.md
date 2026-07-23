@@ -2,20 +2,20 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 5.61 | Started: 251223 | Updated: 260722**"
+description: "**Version: 5.62 | Started: 251223 | Updated: 260723**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-07-22"
+modifiedDate: "2026-07-23"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-07-23 05:59 | Source version: 5.61
+> Generated: 2026-07-23 21:08 | Source version: 5.62
 
 # QWU Backoffice User Manual
 
-**Version: 5.61 | Started: 251223 | Updated: 260722**
+**Version: 5.62 | Started: 251223 | Updated: 260723**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -62,59 +62,59 @@ A comprehensive guide to the QWU Backoffice agent workspace, covering architectu
 37. [[#Ez Terminal (Scheduler) ⭐ NEW]]
 38. [[#Chat Leak Prevention System ⭐ NEW]]
 39. [[#Troubleshooting]]
-38. [[#Resources]]
-39. [[#BNI Member Dossier System]]
-40. [[#BNI Meeting Recap System ⭐ NEW]]
-41. [[#System Architecture Audit ⭐ NEW]]
-42. [[#EPIC Appointment Intelligence System v2.0 ⭐ NEW]]
-43. [[#Ezer Aión Assistant System ⭐ NEW]]
-44. [[#Strategic Goals Framework ⭐ NEW]]
-45. [[#QWU Cosmic Style Guide ⭐ NEW]]
-46. [[#Content Calendar System ⭐ NEW]]
-47. [[#Daily Journal Command Center ⭐ NEW]]
-48. [[#Supervisor Observability System (SOS) ⭐ NEW]]
-49. [[#Relationship Intelligence Layer ⭐ NEW]]
-50. [[#Parallel Execution System ⭐ NEW]]
-51. [[#Ezer Universal Interface ⭐ NEW]]
-52. [[#Project System Status Files ⭐ NEW]]
-53. [[#Supervisor Architecture]]
-54. [[#HQ Command Center ⭐ NEW]]
-55. [[#QWR SEO Intelligence ⭐ NEW]]
-56. [[#Customer System Safeguards ⭐ NEW]]
-57. [[#GreenCal Command Center ⭐ NEW]]
-58. [[#Pocket Ez Companion App ⭐ NEW]]
-59. [[#Public Manual Generation System ⭐ NEW]]
-60. [[#QWR Audience Intelligence System ⭐ NEW]]
-61. [[#QKN Quietly Knocking ⭐ NEW]]
-62. [[#QSP Quietly Spotting ⭐ NEW]]
-63. [[#QNT Quietly Networking ⭐ NEW]]
-64. [[#QWR Content Performance Intelligence ⭐ NEW]]
-65. [[#QWR Press Release Service ⭐ NEW]]
-66. [[#Cost Intelligence System ⭐ NEW]]
-67. [[#QWR Reverse Benchmarking Intelligence ⭐ NEW]]
-68. [[#QWR Content Strategy System ⭐ NEW]]
-69. [[#QWR Preparation Workbook ⭐ NEW]]
-70. [[#QWF Ecosystem Landing Section ⭐ NEW]]
-71. [[#Auto-Remediation System ⭐ NEW]]
-72. [[#QTR Quietly Tracking ⭐ NEW]]
-73. [[#QWF Ecosystem Widget ⭐ NEW]]
-74. [[#QWR Team Accounts System ⭐ NEW]]
-75. [[#QWF Documentation Standard ⭐ NEW]]
-76. [[#Weavy Creative Production System ⭐ NEW]]
-77. [[#WHL WHELHO App ⭐ NEW]]
-78. [[#Cloudflare & DNS Management ⭐ NEW]]
-79. [[#Puzzle Operations Blueprint ⭐ NEW]]
-79. [[#Trails AI SOP + Video Pair ⭐ NEW]]
-79. [[#QWF App Registry ⭐ NEW]]
-80. [[#Testimonial Intelligence Pipeline ⭐ NEW]]
-81. [[#QSP Local Growth Engine ⭐ NEW]]
-82. [[#TWL Preload Hook ⭐ NEW]]
-83. [[#HQ Issues Preload Hook ⭐ NEW]]
-84. [[#Date/Time Output Validation Hook ⭐ NEW]]
-83. [[#QWB Quietly Webbing ⭐ NEW]]
-84. [[#L4G Locals 4 Good Platform ⭐ NEW]]
-85. [[#Living Roadmap Delivery Pipeline ⭐ NEW]]
-86. [[#Session Log]]
+40. [[#Resources]]
+41. [[#BNI Member Dossier System]]
+42. [[#BNI Meeting Recap System ⭐ NEW]]
+43. [[#System Architecture Audit ⭐ NEW]]
+44. [[#EPIC Appointment Intelligence System v2.0 ⭐ NEW]]
+45. [[#Ezer Aión Assistant System ⭐ NEW]]
+46. [[#Strategic Goals Framework ⭐ NEW]]
+47. [[#QWU Cosmic Style Guide ⭐ NEW]]
+48. [[#Content Calendar System ⭐ NEW]]
+49. [[#Daily Journal Command Center ⭐ NEW]]
+50. [[#Supervisor Observability System (SOS) ⭐ NEW]]
+51. [[#Relationship Intelligence Layer ⭐ NEW]]
+52. [[#Parallel Execution System ⭐ NEW]]
+53. [[#Ezer Universal Interface ⭐ NEW]]
+54. [[#Project System Status Files ⭐ NEW]]
+55. [[#Supervisor Architecture]]
+56. [[#HQ Command Center ⭐ NEW]]
+57. [[#QWR SEO Intelligence ⭐ NEW]]
+58. [[#Supporter System Safeguards ⭐ NEW]]
+59. [[#[Supporter Organization] Command Center ⭐ NEW]]
+60. [[#Pocket Ez Companion App ⭐ NEW]]
+61. [[#Public Manual Generation System ⭐ NEW]]
+62. [[#QWR Audience Intelligence System ⭐ NEW]]
+63. [[#QKN Quietly Knocking ⭐ NEW]]
+64. [[#QSP Quietly Spotting ⭐ NEW]]
+65. [[#QNT Quietly Networking ⭐ NEW]]
+66. [[#QWR Content Performance Intelligence ⭐ NEW]]
+67. [[#QWR Press Release Service ⭐ NEW]]
+68. [[#Cost Intelligence System ⭐ NEW]]
+69. [[#QWR Reverse Benchmarking Intelligence ⭐ NEW]]
+70. [[#QWR Content Strategy System ⭐ NEW]]
+71. [[#QWR Preparation Workbook ⭐ NEW]]
+72. [[#QWF Ecosystem Landing Section ⭐ NEW]]
+73. [[#Auto-Remediation System ⭐ NEW]]
+74. [[#QTR Quietly Tracking ⭐ NEW]]
+75. [[#QWF Ecosystem Widget ⭐ NEW]]
+76. [[#QWR Team Accounts System ⭐ NEW]]
+77. [[#QWF Documentation Standard ⭐ NEW]]
+78. [[#Weavy Creative Production System ⭐ NEW]]
+79. [[#WHL WHELHO App ⭐ NEW]]
+80. [[#Cloudflare & DNS Management ⭐ NEW]]
+81. [[#Puzzle Operations Blueprint ⭐ NEW]]
+82. [[#Trails AI SOP + Video Pair ⭐ NEW]]
+83. [[#QWF App Registry ⭐ NEW]]
+84. [[#Testimonial Intelligence Pipeline ⭐ NEW]]
+85. [[#QSP Local Growth Engine ⭐ NEW]]
+86. [[#TWL Preload Hook ⭐ NEW]]
+87. [[#HQ Issues Preload Hook ⭐ NEW]]
+88. [[#Date/Time Output Validation Hook ⭐ NEW]]
+89. [[#QWB Quietly Webbing ⭐ NEW]]
+90. [[#L4G Locals 4 Good Platform ⭐ NEW]]
+91. [[#Living Roadmap Delivery Pipeline ⭐ NEW]]
+92. [[#Session Log]]
 
 ---
 
@@ -176,12 +176,12 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 
 **External Monitoring (Betterstack)**
 - **Plan:** AppSumo lifetime deal (2 stacked codes) — 200 monitors, 10 status pages, 5 members
-- **23 HTTP monitors** (updated 2026-04-12): 10 WPMU sites, 6 QWF apps (QNT, QQT, QKN, QSP, L4G, QTR), 5 infrastructure services, QWR app, OCN supporter site
-- **4 heartbeat monitors:** claude-dev, n8n, WPMU VM, OCN VM (all every 6 hours)
+- **23 HTTP monitors** (updated 2026-04-12): 10 WPMU sites, 6 QWF apps (QNT, QQT, QKN, QSP, L4G, QTR), 5 infrastructure services, QWR app, [Supporter Organization] supporter site
+- **4 heartbeat monitors:** claude-dev, n8n, WPMU VM, [Supporter Organization] VM (all every 6 hours)
 - Alerts: phone call + SMS + email + push notification
 - Outgoing webhook (ID 80218) fires on incident events → triggers auto-remediation (see [[#Auto-Remediation System ⭐ NEW]])
-- **Status page:** [status.quietlyworking.org](https://status.quietlyworking.org) — single section "QWU Infrastructure" (all QWF sites + apps + infra + heartbeats). Supporter monitors (OCN) run internally for alerting but are not displayed on the public status page — supporters access their status via SuiteDash portal embeds.
-- WPMU and OCN Lightsail CPU alarms deleted (2026-03-11) — they flapped due to WP-Cron bursts and xmlrpc attacks; Betterstack uptime monitoring is more useful
+- **Status page:** [status.quietlyworking.org](https://status.quietlyworking.org) — single section "QWU Infrastructure" (all QWF sites + apps + infra + heartbeats). Supporter monitors ([Supporter Organization]) run internally for alerting but are not displayed on the public status page — supporters access their status via SuiteDash portal embeds.
+- WPMU and [Supporter Organization] Lightsail CPU alarms deleted (2026-03-11) — they flapped due to WP-Cron bursts and xmlrpc attacks; Betterstack uptime monitoring is more useful
 
 **Internal Health Checks**
 - `check_vm_health.py` runs every 6 hours via cron on both VMs
@@ -2606,7 +2606,7 @@ Voice profiles live in `003 Entities/Voice Profiles/`:
 └── Voice Profiles/
     ├── Chaplain TIG/
     │   └── Brand Voice.md
-    └── GreenCal Construction/
+    └── [Supporter Organization]/
         └── voice.md
 ```
 
@@ -2625,7 +2625,7 @@ Each voice profile folder contains:
 |---------|------|---------------|---------------------|----------|
 | Chaplain TIG | `003 Entities/Voice Profiles/Chaplain TIG/` | v2.2 (260411) | v3 (260326) | Personal content, QWU, Missing Pixel |
 | Ezer Aión | `003 Entities/Voice Profiles/Ezer Aión/` | — | — | QWU Backoffice assistant, automated outreach, verification |
-| GreenCal Construction | `003 Entities/Voice Profiles/GreenCal Construction/` | — | — | Client: roofing/construction company |
+| [Supporter Organization] | `003 Entities/Voice Profiles/[Supporter Organization]/` | — | — | Client: roofing/construction company |
 
 ### QWR Supabase Voice Profiles
 
@@ -2646,9 +2646,9 @@ Output:
 ```
 === Available Voice Profiles ===
 
-  GreenCal Construction
+  [Supporter Organization]
     Type: folder
-    Path: .../Voice Profiles/GreenCal Construction/voice.md
+    Path: .../Voice Profiles/[Supporter Organization]/voice.md
 
   Chaplain TIG
     Type: folder
@@ -3064,10 +3064,10 @@ For videos with multiple experts (interviews, panels), the pipeline now tracks p
 .venv/bin/python "005 Operations/Execution/wisdom_synthesizer.py" \
   --vertical nonprofit --topic ai_adoption --format linkedin_post
 
-# Generate talking points for surveyors with GreenCal voice
+# Generate talking points for surveyors with [Supporter Organization] voice
 .venv/bin/python "005 Operations/Execution/wisdom_synthesizer.py" \
   --vertical surveying --topic quality --format talking_points \
-  --voice "GreenCal Construction" --save
+  --voice "[Supporter Organization]" --save
 
 # List available content formats
 .venv/bin/python "005 Operations/Execution/wisdom_synthesizer.py" --list-formats
@@ -3488,8 +3488,8 @@ The L4G system includes:
 
 | Workflow | ID | Schedule/Trigger | Purpose |
 |----------|----|-----------------|---------|
-| L4G Conversation Email Mirror v1.0 | `kbmulgoO0thPNAZK` | Webhook (`l4g-conversation-mirror`) | Receives pg_net POST on l4g_conversations INSERT, triggers email mirror to conversation participants |
-| L4G Email Reply Poller v1.0 | `eLESO5sr6qgDqFbU` | Every 2 minutes | Runs `poll_l4g_email_replies.py` to capture email replies back into conversation threads |
+| L4G Conversation Email Mirror v1.0 | `<WORKFLOW_ID>` | Webhook (`l4g-conversation-mirror`) | Receives pg_net POST on l4g_conversations INSERT, triggers email mirror to conversation participants |
+| L4G Email Reply Poller v1.0 | `<WORKFLOW_ID>` | Every 2 minutes | Runs `poll_l4g_email_replies.py` to capture email replies back into conversation threads |
 
 **Lead Generation Webhook:** `https://n8n.quietlyworking.org/webhook/lead-request`
 
@@ -3775,7 +3775,7 @@ Projects in `002 Projects/` follow a visual naming convention that indicates lif
 | Type | Convention | Example |
 |------|------------|---------|
 | **Evergreen** | `_ProjectName/` | `_QWU Backoffice Automation/` |
-| **Client Container** | `_ClientName/` | `_Aim High BNI Projects/` |
+| **Client Container** | `_ClientName/` | `_[Networking Chapter] Projects/` |
 | **Active Time-bound** | `ProjectName/` | `Conference 2026/` |
 | **Completed** | `zzz-YYYYMMDD-Name/` | `zzz-20251215-Old Campaign/` |
 
@@ -3817,7 +3817,7 @@ _ProjectName/
 ### Example: Client Container
 
 ```
-_Aim High BNI Projects/               # Evergreen (client relationship)
+_[Networking Chapter] Projects/               # Evergreen (client relationship)
 ├── _Overview.md                      # Client overview, active work
 ├── BNI Visitor Host.md               # Task (plain name)
 ├── 20260108 Presentation/            # Time-bound sub-project
@@ -4645,8 +4645,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.61 by generate_public_manual.py"
-generated: "2026-07-23 05:59"
+source: "Auto-generated from private manual v5.62 by generate_public_manual.py"
+generated: "2026-07-23 21:08"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5702,10 +5702,10 @@ All QWU Twilio numbers are under the <ADMIN_EMAIL> account with Charity A2P mess
 
 | Number | Friendly Name | Purpose | Voice Config |
 |--------|---------------|---------|--------------|
-| **(949) 264-5730** | BNI-5730 | Aim High BNI - visitor reminders, member updates, referral alerts | Webhook |
-| **(256) 827-7325** | U2SPEAK | Aim High BNI - speaker reminder automations | Webhook to n8n |
-| **(949) 373-3730** | — | Locals 4 Good (L4G) - customer/prospect SMS | Studio Workflow |
-| **(949) 344-2844** | — | VIP/Personal line → forwards to TIG's cell (949-371-5844) | Studio Transfer |
+| **<TWILIO_NUMBER>** | BNI-relay | [Networking Chapter] - visitor reminders, member updates, referral alerts | Webhook |
+| **<TWILIO_NUMBER>** | U2SPEAK | [Networking Chapter] - speaker reminder automations | Webhook to n8n |
+| **<TWILIO_NUMBER>** | — | Locals 4 Good (L4G) - donor-partner SMS | Studio Workflow |
+| **<TWILIO_NUMBER>** | — | VIP/Personal line → forwards to TIG's cell (<PERSONAL_NUMBER>) | Studio Transfer |
 | **TBD** | EZER | Ezer AI Assistant - TIG command intake | Webhook to n8n |
 
 ```bash
@@ -5714,10 +5714,10 @@ TWILIO_ACCOUNT_SID="your-account-sid"
 TWILIO_AUTH_TOKEN="your-auth-token"
 
 # Phone Numbers by Purpose
-TWILIO_BNI_NUMBER="+19492645730"      # Aim High BNI automations
-TWILIO_U2SPEAK_NUMBER="+12568277325"  # BNI speaker reminders
-TWILIO_L4G_NUMBER="+19493733730"      # Locals 4 Good SMS
-TWILIO_VIP_NUMBER="+19493442844"      # VIP/Personal line
+TWILIO_BNI_NUMBER="<TWILIO_NUMBER>"      # [Networking Chapter] automations
+TWILIO_U2SPEAK_NUMBER="<TWILIO_NUMBER>"  # BNI speaker reminders
+TWILIO_L4G_NUMBER="<TWILIO_NUMBER>"      # Locals 4 Good SMS
+TWILIO_VIP_NUMBER="<TWILIO_NUMBER>"      # VIP/Personal line
 ```
 
 For detailed number documentation, see: `003 Entities/Tools/Twilio.md`
@@ -5755,7 +5755,7 @@ L4G_AREA_CONFIG_API="https://script.google.com/macros/s/.../exec"
 L4G_POSTCARD_API="https://script.google.com/macros/s/.../exec"
 
 # SMS (Twilio via n8n)
-L4G_TWILIO_FROM_NUMBER="949-373-3730"
+L4G_TWILIO_FROM_NUMBER="<TWILIO_NUMBER>"
 ```
 
 **Social Media:**
@@ -5818,7 +5818,7 @@ VAULT_PATH="/home/<VM_USER>/qwu_backOffice"
 
 ## BNI Member Dossier System
 
-A comprehensive member enrichment and visitor connection system for BNI (Business Network International) chapter management. Designed for the Aim High chapter in Orange County, CA.
+A comprehensive member enrichment and visitor connection system for BNI (Business Network International) chapter management. Designed for the [Networking Chapter] chapter in Orange County, CA.
 
 ### Purpose
 
@@ -5882,8 +5882,8 @@ When visitors register for a BNI meeting, generate personalized **Connection Rep
 
 | Location | Purpose |
 |----------|---------|
-| `002 Projects/_Aim High BNI Projects/_Aim High SOP/Aim High BNI - Standard Operating Procedures.md` | Comprehensive chapter SOP (all systems) |
-| `002 Projects/_Aim High BNI Projects/Member Dossier System/_Overview.md` | Project documentation |
+| `002 Projects/_[Networking Chapter] Projects/_[Networking Chapter] SOP/[Networking Chapter] - Standard Operating Procedures.md` | Comprehensive chapter SOP (all systems) |
+| `002 Projects/_[Networking Chapter] Projects/Member Dossier System/_Overview.md` | Project documentation |
 | `002 Projects/.../Templates/Template - BNI Member Dossier.md` | Member entity template |
 | `002 Projects/.../Templates/Template - Visitor Connection Report.md` | Visitor×Member report template |
 | `003 Entities/People/*.md` | Individual member entities (23 members) |
@@ -5912,7 +5912,7 @@ The roster sync system enforces a critical data governance principle:
 | **BNI chapter website** (socalbni.com) | WHO is an active member |
 | **Entity files** (`003 Entities/People/`) | Member DATA (email, phone, enrichment, notes) |
 
-The stale CSV export (`AimHighBNI-Members-Grid view exported on 20260109.csv`) must NEVER be used for roster lookups.
+The stale CSV export (`<chapter members CSV export>`) must NEVER be used for roster lookups.
 
 **Sync script:** `sync_bni_roster.py` scrapes the BNI website (direct HTTP, no Apify), compares against entity file tags, and applies changes:
 - New members → creates entity file with `BNI-Active` tag, `enrichment_status: pending`
@@ -5987,7 +5987,7 @@ Member entities include these YAML frontmatter fields:
 
 ```yaml
 # === IDENTITY ===
-tags: [AimHigh, BNI-Active]
+tags: [[Networking Chapter], BNI-Active]
 aliases: [Derek]
 type: human
 
@@ -6085,7 +6085,7 @@ Generates "who should meet whom" recommendations using 8 matching algorithms:
 
 ```bash
 # Generate chapter-wide connection recommendations
-python network_intelligence.py --chapter AimHigh --write
+python network_intelligence.py --chapter [Networking Chapter] --write
 ```
 
 **Matching Algorithms:**
@@ -7016,7 +7016,7 @@ quietlyworking.org
 
 ### Name Normalization Helper (Added 2026-04-19)
 
-Raw first names pulled from external data sources (Google Calendar profile names, Supabase CRM rows, BNI rosters) are often stored in all-lowercase because users type their own names that way during signup. When those strings get substituted into hardcoded email f-strings, recipients see disrespectful output like "Howdy megan!".
+Raw first names pulled from external data sources (Google Calendar profile names, Supabase CRM rows, BNI rosters) are often stored in all-lowercase because users type their own names that way during signup. When those strings get substituted into hardcoded email f-strings, recipients see disrespectful output like "Howdy jane!".
 
 **Fix:** `005 Operations/Execution/name_utils.py` exports `normalize_first_name(raw, fallback="there")`. It only uppercases the first character when the input is entirely lowercase — preserving deliberate interior capitalization like "McKenzie", "DeShawn", "iPhone", and "JANE".
 
@@ -7542,8 +7542,8 @@ Year → Quarter → Month → Week → Day
 ```
 
 Each client is treated as their own entity with goals that roll up to the big picture:
-- **Aim High BNI** - Chapter automation, member enrichment
-- **GreenCal Construction** - Operations efficiency
+- **[Networking Chapter]** - Chapter automation, member enrichment
+- **[Supporter Organization]** - Operations efficiency
 - **Missing Pixel Students** - Tier 2 curriculum
 - **L4G Prospective Clients** - Revenue pipeline
 
@@ -7817,7 +7817,7 @@ All error outputs route to a Discord Error Alert node.
 
 | Property | Value |
 |----------|-------|
-| **n8n Workflow ID** | `7NxSNqAg6aY97ZXl` (v5.0) |
+| **n8n Workflow ID** | `<WORKFLOW_ID>` (v5.0) |
 | **Webhook Path** | `/generate-article` |
 | **Supabase Project** | `<SUPABASE_PROJECT_ID>` |
 | **OpenRouter Credential** | OpenRouter QWR (`<N8N_CREDENTIAL_ID>`) |
@@ -7913,7 +7913,7 @@ The Audience Intelligence system enables persona-targeted article generation. Us
 | Living Documents table | Supabase | `living_documents` | Google Docs linked for voice enrichment |
 | Interview Webhook | n8n workflow | `nbUJ57ZFAjttguu4` | Handles `start`/`message` commands for conversational persona interviews |
 | Living Doc Sync | n8n workflow | `tvi5z83IrONMO40U` | Weekly sync: fetches Google Docs, extracts voice patterns via Claude |
-| Article Gen v6.0 | n8n workflow | `7NxSNqAg6aY97ZXl` | Reads persona context + living doc enrichment + gap evidence + content strategy for targeted generation |
+| Article Gen v6.0 | n8n workflow | `<WORKFLOW_ID>` | Reads persona context + living doc enrichment + gap evidence + content strategy for targeted generation |
 | PersonaSelector | Lovable component | `PersonaSelector.tsx` | Dropdown in article creation flow |
 | usePersonas hook | Lovable hook | `usePersonas.ts` | Fetches active personas by brand |
 
@@ -8373,7 +8373,7 @@ Quietly Knocking (QKN) is a multi-tenant AI-powered outbound outreach platform. 
 ```
 Lovable Frontend (quietlyknocking.org)
     → Supabase SDK
-        → Supabase (mepdsaqmsooxmjsmlcut, us-west-1)
+        → Supabase (<SUPABASE_PROJECT_ID>, us-west-1)
             ← n8n workflows (planned)
                 ← Python scripts (existing lead gen + enrichment pipeline)
                     ← Instantly API (Phase 1 sending)
@@ -8398,13 +8398,13 @@ QKN is the outreach/conversion arm of the QWF product family:
 
 | Component | Status |
 |-----------|--------|
-| Supabase project | ACTIVE_HEALTHY — `mepdsaqmsooxmjsmlcut` |
+| Supabase project | ACTIVE_HEALTHY — `<SUPABASE_PROJECT_ID>` |
 | Domain | `quietlyknocking.org` — Live on Lovable |
 | Lovable preview | `quietly-knocking.lovable.app` |
 | Schema | v1.0.0 deployed — tenants, profiles, campaign_purposes |
 | Auth | Configured — autoconfirm, redirect URLs for all 3 domains |
 | Lovable Prompt 001 | DEPLOYED — landing page, auth, onboarding wizard, dashboard, app layout |
-| GreenCal (tenant #1) | Planned — migration from internal pipeline |
+| [Supporter Organization] (tenant #1) | Planned — migration from internal pipeline |
 
 ### Pricing Tiers
 
@@ -8434,7 +8434,7 @@ Quietly Spotting (QSP) is a multi-tenant command center for small businesses. Yo
 ```
 CF Pages Frontend (quietlyspotting.org → quietly-spotting.pages.dev)
     → Supabase SDK
-        → Supabase (lsfplhkgpiakhvtvsfic, us-west-1)
+        → Supabase (<SUPABASE_PROJECT_ID>, us-west-1)
             ← n8n workflows (hourly sync)
                 ← Python scripts (sync_qqt_submissions.py, sync_qwr_articles.py)
                     ← QQT Calculator API + QWR Agency API
@@ -8453,7 +8453,7 @@ QSP is the aggregation hub of the QWF product family:
 Shared Supabase database with `tenant_id` column + RLS (following QQT's proven pattern):
 - `tenants` — businesses (root entity)
 - `profiles` — users within businesses (linked to auth.users)
-- `companies` — sub-brands within a tenant (e.g., GreenCal's 4 companies)
+- `companies` — sub-brands within a tenant (e.g., [Supporter Organization]'s 4 companies)
 - `modules` — system catalog of available features
 - `tenant_modules` — which modules each tenant has enabled
 - `integrations` — external tool connections with encrypted credentials
@@ -8482,7 +8482,7 @@ Shared Supabase database with `tenant_id` column + RLS (following QQT's proven p
 
 | Component | Status |
 |-----------|--------|
-| Supabase project | ACTIVE_HEALTHY — `lsfplhkgpiakhvtvsfic` (us-west-1) |
+| Supabase project | ACTIVE_HEALTHY — `<SUPABASE_PROJECT_ID>` (us-west-1) |
 | Domain | `quietlyspotting.org` — CNAME → `quietly-spotting.pages.dev` (Cloudflare proxied) |
 | Hosting | **Cloudflare Pages** — `quietly-spotting` project, GitHub Actions CI/CD (migrated from Lovable 2026-03-27) |
 | GitHub repo | `QuietlyWorking/quietly-spotting` — direct code commits, push-to-deploy |
@@ -8491,31 +8491,31 @@ Shared Supabase database with `tenant_id` column + RLS (following QQT's proven p
 | Lovable Prompts | 34 total (001-034) — ARCHIVED. All future changes are direct code commits. |
 | Storage buckets | `avatars` (2MB) + `logos` (5MB) — public read, auth upload |
 | QQT sync | Active — 12 submissions synced per tenant |
-| QWR sync | Active — 5 articles synced for GreenCal (v1.1.0) |
+| QWR sync | Active — 5 articles synced for [Supporter Organization] (v1.1.0) |
 | Email Infra sync | Active — 18 sending accounts + 12 DMARC domains synced |
 | Campaigns sync | Active — 1 campaign synced |
-| Reviews sync | Tested — 113 Google reviews synced for GreenCal, 8 flagged. v1.1.0: confidence gate (skips low-confidence auto-matches) |
+| Reviews sync | Tested — 113 Google reviews synced for [Supporter Organization], 8 flagged. v1.1.0: confidence gate (skips low-confidence auto-matches) |
 | KPI snapshots | Tested — nightly aggregation across 6 categories |
 | Alert engine | Tested — rule eval + SMS/Discord/in-app dispatch |
 | n8n workflows | 4 active — QQT 1h, QWR 1h, Email Infra 2h, Campaigns 4h |
 | QWF test tenant | `b28692ad` — growth plan, 4 modules |
-| GreenCal tenant | `6db7928c` — growth plan, 4 companies, 6 modules, 113 reviews, 2 team accounts |
-| GCC migration | Executed 2026-03-17 — 6 accounts, 6 domains, 3 campaigns ported |
+| [Supporter Organization] tenant | `<TENANT_ID>` — growth plan, 4 companies, 6 modules, 113 reviews, 2 team accounts |
+| supporter-CC migration | Executed 2026-03-17 — 6 accounts, 6 domains, 3 campaigns ported |
 | Phase 3e | Executive Pulse DEPLOYED. Schema v4 (8 tables). Role system upgraded (Owner>Admin>Manager>Viewer). Prompts 032-033 deployed. |
 | Phase 3f | Place ID Verification. Schema v5 deployed (confidence tracking). `lookup-place-id` edge function deployed. Prompt 034 ready. Backend confidence gate active. |
-| Phase 4 (Active) | **Local Growth Engine** — BrightLocal API integration (citation sync live), citation health dashboard, geo-grid rank visualization, GBP audit/optimization queue, schema markup generator, on-page SEO audit (Lighthouse), monthly cross-product performance report. Agency white-label architecture baked in (nullable `agency_id` + `brand_config`). 4 Supabase tables deployed. First GreenCal citation sync complete (score 32, 31 active, 15 NAP issues). Directive: `qsp_local_growth_engine.md`. |
+| Phase 4 (Active) | **Local Growth Engine** — BrightLocal API integration (citation sync live), citation health dashboard, geo-grid rank visualization, GBP audit/optimization queue, schema markup generator, on-page SEO audit (Lighthouse), monthly cross-product performance report. Agency white-label architecture baked in (nullable `agency_id` + `brand_config`). 4 Supabase tables deployed. First [Supporter Organization] citation sync complete (baseline synced). Directive: `qsp_local_growth_engine.md`. |
 
 ### Local Growth Engine (Active — April 2026)
 
 New QSP module providing local SEO services to all supporters. Replaces $1,500-3,000+/mo external SEO agency with built-in capabilities.
 
-**External Integration:** BrightLocal Track agency account. **Paid plan activated 2026-04-21: Track, 11-20 locations, monthly billing (~$99/mo).** Monthly chosen over annual ($74/mo) to preserve cash flow flexibility until L4G ramps. Covers QWF internal properties (5) + GreenCal (4 companies) with headroom to 20 locations. QWF absorbs cost. No nonprofit discount available (confirmed via support email thread, Session 195).
+**External Integration:** BrightLocal Track agency account. **Paid plan activated 2026-04-21: Track, 11-20 locations, monthly billing (~$99/mo).** Monthly chosen over annual ($74/mo) to preserve cash flow flexibility until L4G ramps. Covers QWF internal properties (5) + [Supporter Organization] (4 companies) with headroom to 20 locations. QWF absorbs cost. No nonprofit discount available (confirmed via support email thread, Session 195).
 
 **BrightLocal API Status (as of May 8, 2026):**
 - Single API key on all three hosts: `tools.brightlocal.com/seo-tools/api/v2/`, `/v4/`, and `api.brightlocal.com/manage/v1/`
-- Three deprecation map corrections from Harvey Godden (BrightLocal Sales) on 2026-04-30 collapsed the earlier "Data API agreement" framing as a misconception ... the Track-plan key has live Management API access, no separate agreement needed
+- Three deprecation map corrections from [Vendor Support] (BrightLocal Sales) on 2026-04-30 collapsed the earlier "Data API agreement" framing as a misconception ... the Track-plan key has live Management API access, no separate agreement needed
 - All five sync modules now wired in `sync_brightlocal_data.py` v2.0.0: citation health (`/v2/ct/get-results`), keyword rankings (`/v4/gpw/{id}/results.keywords`), GBP audit (`/v4/gpw/{id}/results.summary` + locally-computed completeness score), multi-site reviews (`/manage/v1/rm/reports/{id}/reviews`, paginated 20/page fixed), composite SEO health (locally-computed 25/35/25/15 weighted from the four component scores)
-- One open question with Harvey (on annual leave per Connie 2026-05-05): LRT rankings-fetch path. Workaround: `/v4/gpw/{id}/results.keywords[*].client_rank` carries the same data and is sufficient for QSP
+- One open question with [Vendor Support] (on annual leave per [Vendor Support] 2026-05-05): LRT rankings-fetch path. Workaround: `/v4/gpw/{id}/results.keywords[*].client_rank` carries the same data and is sufficient for QSP
 - Note: GBP Post Scheduler is Manage-tier+ only (correction from original 2026-04-02 research). Vista Social remains Plan B for QWR → GBP routing
 
 **BrightLocal Track Features Used:**
@@ -8548,7 +8548,7 @@ All new tables include nullable `agency_id` column. Reports use `brand_config` o
 - `qsp_monthly_reports` — Generated report data + PDF references
 - `qsp_schema_output` — Generated JSON-LD per location
 - `agency_brand_config` — White-label branding per agency
-| AccuLynx sync | Active — 3,384 jobs synced for GreenCal. Safety gate + audit logging + soft-delete pattern. `sync_audit_log` table deployed (immutable, RLS-protected). |
+| [Supporter CRM] sync | Active — thousands of jobs synced for [Supporter Organization]. Safety gate + audit logging + soft-delete pattern. `sync_audit_log` table deployed (immutable, RLS-protected). |
 | QWF Passport | Deployed — `generate-crossover-token` (QSP) + `verify-crossover-token` (QWR, QQT, QNT) |
 | Contact Form | Deployed — `submit-contact-form` edge function + centralized pipeline |
 | Landing Page | Deployed — Prompt 011 with heritage, ecosystem, contact sections |
@@ -8567,14 +8567,14 @@ Each tenant stores QQT/QWR API keys in the `integrations` table. Python sync scr
 | `sync_qsp_reviews.py` | Google Maps via Apify | `reviews` | Every 6h (cron stopgap; n8n still pending — see HQ issue `935bb95b`) |
 | `compute_kpi_snapshots.py` | All QSP source tables | `kpi_snapshots` | Nightly (pending n8n) |
 | `check_qsp_alerts.py` | `alert_rules` → `alert_history` | SMS, Discord, in-app | Post-sync (pending n8n) |
-| `sync_acculynx_data.py` | AccuLynx CRM API v2 | `acculynx_jobs`, `acculynx_appointments` | Every 4h (v1.1.0, safety gate integrated) |
-| `extract_acculynx_past_customers.py` | AccuLynx CRM API v2 | CSV output (`.tmp/`) | Manual (v1.0.0, warm campaign extraction) |
-| `sync_brightlocal_data.py` | BrightLocal CT Data API | `qsp_citation_health` | Manual (v1.0.0, first GreenCal sync complete) |
+| `<supporter-CRM sync script>` | supporter CRM API | `<supporter_crm_jobs>`, `<supporter_crm_appointments>` | Every 4h (v1.1.0, safety gate integrated) |
+| `<supporter-CRM extract script>` | supporter CRM API | CSV output (`.tmp/`) | Manual (v1.0.0, warm campaign extraction) |
+| `sync_brightlocal_data.py` | BrightLocal CT Data API | `qsp_citation_health` | Manual (v1.0.0, first [Supporter Organization] sync complete) |
 | `sync_safety_gate.py` | Pre/post-sync validation module | `sync_audit_log` | Called by sync scripts |
 
-All scripts support `--dry-run` and `--tenant-id` flags. AccuLynx sync includes `--force` flag to bypass the safety gate (row-count sanity check blocks syncs where incoming rows < 50% of existing). The `migrate_gcc_to_qsp.py` script was a one-time migration from GCC to QSP GreenCal tenant (executed 2026-03-17).
+All scripts support `--dry-run` and `--tenant-id` flags. [Supporter CRM] sync includes `--force` flag to bypass the safety gate (row-count sanity check blocks syncs where incoming rows < 50% of existing). The `<supporter-CC migration script>` script was a one-time migration from supporter-CC to QSP [Supporter Organization] tenant (executed 2026-03-17).
 
-**AccuLynx Custom Fields API (discovered 2026-04-05):** AccuLynx released custom fields support on 2026-03-30 (API v2.2607.0). Endpoints: `GET/PUT /api/v2/contacts/{id}/custom-fields`, `GET/PUT /api/v2/jobs/{id}/custom-fields`, `GET /api/v2/company-settings/custom-fields`. Webhooks: `contact.custom-field.value_changed`, `job.custom-field.value_changed`. GreenCal has 1 job-level field ("Confirmer"). No contact-level DNC field yet — recommendation pending with Megan.
+**[Supporter CRM] Custom Fields API (discovered 2026-04-05):** [Supporter CRM] released custom fields support on 2026-03-30 (API v2.2607.0). Endpoints: `GET/PUT /api/v2/contacts/{id}/custom-fields`, `GET/PUT /api/v2/jobs/{id}/custom-fields`, `GET /api/v2/company-settings/custom-fields`. Webhooks: `contact.custom-field.value_changed`, `job.custom-field.value_changed`. [Supporter Organization] has 1 job-level field ("Confirmer"). No contact-level DNC field yet — recommendation pending with [Supporter Team Member].
 
 ### Reference
 
@@ -8584,7 +8584,7 @@ All scripts support `--dry-run` and `--tenant-id` flags. AccuLynx sync includes 
 - **Product Directive:** `005 Operations/Directives/quietly_spotting.md`
 - **Lovable Prompts (archived):** `002 Projects/_Quietly Spotting/lovable-prompts/001-034`
 - **Sync Scripts:** `005 Operations/Execution/sync_qqt_submissions.py`, `sync_qwr_articles.py`, `sync_qsp_sending_accounts.py`, `sync_qsp_dmarc_domains.py`, `sync_qsp_campaigns.py`, `sync_qsp_reviews.py`, `sync_brightlocal_data.py`, `compute_kpi_snapshots.py`, `check_qsp_alerts.py`
-- **Migration Script:** `005 Operations/Execution/migrate_gcc_to_qsp.py` (one-time, executed 2026-03-17)
+- **Migration Script:** `005 Operations/Execution/<supporter-CC migration script>` (one-time, executed 2026-03-17)
 - **Safety Module:** `005 Operations/Execution/sync_safety_gate.py` (pre/post-sync validation, batch checking, audit logging)
 - **Data Safety Directive:** `005 Operations/Directives/supporter_data_safety.md` (foundational — live supporter data handling)
 - **Edge Functions:** `generate-crossover-token` (QWF Passport), `submit-contact-form` (contact pipeline), `lookup-place-id` (Google Place ID search with confidence scoring)
@@ -8602,7 +8602,7 @@ Quietly Networking (QNT) is a multi-tenant AI-powered chapter management platfor
 ```
 CF Pages Frontend (React, Dark Mode) — quietlynetworking.org
     → Supabase SDK
-        → Supabase (caeiaprjizteokoenzad, us-west-1)
+        → Supabase (<SUPABASE_PROJECT_ID>, us-west-1)
             ← Edge Functions (enrich-visitor, verify-crossover-token, Stripe webhooks)
                 ← FastAPI Webhook Receiver (qnt.quietlyworking.org:8100)
                     ← Python AI Pipeline (Apify + Claude Opus 4.7)
@@ -8612,8 +8612,8 @@ CF Pages Frontend (React, Dark Mode) — quietlynetworking.org
 
 QNT is the BNI chapter management arm of the QWF product family:
 - **QNT → QSP:** Chapter data, visitor stats, and referral metrics feed the SPOT dashboard
-- **Aim High BNI → QNT:** First alpha tenant (27 members), production test environment
-- **Shared Infrastructure:** Enrichment scripts inherited from Aim High backoffice (65+ scripts)
+- **[Networking Chapter] → QNT:** First alpha tenant (27 members), production test environment
+- **Shared Infrastructure:** Enrichment scripts inherited from [Networking Chapter] backoffice (65+ scripts)
 
 ### Key Features (46 Lovable Prompts)
 
@@ -8674,7 +8674,7 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 
 | Component | Status |
 |-----------|--------|
-| Supabase project | ACTIVE_HEALTHY — `caeiaprjizteokoenzad` |
+| Supabase project | ACTIVE_HEALTHY — `<SUPABASE_PROJECT_ID>` |
 | Hosting | CF Pages — `quietlynetworking.org` (migrated from Lovable 2026-03-20) |
 | Deploy pipeline | Push to `main` → GitHub Actions → CF Pages auto-deploy |
 | Supabase auth site_url | Updated to `https://quietlynetworking.org` |
@@ -8682,7 +8682,7 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 | Webhook receiver | v1.4.0 — idempotency guard on `/enrich-visitor` and `/enrich-member` (skips if `enrichment_status == 'complete'`) |
 | QWF Passport | Deployed — `verify-crossover-token` on QNT Supabase; QNT added as crossover target in QSP's `generate-crossover-token` |
 | Stripe | Configured (TEST MODE) — 2 products, 4 prices, webhook |
-| Alpha tenant | Aim High BNI — 27 members (17 active, 2 on leave, 8 alumni), 2,373 historical visitors imported |
+| Alpha tenant | [Networking Chapter] — 27 members (17 active, 2 on leave, 8 alumni), 2,373 historical visitors imported |
 | Timezone fix | Prompt 021 deployed — 8 affected areas fixed |
 | Database | 35 tables, 16 migrations, full RLS (added: `chapter_testimonials`, `card_shares`, `card_clicks`; per-member privacy columns `testimonials_enabled`, `card_shareable`, `card_redirect_url`) |
 | Newsletter system | 3-step composer, 11 section types, template management, send-newsletter edge function |
@@ -8696,7 +8696,7 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 | Permission controls | Edit controls respect impersonation (useEffectiveUser), card builder has ownership check (Apr 9, 2026) |
 | Alpha readiness | Alpha badge, bug reporter, landing page alpha gate (Prompt 029) |
 | Branding | Custom logo, fern icon, favicon suite, botanical palette deployed |
-| Aim High website | `aimhighbni.com` — Astro 5 SSR on CF Pages (migrated from React SPA 2026-04-09), multi-tenant middleware, live data from QNT Supabase. Client JS: ~6KB (form islands only). |
+| [Networking Chapter] website | `<chapter-domain>` — Astro 5 SSR on CF Pages (migrated from React SPA 2026-04-09), multi-tenant middleware, live data from QNT Supabase. Client JS: ~6KB (form islands only). |
 | Business cards | `generate_business_cards.py` — Pillow-based card generator, 18 cards, trackable sharing via `card_shares`/`card_clicks` tables |
 | Card sharing | `/card/[slug]` Astro API route with OG meta tags for social previews, `increment_card_share_clicks` RPC |
 | Form backends | `/api/rsvp` (→ `visitors` table), `/api/testimonial` (→ `chapter_testimonials` table, slug→UUID resolution, author→member matching, triggers notification) — Astro API routes with CF runtime env |
@@ -8715,9 +8715,9 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 ### Reference
 
 - **GitHub Repo (QNT):** `https://github.com/QuietlyWorking/quietly-networking` (CF Pages source; push to `main` → GitHub Actions → auto-deploy)
-- **GitHub Repo (Aim High):** `https://github.com/QuietlyWorking/aim-high-bni` (CF Pages; push to `main` → GitHub Actions → auto-deploy)
+- **GitHub Repo ([Networking Chapter]):** `https://github.com/QuietlyWorking/aim-high-bni` (CF Pages; push to `main` → GitHub Actions → auto-deploy)
 - **Production URL:** `https://quietlynetworking.org`
-- **Aim High URL:** `https://aimhighbni.com` (CNAME → `aim-high-bni.pages.dev`)
+- **[Networking Chapter] URL:** `https://<chapter-domain>` (CNAME → `aim-high-bni.pages.dev`)
 - **System Status:** `002 Projects/_Quietly Networking/QNT-System-Status.md`
 - **Backend Scripts:** `005 Operations/Execution/qnt_webhook_receiver.py` (v1.4.0), `qnt_visitor_pipeline.py`, `qnt_roster_sync.py`, `qnt_import_historical_visitors.py`, `qnt_newsletter_pipeline.py`, `qnt_meeting_pipeline.py`, `process_presentation_media.py`, `generate_business_cards.py`
 - **Edge Functions:** `enrich-visitor`, `verify-crossover-token` (QWF Passport), `sync-roster`, `create-checkout-session`, `create-portal-session`, `stripe-webhook`, `sync-member-count`, `send-newsletter`, `submit-contact-form`
@@ -9009,7 +9009,7 @@ The Supabase cost is computed dynamically, not hardcoded per-app:
 |-----------|-------------|-------|
 | Org base (Pro) | $25.00 | Single "Quietly Working" org |
 | Compute credit | -$10.00 | Included in Pro plan |
-| 12x MICRO projects | $120.00 | QWR, HQ, QQT, QRP, QSP, QNT, QKN, Pocket EZ, L4G, QTR, WHL, GreenCal CC ($10 each) |
+| 12x MICRO projects | $120.00 | QWR, HQ, QQT, QRP, QSP, QNT, QKN, Pocket EZ, L4G, QTR, WHL, [Supporter Organization] CC ($10 each) |
 | **Total** | **$135.00** | Verified 2026-04-06 (invoice KWNZSK-00017) |
 
 Helper function `_app_monthly_cost()` in `collect_app_metrics.py` computes per-app cost:
@@ -9032,7 +9032,7 @@ Every LLM usage log entry includes `billing_channel` to ensure correct cost attr
 
 | App Code | Scripts | Description |
 |----------|---------|-------------|
-| `bni` | Meeting followups, visitor pipeline, enrichment scripts | Aim High BNI operations |
+| `bni` | Meeting followups, visitor pipeline, enrichment scripts | [Networking Chapter] operations |
 | `hq` | Audit, briefing, capture, entity management, summarization | HQ Command Center + backoffice |
 | `qwr` | Content pipeline, press releases, citation tracking | Quietly Writing |
 | `qnt` | Visitor pipeline, meeting pipeline, newsletter pipeline | Quietly Networking |
@@ -9311,7 +9311,7 @@ ARTICLE GENERATION (v6.0)
 |-----------|------|--------|
 | `content_strategies` table | Supabase | Deployed — stores strategy configs per brand |
 | `qwr_gap_opportunity_generator.py` v2.0.0 | Python script | Built — adds `suggested_strategy_id` to matching gaps |
-| Article Gen v6.0 | n8n workflow `7NxSNqAg6aY97ZXl` | Deployed — reads strategy context for generation |
+| Article Gen v6.0 | n8n workflow `<WORKFLOW_ID>` | Deployed — reads strategy context for generation |
 | Lovable: Strategy Settings (065) | Frontend | Executed — CRUD for content strategies |
 | Lovable: Landing Page v3.0 (066) | Frontend | Executed — updated landing page with Content Strategy messaging |
 
@@ -9690,7 +9690,7 @@ Quietly Tracking (QTR) is a smart link + dynamic landing page + conversion attri
 ```
 Lovable Frontend (quietlytracking.org)
     → Supabase SDK
-        → Supabase (ipdrexcbaqoazhpohfco, us-west-1)
+        → Supabase (<SUPABASE_PROJECT_ID>, us-west-1)
             ← Edge Functions (planned: render-landing-page, track-visit, track-conversion)
                 ← n8n workflows (planned)
 ```
@@ -9755,7 +9755,7 @@ No free tier. 30-day trial. **QWF ecosystem bundle:** Full Pro access included f
 
 | Component | Status |
 |-----------|--------|
-| Supabase project | ACTIVE_HEALTHY — `ipdrexcbaqoazhpohfco` (us-west-1) |
+| Supabase project | ACTIVE_HEALTHY — `<SUPABASE_PROJECT_ID>` (us-west-1) |
 | Domain | `quietlytracking.org` — registered, DNS via Cloudflare |
 | Lovable project | `a404ee32-52c7-4781-8411-974ed9bdbaf7` |
 | Schema | v1.0.0 — 7 tables, RLS policies, indexes |
@@ -10035,8 +10035,8 @@ Transforms QWR from a single-user platform into a multi-user team collaboration 
 |-----------|------|---------|
 | `accept-team-invite` | Supabase Edge Function | `verify_jwt=false` |
 | `qwr_team_invite.py` | Python script (v1.0.0) | `005 Operations/Execution/` |
-| QWR Team Invite Email Sender | n8n workflow | `kMhNP4iiP9MjS7Q7` |
-| Stripe Webhook Handler v1.3 | n8n workflow | `rZt6WRkGtX7LQgqo` |
+| QWR Team Invite Email Sender | n8n workflow | `<WORKFLOW_ID>` |
+| Stripe Webhook Handler v1.3 | n8n workflow | `<WORKFLOW_ID>` |
 
 **Stripe Integration:** v1.3 of the webhook handler sets `max_team_members` on `supporter_partners` during both new subscriptions (`checkout.session.completed`) and tier changes (`customer.subscription.updated`). This enforces seat limits: Starter→2, Growth→5, Agency→15.
 
@@ -10137,7 +10137,7 @@ Key principles adopted from Rory's work:
 
 | Project | Workflow | Status | Notes |
 |---------|----------|--------|-------|
-| GreenCal Leafie | 3-phase plushie vendor reference | Phase 3 operational | Hero shot, turnaround grid, lifestyle shots |
+| [Supporter Organization] [Supporter Mascot] | 3-phase plushie vendor reference | Phase 3 operational | Hero shot, turnaround grid, lifestyle shots |
 | L4G Postcard Ads | Ad creative generation | Planned | Missing Pixel student training component |
 | WOH Product Shots | Product photography pipeline | Planned | War on Hopelessness merchandise |
 
@@ -10156,8 +10156,8 @@ A comprehensive 17-chapter + appendices user manual lives at `004 Knowledge/How-
 | `004 Knowledge/How-To/Weavy-User-Manual.md` | Comprehensive Weavy user manual (v2.0.0) |
 | `005 Operations/Directives/weavy_creative_workflows.md` | Creative production directive (v1.5.0) |
 | `003 Entities/Experts/Rory Flynn.md` | Methodology source entity |
-| `002 Projects/_GreenCal Projects/Leafie-Plushie-Weavy-Workflow.md` | GreenCal Leafie 3-phase workflow spec |
-| `002 Projects/_GreenCal Projects/Callie "Leafie" Chlorophyllis XII.md` | Leafie character bible |
+| `002 Projects/_[Supporter Organization] Projects/[Supporter Mascot]-Plushie-Weavy-Workflow.md` | [Supporter Organization] [Supporter Mascot] 3-phase workflow spec |
+| `002 Projects/_[Supporter Organization] Projects/[Supporter Mascot].md` | [Supporter Mascot] character bible |
 
 ### App Mode (Missing Pixel)
 
@@ -10371,13 +10371,13 @@ QWU uses **one** Cloudflare API token covering all operations:
 | `quietlynetworking.org` | — | CF Pages | QNT (migrated 2026-03-20) |
 | `locals4good.org` | — | CF Pages | L4G (migrated 2026-03-19) |
 | `whelho.org` | `4e73ca94aad582ed7157175b5a1f6fca` | CF Pages | WHELHO |
-| `aimhighbni.com` | — | CF Pages | Aim High BNI chapter site (CNAME → `aim-high-bni.pages.dev`) |
+| `<chapter-domain>` | — | CF Pages | [Networking Chapter] chapter site (CNAME → `aim-high-bni.pages.dev`) |
 | `preciousmonster.org` | — | — | Reserved (MP lore) |
 | `preciousmonster.com` | — | — | Reserved (MP lore) |
 
 **Cloudflare Account ID:** see `CLOUDFLARE_ACCOUNT_ID` in `.env`
 
-**Supporter zones on the same account:** [Supporter Organization] (OCN) has 40 subsite zones (e.g., `orangecountynewspapers.com`, `tustinpostdispatch.com`, …) on this CF account — delegated admin for a supporter system. **Do not modify OCN zones** unless the task is explicitly authorized for OCN infrastructure. See `002 Projects/_[Supporter Organization] Projects/` and `CLAUDE.md` → "Supporter Systems". OCN migration from Namecheap DNS to CF completed 2026-04-18 — see `OCN-Cloudflare-Migration.md` for the full zone list, IP-lockdown pattern, and Phase 4 hardening artifacts.
+**Supporter zones on the same account:** [Supporter Organization] has 40 subsite zones (e.g., `<supporter-news-domain>`, `<supporter-news-domain>`, …) on this CF account — delegated admin for a supporter system. **Do not modify [Supporter Organization] zones** unless the task is explicitly authorized for [Supporter Organization] infrastructure. See `002 Projects/_[Supporter Organization] Projects/` and `CLAUDE.md` → "Supporter Systems". [Supporter Organization] migration from Namecheap DNS to CF completed 2026-04-18 — see `[Supporter Organization]-Cloudflare-Migration.md` for the full zone list, IP-lockdown pattern, and Phase 4 hardening artifacts.
 
 ### DNS Management Script
 
@@ -10399,7 +10399,7 @@ Apps on CF Pages deploy via `wrangler pages deploy`:
 cd /home/<VM_USER>/whelho && npm run build
 npx wrangler pages deploy dist --project-name=whelho
 
-# QWR, L4G, QNT, Aim High BNI deploy via GitHub Actions (auto on push to main)
+# QWR, L4G, QNT, [Networking Chapter] deploy via GitHub Actions (auto on push to main)
 # WHELHO deploys via direct wrangler (GH Actions secrets pending)
 ```
 
@@ -10439,17 +10439,17 @@ Centralized registry of all QWF apps with hosting, database, domain, and develop
 | App | Program | Hosting | Framework | GitHub Repo | Domain | Supabase Project | Stage |
 |-----|---------|---------|-----------|-------------|--------|------------------|-------|
 | **QWR** | Quietly Writing | CF Pages | React → SvelteKit (P3) | `quietly-writing` | `quietlywriting.org` | `<SUPABASE_PROJECT_ID>` | Production |
-| **QQT** | Quietly Quoting | Lovable | → SvelteKit (P4) | — | `quietlyquoting.org` | `wrumuuxjnyplzykibwsj` | Beta |
-| **QNT** | Quietly Networking | CF Pages | React | `quietly-networking` | `quietlynetworking.org` | `caeiaprjizteokoenzad` | Alpha |
-| **QKN** | Quietly Knocking | Lovable | → SvelteKit (P5) | — | `quietlyknocking.org` | `mepdsaqmsooxmjsmlcut` | Alpha |
-| **QSP** | Quietly Spotting | CF Pages | React → SvelteKit (P2) | `quietly-spotting` | `quietlyspotting.org` | `lsfplhkgpiakhvtvsfic` | Production |
-| **QTR** | Quietly Tracking | Lovable | → SvelteKit (P6) | — | `quietlytracking.org` | `ipdrexcbaqoazhpohfco` | Foundation |
+| **QQT** | Quietly Quoting | Lovable | → SvelteKit (P4) | — | `quietlyquoting.org` | `<SUPABASE_PROJECT_ID>` | Beta |
+| **QNT** | Quietly Networking | CF Pages | React | `quietly-networking` | `quietlynetworking.org` | `<SUPABASE_PROJECT_ID>` | Alpha |
+| **QKN** | Quietly Knocking | Lovable | → SvelteKit (P5) | — | `quietlyknocking.org` | `<SUPABASE_PROJECT_ID>` | Alpha |
+| **QSP** | Quietly Spotting | CF Pages | React → SvelteKit (P2) | `quietly-spotting` | `quietlyspotting.org` | `<SUPABASE_PROJECT_ID>` | Production |
+| **QTR** | Quietly Tracking | Lovable | → SvelteKit (P6) | — | `quietlytracking.org` | `<SUPABASE_PROJECT_ID>` | Foundation |
 | **L4G** | Locals 4 Good | CF Pages | SvelteKit ✅ | `locals4good` | `locals4good.org` | `<SUPABASE_PROJECT_ID_L4G>` | Beta |
 | **HQ** | Command Center | Lovable | Lovable (stay) | — | `hq.quietlyworking.org` | `<SUPABASE_PROJECT_ID>` (shared with QWR) | Production |
 | **WHL** | WHELHO | CF Pages | React | `whelho` | `whelho.org` | `nvimpjmhiondaxtrwlny` | Alpha |
 | **PEZ** | Pocket Ez | Lovable | — | — | — | `<SUPABASE_PROJECT_POCKET>` | Planned |
-| **QMP** | Missing Pixel | Lovable | — | — | — | `tmljwjrpujmnrybofxht` | Planned |
-| **AH** | Aim High BNI | CF Pages | React | `aim-high-bni` | `aimhighbni.com` | `caeiaprjizteokoenzad` (shared with QNT) | Production |
+| **QMP** | Missing Pixel | Lovable | — | — | — | `<SUPABASE_PROJECT_ID>` | Planned |
+| **AH** | [Networking Chapter] | CF Pages | React | `aim-high-bni` | `<chapter-domain>` | `<SUPABASE_PROJECT_ID>` (shared with QNT) | Production |
 | **QWB** | Quietly Webbing | CF Pages | SvelteKit (P1) | — (planned) | `quietlywebbing.org` | — | Planned |
 | **QCP** | Quietly Capsuling | CF Pages | SvelteKit | — (planned) | — | — | Concept |
 
@@ -10698,7 +10698,7 @@ This issue was diagnosed while helping Josefa Savu in the Puzzle Circle communit
 
 ### Key Contacts
 
-- **Brian Ragone** — Founder/CEO (brian@puzzleapp.io), warm relationship, attended BNI
+- **Brian Ragone** — Founder/CEO (<vendor support email>), warm relationship, attended BNI
 - **Jolly Amurao** — Senior Product Operations (support@puzzleapp.io), primary support, escalates to engineering
 
 ### 🎓 Missing Pixel Training Opportunities
@@ -10854,7 +10854,7 @@ The hook is one of three required parts. Skip any → trust breaks:
 
 ### Origin
 
-Session 246 (April 18, 2026). TIG had a Bugs/Ideas/Suggestions panel in HQ for capture, but items piled up unseen. A 4-week-old "decommission GCC" item that had passed its target date by 18 days was discovered only when the new hook surfaced it on its first run. Same architectural family as the TWL Preload Hook (Vol 1) — same UserPromptSubmit pattern, different data plane (live DB rows vs. static docs). Documented publicly as Built from Broken Vol 5.
+Session 246 (April 18, 2026). TIG had a Bugs/Ideas/Suggestions panel in HQ for capture, but items piled up unseen. A 4-week-old "decommission supporter-CC" item that had passed its target date by 18 days was discovered only when the new hook surfaced it on its first run. Same architectural family as the TWL Preload Hook (Vol 1) — same UserPromptSubmit pattern, different data plane (live DB rows vs. static docs). Documented publicly as Built from Broken Vol 5.
 
 ### Training Opportunities
 
@@ -11005,23 +11005,23 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 **Scaling path:** Single VM handles ~20 concurrent sessions. Beyond that: resize VM, multiple VMs, or Anthropic Managed Agents (beta April 2026). Agent tools designed runtime-agnostic so the intelligence layer ports without rewrite.
 
-### Proof of Concept: GreenCal Construction
+### Proof of Concept: [Supporter Organization]
 
-- **Sandbox:** `sandbox.greencalinc.org` (live, **29 pages** + `/about-us` 301 → `/about`)
-- **Repo:** `QuietlyWorking/greencal-website` (public)
+- **Sandbox:** `<supporter-sandbox-domain>` (live, **29 pages** + `/about-us` 301 → `/about`)
+- **Repo:** `<supporter website repo>` (public)
 - **Stack:** Astro static + Cloudflare Pages Functions for `/api/lead` + `/api/feedback`. Zero JS at the page level (Pills/Form scripts inline-compiled); Lighthouse projected 95+.
 - **Stage:** `alpha` — PUBLIC_SITE_STAGE env var gates alpha banner + feedback pill visibility. Flip to `production` in `.github/workflows/deploy.yml` to hide widgets after sign-off.
 - **Primitives:** 14 canonical components in `src/components/primitives/` (NavHeader, Footer, CalloutBanner, Hero, Features, Gallery, Testimonials, LogoWall, CtaBand, FaqAccordion, EmbedBlock, TeamGrid, ArticleList, RichTextContent, StatsStrip, TagCloud, LeadForm, FeedbackPill).
-- **Lead pipeline:** `/api/lead` dual-writes to QSP Supabase `website_leads` (tenant_id scoped) + MS Graph email to `hello@greencalinc.com`.
-- **Feedback pipeline (alpha-only):** `/api/feedback` dual-writes to HQ `hq_contact_submissions` (source_app=site_greencal) + private MS Graph email to TIG only. Screenshots supported (file pick / drag / paste / clipboard), client-resized to 1920px, uploaded to HQ Supabase Storage bucket `site-feedback-screenshots`, rendered inline in notification email and (after HQ prompt 127) in HQ detail view.
+- **Lead pipeline:** `/api/lead` dual-writes to QSP Supabase `website_leads` (tenant_id scoped) + MS Graph email to `<supporter contact inbox>`.
+- **Feedback pipeline (alpha-only):** `/api/feedback` dual-writes to HQ `hq_contact_submissions` (source_app=<supporter-site-id>) + private MS Graph email to TIG only. Screenshots supported (file pick / drag / paste / clipboard), client-resized to 1920px, uploaded to HQ Supabase Storage bucket `site-feedback-screenshots`, rendered inline in notification email and (after HQ prompt 127) in HQ detail view.
 - **Social proof:** 60 real 5-star Google reviews in a CSS-columns masonry wall, Google source badges, 8 AI-extracted praise themes (Opus 4.7 analyzed from the full corpus), multi-source trust stats replacing the old "4.5★" single line.
-- **Status (2026-04-20, Session 249):** Alpha review begins. Hazel + Megan + Gabrielle + rest of GreenCal team invited via announcement email to walk the site and submit via the private feedback pill. Known gaps: Blog/Gallery/Videos detail pages not yet clickable (data ready in JSON), Get Started form not yet wired, FAQ expansion pending. Six open business decisions awaiting Hazel.
-- **Full System Status:** `002 Projects/_GreenCal Projects/GreenCal-Website/GreenCal-Website-System-Status.md`
+- **Status (2026-04-20, Session 249):** Alpha review begins. [Supporter Lead] + [Supporter Team Member] + [Supporter Team Member] + rest of [Supporter Organization] team invited via announcement email to walk the site and submit via the private feedback pill. Known gaps: Blog/Gallery/Videos detail pages not yet clickable (data ready in JSON), Get Started form not yet wired, FAQ expansion pending. Six open business decisions awaiting [Supporter Lead].
+- **Full System Status:** `002 Projects/_[Supporter Organization] Projects/[Supporter Organization]-Website/[Supporter Organization]-Website-System-Status.md`
 
 ### Key Documents
 
-- GreenCal site System Status: `002 Projects/_GreenCal Projects/GreenCal-Website/GreenCal-Website-System-Status.md`
-- Gap audit: `.tmp/greencal-site-audit/30-gap-report.md`
+- [Supporter Organization] site System Status: `002 Projects/_[Supporter Organization] Projects/[Supporter Organization]-Website/[Supporter Organization]-Website-System-Status.md`
+- Gap audit: `.tmp/[Supporter Organization]-site-audit/30-gap-report.md`
 - Ecosystem vision: `002 Projects/_QWF App Ecosystem/QWF-App-Ecosystem-Vision.md`
 - Architecture decisions: `memory/qwb_architecture_chat.md`
 - Program genesis: `memory/project_qwb_quietly_webbing.md`
@@ -11100,4 +11100,890 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-07-23 05:59 (v5.61)*
+## Project System Status Files ⭐ NEW
+
+Projects with 2+ deployed external systems maintain a `*-System-Status.md` file in their `002 Projects/` folder. These files are the **anti-compaction memory** — they survive context loss between Claude sessions and are the first file read when resuming work.
+
+### Why This Exists
+
+LLM conversations compact over time, losing operational details like URLs, credential access methods, and deployment state. This caused false claims about system status and forgotten access methods. System Status files fix this by storing critical operational state in the filesystem where it persists permanently.
+
+### Current Status Files
+
+| Project | File | Key Systems |
+|---------|------|-------------|
+| QWR Quietly Writing | `QWR-System-Status.md` | Cloudflare Pages, Supabase, n8n (26 workflows), Stripe, GitHub Actions CI/CD, Python scripts |
+| [Networking Chapter] | `[Networking Chapter]-System-Status.md` | SuiteDash, n8n, Twilio (2 numbers), MS Graph, Apify |
+| QWU Backoffice | `QWU-Backoffice-System-Status.md` | n8n (10+ workflows), Discord, Google Calendar, Betterstack, Zoom |
+| Lead Generation | `LeadGen-System-Status.md` | Apify (7 actors), Anymail, Reoon, Google Sheets, n8n |
+| Appointment Scheduling | `Scheduling-System-Status.md` | Google Calendar, SuiteDash, Discord approval, n8n |
+| Locals 4 Good | `L4G-System-Status.md` | Supabase (`<SUPABASE_PROJECT_ID_L4G>`), Lovable frontend, Stripe, n8n |
+| QWU WordPress Multisite | `QWU-WPMU-System-Status.md` | AWS Lightsail, WordPress 6.9.1, Divi 4.27.6 (Divi 5 migration HOLD — revisit May 5, 2026), 11 QWF program sites + chaplaintig.com (blog_id 10) |
+| HQ Command Center | `HQ-System-Status.md` | Supabase, Lovable frontend, API server (8766), n8n, relationship_intelligence.db |
+| [Supporter Organization] Command Center | `supporter-CC-System-Status.md` | Supabase (`<SUPABASE_PROJECT_GCC>`), Lovable frontend, Instantly, DMARC Report |
+| QMP Quietly Managing Property | `QRP-System-Status.md` | Supabase (`<SUPABASE_PROJECT_ID>`), Lovable frontend (9 prompts), n8n (bill pipeline), edge functions (submit-contact-form), Python scripts |
+| Pocket Ez | `Pocket-Ez-System-Status.md` | Supabase (`<SUPABASE_PROJECT_POCKET>`), Lovable PWA, OpenRouter (Claude Opus 4.7), pocketez.org |
+| [Supporter Organization] PDF Plugin | `[Supporter Organization]-PDF-Plugin-System-Status.md` | AWS Lightsail (supporter-owned), WordPress Multisite, dozens of publication sites, n8n email relay |
+| QKN Quietly Knocking | `QKN-System-Status.md` | Supabase (`<SUPABASE_PROJECT_ID>`), Lovable frontend, quietlyknocking.org |
+| QSP Quietly Spotting | `QSP-System-Status.md` | Supabase (`<SUPABASE_PROJECT_ID>`), Lovable frontend, n8n (2 sync workflows), Python scripts, quietlyspotting.org |
+| QNT Quietly Networking | `QNT-System-Status.md` | Supabase (`<SUPABASE_PROJECT_ID>`), CF Pages frontend (quietlynetworking.org), FastAPI webhook (internal port), Stripe (test), QWF Passport deployed |
+| QTR Quietly Tracking | `QTR-System-Status.md` | Supabase (`<SUPABASE_PROJECT_ID>`), Lovable frontend, quietlytracking.org |
+| Meeting Experience System | `MES-System-Status.md` | 41 scripts, 6 directives, 10 n8n workflows, Zoom OAuth, Google Calendar, Twilio, contact_history.db |
+
+### What Goes In (The Amnesia Test)
+
+Include anything that answers: *"If I lost all conversation history, what would I need to know to resume work?"*
+
+- **Access credentials & methods** — SSH clone commands, deploy key locations, credential IDs (not raw secrets)
+- **URLs & endpoints** — Project URLs, webhook paths, API endpoints
+- **What's deployed vs. planned** — Script versions, workflow status, prompt execution state
+- **Architecture decisions** — "Uses HTTP Request nodes, not Supabase nodes (buggy)"
+- **Known issues** — Active bugs with severity
+- **Session log** — What changed and when
+
+### Maintenance Rules
+
+1. **Session-start:** Read the relevant status file before working on any project
+2. **Session-end:** Update the file if any deployed state changed (enforced by `/session-wrap-up`)
+3. **Periodic audit:** Clone repos and diff actual components against the status file to catch drift
+
+---
+
+## HQ Command Center ⭐ NEW
+
+**Added: February 5, 2026**
+
+The HQ Command Center is a personal operational dashboard at `hq.quietlyworking.org` that aggregates tasks, relationships, system health, calendar, and WHELHO life domains into a single power-user interface.
+
+### Architecture
+
+```
+Lovable Frontend (hq.quietlyworking.org)
+    → Supabase SDK
+        → Supabase (<SUPABASE_PROJECT_ID>)
+            ← Synced by n8n (daily 6 AM)
+                ← HQ API (<internal API host>)
+                    ← Local Data Sources (relationship_intelligence.db, vault tasks, WHELHO)
+```
+
+### Components
+
+| Component | Status | Details |
+|-----------|--------|---------|
+| Supabase Project | ✅ Deployed | `<SUPABASE_PROJECT_ID>` (US West 1) — 25+ tables + 4 views (incl. `hq_quick_intel`/`hq_quick_intel_actions`/`hq_quick_intel_messages`/`hq_tool_registry` as of 2026-04-24) |
+| API Server | ✅ Built | `hq_api_server.py` v1.0.0 on an internal port |
+| Task Sync | ✅ Built | `sync_hq_tasks.py` v1.5.0 — ~235 tasks synced (SUPERVISOR skip filter) |
+| Relationship Sync | ✅ Built | `sync_hq_relationships.py` v1.6.0 — 1,435 relationships |
+| Meeting Sync | ✅ Built | `sync_hq_meetings.py` v2.2.0 — 51 upcoming + 17 past meetings (enriched with relationship data from `hq_relationships`). Past meetings merge tracker DB + daily notes, resolve attendee emails from entity frontmatter, and clean up stale duplicate records |
+| System Health Sync | ✅ Built | `sync_hq_system_health.py` |
+| n8n Daily Sync | ✅ Deployed | `<WORKFLOW_ID>` v7.0.0 (2026-04-24) — tasks + relationships + meetings + agent efficiency + app registry + tool registry sync (6 AM, 7 parallel SSH nodes) |
+| Lovable Frontend | ✅ Built | 139 prompts total — includes Projects Intelligence Hub (101-103), L4G Operations Module (105-106), Agent Efficiency (107), Action Queue (108), Testimonials/Voices (109-111), Dynamic Issue Form (112), Content Review (113-115), Issue Tracker Complete App List + Sidebar Fix + Searchable Dropdown (116-118), Quick Intel (119-122), Issue Tracker Mobile Fix + Editable Issues (123-124), Transparency Article Cards (125-126), Issue Detail Polish (127-130), Quick Intel Tool Search (131), Quick Intel Deep Analyze + Usage Panel + Delete (132-133), Email Sources Layout + Perf + Virtualization (134-139) |
+| Quick Intel Deep Stack | ✅ Built (2026-04-24) | `process_quick_intel_deep.py` v1.2.0 (state-machine orchestrator, wisdom.db dedup, resume-aware), n8n `Quick Intel Deep Process` workflow (`<WORKFLOW_ID>`, webhook → SSH → orchestrator → Discord), edge function `quick-intel` v2.1.0 (dedup + 5-surface usage panel + Content preset + smarter `dedup_hit` gating), schema `hq_quick_intel_deep_schema.sql` (deep_status/content_status lifecycle + supabase_realtime publication) |
+| Tool Registry | ✅ Built (2026-04-24) | `hq_tool_registry` table — 25+ tools mirroring CLAUDE.md TWL catalog (slug, display_name, category, status, has_twl, twl_path, entity_path, aliases). `sync_hq_tool_registry.py` v1.0.0 (TWL directives → registry, idempotent, preserves manual curation). Used by Quick Intel TWL routing combobox (Lovable prompt 131) — alias-aware search (`cf` → Cloudflare Pages, `fusion` → DaVinci Fusion) |
+| Email Sources Module | ✅ Built | `/email-sources` page — sender table with search/filter/sort, Block Email + Block Domain buttons, skip-confirmation checkbox |
+| Sender Tracking | ✅ Built | `outlook_pipeline.py` v1.6.0 tracks all senders in `hq_email_senders` Supabase table after classification |
+| Google Calendar Edge Function | ✅ Deployed | v3.0.0 — RFC3339 timestamps with Pacific TZ offset, DST auto-detection, dual-format private key, `auth handled in-function` |
+| Calendar Health Monitor | ✅ Deployed | `check_calendar_health.py` v1.0.0 — every 2h cron, auto-redeploy via Supabase CLI, Discord alerts |
+| Ezer Agent Edge Function | ✅ Deployed | Claude Opus 4.7, 8 tools, `auth handled in-function` |
+| Dispatch Agent Edge Function | ✅ Deployed | v1.1.0, `auth handled in-function` (fixed from `true`) |
+| Custom Domain | ✅ Live | `hq.quietlyworking.org` via Lovable |
+| Meeting Prep Emails | ✅ Built | `send_meeting_prep_email.py` v1.0.0 — 7-day emails + 30-day briefings |
+| Issue Tracker | ✅ Built | Kanban + table views, detail drawer, triage badge, app sidebar cards, color-coded app borders, dynamic Source App dropdown (Prompt 112), filter fix for beta status (Prompt 116), sidebar shows all programs incl. planning (Prompt 117), searchable combobox dropdown (Prompt 118), mobile touch-scroll fix + visible search (Prompt 123), inline editing for description/subject/type/source app (Prompt 124) |
+| Notification System | ✅ Built | Unified dispatcher (SMS + Discord + Push), per-person notify toggles, Settings notification preferences |
+| App Observatory | ✅ Built | `hq_app_registry` (64 rows, synced from `ecosystem_registry.json` via `sync_hq_app_registry.py` v1.0.0), `hq_app_metrics`, collector running. Category constraint: app/program/system/infra/pedagogy/content/site. Status constraint: active/building/standby/production/beta/alpha/planning/paused. Includes QOP, QCP, Heart Draft, FORGE, EPIC, GUILD. 3 duplicates cleaned (other_epic→epic, whelho→whl, heart_draft→hd). |
+| Projects Intelligence Hub | ✅ Built | 37 projects bootstrapped, momentum scoring, 57 goal milestones, grid/table views, detail drawer |
+| Interactive Work Items | ✅ Built | Click-to-cycle status, add manual tasks, internal notes, delete, sync protection via `hq_dirty` trigger |
+| Goals Sync | ✅ Built | `sync_hq_goals.py` v1.1.0 — parses Goals doc, upserts milestones with sort_order, skips hq_dirty items |
+| Git Activity Sync | ✅ Built | `sync_hq_git_activity.py` v1.0.0 — per-project commit recency |
+| Health Computation | ✅ Built | `compute_hq_project_health.py` v1.0.0 — momentum scoring (0-100), health assessment |
+| L4G Operations Module | ✅ Built | Prompt 106 — Kanban pipeline (5 journey stages), production calendar (area×month grid), deadline alerts. Backend: `sync_hq_l4g.py` v1.1.0 syncs from L4G Supabase every 15 min |
+| L4G Sync | ✅ Built | `sync_hq_l4g.py` v1.1.0 — 14 pipeline rows, 18 production rows, 25 alerts. n8n workflow `<WORKFLOW_ID>` |
+| Agent Efficiency | ✅ Built | Prompt 107 — Dashboard card with redundancy ratio (color-coded), SVG sparkline (last 20 sessions), wasted token estimate, engram candidates list. Backend: `sync_hq_agent_efficiency.py` syncs from local QCM metrics to HQ Supabase daily |
+| Action Queue | ✅ Built | Prompt 108 — Dashboard panel showing pending decision items from `hq_action_queue`. First action type: `video_article` (chaplaintig.com pipeline). Publish/Edit Draft/Reject buttons. Real-time Supabase subscription. Write-back via `write_back_dirty_items.py` v1.1.0 |
+
+### Data Sources
+
+| Source | Frequency | Script |
+|--------|-----------|--------|
+| Vault tasks (`000 Inbox/___Tasks/`) | Daily 6 AM | `sync_hq_tasks.py` |
+| Relationships (`relationship_intelligence.db`) | Daily 6 AM | `sync_hq_relationships.py` |
+| Upcoming meetings (briefings + calendar) | Daily 6 AM | `sync_hq_meetings.py` |
+| Past meetings (daily notes + zoom + tracker DB) | Daily 6 AM | `sync_hq_meetings.py` |
+| System health (twin API) | Every 15 min (Phase 3) | `sync_hq_system_health.py` |
+| L4G pipeline, production, alerts | Every 15 min | `sync_hq_l4g.py` (3 tables: `hq_l4g_pipeline`, `hq_l4g_production`, `hq_l4g_alerts`) |
+| Agent efficiency metrics (QCM redundancy_metrics) | Daily 6 AM | `sync_hq_agent_efficiency.py` (3 tables: `hq_agent_efficiency`, `hq_engram_candidates`, `hq_agent_efficiency_summary` view) |
+| Google Calendar | Live via edge function | `google-calendar-events` (v3.0.0) |
+| Calendar health | Every 2 hours via cron | `check_calendar_health.py` (auto-redeploy + Discord alert) |
+| Action queue (video articles) | Real-time (Supabase subscription) + write-back via n8n | `hq_action_queue` table, `write_back_dirty_items.py` v1.1.0 |
+
+### UX Efficiency Features (Prompts 038-047)
+
+The HQ Command Center emphasizes power-user efficiency: zero-confirmation actions with undo toasts (Gmail/Slack pattern), keyboard triage mode (j/k navigation + single-key actions), right-click context menus, inline entity editing (click-to-edit contact fields), enhanced Cmd+K command palette (searches people + tasks + pages), double-click entity access, sticky batch action bar, and agent task popout panels (work while agents process in floating panels).
+
+### Focus Module (Prompts 065-067)
+
+The Focus module surfaces the 3-5 most urgent tasks. Two input paths:
+- **Phone capture:** Type `@star [task]` → process_inbox.py detects prefix → creates task with `starred: true` + `priority: high` → sync to HQ
+- **HQ UI:** Click star icon on any task row, or press `s` on a selected task
+
+Focus section appears at the top of the Tasks page (collapsible, starred pending/in-progress tasks as compact cards). Dashboard Focus widget shows top 5 starred tasks. Snooze system includes timezone-safe date picker (Pacific time via `Intl.DateTimeFormat`).
+
+### Quick Capture Prefixes (Prompt 080)
+
+Enhanced phone capture with typed prefixes:
+- **`@star [task]`** — Creates task with `starred: true` + `priority: high` (Focus module integration)
+- **`@do [task]`** — Creates task with `priority: high` (quick action items, not starred)
+
+Both prefixes are detected by `process_inbox.py` and route through the standard task sync pipeline to HQ.
+
+### QSP Discovery Funnel (Prompt 081)
+
+Unauthorized login attempts now redirect to a QSP discovery page instead of a generic error. When someone visits `hq.quietlyworking.org` without auth, they see QSP (Quietly Spotting) as the recommended entry point — routing potential users to the public product rather than a dead end.
+
+### Google Calendar Edge Function v3.0.0 (Prompt 084)
+
+The `google-calendar-events` edge function was rebuilt after diagnosing a persistent failure mode. The fix is locked into Lovable's codebase via Prompt 084 to prevent Lovable from overwriting it.
+
+**Root cause:** Google Calendar API requires RFC3339 timestamps with timezone offsets (e.g., `2026-02-28T00:00:00-08:00`). Lovable's generated version used bare timestamps without offsets, causing 400 Bad Request errors from Google's API.
+
+**v3.0.0 changes:**
+- RFC3339 timestamps with Pacific timezone offset
+- DST auto-detection (PST `-08:00` vs PDT `-07:00`) using date-based calculation
+- Dual-format private key handling (escaped `\\n` and literal newlines)
+- `auth handled in-function` (Lovable kept resetting to `true`)
+- Supabase secrets re-set: `GOOGLE_SA_PRIVATE_KEY`, `GOOGLE_CALENDAR_TIMEZONE`
+
+**Self-healing health monitor:** `check_calendar_health.py` v1.0.0 runs every 2 hours via cron. If the edge function fails:
+1. Calls the edge function endpoint and validates the response
+2. If broken: auto-redeploys the known-good source from `002 Projects/_HQ Command Center/supabase/functions/google-calendar-events/index.ts` via Supabase CLI
+3. Re-checks after deployment
+4. Posts to Discord `#system-status` with status (healthy/healed/still-broken)
+
+### Email Sources Module (Prompts 085-087)
+
+The Email Sources module provides visibility into every email address the Outlook pipeline processes, enabling bulk sender management directly from the HQ UI.
+
+**Components:**
+- **`/email-sources` page** — Full sender table with search, filter by domain, sort by email count/task count/last seen. "Pure cost waste" rows (high email count, zero task count) highlighted with yellow left-border.
+- **Block Email / Block Domain buttons** — Per-row actions that insert into `hq_email_suppressions` for immediate suppression in the next pipeline run.
+- **Skip Confirmation checkbox** — Custom AlertDialog with "Don't ask again this session" checkbox (`useRef` for persistence + `useState` for visual state). When checked, subsequent blocks execute immediately with toast-only feedback. Resets on page refresh.
+- **`hq_email_senders` table** — Supabase table tracking all scanned senders. Schema: email (unique), domain, display_name, first_seen, last_seen, email_count, task_count, last_classification. Populated by `outlook_pipeline.py` v1.6.0 via PostgREST upsert (fetch + calculate + upsert, because PostgREST cannot do atomic `SET count = count + N`).
+
+**Suppression Impact (March 2026):** 82% suppression rate (1,153/1,413 emails skipped). Email processing costs dropped from $1.17/day (Feb) to $0.22/day (Mar) — 81% reduction, ~$29/month savings.
+
+### Projects Intelligence Hub (Prompts 101-103)
+
+The Projects module provides portfolio-level visibility across all 37 QWU projects, answering "Where should I invest my time?"
+
+**Backend pipeline:**
+- `bootstrap_hq_projects.py` v1.0.0 — One-time load of all 37 projects across 6 categories (qwf_app, operational, student_program, supporter, infrastructure, planning)
+- `sync_hq_goals.py` v1.1.0 — Parses `_Goals and Priorities.md`, upserts milestones with numeric `sort_order` (M1→1000, M2→2000, ... M10→10000), skips `hq_dirty` items to protect user edits
+- `sync_hq_git_activity.py` v1.0.0 — Scans git log per project folder, updates `last_commit_date` and `days_since_activity`
+- `compute_hq_project_health.py` v1.0.0 — Weighted momentum scoring (0-100): commits recency (25%), strategic priority (20%), no blockers (15%), completion momentum (15%), active work items (25%). Health: healthy (>50), needs_attention (20-50), stalled (<20 + 30d inactive)
+
+**Frontend (Prompts 101-103):**
+- **Prompt 101:** Grid view (cards grouped by category with momentum rings, health dots, goal badges) + table view (10 sortable columns) + detail drawer (strategic context, work items, activity)
+- **Prompt 102:** Kanban card left border accent matching source app's `color_hex` from `hq_app_registry`
+- **Prompt 103:** Interactive work items — click-to-cycle status (open → in_progress → done), add manual tasks with inline form, internal notes per item, delete manual items with undo, "HQ" badges on manual items, pencil icon on edited goal milestones
+
+**Sync protection:** `hq_dirty` boolean + `preserve_work_item_hq_edits` PostgreSQL trigger. When a user edits a milestone in HQ, the trigger prevents the next `sync_hq_goals.py` run from overwriting those changes. Manual items (`source='manual'`) are naturally safe via the UNIQUE(source, source_ref) constraint.
+
+**Tables:** `hq_projects` (37 rows, 6 categories), `hq_work_items` (57 goal milestones + manual items, with sort_order, hq_dirty, last_hq_edit_at columns)
+
+### Action Queue Panel (Prompt 108)
+
+The Action Queue surfaces pending decision items directly on the HQ dashboard, starting with `video_article` items from the chaplaintig.com pipeline.
+
+**Flow:**
+```
+Pipeline creates WordPress draft
+  → inserts row into hq_action_queue (status: pending)
+    → HQ dashboard shows card with Publish / Edit Draft / Reject buttons
+      → user clicks → hq_action_log entry created
+        → write_back_dirty_items.py processes action
+          → tig_publish_article.py publishes (or marks rejected)
+            → hq_action_log.processed_at stamped
+```
+
+**Schema changes (HQ Supabase `<SUPABASE_PROJECT_ID>`):**
+- `hq_action_queue` — `status` column (pending/completed/dismissed/expired)
+- `hq_action_log` — `processed_at` column (write-back processing tracker)
+- `hq_video_articles` — stores article metadata for the approval UI
+- RLS policies for broadcast items (`user_id IS NULL`)
+
+**Write-back:** `write_back_dirty_items.py` v1.1.0 reads unprocessed `hq_action_log` entries, dispatches by action type (`publish` runs `tig_publish_article.py`, `reject` marks dismissed), then stamps `processed_at`. Triggered by n8n workflow.
+
+### Testimonial Intelligence Pipeline (Prompts 109-111)
+
+**Added: March 30, 2026**
+
+End-to-end system for discovering, approving, and publishing testimonials about Chaplain TIG from multiple sources.
+
+**Pipeline stages:**
+```
+Sources (meetings, LinkedIn, manual)
+  → extract_testimonials.py (discovery)
+    → score_testimonial.py (0-1 quality + WHELHO realm mapping)
+      → Pipeline routing:
+        Public source → tig_pending (TIG reviews in HQ)
+        Private source → giver_pending (Ezer asks permission)
+      → testimonial_giver_approval.py (warm email via Ezer)
+      → TIG approves in HQ Voices page
+        → sync_testimonials_to_wp.py (JSON cache to WordPress)
+          → tig-testimonials-widget.php (live on chaplaintig.com)
+```
+
+**Backend scripts (7):**
+- `extract_testimonials.py` — Main orchestrator
+- `extract_testimonials_meetings.py` — Scans meeting transcripts for praise/endorsement
+- `extract_testimonials_linkedin.py` — Scrapes LinkedIn recommendations via Apify
+- `score_testimonial.py` — Quality scoring + WHELHO realm/theme tagging
+- `testimonial_giver_approval.py` — Ezer sends warm approval request emails (Exempt classification)
+- `sync_testimonials_to_hq.py` — Pushes to HQ action queue
+- `publish_testimonials_wp.py` — Generates display output, pushes to WordPress
+
+**WordPress widget:** `tig-testimonials-widget.php` v1.0.1 — Dynamic testimonial slider with auto-rotating cards, progress bar, mouseover pause with "Paused" indicator, shortcode `[tig_testimonials]`. Reads from `/wp-json/tig/v1/testimonials` REST endpoint backed by JSON cache synced from Supabase.
+
+**HQ Frontend:**
+- **Prompt 109:** Voices page — Kanban pipeline view with filter tabs (Needs Review / Awaiting Giver / Approved / Published / Archived), testimonial cards with quality scores (color-coded), source type badges (LinkedIn=blue, Meeting=purple, Networking=amber, Google=green), WHELHO realm tag pills, action buttons per status, Add Testimonial slide-over form, real-time Supabase subscriptions, stats bar
+- **Prompt 110:** Inline editing — click-to-edit quote text directly on cards
+
+**Schema:** `hq_testimonials` table with multi-stage `pipeline_status` (extracted → giver_pending → giver_approved → approved → published), `quality_score` (0-1), `realm_tags` (WHELHO), `themes`, `dedup_hash` (SHA-256), `giver_approval_needed` boolean.
+
+**Directive:** `005 Operations/Directives/testimonial_intelligence.md`
+
+### Key Files
+
+| File | Purpose |
+|------|---------|
+| `002 Projects/_HQ Command Center/HQ-System-Status.md` | System Status (source of truth) |
+| `005 Operations/Directives/hq_command_center.md` | Governing directive |
+| `005 Operations/Data/relationship_intelligence.db` | Relationship intelligence SQLite DB |
+| `005 Operations/Data/linkedin_export/` | Source LinkedIn data (2 exports) |
+| `002 Projects/_HQ Command Center/handoff-meeting-intelligence-pipeline.md` | Meeting module handoff (Upcoming + Past) |
+| `005 Operations/Execution/check_calendar_health.py` | Calendar edge function health monitor (v1.0.0, every 2h cron) |
+| `002 Projects/_HQ Command Center/supabase/functions/google-calendar-events/index.ts` | Known-good edge function source (v3.0.0) |
+| `002 Projects/_HQ Command Center/084-lovable-prompt-fix-calendar-edge-function.md` | Lovable prompt locking edge function code |
+| `005 Operations/Execution/bootstrap_hq_projects.py` | One-time project bootstrap (37 projects) |
+| `005 Operations/Execution/sync_hq_goals.py` | Goals doc → milestones sync (v1.1.0, hq_dirty aware) |
+| `005 Operations/Execution/sync_hq_git_activity.py` | Per-project git commit recency sync |
+| `005 Operations/Execution/compute_hq_project_health.py` | Momentum scoring + health assessment |
+| `005 Operations/Execution/sync_hq_agent_efficiency.py` | QCM redundancy metrics → HQ Supabase sync |
+| `005 Operations/Execution/write_back_dirty_items.py` | Process HQ action log entries (publish/reject articles) v1.1.0 |
+| `005 Operations/Directives/testimonial_intelligence.md` | Testimonial pipeline SOP |
+| `005 Operations/Execution/extract_testimonials.py` | Testimonial extraction orchestrator |
+| `005 Operations/Execution/score_testimonial.py` | Quality scoring + WHELHO realm mapping |
+| `005 Operations/Execution/testimonial_giver_approval.py` | Ezer giver approval emails |
+| `005 Operations/Execution/sync_testimonials_to_hq.py` | Push to HQ action queue for TIG review |
+| `005 Operations/Execution/publish_testimonials_wp.py` | Generate Divi shortcode, push to WordPress |
+| `005 Operations/Execution/sync_testimonials_to_wp.py` | Supabase → WordPress JSON sync |
+| `005 Operations/Execution/wp-mu-plugins/tig-testimonials-widget.php` | WordPress testimonial widget v1.0.1 (slider/wall/grid/ticker/featured) |
+
+### Quick Intel — YouTube Video Analysis (Prompts 120-122)
+
+**Added: April 12, 2026**
+
+Quick Intel lets TIG paste a YouTube URL into HQ and get instant AI-powered analysis about the video's relevance to the QWU backoffice stack, tools, and mission. Designed for the **mobile capture, desktop decide** workflow — triage videos on the phone, review and route on the desktop.
+
+**How it works:**
+
+```
+HQ Frontend (URL + question)
+    → Edge Function (quick-intel)
+        → YouTube Data API (metadata)
+        → YouTube captions (transcript extraction)
+        → Claude Opus 4.7 (analysis with QWU context)
+    → Response stored in hq_quick_intel table
+    → Follow-up conversation via hq_quick_intel_messages
+    → Action routing via hq_quick_intel_actions
+        → Backoffice process_quick_intel_action.py
+```
+
+**Preset quick actions:** Relevant? | Key Insights | Wisdom | TWL | Brand Voice
+
+**Routing actions (combinable, checkbox-based):**
+
+| Action | Pipeline | End State |
+|--------|----------|-----------|
+| Content | Full Gemini multimodal → article → social atoms | Content Review page + Wisdom Library |
+| Wisdom | Save selected insights (no article/social) | Wisdom Library |
+| TWL | Extract tool patterns, gotchas, best practices | wisdom.db with tool tags |
+| Idea | Create issue tagged to QWF property | HQ Issues page |
+| Student | Flag for MP curriculum | HQ Tasks with skill area tag |
+| Copy | Copy analysis to clipboard | Local only |
+
+Hot priority toggle (flame icon) bumps all selected actions to high priority.
+
+**Edge function:** `quick-intel` on HQ Supabase (`<SUPABASE_PROJECT_ID>`), `auth handled in-function`. Secrets: `ANTHROPIC_API_KEY`, `YOUTUBE_API_KEY`.
+
+**Tables:** `hq_quick_intel` (sessions), `hq_quick_intel_actions` (routing queue), `hq_quick_intel_messages` (follow-up chat). Schema: `hq_quick_intel_schema.sql`.
+
+**Backoffice handler:** `process_quick_intel_action.py` v1.0.0 — processes pending actions from Supabase (7 action types).
+
+**Mobile:** Quick Intel card pinned to top of mobile dashboard (prompt 122). Compact layout with horizontally scrollable preset chips.
+
+### Issue Tracker Improvements (Prompts 123-124)
+
+**Added: April 12, 2026**
+
+- **Prompt 123 (Mobile Fix)** — Fixed Source App dropdown on mobile: touch scroll was blocked by Popover component intercepting touch events, search input not visible due to Popover positioning. CSS `touch-action: manipulation` fixes + Popover `sideOffset` adjustment.
+- **Prompt 124 (Editable Issues)** — Added inline editing in the Issue Tracker detail drawer: click-to-edit description, subject, type badge, and source app. Changes save directly to Supabase without opening a separate form.
+
+### 🎓 Missing Pixel Training Opportunities
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Supabase Schema Design | SQL, RLS policies, PostgREST | ⭐⭐⭐ |
+| API Server (no framework) | Python http.server, REST design | ⭐⭐ |
+| Data Sync Pipeline | ETL patterns, incremental sync, deduplication | ⭐⭐⭐ |
+| Lovable Frontend | AI-assisted UI development, prompt engineering | ⭐⭐ |
+| Meeting Intelligence Pipeline | Calendar APIs, vault enrichment, relationship health scoring, email automation | ⭐⭐⭐ |
+| Self-Healing Infrastructure | Health checks, auto-remediation, Supabase CLI deployment, cron monitoring | ⭐⭐⭐ |
+| Quick Intel Feature Build | Edge functions, YouTube APIs, LLM integration, full-stack feature delivery | ⭐⭐⭐ |
+
+---
+
+## QWR SEO Intelligence ⭐ NEW
+
+**Added: February 5, 2026**
+
+The SEO Intelligence system provides keyword research, competitive analysis, and content opportunity scoring for QWR (Quietly Writing) to help users discover what to write about.
+
+### Components
+
+| Component | Status | Details |
+|-----------|--------|---------|
+| Keyword Research | ✅ Built | `qwr_keyword_research.py` v1.1.0 — DataForSEO integration with null safety |
+| Opportunity Scorer | ✅ Built | `qwr_opportunity_scorer.py` — Multi-signal scoring |
+| n8n Keyword Lookup | ✅ Built | `qwr-seo-keyword-lookup.json` — On-demand webhook |
+| n8n Weekly Refresh | ✅ Built | `qwr-seo-weekly-refresh.json` — Scheduled analysis |
+| Wisdom Library Monitor | ✅ Built | `qwr-wisdom-library-monitor.json` — Source change detection |
+| Unsubscribe RPC | ✅ Built | `unsubscribe_from_wisdom_source` — Supabase RPC for Remove button (cascading cleanup of entries + source) |
+| SQL Migration | ✅ Built | `2026-02-05-seo-intelligence-tables.sql` |
+| Lovable SEO Prompts | ✅ Written | `lovable-prompt-seo-keyword-intelligence.md`, `lovable-prompt-seo-opportunities-widget.md` |
+
+### Key Files
+
+- **Directive:** `005 Operations/Directives/qwr_seo_intelligence.md`
+- **Scripts:** `qwr_keyword_research.py`, `qwr_opportunity_scorer.py`
+- **Workflows:** `qwr-seo-keyword-lookup.json`, `qwr-seo-weekly-refresh.json`, `qwr-wisdom-library-monitor.json`
+- **Migration:** `005 Operations/Migrations/2026-02-05-seo-intelligence-tables.sql`
+
+### 🎓 Missing Pixel Training Opportunities
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Google Autocomplete Scraping | HTTP requests, parsing, rate limiting | ⭐⭐ |
+| Multi-Signal Scoring | Weighted algorithms, normalization | ⭐⭐⭐ |
+| n8n Workflow Design | Webhook triggers, SSH execution, error handling | ⭐⭐ |
+
+---
+
+## Supporter System Safeguards ⭐ NEW
+
+**Added: February 5, 2026**
+
+QWF serves supporters with hosted infrastructure. Supporter systems are **off-limits** to autonomous agent operations unless explicitly directed for a specific task.
+
+### SSH Permission Protocol
+
+Before SSHing to ANY server:
+
+1. **Is this server in CLAUDE.md "Infrastructure Access" whitelist?** → Proceed (QWU infrastructure)
+2. **Is this server in "Supporter System Registry"?** → ASK for explicit permission first
+3. **Unknown server?** → STOP and ASK
+
+### Supporter System Registry
+
+| Customer | Server | Project Folder | Guardrails |
+|----------|--------|----------------|------------|
+| [Supporter Organization] | `<SUPPORTER_SERVER_IP>` | `_[Supporter Organization] Projects/` | `<supporter deploy-guard script>` — no writes 8 AM–5 PM Pacific |
+
+### Deploy Guard Script
+
+`005 Operations/Execution/<supporter deploy-guard script>` prevents accidental writes to supporter production servers during business hours. Run it before any supporter server operation.
+
+### Why This Exists
+
+On 2026-02-05, an agent SSHed to a supporter's server without permission, mistaking it for QWU infrastructure. The project folder name identified a supporter organization, but the agent ignored that signal. This safeguard system ensures supporter systems are always treated with explicit authorization.
+
+**Data Safety:** The foundational directive `supporter_data_safety.md` codifies how to safely sync and handle live supporter business data — safety gates, audit logging, soft-delete, rollback runbook, and anomaly detection. All sync scripts touching supporter data must integrate `sync_safety_gate.py`.
+
+### Supporter Server Operations (Withheld)
+
+> [!NOTE] Withheld for supporter privacy and security
+> Four subsections documenting a specific supporter's email relay and server-hardening details (ban thresholds, blocklists, capacity figures) are excluded from the public manual: publishing a supporter's defensive configuration would hand a hostile reader an attack map. The generic patterns (fail2ban jails, iptables persistence) are standard Linux administration — the commands below remain as teaching material.
+
+**Useful commands:**
+```bash
+# Check fail2ban status
+sudo fail2ban-client status
+sudo fail2ban-client status wordpress-flood
+
+# Unban an IP
+sudo fail2ban-client set wordpress-login unbanip <IP>
+
+# View current iptables blocks
+sudo iptables -L INPUT -n
+
+# Save updated rules (after manual iptables changes)
+sudo /usr/sbin/iptables-save | sudo tee /etc/iptables.rules > /dev/null
+```
+
+### Key Files
+
+- **CLAUDE.md** — Supporter Systems section with registry and protocol
+- **Script:** `005 Operations/Execution/<supporter deploy-guard script>`
+- **Script:** `005 Operations/Execution/<supporter bug-report relay script>` (email relay)
+- **MEMORY.md** — Supporter systems lesson learned
+
+---
+
+## [Supporter Organization] Command Center ⭐ NEW
+
+**Added: February 9, 2026**
+
+The [Supporter Organization] Command Center is a multi-company supporter-facing dashboard for a supporter family's 4 service companies. Built as a client-facing layer powered by QWU Backoffice — all orchestration, scripts, and AI stay inside QWU while the [Supporter Organization] team sees dashboards and takes actions.
+
+### Architecture
+
+```
+Lovable Frontend (<supporter-subdomain>.quietlyworking.org)
+    → Supabase SDK
+        → Supabase (<SUPABASE_PROJECT_GCC>, us-west-1)
+            ← Synced by n8n + Python scripts on claude-dev
+                ← Data Sources (Instantly, DMARC Report, Google Workspace, QWR Agency API)
+```
+
+### Companies Served
+
+> [!NOTE] Withheld for supporter privacy
+> Four supporter companies across construction, rentals, and creative arms. Names and domains are withheld from the public manual.
+
+### Stack
+
+| Layer | Technology | Details |
+|-------|-----------|---------|
+| Frontend | Lovable | 8 prompts executed (auth, impersonation, brand, email health, leads, campaigns, settings/profile) |
+| Backend | Supabase | 17 tables with RLS, separate project from QWR |
+| Auth | Supabase Auth | Magic link, branded email templates, avatars bucket |
+| Data Sync | n8n + Python | Instantly API, DMARC Report API, QWR Agency API |
+| Brand | [Supporter Organization] Brand Kit | Dark mode default, 3-color brand palette, brand display font |
+
+### Phase Roadmap
+
+| Phase | Name | Status |
+|-------|------|--------|
+| 0 | Foundation (Supabase + Auth + Layout Engine) | Complete |
+| 1 | Lead Engine + Core Dashboard | In Progress |
+| 2 | Content & SEO Intelligence | Not Started |
+| 3 | Calculators & SOP Engine | Not Started |
+| 4 | AI Intelligence Layer | Not Started |
+| 5 | System Map & Polish | Not Started |
+| 6 | Creative-arm productization | Not Started |
+
+### Key Files
+
+| File | Purpose |
+|------|---------|
+| `002 Projects/_[Supporter Organization] Projects/[Supporter Organization]-Command-Center/supporter-CC-System-Status.md` | System Status (source of truth) |
+| `002 Projects/_[Supporter Organization] Projects/[Supporter Organization]-Command-Center/supporter-CC-Project-Brief.md` | Project brief (v0.1.0) |
+| `002 Projects/_[Supporter Organization] Projects/[Supporter Organization]-Command-Center/[Supporter Organization]-brand-reference.md` | Brand kit (extracted from 14-page PDF) |
+| `002 Projects/_[Supporter Organization] Projects/[Supporter Organization]-Command-Center/004-lovable-prompt-email-infrastructure.md` | Email Health page prompt |
+| `002 Projects/_[Supporter Organization] Projects/[Supporter Organization]-Command-Center/005-lovable-prompt-lead-pipeline.md` | Lead Pipeline page prompt |
+| `002 Projects/_[Supporter Organization] Projects/[Supporter Organization]-Command-Center/006-lovable-prompt-campaign-management.md` | Campaign Management page prompt |
+| `005 Operations/Directives/<supporter outreach campaigns directive>` | 3 campaigns with ICPs + 9 email templates |
+| `005 Operations/Directives/provision_sending_domain.md` | Domain provisioning (Cloudflare → Workspace → DMARC → Instantly) |
+| `002 Projects/_[Supporter Organization] Projects/QWF-[Supporter Organization]-Ecosystem-Overview.md` | 100,000 ft view: 4 Mermaid diagrams (ecosystem rings, data pipeline, flywheel thesis, before/after) |
+| `002 Projects/_[Supporter Organization] Projects/[Supporter Organization]-SOPs/[Supporter Organization]-SOPs-System-Status.md` | SOP digitization status (40 SOPs identified across 6 categories from 34 source documents) |
+| `002 Projects/_[Supporter Organization] Projects/[Supporter Mascot]-Plushie-Weavy-Workflow.md` | [Supporter Mascot] plushie 3-phase Weavy workflow spec (vendor reference package for [Supporter Team Member]) |
+| `005 Operations/Directives/weavy_creative_workflows.md` | Weavy creative production directive (v1.5.0) — powers [Supporter Mascot] workflow |
+
+### 🎓 Missing Pixel Training Opportunities
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Multi-Company Supabase Schema | RLS policies, company isolation, role-based access | ⭐⭐⭐ |
+| Lovable Prompt Engineering | AI-assisted UI, backend-first pattern, iterative refinement | ⭐⭐ |
+| Brand Kit to Code Translation | Design system extraction, CSS variables, dark mode | ⭐⭐ |
+| Supabase Auth Configuration | Magic link, email templates, redirect URLs, Management API | ⭐⭐⭐ |
+| Cold Email Infrastructure | Sending account warmup, DMARC compliance, domain health | ⭐⭐ |
+| Data Source Integration | API sync patterns (Instantly, DMARC Report, QWR Agency API) | ⭐⭐⭐ |
+
+---
+
+## Site Replication Pipeline (QWB) ⭐ NEW
+
+**Added: April 8, 2026**
+
+A 7-stage deterministic pipeline for replicating existing websites as pixel-perfect static sites on Cloudflare Pages. Core engine for the QWB (Quietly Webbing) program. **Migrated from React SPA to Astro static framework on April 9, 2026** after React caused Lighthouse to drop from 99→64. Astro outputs zero JavaScript by default (projected Lighthouse 95-100). First tested on a supporter's Squarespace website (replicated to a private sandbox).
+
+### Architecture: Content is Sacred
+
+The pipeline strictly separates deterministic extraction (zero AI) from constrained code generation. Previous AI-only approach produced ~55% fidelity because AI hallucinated content, truncated text, and rearranged sections. The pipeline achieves this by:
+
+- **Stages 1-4 and 6: 100% deterministic** (no AI) — Playwright DOM traversal, `innerHTML` preservation, `getComputedStyle` capture, pixel-level screenshot comparison
+- **Stage 5: AI-constrained** — Generates Astro pages (was React) with content provided verbatim (not generated)
+- **Stage 7: AI-targeted** — Claude Vision reads diff images and makes specific CSS fixes
+
+### Pipeline Stages
+
+| Stage | Script | Purpose |
+|-------|--------|---------|
+| 0. SCAFFOLD (Session 251) | `scaffold_supporter_site.py` v1.2.0 | Provision new supporter-site repo from `QuietlyWorking/qwb-supporter-site-template` (18 primitives, lint gate, CI workflow). Idempotent 10-step run: GitHub repo + CF Pages project + HQ `hq_app_registry` row + `.site-config.json` + `.approved-assets.json`. Regenerates `src/styles/tokens.css` from supporter's BRAND.json (see contract in directive §Stage 0) |
+| 1. DISCOVER | `discover_site.py` | Crawl sitemap, detect platform (Squarespace/WordPress/Wix), enumerate pages. Refuses to run unless Stage 0 completed (`scripts/lint_sandbox.mjs` present) |
+| 2. CAPTURE | `capture_site.py` | Squarespace JSON API, Playwright rendered HTML, full-page screenshots (3 viewports), asset download |
+| 3. EXTRACT | `extract_dom.py` | DOM traversal: verbatim `innerHTML`, section ordering, image-to-section mapping, computed styles |
+| 4. TOKENIZE | `tokenize_styles.py` | Color clustering, typography detection, spacing scale, Tailwind v4 `@theme` generation |
+| 5. GENERATE ⭐ NEW (Session 258) | `page_json_to_astro.py` v1.0.0 | **Deterministic** page.json → Astro converter. 48 renderer functions across 13 implemented primitives. `AssetAuthority` rejects unauthorized image URLs. Low-confidence sections wrapped in `{/* REVIEW NEEDED */}` comments. Emits `<page>.astro.conversion-log.json` sidecar (committed to git). Strict-by-default with `--allow-unregistered` + `--allow-missing-primitive` dev escape hatches |
+| 6. COMPARE | `compare_screenshots.py` | Pixel-level comparison: baseline vs replica, diff images, match percentage |
+| 6b. PARITY ⭐ NEW (Session 258) | `check_sandbox_parity.py` v1.0.0 | Playwright-based 9-check structural audit (h1, headings, nav/footer links, image count, form presence, meta, sections). Findings allowlist at `<site_repo>/.parity-allow.json` decays over time |
+| 7. REFINE | `refine_components.py` | Claude Vision targeted fixes, comparison loop until 95%+ (planned) |
+
+**Orchestrator (Session 258):** `rebuild_page_from_production.py` is the single-command entry point that wraps `migrate_page.py` → `page_json_to_astro.py` → `npm run lint:sandbox` → `git commit` for rebuilding any page from its production URL. Makes the right thing the easy thing.
+
+**Asset authority (Session 258):** `005 Operations/Standards/site/approved-assets.json` is the central registry; `sync_approved_assets.py` pushes supporter-scoped copies into each `/<slug>-website/.approved-assets.json`. Both the converter and the sandbox lint read it — 4-tier check chain (scraped page URLs, cdnPrefixes, cdnUrls, localPathGlobs). Unauthorized URLs halt in strict mode; dev iteration uses `--allow-unregistered`.
+
+**Sign-off gate (Session 258):** Before a supporter sees the alpha feedback link, operator walks `005 Operations/Directives/qwb_supporter_site_signoff_checklist.md`. Stricter caps for pre-production (lint allowlist ≤3, parity allowlist ≤5).
+
+**tokens.css generation contract (hardened Session 257):** Stage 0's `step_generate_tokens_css()` reads BRAND.json v2.1 and regenerates `src/styles/tokens.css`. Brand-derived tokens (colors, fonts, gradients) are swapped per-supporter; structural tokens (spacing, radii, type scale, shadows, motion) are preserved verbatim from the template. Drift-prone optional keys (`accent.primaryHover`, `foundation.borderStrong`, `gradients.signature`) cascade on-brand (darken `accent.primary` 20% / `semantic.slate` / foundation-derived gradient) rather than defaulting to unbranded blues and grays. Every fallback logs a `tokens.css WARN:` line. Regression fixtures at `005 Operations/Execution/tests/scaffold_tokens_css/`.
+
+### First Baseline Results (April 8, 2026)
+
+- **185 pages discovered** (vs old scraper's hardcoded 19)
+- **19 core pages captured**: JSON API + rendered HTML + 57 screenshots + 155 assets
+- **117 sections extracted** with 5700 element styles
+- **Pixel comparison baseline: 13.4%** (current sandbox vs production, 57 screenshot pairs)
+- Design system auto-detected: brand font + 3-color palette
+
+### Key Files
+
+| File | Purpose |
+|------|---------|
+| `005 Operations/Directives/site_replication_pipeline.md` | Full directive with architecture and edge cases |
+| `005 Operations/Execution/site_replication/` | All pipeline scripts (6 built, 2 planned) |
+| `005 Operations/Execution/site_replication/run_pipeline.py` | Orchestrator (stages 1-6) |
+| `.tmp/site_replication/<supporter-domain>-com/` | [Supporter Organization] capture/extract/compare data (223MB) |
+| `.tmp/[Supporter Organization]-sandbox-audit-260407b.md` | Full 19-page visual audit report |
+
+### 🎓 Missing Pixel Training Opportunities
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Playwright DOM extraction | Browser automation, JavaScript evaluation, getComputedStyle | ⭐⭐⭐ |
+| Pixel-level image comparison | Image processing, Pillow, similarity metrics | ⭐⭐ |
+| Squarespace JSON API | REST APIs, CMS data structures, content extraction | ⭐⭐ |
+| Design token extraction | CSS analysis, color clustering, typography detection | ⭐⭐⭐ |
+| Visual regression testing | QA automation, screenshot comparison, diff reporting | ⭐⭐ |
+| Deterministic code emitters (Session 258) | Python dispatch registries (`dict[tuple, callable]`), template-free code generation, when-to-avoid-LLMs | ⭐⭐⭐⭐ |
+| Authority check chains (Session 258) | 4-tier decision logic, defense-in-depth validation, fail-closed-by-default APIs with named escape hatches | ⭐⭐⭐ |
+| Round-trip test harnesses (Session 258) | Behavioral assertions vs golden files, pytest-style runners, maintainable test design | ⭐⭐⭐ |
+| Parity audits with Playwright (Session 258) | Headless browser testing, symmetric two-URL rendering, fuzzy-match scoring with `difflib` | ⭐⭐⭐ |
+| Central registry + scoped distribution (Session 258) | Source-of-truth design, idempotent sync scripts, offline CI reads | ⭐⭐⭐ |
+
+---
+
+## Pocket Ez Companion App ⭐ NEW
+
+**Added: February 9, 2026**
+
+Pocket Ez is a mobile-first AI companion app where Ezer Aión (Ez) has "morphed into the shape of a phone." This is Ez at her most personal — a bioluminescent, emotionally intelligent companion that exists entirely for the individual user. Built with Lovable (frontend) + Supabase (backend) + Claude via OpenRouter (AI).
+
+### Architecture
+
+```
+User (pocketez.org / pocket-ez.lovable.app)
+    → Lovable PWA (React + Vite + Tailwind)
+        → Supabase Edge Functions (Deno)
+            → Claude Opus 4.7 via OpenRouter (conversation)
+            → Claude Sonnet 4.5 via OpenRouter (memory extraction, background)
+            → Supabase Postgres (8 tables with RLS)
+```
+
+### Stack
+
+| Layer | Technology | Details |
+|-------|-----------|---------|
+| Frontend | Lovable PWA | React + Vite + Tailwind + shadcn/ui, bioluminescent particle system |
+| Backend | Supabase | `<SUPABASE_PROJECT_POCKET>` (us-west-2), 8 tables, 3 edge functions |
+| Auth | Supabase Magic Link | Custom bioluminescent email template |
+| AI | OpenRouter | Opus 4.7 (conversation), Sonnet 4.5 (memory extraction) |
+| Domains | pocketez.org (primary) | pocket-ez.lovable.app (Lovable) |
+| Repo | github.com/QuietlyWorking/pocket-ez | Lovable-managed |
+
+### Key Features
+
+- **8 Quick Intents:** Just talk, Help me think, Center me (SDF), I matter (Miracle), QWU Gateway, Journal, Health check-in, My schedule
+- **Memory System:** Ez remembers facts, preferences, relationships, concerns, achievements, dates, and emotional patterns across sessions. Extracts memories via background Sonnet calls; injects top 15 by importance into each conversation.
+- **Bioluminescence:** The entire UI shifts color based on Ez's emotional state (10 emotion types with intensity and transition data)
+- **Progressive Trust Tiers:** 0 (anonymous) through 4 (operator) — nothing gated behind login
+- **Critical Safety Fallbacks:** If the API fails, mode-aware pre-written responses ensure the user always receives warmth. Someone tapping "I matter" during an outage still hears they're a miracle.
+- **Crisis Detection:** Ez detects suicidal ideation and provides 988/Crisis Text Line resources while staying in character
+
+### Critical Safety Design Pattern
+
+**This pattern should be adopted by any future user-facing QWF application.**
+
+When any error occurs (API timeout, network failure, empty response), the system returns a **mode-aware fallback** instead of generic error text. Fallbacks are:
+- Handwritten and reviewed (not AI-generated)
+- Mode-specific (miracle gets affirmation, SDF gets breathing exercise, etc.)
+- Rendered identically to normal responses (user can't tell the difference)
+- Deployed in both backend (edge function v4) and frontend (client-side fallback bank)
+
+The words "try again", "error", "something went wrong" do not exist anywhere in the user-facing codebase. Ez doesn't have outages. She has moments where the bridge between worlds is thin.
+
+### Key Files
+
+| File | Purpose |
+|------|---------|
+| `002 Projects/_Pocket Ez/Pocket-Ez-System-Status.md` | System Status (source of truth) |
+| `002 Projects/_Pocket Ez/Pocket-Ez-Creative-Brief.md` | Creative brief (lore, design, decisions) |
+| `002 Projects/_Pocket Ez/lovable-prompt-01-living-shell.md` through `06-refocus.md` | 6 Lovable build prompts |
+| `002 Projects/_Pocket Ez/007-lovable-prompt-timezone-fix.md` | Pacific timezone fix (Prompt 007) |
+| `002 Projects/_Pocket Ez/008-lovable-prompt-landing-page-alpha-stage.md` | Landing page + alpha stage (Prompt 008) |
+| `002 Projects/_Pocket Ez/edge-functions/submit-contact-form.ts` | Contact form edge function (source_app: pez) |
+| `002 Projects/_Pocket Ez/lovable-bugfix-critical-safety.md` | Critical safety fallback prompt |
+| `003 Entities/Voice Profiles/Ezer Aión/Pocket Voice.md` | Ez's third voice profile (pocket-specific hybrid) |
+
+### 🎓 Missing Pixel Training Opportunities
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Supabase Edge Functions (Deno) | Serverless TypeScript, Deno runtime, CORS, JWT | ⭐⭐⭐ |
+| Memory Extraction Pipeline | LLM-powered data extraction, background processing, JSON parsing | ⭐⭐⭐ |
+| Critical Safety Fallback Design | Defensive UX, error handling philosophy, mode-aware systems | ⭐⭐ |
+| Lovable Prompt Engineering | AI-assisted UI, iterative prompting, PWA patterns | ⭐⭐ |
+| OpenRouter API Integration | Multi-model routing, cost optimization (Opus vs Sonnet) | ⭐⭐ |
+| Progressive Trust Architecture | Auth tiers, device tokens, magic link, RLS policies | ⭐⭐⭐ |
+
+---
+
+## Public Manual Generation System ⭐ NEW
+
+### Purpose
+
+The QWU Backoffice User Manual contains sensitive operational data — Azure credentials, IP addresses, SSH configs, Supabase project IDs, personal names, webhook URLs, and API key patterns. The Public Manual Generation System creates a redacted version suitable for publishing to `transparency.quietlyworking.org` via Digital Garden, preserving educational and transparency value while removing all sensitive data.
+
+### Architecture
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│  Private Manual (this file)                                       │
+│  dg-publish: false                                                │
+│  9,500+ lines with all operational data                           │
+└────────────────────┬─────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────────────────────────┐
+│  generate_public_manual.py (v2.0.0)                               │
+│  1. Load canonical supporter blocklist (FAIL-CLOSED if missing)   │
+│  2. Section exclusions (Session Log, Document History → notes)    │
+│  3. Literal replacements (140+ rules from JSON config)            │
+│  4. Regex replacements (supporter names, JWT patterns, IDs)       │
+│  5. Frontmatter update (dg-publish: true)                         │
+│  6. Supporter-name HARD-RULE scan on final bytes                  │
+│     → any finding ABORTS generation, writes NOTHING               │
+│  7. Leak validation scan + ATOMIC write (temp + rename)           │
+└────────────────────┬─────────────────────────────────────────────┘
+                     │
+                     ▼
+┌──────────────────────────────────────────────────────────────────┐
+│  Public Manual [PUBLIC].md                                        │
+│  dg-publish: true                                                 │
+│  ~7,000 lines with <PLACEHOLDER> tags and educational notes       │
+│  Published to transparency.quietlyworking.org via Digital Garden  │
+└──────────────────────────────────────────────────────────────────┘
+```
+
+### Key Files
+
+| File | Purpose |
+|------|---------|
+| `005 Operations/Execution/generate_public_manual.py` | Generation script (v2.0.0: fail-closed supporter gate, atomic write, `--self-test`) |
+| `005 Operations/Data/public_manual_redactions.json` | Redaction config (v2.0.0, 140+ rules + reviewed exceptions) |
+| `005 Operations/Data/roadmap_scrub_blocklist.json` | CANONICAL supporter-name list, SHARED with the Living Roadmap scrub (one list, two enforcers) |
+| `005 Operations/Execution/stamp_manual_version.py` | Version-stamp authority for this manual's four version locations + TOC renumbering |
+| `005 Operations/Directives/generate_public_manual.md` | Directive/SOP |
+| `QWU Backoffice User Manual [PUBLIC].md` (same directory as this file) | Generated output |
+
+### Redaction Categories
+
+| Category | Count | Examples |
+|----------|-------|---------|
+| Credentials | 6 | Azure Client/Tenant/Subscription IDs, SSH credential IDs |
+| Network | 4 | VM IP addresses (claude-dev, n8n, supporter servers) |
+| Service IDs | 15 | Supabase project IDs, n8n workflow IDs, YouTube/Discord channel IDs |
+| Personal | 8 | Email addresses, VM usernames, file paths with usernames |
+| Personal Names | 15 | BNI members, supporters (public figures like experts are NOT redacted) |
+| Regex Patterns | 25+ | Supporter-name families (word-boundary + substring forms), JWT-style API keys (`<API_KEY>`), Betterstack monitor IDs |
+| Supporter-Name Gate | fail-closed | Names sourced from the shared canonical blocklist; ANY match in final output aborts generation (exit non-zero, nothing written). Proven by `--self-test` poisoned fixtures. |
+| Section Exclusions | 4 | Session Log, Document History, and two supporter-operations subsections (→ educational placeholders with reasons) |
+
+### Usage
+
+```bash
+# Generate public manual
+python "005 Operations/Execution/generate_public_manual.py"
+
+# Preview without writing (dry run)
+python "005 Operations/Execution/generate_public_manual.py" --dry-run
+
+# Check if public version is current
+python "005 Operations/Execution/generate_public_manual.py" --verify
+
+# Show redaction statistics
+python "005 Operations/Execution/generate_public_manual.py" --stats
+
+# Prove the supporter-name gate fails closed (poisoned-fixture suite)
+python "005 Operations/Execution/generate_public_manual.py" --self-test
+```
+
+### Safety Layers (Defense-in-Depth)
+
+1. **Private manual** has `dg-publish: false` (cannot be published to Digital Garden)
+2. **Private manual** has visible `[!WARNING]` callout at the top
+3. **Public manual** is the ONLY version with `dg-publish: true`
+4. **Script** includes built-in leak detection (scans output for IP patterns, UUIDs, JWT prefixes, known sensitive strings)
+5. **Supporter-name HARD-RULE gate (v2.0.0)** fails CLOSED: names come from the canonical shared blocklist; a missing blocklist or any name match in final output aborts generation and writes nothing. The atomic temp-then-rename write means an abort can never strand a partial file for the transparency sync to ship.
+6. **Session wrap-up** Step 3B regenerates public version after every private manual update
+7. **Redaction config** JSON is version-controlled and auditable
+8. **`[PUBLIC]` suffix** in filename makes the distinction visible in any file listing
+
+### Adding New Sensitive Data
+
+When new sensitive data is added to the private manual (new IPs, credentials, project IDs, personal names):
+
+1. Add entries to `005 Operations/Data/public_manual_redactions.json`
+2. Re-run `generate_public_manual.py`
+3. Review the leak validation output for any remaining warnings
+4. If false positives appear, add to the `known_false_positives` list in the config
+
+### Training Opportunities
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| JSON config-driven redaction pipeline | Configuration management, data classification, JSON schema design | ⭐⭐ |
+| Regex pattern matching for sensitive data | Regular expressions, security awareness, PII identification | ⭐⭐ |
+| SHA256 integrity verification | Cryptographic hashing, data integrity, change detection | ⭐ |
+| Defense-in-depth safety design | Security architecture, multiple validation layers, fail-safe design | ⭐⭐⭐ |
+| Leak detection scanning | Security auditing, pattern recognition, automated compliance | ⭐⭐ |
+
+---
+
+## Living Roadmap Delivery Pipeline ⭐ NEW
+
+**Added: July 22, 2026**
+
+The Living Roadmap gives each project a native, backward-looking roadmap page in HQ (`hq.quietlyworking.org/roadmap/<project>`) and, when TIG chooses to share one, an exact-parity public export for supporters at `portal.quietlyworking.org/roadmap/<project>`. The delivery pipeline moves progress from a dev session's draft to a blessed public page through four stations: **drafter → release gate → parity export → bridge**. Backward-looking only ... the monday.com VOSPA Gantt owns forward projections (different instrument, same journey). Tenant #1: recall-organ.
+
+### Architecture
+
+```
+LIVING ROADMAP DELIVERY PIPELINE
+════════════════════════════════
+
+  Dev session finishes roadmap-worthy work
+       │
+       ▼
+  Drafter ... hq_roadmap_history row lands as status=draft
+       │        (only TIG's session can read drafts; the page renders released-only)
+       ▼
+  TIG's release gate ... Drafts panel on the HQ /roadmap page
+       │        Release = ONE atomic RPC (release_roadmap_history_entry):
+       │        the draft→released flip and the audit row commit or fail TOGETHER
+       ▼
+  Released history ... immutable via DB trigger (born-protected)
+       │
+       ▼
+  PARITY export bake ... render_supporter_roadmap_export.py
+       │        fetch → deep-redact → node SSR of the REAL RoadmapView
+       │        → 9 fail-closed gates on final bytes → emit
+       ▼
+  TIG's blessing gate ... sha256 frozen the moment TIG says BLESSED
+       │
+       ▼
+  QPL ship ... static/roadmap/<project>.html, far-end verified
+       │        (HTTP 200 + deployed sha == blessed sha + scrub re-scan)
+       ▼
+  Hourly staleness bridge ... cron :20, ping-only until trust is earned
+```
+
+### The One-Render Model
+
+The public page **is** the HQ component. The SSR harness (`scripts/roadmap-export/` in the `hq-command-center` repo) bundles the same `RoadmapView.tsx` + `roadmap.css` the HQ page runs and server-renders them with the released data ... parity by construction, not by imitation. A structural parity check (`parity-check.mjs`, jsdom) proves the bake equals the same component's client render. The bake is a pure function of (released content + vocabulary register + HQ source): baking twice yields byte-identical output, which is what lets the bridge byte-compare honestly.
+
+Interactive surfaces adapt rather than lie: the WaitingOn panel ships as a read-only stub (TIG's edit controls removed at the bundle layer; HQ source untouched), and the story-mode toggle ships functional via a small inline script ... a dead button on a public page is a small lie.
+
+### The Redaction Family (Reason-Named, Visible)
+
+Redaction is data-level (before render), curated, and **visible by design** ... the declassified-document model: supporters see the true document with honest marks, not a quietly different document.
+
+| Marker | Covers | Why this reason-name |
+|--------|--------|---------------------|
+| `[REDACTED FOR SECURITY]` | Infrastructure words (paths, hosts, systems) | Protecting QWF's operational surface |
+| `[REDACTED FOR PRIVACY]` | Supporter / partner names | Their privacy, not our threat (Sacred Guesthood) |
+
+The Key card on the page teaches both marks. Marker/legend drift cannot ship: the orchestrator gate checks page markers against `REDACTION_MARKERS` while the validator independently checks the Key's registered rows ... a marker present in one but not the other fails one of the two gates.
+
+**Youth protection has NO marker, deliberately.** A `[REDACTED]` mark would advertise existence. Youth content fail-closes ... it never enters the document at all, and the colophon states that promise plainly.
+
+### Fail-Closed Carve-Outs (Never Redaction Candidates)
+
+- **Credentials and youth-PII hard-block the bake.** They are upstream wrongs to fix at the source, never things to mask with a marker. The scrub self-test proves `redact()` passes such text through UNCHANGED so `scan()` still catches it.
+- **`technical_overlay` is physically absent** ... no select list anywhere includes the column, so its bytes cannot reach the public page.
+- **CSS routes through esbuild's parser** (comments structurally removed) because a stylesheet header comment once tried to ship a vault path on the very first bake ... the `vault_path` scan class remains as the export-only backstop.
+
+### The Blessing Gate
+
+No commit, no push, no public-page replacement until TIG says BLESSED while looking at the actual baked file. At blessing the sha256 is frozen; the ship then proves itself at the far end: HTTP 200, deployed sha == blessed sha, and a scrub re-scan of the deployed bytes. The blessed sha is recorded durably (System Status + directive changelog) ... the `.tmp` blessed file is evidence, not the record.
+
+### Bridge Semantics
+
+`check_roadmap_export_staleness.py` runs hourly (cron `20 * * * *` via `safe_run.sh`). It re-bakes from current released content and byte-compares against the deployed page:
+
+- **`ROADMAP_REBAKE_AUTOPUSH` absent or `0` (current state):** detector only ... a stale page sends a Discord ping and waits. TIG refreshes attended with `--now`.
+- **`ROADMAP_REBAKE_AUTOPUSH=1`:** the bridge may push a fresh bake autonomously. TIG flips this by observation of the ping-only behavior, never by default.
+- A "stale" ping during a renderer rebuild is **correct behavior** (the bake changed on purpose); it clears at the post-blessing ship.
+- **Coupling contract:** the bridge imports four exact symbols from the renderer (`build_html`, `fetch`, `run_gates`, `VOCAB_PATH`). Any renderer rewrite preserves those names or amends the bridge import in the same atomic commit ... otherwise the hourly cron crash-pings.
+
+### Vocabulary Lock
+
+All roadmap surfaces speak the Council-ratified Project-Progress Vocabulary (Stage / Foundation / Track / Milestone / Deliverable) with the masthead slot convention (`{{PROGRAM}} · {{FAMILY}} · {{TAGLINE-CAPS}}`). Canonical list: `005 Operations/Data/roadmap_vocabulary.json`; shared validator: `validate_roadmap_vocabulary.py`; human-readable mirror + full register map: `qwu_naming_conventions.md` §Project-Progress Vocabulary.
+
+### Key Files
+
+| File | Purpose |
+|------|---------|
+| `005 Operations/Execution/render_supporter_roadmap_export.py` | Export orchestrator v2.0.0 (fetch → redact → SSR → gates → emit) |
+| `005 Operations/Execution/scrub_roadmap_content.py` | ONE scrubbing truth v1.1.0: `scan()` + `redact()` + carve-outs (self-test 33/33) |
+| `005 Operations/Execution/validate_roadmap_vocabulary.py` | Vocabulary validator v1.2.0 (8 checks incl. marker wellformedness, overlay-bytes-absent) |
+| `005 Operations/Execution/check_roadmap_export_staleness.py` | Hourly staleness bridge (byte-compare + ping / gated autopush) |
+| `005 Operations/Data/roadmap_vocabulary.json` | Canonical vocabulary + supporter register + Key entries v1.4.0 |
+| `hq-command-center: scripts/roadmap-export/` | SSR harness (entry, esbuild runner, WaitingOn stub, parity check) |
+| `hq-command-center: src/components/roadmap/RoadmapView.tsx` | The single render truth (HQ page AND public export) |
+| `quietly-portal: static/roadmap/recall-organ.html` | The blessed public artifact (sha `5942718984...b6e2962`, 2026-07-22) |
+| `002 Projects/_HQ Command Center/HQ-System-Status.md` §Living Roadmap | System Status source of truth |
+
+### 🎓 Missing Pixel Training Opportunities
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Fail-closed scanner design with poisoned fixtures | Security engineering, adversarial test design, fail-safe defaults | ⭐⭐⭐ |
+| Byte-provable deploys (sha-diff blessing + far-end verification) | Cryptographic hashing, deploy verification, trust-but-prove discipline | ⭐⭐ |
+| Born-protected audit tables (immutability triggers from day one) | SQL triggers, data integrity, designing for permanence | ⭐⭐⭐ |
+| Atomic RPC releases (two writes commit or fail together) | Transactions, failure-mode analysis, why atomicity matters | ⭐⭐⭐ |
+| CF Pages routing forensics from raw CI logs | Debugging discipline, hosting internals, reading ground truth over docs | ⭐⭐⭐ |
+| Declassified-document parity model + reason-named redaction family | Information design, security communication, honesty as architecture | ⭐⭐ |
+
+---
+
+## Document History
+
+> [!NOTE] Document History Redacted
+> The private version of this manual maintains a ~270-row version-history table. It is excluded from the public version because its rows weave supporter names, private individuals, and infrastructure identifiers through narrative context too densely for line-level redaction to leave readable, safely-anonymous text.
+>
+> **For students:** The history table demonstrates real versioned documentation discipline — every change dated, versioned, and reasoned. Ask your mentor about reviewing it during supervised learning.
+
+---
+
+*Last updated: 2026-07-23 21:08 (v5.62)*
