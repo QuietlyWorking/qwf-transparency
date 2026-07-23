@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 5.20 | Started: 251223 | Updated: 260416**"
+description: "**Version: 5.61 | Started: 251223 | Updated: 260722**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-07-22"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -11,11 +11,11 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-07-22 16:43 | Source version: 5.59
+> Generated: 2026-07-23 05:59 | Source version: 5.61
 
 # QWU Backoffice User Manual
 
-**Version: 5.20 | Started: 251223 | Updated: 260416**
+**Version: 5.61 | Started: 251223 | Updated: 260722**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -113,7 +113,8 @@ A comprehensive guide to the QWU Backoffice agent workspace, covering architectu
 84. [[#Date/Time Output Validation Hook ⭐ NEW]]
 83. [[#QWB Quietly Webbing ⭐ NEW]]
 84. [[#L4G Locals 4 Good Platform ⭐ NEW]]
-85. [[#Session Log]]
+85. [[#Living Roadmap Delivery Pipeline ⭐ NEW]]
+86. [[#Session Log]]
 
 ---
 
@@ -4644,8 +4645,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.59 by generate_public_manual.py"
-generated: "2026-07-22 16:43"
+source: "Auto-generated from private manual v5.61 by generate_public_manual.py"
+generated: "2026-07-23 05:59"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11099,4 +11100,4 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ---
 
-*Last updated: 2026-07-22 16:43 (v5.59)*
+*Last updated: 2026-07-23 05:59 (v5.61)*
