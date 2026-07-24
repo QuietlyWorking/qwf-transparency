@@ -2,20 +2,20 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 5.62 | Started: 251223 | Updated: 260723**"
+description: "**Version: 5.63 | Started: 251223 | Updated: 260724**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-07-23"
+modifiedDate: "2026-07-24"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-07-23 21:08 | Source version: 5.62
+> Generated: 2026-07-24 03:35 | Source version: 5.63
 
 # QWU Backoffice User Manual
 
-**Version: 5.62 | Started: 251223 | Updated: 260723**
+**Version: 5.63 | Started: 251223 | Updated: 260724**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -4645,8 +4645,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.62 by generate_public_manual.py"
-generated: "2026-07-23 21:08"
+source: "Auto-generated from private manual v5.63 by generate_public_manual.py"
+generated: "2026-07-24 03:35"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11874,7 +11874,19 @@ When new sensitive data is added to the private manual (new IPs, credentials, pr
 
 **Added: July 22, 2026**
 
-The Living Roadmap gives each project a native, backward-looking roadmap page in HQ (`hq.quietlyworking.org/roadmap/<project>`) and, when TIG chooses to share one, an exact-parity public export for supporters at `portal.quietlyworking.org/roadmap/<project>`. The delivery pipeline moves progress from a dev session's draft to a blessed public page through four stations: **drafter → release gate → parity export → bridge**. Backward-looking only ... the monday.com VOSPA Gantt owns forward projections (different instrument, same journey). Tenant #1: recall-organ.
+The Living Roadmap gives each project a native, backward-looking roadmap page in HQ (`hq.quietlyworking.org/roadmap/<project>`) and, when TIG chooses to share one, an exact-parity public export for supporters at `portal.quietlyworking.org/roadmap/<project>`. The delivery pipeline moves progress from a dev session's draft to a blessed public page through four stations: **drafter → release gate → parity export → bridge**. Backward-looking only ... the monday.com VOSPA Gantt owns forward projections (different instrument, same journey). Tenant #1: recall-organ (QWU-internal). Tenant #2: **[Supporter Organization]-qqt** (2026-07-24) ... the first SUPPORTER-FACING tenant, which forced the audience-aware tenancy model below.
+
+### Audience-Aware Tenancy (2026-07-24)
+
+A supporter-facing tenant page never redacts that supporter's OWN names ... it is their story, told to them (TIG's audience ruling, 2026-07-23). The mechanics:
+
+- **Blocklist** `roadmap_scrub_blocklist.json` v1.2.0 gains `tenant_self_names` (e.g. `[Supporter Organization]` → 18 names incl. the supporter's vendor [Supporter CRM] per TIG's ruling). Names STAY in `supporter_names` ... every other surface keeps redacting them.
+- **Scrub** `scrub_roadmap_content.py` v1.2.0: `scan(text, profile, audience=None)` + `redact(text, audience=None)`. The exemption applies to the `supporter` class ONLY; `credential` + `youth_pii` are structurally audience-blind (they stop the bake for everyone); infra never exempts; an unknown audience raises (typos fail loud). Supporter matching is substring for names >4 chars (underscore-joined identifiers defeat `\b`), word-boundary for acronyms.
+- **Audience resolution** is registration-driven: `resolve_audience(project)` returns a tenant key when the project's `project_code` or `parent_code` matches a `tenant_self_names` key, else `None` (categorical redaction, tenant #1 unchanged). **A new tenant costs a blocklist entry + a normal project registration ... zero code.**
+- **The whole pipeline threads it:** renderer bake + gates, the drafter's narrative scan (a tenant's wrap-up drafts never fail-close on the tenant's own name), and the hourly bridge's re-bake judgment.
+- **Edge armor is understood, not fought:** Cloudflare Email Obfuscation rewrites email addresses in DEPLOYED bytes (kept ON ... it shields the supporter's address from scrapers); the bridge compares through `_normalize_edge()` so content, not armor, is judged.
+- **Verification standard:** raw form-generic both-directions sweeps on LIVE bytes ... the tenant's names present-and-unredacted AND other-supporter names / phone shapes / IPs / infra hostnames / github.com / vault paths all zero.
+- **Multi-tenant work items:** `hq_work_items` has a GLOBAL unique on `(source, source_ref)` ... tenant #2+ roadmap refs are namespaced (`[Supporter Organization]-qqt:M0`).
 
 ### Architecture
 
@@ -11954,15 +11966,19 @@ All roadmap surfaces speak the Council-ratified Project-Progress Vocabulary (Sta
 
 | File | Purpose |
 |------|---------|
-| `005 Operations/Execution/render_supporter_roadmap_export.py` | Export orchestrator v2.0.0 (fetch → redact → SSR → gates → emit) |
-| `005 Operations/Execution/scrub_roadmap_content.py` | ONE scrubbing truth v1.1.0: `scan()` + `redact()` + carve-outs (self-test 33/33) |
+| `005 Operations/Execution/render_supporter_roadmap_export.py` | Export orchestrator v2.1.0 (fetch → resolve_audience → redact → SSR → gates → emit) |
+| `005 Operations/Execution/scrub_roadmap_content.py` | ONE scrubbing truth v1.2.0: audience-aware `scan()` + `redact()` + carve-outs (self-test 48/48) |
 | `005 Operations/Execution/validate_roadmap_vocabulary.py` | Vocabulary validator v1.2.0 (8 checks incl. marker wellformedness, overlay-bytes-absent) |
-| `005 Operations/Execution/check_roadmap_export_staleness.py` | Hourly staleness bridge (byte-compare + ping / gated autopush) |
+| `005 Operations/Execution/check_roadmap_export_staleness.py` | Hourly staleness bridge v1.1.0 (edge-normalized compare + ping / gated autopush) |
+| `005 Operations/Execution/draft_roadmap_history.py` | Drafter v1.1.0 (audience-aware narrative scan; wrap-up auto-draft) |
+| `005 Operations/Data/roadmap_scrub_blocklist.json` | Shared pattern data v1.2.0 (supporter_names + tenant_self_names; two enforcers, one list) |
 | `005 Operations/Data/roadmap_vocabulary.json` | Canonical vocabulary + supporter register + Key entries v1.4.0 |
 | `hq-command-center: scripts/roadmap-export/` | SSR harness (entry, esbuild runner, WaitingOn stub, parity check) |
 | `hq-command-center: src/components/roadmap/RoadmapView.tsx` | The single render truth (HQ page AND public export) |
-| `quietly-portal: static/roadmap/recall-organ.html` | The blessed public artifact (sha `5942718984...b6e2962`, 2026-07-22) |
+| `quietly-portal: static/roadmap/recall-organ.html` | Tenant #1 blessed artifact (refreshed 2026-07-24 with the template upgrades) |
+| `quietly-portal: static/roadmap/[Supporter Organization]-qqt.html` | Tenant #2 blessed artifact (sha `c2d3c68b...178d27`, 2026-07-24; live bytes differ only by CF email armor) |
 | `002 Projects/_HQ Command Center/HQ-System-Status.md` §Living Roadmap | System Status source of truth |
+| `002 Projects/_[Supporter Organization] Projects/[Supporter Organization] QQT Living Roadmap/` | Tenant #2 project (design doc, System Status) |
 
 ### 🎓 Missing Pixel Training Opportunities
 
@@ -11974,6 +11990,9 @@ All roadmap surfaces speak the Council-ratified Project-Progress Vocabulary (Sta
 | Atomic RPC releases (two writes commit or fail together) | Transactions, failure-mode analysis, why atomicity matters | ⭐⭐⭐ |
 | CF Pages routing forensics from raw CI logs | Debugging discipline, hosting internals, reading ground truth over docs | ⭐⭐⭐ |
 | Declassified-document parity model + reason-named redaction family | Information design, security communication, honesty as architecture | ⭐⭐ |
+| Audience-aware redaction (tenant self-name exemption, structural carve-outs) | Access-control modeling, privacy engineering, fail-loud config validation | ⭐⭐⭐ |
+| Realtime publication debugging (silent postgres_changes no-op) | Supabase realtime internals, silent-failure diagnosis, belt-and-suspenders UI design | ⭐⭐⭐ |
+| CSS grid `min-width:auto` blowout + edge-transform normalization (CF email armor) | CSS layout internals, CDN edge behavior, comparing content vs armor | ⭐⭐ |
 
 ---
 
@@ -11986,4 +12005,4 @@ All roadmap surfaces speak the Council-ratified Project-Progress Vocabulary (Sta
 
 ---
 
-*Last updated: 2026-07-23 21:08 (v5.62)*
+*Last updated: 2026-07-24 03:35 (v5.63)*
