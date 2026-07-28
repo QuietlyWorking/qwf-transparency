@@ -2,20 +2,20 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 5.63 | Started: 251223 | Updated: 260724**"
+description: "**Version: 5.64 | Started: 251223 | Updated: 260728**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-07-24"
+modifiedDate: "2026-07-28"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-07-24 03:35 | Source version: 5.63
+> Generated: 2026-07-28 18:29 | Source version: 5.64
 
 # QWU Backoffice User Manual
 
-**Version: 5.63 | Started: 251223 | Updated: 260724**
+**Version: 5.64 | Started: 251223 | Updated: 260728**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -4645,8 +4645,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.63 by generate_public_manual.py"
-generated: "2026-07-24 03:35"
+source: "Auto-generated from private manual v5.64 by generate_public_manual.py"
+generated: "2026-07-28 18:29"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10383,12 +10383,25 @@ QWU uses **one** Cloudflare API token covering all operations:
 
 **Script:** `005 Operations/Execution/cloudflare_api.py` (v1.0.0)
 
-Full CRUD for DNS records using `CLOUDFLARE_API_TOKEN`. Supports:
+Full CRUD for DNS records. Supports:
 - List all records for a zone
 - Create A, AAAA, CNAME, TXT, MX records
 - Update existing records
 - Delete records
 - Toggle proxied/DNS-only status
+
+**Credential selection (`--token-env`, added 2026-07-28).** The script defaults to `CLOUDFLARE_API_TOKEN`, which only sees QWU-owned zones. **Supporter zones are invisible to it and fail with a misleading `"Zone not found: <domain>"`** ... which reads as "the zone does not exist" rather than "this credential cannot see it." Point the script at the right credential by env-var name:
+
+```bash
+# QWU-owned zone (default ... no flag needed)
+python "005 Operations/Execution/cloudflare_api.py" records --domain quietlyworking.org
+
+# [Supporter Organization]-owned zone (supporter system)
+python "005 Operations/Execution/cloudflare_api.py" records \
+  --domain <supporter-domain>.com --token-env GC_CLOUDFLARE_API_TOKEN
+```
+
+The flag takes the **variable name**, never a token value. Reads on registered supporter zones have standing permission; **any write to a supporter zone needs task-level permission from TIG at the moment of the write** (see the Supporter Systems guardrails in `CLAUDE.md`), and a primary-URL DNS change needs explicit execution-time approval every time.
 
 ### CF Pages Deployment
 
@@ -11996,6 +12009,70 @@ All roadmap surfaces speak the Council-ratified Project-Progress Vocabulary (Sta
 
 ---
 
+## Advisor Brain Vocabulary ⭐ NEW
+
+**Source of truth:** `002 Projects/_QWF Advisor Brain/BRAIN-Glossary.md` (24 terms, each with what it
+**is**, what it is **not**, and where it lives). This section is the pointer plus the collisions ...
+never a second copy that can drift.
+
+**Why it exists:** "Brain", "corpus", "domain" and "surface" were being used interchangeably, which is
+how a wrong routing decision gets made at 1am.
+
+### The four organs (each stands on its own)
+
+| Organ | Role | Registered as |
+|-------|------|---------------|
+| **Brain** | Memory ... decisions + the WHY. The only organ that should eventually ACT. | `brain` |
+| **Council** | Adversarial deliberation. An ADVISOR, convened per question. | `council` |
+| **STORM** | Citation-verified research. An ADVISOR, called by TIG *and* the Council. | `storm-research-organ` |
+| **Recall Organ** | Read-only recall over operational exhaust. Sibling project. | `recall-organ` |
+
+### The five collisions to avoid
+
+1. **"recall"** ... verb (finding precedent) vs proper noun (the Recall Organ project).
+   **Use "retrieval" for the act.** Reserve "Recall Organ", capitalized and in full, for the project.
+2. **"domain"** ... **RETIRED.** Use `category` (the engine-enforced controlled vocabulary).
+3. **"corpus"** ... does NOT mean the Ledger. The Ledger (`decisions.v1`) is **one of eleven** corpuses.
+4. **"card" vs "entry"** ... a Card is the surface where a decision awaits TIG's verdict
+   (`hq_brain_verdicts`); an Entry is the record in the Ledger. Different objects.
+5. **"trust" vs "calibration"** ... trust meter = approval rate; calibration meter = prediction
+   agreement. The §14 autonomy gate reads **calibration**. Conflating them opens a gate early.
+
+### Terms that are easy to get backwards
+
+| Term | Means | Does NOT mean |
+|------|-------|---------------|
+| **Precedent** | a *ratified* Entry used as input to a later decision (a role, not an object) | any Entry ... a `pending` Entry is not precedent |
+| **Principle** | a distilled standing rule in the memory corpus ... **compiled precedent** | a single ruling |
+| **Retrieval** | the act of finding relevant precedent | the Recall Organ |
+| **Ranker** | the function that ORDERS precedent (`authority x recency`) | a predictor ... it orders, it does not answer |
+| **Corroboration** | the same choice made repeatedly for the same thing ... weight UP | **not** `approved-with-reinforcement`, which is a *verdict state* |
+| **Contradiction** | rulings inside one topic cluster that disagree ... fires the alarm | a duplicate |
+
+### Naming rulings (TIG, 2026-07-26)
+
+- **"retrieval"** replaces "recall" for the act. Ratified.
+- **"corroboration weight"** ... NOT "concurrency weighting" (concurrency already means simultaneous
+  execution everywhere in the stack) and NOT "reinforcement" (already a verdict state; reusing it
+  would plant the same double-meaning bug that caused the calibration-meter defect).
+- **`distinguish`** becomes a first-class Entry kind: when two rulings both stand because the
+  situations differ, the retriever surfaces the disambiguating condition **alongside** whichever
+  ruling it qualifies. Structural, not hoped-for.
+
+### Measurement (`measure_corpus_health.py`, read-only, no spend)
+
+Three axes the ranker deliberately does not measure:
+
+- **Coverage** ... "if a decision arrives tomorrow, is there precedent to answer it?" Low-coverage
+  categories are where the Brain over-reaches, answering from analogy with nothing to stop it.
+- **Freshness distribution** ... the age *histogram* per category, not the average. **Bimodal** is the
+  signal: old cluster + new cluster with a thin middle usually means an un-superseded precedent break
+  already sitting in the corpus.
+- **Contradiction density** ... fraction of topic clusters holding rulings that answer the same
+  question differently. The accumulated total of what the alarm catches one at a time.
+
+---
+
 ## Document History
 
 > [!NOTE] Document History Redacted
@@ -12005,4 +12082,4 @@ All roadmap surfaces speak the Council-ratified Project-Progress Vocabulary (Sta
 
 ---
 
-*Last updated: 2026-07-24 03:35 (v5.63)*
+*Last updated: 2026-07-28 18:29 (v5.64)*
