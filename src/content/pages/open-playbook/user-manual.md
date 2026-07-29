@@ -2,20 +2,20 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 5.64 | Started: 251223 | Updated: 260728**"
+description: "**Version: 5.65 | Started: 251223 | Updated: 260729**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-07-28"
+modifiedDate: "2026-07-29"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-07-28 18:29 | Source version: 5.64
+> Generated: 2026-07-29 07:12 | Source version: 5.65
 
 # QWU Backoffice User Manual
 
-**Version: 5.64 | Started: 251223 | Updated: 260728**
+**Version: 5.65 | Started: 251223 | Updated: 260729**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -4645,8 +4645,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.64 by generate_public_manual.py"
-generated: "2026-07-28 18:29"
+source: "Auto-generated from private manual v5.65 by generate_public_manual.py"
+generated: "2026-07-29 07:12"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11889,6 +11889,33 @@ When new sensitive data is added to the private manual (new IPs, credentials, pr
 
 The Living Roadmap gives each project a native, backward-looking roadmap page in HQ (`hq.quietlyworking.org/roadmap/<project>`) and, when TIG chooses to share one, an exact-parity public export for supporters at `portal.quietlyworking.org/roadmap/<project>`. The delivery pipeline moves progress from a dev session's draft to a blessed public page through four stations: **drafter → release gate → parity export → bridge**. Backward-looking only ... the monday.com VOSPA Gantt owns forward projections (different instrument, same journey). Tenant #1: recall-organ (QWU-internal). Tenant #2: **[Supporter Organization]-qqt** (2026-07-24) ... the first SUPPORTER-FACING tenant, which forced the audience-aware tenancy model below.
 
+### Cadence, Coverage, and Auto-Draft (2026-07-29)
+
+The pipeline above moves a drafted entry to a published page. It says nothing about whether an entry ever gets **written**, and that turned out to be the real failure mode: 3 of 6 roadmaps had never released a single entry, and one session's work was recorded only because TIG asked whether the roadmap had been updated.
+
+**The purpose, corrected.** The Living Roadmap's PRIMARY audience is TIG's own whole-universe view ... 100k-ft to ground floor, the graph vantage point, every project's history in one place. Supporter-facing was the secondary discovery. That inverts what coverage means: the question is not "does an outsider need this?" but "is this project on the map?"
+
+**Four mechanisms, each aimed at a different way silence happens:**
+
+| Mechanism | Answers | Where |
+|---|---|---|
+| `watch_paths` (jsonb on `hq_roadmaps`) | which tenant does a changed file belong to | longest-prefix-wins; replaced folder inference |
+| `audience` (`internal` / `external`) | does silence here hurt anyone | governs ALARM behaviour only, never existence |
+| `roadmap_posture` (on `hq_projects`) | is this project on the map at all | `has-roadmap` / `no-audience` / `deferred`; NULL = UNDECLARED |
+| auto-draft on the wrap-up seam | did anyone actually write an entry | `summarize_session.py` v1.12.0 |
+
+**`watch_paths` exists because inference could not work.** QQT's work lives in `002 Projects/_Quietly Quoting/` while its tenant is `[Supporter Organization]-qqt` under `002 Projects/_[Supporter Organization] Projects/[Supporter Organization] QQT Living Roadmap/`. Any folder-based guess is structurally blind to that, so the mapping is declared data. Longest-prefix-wins lets a nested project claim its own files instead of double-drafting into the folder containing it.
+
+**`audience` splits the alarm, not the artifact.** An external tenant's silence reads to a supporter as "have they forgotten me?" and earns an interruption. An internal tenant's quiet just means that project is not being worked, which costs nobody anything. The governing principle: **passive surfaces show everything; active interruptions are reserved for relationship damage.** The Projects-board badge lights up for every tenant including internal ones; Discord only ever fires for external.
+
+**`check_roadmap_cadence.py`** (daily 8 AM Pacific, `safe_run.sh` lock `check-roadmap-cadence`, read-only, exit 1 when flagged) separates **WAITING** (written but never released ... invisible to the reader, so a stuck review queue looks identical to no work), **QUIET** (nothing released in N days), and **NEVER** (never shown a single entry ... a cold start never self-heals). It is the only mechanism here that is not session-triggered, so it fires when no session happens ... which is exactly when someone is being starved.
+
+**Coverage reports, it does not nag.** All 67 projects carry a declared posture (63 `has-roadmap`, 4 `deferred`, 0 `no-audience`; TIG ruled personal projects ON the map). The pre-existing backlog is reported every run but never pinged, because dozens of daily lines about a known backlog is how a gate teaches its reader to ignore it. Only a project created *after* the posture epoch with no posture alarms. `propose_roadmap_postures.py` proposes all of them at once and applies only a file TIG has ratified.
+
+**Auto-draft is session-scoped, and that is load-bearing.** `resolve_roadmap_projects.py` reads the files THIS session touched from the QCM per-session event log, never repo-wide git. On a shared checkout with many concurrent agents, "commits since midnight" is largely other people's work ... resolving from git returned `l4g` (another session's in-flight work) while the session had actually touched `[Supporter Organization]-qqt`. **The session id must be given** (`session_data["session_id"]`); absent it, nothing drafts. Fail-safe by design: a missing draft is caught by the cadence gate, while a mis-attributed one is a plausible lie no gate catches. Entries land as DRAFTS, invisible until TIG releases. Gate off with `QWF_DRAFT_ROADMAPS=0`.
+
+**The overclaim rail.** The generator writes optimistically. On the 2026-07-28 [Supporter Organization] entry it produced "Now when a homeowner gets a contract, it looks like it came from [Supporter Organization]" when the domain was registered but not yet activated by the vendor. Re-read every generated entry for overclaim before it reaches TIG ... an overclaim on a roadmap is worse than no entry, because the whole point of the artifact is that a gap cannot go silent.
+
 ### Audience-Aware Tenancy (2026-07-24)
 
 A supporter-facing tenant page never redacts that supporter's OWN names ... it is their story, told to them (TIG's audience ruling, 2026-07-23). The mechanics:
@@ -12082,4 +12109,4 @@ Three axes the ranker deliberately does not measure:
 
 ---
 
-*Last updated: 2026-07-28 18:29 (v5.64)*
+*Last updated: 2026-07-29 07:12 (v5.65)*
