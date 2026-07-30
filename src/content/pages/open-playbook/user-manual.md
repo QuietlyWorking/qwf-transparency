@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-07-29 07:12 | Source version: 5.65
+> Generated: 2026-07-30 16:24 | Source version: 5.67
 
 # QWU Backoffice User Manual
 
@@ -4645,8 +4645,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.65 by generate_public_manual.py"
-generated: "2026-07-29 07:12"
+source: "Auto-generated from private manual v5.67 by generate_public_manual.py"
+generated: "2026-07-30 16:24"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11286,10 +11286,10 @@ The Email Sources module provides visibility into every email address the Outloo
 
 ### Projects Intelligence Hub (Prompts 101-103)
 
-The Projects module provides portfolio-level visibility across all 37 QWU projects, answering "Where should I invest my time?"
+The Projects module provides portfolio-level visibility across the QWU project portfolio (**67 projects as of 2026-07-28**, up from the original 37), answering "Where should I invest my time?"
 
 **Backend pipeline:**
-- `bootstrap_hq_projects.py` v1.0.0 — One-time load of all 37 projects across 6 categories (qwf_app, operational, student_program, supporter, infrastructure, planning)
+- `bootstrap_hq_projects.py` v1.0.0 — One-time load of the original 37 projects across 6 categories (qwf_app, operational, student_program, supporter, infrastructure, planning). A **7th category, `personal`**, arrived later with the two-plane project model and is populated by `sync_personal_projects.py` (folder-scan), not by the bootstrap list. New projects are created by `create_project.py` (the canonical creator ... never a hand `mkdir`).
 - `sync_hq_goals.py` v1.1.0 — Parses `_Goals and Priorities.md`, upserts milestones with numeric `sort_order` (M1→1000, M2→2000, ... M10→10000), skips `hq_dirty` items to protect user edits
 - `sync_hq_git_activity.py` v1.0.0 — Scans git log per project folder, updates `last_commit_date` and `days_since_activity`
 - `compute_hq_project_health.py` v1.0.0 — Weighted momentum scoring (0-100): commits recency (25%), strategic priority (20%), no blockers (15%), completion momentum (15%), active work items (25%). Health: healthy (>50), needs_attention (20-50), stalled (<20 + 30d inactive)
@@ -11298,10 +11298,12 @@ The Projects module provides portfolio-level visibility across all 37 QWU projec
 - **Prompt 101:** Grid view (cards grouped by category with momentum rings, health dots, goal badges) + table view (10 sortable columns) + detail drawer (strategic context, work items, activity)
 - **Prompt 102:** Kanban card left border accent matching source app's `color_hex` from `hq_app_registry`
 - **Prompt 103:** Interactive work items — click-to-cycle status (open → in_progress → done), add manual tasks with inline form, internal notes per item, delete manual items with undo, "HQ" badges on manual items, pencil icon on edited goal milestones
+- **Search (added 2026-07-28, direct code commit `cc4ff20` ... no longer a Lovable prompt):** a search bar above the category pills. Matches across `display_name` + `short_name` + `project_code` + `app_code` + `description` + `tags` + category label, because the handle you remember lives in a different column per row (`MP` is a short_name; `qcm` exists ONLY as a project_code; `[Supporter Organization]` only as a display_name). Tokens are AND-ed, so "[Supporter Organization] dmarc" narrows to one. Header shows a `N of 67` match count. Helpers: `projectSearchHaystack` / `tokenizeProjectSearch` / `matchesProjectSearch` in `src/components/projects/projectConstants.ts`; input reuses the house `SearchFilter` component. Deliberate tradeoff: a flat haystack (nothing is ever hidden) over a smarter ranking that would suppress description-only matches ... so a 2-character query returns some substring noise, which one more character clears.
+- **Grid-view category bug fixed (same commit):** `ProjectGrid` derived its render order solely from `CATEGORY_CONFIG`, so the 4 `category='personal'` projects ... a category never added to that map ... **were invisible in grid view (the default), appearing only in table view.** Fixed by adding the `Personal` category AND ordering off the union of config keys + categories actually present in the data, so a future category cannot silently vanish the same way.
 
 **Sync protection:** `hq_dirty` boolean + `preserve_work_item_hq_edits` PostgreSQL trigger. When a user edits a milestone in HQ, the trigger prevents the next `sync_hq_goals.py` run from overwriting those changes. Manual items (`source='manual'`) are naturally safe via the UNIQUE(source, source_ref) constraint.
 
-**Tables:** `hq_projects` (37 rows, 6 categories), `hq_work_items` (57 goal milestones + manual items, with sort_order, hq_dirty, last_hq_edit_at columns)
+**Tables:** `hq_projects` (**67 rows across 7 categories** as of 2026-07-28: qwf_app 15 · operational 19 · infrastructure 14 · supporter 7 · planning 6 · personal 4 · student_program 2), `hq_work_items` (goal milestones + manual items, with sort_order, hq_dirty, last_hq_edit_at columns)
 
 ### Action Queue Panel (Prompt 108)
 
@@ -11453,6 +11455,10 @@ Hot priority toggle (flame icon) bumps all selected actions to high priority.
 | Meeting Intelligence Pipeline | Calendar APIs, vault enrichment, relationship health scoring, email automation | ⭐⭐⭐ |
 | Self-Healing Infrastructure | Health checks, auto-remediation, Supabase CLI deployment, cron monitoring | ⭐⭐⭐ |
 | Quick Intel Feature Build | Edge functions, YouTube APIs, LLM integration, full-stack feature delivery | ⭐⭐⭐ |
+| Search-a-Data-Page (Projects search, 2026-07-28) | React `useMemo` filtering, debounced input, reusing a house component instead of writing a new one, **ground-truthing the data before designing the feature** | ⭐⭐ |
+| The Invisible-Row Bug Class (same session) | Defensive rendering: why iterating a config map to decide *what* to render silently deletes rows, how to iterate data instead, and why a `N of TOTAL` count is the cheapest detector | ⭐⭐⭐ |
+
+**Why the two above pair well as one lesson (~90 min, Intermediate):** the student's instinct is to search `display_name` and ship. Querying the live table first reveals the name they'd search by is scattered ... `MP` is a `short_name`, `qcm` exists only as a `project_code` ... so the naive build is broken for two thirds of the rows. Same session then surfaced a 7-week-old invisible-data bug caused by a config map that gated rendering. Teaches the habit ("look at the real data before you design") and the failure mode it prevents, on the same 30-line diff. Prerequisites: React + TypeScript basics, REST/JSON. Reference: `feedback_config_mirror_driving_iteration_hides_rows.md`.
 
 ---
 
@@ -12100,6 +12106,47 @@ Three axes the ranker deliberately does not measure:
 
 ---
 
+## Call Intelligence Pipeline ⭐ NEW
+
+Turns a recorded phone call or in-person appointment into a structured, reviewable log. Built 2026-07-29/30 because TIG became medical advocate for a family member and needed a durable record of every care conversation. Full anti-compaction detail: `002 Projects/_Call Intelligence/Call Intelligence-System-Status.md`.
+
+**New persistent VM service:** Syncthing v2.1.2, installed rootless to `~/.local/bin` (no passwordless sudo on this box; the static binary is also newer than Ubuntu 24.04's 1.27.2). Runs as an **enabled `systemd --user` service** (`~/.config/systemd/user/syncthing.service`) with lingering already on, so it survives reboot. GUI bound to **127.0.0.1:8384 only**. Two **receive-only** folders with trashcan versioning pull from the phone.
+
+| Path | Purpose |
+|---|---|
+| `~/call_intel/inbox/{call,voice,drive_exports}` | Landing zones ... transient |
+| `~/call_intel/archive/<source>/<YYYY>/<MM>/` | Permanent archive, OUTSIDE the git tree |
+| `~/call_intel/config/` | Syncthing config + keys |
+
+**Deliberately outside the vault:** a 96 MB recording has no business near a repo the auto-committer sweeps with `git add -A`.
+
+**Pipeline** ... cron `call-intel-ingest`, every 15 min Pacific, wrapped in `safe_run.sh`:
+
+```
+poll_drive_call_exports.py --apply            # dialer exports from Drive
+  && ingest_call_media.py --apply             # COPY landing zone -> archive, register hq_call_media
+  && process_call_media.py --apply --discord  # -> hq_calls draft + failure alerts
+```
+
+Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and idempotent.
+
+| Script | Version | Role |
+|---|---|---|
+| `normalize_call_recording.py` | v1.2.0 | Filename grammars, ffprobe, UTF-16-BE sidecar, ffmpeg remux |
+| `analyze_call_recording.py` | v1.2.0 | Whisper + FLAGSHIP fusion, uncertainty flagging |
+| `ingest_call_media.py` | v1.0.0 | Landing zone to archive (COPY) |
+| `poll_drive_call_exports.py` | v1.0.0 | Drive export poller (md5-idempotent) |
+| `process_call_media.py` | v1.2.0 | Archive to `hq_calls` draft; `--check` / `--retry-failed` |
+| `voice_transcriber.py` | v1.2.0 | Opt-in `with_segments`; `get_file_duration` now uses ffprobe |
+
+**Two gotchas that cost real time:**
+
+1. **Whisper rejects the raw recordings.** The phone writes AAC into a container branded `3gp4` while naming the file `.m4a`. The OpenAI API sniffs the brand, not the extension, and returns "Invalid file format" even though m4a is supported. An ffmpeg remux is the fix.
+2. **Ingest COPIES, never moves.** The landing zones are Syncthing **receive-only** folders, which treat a local deletion as divergence ... the folder reports out-of-sync forever and "revert local changes" would re-download whatever the archive took. Verified by asserting `receiveOnlyChangedFiles == 0` after archiving.
+
+**Historical cost discontinuity:** `voice_transcriber.get_file_duration()` previously estimated duration from FILE SIZE at an assumed 64 kbps ... measured 36% low. Audio `cost_usd` figures recorded before 2026-07-30 are systematically understated. Do not read pre/post as a trend; the step change is the fix. Relevant to `llm_usage.jsonl` history and `audit_system.py` drift checks.
+
+
 ## Document History
 
 > [!NOTE] Document History Redacted
@@ -12109,4 +12156,4 @@ Three axes the ranker deliberately does not measure:
 
 ---
 
-*Last updated: 2026-07-29 07:12 (v5.65)*
+*Last updated: 2026-07-30 16:24 (v5.67)*
