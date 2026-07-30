@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-07-30 16:24 | Source version: 5.67
+> Generated: 2026-07-30 17:18 | Source version: 5.68
 
 # QWU Backoffice User Manual
 
@@ -4645,8 +4645,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.67 by generate_public_manual.py"
-generated: "2026-07-30 16:24"
+source: "Auto-generated from private manual v5.68 by generate_public_manual.py"
+generated: "2026-07-30 17:18"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11444,6 +11444,37 @@ Hot priority toggle (flame icon) bumps all selected actions to high priority.
 - **Prompt 123 (Mobile Fix)** — Fixed Source App dropdown on mobile: touch scroll was blocked by Popover component intercepting touch events, search input not visible due to Popover positioning. CSS `touch-action: manipulation` fixes + Popover `sideOffset` adjustment.
 - **Prompt 124 (Editable Issues)** — Added inline editing in the Issue Tracker detail drawer: click-to-edit description, subject, type badge, and source app. Changes save directly to Supabase without opening a separate form.
 
+### In-App Search Rollout (2026-07-28 → 07-30, direct code commits)
+
+**Added: July 30, 2026.** Not Lovable prompts ... HQ is direct-code since the CF Pages migration.
+
+Search was added to the three surfaces that lacked it, chosen by measurement rather than hunch: every page and component tree was greped for a search input, then live row counts were pulled for all 28 HQ tables. Surfaces that already had search (Wisdom 10.5k rows · Relationships 1,973 · Ezer Activity 1,360 · Tasks 761 · Content Review 590 · Suppressions 499 · Issues · Meetings · Subscriptions · QCM Contacts) were left alone.
+
+| Surface | Rows | Commit | Haystack |
+|---------|------|--------|----------|
+| **Projects** | 68 | `cc4ff20` | `display_name` + `short_name` + `project_code` + `app_code` + `description` + `tags` + category label |
+| **Brain** | 813 | `b374352` | `decision_title` + `decision_one_liner` + `non_technical_description` + `why_at_decision` + `category` + `corrected_category` + `source_app` + `checkpoint` + `trust_weight` + `verdict_status` |
+| **Observatory** | 68 | `2d08c21` | `display_name` + `app_code` + `domain` + `category` + `status` + `health_status` |
+
+**Shared design rules (all three):**
+- **Flat haystack, AND-ed tokens.** Every field searched together; a project or card is never hidden because something else matched by name. A tiered match would scan tighter but introduces a mode the user cannot see ... unacceptable on a governance surface, and needless elsewhere. The cost is some substring noise on 2-character queries, which one more character clears.
+- **The name you remember lives in a different column per row.** `MP` is a `short_name`; `qcm` exists ONLY as a `project_code`; `[Supporter Organization]` only as a `display_name`. Single-field search would have been broken for most rows ... which is why the data was queried before the feature was designed.
+- **`N of TOTAL` match count** on every one. This is the detector, not decoration: a count that does not reconcile is how silent under-rendering announces itself.
+- **Portfolio-level stats never re-scope.** Observatory's ecosystem tiles and Brain's pending count stay on the full set; only the card list narrows.
+- Reuses the house `SearchFilter` component (`src/components/SearchFilter.tsx`, 300 ms debounce, clear button). No new input was written.
+
+**Brain also gained a verdict-status filter** (multi-select chips: pending / silent / reinforced / redirected / applied, all-on by default, AND-ing with the existing trust-weight chip). Previously "every redirect" (2 cards of 813) and "every reinforced" (99) had no filter path at all. The `?card=` deep-link now clears search and restores all statuses *before* resolving, because it queries rendered DOM and would otherwise report "Card not found" for a visible card. Closes HQ issue `4aefd8c1`.
+
+**Three invisible-row bugs were found by this work** (pattern: `memory/feedback_config_mirror_driving_iteration_hides_rows.md`):
+
+| Surface | What was hidden | State |
+|---------|-----------------|-------|
+| Projects grid | All 4 `category='personal'` projects, ~7 weeks, in the DEFAULT view | ✅ Fixed `cc4ff20` |
+| Projects health tiles | 31 of 68 projects at `health='unknown'` ... no tile, no filter path | ⏳ Open, HQ issue `1a9a0e5d` |
+| L4G pipeline board | 48 of 62 bookings at `journey_stage='awaiting_choice'` | ✅ Visibility fixed `2d08c21`; placement is a TIG decision, HQ issue `34031f72` |
+
+The shared mechanism: **a config map or hardcoded list that drives render ITERATION**, so a value it was never taught renders nowhere while a count beside it still includes the row. Fixed by ordering off the **union** of known keys and keys present in the data, so an unknown value sorts last instead of vanishing.
+
 ### 🎓 Missing Pixel Training Opportunities
 
 | Component | Skills Developed | Difficulty |
@@ -11458,7 +11489,9 @@ Hot priority toggle (flame icon) bumps all selected actions to high priority.
 | Search-a-Data-Page (Projects search, 2026-07-28) | React `useMemo` filtering, debounced input, reusing a house component instead of writing a new one, **ground-truthing the data before designing the feature** | ⭐⭐ |
 | The Invisible-Row Bug Class (same session) | Defensive rendering: why iterating a config map to decide *what* to render silently deletes rows, how to iterate data instead, and why a `N of TOTAL` count is the cheapest detector | ⭐⭐⭐ |
 
-**Why the two above pair well as one lesson (~90 min, Intermediate):** the student's instinct is to search `display_name` and ship. Querying the live table first reveals the name they'd search by is scattered ... `MP` is a `short_name`, `qcm` exists only as a `project_code` ... so the naive build is broken for two thirds of the rows. Same session then surfaced a 7-week-old invisible-data bug caused by a config map that gated rendering. Teaches the habit ("look at the real data before you design") and the failure mode it prevents, on the same 30-line diff. Prerequisites: React + TypeScript basics, REST/JSON. Reference: `feedback_config_mirror_driving_iteration_hides_rows.md`.
+| Measure-Before-You-Build (search rollout, 2026-07-30) | Surveying a codebase for a missing capability, then ranking candidates by **live row counts** instead of intuition; recognising that the highest-count surfaces already had it | ⭐⭐ |
+
+**Why the three above pair well as one lesson (~90 min, Intermediate):** the student's instinct is to search `display_name` and ship. Querying the live table first reveals the name they'd search by is scattered ... `MP` is a `short_name`, `qcm` exists only as a `project_code` ... so the naive build is broken for two thirds of the rows. Same session then surfaced a 7-week-old invisible-data bug caused by a config map that gated rendering. Teaches the habit ("look at the real data before you design") and the failure mode it prevents, on the same 30-line diff. Prerequisites: React + TypeScript basics, REST/JSON. Reference: `feedback_config_mirror_driving_iteration_hides_rows.md`.
 
 ---
 
@@ -12156,4 +12189,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-07-30 16:24 (v5.67)*
+*Last updated: 2026-07-30 17:18 (v5.68)*
