@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-07-30 17:18 | Source version: 5.68
+> Generated: 2026-07-31 03:08 | Source version: 5.69
 
 # QWU Backoffice User Manual
 
@@ -4645,8 +4645,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.68 by generate_public_manual.py"
-generated: "2026-07-30 17:18"
+source: "Auto-generated from private manual v5.69 by generate_public_manual.py"
+generated: "2026-07-31 03:08"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11951,7 +11951,33 @@ The pipeline above moves a drafted entry to a published page. It says nothing ab
 
 **Coverage reports, it does not nag.** All 67 projects carry a declared posture (63 `has-roadmap`, 4 `deferred`, 0 `no-audience`; TIG ruled personal projects ON the map). The pre-existing backlog is reported every run but never pinged, because dozens of daily lines about a known backlog is how a gate teaches its reader to ignore it. Only a project created *after* the posture epoch with no posture alarms. `propose_roadmap_postures.py` proposes all of them at once and applies only a file TIG has ratified.
 
-**Auto-draft is session-scoped, and that is load-bearing.** `resolve_roadmap_projects.py` reads the files THIS session touched from the QCM per-session event log, never repo-wide git. On a shared checkout with many concurrent agents, "commits since midnight" is largely other people's work ... resolving from git returned `l4g` (another session's in-flight work) while the session had actually touched `[Supporter Organization]-qqt`. **The session id must be given** (`session_data["session_id"]`); absent it, nothing drafts. Fail-safe by design: a missing draft is caught by the cadence gate, while a mis-attributed one is a plausible lie no gate catches. Entries land as DRAFTS, invisible until TIG releases. Gate off with `QWF_DRAFT_ROADMAPS=0`.
+**Auto-draft is session-scoped, and that is load-bearing.** `resolve_roadmap_projects.py` reads the files THIS session touched from the QCM per-session event log, never repo-wide git. On a shared checkout with many concurrent agents, "commits since midnight" is largely other people's work ... resolving from git returned `l4g` (another session's in-flight work) while the session had actually touched `[Supporter Organization]-qqt`. **The session id must be given** (`session_data["session_id"]`, or `CLAUDE_CODE_SESSION_ID` from the environment); absent it, nothing drafts. Entries land as DRAFTS, invisible until TIG releases. Gate off with `QWF_DRAFT_ROADMAPS=0`.
+
+> ⚠ **Three claims in the paragraph above were wrong when written, and cost two misfiled drafts (2026-07-30). Corrected below; the sentences are kept rather than deleted because the reasoning error is the lesson.**
+> 1. *"Auto-draft is session-scoped"* was true of ONE of the TWO drafting paths. `run_session_wrap_up.run_roadmap_drafts` selected projects from the ENTIRE `git status` dirty tree and was never retired when the session-scoped path shipped. It misfiled a QQT price-book narrative onto the Call Intelligence roadmap.
+> 2. *"a missing draft is caught by the cadence gate"* holds for **2 of 8** roadmaps. `check_roadmap_cadence.classify()` routes every non-external roadmap to `internal` and returns early, and `WAITING` *inverts* on this failure (it keys on drafts existing and aging, so when drafting stops the roadmap reads healthier).
+> 3. *"a mis-attributed one is a plausible lie no gate catches"* was the correct diagnosis and the wrong conclusion. It IS catchable, and now is.
+>
+> There was also a fourth, unstated fault: the session-scoped query had **no time window**. Agent sessions here persist for days, so "this session's files" silently meant "every file this session ever touched." That is how a 2026-07-28 file attributed a 2026-07-29 narrative onto the supporter-facing `[Supporter Organization]-qqt` page.
+
+#### The attribution gate (2026-07-30) ... at the chokepoint, not in the callers
+
+`draft_roadmap_history.attribution_gate` (v1.2.0) refuses a draft the calling session cannot evidence. It lives inside `draft()` ... the only function that writes an `hq_roadmap_history` row ... rather than in any caller, because **two callers of that module drifted apart for six days and both misfiled**. A gate in either would not have caught the other, nor a future third.
+
+| Refusal | Fires when |
+|---|---|
+| `NO-SESSION` | no usable session id. Placeholders `"unknown"` / `"wrap-up"` count as absent ... they were the literal values both callers wrote into `technical_overlay.source_session`. |
+| `NOT-EVIDENCED` | the session touched no file this project watches **on `occurred_on`**. The refusal names where the evidence *did* point. |
+| `MULTI-MATCH` | the session touched files for more than one roadmap-bearing project. One narrative is composed from the WHOLE session and handed identically to every matched tenant, so a two-project session cannot help but narrate A onto B. **TIG-ratified: refuse and alert rather than write.** |
+| `INTENT-MISMATCH` | a declared project disagrees with the file evidence. |
+
+The gate runs **before** the FLAGSHIP voice pass, so a refusal costs no spend. Backfills are legitimate and use `--allow-unevidenced --reason "<why>"`, which stamps `technical_overlay.attribution_gate_bypassed` onto the row ... 26 existing rows are backfill and were previously indistinguishable from drafter output, which cost a whole forensic leg.
+
+Supporting changes: the whole-tree path is now **opt-in** (`run_session_wrap_up` v1.5.0, `--draft`) rather than deleted, because the session-scoped replacement was **never armed** ... it read `CLAUDE_SESSION_ID` / `SESSION_ID` while the environment supplies `CLAUDE_CODE_SESSION_ID`, so it returned `[]` on every real invocation and had drafted exactly once, for its own author. Deleting the old path first would have taken drafting to zero silently. `resolve_session_id()` is now THE single place the env chain lives; the gate deliberately does **not** resolve an id of its own, because a fallback there would let a backfill run from inside an agent session inherit that identity and bypass the audit stamp.
+
+**Two rails worth carrying past this feature:**
+- **Prove both directions.** A gate hardwired to refuse passes every refusal test. The first version of this gate shipped with proofs of all four refusals and zero allow-path checks. `tests/test_roadmap_attribution_gate.py` (17 assertions) now covers both, including replays of both real misfiles and **both** `audience=external` roadmaps ... `recall-organ` bakes to the same supporter portal as `[Supporter Organization]-qqt` and had been absent from every earlier scope.
+- **Verification depth tracks blast radius.** The investigation swept 10 internal drafts in full and gave the 2 supporter-facing drafts a metadata-only glance. The row never opened was the second misfile.
 
 **The overclaim rail.** The generator writes optimistically. On the 2026-07-28 [Supporter Organization] entry it produced "Now when a homeowner gets a contract, it looks like it came from [Supporter Organization]" when the domain was registered but not yet activated by the vendor. Re-read every generated entry for overclaim before it reaches TIG ... an overclaim on a roadmap is worse than no entry, because the whole point of the artifact is that a gap cannot go silent.
 
@@ -12072,6 +12098,11 @@ All roadmap surfaces speak the Council-ratified Project-Progress Vocabulary (Sta
 | Audience-aware redaction (tenant self-name exemption, structural carve-outs) | Access-control modeling, privacy engineering, fail-loud config validation | ⭐⭐⭐ |
 | Realtime publication debugging (silent postgres_changes no-op) | Supabase realtime internals, silent-failure diagnosis, belt-and-suspenders UI design | ⭐⭐⭐ |
 | CSS grid `min-width:auto` blowout + edge-transform normalization (CF email armor) | CSS layout internals, CDN edge behavior, comparing content vs armor | ⭐⭐ |
+| Gate placement: the chokepoint vs. every caller (2026-07-30) | Architectural reasoning, invariants, why guarding N callers loses to guarding the one write | ⭐⭐⭐ |
+| Prove-both-directions test design (a gate hardwired to REFUSE passes every refusal test) | Test design, falsifiability, distinguishing "safe" from "broken" | ⭐⭐ |
+| Forensic discriminators and their limits (`source_session` as a fingerprint) | Incident forensics, evidence reasoning, checking whether a signal predates the code that writes it | ⭐⭐⭐ |
+| Blind multi-reviewer fan-out (decorrelated errors; reviewers found what the builder had cleared) | Review architecture, cognitive bias, why one deep look shares its own blind spot | ⭐⭐⭐ |
+| Trace-the-consumer debugging (a correct function nobody supplies an input to) | Debugging discipline, dead-code detection, docstrings are not evidence of wiring | ⭐⭐ |
 
 ---
 
@@ -12189,4 +12220,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-07-30 17:18 (v5.68)*
+*Last updated: 2026-07-31 03:08 (v5.69)*
