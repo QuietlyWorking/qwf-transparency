@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-07-31 03:08 | Source version: 5.69
+> Generated: 2026-07-31 21:47 | Source version: 5.70
 
 # QWU Backoffice User Manual
 
@@ -3719,21 +3719,53 @@ entity_path = resolve_for_enrichment("John Smith", caller="my_script.py")
 # DANGEROUS: if name.lower() in f.stem.lower():
 ```
 
-**Key Features:**
+**Second Bug (2026-07-30) ... the one that forced v2.0.0:** an 80-minute 1:1 with a
+donor-partner was written onto a **different person's** entity file, including a 12-field
+frontmatter overwrite, and four of her email threads had been misfiled there since
+January. Two legacy scripts still carried their own 5-strategy ladders that matched on
+**first name alone** at 0.65/0.70 confidence and returned the first glob-order hit. It
+went undetected for six months because the pipeline logged the **requested name**, not
+the file it wrote ... the audit trail read as a clean success.
+
+**Key Features (v2.0.1, 2026-07-31):**
 | Feature | Purpose |
 |---------|---------|
-| **Role Blocklist** | Blocks 30+ terms like "Chapter President", "Vice President", "Secretary" |
-| **Strictness Levels** | STRICT (email routing), STANDARD (enrichment), PERMISSIVE (history) |
-| **Purpose Declaration** | EMAIL_ROUTING, DATA_ENRICHMENT, HISTORY_LINKING |
-| **Confidence Scoring** | Requires exact or near-exact matches, rejects fuzzy matches |
+| **Token matching** | Whole-token, never substring. A search for `"ann"` can no longer land inside a concatenated filename like `"joann"` |
+| **Single-token rule** | A one-word name resolves ONLY via exact filename, a curated alias, or corroborating context |
+| **Role blocklist** | Role names AND role email local-parts (`hello@`, `info@`, `noreply@`) ... one shared set for both sides |
+| **Ambiguity refusal** | An unbroken tie REFUSES rather than taking the first glob hit |
+| **Canonical beats draft** | A real entity outranks a `[DRAFT]` stub of the same name |
+| **ResolutionContext** | Situational context (meeting domain, sender address, org) corroborates, demotes, and breaks ties ... it never lowers the floor |
+| **Strictness levels** | STRICT (email routing), STANDARD (enrichment), PERMISSIVE (history) |
+| **Write guard** | `authorize_entity_write()` fail-closed: refuses an unvalidated path, a below-floor resolution, and a resolution pointing at a *different* file |
+| **Quarantine** | A refused write is held in `005 Operations/Data/quarantine/entity_writes/`, never dropped |
 
-**Scripts Migrated (18 total):**
-- All `enrich_member_*.py` scripts (6)
-- All `*_121_*.py` and briefing scripts (5)
-- All `*_suitedash_*.py` and sync scripts (5)
-- `predictive_intelligence.py`, `generate_connection_report.py`, `update_person_health.py`
+**Honest coverage ... do NOT read "centralized" as "exclusive".** A blind 5-reviewer audit
+(2026-07-31) found the module's own "one resolution path" claim was false. These still
+resolve entities WITHOUT the resolver and are tracked in
+`002 Projects/_QWU Backoffice Automation/Kickoff Prompts/entity-resolution-remaining-ladders-2026-07-31.md`:
+`entity_lookup.py` · `zoom_pipeline._append_action_item_to_entity` (**writes**) ·
+`meeting_entity_resolve.create_draft_person` · `prepare_verification_batch.find_entity_file` ·
+`enrich_member_{instagram,linkedin}.update_entity_file` (**write**). Also unguarded:
+`meeting_update_vault.append_to_person_file` and `email_update_vault.append_to_person_file`.
 
-**Rule:** Any new script that looks up entity files MUST use `entity_resolver.py`. Never implement direct substring matching.
+**Verification:** `tests/test_entity_resolver_misdirection.py` ... 104 cases against a
+**synthetic fixture vault** (the obvious assertion passes trivially against the real vault
+and would pass with every defect present). 204/204 canonical entities resolve to
+themselves; 13 of 14 mutation-injected defects are caught.
+
+**Auditing:** `005 Operations/Execution/audit_entity_misdirection.py` sweeps all ~949
+entity files with 8 deterministic detectors (duplicate email, duplicate alias, role-mailbox
+magnet, identity spread, domain spread, concatenated stem, alias-shadows-file, email-as-name).
+Read-only ... it reports, a human repairs.
+```bash
+.venv/bin/python "005 Operations/Execution/audit_entity_misdirection.py" --markdown --min-severity 2
+```
+
+**Rule:** Any new script that looks up entity files MUST use `entity_resolver.py`, and any
+script that WRITES to one must carry a `ResolverResult` through `authorize_entity_write()`.
+Never implement direct substring matching. Never trust a supplied `file_path` ... re-resolve
+and log the **resolved** path, never the requested name.
 
 ### What to Store in Entity Notes (003 Entities/)
 
@@ -4645,8 +4677,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.69 by generate_public_manual.py"
-generated: "2026-07-31 03:08"
+source: "Auto-generated from private manual v5.70 by generate_public_manual.py"
+generated: "2026-07-31 21:47"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12220,4 +12252,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-07-31 03:08 (v5.69)*
+*Last updated: 2026-07-31 21:47 (v5.70)*
