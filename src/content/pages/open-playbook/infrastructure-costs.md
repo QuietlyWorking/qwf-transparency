@@ -12,19 +12,19 @@ This page exists because we believe donor-partners deserve to see exactly where 
 
 Every figure on this page is generated automatically from the same constants file our backoffice scripts use. When infrastructure changes, this page changes. When we update a constant, an audit runs the next morning and reconciles it against the actual Azure invoice. If they disagree by more than 5%, the system raises an alert before anyone can publish a wrong number.
 
-_Last regenerated: 2026-04-26 (Pacific). Constants verified: 2026-04-25._
+_Last regenerated: 2026-08-01 (Pacific). Constants verified: 2026-04-25._
 
 ---
 
 ## The Headline
 
-- **Fixed monthly infrastructure:** $378.54
+- **Fixed monthly infrastructure:** $418.54
 - **Variable monthly budget (LLM + scraping):** up to $400.00
-- **Grand total at full variable spend:** up to $778.54/month
+- **Grand total at full variable spend:** up to $818.54/month
 
-That funds 13 active apps, ~50 automation workflows, ~280 Python scripts, and the entire backoffice that keeps QWF running.
+That funds 16 active apps, ~50 automation workflows, ~280 Python scripts, and the entire backoffice that keeps QWF running.
 
-**Most recent month-to-date Azure spend (live):** $175.57 as of 2026-04-26.
+**Most recent month-to-date Azure spend (live):** $7.52 as of 2026-08-01.
 
 ---
 
@@ -44,14 +44,14 @@ Two virtual machines + supporting infrastructure. The big one runs the backoffic
 
 ## Supabase (databases + auth + edge functions)
 
-One Supabase organization on the Pro plan. 12 apps each get their own MICRO-tier project; 1 app runs on the Free tier.
+One Supabase organization on the Pro plan. 16 apps each get their own MICRO-tier project; 1 app runs on the Free tier.
 
 | Component | Monthly Cost | What it does |
 |-----------|-------------:|--------------|
 | Supabase Pro org base | $25.00 | Single org covering all QWF apps |
 | Included compute credit | ($10.00) | Pro plan credit (offsets one MICRO project) |
-| 12 MICRO projects @ $10.00 each | $120.00 | One per app: QWR, HQ, QQT, QRP, QSP, QNT, QKN, Pocket EZ, L4G, QTR, WHL, GreenCal CC |
-| **Supabase subtotal** | **$135.00** | |
+| 16 MICRO projects @ $10.00 each | $160.00 | One per app: QWR, HQ, QQT, QRP, QSP, QNT, QKN, Pocket EZ, L4G, QTR, WHL, GreenCal CC |
+| **Supabase subtotal** | **$175.00** | |
 
 ## Other Fixed Infrastructure
 
@@ -77,7 +77,7 @@ If we hit 75% of either budget, the system pings a Discord alert. If we hit 90%,
 
 ## The Bottom Line
 
-**Fixed:** $378.54/month. **Maximum if every variable budget hits 100%:** $778.54/month.
+**Fixed:** $418.54/month. **Maximum if every variable budget hits 100%:** $818.54/month.
 
 That covers every app, every automation, every dashboard, every email, every database, every monitor. No hidden line items. No marketing budget hidden in 'operations'. No executive compensation buried in 'professional services'.
 
@@ -93,7 +93,7 @@ Three things keep this page from drifting into marketing fiction:
 2. **Daily reconciliation.** A scheduled audit pulls our actual Azure spend each morning and compares it to the constants. Drift over 10% raises an alert.
 3. **Monthly invoice reconciliation.** On the 8th of each month, after Azure's invoice settles, we pull the finalized total for the prior month and reconcile it against the constants with a tighter 5% threshold.
 
-**Most recent monthly reconciliation:** 2026-03 (internal report; full backoffice is browseable on GitHub)
+**Most recent monthly reconciliation:** 2026-06 (internal report; full backoffice is browseable on GitHub)
 
 **Source script:** `005 Operations/Execution/generate_cost_transparency.py`
 **Constants file:** `005 Operations/Execution/cost_constants.py`
