@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-07-31 21:47 | Source version: 5.70
+> Generated: 2026-08-03 15:23 | Source version: 5.71
 
 # QWU Backoffice User Manual
 
@@ -808,11 +808,17 @@ With 24/7 operation, we follow a maintenance schedule:
 
 **Reboot cadence updated 2026-05-17 (Session 349)** from the old Sun 3 AM schedule to the new Sat 04:00 PT schedule, after a VM crash where a single login scope reached 28.3 GB peak following 22 days of uptime. The memory pressure monitor + `/pulse` skill catch accumulation BEFORE it locks the VM; the weekly reboot is the periodic reset.
 
-**Monitoring model — v2.1.0** (2026-05-19): The pulse skill (`.claude/skills/pulse/SKILL.md`) and memory pressure monitor (`005 Operations/Execution/monitor_memory_pressure.py`) share core logic via Python import from `pulse.py` ... they cannot drift out of sync. v2.1.0 dropped two v2.0 thresholds that caused false alerts:
+**Monitoring model ... v2.4.0** (2026-05-19 base, corrected through 2026-08-02): The pulse skill (`.claude/skills/pulse/SKILL.md`) and memory pressure monitor (`005 Operations/Execution/monitor_memory_pressure.py`) share core logic via Python import from `pulse.py` ... they cannot drift out of sync. v2.1.0 dropped two v2.0 thresholds that caused false alerts:
 - **The 8-session count cap** ... counts treat all sessions as equal weight; 12 simple chats are safer than 2 multi-agent fan-outs. Replaced with per-PID classification (chat / medium / fan-out) and spawn-budget verdicts (Simple ✅ / Medium ✅ / Fan-out ❌).
 - **The 16 GB scope-size threshold** ... `cgroup.memory.current` includes reclaimable kernel page cache (VSCode + MCP servers can sit at 20 GB without any real pressure). Replaced with PSI memory.pressure (kernel-honest stall percentages).
 
-**Current RED conditions** (any one triggers SMS): swap > 500 MB, available RAM < 4 GB, top Claude process > 3 GB, PSI memory.pressure some > 30% OR full > 5%, max growth slope > 200 MB/min. SMS body names the offending PID + classification so you know which session to close: `[QWU VM RED] PSI some=42.3 ... Close pid <MONITOR_ID> (fan-out, 4200 MB, 6.1h).`
+**v2.3.0** (2026-07-15) retired **resident swap SIZE** as a RED/YELLOW trigger in both tools. Linux parks cold pages in swap even with ~28 GB RAM free and PSI = 0, so `swap_used > 500 MB` pinned the monitor to RED and re-texted every 30 minutes, each time naming an innocent ~200 MB chat session that holds no swap. Swap is now context-only; PSI is the honest signal.
+
+**v2.4.0** (2026-08-02) closed a blind spot that had been hiding 93% of the slice. `pulse.list_claude_processes` matched only `claude --output-format`, so during a real freeze it tracked **1,104 MB of a 15,790 MB slice** and the RED alert named a **265 MB chat session** while ~15 GB sat in a non-Claude process nothing was looking at. New additive `slice_processes` field records the top in-slice processes by RSS regardless of cmdline (binary name + hash only ... never argv, because `pulse_history.jsonl` is tracked in git). The `/pulse` report gained §3b, and the Discord embed + SMS now name the real hog and flag when it is **not** a Claude session.
+
+**Current RED conditions** (any one triggers SMS): available RAM < 4 GB, top Claude process > 3 GB, PSI memory.pressure some > 30% OR full > 5%, max growth slope > 200 MB/min. Swap size is **not** a trigger (see v2.3.0 above). SMS names the offending PID + classification, or the largest in-slice process when that is bigger: `[QWU VM RED] PSI some=99.0 ... Biggest: pid 265363 node 2402 MB (NOT a claude session).`
+
+> **Alerting is forensics, not defense.** In all three 2026 livelock incidents the balloon completed *inside a single 5-minute sampling interval*, so the alert necessarily arrived after the box was already frozen. What actually protects the VM is the cgroup `MemoryMax` enforcement layer (see §Infrastructure Monitoring and `infrastructure_monitoring.md` §Tier-1). Do not respond to a recurrence by tightening these thresholds.
 
 **Background heartbeat**: cron `*/5 * * * *` writes `005 Operations/Data/pulse_history.jsonl` so slopes (Δ RSS / Δ time per PID) populate within 10 minutes of any session starting.
 
@@ -4677,8 +4683,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.70 by generate_public_manual.py"
-generated: "2026-07-31 21:47"
+source: "Auto-generated from private manual v5.71 by generate_public_manual.py"
+generated: "2026-08-03 15:23"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12252,4 +12258,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-07-31 21:47 (v5.70)*
+*Last updated: 2026-08-03 15:23 (v5.71)*
