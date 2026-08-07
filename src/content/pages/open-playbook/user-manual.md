@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-08-03 15:23 | Source version: 5.71
+> Generated: 2026-08-07 06:25 | Source version: 5.72
 
 # QWU Backoffice User Manual
 
@@ -821,6 +821,21 @@ With 24/7 operation, we follow a maintenance schedule:
 > **Alerting is forensics, not defense.** In all three 2026 livelock incidents the balloon completed *inside a single 5-minute sampling interval*, so the alert necessarily arrived after the box was already frozen. What actually protects the VM is the cgroup `MemoryMax` enforcement layer (see §Infrastructure Monitoring and `infrastructure_monitoring.md` §Tier-1). Do not respond to a recurrence by tightening these thresholds.
 
 **Background heartbeat**: cron `*/5 * * * *` writes `005 Operations/Data/pulse_history.jsonl` so slopes (Δ RSS / Δ time per PID) populate within 10 minutes of any session starting.
+
+#### MP Training Opportunities ⭐ (from the 2026-08-02 livelock diagnosis)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| "It crashed" is a hypothesis, not a fact ... check `last -x`, `who -b`, and the shutdown path before diagnosing | The single highest-value habit in ops. Here the box had NOT crashed: it was a clean graceful poweroff, and everything downstream of "crash" would have been wrong | Beginner |
+| Reading `sar` history to reconstruct an incident after the fact | `sysstat` silently records every 10 min; most people never learn it exists. `%system` 99% vs `%user` 99% points at completely different culprits | Beginner |
+| Distinguishing **livelock** from **crash** from **OOM kill** | Three failure modes that all look like "the machine died" but have opposite fixes. Evidence: `oom_kill 0` + no panic + 99% `%system` + PSI full 99% = livelock | Intermediate |
+| Free RAM does not mean healthy ... read PSI (`memory.pressure`) instead | The box had 10.8 GB free while frozen solid. Teaches that the obvious metric can be the misleading one | Intermediate |
+| Verifying a kernel symbol's origin in `/proc/kallsyms` instead of guessing from its name | `high_work_func` sounds like the Hyper-V balloon driver on an Azure VM. It isn't. Checking neighbours in the symbol table settled it in one command | Advanced |
+| cgroup v2 `memory.high` vs `memory.max` ... one throttles forever, only one can END an episode | A genuinely counter-intuitive distinction that cost three production freezes. Excellent systems-thinking lesson: a "safe, soft" limit was the dangerous one | Advanced |
+| Auditing your own instrument's coverage before trusting its output | The monitor tracked 1,104 MB of a 15,790 MB slice and confidently named the wrong process. Teaches "what is this tool blind to?" as a standing question | Advanced |
+| Never writing `argv` into a git-tracked log | A script invoked with a token in its arguments leaks that secret into history permanently. Store a hash instead | Intermediate |
+
+**Most valuable MP exercise:** the crash-that-wasn't. Give a student the screenshot (CPU pegged at 100%, memory dropping) and the VM, and ask them to determine what happened. The instinct is "it ran out of memory." The evidence says the opposite, and every step of the correction is teachable: boot history → `sar` → `%system` vs `%user` → PSI → cgroup limits → kallsyms. It ends with a real, shipped fix and a genuinely humbling lesson: **the safety mechanism was the thing causing the outage.**
 
 **Operating discipline** (replaces the v2.0 "8 sessions max" cap): one session per task, close it when done. Don't think in session count ... think in classification mix. Watch slope, not just RSS. Trust swap and PSI over free RAM.
 
@@ -4683,8 +4698,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.71 by generate_public_manual.py"
-generated: "2026-08-03 15:23"
+source: "Auto-generated from private manual v5.72 by generate_public_manual.py"
+generated: "2026-08-07 06:25"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -4772,6 +4787,10 @@ Microsoft retired the donated nonprofit Business Premium grant (effective 2025-0
 
 `check_email_transport_health.py` runs via n8n (`QWFEmailCanary01`) every 6 hours: (1) SES leg sends to the SES mailbox simulator and verifies the `email.delivered` event lands in `integration_events`; (2) M365 recovery leg sends a Graph probe externally and reads the NDR ... NDR present = still blocked (silent), NDR absent = recovery detected (Discord alert). State file: `.tmp/email_transport_canary_state.json`.
 
+**Leg 3 ... inbound arrival (added 2026-08-06, v1.1.0).** Legs 1 and 2 both prove mail can *leave*. Leg 3 proves it can *arrive*: SES sends to `tig@` (out to SES, back in through EOP) and Graph confirms the token landed, distinguishing **Inbox from Junk**. Probe auto-deletes. Ladder: Inbox = RECORD (silent) · Junk or 1st miss = TODAY · **2nd consecutive miss = INTERRUPT (SMS)**, which at the 6h cadence is 12h of silence ... the alerting standard's irreversibility threshold. If the probe cannot be sent, the result is **INDETERMINATE and never escalates**, so an SES outage cannot page for the wrong failure.
+
+**Why leg 3 exists:** on 2026-06-11 inbound died for four days while both outbound legs stayed green. Third parties recorded hard bounces and **permanently suppressed** the address ... suppression lists never self-heal, so recovery fixed nothing on their side. BNI Connect cost 8 weeks of visitor emails; Betterstack alert email was dead 57 days across 37 incidents. Two companion scripts close the loop: `detect_silent_senders.py` (monthly, cadence-based, finds who went quiet ... leg 3 is structurally blind to single-sender suppression) and `watch_sender_recovery.py` (daily, proves a claimed suppression release actually took). **Diagnose suppression in ten seconds by triggering a password reset or magic link ... a sender that refuses outright is suppressed.**
+
 ### Rules for New Sender Scripts
 
 Never write inline Graph sendMail or smtplib code. Import the transport. Footers, opt-out checks, and templates stay in the calling script (Enhancement/Exempt classification is per-script policy). Full reference: `005 Operations/Directives/qwf_email_infrastructure.md` §Backoffice Transactional Rerouting.
@@ -4784,6 +4803,8 @@ Never write inline Graph sendMail or smtplib code. Import the transport. Footers
 | Provider abstraction (transport seam) | Adapter pattern, failover chains, kill-switch env flags, structured returns | ⭐⭐⭐ |
 | SES + SNS + webhook event pipeline | AWS IAM least-privilege, SES config sets, SNS subscriptions, event-driven observability | ⭐⭐⭐⭐ |
 | Canary monitoring design | Health probes, state files, alert-on-change vs alert-always, simulator endpoints | ⭐⭐ |
+| Inbound-vs-outbound blind spots | Bidirectional probe design, why a green dashboard can hide a dead channel, INDETERMINATE as a first-class state | ⭐⭐⭐ |
+| Suppression-list forensics | Bounce suppression mechanics, per-sender vs per-domain scoping, magic-link diagnosis, cadence-based silence detection | ⭐⭐⭐ |
 
 ---
 
@@ -12258,4 +12279,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-08-03 15:23 (v5.71)*
+*Last updated: 2026-08-07 06:25 (v5.72)*
