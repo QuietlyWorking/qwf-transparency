@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-08-07 06:25 | Source version: 5.72
+> Generated: 2026-08-07 21:45 | Source version: 5.73
 
 # QWU Backoffice User Manual
 
@@ -4698,8 +4698,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.72 by generate_public_manual.py"
-generated: "2026-08-07 06:25"
+source: "Auto-generated from private manual v5.73 by generate_public_manual.py"
+generated: "2026-08-07 21:45"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -4791,6 +4791,12 @@ Microsoft retired the donated nonprofit Business Premium grant (effective 2025-0
 
 **Why leg 3 exists:** on 2026-06-11 inbound died for four days while both outbound legs stayed green. Third parties recorded hard bounces and **permanently suppressed** the address ... suppression lists never self-heal, so recovery fixed nothing on their side. BNI Connect cost 8 weeks of visitor emails; Betterstack alert email was dead 57 days across 37 incidents. Two companion scripts close the loop: `detect_silent_senders.py` (monthly, cadence-based, finds who went quiet ... leg 3 is structurally blind to single-sender suppression) and `watch_sender_recovery.py` (daily, proves a claimed suppression release actually took). **Diagnose suppression in ten seconds by triggering a password reset or magic link ... a sender that refuses outright is suppressed.**
 
+**The machinery paid off on its first real pair (2026-08-07).** Both opening watches closed **CONFIRMED**, 13 days inside deadline: `betterstack` at 04:49:46Z, and `bni-connect` at 18:17:05Z off the **exact** suppressed sender `bni.notifications@bniconnectglobal.com` ... its first message since 2026-06-08, a **60-day** blackout. Ninety minutes later a real visitor registration arrived and the [Networking Chapter] pipeline ran unattended end to end. Neither recovery needed a human to remember to check, which was the entire point.
+
+**Whitelisting after a recovery ... measure before you widen.** A vendor's "have your IT team allowlist these domains" is a template written for the worst-case tenant, not a diagnosis of yours. BNI asked for four domain allows plus a sender and an IP. Ground truth from a full-folder Graph scan of `tig@`: **0 of 319 Junk messages were from any BNI domain, and all 382 BNI messages ever received landed in the Inbox.** Our filtering had never blocked BNI once, so the allow would have fixed nothing while handing a spoofer four trusted envelopes. **Prefer the narrowest allow that carries the trust:** the two-IP connection-filter entry (`[Networking Platform Mail Server 1]`, `[Networking Platform Mail Server 2]`, both reverse-DNS verified) tracks BNI-controlled infrastructure; a domain allow tracks a string anyone can type.
+
+**Capability limit (probed, do not re-derive):** Microsoft Graph exposes **no** junk or safe-sender surface on v1.0 **or** beta ... `mailboxSettings` returns only calendar/locale/working-hours fields. Our 8 Graph app roles are Graph-only; Exchange Online app-only auth requires `Exchange.ManageAsApp` **plus a certificate** (a client secret is rejected), and there is no `pwsh` on this box. Both the mailbox Safe Senders list and the EOP tenant allow list are portal-or-PowerShell only.
+
 ### Rules for New Sender Scripts
 
 Never write inline Graph sendMail or smtplib code. Import the transport. Footers, opt-out checks, and templates stay in the calling script (Enhancement/Exempt classification is per-script policy). Full reference: `005 Operations/Directives/qwf_email_infrastructure.md` §Backoffice Transactional Rerouting.
@@ -4805,6 +4811,7 @@ Never write inline Graph sendMail or smtplib code. Import the transport. Footers
 | Canary monitoring design | Health probes, state files, alert-on-change vs alert-always, simulator endpoints | ⭐⭐ |
 | Inbound-vs-outbound blind spots | Bidirectional probe design, why a green dashboard can hide a dead channel, INDETERMINATE as a first-class state | ⭐⭐⭐ |
 | Suppression-list forensics | Bounce suppression mechanics, per-sender vs per-domain scoping, magic-link diagnosis, cadence-based silence detection | ⭐⭐⭐ |
+| Allow-list hygiene (measure before you widen) | Reading a vendor request critically, querying your own filter for evidence, least-privilege allow design (IP vs domain), declining a request with numbers instead of opinion | ⭐⭐⭐ |
 
 ---
 
@@ -12279,4 +12286,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-08-07 06:25 (v5.72)*
+*Last updated: 2026-08-07 21:45 (v5.73)*
