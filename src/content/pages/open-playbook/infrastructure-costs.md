@@ -12,7 +12,7 @@ This page exists because we believe donor-partners deserve to see exactly where 
 
 Every figure on this page is generated automatically from the same constants file our backoffice scripts use. When infrastructure changes, this page changes. When we update a constant, an audit runs the next morning and reconciles it against the actual Azure invoice. If they disagree by more than 5%, the system raises an alert before anyone can publish a wrong number.
 
-_Last regenerated: 2026-08-01 (Pacific). Constants verified: 2026-04-25._
+_Last regenerated: 2026-08-11 (Pacific). Constants verified: 2026-04-25._
 
 ---
 
@@ -24,7 +24,7 @@ _Last regenerated: 2026-08-01 (Pacific). Constants verified: 2026-04-25._
 
 That funds 16 active apps, ~50 automation workflows, ~280 Python scripts, and the entire backoffice that keeps QWF running.
 
-**Most recent month-to-date Azure spend (live):** $7.52 as of 2026-08-01.
+**Most recent month-to-date Azure spend (live):** $109.91 as of 2026-08-10.
 
 ---
 
@@ -93,7 +93,7 @@ Three things keep this page from drifting into marketing fiction:
 2. **Daily reconciliation.** A scheduled audit pulls our actual Azure spend each morning and compares it to the constants. Drift over 10% raises an alert.
 3. **Monthly invoice reconciliation.** On the 8th of each month, after Azure's invoice settles, we pull the finalized total for the prior month and reconcile it against the constants with a tighter 5% threshold.
 
-**Most recent monthly reconciliation:** 2026-06 (internal report; full backoffice is browseable on GitHub)
+**Most recent monthly reconciliation:** 2026-07 (internal report; full backoffice is browseable on GitHub)
 
 **Source script:** `005 Operations/Execution/generate_cost_transparency.py`
 **Constants file:** `005 Operations/Execution/cost_constants.py`
