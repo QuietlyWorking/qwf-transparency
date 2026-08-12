@@ -8363,7 +8363,7 @@ The system uses a **TaskGraph** pattern that models tasks with dependencies:
 | Daily Briefing | `daily_briefing_parallel.py` | 6 collectors | 5x |
 | L4G Lead Generation | `l4g_parallel_pipeline.py` | 8 tasks | 40% |
 | Multi-Source Scraping | `multi_source_scraper.py` | 3-5 sources | 3x |
-| Visitor Enrichment | `enrich_visitor_parallel.py` | 7 EPIC tasks | 60% |
+| ~~Visitor Enrichment~~ **RETIRED 2026-08-11** | ~~`enrich_visitor_parallel.py`~~ ... use `bni_visitor_pipeline.py` | see note below | n/a |
 | Content Pipeline | `content_pipeline_parallel.py` | 8 tasks | 60% |
 | Member Enrichment | `enrich_member_parallel.py` | 7 tasks | 60% |
 | Lead Enrichment | `enrich_leads_parallel.py` | 6 tasks | 60% |
@@ -8381,8 +8381,21 @@ python 005\ Operations/Execution/l4g_parallel_pipeline.py \
   --location "Portland, OR" \
   --dry-run
 
-# Visitor enrichment (EPIC 7-step)
-python 005\ Operations/Execution/enrich_visitor_parallel.py "John Smith" --dry-run
+# Visitor enrichment ... RETIRED 2026-08-11, use the gated pipeline instead.
+#
+# `enrich_visitor_parallel.py` bypassed the identity confirmation gate on all
+# four surfaces (LinkedIn profile, company website, Google Business listing,
+# vault entity file) and still selected a Google business by taking the first
+# search result unscored. It now refuses to run and points here.
+#
+# Its parallel design cannot hold the gate: a human confirmation sits between
+# its phases, and you cannot parallelize past a person. The speed it existed
+# for is also moot ... enrichment now STOPS at the gate and waits for an
+# answer, so the wall clock is set by how long the answer takes.
+python 005\ Operations/Execution/bni_visitor_pipeline.py --visitor "John Smith" --dry-run
+
+# ...then answer the identity questions for that visitor:
+python 005\ Operations/Execution/review_visitor_holds.py --show "John Smith"
 
 # Lead enrichment with task selection
 python 005\ Operations/Execution/enrich_leads_parallel.py \
