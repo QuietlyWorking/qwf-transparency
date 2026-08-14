@@ -2,20 +2,20 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 5.65 | Started: 251223 | Updated: 260729**"
+description: "**Version: 5.76 | Started: 251223 | Updated: 260814**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-07-29"
+modifiedDate: "2026-08-14"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-08-07 21:45 | Source version: 5.73
+> Generated: 2026-08-14 20:39 | Source version: 5.76
 
 # QWU Backoffice User Manual
 
-**Version: 5.65 | Started: 251223 | Updated: 260729**
+**Version: 5.76 | Started: 251223 | Updated: 260814**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -4698,8 +4698,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.73 by generate_public_manual.py"
-generated: "2026-08-07 21:45"
+source: "Auto-generated from private manual v5.76 by generate_public_manual.py"
+generated: "2026-08-14 20:39"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5959,7 +5959,8 @@ When visitors register for a BNI meeting, generate personalized **Connection Rep
 | Script | Purpose |
 |--------|---------|
 | `import_bni_members.py` | Import Airtable CSV into entity files |
-| `enrich_member_linkedin.py` | LinkedIn profile + posts scraping (Apify) |
+| `enrich_member_linkedin.py` | **RETIRED 2026-08-12** ... no identity gate. Use `enrich_member_anchors.py` |
+| `enrich_member_anchors.py` | Member Identity Anchors: harvest our own records, discover only the gaps, wait for a human |
 | `enrich_member_website.py` | Website content extraction with AI |
 | `enrich_member_reviews.py` | Google + Yelp reviews with referral intelligence |
 | `enrich_member_orchestrator.py` | Full pipeline runner with AI synthesis |
@@ -8614,7 +8615,7 @@ New QSP module providing local SEO services to all supporters. Replaces $1,500-3
 - Local Keyword Matrix — Service x city keyword combinations via QWR DataForSEO
 
 **Agency White-Label Architecture (Built Into Phase 4, Launched Later):**
-All new tables include nullable `agency_id` column. Reports use `brand_config` object (logo, name, colors). RBAC scoped by `agency_id` + `organization_id`. Enables future Tier 2 Agency supporters (e.g., (R)after Thoughts) to white-label the entire QWF stack.
+All new tables include nullable `agency_id` column. Reports use `brand_config` object (logo, name, colors). RBAC scoped by `agency_id` + `organization_id`. Enables future Tier 2 Agency supporters (e.g., [Supporter Company]) to white-label the entire QWF stack.
 
 **Supabase Tables — Deployed (Session 195):**
 - `qsp_citation_health` — Directory-level NAP consistency (created via Management API)
@@ -9008,6 +9009,103 @@ Press Ranger Gold tier provides access to 500+ outlets including:
 | GEO optimization for AI citations | Emerging SEO, structured content | ⭐⭐ |
 
 ---
+
+### 🎓 Missing Pixel Training Opportunities — Verification & Migration Discipline (added 2026-08-11)
+
+Drawn from the Opus 5 FLAGSHIP migration. **These are unusually good teaching material because
+the session got things WRONG and the record shows how each was caught** ... which is far more
+instructive than a clean run. Every item below maps to a real artifact a student can read.
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Staged rollout of a vendor upgrade (probe → non-behavioral code → flip → watch) | Release engineering, change isolation, risk staging | ⭐⭐⭐ |
+| Writing a one-shot empirical probe instead of trusting docs | API testing, evidence discipline, cost-aware experimentation | ⭐⭐ |
+| Mutation testing: reverting each fix to prove its test fails | Test quality, "a suite that never caught anything is a green light that means nothing" | ⭐⭐⭐ |
+| Distinguishing a model OUTCOME field from a caller INTENT field | Data modeling, schema design, why proxies mislead | ⭐⭐⭐ |
+| Instrument reliability: how a measuring tool lies | Debugging methodology, epistemics, root-cause analysis | ⭐⭐⭐⭐ |
+| Designing a blind multi-reviewer fan-out | Code review process, decorrelating errors, adversarial thinking | ⭐⭐⭐⭐ |
+| Reading a rollback path in the direction people actually reach | Operational safety, failure-mode analysis | ⭐⭐ |
+| Fail-closed gates and why silent aborts are the dangerous kind | Systems safety, alerting design | ⭐⭐⭐ |
+
+**Three teaching moments with the receipts, suitable as a discussion exercise:**
+
+1. **"Two reviewers confirmed a number that was wrong by 7x."** The exposure figure was computed
+   by classifying ledger rows on `thinking_tokens`. Two independent reviewers re-derived it from
+   the same field and confirmed it; a third asked *what did the caller actually request?* and the
+   number collapsed. **Lesson: independent recomputation validates arithmetic, not premises.
+   Vary the question, not just the reviewer.** Artifacts: channel `r02`, `r04-advisor.md`.
+
+2. **"I documented the trap and then walked into it."** The same session proved
+   `reasoning_tokens` reads 0 on calls that reasoned, wrote that finding into three files ... and
+   then used the field as its population classifier. **Lesson: a finding you record but do not
+   apply to your own work is not yet a lesson.** Artifact: `probe_opus5_passthrough.py` docstring
+   vs the retracted figure in `r02`.
+
+3. **"A schedule that stops beats a flag that persists."** A claim that two pipelines were still
+   running rested on `n8n list:workflow --onlyActive`, which reads a column the project's own docs
+   say is not publish state. The decisive evidence ... regular execution clusters that simply
+   stopped ... was already in hand and was read second. **Lesson: absence of expected activity is
+   stronger evidence than presence of a stale boolean.** Artifact: `r03.md` retraction.
+
+**Suggested exercise (Intermediate, ~90 min):** give the student `r01.md` through `r04-advisor.md`
+and the raw probe JSON in `.tmp/opus5_probe/`, and ask them to find the error before reading
+`r04`. Then ask the harder question: *which reviewer would you have believed, and why?*
+
+**Portfolio value:** high. Verification discipline, adversarial review design, and honest
+retraction are rare, demonstrable, and transfer to any engineering employer.
+
+---
+
+## LLM Model Tiers and the Opus 5 Migration ⭐ NEW
+
+**Source of truth:** `005 Operations/Directives/llm_model_strategy.md`. This section is the
+operator-facing summary; the directive owns the detail and the model-upgrade runbook.
+
+Every LLM call in the backoffice routes through `005 Operations/Execution/model_config.py`.
+Tiers are selected by name (`ModelTier.FLAGSHIP`, `STANDARD`, `FAST`, ...) and the concrete
+model behind each tier is set by `MODEL_TIER_*` variables in `.env`, which **override** the
+`DEFAULT_MODELS` map in code.
+
+### FLAGSHIP is Claude Opus 5 (migrated 2026-08-11)
+
+Identical pricing to the previous Opus 4.8 ($5 input / $25 output per MTok, 1M context), so
+the migration was a capability move with no cost move.
+
+### The one thing to know: Opus 5 reversed the thinking default
+
+On Opus 4.x, omitting the thinking parameter meant **no thinking**. On Opus 5, omitting it
+means **adaptive thinking is ON**. `llm_call()` therefore states thinking intent explicitly in
+both directions and sends `reasoning: {"enabled": False}` whenever a caller passes
+`thinking=False`. **Do not remove that branch** ... it is pinned by 26 assertions in
+`tests/test_model_config_reasoning_payload.py`.
+
+Two further Opus 5 behaviors worth knowing before wiring anything new:
+
+- It can **decline** a request (HTTP 200 with a `refusal` stop reason). `llm_call()` now fails
+  loudly on this rather than returning an empty string as a successful answer.
+- It **rejects an explicit thinking-disable above effort `high`**; a guard refuses that
+  combination locally instead of shipping a 400.
+
+### Two instrument traps recorded here so nobody re-learns them
+
+| Trap | What actually happens |
+|---|---|
+| `completion_tokens_details.reasoning_tokens` | **Unreliable in BOTH directions** for Anthropic-via-OpenRouter: reads 0 on calls that demonstrably reasoned, and undercounts by ~6x when non-zero (it counts the returned summary, not the billed thinking). Use `message.reasoning_details` as the did-it-reason flag. |
+| Inferring caller intent from the ledger | `thinking_tokens` is a model OUTCOME. The ledger now carries **`thinking_requested`** (caller intent) because intent cannot be recovered from the other fields after the fact ... four high-volume scripts pass `thinking=True` with no `effort`, so filtering on `thinking_tokens or effort` misclassifies them. This mistake produced a cost estimate wrong by 7x on 2026-08-11. |
+
+### Rollback
+
+**SET** `MODEL_TIER_FLAGSHIP=anthropic/claude-opus-4.8` in `.env`. **Do not delete or comment
+the line** ... `DEFAULT_MODELS[FLAGSHIP]` is now opus-5, so an absent or blank override falls
+through and rolls you *forward*. Cron- and n8n-invoked scripts pick it up on their next run;
+long-lived servers hold their boot environment and need a restart.
+
+### Known scope limits
+
+The tier system migrated; several surfaces did not, because they bypass `model_config`
+entirely ... the STORM/research path, two provenance-metadata strings, and three edge functions
+in separate repos (HQ `ezer`, HQ `quick-intel`, L4G `ezer-chat`). See the Known Issues table in
+`QWU-Backoffice-System-Status.md`.
 
 ## Cost Intelligence System ⭐ NEW
 
@@ -10720,14 +10818,59 @@ Puzzle is the visual operations layer for QWF — mapping teams, roles, processe
 ### Setup
 
 - **Plan:** AppSumo Tier 3 Optimizer Lifetime (6 seats, unlimited workspaces)
-- **Workspace:** "Quietly Working" (ID 6096)
+- **Workspaces:** "Quietly Working" (6096), [Supporter Organization] (9437), [Networking Chapter] (11667) — one MCP connector per workspace, `?workspace=<id>` on the URL
 - **MCP Integration:** HTTP MCP via `https://app.puzzleapp.io/mcp`
 - **VSCode Config:** `claude-code.mcpServers.puzzle` in user `settings.json`
-- **Auth:** OAuth per chat session (token may cache across sessions)
+- **Auth:** OAuth **once per connector, and tokens PERSIST across sessions** (corrected 2026-08-06; stored in `~/.claude/.credentials.json` under `.mcpOAuth` with a refresh token and multi-day expiry). A connector that suddenly stops working is far more likely an **approval** problem than an expiry — diagnose with `.venv/bin/python "005 Operations/Execution/check_mcp_connector.py" <name>`.
 
-### VSCode Remote SSH Gotcha
+### VSCode Remote SSH — SUPERSEDED 2026-08-06
 
-When using Claude Code via VSCode Remote SSH, the OAuth callback redirects to `localhost` on the **local machine**, but the MCP listener runs on the **remote VM**. Fix: forward the callback port in VSCode's Ports panel before opening the auth URL. The port number changes each auth attempt — check the URL.
+~~Forward the OAuth callback port in VSCode's Ports panel before opening the auth URL.~~ **Use `claude mcp login <name> --no-browser` instead**, which prints the URL and accepts the redirect pasted back, eliminating the port-forwarding dance entirely. Note that VSCode often auto-forwards the port anyway, so an OAuth can quietly **succeed** while appearing to fail — check `.mcpOAuth` before re-running it.
+
+### Before touching any Puzzle canvas — read the TWL
+
+The TWL is the source of truth and it now carries several rules that will cost you a session if skipped. **Read `005 Operations/Directives/puzzle_tool_wisdom.md` first.** The expensive ones, by name only:
+
+- **Confirm the connector's workspace binding before the first write** — a cross-workspace `tab_id` is silently ignored and the content lands in the connector's own workspace, returning `ok: true`.
+- **A new `.mcp.json` connector is QUARANTINED until approved**, and it reports itself as an auth failure.
+- **Adding or removing a step forces a full delete + fresh `create_process`** (passing `section_id` skips auto-layout), and **that create can fail after the delete has run, leaving the canvas empty** — never call `delete` without the re-create payload in hand.
+- **No horizontal-bar glyph in any step name**, and names truncate silently at ~40 chars (~30 on a diamond).
+- **Puzzle rewrites your text** on write (smart typography) — read stored values back rather than trusting the payload.
+
+### Sharing a canvas outside Puzzle, and what QWF does with it (added Aug 14, 2026)
+
+A **Shared View** is the only embeddable Puzzle surface: `app.puzzleapp.io/share/<id>/<slug>` answers
+`frame-ancestors *`, while the `/workspaces/` editor URL answers `frame-ancestors 'self'` and renders
+an empty box. Creation is **UI-only** ... there is no share tool in the MCP surface, so a human clicks
+Share. Three costs, none obvious: the vendor's branding cannot be removed, embedding forecloses the
+password option, and **a Shared View is a publicly linked crawlable document from the moment it
+exists**, not an unlisted one.
+
+**A Shared View is NOT one tab.** The vendor: *"a single shareable view that includes content across
+multiple canvases, including Workflow sections, Teams, People, and Tool Groups."* Nothing can
+enumerate what is in one ... the share document is an ~8.7 KB JavaScript shell with no canvas prose.
+
+**How the Living Roadmap uses this (the "How this works" band):**
+
+| Plane | Table | Written by |
+|---|---|---|
+| Identity ... "there is a map, and here it is" | `hq_projects.puzzle_canvas_source` | **TIG, in the HQ Projects UI.** Recording the link IS the approval. |
+| Presentation ... what the page renders | `hq_roadmaps.puzzle_canvas` | `check_puzzle_canvas_drift.py` only |
+
+Typing a URL in HQ can never publish anything ... the band renders only from the second table. What
+appears on a page is decided by TIG's act plus an **automatic, fail-closed content gate** that scans
+the canvas for credentials, other supporters' names, youth PII, banned glyphs and vault paths. If the
+scan finds something, the map stays hidden and says why. There is no approval ritual: fetch, scan,
+fingerprint and outline are machine work (TIG, 2026-08-14: *"I added it to the roadmap ... that should
+be my BLESSSING right there!"*).
+
+**Two traps worth naming**, both paid for in production:
+- **An empty tab, a deleted tab and a foreign tab are one API response.** A content gate that scans
+  strings passes trivially on zero strings, so "I looked and found nothing" read as "there is nothing
+  to find." Any tool gating on Puzzle content must refuse an empty canvas outright.
+- **A prefix regex on a share URL is a typo filter, not an invariant.** Browsers normalize:
+  `.../share/..` passed two database CHECKs, a client guard AND an unauthenticated reachability probe
+  (the vendor's login page answers 200). Validate what a browser will FETCH.
 
 ### Current Workspace State (April 9, 2026)
 
@@ -12299,4 +12442,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-08-07 21:45 (v5.73)*
+*Last updated: 2026-08-14 20:39 (v5.76)*
