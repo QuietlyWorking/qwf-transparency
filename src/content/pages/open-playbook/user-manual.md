@@ -2,20 +2,20 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 5.76 | Started: 251223 | Updated: 260814**"
+description: "**Version: 5.77 | Started: 251223 | Updated: 260820**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-08-14"
+modifiedDate: "2026-08-20"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-08-14 20:39 | Source version: 5.76
+> Generated: 2026-08-21 03:57 | Source version: 5.77
 
 # QWU Backoffice User Manual
 
-**Version: 5.76 | Started: 251223 | Updated: 260814**
+**Version: 5.77 | Started: 251223 | Updated: 260820**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -4698,8 +4698,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.76 by generate_public_manual.py"
-generated: "2026-08-14 20:39"
+source: "Auto-generated from private manual v5.77 by generate_public_manual.py"
+generated: "2026-08-21 03:57"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6578,6 +6578,53 @@ The slide intel JSON is then combined with chat analysis to produce a richer rec
 4. Send individually (no BCC) for unique unsubscribe links
 
 **Official roster verification:** The authoritative member list is at `socalbni.com` (AJAX POST to `/bnicms/v3/frontend/chapterdetail/display` with `website_type=2`, `website_id=5197`). Cross-reference entity files against this periodically to catch stale `BNI-Active` tags.
+
+### Current Path (v3 — August 2026): the QNT in-app loop
+
+**The legacy path above is historical.** As of 2026-08-20 the weekly recap is produced by the
+Quietly Networking app, not by `generate_bni_meeting_recap.py`. First end-to-end edition shipped
+2026-08-20 (25 emails: 15 members + 10 visitors).
+
+```
+TIG pastes the Zoom chat into QNT (MeetingDrawer -> meetings.chat_raw)
+        |
+        v  POST /qnt/process-meeting   (qnt-webhook, localhost:8100)
+qnt_meeting_pipeline.py     parse_zoom_chat + LLM connection extraction (~$0.27/run)
+        |                   Track A: qnt_source_adapter resolves visitors from [Member Name]'s
+        |                            sheet (THE visitor authority) + speakers for the date
+        v
+qnt_recap_generator.py      16-section registry -> TWO editions (member + visitor),
+        |                   persisted as `draft` newsletter_editions rows
+        v
+  EITHER  qnt_recap_send.py --send        (automated; fail-closed consent gate)
+  OR      draft_qnt_recap_emails.py --create   <- CURRENT PRACTICE
+                                          one Outlook DRAFT per recipient; NO send path
+```
+
+**Two editions, deliberately different audiences.** `visitor_spotlight` and `power_team_matches`
+are **member-only edition sets** in `SECTION_REGISTRY` (not config toggles) — a visitor edition
+that lists the day's visitors publishes every visitor's email address to every other visitor, and
+several of those addresses come from the private registration sheet rather than from the person's
+own chat message. The visitor edition instead carries the **full member roster** with each
+member's own details, gated by their `public_email` / `public_phone` flags.
+
+**⚠ The consent category above is STALE.** The live gate is
+`check_send_permission_v2(email, "email", "relationship_touchpoint", fail_open=False)`.
+`qnt_recap_send.py`'s docstring still says `meeting_recaps`, but the **code** passes
+`relationship_touchpoint`, and that difference is load-bearing: `meeting_recaps` resolves
+**17 of 17 members to HOLD** and would send to nobody. Do not "fix" the code to match the docstring.
+
+**Drafts, not sends.** Per the standing 2026-08-19 HARD RULE, every relationship-facing recap is
+created as a DRAFT in TIG's mailbox for him to review and send. `draft_qnt_recap_emails.py` reuses
+`qnt_recap_send._compose_edition_html` so a draft cannot drift from what the sender would produce
+(and so the preference footer is never omitted), passes `tracking_id=None` (no open pixel, no click
+wrapping — a hand-sent message has no `newsletter_recipients` row to attribute), and has **no send
+path**. `--only` builds a second wave after a later consent decision without duplicating drafts for
+people who already received the email.
+
+**Also gated as of 2026-08-20:** `draft_weekly_report_emails.py` (Weekly Connection Report) had no
+consent check at all. It now resolves the same channel and category, fail-closed, so one member
+decision governs both weekly touchpoints.
 
 ### Speaker Spotlight Feature
 
@@ -12442,4 +12489,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-08-14 20:39 (v5.76)*
+*Last updated: 2026-08-21 03:57 (v5.77)*
