@@ -2,13 +2,13 @@
 title: "The QWU Tool Shed"
 slug: "the-tool-shed"
 pillar: "open-playbook"
-description: "We run a 501(c)(3) nonprofit on 48+ tools. This page is a transparent look at every single one of them... what we use, why we chose it, and what kind of company"
+description: "We run a 501(c)(3) nonprofit on 50+ tools. This page is a transparent look at every single one of them... what we use, why we chose it, and what kind of company"
 tags: ["tools", "transparency", "ecosystem", "qsp", "reference"]
 isHome: false
 ---
 # The QWU Tool Shed
 
-We run a 501(c)(3) nonprofit on 48+ tools. This page is a transparent look at every single one of them... what we use, why we chose it, and what kind of company is behind it.
+We run a 501(c)(3) nonprofit on 50+ tools. This page is a transparent look at every single one of them... what we use, why we chose it, and what kind of company is behind it.
 
 Most review sites ask *"How good is the product?"* We ask a different question: **"How good is the company... and will this tool still be here in 5 years?"**
 
@@ -46,7 +46,7 @@ These tools have the broadest audience appeal, strongest stories, and highest QW
 | **Obsidian** | Productivity | 4 | 5 | **4.9** | Our entire knowledge base, daily operations, and this transparency site run on it. Bootstrapped, founder-led, free for personal use, local-first data ownership. |
 | **Supabase** | Database/Backend | 5 | 4 | **4.6** | Powers 8 projects across QWF. Open source, strong nonprofit support, active founder (Paul Copplestone). |
 | **BetterStack** | Monitoring | 5 | ? | **4.5** | Uptime monitoring and status page for all QWF services. Generous free tier, founder-led, loves nonprofits. |
-| **n8n** | Automation | 4 | 4 | **4.4** | 50+ workflows automating everything from meeting prep to daily operations. Self-hostable, open source core, founder still active. |
+| **n8n** | Automation | 4 | 4 | **4.4** | 121 workflows automating everything from meeting prep to daily operations (50,667 production executions, 0.2% failure rate). Self-hostable, open source core, founder still active. |
 | **Stripe** | Payments | 3 | 5 | **4.2** | Processes all QWF donations. Patrick Collison still CEO, rock-solid, universal. |
 | **SuiteDash** | CRM | 4 | 5 | **4.2** | Our family portal (family.quietlyworking.org). Bootstrapped, founder active in community, lifetime deal roots, all-in-one. |
 | **Cloudflare** | DNS/Security | 4 | 4 | **4.2** | DNS and security for every QWF domain. Incredible free tier, public company but not PE. |
@@ -66,6 +66,7 @@ Engaged communities, good stories, solid vendor partnership potential.
 | **Let's Encrypt** | SSL/Security | 5 | 5 | **5.0** | Free SSL certificates for everything. Nonprofit (ISRG), free forever, changed the internet. Perfect Heart score. |
 | **OpenRouter** | AI Gateway | ? | ? | **4.2** | One API for all AI models. Founder-led, great developer experience. |
 | **EmailDelivery.com** | Email/ESP | ? | 5 | **4.2** | Self-hosted email platform. Open source, MIT license. Our ESP runs for $35/year. |
+| **OBS Studio** | Live Video | 5 | 5 | **4.6** | The compositor behind every live QWF appearance ... camera, lower-third and artwork, published to Zoom as a virtual camera. Free, MIT-licensed, donation-funded, no vendor to be acquired. Perfect Child score: it is the community's own work, not a venture. |
 | **Docker** | Infrastructure | 3 | 2 | **3.5** | Containers for n8n, ESP, and local services. The technology is foundational even if Docker Inc. has had ownership drama. |
 | **Vista Social** | Social Media | ? | ? | **?** | Daily social media management. Needs research on company. |
 | **RackNerd** | Hosting | ? | ? | **?** | Budget VPS hosting. Our ESP runs on a $35/year VPS that actually works. |
@@ -90,6 +91,7 @@ Important tools, narrower audience, still worth reviewing honestly.
 | **Redis** | Cache/DB | 4 | 3 | **4.0** | Open source (with recent license changes), fast, universal. |
 | **Divi** | WordPress Theme | 3 | 5 | **3.8** | Nick Roach still leads Elegant Themes. Bootstrapped. |
 | **Discord** | Communication | 3 | 2 | **3.5** | Internal team communication. Free tier is incredible, community-first DNA. |
+| **Trails** | Training / SOP | ? | ? | **4.0** | Turns a screen recording into a written SOP and a branded video at the same time. **$40/mo Business plan via a SuiteDash partnership** (retail $299/mo). Being adopted for the training materials that accompany our SOPs and apps. |
 | **Circle** | Community | ? | ? | **3.5** | Founder-led SaaS community platform. |
 | **Atlassian (Loom)** | Video/Productivity | 5 | 2 | **4.0** | We use Loom for video. As of Feb 2026, Atlassian offers **100% off** Jira, Confluence, Loom, and Teamwork Collection for social impact teams (25 seats or less). Previously 75% off. EPIC. |
 | **Zoom** | Meetings | 4 | 2 | **3.2** | All QWF meetings. 50% nonprofit discount via GoodStack (approved Feb 2026). Eric Yuan still CEO. |
@@ -129,7 +131,7 @@ As of February 2026, QWF runs on:
 
 - **48 tools** in production
 - **8 Supabase projects** powering web apps
-- **50+ n8n automation workflows**
+- **121 n8n automation workflows**
 - **280+ Python scripts** in the backoffice
 - **11 WordPress sites** across the multisite network
 - **3 virtual machines** (backoffice, automation, email)

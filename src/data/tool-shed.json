@@ -38,7 +38,7 @@
       "heart": 4.0,
       "childInv": 4.0,
       "qwsScore": 4.4,
-      "description": "50+ workflows automating everything from meeting prep to daily operations. Self-hostable, open source core, founder still active."
+      "description": "121 workflows automating everything from meeting prep to daily operations (50,667 production executions, 0.2% failure rate). Self-hostable, open source core, founder still active."
     },
     {
       "name": "Stripe",
@@ -139,6 +139,16 @@
       "childInv": 5.0,
       "qwsScore": 4.2,
       "description": "Self-hosted email platform. Open source, MIT license. Our ESP runs for $35/year."
+    },
+    {
+      "name": "OBS Studio",
+      "category": "Live Video",
+      "tier": 2,
+      "tierName": "Strong Content",
+      "heart": 5.0,
+      "childInv": 5.0,
+      "qwsScore": 4.6,
+      "description": "The compositor behind every live QWF appearance ... camera, lower-third and artwork, published to Zoom as a virtual camera. Free, MIT-licensed, donation-funded, no vendor to be acquired. Perfect Child score: it is the community's own work, not a venture."
     },
     {
       "name": "Docker",
@@ -289,6 +299,16 @@
       "childInv": 2.0,
       "qwsScore": 3.5,
       "description": "Internal team communication. Free tier is incredible, community-first DNA."
+    },
+    {
+      "name": "Trails",
+      "category": "Training / SOP",
+      "tier": 3,
+      "tierName": "Solid Reviews",
+      "heart": null,
+      "childInv": null,
+      "qwsScore": 4.0,
+      "description": "Turns a screen recording into a written SOP and a branded video at the same time. $40/mo Business plan via a SuiteDash partnership (retail $299/mo). Being adopted for the training materials that accompany our SOPs and apps."
     },
     {
       "name": "Circle",
@@ -534,6 +554,7 @@
     "Hosting",
     "Infrastructure",
     "Lead Data",
+    "Live Video",
     "Meetings",
     "Monitoring",
     "Payments",
@@ -543,6 +564,7 @@
     "SEO Data",
     "SSL/Security",
     "Social Media",
+    "Training / SOP",
     "Video/Productivity",
     "Web Scraping",
     "Web Server",
@@ -557,12 +579,12 @@
     {
       "id": 2,
       "name": "Strong Content",
-      "count": 10
+      "count": 11
     },
     {
       "id": 3,
       "name": "Solid Reviews",
-      "count": 12
+      "count": 13
     },
     {
       "id": 4,
@@ -571,9 +593,9 @@
     }
   ],
   "stats": {
-    "total": 50,
-    "scored": 31,
-    "avgScore": 4.03
+    "total": 52,
+    "scored": 33,
+    "avgScore": 4.05
   },
-  "generated_at": "2026-08-26T19:00:08.390982+00:00"
+  "generated_at": "2026-08-27T06:33:18.584583+00:00"
 }
