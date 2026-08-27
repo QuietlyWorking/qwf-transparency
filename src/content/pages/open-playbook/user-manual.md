@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-08-21 03:57 | Source version: 5.77
+> Generated: 2026-08-27 06:45 | Source version: 5.78
 
 # QWU Backoffice User Manual
 
@@ -3078,6 +3078,52 @@ For videos with multiple experts (interviews, panels), the pipeline now tracks p
 .venv/bin/python "005 Operations/Execution/wisdom_query.py" --list-filters
 ```
 
+### Tool Coverage: is every tool we run actually documented? (Aug 2026)
+
+Six systems each hold a partial answer to "what tools do we run," and they disagree. The
+roster is a JOIN computed on demand, deliberately **not** a seventh source of truth:
+
+```bash
+# Build the joined roster and publish it to a Google Sheet in the QWU Backoffice Drive
+.venv/bin/python "005 Operations/Execution/build_tool_roster.py"          # counts only
+.venv/bin/python "005 Operations/Execution/build_tool_roster_sheet.py"    # creates the sheet
+.venv/bin/python "005 Operations/Execution/build_tool_roster_sheet.py" --file-id <ID>  # update in place
+
+# Which load-bearing tools have no Tool Wisdom Library?
+.venv/bin/python "005 Operations/Execution/audit_tool_wisdom_coverage.py"
+.venv/bin/python "005 Operations/Execution/audit_tool_wisdom_coverage.py" --wisdom-threshold 10
+
+# Register entity profiles for tools that carry wisdom but have no record
+.venv/bin/python "005 Operations/Execution/register_tool_entities.py" --dry-run
+
+# Move discipline tags out of the TOOL dimension into topics
+.venv/bin/python "005 Operations/Execution/reclassify_wisdom_tool_tags.py"          # dry run
+.venv/bin/python "005 Operations/Execution/reclassify_wisdom_tool_tags.py" --apply  # writes
+```
+
+**The six sources joined:** The Tool Shed page (published, donor-facing) ·
+`vendor_registry.yaml` (monitoring config) · `003 Entities/Tools/*.md` (entity profiles) ·
+`005 Operations/Directives/*_tool_wisdom.md` (TWLs) · `wisdom.db` `wisdom_tools` tags ·
+the **Puzzle Tools canvas** (via `005 Operations/Data/puzzle_tools_snapshot.json`, refreshed
+by an agent through the Puzzle MCP because Puzzle has no static token and no REST API).
+
+**Two things the roster reports that are easy to get wrong:**
+
+- **"Has TWL = YES" is not the same as covered.** A TWL file existing says a file is on
+  disk. The roster reports each library's last COMMIT date instead, and only calls one
+  current inside the standard's own 90-day freshness window. A stale TWL is more dangerous
+  than a missing one, because every coverage check goes green while the library quietly
+  stops being true.
+- **"Active" means an operational trace** (in the Tool Shed, monitored, has an entity
+  profile, has a TWL, on the Puzzle canvas, or called by 2+ execution scripts).
+  "Knowledge only" means we have indexed wisdom about a tool and no operational trace ...
+  a claim about what we have READ, not what we RUN.
+
+**Why this exists:** the coverage audit used to build its roster from entity files alone
+and never opened `wisdom.db`, so a tool could carry hundreds of indexed wisdom entries and
+be structurally invisible to the only check that asks whether a TWL exists. Measured
+2026-08-27: 48 tool tags, 4,449 entries, **zero** entity files between them.
+
 ### Synthesizing Content
 
 ```bash
@@ -3332,6 +3378,10 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 | Prevention Architecture | Convention design, agent instruction, defense-in-depth | Advanced |
 | SEO Silent-Death Detector (2026-05-27) | Cron jobs, Discord webhooks, Supabase PostgREST probes, "active ≠ producing" debugging mindset, freshness-gated alerts | Intermediate |
 | Senior-Reviewer Multi-Agent Fan-Out | Sub-agent orchestration, independent fact-checking with probes, commit-protocol discipline (SR owns commits), ground-truth verification | Advanced |
+| Verifying a Route on a Single-Page App (2026-08-20) | Why `curl -w "%{http_code}"` is worthless against a React/SvelteKit SPA (every path returns **200**, including its own 404); designing a **negative control** (request a path you KNOW is fake) to prove an instrument can discriminate; choosing data-verification over link-verification when shipping email | Beginner |
+| Consent-Gated Sending (2026-08-20) | Resolving a permission model before any send; fail-CLOSED vs fail-OPEN and why an unreachable gate is an UNKNOWN not a yes; structurally locked-on categories (a receipt can never be suppressed); why an ungated DRAFT is still a broken opt-out. Real data-governance work, not a toy | Advanced |
+| PostgREST Query Literacy (2026-08-20) | `select=` returns ONLY named columns and omitting one fails silently; `eq.` on text is case-sensitive so a mixed-case key is invisible; `ilike.` vs indexing `lower(value)`; auditing a permission store means comparing CASE, not just presence | Intermediate |
+| "Green" Is Not "Written" (2026-08-20) | Insert-once/idempotent pipelines that return success while discarding the payload (`idempotent_replay` + `payload_drift_detected`); verifying the WRITE landed instead of trusting the return code; repairing without creating duplicate records | Intermediate |
 | n8n Workflow Deploy + Cleanup | scp → docker cp → `import:workflow` → `publish:workflow` → restart pattern; `isArchived=true` over delete (reversible); export-before-archive for reversibility | Intermediate |
 
 ---
@@ -4698,8 +4748,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.77 by generate_public_manual.py"
-generated: "2026-08-21 03:57"
+source: "Auto-generated from private manual v5.78 by generate_public_manual.py"
+generated: "2026-08-27 06:45"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12489,4 +12539,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-08-21 03:57 (v5.77)*
+*Last updated: 2026-08-27 06:45 (v5.78)*
