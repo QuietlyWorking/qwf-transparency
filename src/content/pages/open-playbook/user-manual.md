@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-08-31 05:31 | Source version: 5.79
+> Generated: 2026-08-31 05:39 | Source version: 5.79
 
 # QWU Backoffice User Manual
 
@@ -3379,6 +3379,11 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 | SEO Silent-Death Detector (2026-05-27) | Cron jobs, Discord webhooks, Supabase PostgREST probes, "active ≠ producing" debugging mindset, freshness-gated alerts | Intermediate |
 | Senior-Reviewer Multi-Agent Fan-Out | Sub-agent orchestration, independent fact-checking with probes, commit-protocol discipline (SR owns commits), ground-truth verification | Advanced |
 | Verifying a Route on a Single-Page App (2026-08-20) | Why `curl -w "%{http_code}"` is worthless against a React/SvelteKit SPA (every path returns **200**, including its own 404); designing a **negative control** (request a path you KNOW is fake) to prove an instrument can discriminate; choosing data-verification over link-verification when shipping email | Beginner |
+| Tracing One Alert Back to Its Cause (2026-08-30) | Following a single SMS backwards through five independent systems ... Twilio's REST API, a SQLite queue, run logs, n8n's Postgres, and the Graph mailbox ... instead of trusting the first plausible story. The habit being taught: **read the recipient's copy, not the send result.** Two shipped bugs this session were caught only by re-reading the rendered artifact after the fix. | Beginner |
+| Internal vs Outbound Data Boundaries (2026-08-30) | Recognizing that fields sitting side by side in one dict do not share an audience. An LLM analysis record held `{speaker, quote, significance}`; the first two were the person's, the third was our private assessment, and a template pasted all three into their inbox. Teaches trust boundaries, allowlist-not-blocklist rendering, and asking "would I say this to their face?" before interpolating. | Intermediate |
+| Race Conditions and Atomic Claims (2026-08-30) | A status field meaning BOTH "discovered" and "claimed, in flight" let two overlapping jobs process the same record. Teaches state-machine design, `BEGIN EXCLUSIVE` / compare-and-set, lease expiry so a crashed worker cannot wedge a queue forever, and proving the fix with a concurrency test (8 threads, exactly 1 winner) rather than by reasoning. Directly transferable to any job queue. | Advanced |
+| Idempotency by Design (2026-08-30) | Making a repeated run harmless instead of forbidding repeats: a composite primary key claimed inside a transaction, released on failure so a retry can pick it up. Core distributed-systems concept, high employer demand, and demonstrable in a 20-line SQLite example. | Intermediate |
+| Reading Code for What Is CALLED, Not What EXISTS (2026-08-30) | A correct, well-documented locking function had been in the codebase for months with **zero call sites** ... and the data proved it (`status='processing'` never appeared in 94 rows). Teaches `grep` for call sites, verifying a safety mechanism by its fingerprints in the data, and the difference between "implemented" and "wired in." | Beginner |
 | Consent-Gated Sending (2026-08-20) | Resolving a permission model before any send; fail-CLOSED vs fail-OPEN and why an unreachable gate is an UNKNOWN not a yes; structurally locked-on categories (a receipt can never be suppressed); why an ungated DRAFT is still a broken opt-out. Real data-governance work, not a toy | Advanced |
 | PostgREST Query Literacy (2026-08-20) | `select=` returns ONLY named columns and omitting one fails silently; `eq.` on text is case-sensitive so a mixed-case key is invisible; `ilike.` vs indexing `lower(value)`; auditing a permission store means comparing CASE, not just presence | Intermediate |
 | "Green" Is Not "Written" (2026-08-20) | Insert-once/idempotent pipelines that return success while discarding the payload (`idempotent_replay` + `payload_drift_detected`); verifying the WRITE landed instead of trusting the return code; repairing without creating duplicate records | Intermediate |
@@ -4336,8 +4341,8 @@ Next Meeting with Same People
 | `meeting_project_link.py` | Project detection |
 | `send_meeting_followup.py` | Post-meeting recap **DRAFTS** in TIG's Outlook (never sends) | v3.1.0 |
 | `zoom_reconcile.py` | Reconciliation safety net; holds the exclusive per-meeting processing lock | v1.9.0 |
-| `appreciation_followup_db.py` | ⛔ Component retired 2026-08-31; DB retained read-only for audit | v1.1.0 |
-| `process_appreciation_queue.py` | ⛔ RETIRED 2026-08-31 — no-op stub | v2.0.0 |
+| `appreciation_followup_db.py` | ⛔ Component retired 2026-08-30; DB retained read-only for audit | v1.1.0 |
+| `process_appreciation_queue.py` | ⛔ RETIRED 2026-08-30 — no-op stub | v2.0.0 |
 
 **Pipeline Flowchart:** See `005 Operations/Execution/zoom_pipeline_flowchart.md` for the full 8-stage visual diagram including follow-up emails, BCC monitoring, and error handling.
 
@@ -4352,7 +4357,7 @@ Next Meeting with Same People
 
 ### Follow-Up Recaps: Drafts, Not Sends
 
-**v2.0 | Updated 2026-08-31** (replaces the Appreciation Followup System, v1.0 2026-02-08 to v1.1 2026-03-01)
+**v2.0 | Updated 2026-08-30** (replaces the Appreciation Followup System, v1.0 2026-02-08 to v1.1 2026-03-01)
 
 After a meeting is processed, `send_meeting_followup.py` creates **one Outlook draft per attendee
 in TIG's mailbox and sends nothing.** TIG reviews each draft and sends it himself. The script has
@@ -4368,7 +4373,7 @@ no send path, and must not be given one.
 | Notification | **One** SMS per meeting: how many drafts, who for, and the Outlook Drafts link. |
 | Consent | `check_send_permission_v2(..., "relationship_touchpoint", fail_open=True)` still runs. A draft TIG sends by hand is still a send. |
 
-**What was removed and why (2026-08-31).** The former appreciation system SMS'd TIG asking for a
+**What was removed and why (2026-08-30).** The former appreciation system SMS'd TIG asking for a
 compliment, staged the email, reminded at T+1h and T+2h, and **sent it anyway at T+5h** with a
 generic warm P.S. Three faults, found by ground-truthing one SMS:
 
@@ -4753,7 +4758,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.79 by generate_public_manual.py"
-generated: "2026-08-31 05:31"
+generated: "2026-08-31 05:39"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12543,4 +12548,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-08-31 05:31 (v5.79)*
+*Last updated: 2026-08-31 05:39 (v5.79)*
