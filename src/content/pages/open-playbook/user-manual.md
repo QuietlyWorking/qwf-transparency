@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-08-27 06:51 | Source version: 5.78
+> Generated: 2026-08-31 05:31 | Source version: 5.79
 
 # QWU Backoffice User Manual
 
@@ -4334,9 +4334,10 @@ Next Meeting with Same People
 | `meeting_entity_resolve.py` | Entity matching + SuiteDash CRM |
 | `meeting_update_vault.py` | Vault file updates |
 | `meeting_project_link.py` | Project detection |
-| `send_meeting_followup.py` | Post-meeting follow-up emails (personalized) | v1.3.0 |
-| `appreciation_followup_db.py` | Deferred appreciation state management + cancel | v1.1.0 |
-| `process_appreciation_queue.py` | SMS reminders + timeout fallback poller | v1.0.0 |
+| `send_meeting_followup.py` | Post-meeting recap **DRAFTS** in TIG's Outlook (never sends) | v3.1.0 |
+| `zoom_reconcile.py` | Reconciliation safety net; holds the exclusive per-meeting processing lock | v1.9.0 |
+| `appreciation_followup_db.py` | ⛔ Component retired 2026-08-31; DB retained read-only for audit | v1.1.0 |
+| `process_appreciation_queue.py` | ⛔ RETIRED 2026-08-31 — no-op stub | v2.0.0 |
 
 **Pipeline Flowchart:** See `005 Operations/Execution/zoom_pipeline_flowchart.md` for the full 8-stage visual diagram including follow-up emails, BCC monitoring, and error handling.
 
@@ -4349,38 +4350,41 @@ Next Meeting with Same People
 .venv/bin/python "005 Operations/Execution/zoom_pipeline.py" --meeting-id test-123 --use-fixtures --dry-run
 ```
 
-### Appreciation Followup System (SMS Wait-for-Response)
+### Follow-Up Recaps: Drafts, Not Sends
 
-**v1.1 | Updated 2026-03-01** (v1.0 created 2026-02-08)
+**v2.0 | Updated 2026-08-31** (replaces the Appreciation Followup System, v1.0 2026-02-08 to v1.1 2026-03-01)
 
-When `send_meeting_followup.py` can't find specific quotes for an attendee, instead of immediately sending a generic fallback, it now **defers the email** and asks TIG for a personal appreciation via SMS. The system waits up to 5 hours for TIG's reply before falling back to the generic message.
+After a meeting is processed, `send_meeting_followup.py` creates **one Outlook draft per attendee
+in TIG's mailbox and sends nothing.** TIG reviews each draft and sends it himself. The script has
+no send path, and must not be given one.
 
-**Timeline:**
-- **T+0:** SMS asks TIG "What do you appreciate about {name}?" — email is staged (not sent)
-- **T+1h:** No response? SMS reminder 1
-- **T+2h:** No response? SMS reminder 2 (last call)
-- **T+5h:** No response? Send email with generic warm fallback, notify TIG
-- **Any time before T+5h:** TIG replies via SMS → personalized email sent immediately
+| Rule | Behaviour |
+|------|-----------|
+| Drafts only | One draft per attendee in `TIG_MAILBOX`, via `create_outlook_draft.py`. |
+| Recipients | Calendar invitees **intersected with** the people Zoom recorded as present. Fail-open: with no participant list the filter does not run and a WARNING is logged. |
+| Idempotency | `(meeting_id, recipient_email)` claimed with `BEGIN IMMEDIATE` in `meeting_followup_drafts.db`. |
+| Recap body | **Composed** in Ezer's voice by `compose_outbound_recap()`, once per meeting. `analysis.summary` never reaches a recipient. Fails CLOSED: on error the draft ships with no narrative plus a visible note to TIG. |
+| Internal-only fields | Never rendered: `analysis.summary`, `key_topics`, `decisions[].context`, `action_items[].context` / `[].priority`, all of `key_quotes`. Only `action_items[].task / owner / due` go out. |
+| Notification | **One** SMS per meeting: how many drafts, who for, and the Outlook Drafts link. |
+| Consent | `check_send_permission_v2(..., "relationship_touchpoint", fail_open=True)` still runs. A draft TIG sends by hand is still a send. |
 
-**Three actors:**
-| Actor | Role | Trigger |
-|-------|------|---------|
-| `send_meeting_followup.py` v1.3.0 | **Producer** — stages deferred appreciation | Zoom pipeline stage 8 |
-| `twilio_webhook_server.py` v3.5.0 | **Listener** — captures TIG's SMS reply or cancel | Incoming SMS (Priority 2.7) |
-| `process_appreciation_queue.py` v1.0.0 | **Timer** — sends reminders, handles timeouts | n8n every 5 min |
+**What was removed and why (2026-08-31).** The former appreciation system SMS'd TIG asking for a
+compliment, staged the email, reminded at T+1h and T+2h, and **sent it anyway at T+5h** with a
+generic warm P.S. Three faults, found by ground-truthing one SMS:
 
-**State:** `appreciation_followup_db.py` v1.1.0 with `pending_appreciations` + `appreciation_audit_log` tables. Race safety via `BEGIN IMMEDIATE` transactions.
+1. **It sent autonomously**, against the standing drafts-not-sends rule set 2026-08-19.
+2. **The P.S. carried internal analysis outbound.** It interpolated `key_quotes[].significance`,
+   our private commercial read, so a supporter was emailed our assessment of her own budget
+   position. Never read that field, or any analysis judgment, into outbound content.
+3. **Recipients came from the calendar invite** with no attendance check, and the pipeline could
+   run twice, so people who never joined were queued duplicate copies.
 
-**Commands via SMS** (when appreciations are pending):
-- **Free-form text** — used as the personalized appreciation for the next pending attendee
-- **"skip" / "next" / "pass"** — sends the generic fallback immediately
-- **"don't send to John" / "cancel follow-up for Miller"** — cancels the follow-up entirely (no email sent, not even fallback)
-- **"cancel all"** — cancels all pending follow-ups
-- **Multi-recipient:** "don't send to John or Miller" — cancels specific people by name
+`process_appreciation_queue.py` is now a no-op stub, the appreciation handlers and their outbound
+send path are gone from `twilio_webhook_server.py` (v3.6.0), and the n8n poller
+`<WORKFLOW_ID>` is deactivated. `appreciation_followup.db` is retained read-only for audit.
 
-**LLM-based intent classification (v3.5.0):** When appreciations are pending, all inbound messages (except compliance, health vitals, and video commands) are routed through an LLM classifier (STANDARD tier) that determines: appreciation text, cancel request, skip, or unrelated. Unrelated messages (e.g., "what's on my calendar?") fall through to normal routing. This replaced a keyword-exclusion list that falsely matched words like "meeting" as calendar queries.
-
-**n8n workflow:** `appreciation-queue-poller.json` (ID: `<WORKFLOW_ID>`) — every 5 min, SSH to poller script, logs actions to #agent-log, SSH errors to #system-status.
+**Pre-meeting prep emails are drafts too** (`send_meeting_prep_email.py` v3.0.0). Both halves of
+the meeting system are draft-only.
 
 ### Meeting Reconciliation System (Defense-in-Depth)
 
@@ -4565,28 +4569,28 @@ Contact History (last contact date, relationship health assessment)
 **Key Features:**
 - **7-day lookahead emails** — Warm, concise prep email asking attendees for agenda input
 - **30-day enriched briefings** — Full attendee profiles with vault data, relationship health, outstanding actions
-- **SQLite dedup** — UNIQUE(event_id, attendee_email) prevents duplicate sends
+- **SQLite dedup** ... UNIQUE(event_id, attendee_email) prevents duplicate drafts
 - **Relationship health assessment** — thriving (≤14d) → healthy (≤30d) → stable (≤60d) → cooling (≤90d) → dormant (>90d)
 
 **Scripts:**
 | File | Purpose | Version |
 |------|---------|---------|
-| `send_meeting_prep_email.py` | 7-day emails + 30-day briefings | v1.2.0 |
+| `send_meeting_prep_email.py` | 7-day prep **DRAFTS** (never sends) + 30-day briefings | v3.0.0 |
 
 **n8n Workflows:**
 | Workflow | Schedule | Purpose |
 |----------|----------|---------|
-| Meeting Prep Email - Daily | 9 AM Pacific | Send prep emails + generate briefings |
+| Meeting Prep Email - Daily | 9 AM Pacific | Create prep **drafts** in TIG's Outlook + generate briefings |
 
 **Usage:**
 ```bash
-# Send 7-day prep emails (dry run)
+# Draft 7-day prep emails (dry run ... never sends)
 .venv/bin/python "005 Operations/Execution/send_meeting_prep_email.py" send --dry-run --json
 
 # Generate 30-day enriched briefings for HQ module
 .venv/bin/python "005 Operations/Execution/send_meeting_prep_email.py" briefings --days 30 --json
 
-# Check send status
+# Check draft history
 .venv/bin/python "005 Operations/Execution/send_meeting_prep_email.py" status --json
 
 # Cleanup old records (60+ days)
@@ -4748,8 +4752,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.78 by generate_public_manual.py"
-generated: "2026-08-27 06:51"
+source: "Auto-generated from private manual v5.79 by generate_public_manual.py"
+generated: "2026-08-31 05:31"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12539,4 +12543,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-08-27 06:51 (v5.78)*
+*Last updated: 2026-08-31 05:31 (v5.79)*
