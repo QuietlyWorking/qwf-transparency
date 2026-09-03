@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-08-31 05:39 | Source version: 5.79
+> Generated: 2026-09-03 05:36 | Source version: 5.80
 
 # QWU Backoffice User Manual
 
@@ -3388,6 +3388,9 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 | PostgREST Query Literacy (2026-08-20) | `select=` returns ONLY named columns and omitting one fails silently; `eq.` on text is case-sensitive so a mixed-case key is invisible; `ilike.` vs indexing `lower(value)`; auditing a permission store means comparing CASE, not just presence | Intermediate |
 | "Green" Is Not "Written" (2026-08-20) | Insert-once/idempotent pipelines that return success while discarding the payload (`idempotent_replay` + `payload_drift_detected`); verifying the WRITE landed instead of trusting the return code; repairing without creating duplicate records | Intermediate |
 | n8n Workflow Deploy + Cleanup | scp → docker cp → `import:workflow` → `publish:workflow` → restart pattern; `isArchived=true` over delete (reversible); export-before-archive for reversibility | Intermediate |
+| Provisioning a QWF app end to end (2026-09-03) | Following a written SOP (`provision_qwf_sveltekit_app.md`) to take a domain to a live app: Supabase project + Auth config via the Management API, GitHub repo + per-repo deploy key + SSH alias, Cloudflare Pages project + custom domains + DNS, GitHub Actions secrets (sealed-box encryption), CLI edge-function deploy, registry entries. Order matters: secrets BEFORE the first push. | Advanced |
+| One renderer, print parity (2026-09-03) | Why a printable sheet and a screen sheet must be ONE component (`@page 17in 11in`), how a Python reference generator becomes a golden fixture for a Playwright visual-diff instead of a second engine, and how to verify a PDF's page size from its MediaBox. | Intermediate |
+| Reusable ops script from a one-off (2026-09-03) | Turning a project-specific script (`qcm_create_betterstack_monitor.py`) into a parameterized, idempotent, dry-run-by-default tool (`create_app_uptime_monitor.py`) that any app can call; inherit the proven API errata, add `--apply`, never print the token. | Beginner |
 
 ---
 
@@ -4757,8 +4760,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.79 by generate_public_manual.py"
-generated: "2026-08-31 05:39"
+source: "Auto-generated from private manual v5.80 by generate_public_manual.py"
+generated: "2026-09-03 05:36"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10748,6 +10751,7 @@ Centralized registry of all QWF apps with hosting, database, domain, and develop
 | **AH** | [Networking Chapter] | CF Pages | React | `aim-high-bni` | `<chapter-domain>` | `<SUPABASE_PROJECT_ID>` (shared with QNT) | Production |
 | **QWB** | Quietly Webbing | CF Pages | SvelteKit (P1) | — (planned) | `quietlywebbing.org` | — | Planned |
 | **QCP** | Quietly Capsuling | CF Pages | SvelteKit | — (planned) | — | — | Concept |
+| **QPN** | Quietly Planning | CF Pages | SvelteKit | `quietly-planning` | `quietlyplanning.org` | `qadtibkqekzryahqrbll` | Phase 0 (landing + auth live 2026-09-03; never the retired code QPL) |
 
 ### Frontend Development Workflow
 
@@ -12548,4 +12552,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-08-31 05:39 (v5.79)*
+*Last updated: 2026-09-03 05:36 (v5.80)*
