@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-07 21:33 | Source version: 5.82
+> Generated: 2026-09-07 21:37 | Source version: 5.82
 
 # QWU Backoffice User Manual
 
@@ -3391,6 +3391,11 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 | Provisioning a QWF app end to end (2026-09-02) | Following a written SOP (`provision_qwf_sveltekit_app.md`) to take a domain to a live app: Supabase project + Auth config via the Management API, GitHub repo + per-repo deploy key + SSH alias, Cloudflare Pages project + custom domains + DNS, GitHub Actions secrets (sealed-box encryption), CLI edge-function deploy, registry entries. Order matters: secrets BEFORE the first push. | Advanced |
 | One renderer, print parity (2026-09-02) | Why a printable sheet and a screen sheet must be ONE component (`@page 17in 11in`), how a Python reference generator becomes a golden fixture for a Playwright visual-diff instead of a second engine, and how to verify a PDF's page size from its MediaBox. | Intermediate |
 | Reusable ops script from a one-off (2026-09-02) | Turning a project-specific script (`qcm_create_betterstack_monitor.py`) into a parameterized, idempotent, dry-run-by-default tool (`create_app_uptime_monitor.py`) that any app can call; inherit the proven API errata, add `--apply`, never print the token. | Beginner |
+| Web Push end to end (2026-09-06) | Generating a VAPID keypair with `cryptography`, storing the halves in the three places that need them (`.env`, edge-function secrets, the app's public env), subscribing a real phone from the browser, and a service worker `push` handler that does real work and shows the one notification the browser requires. The whole chain is visible in a single afternoon. | Intermediate |
+| A wait that never waited (2026-09-06) | `page.wait_for_function(...)` wrapped in `except: pass` raised while the page was reloading, returned instantly, and turned a 90-second wait into a zero-second one ... three 10-minute proof runs were spent chasing an app bug that did not exist. Teaches: never swallow a wait's exception, and a test that passes too fast is a symptom. | Beginner |
+| Offline-first as a cache, not a feature (2026-09-06) | A service worker that pre-fetches tomorrow's pages so a page opens with no signal; why the fetch must refuse to cache a login redirect, why the jobs are fetched one at a time, and why the on-screen count reads the device's own record rather than the server's. | Intermediate |
+| Grants are checked before RLS (2026-09-06) | A new Postgres table arrives with `anon` holding every privilege because of default privileges; adding a policy does not remove them. Teaches `revoke ... from public, anon, authenticated` then grant precisely, and writing a post-condition that refuses to commit the migration if the grant is still there (it fired twice this session and rolled both back). | Intermediate |
+| Two keys with the same name (2026-09-06) | An edge function compared the caller's bearer token to its own runtime `SUPABASE_SERVICE_ROLE_KEY` and refused everyone. The runtime's copy was a 41-character secret; the caller's was a 219-character token. Teaches: prove an auth check by probing lengths and first-difference, never by reasoning about what a variable 'should' hold. | Advanced |
 
 ---
 
@@ -4761,7 +4766,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.82 by generate_public_manual.py"
-generated: "2026-09-07 21:33"
+generated: "2026-09-07 21:37"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12552,4 +12557,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-07 21:33 (v5.82)*
+*Last updated: 2026-09-07 21:37 (v5.82)*
