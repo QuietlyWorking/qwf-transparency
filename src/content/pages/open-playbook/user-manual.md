@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-07 21:37 | Source version: 5.82
+> Generated: 2026-09-08 06:00 | Source version: 5.84
 
 # QWU Backoffice User Manual
 
@@ -3383,6 +3383,9 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 | Internal vs Outbound Data Boundaries (2026-08-30) | Recognizing that fields sitting side by side in one dict do not share an audience. An LLM analysis record held `{speaker, quote, significance}`; the first two were the person's, the third was our private assessment, and a template pasted all three into their inbox. Teaches trust boundaries, allowlist-not-blocklist rendering, and asking "would I say this to their face?" before interpolating. | Intermediate |
 | Race Conditions and Atomic Claims (2026-08-30) | A status field meaning BOTH "discovered" and "claimed, in flight" let two overlapping jobs process the same record. Teaches state-machine design, `BEGIN EXCLUSIVE` / compare-and-set, lease expiry so a crashed worker cannot wedge a queue forever, and proving the fix with a concurrency test (8 threads, exactly 1 winner) rather than by reasoning. Directly transferable to any job queue. | Advanced |
 | Idempotency by Design (2026-08-30) | Making a repeated run harmless instead of forbidding repeats: a composite primary key claimed inside a transaction, released on failure so a retry can pick it up. Core distributed-systems concept, high employer demand, and demonstrable in a 20-line SQLite example. | Intermediate |
+| The Permission That Silently Does Nothing (2026-09-06) | A database row-security policy listed a role name the application had retired, so an update by a valid manager changed nothing and returned success with an empty result ... the button reported "saved" for a day. Teaches Postgres row-level security, reading `pg_policies` instead of trusting a policy's NAME, and the habit that closes it: any write whose success you are about to REPORT must return its rows and be checked by COUNT, never by the error flag. Also teaches preferring one shared helper function over the same role list copy-pasted into four policies. | Intermediate |
+| Escaping Untrusted Text for Three Different Outputs (2026-09-06) | The same name a stranger typed on a public website goes into an HTML email, a text message and a chat webhook, and each one is unsafe in a different way: HTML needs escaping, a subject line must never carry a line break, a chat embed must not be allowed to mention everyone. Teaches input sanitisation, why "clean" and "HTML-safe" are two separate steps, and writing the proof that shows the angle brackets arriving as visible text. | Beginner |
+| Guarding a Webhook with a Shared Secret (2026-09-06) | An automation webhook open to the whole internet, closed with a header check. Teaches shared-secret auth, why the check must happen BEFORE the server answers (the default mode replies 200 first, so the guard silently protects nothing), where a secret has to live to reach a container, and proving all three cases: no token refused, wrong token refused, right token accepted AND the work still happening. | Intermediate |
 | Reading Code for What Is CALLED, Not What EXISTS (2026-08-30) | A correct, well-documented locking function had been in the codebase for months with **zero call sites** ... and the data proved it (`status='processing'` never appeared in 94 rows). Teaches `grep` for call sites, verifying a safety mechanism by its fingerprints in the data, and the difference between "implemented" and "wired in." | Beginner |
 | Consent-Gated Sending (2026-08-20) | Resolving a permission model before any send; fail-CLOSED vs fail-OPEN and why an unreachable gate is an UNKNOWN not a yes; structurally locked-on categories (a receipt can never be suppressed); why an ungated DRAFT is still a broken opt-out. Real data-governance work, not a toy | Advanced |
 | PostgREST Query Literacy (2026-08-20) | `select=` returns ONLY named columns and omitting one fails silently; `eq.` on text is case-sensitive so a mixed-case key is invisible; `ilike.` vs indexing `lower(value)`; auditing a permission store means comparing CASE, not just presence | Intermediate |
@@ -4765,8 +4768,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.82 by generate_public_manual.py"
-generated: "2026-09-07 21:37"
+source: "Auto-generated from private manual v5.84 by generate_public_manual.py"
+generated: "2026-09-08 06:00"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5739,9 +5742,17 @@ Twilio → sms.quietlyworking.org → Caddy (SSL) → twilio_webhook_server.py �
 **Components:**
 | Component | Purpose |
 |-----------|---------|
-| `twilio_webhook_server.py` | HTTP server on port 8765, receives Twilio webhooks (v3.5.1 — `SO_REUSEADDR` via `ReusableHTTPServer`) |
+| `twilio_webhook_server.py` | HTTP server on port 8765, receives Twilio webhooks (v3.7.0; `SO_REUSEADDR` via `ReusableHTTPServer` since v3.5.1) |
 | Caddy reverse proxy | SSL termination, proxies to webhook server |
 | `sms-webhook.service` | systemd service for persistence; `ExecStartPre` kills port squatters via `port-cleanup.conf` drop-in |
+
+**A STOP is recorded in two places (2026-09-06).** `sms_compliance.py` v2.1.0 still writes the
+family opt-out to the preference-center SQLite (the store every QWF sender gates on), and now
+also calls `qqt_consent_mirror.py` to write the same boundary into Quietly Quoting's
+`notification_consent` table, so a supporter's Alerts & Reporting grid greys the person who
+stopped. The mirror is best-effort and never blocks the acknowledgement: a failure prints a
+WARN line and the SQLite record still governs sending. `twilio_webhook_server.py` v3.7.0 passes
+the `To` number through so the mirrored row records which QWF number was texted.
 
 **Should This Be Reported?**
 Yes. This appears to be a legitimate bug in the n8n REST API. The behavior is:
@@ -7290,11 +7301,11 @@ Ezer Omnibus is the unified communication intelligence system that routes all in
 
 | Script | Purpose | Version |
 |--------|---------|---------|
-| `twilio_webhook_server.py` | SMS/MMS router - main gateway | v3.4.0 |
+| `twilio_webhook_server.py` | SMS/MMS router - main gateway | **v3.7.0** (passes the `To` number to the compliance handlers) |
 | `sms_intent_classifier.py` | Intent classification engine | v1.4.0 |
 | `ezer_backoffice_agent.py` | Claude Agent SDK wrapper for SMS-triggered backoffice | v1.1.0 |
 | `process_sms_image.py` | MMS image analysis (IMAGE tier) | v1.0.0 |
-| `sms_compliance.py` | STOP/HELP/START compliance | v1.0.0 |
+| `sms_compliance.py` | STOP/HELP/START compliance | **v2.1.0** (SQLite primary since v2.0.0; v2.1.0 mirrors STOP/START into Quietly Quoting's consent store) |
 | `health_tracker.py` | Health data → Obsidian | v1.0.0 |
 | `calendar_assistant.py` | Calendar queries | v1.0.0 |
 | `ezer_discord_handler.py` | Discord DM processing | v1.2.0 |
@@ -12557,4 +12568,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-07 21:37 (v5.82)*
+*Last updated: 2026-09-08 06:00 (v5.84)*
