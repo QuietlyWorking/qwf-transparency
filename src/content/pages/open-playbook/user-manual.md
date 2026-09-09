@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-09 23:25 | Source version: 5.86
+> Generated: 2026-09-09 23:27 | Source version: 5.87
 
 # QWU Backoffice User Manual
 
@@ -4770,8 +4770,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.86 by generate_public_manual.py"
-generated: "2026-09-09 23:25"
+source: "Auto-generated from private manual v5.87 by generate_public_manual.py"
+generated: "2026-09-09 23:27"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6465,20 +6465,40 @@ Students can learn data enrichment pipeline patterns by:
 - JSON data transformation and storage patterns
 - Pipeline design with graceful degradation (partial enrichment when sources fail)
 
-### Full Visitor Pipeline (v3.2.0) ⭐ NEW
+### Full Visitor Pipeline (v5.4.0)
 
-The `bni_visitor_pipeline.py` orchestrates the complete visitor processing workflow from enrichment through email delivery and inbox organization.
+`bni_visitor_pipeline.py` orchestrates visitor processing from registration through in-app delivery.
 
-**6 Pipeline Stages:**
+**⚠ Two structural changes since the v3.2.0 description this section used to carry** (corrected
+2026-09-09, both had been live for weeks while the manual still described the old shape):
+
+1. **IN-APP ONLY since v5.2.0.** The pipeline no longer emails connection reports to members. It
+   writes them to Quietly Networking, where members read them. The old Stage 3 (MS Graph `/sendMail`)
+   and Stage 4 (SMS "emails sent") no longer exist. Members receive **one** weekly email: the Weekly
+   Connection Report, sent by a different script (below).
+2. **Nothing is enriched or written until a human confirms identity.** The Identity Anchor gate
+   (2026-08-11) holds every visitor on three surfaces ... LinkedIn profile, company website, Google
+   Business listing ... and **no depth is bought and no report is generated until a person answers all
+   three** at `quietlynetworking.org/visitors/confirm` (or via `review_visitor_holds.py`).
+
+**Stages as they actually run:**
 
 | Stage | Name | What It Does |
 |-------|------|--------------|
-| 1 | EPIC Enrichment | 7-step visitor enrichment (LinkedIn, posts, website, reviews, AI synthesis) |
-| 2 | Connection Reports | Generates 16 personalized reports for all active members (5 parallel workers) |
-| 3 | Email Sending | Sends connection report emails directly via MS Graph `/sendMail` (no drafts) |
-| 4 | SMS Notification | Notifies TIG via Twilio when emails have been sent |
-| 5 | Discord Notification | Posts completion summary to #bni-prep |
-| 6 | Email Housekeeping | Marks original registration email complete + moves to BNI/Visitors folder |
+| 1 | Discovery | Finds CANDIDATES for each of the three identity anchors. Selects nothing, spends nothing. |
+| 2 | HOLD + alert | Parks the visitor and tells the responsible human once (TODAY, or INTERRUPT within 24h of the meeting). A past meeting never alerts; the same tier is not repeated within 20 hours. |
+| 3 | Human answers | A person confirms, declares "none exists", or declares a chain, per surface. Their answer is a LOCK, never re-litigated. |
+| 4 | Depth | Only now: LinkedIn profile + posts, website content, Google reviews, AI synthesis. |
+| 5 | Fan-out gate | Blocks while ANY anchor is unanswered (v5.4.0 ... it previously watched only LinkedIn). |
+| 6 | Connection Reports | One per active member, written to Quietly Networking. No email. |
+| 7 | Housekeeping | Marks the registration email complete and files it. |
+
+**The weekly member email is a separate script.** `send_weekly_connection_reports.py` binds every
+READY visitor into one PDF per member and sends it from TIG's mailbox at **noon Pacific the day before
+the meeting**, to the members listed in `WCR-Consent-Register.md` who also pass QCM consent
+(fail-closed, holds named by SMS). A half-hourly sweep sends an **addendum** for anyone who becomes
+ready after that, and carries the report itself late if noon passed without one. Auto-send was released
+by TIG on 2026-09-08 for those two kinds of mail only; first auto-send delivered 2026-09-09.
 
 **Usage:**
 ```bash
@@ -12730,4 +12750,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-09 23:25 (v5.86)*
+*Last updated: 2026-09-09 23:27 (v5.87)*
