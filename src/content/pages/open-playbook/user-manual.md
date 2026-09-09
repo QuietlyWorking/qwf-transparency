@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-09 03:15 | Source version: 5.85
+> Generated: 2026-09-09 23:25 | Source version: 5.86
 
 # QWU Backoffice User Manual
 
@@ -55,67 +55,68 @@ A comprehensive guide to the QWU Backoffice agent workspace, covering architectu
 30. [[#Docker Fundamentals: Running Isolated Tasks]]
 31. [[#Docker Sandbox Security]]
 32. [[#Meeting Intelligence System ⭐]]
-33. [[#Outlook Email Processing ⭐]]
-34. [[#SuiteDash CRM Integration ⭐]]
-35. [[#Transcript Extraction System (Planned)]]
-36. [[#Ez/Ezer Mascot]]
-37. [[#Ez Terminal (Scheduler) ⭐ NEW]]
-38. [[#Chat Leak Prevention System ⭐ NEW]]
-39. [[#Troubleshooting]]
-40. [[#Resources]]
-41. [[#BNI Member Dossier System]]
-42. [[#[Networking Chapter] Mentor Program (QNT) ⭐ NEW]]
-43. [[#BNI Meeting Recap System ⭐ NEW]]
-44. [[#System Architecture Audit ⭐ NEW]]
-45. [[#EPIC Appointment Intelligence System v2.0 ⭐ NEW]]
-46. [[#Ezer Aión Assistant System ⭐ NEW]]
-47. [[#Strategic Goals Framework ⭐ NEW]]
-48. [[#QWU Cosmic Style Guide ⭐ NEW]]
-49. [[#Content Calendar System ⭐ NEW]]
-50. [[#Daily Journal Command Center ⭐ NEW]]
-51. [[#Supervisor Observability System (SOS) ⭐ NEW]]
-52. [[#Relationship Intelligence Layer ⭐ NEW]]
-53. [[#Parallel Execution System ⭐ NEW]]
-54. [[#Ezer Universal Interface ⭐ NEW]]
-55. [[#Project System Status Files ⭐ NEW]]
-56. [[#Supervisor Architecture]]
-57. [[#HQ Command Center ⭐ NEW]]
-58. [[#QWR SEO Intelligence ⭐ NEW]]
-59. [[#Supporter System Safeguards ⭐ NEW]]
-60. [[#[Supporter Organization] Command Center ⭐ NEW]]
-61. [[#Pocket Ez Companion App ⭐ NEW]]
-62. [[#Public Manual Generation System ⭐ NEW]]
-63. [[#QWR Audience Intelligence System ⭐ NEW]]
-64. [[#QKN Quietly Knocking ⭐ NEW]]
-65. [[#QSP Quietly Spotting ⭐ NEW]]
-66. [[#QNT Quietly Networking ⭐ NEW]]
-67. [[#QWR Content Performance Intelligence ⭐ NEW]]
-68. [[#QWR Press Release Service ⭐ NEW]]
-69. [[#Cost Intelligence System ⭐ NEW]]
-70. [[#QWR Reverse Benchmarking Intelligence ⭐ NEW]]
-71. [[#QWR Content Strategy System ⭐ NEW]]
-72. [[#QWR Preparation Workbook ⭐ NEW]]
-73. [[#QWF Ecosystem Landing Section ⭐ NEW]]
-74. [[#Auto-Remediation System ⭐ NEW]]
-75. [[#QTR Quietly Tracking ⭐ NEW]]
-76. [[#QWF Ecosystem Widget ⭐ NEW]]
-77. [[#QWR Team Accounts System ⭐ NEW]]
-78. [[#QWF Documentation Standard ⭐ NEW]]
-79. [[#Weavy Creative Production System ⭐ NEW]]
-80. [[#WHL WHELHO App ⭐ NEW]]
-81. [[#Cloudflare & DNS Management ⭐ NEW]]
-82. [[#Puzzle Operations Blueprint ⭐ NEW]]
-83. [[#Trails AI SOP + Video Pair ⭐ NEW]]
-84. [[#QWF App Registry ⭐ NEW]]
-85. [[#Testimonial Intelligence Pipeline ⭐ NEW]]
-86. [[#QSP Local Growth Engine ⭐ NEW]]
-87. [[#TWL Preload Hook ⭐ NEW]]
-88. [[#HQ Issues Preload Hook ⭐ NEW]]
-89. [[#Date/Time Output Validation Hook ⭐ NEW]]
-90. [[#QWB Quietly Webbing ⭐ NEW]]
-91. [[#L4G Locals 4 Good Platform ⭐ NEW]]
-92. [[#Living Roadmap Delivery Pipeline ⭐ NEW]]
-93. [[#Session Log]]
+33. [[#App Login Email Guard (`audit_qwf_auth_mail.py`) ⭐ NEW]]
+34. [[#Outlook Email Processing ⭐]]
+35. [[#SuiteDash CRM Integration ⭐]]
+36. [[#Transcript Extraction System (Planned)]]
+37. [[#Ez/Ezer Mascot]]
+38. [[#Ez Terminal (Scheduler) ⭐ NEW]]
+39. [[#Chat Leak Prevention System ⭐ NEW]]
+40. [[#Troubleshooting]]
+41. [[#Resources]]
+42. [[#BNI Member Dossier System]]
+43. [[#[Networking Chapter] Mentor Program (QNT) ⭐ NEW]]
+44. [[#BNI Meeting Recap System ⭐ NEW]]
+45. [[#System Architecture Audit ⭐ NEW]]
+46. [[#EPIC Appointment Intelligence System v2.0 ⭐ NEW]]
+47. [[#Ezer Aión Assistant System ⭐ NEW]]
+48. [[#Strategic Goals Framework ⭐ NEW]]
+49. [[#QWU Cosmic Style Guide ⭐ NEW]]
+50. [[#Content Calendar System ⭐ NEW]]
+51. [[#Daily Journal Command Center ⭐ NEW]]
+52. [[#Supervisor Observability System (SOS) ⭐ NEW]]
+53. [[#Relationship Intelligence Layer ⭐ NEW]]
+54. [[#Parallel Execution System ⭐ NEW]]
+55. [[#Ezer Universal Interface ⭐ NEW]]
+56. [[#Project System Status Files ⭐ NEW]]
+57. [[#Supervisor Architecture]]
+58. [[#HQ Command Center ⭐ NEW]]
+59. [[#QWR SEO Intelligence ⭐ NEW]]
+60. [[#Supporter System Safeguards ⭐ NEW]]
+61. [[#[Supporter Organization] Command Center ⭐ NEW]]
+62. [[#Pocket Ez Companion App ⭐ NEW]]
+63. [[#Public Manual Generation System ⭐ NEW]]
+64. [[#QWR Audience Intelligence System ⭐ NEW]]
+65. [[#QKN Quietly Knocking ⭐ NEW]]
+66. [[#QSP Quietly Spotting ⭐ NEW]]
+67. [[#QNT Quietly Networking ⭐ NEW]]
+68. [[#QWR Content Performance Intelligence ⭐ NEW]]
+69. [[#QWR Press Release Service ⭐ NEW]]
+70. [[#Cost Intelligence System ⭐ NEW]]
+71. [[#QWR Reverse Benchmarking Intelligence ⭐ NEW]]
+72. [[#QWR Content Strategy System ⭐ NEW]]
+73. [[#QWR Preparation Workbook ⭐ NEW]]
+74. [[#QWF Ecosystem Landing Section ⭐ NEW]]
+75. [[#Auto-Remediation System ⭐ NEW]]
+76. [[#QTR Quietly Tracking ⭐ NEW]]
+77. [[#QWF Ecosystem Widget ⭐ NEW]]
+78. [[#QWR Team Accounts System ⭐ NEW]]
+79. [[#QWF Documentation Standard ⭐ NEW]]
+80. [[#Weavy Creative Production System ⭐ NEW]]
+81. [[#WHL WHELHO App ⭐ NEW]]
+82. [[#Cloudflare & DNS Management ⭐ NEW]]
+83. [[#Puzzle Operations Blueprint ⭐ NEW]]
+84. [[#Trails AI SOP + Video Pair ⭐ NEW]]
+85. [[#QWF App Registry ⭐ NEW]]
+86. [[#Testimonial Intelligence Pipeline ⭐ NEW]]
+87. [[#QSP Local Growth Engine ⭐ NEW]]
+88. [[#TWL Preload Hook ⭐ NEW]]
+89. [[#HQ Issues Preload Hook ⭐ NEW]]
+90. [[#Date/Time Output Validation Hook ⭐ NEW]]
+91. [[#QWB Quietly Webbing ⭐ NEW]]
+92. [[#L4G Locals 4 Good Platform ⭐ NEW]]
+93. [[#Living Roadmap Delivery Pipeline ⭐ NEW]]
+94. [[#Session Log]]
 
 ---
 
@@ -4769,8 +4770,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.85 by generate_public_manual.py"
-generated: "2026-09-09 03:15"
+source: "Auto-generated from private manual v5.86 by generate_public_manual.py"
+generated: "2026-09-09 23:25"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -4892,6 +4893,81 @@ Never write inline Graph sendMail or smtplib code. Import the transport. Footers
 | Inbound-vs-outbound blind spots | Bidirectional probe design, why a green dashboard can hide a dead channel, INDETERMINATE as a first-class state | ⭐⭐⭐ |
 | Suppression-list forensics | Bounce suppression mechanics, per-sender vs per-domain scoping, magic-link diagnosis, cadence-based silence detection | ⭐⭐⭐ |
 | Allow-list hygiene (measure before you widen) | Reading a vendor request critically, querying your own filter for evidence, least-privilege allow design (IP vs domain), declining a request with numbers instead of opinion | ⭐⭐⭐ |
+
+---
+
+## App Login Email Guard (`audit_qwf_auth_mail.py`) ⭐ NEW
+
+### Overview
+
+Every QWF app's **Supabase-native auth email** ... the invite, password reset, signup confirmation, magic link,
+email-change and reauthentication messages ... must leave from that app's OWN verified subdomain
+(`noreply@accounts.<app-domain>`), branded, carrying the locked Auth Variant footer. This is a different leg from
+the backoffice transport above: the transport governs Python senders; this governs mail the *vendor* sends on the
+app's behalf. It is the leg most often missed, because an app works perfectly while sending unbranded mail.
+
+### Why It Exists (2026-09-09)
+
+Quietly Quoting was one word from inviting four supporter managers when TIG asked whether the invitation would
+come from the app or from the vendor. It would have come from the vendor: no custom SMTP, stock subject
+("You have been invited"), one bare line, no nonprofit footer. The family already had the rule
+(`qwf_app_family_standard.md` §9), the tool (`resolve_email_config.py`) and a conformance matrix with a blank QQT
+row that had sat there eleven weeks. **Nothing read the row.** TIG's ruling: *"I don't want me remembering a past
+issue being the only thing standing between any user receiving a non-app domain message."*
+
+### The three controls
+
+| Control | What it does | Where |
+|---|---|---|
+| **Daily auditor** | Enumerates EVERY active Supabase project the backoffice token can see, reads each project's live auth config, and requires: custom SMTP on SES, From = `noreply@accounts.<app-domain>`, a sender name, all six templates non-stock and carrying the locked footer. Counts confirmed non-staff logins: a failing project with real users is **High**. | `audit_qwf_auth_mail.py --check --notify`, cron **07:30 daily**; also a High gap inside `audit_system.py` (06:00) |
+| **Invite guard** | `assert_branded(<project ref>)` raises before any script or agent creates or invites a human user in an unbranded app. A function that refuses, not a reminder. | imported by user-creating scripts |
+| **Provisioning step** | Branding is part of standing an app up, before its first human login. | `provision_qwf_sveltekit_app.md` |
+
+**A project the auditor has no expected domain for is `UNMAPPED`, which FAILS** ... a new app cannot be forgotten
+by omission. Add its ref to `EXPECTED` the day the project is created. An auditor that cannot read the API raises
+`qwf_auth_mail_audit_blind` rather than reporting green.
+
+### Alerting
+
+Two HQ rules, both TODAY tier (push + Discord) via `send_notification.py`, never a raw webhook:
+`qwf_auth_mail_unbranded` and `qwf_auth_mail_audit_blind`.
+
+### Branding an app (about an hour)
+
+1. `provision_app_email_subdomain.py --app-domain <app>.org` ... SES identity, DKIM, MAIL FROM, DMARC.
+2. IAM user `qwf-ses-smtp-<app>` scoped to `ses:FromAddress = noreply@accounts.<app>.org`; SES config set
+   `<app>-auth-emails`; six `<APP>_SES_*` vars in `.env`. Recipe: `qwf_email_infrastructure.md`.
+3. Child brand `005 Operations/Brands/<APP>.brand.json` → `resolve_brand.py --child <APP>` → `validate_brand.py`.
+4. Templates `005 Operations/Templates/email/<app>/` ... copy `qqt/` (the 2026-09-09 reference; its skeletons carry
+   the locked footer through `[[TEMPLATE_PURPOSE]]`), then the app in `resolve_email_config.py` `APP_SUPABASE_REFS`.
+5. `resolve_email_config.py --app <APP> --dry-run` then `--apply` (it PATCHes and independently GET-verifies).
+6. Add the ref to `audit_qwf_auth_mail.EXPECTED`.
+7. **Inbox-verify**: trigger one password reset to `tig@` and read the headers at the mailbox. A Management API 200
+   is not delivery.
+
+### Family baseline (2026-09-09, first auditor run)
+
+| State | Apps |
+|---|---|
+| BRANDED | QSP, QQT |
+| UNBRANDED, has human logins (**High**) | QWR ... sends from its subdomain correctly, but its six live templates predate the locked footer (HQ `1c3891b3`) |
+| UNBRANDED, no human logins yet (Medium) | QNT, L4G, WHL, HQ, QKN, QTR, QST, QCM, QWB, QOS, QPN, QMP, PEZ, supporter-CC, CTIG ... each flips to High the day it gains a real user |
+
+### Known limit
+
+After branding, the From line, DKIM alignment, subject, body and footer are all the app's ... but the **verify link**
+in the body still resolves on the vendor's own hosted domain rather than the app's. A custom auth domain is a paid
+Supabase add-on and a family decision TIG has not taken.
+
+### Missing Pixel Training Opportunities
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Enumerate-don't-list auditing (UNMAPPED fails) | Why a hand-maintained list rots and an enumeration cannot; designing a check that fails safe on the unknown | ⭐⭐⭐ |
+| Turning a written standard into a control | The difference between a document, an alarm, and a function that refuses; where each belongs | ⭐⭐⭐⭐ |
+| SES SMTP credential derivation | AWS SigV4-derived SMTP passwords, IAM least-privilege by `ses:FromAddress`, config sets | ⭐⭐⭐ |
+| Email authentication at the receiving mailbox | SPF / DKIM / DMARC alignment, reading `Authentication-Results`, why a provider 200 is not delivery | ⭐⭐⭐ |
+| Blind-instrument discipline | Why "I could not read" must never render as "all clear" | ⭐⭐⭐ |
 
 ---
 
@@ -12654,4 +12730,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-09 03:15 (v5.85)*
+*Last updated: 2026-09-09 23:25 (v5.86)*
