@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-09 23:27 | Source version: 5.87
+> Generated: 2026-09-09 23:28 | Source version: 5.87
 
 # QWU Backoffice User Manual
 
@@ -4771,7 +4771,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.87 by generate_public_manual.py"
-generated: "2026-09-09 23:27"
+generated: "2026-09-09 23:28"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6499,6 +6499,23 @@ the meeting**, to the members listed in `WCR-Consent-Register.md` who also pass 
 (fail-closed, holds named by SMS). A half-hourly sweep sends an **addendum** for anyone who becomes
 ready after that, and carries the report itself late if noon passed without one. Auto-send was released
 by TIG on 2026-09-08 for those two kinds of mail only; first auto-send delivered 2026-09-09.
+
+> **Missing Pixel Training Opportunity (Tier 2: Contributor) ... Identity disambiguation**
+>
+> On 2026-09-09 two LinkedIn profiles carried the same name AND the same employer. One was blank
+> (no photo, 0 connections, one role); one was lived-in (photo, 143 connections, posts, 8 roles). An
+> automated search found only the blank one and scored it a perfect name match. This is the everyday
+> shape of a data-quality problem, and it is a marketable skill.
+>
+> | Component | Skills Taught |
+> |-----------|---------------|
+> | Why one query returned zero and a shorter one returned the person | How keyword search ANDs terms; why a form's abbreviation ("Cratus Tech" vs "Cratus Technology") is a silent killer |
+> | Running several query variants and merging by unique id | De-duplication, cost-aware search (stop when you have enough) |
+> | Scoring "substance" (photo, connections, About, roles) | Turning a judgment call into named, inspectable evidence |
+> | Deciding what the score may NOT decide | Why substance breaks ties but never outranks a name match ... a blank profile can still be the right person |
+> | Never auto-confirming when two candidates tie | Designing for a human decision instead of a confident guess |
+>
+> **Prerequisites:** basic Python, REST/JSON. **Time:** ~4 hours. **Complexity:** Intermediate.
 
 **Usage:**
 ```bash
@@ -12750,4 +12767,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-09 23:27 (v5.87)*
+*Last updated: 2026-09-09 23:28 (v5.87)*
