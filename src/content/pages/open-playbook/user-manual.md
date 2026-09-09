@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-08 06:00 | Source version: 5.84
+> Generated: 2026-09-09 03:15 | Source version: 5.85
 
 # QWU Backoffice User Manual
 
@@ -64,57 +64,58 @@ A comprehensive guide to the QWU Backoffice agent workspace, covering architectu
 39. [[#Troubleshooting]]
 40. [[#Resources]]
 41. [[#BNI Member Dossier System]]
-42. [[#BNI Meeting Recap System ⭐ NEW]]
-43. [[#System Architecture Audit ⭐ NEW]]
-44. [[#EPIC Appointment Intelligence System v2.0 ⭐ NEW]]
-45. [[#Ezer Aión Assistant System ⭐ NEW]]
-46. [[#Strategic Goals Framework ⭐ NEW]]
-47. [[#QWU Cosmic Style Guide ⭐ NEW]]
-48. [[#Content Calendar System ⭐ NEW]]
-49. [[#Daily Journal Command Center ⭐ NEW]]
-50. [[#Supervisor Observability System (SOS) ⭐ NEW]]
-51. [[#Relationship Intelligence Layer ⭐ NEW]]
-52. [[#Parallel Execution System ⭐ NEW]]
-53. [[#Ezer Universal Interface ⭐ NEW]]
-54. [[#Project System Status Files ⭐ NEW]]
-55. [[#Supervisor Architecture]]
-56. [[#HQ Command Center ⭐ NEW]]
-57. [[#QWR SEO Intelligence ⭐ NEW]]
-58. [[#Supporter System Safeguards ⭐ NEW]]
-59. [[#[Supporter Organization] Command Center ⭐ NEW]]
-60. [[#Pocket Ez Companion App ⭐ NEW]]
-61. [[#Public Manual Generation System ⭐ NEW]]
-62. [[#QWR Audience Intelligence System ⭐ NEW]]
-63. [[#QKN Quietly Knocking ⭐ NEW]]
-64. [[#QSP Quietly Spotting ⭐ NEW]]
-65. [[#QNT Quietly Networking ⭐ NEW]]
-66. [[#QWR Content Performance Intelligence ⭐ NEW]]
-67. [[#QWR Press Release Service ⭐ NEW]]
-68. [[#Cost Intelligence System ⭐ NEW]]
-69. [[#QWR Reverse Benchmarking Intelligence ⭐ NEW]]
-70. [[#QWR Content Strategy System ⭐ NEW]]
-71. [[#QWR Preparation Workbook ⭐ NEW]]
-72. [[#QWF Ecosystem Landing Section ⭐ NEW]]
-73. [[#Auto-Remediation System ⭐ NEW]]
-74. [[#QTR Quietly Tracking ⭐ NEW]]
-75. [[#QWF Ecosystem Widget ⭐ NEW]]
-76. [[#QWR Team Accounts System ⭐ NEW]]
-77. [[#QWF Documentation Standard ⭐ NEW]]
-78. [[#Weavy Creative Production System ⭐ NEW]]
-79. [[#WHL WHELHO App ⭐ NEW]]
-80. [[#Cloudflare & DNS Management ⭐ NEW]]
-81. [[#Puzzle Operations Blueprint ⭐ NEW]]
-82. [[#Trails AI SOP + Video Pair ⭐ NEW]]
-83. [[#QWF App Registry ⭐ NEW]]
-84. [[#Testimonial Intelligence Pipeline ⭐ NEW]]
-85. [[#QSP Local Growth Engine ⭐ NEW]]
-86. [[#TWL Preload Hook ⭐ NEW]]
-87. [[#HQ Issues Preload Hook ⭐ NEW]]
-88. [[#Date/Time Output Validation Hook ⭐ NEW]]
-89. [[#QWB Quietly Webbing ⭐ NEW]]
-90. [[#L4G Locals 4 Good Platform ⭐ NEW]]
-91. [[#Living Roadmap Delivery Pipeline ⭐ NEW]]
-92. [[#Session Log]]
+42. [[#[Networking Chapter] Mentor Program (QNT) ⭐ NEW]]
+43. [[#BNI Meeting Recap System ⭐ NEW]]
+44. [[#System Architecture Audit ⭐ NEW]]
+45. [[#EPIC Appointment Intelligence System v2.0 ⭐ NEW]]
+46. [[#Ezer Aión Assistant System ⭐ NEW]]
+47. [[#Strategic Goals Framework ⭐ NEW]]
+48. [[#QWU Cosmic Style Guide ⭐ NEW]]
+49. [[#Content Calendar System ⭐ NEW]]
+50. [[#Daily Journal Command Center ⭐ NEW]]
+51. [[#Supervisor Observability System (SOS) ⭐ NEW]]
+52. [[#Relationship Intelligence Layer ⭐ NEW]]
+53. [[#Parallel Execution System ⭐ NEW]]
+54. [[#Ezer Universal Interface ⭐ NEW]]
+55. [[#Project System Status Files ⭐ NEW]]
+56. [[#Supervisor Architecture]]
+57. [[#HQ Command Center ⭐ NEW]]
+58. [[#QWR SEO Intelligence ⭐ NEW]]
+59. [[#Supporter System Safeguards ⭐ NEW]]
+60. [[#[Supporter Organization] Command Center ⭐ NEW]]
+61. [[#Pocket Ez Companion App ⭐ NEW]]
+62. [[#Public Manual Generation System ⭐ NEW]]
+63. [[#QWR Audience Intelligence System ⭐ NEW]]
+64. [[#QKN Quietly Knocking ⭐ NEW]]
+65. [[#QSP Quietly Spotting ⭐ NEW]]
+66. [[#QNT Quietly Networking ⭐ NEW]]
+67. [[#QWR Content Performance Intelligence ⭐ NEW]]
+68. [[#QWR Press Release Service ⭐ NEW]]
+69. [[#Cost Intelligence System ⭐ NEW]]
+70. [[#QWR Reverse Benchmarking Intelligence ⭐ NEW]]
+71. [[#QWR Content Strategy System ⭐ NEW]]
+72. [[#QWR Preparation Workbook ⭐ NEW]]
+73. [[#QWF Ecosystem Landing Section ⭐ NEW]]
+74. [[#Auto-Remediation System ⭐ NEW]]
+75. [[#QTR Quietly Tracking ⭐ NEW]]
+76. [[#QWF Ecosystem Widget ⭐ NEW]]
+77. [[#QWR Team Accounts System ⭐ NEW]]
+78. [[#QWF Documentation Standard ⭐ NEW]]
+79. [[#Weavy Creative Production System ⭐ NEW]]
+80. [[#WHL WHELHO App ⭐ NEW]]
+81. [[#Cloudflare & DNS Management ⭐ NEW]]
+82. [[#Puzzle Operations Blueprint ⭐ NEW]]
+83. [[#Trails AI SOP + Video Pair ⭐ NEW]]
+84. [[#QWF App Registry ⭐ NEW]]
+85. [[#Testimonial Intelligence Pipeline ⭐ NEW]]
+86. [[#QSP Local Growth Engine ⭐ NEW]]
+87. [[#TWL Preload Hook ⭐ NEW]]
+88. [[#HQ Issues Preload Hook ⭐ NEW]]
+89. [[#Date/Time Output Validation Hook ⭐ NEW]]
+90. [[#QWB Quietly Webbing ⭐ NEW]]
+91. [[#L4G Locals 4 Good Platform ⭐ NEW]]
+92. [[#Living Roadmap Delivery Pipeline ⭐ NEW]]
+93. [[#Session Log]]
 
 ---
 
@@ -4768,8 +4769,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.84 by generate_public_manual.py"
-generated: "2026-09-08 06:00"
+source: "Auto-generated from private manual v5.85 by generate_public_manual.py"
+generated: "2026-09-09 03:15"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -4872,6 +4873,15 @@ Microsoft retired the donated nonprofit Business Premium grant (effective 2025-0
 Never write inline Graph sendMail or smtplib code. Import the transport. Footers, opt-out checks, and templates stay in the calling script (Enhancement/Exempt classification is per-script policy). Full reference: `005 Operations/Directives/qwf_email_infrastructure.md` §Backoffice Transactional Rerouting.
 
 ### Training Opportunities
+
+**Added Session 657 (2026-09-07) ... "the deploy said success and served nothing":**
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Diagnosing a cloud deploy that reports success but serves nothing (CF Pages `83b95334`) | Reading a green dashboard against ground truth; **burst-probing** (one hit says up, forty hits find a 25% flap); isolating by deployment url; rollback-then-re-upload instead of debugging code that was never wrong | ⭐⭐⭐ |
+| Why a one-hit-a-minute uptime monitor cannot see a partial outage | Sampling and probability; designing a check whose sensitivity matches the failure it must catch | ⭐⭐ |
+| Testing the DEFAULT path, not only the specified one | A sign-in proof that passes `?next=/present` can never catch a wrong default landing; parameter-absent test design | ⭐⭐ |
+| Running a browser proof on a second engine (Playwright WebKit as an iPad) | Cross-engine testing; what Safari does not have (background sync, install prompt, webm recording) and why the device you test on is a design input | ⭐⭐⭐ |
 
 | Component | Skills Developed | Difficulty |
 |-----------|------------------|------------|
@@ -6518,6 +6528,82 @@ Previously created Outlook drafts requiring manual review. Now sends emails dire
 - Emails failing validation are NOT sent
 
 ---
+
+## [Networking Chapter] Mentor Program (QNT) ⭐ NEW
+
+**Added: Session 658 (September 7-9, 2026)**
+
+TIG becomes Lead Mentor for the [Networking Chapter] chapter in October 2026. The program's data lives in
+the Quietly Networking database, not in the vault, because it is a product feature that any future
+chapter inherits ... see `feedback_build_qnt_features_against_tenant_db_not_vault.md`.
+
+### What is live
+
+| Piece | State |
+|---|---|
+| Schema (7 tables, `is_mentor()`, 15 RLS policies) | Deployed 2026-09-06, migration 024 |
+| Auto-send columns on the touch log | Deployed 2026-09-07, migration 025 |
+| Four confirmed mentors + their caps + availability tokens | Seeded |
+| Day-before reminders | Live on cron, first real send 2026-09-08 |
+| Every screen (Lead Mentor page, availability, scheduler, mentor form) | Not built ... kickoff written, hard date 2026-09-14 |
+
+### The one script in this program that sends
+
+`qnt_mentor_reminders.py` v1.0.0, cron `0 16 * * *` UTC (09:00 Pacific in summer, 08:00 in winter),
+log `.tmp/logs/qnt_mentor_reminders.log`.
+
+It is the **only** exception to the standing drafts-not-sends rule, released by TIG on 2026-09-07 for
+exactly two kinds of message: a mentor's certification session is tomorrow, or a mentor meeting is
+tomorrow. The reason is timing, not convenience ... a reminder that arrives late is not a reminder.
+
+Its safety properties, in the order they matter:
+
+1. **Consent resolves fail-closed** through the family gate before any send, category
+   `relationship_touchpoint`, channel email. The resolved answer is stored on the touch row, so the
+   log says *why* a message was allowed, not just that it went.
+2. **A person it cannot send to is FLAGGED to TIG by SMS, never skipped.** No registration on
+   record, no address on file, or a consent HOLD all produce a `flag_only` row and a line in the
+   text message. Nobody is silently short.
+3. **Idempotent** on a per-recipient-per-day key, so a double cron run cannot double-send.
+4. **A mentor registered for a session that is not tomorrow gets nothing.** The window is exact.
+5. It **will not remind someone to attend a session they never registered for** ... that is a lie
+   with a link in it, and it becomes a flag instead.
+
+Nine unit tests cover the decision logic and none of them reach a live writer.
+
+### The certification gate (SoCal BNI, per term)
+
+Not in the Mentor handbook ... it comes from the region's own notices. Every leadership and support
+role must (a) sign the Leadership Team Agreement and (b) attend one role certification start to
+finish. The region's wording: anyone who cannot attend and stay for the whole session *"will be
+replaced"* in the role. All certifications fall in September.
+
+### Governance worth remembering
+
+- **Routing follows the office, not the person.** Every completed mentor form goes to the Lead
+  Mentor AND the Chapter Vice President within 24 hours, and the Lead Mentor must confirm the VP
+  received it. The VP is resolved at send time from the roster, never stored as an address, because
+  the office turns over every October.
+- **A mentor's cap is the mentor's.** The system may lower one on their word and may never raise
+  one. The handbook's hard ceiling is 6.
+- **Nothing reaches BNI Connect automatically.** BNI's terms forbid it. The system's job is to make
+  the manual step fast and error-free, not to eliminate it.
+
+### MP Training Opportunities
+
+| Task | Skills taught | Level | Time |
+|---|---|---|---|
+| Re-run a mailbox search that returned an incomplete answer | Search result caps, why a keyword that matches newsletters is a bad key, verifying a count against the source rather than trusting a tool's first answer | Beginner | 1 hour |
+| Write a database migration with its own proof inside the transaction | SQL, transactions, why an assertion that runs after the commit proves nothing | Intermediate | 3 hours |
+| Build a sender that refuses to send | Fail-closed design, why "flag the person you could not reach" beats "skip them quietly", idempotency keys | Intermediate | 4 hours |
+| Write tests for a script that emails real people | Pure functions, fixtures, why no test may ever reach a live writer | Intermediate | 2 hours |
+
+**The lesson worth teaching from this session:** the roster said one mentor for four weeks. Nothing
+was broken, no error appeared, and the number was simply wrong because a search tool returned its
+first hundred matches and the reply we needed was the hundred-and-first. A confident wrong answer
+looks exactly like a right one. The habit that catches it is asking what the tool was actually
+searching, then searching a key that cannot be diluted ... the exact subject line, not the word
+everyone uses.
 
 ## BNI Meeting Recap System ⭐ NEW
 
@@ -12568,4 +12654,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-08 06:00 (v5.84)*
+*Last updated: 2026-09-09 03:15 (v5.85)*
