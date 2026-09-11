@@ -40,6 +40,7 @@ isHome: true
 - [Vol 7 ... When You're About to Erode the Thing You Built the Framework to Protect](/built-from-broken/vol-7-when-you-re-about-to-erode-the-thing-you-built-the-framework-to-protect/) — How encoding organizational values into machine-readable schemas loaded into the agent's context every session catches leader drift before it silently re-frames the mission
 - [Vol 8 ... When Three Parallel Agents Crash and the System Still Holds](/built-from-broken/vol-8-when-three-parallel-agents-crash-and-the-system-still-holds/) — How atomic migrations, a vault auto-commit cron, and a verify-first triage runbook turned a six-hour multi-agent crash recovery into a ninety-minute forensic pass
 - [Vol 9 ... When Your AI Agent Can't See Its Own Mind](/built-from-broken/vol-9-when-your-ai-agent-can-t-see-its-own-mind/) — How transcript-JSONL ground-truth token counts, a 70/90/95 handoff ladder, a tiered emergency wrap-up, and per-session git worktrees keep long agent sessions sharp and parallel sessions structurally isolated
+- [Vol 10 ... When Your AI Agent Runs Out of Road Mid-Flow](/built-from-broken/vol-10-when-your-ai-agent-runs-out-of-road-mid-flow/) — How a fail-loud capacity poller, a weakest-link account picker, an editor switchboard, and a keep-alive let every new agent session start on the subscription with the most usable room, and never move a running one
 
 ## Tools
 These are the tools that the #QWU uses.
