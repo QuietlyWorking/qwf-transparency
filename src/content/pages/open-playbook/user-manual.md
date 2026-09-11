@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-11 06:23 | Source version: 5.88
+> Generated: 2026-09-11 18:32 | Source version: 5.89
 
 # QWU Backoffice User Manual
 
@@ -4771,8 +4771,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.88 by generate_public_manual.py"
-generated: "2026-09-11 06:23"
+source: "Auto-generated from private manual v5.89 by generate_public_manual.py"
+generated: "2026-09-11 18:32"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6500,6 +6500,19 @@ the meeting**, to the members listed in `WCR-Consent-Register.md` who also pass 
 (fail-closed, holds named by SMS). A half-hourly sweep sends an **addendum** for anyone who becomes
 ready after that, and carries the report itself late if noon passed without one. Auto-send was released
 by TIG on 2026-09-08 for those two kinds of mail only; first auto-send delivered 2026-09-09.
+
+**The applicant email is a third script (2026-09-11).** When the Membership Committee asks the chapter
+for written feedback on a NEW applicant, `bni_membership_request_forward.py` (cron every 15 minutes)
+reads the request from TIG's inbox, decides the kind (a renewal or category change is an existing
+member and gets nothing), matches the applicant to ONE complete QNT visitor row (zero or many holds
+for `--confirm` / `--park`), binds each opted-in member's EXISTING Visitor Connection Report into a
+one-visitor PDF at $0, and SENDS it from TIG's mailbox with the committee's own feedback-form link.
+Same register + QCM consent gates as the weekly report, imported. TIG released auto-send for it on
+2026-09-11 with the rule that now governs every sender: **a blessed template sends itself; only
+agent-composed copy waits for his eyes.** It also writes `visitors.status='applied'` and the
+application category (never touching the visit-time `profession_category`). First live send: 10
+members, 2026-09-11. The in-app Membership Committee page (queue, in-app match resolution, Send
+button, five-button member answers) is in build from a kickoff written the same day.
 
 > **Missing Pixel Training Opportunity (Tier 2: Contributor) ... Identity disambiguation**
 >
@@ -12784,4 +12797,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-11 06:23 (v5.88)*
+*Last updated: 2026-09-11 18:32 (v5.89)*
