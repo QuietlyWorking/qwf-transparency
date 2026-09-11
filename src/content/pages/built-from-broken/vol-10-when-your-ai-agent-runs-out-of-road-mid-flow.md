@@ -23,6 +23,12 @@ A Claude Max subscription reads as one percentage. It is at least three, each on
 
 That is the shape of every problem in this volume. The number was true. It was also not the number that mattered.
 
+Here is what "three limits, three clocks" looks like once you can see it. This is the capacity card we built, as it read one evening during the build: two subscriptions, every limit on each, when each refills, and one line at the top answering the only question that matters.
+
+![bfb-vol10-claude-capacity-card.png](/images/bfb-vol10-claude-capacity-card.png)
+
+Notice the word BINDING. It is not on the same row for both accounts. On the main account the 5-hour session window is what binds right now. On the second account it is the weekly limit on the frontier model. The headline number on either card tells you none of that.
+
 We run ten to fifteen Claude Code sessions at the same time across one operator. Ten of them are useful at any given moment. When the weekly cap on our development model hits, all of them stop at once, in the middle of whatever they were building, and the reset is days away. The obvious fix is a second subscription. The obvious fix is right, and it is also where the real problem starts... because nothing in the product tells you which of your subscriptions to open next, and the moment you have two you are doing that arithmetic in your head, badly, while trying to think about the work.
 
 ### What a subscription actually is
