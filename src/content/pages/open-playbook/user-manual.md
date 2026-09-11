@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-09 23:28 | Source version: 5.87
+> Generated: 2026-09-11 06:23 | Source version: 5.88
 
 # QWU Backoffice User Manual
 
@@ -3382,6 +3382,7 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 | Senior-Reviewer Multi-Agent Fan-Out | Sub-agent orchestration, independent fact-checking with probes, commit-protocol discipline (SR owns commits), ground-truth verification | Advanced |
 | Verifying a Route on a Single-Page App (2026-08-20) | Why `curl -w "%{http_code}"` is worthless against a React/SvelteKit SPA (every path returns **200**, including its own 404); designing a **negative control** (request a path you KNOW is fake) to prove an instrument can discriminate; choosing data-verification over link-verification when shipping email | Beginner |
 | Tracing One Alert Back to Its Cause (2026-08-30) | Following a single SMS backwards through five independent systems ... Twilio's REST API, a SQLite queue, run logs, n8n's Postgres, and the Graph mailbox ... instead of trusting the first plausible story. The habit being taught: **read the recipient's copy, not the send result.** Two shipped bugs this session were caught only by re-reading the rendered artifact after the fix. | Beginner |
+| Proving What an Automation Actually Does (2026-09-10) | Reading an orchestrator's **per-execution node history** instead of its diagram. A workflow ran every 5 minutes and reported success every time, and its JSON clearly showed the pipeline step ... but the step sat behind a "did new input arrive?" gate, so it fired on exactly one tick and never again. Listing which nodes actually ran per execution, and contrasting the tick around the event with its neighbours, settled in one pass what reading the design could not. The habit being taught: **name the triggering event and the state change you care about out loud, and check they are the same thing.** | Intermediate |
 | Internal vs Outbound Data Boundaries (2026-08-30) | Recognizing that fields sitting side by side in one dict do not share an audience. An LLM analysis record held `{speaker, quote, significance}`; the first two were the person's, the third was our private assessment, and a template pasted all three into their inbox. Teaches trust boundaries, allowlist-not-blocklist rendering, and asking "would I say this to their face?" before interpolating. | Intermediate |
 | Race Conditions and Atomic Claims (2026-08-30) | A status field meaning BOTH "discovered" and "claimed, in flight" let two overlapping jobs process the same record. Teaches state-machine design, `BEGIN EXCLUSIVE` / compare-and-set, lease expiry so a crashed worker cannot wedge a queue forever, and proving the fix with a concurrency test (8 threads, exactly 1 winner) rather than by reasoning. Directly transferable to any job queue. | Advanced |
 | Idempotency by Design (2026-08-30) | Making a repeated run harmless instead of forbidding repeats: a composite primary key claimed inside a transaction, released on failure so a retry can pick it up. Core distributed-systems concept, high employer demand, and demonstrable in a 20-line SQLite example. | Intermediate |
@@ -4770,8 +4771,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.87 by generate_public_manual.py"
-generated: "2026-09-09 23:28"
+source: "Auto-generated from private manual v5.88 by generate_public_manual.py"
+generated: "2026-09-11 06:23"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -9131,6 +9132,22 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 
 ---
 
+### Live Demo Mode and the landing embeds (added September 2026)
+
+`https://quietlynetworking.org/demo` runs the real app on a sample chapter with no login and no server. One seam (`src/lib/createAppClient.ts`) hands both Supabase client modules a browser-side PostgREST engine, so every screen renders from fixtures in the tab and nothing reaches the live database. The landing page embeds that demo in all nine feature boxes: each box is the app rendered at laptop width and scaled into the box, mounted only while it is near the viewport, with a captured screenshot behind it and, on phones, instead of it. "Make it yours" on the page (chapter name, colours, first name, seat, browser-only logo, dark or light mode) re-dresses every frame without a reload, and the page URL carries the chapter name and colours only, so a shared link opens already personalized. Three "Show me" tours run inside the frames; a seat switch (President / Visitor Host / Mentor / Member) shows each seat's real access.
+
+**Operating rules for the backoffice:**
+
+| Rule | How |
+|------|-----|
+| Prove nothing leaves the browser | `scripts/demo_zero_egress.py --base <url> --landing` (in the app repo, backoffice venv Playwright). Add `--allow-host static.cloudflareinsights.com` on the custom domain only; never on `*.pages.dev`. |
+| Prove the page form works | `scripts/demo_personalization_check.py --base <url> --landing` (17 checks) and without `--landing` for the in-demo form (18 checks). |
+| Recapture the posters after any demo-affecting change | Build, `vite preview --port 4173`, then `scripts/capture_demo_shots.py --base http://localhost:4173`, commit `public/demo-shots/`. CI has no Playwright, so this is a backoffice step. `--check` exits 1 when a source commit is newer than the shots. |
+| Disclosure copy | Name the sample PEOPLE, never the visitor's chapter: "{chapter}, with sample members and visitors. The software is real." |
+| Icons | No sparkle, brain, rocket, bot, gem, star, zap, target or lightbulb anywhere in a QWF surface (`detect_ui_slop.py` flags the imports). |
+
+Full design of record: `002 Projects/_Quietly Networking/QNT-System-Status.md` §Live Demo Mode.
+
 ## QWR Content Performance Intelligence ⭐ NEW
 
 **Added: February 14, 2026**
@@ -12767,4 +12784,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-09 23:28 (v5.87)*
+*Last updated: 2026-09-11 06:23 (v5.88)*
