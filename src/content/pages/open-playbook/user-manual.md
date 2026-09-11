@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.82 | Started: 251223 | Updated: 260906**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-08-20"
+modifiedDate: "2026-09-11"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-11 18:32 | Source version: 5.89
+> Generated: 2026-09-11 19:33 | Source version: 5.90
 
 # QWU Backoffice User Manual
 
@@ -1274,6 +1274,32 @@ Claude executes without asking "May I run this command?" each time.
 3. **Be specific** in your requests - Claude works better with clear goals
 4. **Review changes** before approving in Normal Mode
 5. **Use Auto-accept** only for well-tested, repetitive workflows
+
+### Running Several Claude Subscriptions (Capacity Routing) ⭐
+
+Since 2026-09-09 the backoffice holds more than one Claude Max subscription (`tig@` = #1, `claude002@` = #2, each in its own `~/.claude*` config directory) and a small system decides which one every NEW session starts on. Nothing ever moves a RUNNING session.
+
+**The one rule:** a Max subscription is three limits with three reset clocks (5-hour session window, weekly all-models, weekly scoped to one model). The scoped weekly limit on Fable is the one that stops development work, so routing ranks on that "weakest link," only among accounts alive on every window.
+
+| Piece | Script | Cadence | What it does |
+|-------|--------|---------|--------------|
+| Gauge | `poll_claude_account_limits.py` | cron `*/20` | Reads every login's real limits from Anthropic (percentages, fail-loud, three states: ok / no room / cannot read); upserts `hq_claude_account_limits`; writes `.tmp/claude_capacity.json` |
+| Card | HQ `/subscriptions` + dashboard widget + mobile | live | "Most room now: <account>", every limit, reset clocks, BINDING marker, amber "unreadable since" note |
+| Brain | `pick_claude_account.py` | on demand | Prints the config dir a new session should use; `--explain` shows every account's standing; `--resume <id>` pins a conversation to the directory that holds it; any doubt = default account |
+| Terminal door | `launch_claude_session.sh` (`1`, `2`, `claude002`, or `--explain`) | on demand | Asks the picker, sets `CLAUDE_CONFIG_DIR`, execs `claude` |
+| Editor door | `install_claude_switchboard.py` | once | Launcher in front of the VS Code extension's bundled binary (all panels share ONE extension host, so this is the only seam); `--status` / `--uninstall` |
+| Repair | `repair_claude_switchboard.py` | cron `*/10` | Reinstalls after every extension update (numeric version compare); records repairs AND failed repairs to `hq_claude_runtime` |
+| Config sync | `sync_claude_account_config.py` | cron `*/10` | Symlinks the user layer (settings, skills, output styles, plugins, status line) into each secondary account; credentials + history stay separate |
+| Keep-alive | `keep_claude_tokens_alive.py` | cron `*/10` | Runs the official client once (one word, Haiku) on any login within 15 min of expiry; a live-but-idle session gets 15 min past expiry, then is renewed underneath |
+| Verify | `verify_claude_account.py` | after every login | Two directories, two account uuids ... or you have one subscription signed in twice |
+
+**Adding subscription three:** log in from a browser that has NEVER signed in to Claude (private windows share a session), with `CLAUDE_CONFIG_DIR=~/.claude-claude003 claude`, using a real `claude003@` alias (not a plus-address). Run `verify_claude_account.py`. That is the only human step; the poller, sync, and keep-alive discover the new directory on their own.
+
+**When something looks wrong:** `pick_claude_account.py --explain` first. An account showing "unreadable" on the card for more than one 10-minute upkeep cycle is a real fault (login gone, or the undocumented usage endpoint changed), not idleness.
+
+**Not the same thing as OpenRouter.** Scripts in the execution layer call any model per step through OpenRouter via `model_config.py` tiers. This system is for the interactive development sessions, which run on subscriptions.
+
+Depth: `005 Operations/Directives/claude_tool_wisdom.md` §Running several Max subscriptions (gotchas, the three silent faults). Deployed state: `002 Projects/_HQ Command Center/HQ-System-Status.md` §Claude Capacity Card. Public write-up with generalized code: Built from Broken Vol. 10 (transparency site).
 
 ### Agent Memory Architecture
 
@@ -4771,8 +4797,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.89 by generate_public_manual.py"
-generated: "2026-09-11 18:32"
+source: "Auto-generated from private manual v5.90 by generate_public_manual.py"
+generated: "2026-09-11 19:33"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12797,4 +12823,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-11 18:32 (v5.89)*
+*Last updated: 2026-09-11 19:33 (v5.90)*
