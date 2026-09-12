@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-11 19:33 | Source version: 5.90
+> Generated: 2026-09-12 02:37 | Source version: 5.91
 
 # QWU Backoffice User Manual
 
@@ -4797,8 +4797,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.90 by generate_public_manual.py"
-generated: "2026-09-11 19:33"
+source: "Auto-generated from private manual v5.91 by generate_public_manual.py"
+generated: "2026-09-12 02:37"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6537,8 +6537,25 @@ Same register + QCM consent gates as the weekly report, imported. TIG released a
 2026-09-11 with the rule that now governs every sender: **a blessed template sends itself; only
 agent-composed copy waits for his eyes.** It also writes `visitors.status='applied'` and the
 application category (never touching the visit-time `profession_category`). First live send: 10
-members, 2026-09-11. The in-app Membership Committee page (queue, in-app match resolution, Send
-button, five-button member answers) is in build from a kickoff written the same day.
+members, 2026-09-11.
+
+**The Membership Committee (MC) page in Quietly Networking (built 2026-09-11, under a testing lock).**
+Every request the script detects is mirrored into QNT (`membership_requests`, `membership_request_sends`,
+`membership_request_responses`, migration 028) and managed on `/membership`: the queue, a HOLD settled
+in-app (this visitor / park ... the next sweep acts on it exactly as the CLI flags do), a Send button
+that composes the sender's own functions (Preview first; consent resolves inside the imported resolver;
+a member who does not pass is refused by name), every member's answer WITH their name, and Close with
+the committee's decision. Members answer on `/membership/answer/<id>` with five buttons (Yes / No /
+Yes with a note / No with a note / I don't know them well enough); a bare Yes or No submits at once
+and "Can't answer right now" stores nothing. **The split is enforced by the database, not the screen:**
+the committee (`organizations.settings.membership_committee`, D-003) reads names; every other member
+reads only their own row and, once the request is closed, aggregate counts. `probe_qnt_membership_rls.py`
+proves it as synthetic users inside a rolled-back transaction. **Testing lock (TIG's rule for any
+member-facing system):** while `settings.membership_committee.testing` is set, every send from the page
+is rendered for its real member and delivered to TIG's inbox only; the unlock is his words after the
+committee and leadership have seen it. Committee named from the 2026-2027 Chapter Roles sheet
+(2026-09-12). Roadmap: `hq.quietlyworking.org/roadmap/aim-high-membership-committee` (public export on
+the portal). Detail: the project's System Status file under `002 Projects/`.
 
 > **Missing Pixel Training Opportunity (Tier 2: Contributor) ... Identity disambiguation**
 >
@@ -12823,4 +12840,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-11 19:33 (v5.90)*
+*Last updated: 2026-09-12 02:37 (v5.91)*
