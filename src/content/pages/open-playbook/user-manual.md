@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.82 | Started: 251223 | Updated: 260906**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-09-11"
+modifiedDate: "2026-09-21"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-12 02:37 | Source version: 5.91
+> Generated: 2026-09-21 16:46 | Source version: 5.92
 
 # QWU Backoffice User Manual
 
@@ -3349,9 +3349,9 @@ All execution scripts have been updated to use qwu_datetime:
 
 **Important:** Any new scripts MUST import from `qwu_datetime` instead of using `datetime.now()` directly. This ensures consistent timezone handling across the entire codebase.
 
-### Lovable Frontend Standard (Foundational Directive)
+### Frontend Timezone Standard (Foundational Directive)
 
-**Promoted to Foundational Directive:** February 13, 2026
+**Promoted to Foundational Directive:** February 13, 2026 · **Renamed 2026-09-21** ... this was titled "Lovable Frontend Standard" when every QWF app was built in Lovable. **Lovable was cancelled 2026-09-21 and no QWF app is hosted or edited there any more** (QKN + QTR, the last two, moved to Cloudflare Pages that night). The standard below is unchanged and still mandatory ... it now applies to every QWF frontend, React and SvelteKit alike, on whatever platform. Read "Lovable project" below as "QWF frontend app".
 
 The same timezone problem affects all QWF Lovable apps. JavaScript's `new Date().toISOString()` returns UTC. After 4 PM Pacific (midnight UTC), the UTC date flips to the next calendar day. Since Supabase stores dates in Pacific time, all Supabase date-boundary queries silently return wrong results for 8 hours every day. No errors are thrown — dashboards just show empty/stale data.
 
@@ -4797,8 +4797,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.91 by generate_public_manual.py"
-generated: "2026-09-12 02:37"
+source: "Auto-generated from private manual v5.92 by generate_public_manual.py"
+generated: "2026-09-21 16:46"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12840,4 +12840,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-12 02:37 (v5.91)*
+*Last updated: 2026-09-21 16:46 (v5.92)*
