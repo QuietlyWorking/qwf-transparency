@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-21 23:18 | Source version: 5.93
+> Generated: 2026-09-21 23:23 | Source version: 5.93
 
 # QWU Backoffice User Manual
 
@@ -4798,7 +4798,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.93 by generate_public_manual.py"
-generated: "2026-09-21 23:18"
+generated: "2026-09-21 23:23"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11046,7 +11046,7 @@ Centralized registry of all QWF apps with hosting, database, domain, and develop
 | Hosting | Framework | How to Make Changes | Deploy Process |
 |---------|-----------|-------------------|----------------|
 | **CF Pages** (every QWF app: QWR, QSP, L4G, QNT, WHL, AH, QQT, HQ, QKN, QTR, QOS, QST, QCM, Portal, QPN) | React (current) / SvelteKit (target) | Direct code commits to GitHub repo | Push to `main` → GitHub Actions → `wrangler pages deploy` (auto). QKN + QTR were the last two wired (2026-09-21). |
-| **Lovable** | — | **Retired 2026-09-21.** No QWF app is on Lovable; subscription cancelled (Free from 2026-09-28). Never write a Lovable prompt. | — |
+| **Lovable** | none | **Retired 2026-09-21.** No QWF app is on Lovable; subscription cancelled (Free from 2026-09-28). Never write a Lovable prompt. | none |
 
 **SvelteKit migration (decided 2026-04-11):** All supporter-facing apps migrate to SvelteKit before onboarding active supporters. Zero current supporters = zero risk window. QWB is the greenfield template app (P1). QSP migrates during Content tab build (P2). QWR migrates frontend (P3). Lovable apps (QQT/QKN/QTR) skip React entirely → go directly to SvelteKit/CF Pages (P4-6). **L4G SvelteKit migration complete (Session 216, Apr 12, 2026)** — `sveltekit-migration` branch merged to `main`, all 20 routes verified on production. SSR live (area demographics in HTML source). `deploy.yml` updated (output dir `.svelte-kit/cloudflare`, Supabase env vars as GH secrets). Host-based redirects via `hooks.server.ts`. HQ stays on Lovable. See `005 Operations/Directives/qwf_content_intelligence_platform.md`.
 
@@ -12840,4 +12840,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-21 23:18 (v5.93)*
+*Last updated: 2026-09-21 23:23 (v5.93)*
