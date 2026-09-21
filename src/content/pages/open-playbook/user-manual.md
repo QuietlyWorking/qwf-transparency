@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-21 16:46 | Source version: 5.92
+> Generated: 2026-09-21 23:18 | Source version: 5.93
 
 # QWU Backoffice User Manual
 
@@ -4797,8 +4797,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.92 by generate_public_manual.py"
-generated: "2026-09-21 16:46"
+source: "Auto-generated from private manual v5.93 by generate_public_manual.py"
+generated: "2026-09-21 23:18"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11026,13 +11026,13 @@ Centralized registry of all QWF apps with hosting, database, domain, and develop
 | App | Program | Hosting | Framework | GitHub Repo | Domain | Supabase Project | Stage |
 |-----|---------|---------|-----------|-------------|--------|------------------|-------|
 | **QWR** | Quietly Writing | CF Pages | React → SvelteKit (P3) | `quietly-writing` | `quietlywriting.org` | `<SUPABASE_PROJECT_ID>` | Production |
-| **QQT** | Quietly Quoting | Lovable | → SvelteKit (P4) | — | `quietlyquoting.org` | `<SUPABASE_PROJECT_ID>` | Beta |
+| **QQT** | Quietly Quoting | CF Pages | SvelteKit ✅ (cutover 2026-06-28) | `quietly-quoting` | `quietlyquoting.org` | `<SUPABASE_PROJECT_ID>` | Beta |
 | **QNT** | Quietly Networking | CF Pages | React | `quietly-networking` | `quietlynetworking.org` | `<SUPABASE_PROJECT_ID>` | Alpha |
-| **QKN** | Quietly Knocking | Lovable | → SvelteKit (P5) | — | `quietlyknocking.org` | `<SUPABASE_PROJECT_ID>` | Alpha |
+| **QKN** | Quietly Knocking | CF Pages (off Lovable 2026-09-21, CI wired same day) | React → SvelteKit (P5) | `quietly-knocking-bb01e834` (the unsuffixed `quietly-knocking` repo is archived) | `quietlyknocking.org` | `<SUPABASE_PROJECT_ID>` | Alpha |
 | **QSP** | Quietly Spotting | CF Pages | React → SvelteKit (P2) | `quietly-spotting` | `quietlyspotting.org` | `<SUPABASE_PROJECT_ID>` | Production |
-| **QTR** | Quietly Tracking | Lovable | → SvelteKit (P6) | — | `quietlytracking.org` | `<SUPABASE_PROJECT_ID>` | Foundation |
+| **QTR** | Quietly Tracking | CF Pages (off Lovable 2026-09-21, CI wired same day) | React → SvelteKit (P6) | `quietly-tracking` | `quietlytracking.org` | `<SUPABASE_PROJECT_ID>` | Foundation |
 | **L4G** | Locals 4 Good | CF Pages | SvelteKit ✅ | `locals4good` | `locals4good.org` | `<SUPABASE_PROJECT_ID_L4G>` | Beta |
-| **HQ** | Command Center | Lovable | Lovable (stay) | — | `hq.quietlyworking.org` | `<SUPABASE_PROJECT_ID>` (shared with QWR) | Production |
+| **HQ** | Command Center | CF Pages (off Lovable 2026-07-05) | React → SvelteKit (later) | `hq-command-center` | `hq.quietlyworking.org` | `<SUPABASE_PROJECT_ID>` (shared with QWR) | Production |
 | **WHL** | WHELHO | CF Pages | React | `whelho` | `whelho.org` | `nvimpjmhiondaxtrwlny` | Alpha |
 | **PEZ** | Pocket Ez | Lovable | — | — | — | `<SUPABASE_PROJECT_POCKET>` | Planned |
 | **QMP** | Missing Pixel | Lovable | — | — | — | `<SUPABASE_PROJECT_ID>` | Planned |
@@ -11045,8 +11045,8 @@ Centralized registry of all QWF apps with hosting, database, domain, and develop
 
 | Hosting | Framework | How to Make Changes | Deploy Process |
 |---------|-----------|-------------------|----------------|
-| **CF Pages** (QWR, QSP, L4G, QNT, WHL, AH) | React (current) / SvelteKit (target) | Direct code commits to GitHub repo | Push to `main` → GitHub Actions → `wrangler pages deploy` (auto) |
-| **Lovable** (HQ only) | React (Lovable-managed) | Write numbered Lovable prompt files | Paste prompt into Lovable editor → preview → deploy |
+| **CF Pages** (every QWF app: QWR, QSP, L4G, QNT, WHL, AH, QQT, HQ, QKN, QTR, QOS, QST, QCM, Portal, QPN) | React (current) / SvelteKit (target) | Direct code commits to GitHub repo | Push to `main` → GitHub Actions → `wrangler pages deploy` (auto). QKN + QTR were the last two wired (2026-09-21). |
+| **Lovable** | — | **Retired 2026-09-21.** No QWF app is on Lovable; subscription cancelled (Free from 2026-09-28). Never write a Lovable prompt. | — |
 
 **SvelteKit migration (decided 2026-04-11):** All supporter-facing apps migrate to SvelteKit before onboarding active supporters. Zero current supporters = zero risk window. QWB is the greenfield template app (P1). QSP migrates during Content tab build (P2). QWR migrates frontend (P3). Lovable apps (QQT/QKN/QTR) skip React entirely → go directly to SvelteKit/CF Pages (P4-6). **L4G SvelteKit migration complete (Session 216, Apr 12, 2026)** — `sveltekit-migration` branch merged to `main`, all 20 routes verified on production. SSR live (area demographics in HTML source). `deploy.yml` updated (output dir `.svelte-kit/cloudflare`, Supabase env vars as GH secrets). Host-based redirects via `hooks.server.ts`. HQ stays on Lovable. See `005 Operations/Directives/qwf_content_intelligence_platform.md`.
 
@@ -12840,4 +12840,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-21 16:46 (v5.92)*
+*Last updated: 2026-09-21 23:18 (v5.93)*
