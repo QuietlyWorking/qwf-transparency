@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.82 | Started: 251223 | Updated: 260906**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-09-21"
+modifiedDate: "2026-09-23"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-22 14:00 | Source version: 5.94
+> Generated: 2026-09-24 01:24 | Source version: 5.96
 
 # QWU Backoffice User Manual
 
@@ -2015,6 +2015,38 @@ python "005 Operations/Execution/calendar_events.py" --dry-run  # Validate crede
 python "005 Operations/Execution/calendar_events.py"            # Fetch today's events
 python "005 Operations/Execution/calendar_events.py" --json     # JSON output
 ```
+
+### Two calendar identities: the service account, and one person's consent (2026-09-23)
+
+Everything above runs as the **service account**, and that is still the default for every calendar write
+in the backoffice. It has exactly one thing it cannot do:
+
+> `403 forbiddenForServiceAccounts` ... *"Service accounts cannot invite attendees without Domain-Wide
+> Delegation of Authority."*
+
+It creates, moves and deletes events on a shared calendar all day. It cannot put an **attendee** on one.
+Discovered live while building the QNT mentor calendar invitation, on a throwaway event that was deleted.
+
+**Domain-Wide Delegation was rejected and should stay rejected by default.** It would let one key act as
+ANY person in the domain for the granted scope, which is the opposite of the narrow-identity discipline
+the calendar-only readers already follow. The narrow path instead:
+
+| Identity | Credential | Used for |
+|---|---|---|
+| Service account | `GOOGLE_CALENDAR_CREDENTIALS` | Every calendar read and write that carries NO attendee. Unchanged. |
+| One person's consent | `.credentials/google-calendar-oauth-token.json` (mode 600, scope `calendar.events` only) | ONLY a call that carries an attendee. |
+
+Set up with `005 Operations/Execution/setup_calendar_oauth.py`, which is two steps because the VM has no
+browser: `--url` prints the consent link, the browser lands on a localhost page that fails to load (this
+is correct), and `--code "<that whole URL>"` exchanges it. `--check` says whether the token works.
+`calendar_events.get_calendar_service_as_user()` reads it, and `calendar_booking.py` (v1.8.0+) takes
+`as_user=True` on `create_appointment` / `update_appointment` / `cancel_appointment` / `get_event`.
+**Callers pass it only when the call actually carries an attendee** ... never as a blanket default.
+
+**Proving an invitation works: never invite the organizer to their own event.** Google sends no
+invitation email to yourself, so a self-invite proves the mechanism and says nothing about delivery. Use
+a different address that still reaches only the tester (plus-addressing works), and expect three emails
+across create, move and delete.
 
 ### Google Calendar API Timestamp Gotcha (RFC3339)
 
@@ -4797,8 +4829,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.94 by generate_public_manual.py"
-generated: "2026-09-22 14:00"
+source: "Auto-generated from private manual v5.96 by generate_public_manual.py"
+generated: "2026-09-24 01:24"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12844,4 +12876,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-22 14:00 (v5.94)*
+*Last updated: 2026-09-24 01:24 (v5.96)*
