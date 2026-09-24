@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-24 01:24 | Source version: 5.96
+> Generated: 2026-09-24 01:25 | Source version: 5.96
 
 # QWU Backoffice User Manual
 
@@ -2047,6 +2047,20 @@ is correct), and `--code "<that whole URL>"` exchanges it. `--check` says whethe
 invitation email to yourself, so a self-invite proves the mechanism and says nothing about delivery. Use
 a different address that still reaches only the tester (plus-addressing works), and expect three emails
 across create, move and delete.
+
+#### MP Training Opportunities (from the 2026-09-23 calendar-invitation build)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|---|---|---|
+| **Differential testing of two implementations against ONE fixture** ... the same logic written in Python and TypeScript, pinned byte-for-byte, then fuzzed against each other | The highest-value lesson of the session. Five happy-path fixture cases looked like proof and were not: a fuzz over 143 inputs found six real divergences. Teaches that a passing test suite is a claim about the tests. | Advanced |
+| **Reading an API's actual error instead of reasoning about the design** | The whole feature was structurally impossible with the identity it ran as, and no amount of code review would have said so. One throwaway call to the real API did. | Intermediate |
+| **OAuth 2.0 consent on a machine with no browser** (auth URL, the loopback redirect that fails on purpose, exchanging the code, storing a refresh token at mode 600) | Every ops engineer meets this and most of them copy a snippet without understanding which half runs where. | Intermediate |
+| **Least-privilege identity choice under pressure** ... Domain-Wide Delegation was fewer clicks and was refused | Teaches that "it works" and "it is the right permission" are different questions, and how to say why in one sentence. | Intermediate |
+| **Two clocks are not one clock** ... a script-stamped column compared with a database-trigger-stamped one | A bug that had been latent for weeks and would have emailed a real person every night. Teaches reading a condition for who writes each side of it. | Advanced |
+| **RFC 5545 by hand** (CRLF, escaping, folding at 75 OCTETS without splitting a codepoint, UID and SEQUENCE semantics) | A real spec, small enough to read end to end, with a visible result in the student's own calendar. | Beginner to Intermediate |
+
+Portfolio value: high. The artifact is small, self-contained, testable, and the student can see the
+result land on their own phone.
 
 ### Google Calendar API Timestamp Gotcha (RFC3339)
 
@@ -4830,7 +4844,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.96 by generate_public_manual.py"
-generated: "2026-09-24 01:24"
+generated: "2026-09-24 01:25"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12876,4 +12890,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-24 01:24 (v5.96)*
+*Last updated: 2026-09-24 01:25 (v5.96)*
