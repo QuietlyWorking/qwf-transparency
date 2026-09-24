@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-24 01:25 | Source version: 5.96
+> Generated: 2026-09-24 02:02 | Source version: 5.97
 
 # QWU Backoffice User Manual
 
@@ -2061,6 +2061,20 @@ across create, move and delete.
 
 Portfolio value: high. The artifact is small, self-contained, testable, and the student can see the
 result land on their own phone.
+
+#### MP Training Opportunities (from the 2026-09-23 auto-save + walk-through-page build)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|---|---|---|
+| **Debounced auto-save as a state machine**, not a timer ... one save in flight, one more queued behind it, a status line that describes the SCREEN rather than the last request | The strongest unit of the session. The first version passed its own tests and still had two reachable bugs a fresh reviewer found: a success handler that printed "All changes saved." over an edit made while the request was in the air, and a validity gate that let one tap on a trash icon commit an empty list. Teaches that "the save succeeded" and "the screen is saved" are different claims. | Advanced |
+| **Writing a rule so the code cannot contradict the words on screen** ... the page says "Max is the most meetings within that particular window", so both booking engines were changed to count per window | Most students learn to make the copy match the code. This is the other direction, done deliberately and only when the words are right. Teaches reading a sentence as a specification. | Intermediate |
+| **Capturing product documentation from a demo lane with Playwright** (screens, a short clip, the notice rendered from the real composer with sample names) so no real person's data is ever in a public asset | A privacy rail a student can see and test: the same page, two data sources, one of which may never be published. | Intermediate |
+| **Verifying a generated clip's first AND last frame before publishing** (`ffmpeg -ss` / `-sseof` / `-frames:v 1`) | A two-second habit that caught an over-scrolled empty ending which the file size, the duration and the poster all called fine. | Beginner |
+| **Rendering someone else's blessed words verbatim** ... placeholders substituted, spelling fixed and disclosed, nothing "improved" | A professional discipline more than a technical one, and the one most students get wrong first. Pinned here by a test that asserts the rendered body equals the blessed string. | Beginner |
+| **Ground truth for a flag is the value the code reads, never a status document** | Learned the hard way this session: a status row said a feature was off while the environment and the code said it was on, and a person was offered a choice built on the wrong answer. | Intermediate |
+
+Portfolio value: high. Every unit is small, has a visible result, and the auto-save one is a real
+interview question with a real wrong answer.
 
 ### Google Calendar API Timestamp Gotcha (RFC3339)
 
@@ -4843,8 +4857,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.96 by generate_public_manual.py"
-generated: "2026-09-24 01:25"
+source: "Auto-generated from private manual v5.97 by generate_public_manual.py"
+generated: "2026-09-24 02:02"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6761,7 +6775,10 @@ chapter inherits ... see `feedback_build_qnt_features_against_tenant_db_not_vaul
 | Auto-send columns on the touch log | Deployed 2026-09-07, migration 025 |
 | Four confirmed mentors + their caps + availability tokens | Seeded |
 | Day-before reminders | Live on cron, first real send 2026-09-08 |
-| Every screen (Lead Mentor page, availability, scheduler, mentor form) | Not built ... kickoff written, hard date 2026-09-14 |
+| Every screen (Lead Mentor console, the mentor's availability page, the member's confirm / move page, the session form) | **Live on `quietlynetworking.org`** since 2026-09-09, extended through 2026-09-23 |
+| The mentor's availability page **saves itself** (no Save button; a status line says saved / not yet / failed) | Live 2026-09-23, TIG's ruling the same day |
+| Two public walk-through pages, `/mentor-meeting-how-to` (for members) and `/mentor-window-how-to` (for mentors) | Live 2026-09-23; nine scenes each, screens from the public demo chapter only |
+| Nightly booker (`qnt_mentor_scheduler.py`) | Built and dry-run clean; **no cron installed** ... it waits on TIG's "flip the scheduler" |
 
 ### The one script in this program that sends
 
@@ -12890,4 +12907,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-24 01:25 (v5.96)*
+*Last updated: 2026-09-24 02:02 (v5.97)*
