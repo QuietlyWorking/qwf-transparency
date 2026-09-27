@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-24 02:02 | Source version: 5.97
+> Generated: 2026-09-27 04:53 | Source version: 5.98
 
 # QWU Backoffice User Manual
 
@@ -4857,8 +4857,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.97 by generate_public_manual.py"
-generated: "2026-09-24 02:02"
+source: "Auto-generated from private manual v5.98 by generate_public_manual.py"
+generated: "2026-09-27 04:53"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -9267,6 +9267,38 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 
 Full design of record: `002 Projects/_Quietly Networking/QNT-System-Status.md` §Live Demo Mode.
 
+### Audit trail ... who changed what, when, from where, and why ⭐ NEW
+
+**Added: September 25, 2026** (first implementation of `005 Operations/Directives/qwf_audit_log_standard.md`)
+
+The QNT database now writes a permanent record of every change itself, in the same instant as the change. No page,
+script or agent can skip it, and nobody (not even the service key) can edit or delete a record.
+
+| What | Where |
+|---|---|
+| The record | `audit.trail` in the QNT database (schema `audit`, never exposed by the API) |
+| Which tables | `audit.table_policy`: 51 audited, 4 exempt with a written reason |
+| Who / where it came from | a person's login (`jwt`), our servers asserting the person (`asserted`, headers `x-qwf-actor` / `x-qwf-surface`), or the operator's `SET LOCAL qwf.*` (`context`); unknown is written `unattributed` |
+| Browser | `src/lib/createAppClient.ts` adds the page's surface to every REST call |
+| Edge functions | `supabase/functions/_shared/audit.ts` (19 functions) |
+| Backoffice scripts | `005 Operations/Execution/qwf_audit_headers.py`; `safe_run.sh` marks scheduled runs `qnt.cron.*` |
+| Reading it | History button on each pairing, History on member and visitor pages, the `/activity` page, the dashboard feed |
+
+**Operations:**
+- Prove any change to the trigger or a named action first: `.venv/bin/python "005 Operations/Execution/probe_qnt_audit_trail.py" --migration <file>` (rolled back, changes nothing).
+- Re-check live: `probe_qnt_audit_trail.py` (no flag) and `qnt_audit_smoke.py` (real, reverted writes on the test fixture).
+- A new table: add `SELECT audit.enroll('table');` (or `audit.exempt('table', 'why')`) to the migration that creates it.
+- If the record ever blocks saving: `002 Projects/_Quietly Networking/migrations/040-audit-trail-EMERGENCY-OFF.sql`.
+
+#### MP Training Opportunities (from the 2026-09-25 audit-trail build)
+
+| Task | Skills taught | Prerequisites | Time | Level |
+|---|---|---|---|---|
+| Read a record's history and explain each row (who, source, surface) | SQL reading, audit concepts | basic SQL | 1 h | Beginner |
+| Write a rolled-back proof for a database change | transactions, test design, Postgres roles | SQL, Python | 3 h | Intermediate |
+| Trace one action from a button to the trail row (browser header -> PostgREST -> trigger) | web requests, HTTP headers, triggers | JavaScript basics | 2 h | Intermediate |
+| Adversarial review: find how a record could lie (forged actor, leaked label, side-door read) | security thinking, RLS | Postgres RLS | 4 h | Advanced |
+
 ## QWR Content Performance Intelligence ⭐ NEW
 
 **Added: February 14, 2026**
@@ -12907,4 +12939,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-24 02:02 (v5.97)*
+*Last updated: 2026-09-27 04:53 (v5.98)*
