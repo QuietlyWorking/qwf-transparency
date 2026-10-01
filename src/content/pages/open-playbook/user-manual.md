@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-27 04:53 | Source version: 5.98
+> Generated: 2026-09-30 23:30 | Source version: 5.98
 
 # QWU Backoffice User Manual
 
@@ -4858,7 +4858,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v5.98 by generate_public_manual.py"
-generated: "2026-09-27 04:53"
+generated: "2026-09-30 23:30"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -4980,6 +4980,87 @@ Never write inline Graph sendMail or smtplib code. Import the transport. Footers
 | Inbound-vs-outbound blind spots | Bidirectional probe design, why a green dashboard can hide a dead channel, INDETERMINATE as a first-class state | ⭐⭐⭐ |
 | Suppression-list forensics | Bounce suppression mechanics, per-sender vs per-domain scoping, magic-link diagnosis, cadence-based silence detection | ⭐⭐⭐ |
 | Allow-list hygiene (measure before you widen) | Reading a vendor request critically, querying your own filter for evidence, least-privilege allow design (IP vs domain), declining a request with numbers instead of opinion | ⭐⭐⭐ |
+
+---
+
+## Contact-Detail Change Guard (`audit_contact_detail_changes.py`) ⭐ NEW
+
+### Overview
+
+A person's email address or phone number is how we reach them. When a bulk script rewrites one, the
+change is indistinguishable afterwards from the person having moved ... until mail starts landing in
+the wrong inbox and nobody can say when it started. This guard reads each app's own audit trail and
+names every contact-detail change that **no person in the app asked for**.
+
+### The rule
+
+The discriminator is `actor_kind` on the trail row, not the value and not a second system. `person`
+means a verified login inside the app made the change. Anything else (`system`, `agent`, `operator`,
+`anonymous`), or an `unattributed` actor_source, means no person asked.
+
+| Change | Meaning | Treated as |
+|--------|---------|-----------|
+| **overwrite** | a real value replaced by a different real value | **flagged** |
+| **clear** | a real value erased | **flagged** |
+| **fill** | a blank filled in | listed with `--include-fills`, never alerted |
+
+### Multi-tenancy
+
+Findings group by `org_id` and the check reads nothing but the app's own trail. No contact system of
+record is consulted on either side ... not QCM, not a supporter's CRM. Every tenant of a QWF app gets
+the identical feature and QWF's own tenant is not special-cased. Watched columns are derived live from
+`information_schema` joined to `audit.table_policy`, so a table added later is covered without anyone
+remembering to add it.
+
+### Running it
+
+```bash
+# what changed in the last day
+python "005 Operations/Execution/audit_contact_detail_changes.py" --since 1
+
+# include the blanks that were filled in
+python "005 Operations/Execution/audit_contact_detail_changes.py" --since 7 --include-fills
+
+# exit 1 if anything is flagged or any app could not be read
+python "005 Operations/Execution/audit_contact_detail_changes.py" --check
+```
+
+Scheduled daily at 06:15 Pacific with `--notify`. RECORD tier (Discord only) via
+`send_notification.py`; rules `contact_detail_changed_without_a_person` and
+`contact_detail_audit_blind`. **An app it cannot read raises its own alert and exits 1** ... a blind
+reader never reports all-clear.
+
+### Apps covered
+
+Only apps carrying the family audit trail. QNT today (first retrofit, live 2026-09-25); add an app to
+`REGISTRY` the day its trail ships.
+
+### Known limits
+
+- The trail only goes back to when it shipped, so nothing earlier is visible.
+- Some backoffice writers pass no surface or reason and land as `<app>.vault.unknown`. Pass
+  `audit_headers(surface=..., reason=...)` on every REST write so a flagged change names its author.
+
+#### MP Training Opportunities (from the 2026-09-30 contact-detail guard)
+
+| Unit | Skills taught | Level | ~Time | Why it's portfolio-worthy |
+|------|---------------|-------|-------|---------------------------|
+| **"Did we email them, and did they reply?"** ... answer it from a mail API rather than memory | REST APIs, OAuth app auth, pagination, date filtering, reading a result set critically | Beginner–Intermediate | 2–3 h | The most common real question in any org, and the one people most often answer from recall and get wrong. A student learns that *searching* a mailbox and *listing* it give different answers, and that "no reply found" is a claim needing evidence. |
+| **Reading an audit trail to find changes nobody asked for** | SQL joins, JSONB, `information_schema` introspection, distinguishing a fill from an overwrite | Intermediate | 3–4 h | Teaches that logs are only worth keeping if something reads them back, and that deriving the watch-list from the schema beats hard-coding it. |
+| **Design exercise: a shared feature for many tenants** | Multi-tenant architecture, avoiding single-customer code paths | Intermediate–Advanced | 1–2 h discussion | The original design put the check in one tenant's CRM. Moving it into the app ... where the evidence already lives ... made it work for everyone and removed the special case. A clean, small case study in "whose problem is this actually?" |
+
+**Teaching moment worth keeping:** the first two detector designs would not have caught the incident
+they were built for. Both systems held the *same wrong value*, so comparing them found nothing. The
+lesson is to derive a detector from the causal chain (what actually made the change) rather than from
+the symptom (what looked different afterwards) ... and to test any proposed check against the incident
+before building it.
+
+### Why it exists (Sep 30, 2026)
+
+A roster clean-up pass replaced an [Networking Chapter] member's years-old address of record on Aug 10, 2026.
+Seven weeks of her weekly reports went to the other inbox. **Both systems agreed on the wrong value**,
+so no cross-system comparison would have caught it ... the drift was ours, applied consistently. The
+trail had always recorded whether a person or a script was behind every write; nobody had read it back.
 
 ---
 
@@ -12939,4 +13020,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-27 04:53 (v5.98)*
+*Last updated: 2026-09-30 23:30 (v5.98)*
