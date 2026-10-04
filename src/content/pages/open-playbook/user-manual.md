@@ -2646,7 +2646,7 @@ Cron (2 AM Pacific, 15 videos) OR Cron (8 AM/2 PM/8 PM Pacific, 5 videos)
 
 **Article Template Sections (v1.3.0):** (1) Video Hero with Watch/Read toggle, (2) 2-column: Key Takeaways + Constellation preview with backlinks bar (pre-baked SVG), (3) Article body with sticky chapter nav + inline frames + clickable wiki links + "Read Next ↓" anchor in Chapters sidebar, (4) Read Next ... top 3 related articles with one-liners and shared tags, (5) "Echoes" ... authority-ranked wisdom from same expert, shared themes, AND full wisdom.db library (actionable wisdom gets gold #E8B833 border + lightning bolt; authority badges for vendor_official/expert_validated). Dark theme (#0a0a1a), PT Sans/PT Serif, #33e8d8 accent.
 
-**Attribution:** "Original video by [Channel Name](channel URL) -- Watch on YouTube" with both linked.
+**Attribution:** "Original video by [Channel Name](channel URL) ... Watch on YouTube" with both linked.
 
 **Data Files:**
 - Playlist mapping: `003 Entities/Taxonomies/chaplaintig_playlist_categories.yaml` (112 playlists, 10 clusters, zero unmapped)

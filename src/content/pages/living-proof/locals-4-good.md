@@ -162,7 +162,7 @@ SEP #D7CCC8  OCT #FFCC80  NOV #A5A58D  DEC #D4E6D4
     <div class="container">
         <h1>12 Monthly Colors - Soft Pastel Palette</h1>
         
-        <!-- Strip View -->
+        <!... Strip View ...>
         <div class="strip-view">
             <div class="color-strip" style="background-color: #E6F0F8;">
                 <span class="color-code">January - Frost Blue - #E6F0F8</span>
@@ -202,7 +202,7 @@ SEP #D7CCC8  OCT #FFCC80  NOV #A5A58D  DEC #D4E6D4
             </div>
         </div>
         
-        <!-- Grid View -->
+        <!... Grid View ...>
         <div class="grid-view">
             <div class="color-swatch" style="background-color: #E6F0F8;">
                 <span class="swatch-code">JAN #E6F0F8</span>

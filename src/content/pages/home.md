@@ -84,7 +84,7 @@ Org Name
 - org structure and tree
 - --what knowledge is needed and where to learn for each position
 - common questions and answers
-- -- copy unity grant question structure?
+- ... copy unity grant question structure?
 - SOP 
 - By position and referenced by function tags
 - What are the things we do?
