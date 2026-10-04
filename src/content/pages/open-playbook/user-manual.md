@@ -3661,11 +3661,11 @@ The L4G system includes:
 | `sync_hq_l4g.py` | HQ Operations module sync (every 15 min) | v1.1.0 |
 | `dispatch_l4g_category_notification.py` | Multi-channel admin notification (Discord + SMS) | v1.0.0 |
 | `send_l4g_concierge_response.py` | Auto-response email after category request resolution (Exempt, MS Graph) | v1.0.0 |
-| `import_l4g_postal_routes.py` | Import EDDM route CSV to l4g_postal_routes (--dry-run, --geocode, on_conflict upsert) | v1.1.0 |
+| `import_l4g_postal_routes.py` | Import EDDM route CSV to l4g_postal_routes (`--dry-run`, `--geocode`, on_conflict upsert) | v1.1.0 |
 | `extract_l4g_zip_boundaries.py` | Extract ZIP boundary GeoJSON from Census TIGER API | v1.0.0 |
-| `enrich_l4g_demographics.py` | Census ACS 5-Year enrichment (42 vars, batched). Flat JSONB output, column sync. Income, home values, education, occupation, housing age, vehicles, household profile, family stats, veterans. Home Services Score + Best For + market summary. Flags: --slug, --all, --dry-run | v2.0.0 |
-| `add_l4g_donor_booking.py` | Admin donor onboarding ... creates auth user, donor_partner, booking, ad_proof, updates inventory. For donors who commit outside website checkout (SuiteDash, phone, in-person). --dry-run, --send-welcome | v1.0.0 |
-| `upload_l4g_proof.py` | Upload proof image to Supabase Storage, update ad_proof record to 'submitted'. --booking-id, --image-path, --dry-run | v1.0.0 |
+| `enrich_l4g_demographics.py` | Census ACS 5-Year enrichment (42 vars, batched). Flat JSONB output, column sync. Income, home values, education, occupation, housing age, vehicles, household profile, family stats, veterans. Home Services Score + Best For + market summary. Flags: `--slug`, `--all`, `--dry-run` | v2.0.0 |
+| `add_l4g_donor_booking.py` | Admin donor onboarding ... creates auth user, donor_partner, booking, ad_proof, updates inventory. For donors who commit outside website checkout (SuiteDash, phone, in-person). `--dry-run`, `--send-welcome` | v1.0.0 |
+| `upload_l4g_proof.py` | Upload proof image to Supabase Storage, update ad_proof record to 'submitted'. `--booking-id`, `--image-path`, `--dry-run` | v1.0.0 |
 | `run_l4g_concept_pipeline.py` | End-to-end "MP Creates" AI pipeline: website enrichment → brand identity → 3 ad briefs → concept proof placeholders → donor notification (2x Claude FLAGSHIP) | v1.0.0 |
 | `process_l4g_concept_choice.py` | Process donor's concept selection ... marks chosen proof as in_progress, others as not_selected, updates booking to design_in_progress | v1.0.0 |
 | `send_l4g_conversation_email.py` | Email mirror for booking conversation threads (Exempt, MS Graph). Reply-To headers for email→thread routing, X-L4G-Booking-ID header | v1.1.0 |
