@@ -2048,6 +2048,21 @@ invitation email to yourself, so a self-invite proves the mechanism and says not
 a different address that still reaches only the tester (plus-addressing works), and expect three emails
 across create, move and delete.
 
+#### MP Training Opportunities (from the 2026-10-04 em-dash sweep and first Claude Code mod)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| A regex for a delimited block must be ANCHORED | ```` ```.*?``` ```` is not anchored to line starts, so it paired the wrong fences and quietly reclassified 213 lines of prose as code. The script then reported those as deliberately preserved. A perfect, self-contained lesson in why lazy matching is not the same as correct matching | Beginner |
+| Verify at the OUTPUT, never at the tool's own report | Four source sweeps all returned "clean" while the live page still showed the glyph. Re-running the script would never have found it; fetching the rendered page did it in one command. The habit generalises to every pipeline a student will ever build | Beginner |
+| A file in a repo is not a source of truth because the code imports it | Editing the site's data file changed nothing, because the deploy workflow overwrites it at build time from an API. Teaches students to read the build before deciding where content lives | Intermediate |
+| A literal-character search misses the escaped form | The same character was written `\u2014` in JSON, so a search for it returned zero while a browser rendered it perfectly. Teaches encoding-awareness concretely | Intermediate |
+| Never run a text transform over a file that is entirely code | A blind find-and-replace hit a regex character class and turned it into a syntax error. The build rejected it, which is its own lesson: your CI is a real safety net and you should want it strict | Intermediate |
+| Adding prevention upstream can silently blind an existing detector | A new filter rewrote the value before the old scanner read it, so the scanner matched nothing and alerted never, while both halves reported perfectly healthy. The only check that can see this asks "did the PAIR still catch it?" | Advanced |
+| Event-driven middleware, via a real Claude Code mod | `($, e, next)` is the same shape as Express, Rack and Django middleware. Observe, rewrite, or answer. A student who understands this one function signature understands a pattern that is everywhere | Advanced |
+| Reading the threat model of an extension system before installing anything | A mod is unsandboxed and bypasses every file-permission rule in the host config. Teaches students to ask "what can this reach?" before "what can this do?" | Advanced |
+
+**Most valuable MP exercise:** the sweep that kept lying. Give a student a source file with 200 em dashes, a cleaning script with the unanchored fence regex, and the live URL. Ask them to make the published page clean. The script will tell them they succeeded. The page will disagree. Every step of the correction is teachable, and it ends on the habit that matters most: **the tool's report is a proxy; the rendered output is the truth.**
+
 #### MP Training Opportunities (from the 2026-09-23 calendar-invitation build)
 
 | Skill / Pattern | Why It Teaches | Difficulty |
@@ -4872,7 +4887,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v6.00 by generate_public_manual.py"
-generated: "2026-10-04 08:24"
+generated: "2026-10-04 08:30"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13055,4 +13070,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-04 08:24 (v6.00)*
+*Last updated: 2026-10-04 08:30 (v6.00)*
