@@ -13,7 +13,7 @@ isHome: false
 
 **Version:** 1.1.0
 **Last Updated:** 2026-04-07
-**Published by:** Quietly Working Foundation (QWF) — [quietlyworking.org](https://quietlyworking.org)
+**Published by:** Quietly Working Foundation (QWF) ... [quietlyworking.org](https://quietlyworking.org)
 **Part of:** [QWU Public Transparency Project](https://github.com/QuietlyWorking)
 
 ---
@@ -35,7 +35,7 @@ This document gives you the complete architecture of a content intelligence syst
 
 Every component is documented with enough detail that you can hand a section to your own Claude instance and say: "Help me implement this pattern for my use case."
 
-We built this at QWF — the Quietly Working Foundation, a 501(c)(3) nonprofit that runs 7 fundraising programs. We're publishing it because our mission is to help others, and this system has proven valuable enough that other developers have asked how it works. So here it is. All of it.
+We built this at QWF ... the Quietly Working Foundation, a 501(c)(3) nonprofit that runs 7 fundraising programs. We're publishing it because our mission is to help others, and this system has proven valuable enough that other developers have asked how it works. So here it is. All of it.
 
 ---
 
@@ -43,27 +43,27 @@ We built this at QWF — the Quietly Working Foundation, a 501(c)(3) nonprofit t
 
 1. [Why We Built This](#why-we-built-this)
 2. [The 30-Second Overview](#the-30-second-overview)
-3. [The 3-Layer Architecture — The Foundation Everything Runs On](#the-3-layer-architecture)
-4. [The Full Pipeline — Stage by Stage](#the-full-pipeline)
-   - [Stage 1: The Wisdom Library — Institutional Knowledge That Compounds](#stage-1-the-wisdom-library)
-   - [Stage 2: Video Processing — Gemini Watches, Claude Analyzes](#stage-2-video-processing)
-   - [Stage 3: Frame Extraction — Gemini Sees, ffmpeg Captures, Gemini Vision Verifies](#stage-3-frame-extraction)
-   - [Stage 4: Article Building — 10 Enhancements for WordPress](#stage-4-article-building)
-   - [Stage 5: Content Atoms — Decomposition for Scale](#stage-5-content-atoms)
-   - [Stage 6: Program Routing — The Big Why Engine](#stage-6-program-routing)
-   - [Stage 7: Voice Adaptation — Same Idea, Different Personality](#stage-7-voice-adaptation)
-   - [Stage 8: Human-in-the-Loop — The HQ Command Center](#stage-8-human-in-the-loop)
-   - [Stage 9: Automated Distribution — Vista Social at Scale](#stage-9-automated-distribution)
+3. [The 3-Layer Architecture ... The Foundation Everything Runs On](#the-3-layer-architecture)
+4. [The Full Pipeline ... Stage by Stage](#the-full-pipeline)
+   - [Stage 1: The Wisdom Library ... Institutional Knowledge That Compounds](#stage-1-the-wisdom-library)
+   - [Stage 2: Video Processing ... Gemini Watches, Claude Analyzes](#stage-2-video-processing)
+   - [Stage 3: Frame Extraction ... Gemini Sees, ffmpeg Captures, Gemini Vision Verifies](#stage-3-frame-extraction)
+   - [Stage 4: Article Building ... 10 Enhancements for WordPress](#stage-4-article-building)
+   - [Stage 5: Content Atoms ... Decomposition for Scale](#stage-5-content-atoms)
+   - [Stage 6: Program Routing ... The Big Why Engine](#stage-6-program-routing)
+   - [Stage 7: Voice Adaptation ... Same Idea, Different Personality](#stage-7-voice-adaptation)
+   - [Stage 8: Human-in-the-Loop ... The HQ Command Center](#stage-8-human-in-the-loop)
+   - [Stage 9: Automated Distribution ... Vista Social at Scale](#stage-9-automated-distribution)
    - [Stage 10: Tracking and the Feedback Loop](#stage-10-tracking)
-5. [The Content Calendar — Scheduled Publishing](#the-content-calendar)
-6. [Social Post Quality Gates — Voice Integrity at Scale](#social-post-quality-gates)
-7. [The Feeder Network — How the Wisdom Library Gets Fed](#the-feeder-network)
-8. [Tool Wisdom Libraries — Deep Dive](#tool-wisdom-libraries)
-9. [The Model Strategy — Quality First](#the-model-strategy)
-10. [Our QWU Toolstack — What We Use and Why](#our-toolstack)
+5. [The Content Calendar ... Scheduled Publishing](#the-content-calendar)
+6. [Social Post Quality Gates ... Voice Integrity at Scale](#social-post-quality-gates)
+7. [The Feeder Network ... How the Wisdom Library Gets Fed](#the-feeder-network)
+8. [Tool Wisdom Libraries ... Deep Dive](#tool-wisdom-libraries)
+9. [The Model Strategy ... Quality First](#the-model-strategy)
+10. [Our QWU Toolstack ... What We Use and Why](#our-toolstack)
 11. [Gotchas, Learnings, and Things That Bit Us](#gotchas-and-learnings)
-12. [Decision Tree — What Do You Actually Need?](#decision-tree)
-13. [Implementation Recipes — Copy-Paste to Claude](#implementation-recipes)
+12. [Decision Tree ... What Do You Actually Need?](#decision-tree)
+13. [Implementation Recipes ... Copy-Paste to Claude](#implementation-recipes)
 14. [Cost Reality Check](#cost-reality-check)
 15. [Script Inventory](#script-inventory)
 
@@ -75,7 +75,7 @@ The Quietly Working Foundation runs 7 fundraising programs, each serving a diffe
 
 | Program | Code | Audience | Voice |
 |---------|------|----------|-------|
-| Quietly Working Foundation | QWF | Broad — youth empowerment supporters | TIG Standard (quiet strength) |
+| Quietly Working Foundation | QWF | Broad ... youth empowerment supporters | TIG Standard (quiet strength) |
 | The Missing Pixel Project | MP | Underserved youth discovering creative careers + creative industry mentors | TIG Standard (student focus) |
 | War on Hopelessness | WOH | Adversity survivors, empowerment community | WOH Combat (loud, defiant) |
 | Locals 4 Good | L4G | Local business owners | L4G B2B (professional confidence) |
@@ -85,7 +85,7 @@ The Quietly Working Foundation runs 7 fundraising programs, each serving a diffe
 
 That's 7 audiences, 25+ social profiles, 5 platforms (Instagram, Twitter/X, LinkedIn, Facebook, TikTok), and 3 distinct brand voices.
 
-Our founder, Chaplain TIG, creates content daily — primarily through curating and analyzing YouTube videos from experts across technology, creativity, business, and leadership. Before this system, sharing one video with all programs meant manually rewriting the same idea 15-20 different ways. The result was predictable: 2-3 posts per video, inconsistent voice, forgotten channels, no tracking, and massive waste of the insights contained in every video.
+Our founder, Chaplain TIG, creates content daily ... primarily through curating and analyzing YouTube videos from experts across technology, creativity, business, and leadership. Before this system, sharing one video with all programs meant manually rewriting the same idea 15-20 different ways. The result was predictable: 2-3 posts per video, inconsistent voice, forgotten channels, no tracking, and massive waste of the insights contained in every video.
 
 **The vision (from Grace Andrews, former Brand Director of Diary of a CEO):**
 
@@ -133,13 +133,13 @@ YouTube Video
 [TRACKING] Distribution log + HQ Supabase records + Discord transparency notifications
 ```
 
-**The human touches the pipeline exactly once — at the HQ approval stage.** Everything before is automated preparation. Everything after is automated execution.
+**The human touches the pipeline exactly once ... at the HQ approval stage.** Everything before is automated preparation. Everything after is automated execution.
 
 ---
 
 ## The 3-Layer Architecture
 
-This is the foundation of the QWU Backoffice. It's not specific to content — it's a general pattern for making AI automation reliable. Every system we build follows this structure.
+This is the foundation of the QWU Backoffice. It's not specific to content ... it's a general pattern for making AI automation reliable. Every system we build follows this structure.
 
 ### Why AI Alone Isn't Enough
 
@@ -198,7 +198,7 @@ You don't notice failures immediately. They compound silently until something vi
 5. Updates the directive with what was learned
 6. The system is now stronger than before
 
-Every failure makes the system more robust. Our directives are living documents — their changelogs read like a history of everything we've learned the hard way.
+Every failure makes the system more robust. Our directives are living documents ... their changelogs read like a history of everything we've learned the hard way.
 
 ### What This Looks Like on Disk (QWU Backoffice)
 
@@ -227,13 +227,13 @@ qwu_backOffice/
 >
 > *Paste this into your Claude instance along with your use case description:*
 >
-> "I want to set up a 3-layer architecture for AI-assisted automation. Layer 1: Markdown directive files that define what to do (goals, inputs, steps, outputs, edge cases). Layer 2: You (Claude) as the orchestrator — read directives, call scripts, handle errors, update directives with learnings. Layer 3: Python scripts that take inputs and return `{success: bool, data: any, error: str|null}`. My use case is: [DESCRIBE]. Create the folder structure, a template directive, and a template execution script."
+> "I want to set up a 3-layer architecture for AI-assisted automation. Layer 1: Markdown directive files that define what to do (goals, inputs, steps, outputs, edge cases). Layer 2: You (Claude) as the orchestrator ... read directives, call scripts, handle errors, update directives with learnings. Layer 3: Python scripts that take inputs and return `{success: bool, data: any, error: str|null}`. My use case is: [DESCRIBE]. Create the folder structure, a template directive, and a template execution script."
 
 ---
 
-## The Full Pipeline — Stage by Stage
+## The Full Pipeline ... Stage by Stage
 
-### Stage 1: The Wisdom Library — Institutional Knowledge That Compounds
+### Stage 1: The Wisdom Library ... Institutional Knowledge That Compounds
 
 Before content creation comes knowledge accumulation. The Wisdom Library is a searchable SQLite database of classified insights extracted from every piece of content that flows through the system.
 
@@ -306,7 +306,7 @@ Not all knowledge is equal. A tip from Supabase's official blog carries more wei
 
 The indexer (`wisdom_indexer.py` v1.9.0) uses Claude Opus for classification. Why the most expensive model? Because misclassified wisdom compounds into bad recommendations downstream. The marginal cost difference is dollars; the quality difference is the entire system's reliability.
 
-**Speaker attribution — a hard-won lesson:**
+**Speaker attribution ... a hard-won lesson:**
 
 Early versions assigned all quotes from a video to the channel owner. But many videos feature interviews or multiple speakers. Version 1.9.0 added per-quote speaker attribution: the indexer parses `quotes.md` for attribution markers, cross-references with `_metadata.json` for channel/expert mapping, and sets authority levels per speaker. A vendor CEO's statement about their own product gets `vendor_official` weight; a commentator's observation gets `expert_validated`.
 
@@ -322,7 +322,7 @@ For stable tools (e.g., ffmpeg, SQLite), the decay timeline is much longer.
 
 > **Implementation Recipe: Wisdom Library**
 >
-> "I want to build a wisdom library — a SQLite database that stores classified insights from content I consume. Each entry needs: insight text, expert name, source URL/title/date, topics (many-to-many), tools referenced (many-to-many with version), authority level (official/expert/community/self), actionability flag, and a timestamp for video deep-links. I need: (1) the SQLite schema, (2) a Python indexing script that uses Claude to extract and classify insights from text, (3) a query utility for filtering. My main content sources are: [LIST YOURS]."
+> "I want to build a wisdom library ... a SQLite database that stores classified insights from content I consume. Each entry needs: insight text, expert name, source URL/title/date, topics (many-to-many), tools referenced (many-to-many with version), authority level (official/expert/community/self), actionability flag, and a timestamp for video deep-links. I need: (1) the SQLite schema, (2) a Python indexing script that uses Claude to extract and classify insights from text, (3) a query utility for filtering. My main content sources are: [LIST YOURS]."
 
 ---
 
@@ -333,8 +333,8 @@ This is where raw YouTube videos become structured content assets.
 **Script:** `process_video_content.py` (v2.5.0)
 
 **Why two AI models?** Each does what it's best at:
-- **Google Gemini** (multimodal): Can literally "watch" a video — processing both the audio AND visual track simultaneously. No other model does this at the same quality. It handles transcription with visual context awareness.
-- **Claude Opus** (flagship): Takes the transcript and generates the actual content — article drafts, social snippets, intelligence analysis. Claude's writing quality and analytical depth are superior for these tasks.
+- **Google Gemini** (multimodal): Can literally "watch" a video ... processing both the audio AND visual track simultaneously. No other model does this at the same quality. It handles transcription with visual context awareness.
+- **Claude Opus** (flagship): Takes the transcript and generates the actual content ... article drafts, social snippets, intelligence analysis. Claude's writing quality and analytical depth are superior for these tasks.
 
 **The processing pipeline, step by step:**
 
@@ -353,7 +353,7 @@ This is stored in `_metadata.json` as ground truth. **This step exists because o
 
 Gemini receives the full video file and produces:
 - Complete transcript with timestamps
-- Key visual moments (timestamps where informational content appears on screen — charts, diagrams, UI demonstrations)
+- Key visual moments (timestamps where informational content appears on screen ... charts, diagrams, UI demonstrations)
 - Content summary
 - Speaker identification (for multi-speaker videos)
 
@@ -368,7 +368,7 @@ Claude receives the transcript and ground truth metadata, then generates five ou
 | `article.md` | Long-form article draft | 1,500-3,000 word article with headers, wiki links, and frontmatter |
 | `social.md` | Social media snippets | Platform-aware posts (Instagram, Twitter, LinkedIn, Facebook) |
 | `quotes.md` | Key quotes | 5-8 timestamped quotes with speaker attribution |
-| `intel.md` | Internal intelligence | Observations not suitable for publishing — analysis, opportunities, competitive notes |
+| `intel.md` | Internal intelligence | Observations not suitable for publishing ... analysis, opportunities, competitive notes |
 | `_metadata.json` | Structured metadata | Topics, categories, visual richness assessment, expert mappings |
 
 **Step 4: Visual Richness Assessment**
@@ -378,7 +378,7 @@ Claude analyzes the transcript and determines a `visual_richness` score:
 - **low:** Some visual content mixed with talking head (extract selectively)
 - **none:** Pure talking head (skip frame extraction, use YouTube thumbnails)
 
-This assessment gates Stage 3 (Frame Extraction) — no point downloading a 2-hour podcast just to capture frames of two people sitting in chairs.
+This assessment gates Stage 3 (Frame Extraction) ... no point downloading a 2-hour podcast just to capture frames of two people sitting in chairs.
 
 **Step 5: Wisdom Indexing**
 
@@ -409,7 +409,7 @@ The `tig_video_pipeline_orchestrator.py` (v1.5.0) runs on a cron schedule and:
 3. Runs the full pipeline on each new video
 4. Creates WordPress draft posts on chaplaintig.com
 5. Inserts approval requests into the HQ Command Center (via Supabase)
-6. Sends a Discord notification for transparency (read-only — not for commands)
+6. Sends a Discord notification for transparency (read-only ... not for commands)
 
 Processing volume: 20-40+ videos per day.
 
@@ -419,7 +419,7 @@ Processing volume: 20-40+ videos per day.
 
 ---
 
-### Stage 3: Frame Extraction — Gemini Sees, ffmpeg Captures, Gemini Vision Verifies
+### Stage 3: Frame Extraction ... Gemini Sees, ffmpeg Captures, Gemini Vision Verifies
 
 This is one of the most technically interesting parts of the system. It uses AI at three different points in a single pipeline.
 
@@ -427,9 +427,9 @@ This is one of the most technically interesting parts of the system. It uses AI 
 
 **The two-phase approach:**
 
-#### Phase 1: Smart Timestamp Selection (Gemini — During Video Watching)
+#### Phase 1: Smart Timestamp Selection (Gemini ... During Video Watching)
 
-When Gemini transcribes the video (Stage 2), it simultaneously identifies `key_visual_moments` — timestamps where informative visual content appears on screen. The prompt includes:
+When Gemini transcribes the video (Stage 2), it simultaneously identifies `key_visual_moments` ... timestamps where informative visual content appears on screen. The prompt includes:
 
 ```
 ## Key Visual Moments for Frame Extraction
@@ -486,7 +486,7 @@ The fix: Phase 2 now receives Phase 1's description of what should be at that ti
 
 **Real-world results from testing:**
 
-Processing a photography tutorial video: 29 frames extracted → 11 kept (informational: charts, UI screenshots, comparison images) → 18 filtered (13 talking heads, 5 generic b-roll). That's a 62% rejection rate — without verification, the article would have been cluttered with useless screenshots.
+Processing a photography tutorial video: 29 frames extracted → 11 kept (informational: charts, UI screenshots, comparison images) → 18 filtered (13 talking heads, 5 generic b-roll). That's a 62% rejection rate ... without verification, the article would have been cluttered with useless screenshots.
 
 **Caption quality:**
 
@@ -495,7 +495,7 @@ Phase 2 also generates captions for approved frames. We discovered that Phase 1 
 - **Phase 2 caption (single frame):** "Capitalized word PASSION is visible"
 - **Phase 1 caption (video context):** "Reynolds reveals comedy was never his passion... it was survival"
 
-Content type tags (CHART, DIAGRAM, etc.) are stripped from displayed captions — they're metadata for the system, not reader-facing text.
+Content type tags (CHART, DIAGRAM, etc.) are stripped from displayed captions ... they're metadata for the system, not reader-facing text.
 
 **Frame naming convention:**
 
@@ -507,11 +507,11 @@ Content type tags (CHART, DIAGRAM, etc.) are stripped from displayed captions �
 
 > **Implementation Recipe: Intelligent Frame Extraction**
 >
-> "I want to extract informational frames from YouTube videos — not talking heads, not b-roll, but charts, diagrams, UI demos, and comparison shots. I need a two-phase approach: (1) During transcription, have Gemini identify timestamps with visual content and classify what's on screen, (2) After extracting frames with ffmpeg, verify each with Gemini Vision — only keep frames classified as 'informational.' Phase 2 should receive Phase 1's description as context to prevent false rejections. Show me how to build both phases and the fallback path when video download fails."
+> "I want to extract informational frames from YouTube videos ... not talking heads, not b-roll, but charts, diagrams, UI demos, and comparison shots. I need a two-phase approach: (1) During transcription, have Gemini identify timestamps with visual content and classify what's on screen, (2) After extracting frames with ffmpeg, verify each with Gemini Vision ... only keep frames classified as 'informational.' Phase 2 should receive Phase 1's description as context to prevent false rejections. Show me how to build both phases and the fallback path when video download fails."
 
 ---
 
-### Stage 4: Article Building — 10 Enhancements for WordPress
+### Stage 4: Article Building ... 10 Enhancements for WordPress
 
 The article builder transforms processed content into a richly enhanced WordPress blog post, formatted for the Divi theme on chaplaintig.com.
 
@@ -523,13 +523,13 @@ The article builder transforms processed content into a richly enhanced WordPres
 |---|------------|-------------|
 | 1 | **Watch/Read Toggle** | Hero section with embedded YouTube player + one-click toggle between watching the video and reading the article. Displays duration and word count so the reader can choose. |
 | 2 | **Timestamped Chapters** | Chapter navigation generated from article headers. Each chapter links to the corresponding timestamp in the YouTube video for instant deep-linking. |
-| 3 | **Key Takeaways** | 3-5 bullet-point takeaways displayed prominently above the article body. Generated from article analysis — the "if you read nothing else, read this" section. |
-| 4 | **TIG Izm Pull-Quotes** | For videos from TIG's own YouTube channel, quotes are styled as "TIG Izms" — aphoristic pull-quotes that punctuate the article. |
+| 3 | **Key Takeaways** | 3-5 bullet-point takeaways displayed prominently above the article body. Generated from article analysis ... the "if you read nothing else, read this" section. |
+| 4 | **TIG Izm Pull-Quotes** | For videos from TIG's own YouTube channel, quotes are styled as "TIG Izms" ... aphoristic pull-quotes that punctuate the article. |
 | 5 | **Ideas Connected Constellation** | A visual map showing how this article's concepts connect to other articles on chaplaintig.com. Uses a knowledge graph database (`tig_graph.db`) to find semantic connections. |
-| 6 | **Echoes (Quote Threads)** | When a quote in the current article echoes wisdom from other articles, the system surfaces those connections — "This idea connects to what [Expert B] said about [Topic]." Powered by the wisdom library. |
-| 7 | **SEO VideoObject (JSON-LD)** | Structured data for Google's video rich results. Includes video title, description, thumbnails, duration, upload date — generated automatically from metadata. |
+| 6 | **Echoes (Quote Threads)** | When a quote in the current article echoes wisdom from other articles, the system surfaces those connections ... "This idea connects to what [Expert B] said about [Topic]." Powered by the wisdom library. |
+| 7 | **SEO VideoObject (JSON-LD)** | Structured data for Google's video rich results. Includes video title, description, thumbnails, duration, upload date ... generated automatically from metadata. |
 | 8 | **Clickable Wiki Links** | Concepts mentioned in the article that have their own articles on chaplaintig.com become clickable links. The `tig_graph.db` provides the lookup: concept name → WordPress post URL. |
-| 9 | **Read Next** | Related article suggestions based on the constellation map — not random, but semantically connected content. |
+| 9 | **Read Next** | Related article suggestions based on the constellation map ... not random, but semantically connected content. |
 | 10 | **Backlink Awareness** | The article knows which other articles link TO it. This enables "Referenced by" sections and helps with internal linking strategy. |
 
 **How verified frames appear in articles:**
@@ -556,7 +556,7 @@ When a new article is built, it's registered in the graph, edges are computed, a
 
 ---
 
-### Stage 5: Content Atoms — Decomposition for Scale
+### Stage 5: Content Atoms ... Decomposition for Scale
 
 Instead of treating each video as "one thing that gets one social post," we decompose it into reusable atoms that can be reassembled in different combinations for different audiences.
 
@@ -573,20 +573,20 @@ Instead of treating each video as "one thing that gets one social post," we deco
 
 **Molecules (program-specific posts) assembled from atoms:**
 
-- **chaplaintig.com** — Full article (all atoms) + video clip for social promotion
-- **QWF social** — Core insight + Big Why (foundation-level) + verified frame + article link
-- **MP social** — Core insight + Big Why (student opportunity) + quotable moment + video clip
-- **WOH social** — Core insight rewritten in Combat voice + Big Why + video clip
-- **L4G social** — Core insight + Big Why (business application) + verified frame (only if business-relevant)
-- **IYSR social** — Core insight + Big Why (YSO partnership value) + link
-- **QWC social** — Core insight + Big Why (creative industry angle) + frame
-- **ACOFH** — Only if grief/service-relevant. Reverent tone. NEVER auto-routed.
+- **chaplaintig.com** ... Full article (all atoms) + video clip for social promotion
+- **QWF social** ... Core insight + Big Why (foundation-level) + verified frame + article link
+- **MP social** ... Core insight + Big Why (student opportunity) + quotable moment + video clip
+- **WOH social** ... Core insight rewritten in Combat voice + Big Why + video clip
+- **L4G social** ... Core insight + Big Why (business application) + verified frame (only if business-relevant)
+- **IYSR social** ... Core insight + Big Why (YSO partnership value) + link
+- **QWC social** ... Core insight + Big Why (creative industry angle) + frame
+- **ACOFH** ... Only if grief/service-relevant. Reverent tone. NEVER auto-routed.
 
 **The compounding effect:** One 20-minute YouTube video → 6 content atoms → 7 possible program molecules → 5 platforms each → up to 35 unique posts (in practice, 15-25 after routing filters out irrelevant programs).
 
 ---
 
-### Stage 6: Program Routing — The Big Why Engine
+### Stage 6: Program Routing ... The Big Why Engine
 
 **Script:** `route_content_programs.py` (v1.0.0)
 
@@ -596,11 +596,11 @@ Every cross-program share MUST have a program-specific "Big Why" statement. Not 
 
 **Bad (generic):** "Check out this great video about AI!"
 
-**Good (Big Why for MP — student program):** "This researcher just proved that small creative studios can now do what only Hollywood VFX houses could do 3 years ago — and that's exactly the opportunity our students are training to seize."
+**Good (Big Why for MP ... student program):** "This researcher just proved that small creative studios can now do what only Hollywood VFX houses could do 3 years ago ... and that's exactly the opportunity our students are training to seize."
 
-**Good (Big Why for L4G — business program):** "If your local business isn't using these AI tools yet, your competitor across town will be by next quarter. Here's what to prioritize."
+**Good (Big Why for L4G ... business program):** "If your local business isn't using these AI tools yet, your competitor across town will be by next quarter. Here's what to prioritize."
 
-**Good (Big Why for WOH — combat voice):** "They said only big studios could do this. They were WRONG. And you don't need their permission to prove it."
+**Good (Big Why for WOH ... combat voice):** "They said only big studios could do this. They were WRONG. And you don't need their permission to prove it."
 
 Same video. Three completely different angles. Each one speaks directly to its audience's values and concerns.
 
@@ -610,7 +610,7 @@ Same video. Three completely different angles. Each one speaks directly to its a
 2. Load all 7 program definitions (audience description, content affinity rules, sensitivity gates)
 3. Single Claude Opus call with atoms + program descriptions → relevance score 0.0-1.0 per program with reasoning
 4. Apply hard gates:
-   - ACOFH has `never_share_outward` — content from other programs NEVER auto-routes there
+   - ACOFH has `never_share_outward` ... content from other programs NEVER auto-routes there
    - Minimum threshold: 0.3 (below this = not relevant enough)
    - Grief/loss content → manual review flag regardless of routing
    - Controversial topics → per-platform approval required
@@ -646,19 +646,19 @@ Claude fills `{specific_reason}`, `{what_changed}`, and `{application}` from the
 |---------|--------------|-----------------|
 | QWF | TIG Standard | Minor tone adjustment |
 | MP | TIG Standard | Minor (student-focused) |
-| WOH | WOH Combat | Full concept rewrite — different energy entirely |
-| L4G | L4G B2B | Full rewrite — business-first framing |
+| WOH | WOH Combat | Full concept rewrite ... different energy entirely |
+| L4G | L4G B2B | Full rewrite ... business-first framing |
 | ACOFH | Reverent (TIG Standard variant) | Manual gate required |
 | IYSR | TIG Standard | Minor (partnership-focused) |
 | QWC | TIG Standard | Minor (creative angle) |
 
 > **Implementation Recipe: Content Router + Big Why Engine**
 >
-> "I have [N] audience segments. Each has a description, content affinity profile, and voice assignment. Given content atoms (core insight, key facts, quotes), I need a router that: (1) scores relevance 0.0-1.0 per segment using Claude, (2) applies minimum thresholds and hard gates (one segment should never receive auto-routed content), (3) generates a 'Big Why' statement per qualifying segment using templates with fill-in variables. The Big Why must explain why THIS content matters to THAT audience — never generic. Store routing decisions in metadata JSON. Template library in a separate JSON file."
+> "I have [N] audience segments. Each has a description, content affinity profile, and voice assignment. Given content atoms (core insight, key facts, quotes), I need a router that: (1) scores relevance 0.0-1.0 per segment using Claude, (2) applies minimum thresholds and hard gates (one segment should never receive auto-routed content), (3) generates a 'Big Why' statement per qualifying segment using templates with fill-in variables. The Big Why must explain why THIS content matters to THAT audience ... never generic. Store routing decisions in metadata JSON. Template library in a separate JSON file."
 
 ---
 
-### Stage 7: Voice Adaptation — Same Idea, Different Personality
+### Stage 7: Voice Adaptation ... Same Idea, Different Personality
 
 **Script:** `adapt_content_voice.py` (v1.0.0)
 
@@ -668,7 +668,7 @@ This is where one piece of content becomes many, each speaking in the right voic
 
 | Voice | Programs | Energy | Key Traits | Punctuation |
 |-------|----------|--------|-----------|-------------|
-| TIG Standard | QWF, MP, IYSR, QWC, ACOFH (reverent) | Quiet strength | Vulnerable warrior, nerdy mystic, authentic vulnerability | Ellipsis (...) always — NEVER em dashes |
+| TIG Standard | QWF, MP, IYSR, QWC, ACOFH (reverent) | Quiet strength | Vulnerable warrior, nerdy mystic, authentic vulnerability | Ellipsis (...) always ... NEVER em dashes |
 | WOH Combat | WOH | Loud action | Battle cry, combat verbs, defiant, calls to action | Exclamation points OK, short punchy sentences |
 | L4G B2B | L4G | Professional confidence | Business-value-first, ROI-focused, minimal emoji | Clean, professional, no spirituality |
 
@@ -676,7 +676,7 @@ This is where one piece of content becomes many, each speaking in the right voic
 
 | Platform | Char Limit | Hashtags | Emoji | Key Rule |
 |----------|-----------|----------|-------|----------|
-| Instagram | 2,200 (150 visible before "more") | 5-15 | 2-4 | Hook in first 150 chars — this is all most people see |
+| Instagram | 2,200 (150 visible before "more") | 5-15 | 2-4 | Hook in first 150 chars ... this is all most people see |
 | Twitter/X | 280 | 1-3 | 1-2 | Every single word counts |
 | LinkedIn | 3,000 | 3-5 | 1-2 | Professional framing, link in comments not body |
 | Facebook | ~500 optimal | 1-3 | 2-4 | Concise performs better despite higher limit |
@@ -705,13 +705,13 @@ The LLM picks the best verified frame for each post based on caption relevance:
 | From Voice | To Voice | Allowed? | How |
 |-----------|----------|---------|-----|
 | TIG Standard | TIG Standard variants | Yes | Minor tone adjustment |
-| TIG Standard | WOH Combat | Concept only | Full rewrite — too different in energy |
-| TIG Standard | L4G B2B | If business-relevant | Full rewrite — different framing entirely |
+| TIG Standard | WOH Combat | Concept only | Full rewrite ... too different in energy |
+| TIG Standard | L4G B2B | If business-relevant | Full rewrite ... different framing entirely |
 | WOH Combat | Any other | Concept only | Too aggressive for other audiences |
 | L4G B2B | Any other | Rarely | Too business-specific |
 | ACOFH | Anyone | NEVER | Content too sensitive for redistribution |
 
-**Output:** `social_variants.json` — every post for every program for every platform:
+**Output:** `social_variants.json` ... every post for every program for every platform:
 
 ```json
 {
@@ -732,7 +732,7 @@ The LLM picks the best verified frame for each post based on caption relevance:
 
 ---
 
-### Stage 8: Human-in-the-Loop — The HQ Command Center
+### Stage 8: Human-in-the-Loop ... The HQ Command Center
 
 Everything before this stage is automated preparation. Everything after is automated execution. This stage is where a human applies judgment.
 
@@ -742,15 +742,15 @@ Everything before this stage is automated preparation. Everything after is autom
 
 **What the human sees:**
 
-1. **Content card** — Title, thumbnail, topics, word count, WordPress preview link
-2. **Routing panel** — Each program with its relevance score, Big Why preview, toggle on/off
-3. **Social variants** — Every adapted post for every platform, editable inline
-4. **Visual assets** — Verified frames available for selection
+1. **Content card** ... Title, thumbnail, topics, word count, WordPress preview link
+2. **Routing panel** ... Each program with its relevance score, Big Why preview, toggle on/off
+3. **Social variants** ... Every adapted post for every platform, editable inline
+4. **Visual assets** ... Verified frames available for selection
 
 **Three possible actions:**
-- **Approve** — Content is good, routing is right, posts are ready → triggers publish chain
-- **Edit** — Adjust routing (add/remove programs), modify post text, change visuals → then approve
-- **Reject** — Not appropriate for publication. Archived, not deleted.
+- **Approve** ... Content is good, routing is right, posts are ready → triggers publish chain
+- **Edit** ... Adjust routing (add/remove programs), modify post text, change visuals → then approve
+- **Reject** ... Not appropriate for publication. Archived, not deleted.
 
 **The action log (audit trail):**
 
@@ -789,7 +789,7 @@ write_back_dirty_items.py
 
 **Why Discord was replaced:**
 
-We originally used Discord for content approval — slash commands to approve/reject. Problems:
+We originally used Discord for content approval ... slash commands to approve/reject. Problems:
 - No visual preview of social posts
 - No inline editing
 - No routing adjustment UI
@@ -810,11 +810,11 @@ A simple cron job would work but offers no visibility or retry. A webhook would 
 
 > **Implementation Recipe: HITL Approval + Write-Back**
 >
-> "I need a human-in-the-loop content approval system. Requirements: (1) A web UI showing content cards with routing recommendations and toggle controls, (2) approve/edit/reject actions that write to a database log, (3) a background process that polls for approved items and triggers a publish chain. I'm using Supabase for the database. For background polling, I could use n8n, cron, or webhooks — recommend the best approach for my scale. Help me design the data model (action queue + action log tables) and the write-back script."
+> "I need a human-in-the-loop content approval system. Requirements: (1) A web UI showing content cards with routing recommendations and toggle controls, (2) approve/edit/reject actions that write to a database log, (3) a background process that polls for approved items and triggers a publish chain. I'm using Supabase for the database. For background polling, I could use n8n, cron, or webhooks ... recommend the best approach for my scale. Help me design the data model (action queue + action log tables) and the write-back script."
 
 ---
 
-### Stage 9: Automated Distribution — Vista Social at Scale
+### Stage 9: Automated Distribution ... Vista Social at Scale
 
 **Script:** `distribute_content_social.py` (v1.0.0)
 
@@ -838,9 +838,9 @@ Vista Social is our social media management platform. We chose it because it sup
 - Video posts get peak engagement time slots
 - Never schedule to the same platform twice in the same hour
 
-4. All API calls go through `vista_social_api.py` (v1.1.0) — a dedicated wrapper with:
+4. All API calls go through `vista_social_api.py` (v1.1.0) ... a dedicated wrapper with:
    - **Built-in rate limiting:** 48 req/min with 20% safety margin against Vista Social's 60 req/min API limit
-   - **Structured responses:** Every call returns `{success, data, error}` — no raw HTTP parsing in calling code
+   - **Structured responses:** Every call returns `{success, data, error}` ... no raw HTTP parsing in calling code
    - **Comprehensive logging:** Every API call logged with timestamp, endpoint, response code
    - **Dry-run mode:** Test the full pipeline without actually posting
 
@@ -861,7 +861,7 @@ The wrapper handles all of this. The calling code just says "schedule this post 
 
 > **Implementation Recipe: Social Distribution Engine**
 >
-> "I need to schedule social posts across multiple profiles and platforms via [your social media tool]'s API. Requirements: (1) rate-limited API wrapper that proactively throttles (not reactively), (2) intelligent timing — spread posts over 3-5 days, max 2 per profile per day, (3) distribution logging (what posted where, when), (4) dry-run mode for testing. Help me build the wrapper module first, then the scheduling logic."
+> "I need to schedule social posts across multiple profiles and platforms via [your social media tool]'s API. Requirements: (1) rate-limited API wrapper that proactively throttles (not reactively), (2) intelligent timing ... spread posts over 3-5 days, max 2 per profile per day, (3) distribution logging (what posted where, when), (4) dry-run mode for testing. Help me build the wrapper module first, then the scheduling logic."
 
 ---
 
@@ -896,9 +896,9 @@ HQ Supabase records track distribution status per content item: how many posts s
 
 ---
 
-## The Content Calendar — Scheduled Publishing
+## The Content Calendar ... Scheduled Publishing
 
-Not all content comes from the video pipeline. Some posts are planned in advance — event announcements, campaign content, recurring series, seasonal posts. The Content Calendar system handles these.
+Not all content comes from the video pipeline. Some posts are planned in advance ... event announcements, campaign content, recurring series, seasonal posts. The Content Calendar system handles these.
 
 **Script:** `process_content_calendar.py` (v1.0.0)
 **Directive:** `process_content_calendar.md`
@@ -930,14 +930,14 @@ The calendar processor runs daily and:
 | Delivery Mode | Platforms | What Happens |
 |--------------|-----------|-------------|
 | `automated` | Vista Social, Discord, WordPress | API calls execute publishing directly |
-| `reminder` | Circle.so, Skool, Press Ranger | Discord notification sent — human posts manually |
-| `manual` | L4G Production, special campaigns | Logged only — human handles everything |
+| `reminder` | Circle.so, Skool, Press Ranger | Discord notification sent ... human posts manually |
+| `manual` | L4G Production, special campaigns | Logged only ... human handles everything |
 
 4. **Publishes** automated items via `vista_social_api.py` (same rate-limited wrapper as Stage 9)
 5. **Updates** frontmatter with `status: published` and `published_at` timestamp
 6. **Summarizes** to Discord `#agent-log` channel
 
-**How it relates to the video pipeline:** The video pipeline (Stages 2-9) handles content that originates from YouTube videos — reactive, based on what experts publish. The Content Calendar handles content that's planned proactively — campaigns, announcements, recurring series. Both use the same distribution infrastructure (Vista Social wrapper, HQ tracking).
+**How it relates to the video pipeline:** The video pipeline (Stages 2-9) handles content that originates from YouTube videos ... reactive, based on what experts publish. The Content Calendar handles content that's planned proactively ... campaigns, announcements, recurring series. Both use the same distribution infrastructure (Vista Social wrapper, HQ tracking).
 
 **Why Markdown files instead of a database?** Calendar items are often drafted collaboratively, benefit from version control (git history shows who changed what), and can be reviewed in Obsidian alongside the rest of the vault. The frontmatter-as-metadata pattern means the same file is both the content and its scheduling configuration.
 
@@ -947,7 +947,7 @@ The calendar processor runs daily and:
 
 ---
 
-## Social Post Quality Gates — Voice Integrity at Scale
+## Social Post Quality Gates ... Voice Integrity at Scale
 
 When you're generating 15-25 social posts per content item across 3 voice profiles and 5 platforms, quality control can't be manual. The QWF social post system includes built-in quality gates that ensure every post maintains brand voice integrity before it reaches the HQ approval stage.
 
@@ -955,26 +955,26 @@ When you're generating 15-25 social posts per content item across 3 voice profil
 
 ### The Self-Review Checklist
 
-Every social post — whether generated by the content pipeline or written individually — passes through a 4-category self-review before delivery:
+Every social post ... whether generated by the content pipeline or written individually ... passes through a 4-category self-review before delivery:
 
 **Voice & Style:**
 - Correct voice profile applied? (TIG Standard vs. WOH Combat vs. L4G B2B)
-- Uses ellipsis (...) not em dashes? (TIG's #1 punctuation rule — no exceptions)
+- Uses ellipsis (...) not em dashes? (TIG's #1 punctuation rule ... no exceptions)
 - Opening varied? (no crutch phrases like "Did you know..." or "Here's the thing...")
 - Active verbs throughout?
-- Every word necessary? (Hemingway principle — trim ruthlessly)
+- Every word necessary? (Hemingway principle ... trim ruthlessly)
 
 **Message & Mission:**
 - Gets to the point fast?
 - Key message clear?
 - CTA obvious?
-- Hope-forward? (No guilt, shame, or fear appeals — ever. QWF builds people up.)
+- Hope-forward? (No guilt, shame, or fear appeals ... ever. QWF builds people up.)
 
 **Tone & Feel:**
 - Authentic? (Sounds human, not corporate)
 - Appropriate vulnerability/energy for the voice profile?
-- Nerd elements present? (TIG Standard — the "nerdy mystic" quality)
-- Combat energy maintained? (WOH — defiant, not despairing)
+- Nerd elements present? (TIG Standard ... the "nerdy mystic" quality)
+- Combat energy maintained? (WOH ... defiant, not despairing)
 
 **Technical:**
 - Emoji usage appropriate for the platform?
@@ -987,23 +987,23 @@ Every social post — whether generated by the content pipeline or written indiv
 Each voice profile has a defined post structure:
 
 **TIG Standard** (QWF, MP, IYSR, QWC):
-1. Hook — punchy observation or vulnerable truth
-2. Body — lyrical build, value, insight
-3. Point — hard-hitting takeaway
-4. CTA — direct invitation + gentle encouragement
+1. Hook ... punchy observation or vulnerable truth
+2. Body ... lyrical build, value, insight
+3. Point ... hard-hitting takeaway
+4. CTA ... direct invitation + gentle encouragement
 5. Hashtags
 
 **WOH Combat** (War on Hopelessness):
-1. Hook — defiant statement, combat energy
-2. Body — battle cry, empowerment
-3. Point — "you are powerful"
-4. CTA — "join the fight"
-5. Hashtags — `#WarOnHopelessness` always primary
+1. Hook ... defiant statement, combat energy
+2. Body ... battle cry, empowerment
+3. Point ... "you are powerful"
+4. CTA ... "join the fight"
+5. Hashtags ... `#WarOnHopelessness` always primary
 
 **L4G B2B** (Locals 4 Good):
-1. Hook — business value statement
-2. Body — clear offer/benefit
-3. CTA — concrete next step
+1. Hook ... business value statement
+2. Body ... clear offer/benefit
+3. CTA ... concrete next step
 4. Minimal hashtags
 
 ### Sensitivity Gates
@@ -1014,10 +1014,10 @@ Beyond voice consistency, certain content triggers additional review:
 |------|---------|--------|
 | **ACOFH Sensitivity** | Any content touching children of fallen military or first responders | Heightened review: no humor, no casual tone, reverent approach. Flag if topic seems too sensitive for social. |
 | **Grief/Loss Detection** | Content mentioning death, loss, fallen heroes | Manual review required even if ACOFH isn't in routing |
-| **Hope Filter** | Post uses guilt, shame, or fear as motivator | Rejected. QWF builds people up — never manipulates through negative emotion. |
+| **Hope Filter** | Post uses guilt, shame, or fear as motivator | Rejected. QWF builds people up ... never manipulates through negative emotion. |
 | **Youth Safety** | Content involving or targeting youth | Additional review for age-appropriateness |
 | **Controversial Topics** | Content on polarizing subjects | Per-platform explicit approval required (no batch approve) |
-| **Family Liaison** | ACOFH content referencing specific families | Must pass through family liaison review — never publish without family approval |
+| **Family Liaison** | ACOFH content referencing specific families | Must pass through family liaison review ... never publish without family approval |
 
 ### Optimal Posting Times
 
@@ -1043,17 +1043,17 @@ Students draft posts using the same voice profiles and quality gates. The `qwf-c
 
 > **Implementation Recipe: Social Post Quality Gates**
 >
-> "I need a quality gate system for social media posts. Each post should pass through a self-review checklist before delivery, covering: voice consistency, message clarity, tone authenticity, and technical compliance (character limits, hashtag counts). I have [N] voice profiles, each with a defined post structure. I also need sensitivity gates — certain content types (grief, controversy, youth-facing) trigger additional manual review. Show me the checklist framework, the voice-specific structures, and how to implement sensitivity detection."
+> "I need a quality gate system for social media posts. Each post should pass through a self-review checklist before delivery, covering: voice consistency, message clarity, tone authenticity, and technical compliance (character limits, hashtag counts). I have [N] voice profiles, each with a defined post structure. I also need sensitivity gates ... certain content types (grief, controversy, youth-facing) trigger additional manual review. Show me the checklist framework, the voice-specific structures, and how to implement sensitivity detection."
 
 ---
 
-## The Feeder Network — How the Wisdom Library Gets Fed
+## The Feeder Network ... How the Wisdom Library Gets Fed
 
 The content pipeline (Stages 2-10) processes individual videos into distributed social posts. But the **wisdom library** (Stage 1) draws from a much wider network of automated monitors that continuously scan the internet for expert knowledge. This is the system that makes the wisdom library grow from hundreds to thousands of entries without manual curation.
 
 ### The Content Pipeline Supervisor
 
-Everything is orchestrated by the **Content Pipeline Supervisor** (`content_pipeline_supervisor.py` v1.1.0) — a master scheduler that coordinates 20+ downstream scripts across five pipeline groups:
+Everything is orchestrated by the **Content Pipeline Supervisor** (`content_pipeline_supervisor.py` v1.1.0) ... a master scheduler that coordinates 20+ downstream scripts across five pipeline groups:
 
 | Pipeline Group | Frequency | What It Does |
 |---------------|-----------|-------------|
@@ -1063,7 +1063,7 @@ Everything is orchestrated by the **Content Pipeline Supervisor** (`content_pipe
 | **Wisdom** | Daily at 7 AM Pacific | Index new content, synthesize entries |
 | **TIG Izms** | Daily/on-demand | Capture and merge quotable insights from TIG's own content |
 
-The supervisor runs sequentially for dependent pipelines and uses a parallel executor (`content_pipeline_parallel.py` v1.0.0) for independent tasks — the expert monitors (Twitter + LinkedIn + newsletter + audit) run simultaneously, achieving 60-70% faster execution than sequential processing.
+The supervisor runs sequentially for dependent pipelines and uses a parallel executor (`content_pipeline_parallel.py` v1.0.0) for independent tasks ... the expert monitors (Twitter + LinkedIn + newsletter + audit) run simultaneously, achieving 60-70% faster execution than sequential processing.
 
 ### The Six Automated Feeder Channels
 
@@ -1111,11 +1111,11 @@ Monitors LinkedIn profiles for new posts from watched experts via Apify's Linked
 
 Monitors the Outlook inbox (via Microsoft Graph API) for newsletters from whitelisted intelligence sources.
 
-- **Whitelist:** `003 Entities/Taxonomies/newsletter_intel_sources.yaml` — curated list of newsletters worth monitoring
+- **Whitelist:** `003 Entities/Taxonomies/newsletter_intel_sources.yaml` ... curated list of newsletters worth monitoring
 - **Process:** Scans inbox for new emails from whitelisted senders → extracts content → indexes to wisdom.db → generates capture document
 - **Audit flow:** A separate `newsletter_audit_review.py` provides a Discord-based review workflow for managing the whitelist (keep, unsubscribe, block domain)
 
-This is the only feeder that requires email access — it monitors the organizational inbox for high-quality newsletters from tool vendors, industry analysts, and expert commentators.
+This is the only feeder that requires email access ... it monitors the organizational inbox for high-quality newsletters from tool vendors, industry analysts, and expert commentators.
 
 #### 5. Web Article Monitor
 
@@ -1132,14 +1132,14 @@ Monitors web blogs and news sites configured in `web_intel_sources.yaml`.
 
 **Script:** `vendor_intel_capture.py` (v1.1.0)
 
-A manual + programmatic capture tool for vendor events that don't come through automated channels — pricing changes, promotional events, feature announcements discovered during normal work.
+A manual + programmatic capture tool for vendor events that don't come through automated channels ... pricing changes, promotional events, feature announcements discovered during normal work.
 
 - **Event types:** pricing change, feature launch, deprecation, promotional generosity, breaking change, security advisory
-- **Polarity tracking:** positive / negative / neutral — feeds into vendor health scoring
+- **Polarity tracking:** positive / negative / neutral ... feeds into vendor health scoring
 - **Audit trail:** Events have a review workflow (pending → applied/dismissed)
 - **Registry:** 32 vendors tracked across 3 tiers in `vendor_registry.yaml`
 
-This is the "catch-all" for intelligence that falls outside the automated monitors. Someone discovers that a tool is offering a limited-time deal, or a breaking change is announced in a Discord server — `vendor_intel_capture.py` captures it with full provenance.
+This is the "catch-all" for intelligence that falls outside the automated monitors. Someone discovers that a tool is offering a limited-time deal, or a breaking change is announced in a Discord server ... `vendor_intel_capture.py` captures it with full provenance.
 
 ### How It All Flows Together
 
@@ -1161,11 +1161,11 @@ Supervisor          ├─── Web Article Monitor ─ New articles┤     (8,
 
 **The compounding effect:** Every day, these 6 channels add 10-50 new wisdom entries to the database. After months of continuous operation, the library has grown to 8,071 entries from 1,187 experts covering 208 tools. This depth means the content router (Stage 6) and voice adapter (Stage 7) have rich context for generating Big Why statements and audience-specific posts. The system literally gets smarter every day.
 
-### The Expert Registry — The Hub of the Feeder Network
+### The Expert Registry ... The Hub of the Feeder Network
 
 All monitors share a common expert registry (`expert_registry.py`) that tracks:
 - Expert name, platforms (YouTube channel, Twitter handle, LinkedIn URL)
-- Priority tier (A/B/C) — determines monitoring frequency
+- Priority tier (A/B/C) ... determines monitoring frequency
 - Last checked date and last content ID per platform
 - Capture count (how many insights we've indexed from this expert)
 - Expertise areas and tool associations
@@ -1174,13 +1174,13 @@ When a new expert is added to the registry, all relevant monitors automatically 
 
 > **Implementation Recipe: Automated Feeder Network**
 >
-> "I want to build an automated intelligence gathering system that monitors multiple content sources and feeds a central wisdom database. I need monitors for: (1) YouTube channels — detect new videos from a registry of experts, (2) Twitter/X — capture tweets from watched accounts via Apify, (3) web blogs — monitor RSS feeds and scrape articles from vendor blogs, (4) newsletters — scan email inbox for whitelisted senders. Each monitor should: track what was last captured per source, only process new content, index insights to a SQLite wisdom database, and generate capture documents. I need a supervisor script that orchestrates all monitors on a daily schedule. Show me the expert registry design and the supervisor architecture."
+> "I want to build an automated intelligence gathering system that monitors multiple content sources and feeds a central wisdom database. I need monitors for: (1) YouTube channels ... detect new videos from a registry of experts, (2) Twitter/X ... capture tweets from watched accounts via Apify, (3) web blogs ... monitor RSS feeds and scrape articles from vendor blogs, (4) newsletters ... scan email inbox for whitelisted senders. Each monitor should: track what was last captured per source, only process new content, index insights to a SQLite wisdom database, and generate capture documents. I need a supervisor script that orchestrates all monitors on a daily schedule. Show me the expert registry design and the supervisor architecture."
 
 ---
 
-## Tool Wisdom Libraries — Deep Dive
+## Tool Wisdom Libraries ... Deep Dive
 
-TWLs deserve their own section because they're a meta-system — a system for building knowledge about the tools you use to build systems.
+TWLs deserve their own section because they're a meta-system ... a system for building knowledge about the tools you use to build systems.
 
 **The core problem:** Tools are complex. Knowledge about them is scattered across vendor docs, YouTube tutorials, Stack Overflow, community forums, and hard-won personal experience. When a tool updates, nobody audits whether accumulated knowledge still applies. When a team member discovers a gotcha, it lives in a Slack message that nobody will ever find again.
 
@@ -1214,7 +1214,7 @@ Vendor blogs, expert YouTube channels, newsletters that feed wisdom. Configured 
 
 When Tool A works with Tool B, both TWLs reference each other. Integration patterns, known conflicts, recommended approaches for combined usage.
 
-**Example:** Our Supabase TWL notes that "Supabase node v1 in n8n is buggy — generates `id..value` instead of `id.eq.value` in PostgREST queries. Use HTTP Request nodes with direct PostgREST API calls instead." This cross-references the n8n TWL which has the same information from the other direction.
+**Example:** Our Supabase TWL notes that "Supabase node v1 in n8n is buggy ... generates `id..value` instead of `id.eq.value` in PostgREST queries. Use HTTP Request nodes with direct PostgREST API calls instead." This cross-references the n8n TWL which has the same information from the other direction.
 
 **TWLs we've built (with maturity scores):**
 
@@ -1228,7 +1228,7 @@ When Tool A works with Tool B, both TWLs reference each other. Integration patte
 | NotebookLM | 9 | Complete | Source management, audio generation, research synthesis |
 | Lovable | 8 | Complete | Prompt conventions, app architecture, Vite gotchas |
 | Weavy | 7 | Complete | Chat integration, real-time features, embedding patterns |
-| BrightLocal | — | New | Local SEO, citations, HMAC auth, competitive landscape |
+| BrightLocal | ... | New | Local SEO, citations, HMAC auth, competitive landscape |
 
 > **Implementation Recipe: Tool Wisdom Library System**
 >
@@ -1236,7 +1236,7 @@ When Tool A works with Tool B, both TWLs reference each other. Integration patte
 
 ---
 
-## The Model Strategy — Quality First
+## The Model Strategy ... Quality First
 
 Every LLM call in the QWU Backoffice follows a "Flagship First" strategy, managed through a centralized configuration module (`model_config.py` v2.1.0).
 
@@ -1248,11 +1248,11 @@ Every LLM call in the QWU Backoffice follows a "Flagship First" strategy, manage
 
 | Tier | Model | When We Use It |
 |------|-------|---------------|
-| FLAGSHIP (default) | Claude Opus 4.7 (1M context, adaptive thinking) | Everything requiring judgment — content analysis, wisdom classification, routing decisions, voice adaptation |
+| FLAGSHIP (default) | Claude Opus 4.7 (1M context, adaptive thinking) | Everything requiring judgment ... content analysis, wisdom classification, routing decisions, voice adaptation |
 | SYNTHESIS | Claude Sonnet 4.5 (1M context) | Large-context tasks where flagship cost isn't justified |
 | STANDARD | Claude Sonnet 4.5 | Genuinely categorical classification tasks |
 | FAST | DeepSeek | Mechanical pattern matching only (name parsing, format conversion) |
-| VIDEO | Gemini (3.1 Pro → 2.5 Pro → 2.5 Flash chain) | Video transcription (multimodal — no other model can watch video) |
+| VIDEO | Gemini (3.1 Pro → 2.5 Pro → 2.5 Flash chain) | Video transcription (multimodal ... no other model can watch video) |
 
 **How it works in practice:**
 
@@ -1279,7 +1279,7 @@ response = llm_call(
 
 **Adaptive thinking (Claude Opus 4.7):**
 
-Opus supports adaptive thinking — Claude decides when and how much to reason before responding. For complex analysis tasks (meeting intelligence, content routing), enabling thinking produces noticeably better results:
+Opus supports adaptive thinking ... Claude decides when and how much to reason before responding. For complex analysis tasks (meeting intelligence, content routing), enabling thinking produces noticeably better results:
 
 ```python
 response = llm_call(
@@ -1291,7 +1291,7 @@ response = llm_call(
 )
 ```
 
-**All calls route through OpenRouter** — a unified LLM gateway that provides single-key access to multiple model providers. Benefits:
+**All calls route through OpenRouter** ... a unified LLM gateway that provides single-key access to multiple model providers. Benefits:
 - Single API key and billing
 - Unified response format regardless of underlying provider
 - Easy model switching without code changes
@@ -1299,13 +1299,13 @@ response = llm_call(
 
 ---
 
-## Our QWU Toolstack — What We Use and Why
+## Our QWU Toolstack ... What We Use and Why
 
 | Tool | Role in the Pipeline | Why We Chose It |
 |------|---------------------|----------------|
-| **Claude Code** | Orchestration layer (Layer 2) — reads directives, calls scripts, handles errors, self-anneals | Best AI coding assistant available; runs on our VM via terminal |
-| **Claude Opus 4.7** | All content analysis, classification, routing, and generation | Quality-First strategy — best reasoning model available |
-| **Google Gemini** | Video transcription (multimodal — watches video) and frame verification (Gemini Vision) | Only model that processes full video files natively |
+| **Claude Code** | Orchestration layer (Layer 2) ... reads directives, calls scripts, handles errors, self-anneals | Best AI coding assistant available; runs on our VM via terminal |
+| **Claude Opus 4.7** | All content analysis, classification, routing, and generation | Quality-First strategy ... best reasoning model available |
+| **Google Gemini** | Video transcription (multimodal ... watches video) and frame verification (Gemini Vision) | Only model that processes full video files natively |
 | **YouTube Data API v3** | Ground truth metadata, playlist monitoring | Authoritative source for video attribution |
 | **Python** | All execution scripts (Layer 3) | Universal, well-supported, extensive library ecosystem |
 | **SQLite** | Wisdom database, graph database, supervisor databases | Zero-config, file-based, perfect for single-VM architecture |
@@ -1335,11 +1335,11 @@ These lessons cost real hours. They're free for you.
 
 ### 1. Gemini Hallucinated Video Attribution (Cost: 2 days)
 
-**What happened:** We let Gemini report the video title and channel name from its transcription. For most videos, it was correct. But occasionally, Gemini would attribute quotes to the wrong person — especially when the video featured interviews where multiple people were mentioned.
+**What happened:** We let Gemini report the video title and channel name from its transcription. For most videos, it was correct. But occasionally, Gemini would attribute quotes to the wrong person ... especially when the video featured interviews where multiple people were mentioned.
 
 **Root cause:** Gemini processes the entire video holistically. If a video mentions "as Elon Musk said..." and the actual speaker is a different creator commenting on Musk, Gemini sometimes reversed the attribution.
 
-**The fix:** Fetch ground truth metadata from YouTube Data API FIRST. Use that for all attribution. Gemini handles transcription and analysis only — never trust it for verifiable facts.
+**The fix:** Fetch ground truth metadata from YouTube Data API FIRST. Use that for all attribution. Gemini handles transcription and analysis only ... never trust it for verifiable facts.
 
 **The principle:** Trust AI for analysis. Never trust it for facts that can be verified from a structured API. This applies everywhere, not just video.
 
@@ -1395,7 +1395,7 @@ These lessons cost real hours. They're free for you.
 
 ### 7. Supabase Node v1 in n8n Is Buggy (Cost: Many hours)
 
-**What happened:** n8n's built-in Supabase node generates incorrect PostgREST queries — `id..value` instead of `id.eq.value`. Queries silently return wrong results.
+**What happened:** n8n's built-in Supabase node generates incorrect PostgREST queries ... `id..value` instead of `id.eq.value`. Queries silently return wrong results.
 
 **The fix:** Use HTTP Request nodes with direct PostgREST API calls instead of the Supabase node. Set both `apikey` and `Authorization: Bearer` headers.
 
@@ -1445,7 +1445,7 @@ These lessons cost real hours. They're free for you.
 
 ---
 
-## Decision Tree — What Do You Actually Need?
+## Decision Tree ... What Do You Actually Need?
 
 ### Solo Creator (1 brand, 1-3 platforms)
 
@@ -1478,7 +1478,7 @@ These lessons cost real hours. They're free for you.
 
 ---
 
-## Implementation Recipes — Copy-Paste to Claude
+## Implementation Recipes ... Copy-Paste to Claude
 
 Each recipe is self-contained. Paste it into Claude Desktop or Claude Code with your own context.
 
@@ -1618,9 +1618,9 @@ Complete list of scripts in the content intelligence pipeline:
 | `process_video_content.py` | v2.5.0 | Capture | YouTube → Gemini transcription → Claude analysis → 5 output files |
 | `extract_video_frames.py` | v1.2.0 | Capture | yt-dlp download → ffmpeg frame extraction → thumbnail fallback |
 | `wisdom_indexer.py` | v1.9.0 | Knowledge | Content → classified wisdom entries in SQLite (multi-source) |
-| `generate_wisdom_capture.py` | — | Knowledge | Generate human-readable capture documents after indexing |
-| `wisdom_query.py` | — | Knowledge | Query wisdom.db by tool, topic, expert, authority |
-| `wisdom_synthesizer.py` | — | Knowledge | Synthesize multiple wisdom entries into summaries |
+| `generate_wisdom_capture.py` | ... | Knowledge | Generate human-readable capture documents after indexing |
+| `wisdom_query.py` | ... | Knowledge | Query wisdom.db by tool, topic, expert, authority |
+| `wisdom_synthesizer.py` | ... | Knowledge | Synthesize multiple wisdom entries into summaries |
 | `tig_article_builder.py` | v1.3.0 | Article | Content → WordPress article with 10 enhancements (Divi format) |
 | `tig_video_pipeline_orchestrator.py` | v1.5.0 | Orchestration | Daily cron → detect new videos → full pipeline → HQ + Discord |
 | `route_content_programs.py` | v1.0.0 | Routing | Content atoms → program relevance scoring → Big Why generation |
@@ -1629,8 +1629,8 @@ Complete list of scripts in the content intelligence pipeline:
 | `vista_social_api.py` | v1.1.0 | Distribution | Rate-limited Vista Social API wrapper (48 req/min safety) |
 | `write_back_dirty_items.py` | v1.2.0 | HITL Bridge | HQ approval → route → adapt → publish → distribute chain |
 | `tig_publish_article.py` | v1.2.0 | Publishing | Approved draft → published WordPress article on chaplaintig.com |
-| `model_config.py` | v2.1.0 | Infrastructure | Centralized LLM config — Quality First, all tiers, cost logging |
-| `generate_constellation_map.py` | — | Article | Knowledge graph visualization for Ideas Connected section |
+| `model_config.py` | v2.1.0 | Infrastructure | Centralized LLM config ... Quality First, all tiers, cost logging |
+| `generate_constellation_map.py` | ... | Article | Knowledge graph visualization for Ideas Connected section |
 
 ---
 
@@ -1649,7 +1649,7 @@ Complete list of scripts in the content intelligence pipeline:
 ## Closing
 
 > "You are a media business that happens to sell products."
-> — Grace Andrews, former Brand Director, Diary of a CEO
+> ... Grace Andrews, former Brand Director, Diary of a CEO
 
 The QWU Backoffice Content Intelligence System operationalizes that principle. Every QWF program is a media voice with its own audience relationship. Content flows from capture through intelligent routing, and each program speaks to its audience about the right topics in the right voice.
 
@@ -1657,7 +1657,7 @@ The technology: Claude + Gemini + Python + SQLite + a few APIs.
 The architecture: 3 layers (directive, orchestration, execution).
 The magic: Decomposition (atoms, molecules, Big Why, voice profiles).
 
-But the real insight is simpler: **Humans should make decisions. Machines should handle everything else.** The human touches this pipeline exactly once — at the approval stage. They see everything the system prepared, apply their judgment, and the rest happens automatically.
+But the real insight is simpler: **Humans should make decisions. Machines should handle everything else.** The human touches this pipeline exactly once ... at the approval stage. They see everything the system prepared, apply their judgment, and the rest happens automatically.
 
 That's the pattern. Take what works for you. Leave what doesn't.
 
