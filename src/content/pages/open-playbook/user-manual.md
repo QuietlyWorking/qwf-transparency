@@ -8,10 +8,10 @@ modifiedDate: "2026-10-03"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
-> [!INFO] PUBLIC VERSION
-> This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
->
-> Generated: 2026-10-04 06:52 | Source version: 6.00
+> [!WARNING] PRIVATE DOCUMENT ... DO NOT PUBLISH
+> This file contains sensitive operational data (IPs, credentials, project IDs, personal names).
+> The publishable version is `QWU Backoffice User Manual [PUBLIC].md` in this same directory.
+> Run `python "005 Operations/Execution/generate_public_manual.py"` to regenerate the public version.
 
 # QWU Backoffice User Manual
 
@@ -4872,7 +4872,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v6.00 by generate_public_manual.py"
-generated: "2026-10-04 06:52"
+generated: "2026-10-04 08:23"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5059,9 +5059,9 @@ Only apps carrying the family audit trail. QNT today (first retrofit, live 2026-
 
 | Unit | Skills taught | Level | ~Time | Why it's portfolio-worthy |
 |------|---------------|-------|-------|---------------------------|
-| **"Did we email them, and did they reply?"** ... answer it from a mail API rather than memory | REST APIs, OAuth app auth, pagination, date filtering, reading a result set critically | Beginner ... Intermediate | 2-3 h | The most common real question in any org, and the one people most often answer from recall and get wrong. A student learns that *searching* a mailbox and *listing* it give different answers, and that "no reply found" is a claim needing evidence. |
+| **"Did we email them, and did they reply?"** ... answer it from a mail API rather than memory | REST APIs, OAuth app auth, pagination, date filtering, reading a result set critically | Beginner-Intermediate | 2-3 h | The most common real question in any org, and the one people most often answer from recall and get wrong. A student learns that *searching* a mailbox and *listing* it give different answers, and that "no reply found" is a claim needing evidence. |
 | **Reading an audit trail to find changes nobody asked for** | SQL joins, JSONB, `information_schema` introspection, distinguishing a fill from an overwrite | Intermediate | 3-4 h | Teaches that logs are only worth keeping if something reads them back, and that deriving the watch-list from the schema beats hard-coding it. |
-| **Design exercise: a shared feature for many tenants** | Multi-tenant architecture, avoiding single-customer code paths | Intermediate ... Advanced | 1-2 h discussion | The original design put the check in one tenant's CRM. Moving it into the app ... where the evidence already lives ... made it work for everyone and removed the special case. A clean, small case study in "whose problem is this actually?" |
+| **Design exercise: a shared feature for many tenants** | Multi-tenant architecture, avoiding single-customer code paths | Intermediate-Advanced | 1-2 h discussion | The original design put the check in one tenant's CRM. Moving it into the app ... where the evidence already lives ... made it work for everyone and removed the special case. A clean, small case study in "whose problem is this actually?" |
 
 **Teaching moment worth keeping:** the first two detector designs would not have caught the incident
 they were built for. Both systems held the *same wrong value*, so comparing them found nothing. The
@@ -11197,7 +11197,7 @@ The flag takes the **variable name**, never a token value. Reads on registered s
 Apps on CF Pages deploy via `wrangler pages deploy`:
 
 ```bash
-# Deploy from local build (WHELHO only ... pending GH Actions secrets)
+# Deploy from local build (WHELHO only — pending GH Actions secrets)
 cd /home/<VM_USER>/whelho && npm run build
 npx wrangler pages deploy dist --project-name=whelho
 
@@ -11944,7 +11944,7 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 >
 > The session log is excluded from the public version because it contains specific operational details (error messages with IPs, credential rotation events, supporter-specific interactions) that would be sensitive to publish.
 >
-> **For students:** The session log demonstrates real-world iterative development ... each session builds on the last, errors lead to improvements, and the system self-anneals over time. Ask your mentor about accessing the session log during supervised learning.
+> **For students:** The session log demonstrates real-world iterative development — each session builds on the last, errors lead to improvements, and the system self-anneals over time. Ask your mentor about accessing the session log during supervised learning.
 
 ---
 
@@ -12392,14 +12392,14 @@ Before SSHing to ANY server:
 
 ### Why This Exists
 
-On 2026-02-05, an agent SSHed to a supporter's server without permission, mistaking it for QWU infrastructure. The project folder name identified a supporter organization, but the agent ignored that signal. This safeguard system ensures supporter systems are always treated with explicit authorization.
+On 2026-02-05, an agent SSHed to a supporter's server without permission, mistaking it for QWU infrastructure. The project folder name said "[Supporter Organization]" ... a customer ... but the agent ignored that signal. This safeguard system ensures supporter systems are always treated with explicit authorization.
 
 **Data Safety:** The foundational directive `supporter_data_safety.md` codifies how to safely sync and handle live supporter business data ... safety gates, audit logging, soft-delete, rollback runbook, and anomaly detection. All sync scripts touching supporter data must integrate `sync_safety_gate.py`.
 
 ### Supporter Server Operations (Withheld)
 
 > [!NOTE] Withheld for supporter privacy and security
-> Four subsections documenting a specific supporter's email relay and server-hardening details (ban thresholds, blocklists, capacity figures) are excluded from the public manual: publishing a supporter's defensive configuration would hand a hostile reader an attack map. The generic patterns (fail2ban jails, iptables persistence) are standard Linux administration ... the commands below remain as teaching material.
+> Four subsections documenting a specific supporter's email relay and server-hardening details (ban thresholds, blocklists, capacity figures) are excluded from the public manual: publishing a supporter's defensive configuration would hand a hostile reader an attack map. The generic patterns (fail2ban jails, iptables persistence) are standard Linux administration — the commands below remain as teaching material.
 
 **Useful commands:**
 ```bash
@@ -13051,8 +13051,8 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 > [!NOTE] Document History Redacted
 > The private version of this manual maintains a ~270-row version-history table. It is excluded from the public version because its rows weave supporter names, private individuals, and infrastructure identifiers through narrative context too densely for line-level redaction to leave readable, safely-anonymous text.
 >
-> **For students:** The history table demonstrates real versioned documentation discipline ... every change dated, versioned, and reasoned. Ask your mentor about reviewing it during supervised learning.
+> **For students:** The history table demonstrates real versioned documentation discipline — every change dated, versioned, and reasoned. Ask your mentor about reviewing it during supervised learning.
 
 ---
 
-*Last updated: 2026-10-04 06:52 (v6.00)*
+*Last updated: 2026-10-04 08:23 (v6.00)*
