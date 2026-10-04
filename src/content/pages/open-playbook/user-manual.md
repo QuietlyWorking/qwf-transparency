@@ -4872,7 +4872,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v6.00 by generate_public_manual.py"
-generated: "2026-10-04 08:23"
+generated: "2026-10-04 08:24"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11944,7 +11944,7 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 >
 > The session log is excluded from the public version because it contains specific operational details (error messages with IPs, credential rotation events, supporter-specific interactions) that would be sensitive to publish.
 >
-> **For students:** The session log demonstrates real-world iterative development — each session builds on the last, errors lead to improvements, and the system self-anneals over time. Ask your mentor about accessing the session log during supervised learning.
+> **For students:** The session log demonstrates real-world iterative development ... each session builds on the last, errors lead to improvements, and the system self-anneals over time. Ask your mentor about accessing the session log during supervised learning.
 
 ---
 
@@ -12392,14 +12392,14 @@ Before SSHing to ANY server:
 
 ### Why This Exists
 
-On 2026-02-05, an agent SSHed to a supporter's server without permission, mistaking it for QWU infrastructure. The project folder name said "[Supporter Organization]" ... a customer ... but the agent ignored that signal. This safeguard system ensures supporter systems are always treated with explicit authorization.
+On 2026-02-05, an agent SSHed to a supporter's server without permission, mistaking it for QWU infrastructure. The project folder name identified a supporter organization, but the agent ignored that signal. This safeguard system ensures supporter systems are always treated with explicit authorization.
 
 **Data Safety:** The foundational directive `supporter_data_safety.md` codifies how to safely sync and handle live supporter business data ... safety gates, audit logging, soft-delete, rollback runbook, and anomaly detection. All sync scripts touching supporter data must integrate `sync_safety_gate.py`.
 
 ### Supporter Server Operations (Withheld)
 
 > [!NOTE] Withheld for supporter privacy and security
-> Four subsections documenting a specific supporter's email relay and server-hardening details (ban thresholds, blocklists, capacity figures) are excluded from the public manual: publishing a supporter's defensive configuration would hand a hostile reader an attack map. The generic patterns (fail2ban jails, iptables persistence) are standard Linux administration — the commands below remain as teaching material.
+> Four subsections documenting a specific supporter's email relay and server-hardening details (ban thresholds, blocklists, capacity figures) are excluded from the public manual: publishing a supporter's defensive configuration would hand a hostile reader an attack map. The generic patterns (fail2ban jails, iptables persistence) are standard Linux administration ... the commands below remain as teaching material.
 
 **Useful commands:**
 ```bash
@@ -13051,8 +13051,8 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 > [!NOTE] Document History Redacted
 > The private version of this manual maintains a ~270-row version-history table. It is excluded from the public version because its rows weave supporter names, private individuals, and infrastructure identifiers through narrative context too densely for line-level redaction to leave readable, safely-anonymous text.
 >
-> **For students:** The history table demonstrates real versioned documentation discipline — every change dated, versioned, and reasoned. Ask your mentor about reviewing it during supervised learning.
+> **For students:** The history table demonstrates real versioned documentation discipline ... every change dated, versioned, and reasoned. Ask your mentor about reviewing it during supervised learning.
 
 ---
 
-*Last updated: 2026-10-04 08:23 (v6.00)*
+*Last updated: 2026-10-04 08:24 (v6.00)*
