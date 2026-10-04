@@ -128,8 +128,8 @@
           if (idx === -1) break;
           const before = idx > 0 ? t[idx - 1] : ' ';
           const after = idx + name.length < t.length ? t[idx + name.length] : ' ';
-          const wb = /[\s.,;:!?'"()\[\]...-\-]/.test(before) || idx === 0;
-          const wa = /[\s.,;:!?'"()\[\]...-\-]/.test(after) || idx + name.length === t.length;
+          const wb = /[\s.,;:!?'"()\[\]—–\-]/.test(before) || idx === 0;
+          const wa = /[\s.,;:!?'"()\[\]—–\-]/.test(after) || idx + name.length === t.length;
           if (wb && wa) {
             let overlap = false;
             for (let i = idx; i < idx + name.length; i++) { if (used.has(i)) { overlap = true; break; } }
