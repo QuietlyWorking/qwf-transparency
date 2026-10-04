@@ -12,19 +12,19 @@ This page exists because we believe donor-partners deserve to see exactly where 
 
 Every figure on this page is generated automatically from the same constants file our backoffice scripts use. When infrastructure changes, this page changes. When we update a constant, an audit runs the next morning and reconciles it against the actual Azure invoice. If they disagree by more than 5%, the system raises an alert before anyone can publish a wrong number.
 
-_Last regenerated: 2026-08-11 (Pacific). Constants verified: 2026-04-25._
+_Last regenerated: 2026-10-03 (Pacific). Constants verified: 2026-04-25._
 
 ---
 
 ## The Headline
 
-- **Fixed monthly infrastructure:** $418.54
+- **Fixed monthly infrastructure:** $512.96
 - **Variable monthly budget (LLM + scraping):** up to $400.00
-- **Grand total at full variable spend:** up to $818.54/month
+- **Grand total at full variable spend:** up to $912.96/month
 
 That funds 16 active apps, ~50 automation workflows, ~280 Python scripts, and the entire backoffice that keeps QWF running.
 
-**Most recent month-to-date Azure spend (live):** $109.91 as of 2026-08-10.
+**Most recent month-to-date Azure spend (live):** $12.24 as of 2026-10-02.
 
 ---
 
@@ -34,13 +34,13 @@ Two virtual machines + supporting infrastructure. The big one runs the backoffic
 
 | Resource | Monthly Cost | What it does |
 |----------|-------------:|--------------|
-| claude-dev compute (D8as_v6, 8 vCPU, 32 GB) | $170.82 | Main backoffice VM... runs all Python scripts, hosts the Digital Twin API, manages the Obsidian vault that is QWF's brain |
-| claude-dev disk (128 GB NVMe Premium SSD) | $27.00 | Storage for the vault, databases, and execution environment |
-| qwu-n8n compute (B2s, 2 vCPU, 4 GB) | $30.00 | n8n workflow orchestration (~50 active workflows for emails, scheduling, monitoring) |
+| claude-dev compute (D8as_v6, 8 vCPU, 32 GB) | $264.99 | Main backoffice VM... runs all Python scripts, hosts the Digital Twin API, manages the Obsidian vault that is QWF's brain |
+| claude-dev disk (128 GB NVMe Premium SSD) | $26.88 | Storage for the vault, databases, and execution environment |
+| qwu-n8n compute (B2s, 2 vCPU, 4 GB) | $30.37 | n8n workflow orchestration (~50 active workflows for emails, scheduling, monitoring) |
 | qwu-n8n disk (Standard SSD) | $4.00 | n8n workflow + execution data |
 | 2x static public IPs | $8.00 | One per VM, $4 each |
 | Pre-resize rollback snapshot | $0.72 | Safety net... deletable after stability confirmed |
-| **Azure subtotal** | **$240.54** | |
+| **Azure subtotal** | **$334.96** | |
 
 ## Supabase (databases + auth + edge functions)
 
@@ -77,7 +77,7 @@ If we hit 75% of either budget, the system pings a Discord alert. If we hit 90%,
 
 ## The Bottom Line
 
-**Fixed:** $418.54/month. **Maximum if every variable budget hits 100%:** $818.54/month.
+**Fixed:** $512.96/month. **Maximum if every variable budget hits 100%:** $912.96/month.
 
 That covers every app, every automation, every dashboard, every email, every database, every monitor. No hidden line items. No marketing budget hidden in 'operations'. No executive compensation buried in 'professional services'.
 

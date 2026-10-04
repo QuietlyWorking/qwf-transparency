@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-04 03:02 | Source version: 5.99
+> Generated: 2026-10-04 06:52 | Source version: 6.00
 
 # QWU Backoffice User Manual
 
@@ -165,7 +165,7 @@ The QWU Backoffice is an AI agent workspace running on Microsoft Azure, designed
 |----------|--------------|---------|
 | Resource Group | <RESOURCE_GROUP> | <RESOURCE_GROUP> |
 | Region | West US 2 | West US 2 |
-| Size | Standard D4as_v6 (4 vCPUs, 16 GB RAM, 128 GiB NVMe) | Standard B2s (2 vCPUs, 4 GB RAM, ~$30/mo) |
+| Size | Standard D8as_v6 (8 vCPUs, 32 GB RAM, 128 GiB NVMe Premium ZRS) | Standard B2s (2 vCPUs, 4 GB RAM, ~$30/mo) |
 | IP | <VM_IP_CLAUDE_DEV> (static) | <VM_IP_N8N> (static) |
 | Image | Ubuntu Server 24.04 LTS | Ubuntu Server 24.04 LTS |
 | Swap | 4 GB | 6 GB (2GB + 4GB added 2026-02-23) |
@@ -651,11 +651,11 @@ Students completing this module will learn:
 
 The self-hosted n8n instance uses pinned version tags for stability.
 
-**Current Version:** 2.31.5 (upgraded 2026-07-22 from 2.17.5 — catch-up security upgrade closing 45 advisories, incl. the same-morning batch of 15 that 2.31.5 was released to patch)
+**Current Version:** 2.41.6 (live-checked 2026-10-04; the HQ masthead strip now tracks installed vs published vs vulnerable continuously. Previously 2.31.5, upgraded 2026-07-22 from 2.17.5 — catch-up security upgrade closing 45 advisories, incl. the same-morning batch of 15 that 2.31.5 was released to patch)
 
 | Property | Value |
 |----------|-------|
-| Image | `docker.n8n.io/n8nio/n8n:2.31.5` |
+| Image | `docker.n8n.io/n8nio/n8n:2.41.6` |
 | Location | `~/n8n/docker-compose.yml` on qwu-n8n |
 | Monitor | `monitor_n8n_releases.py` hourly cron :41 on backoffice VM (live version via SSH + GHSA advisories; replaced the retired "n8n Version Monitor" workflow 2026-07-21) |
 | Port Binding | `127.0.0.1:5678` (localhost only, Caddy proxies HTTPS) |
@@ -2075,6 +2075,20 @@ result land on their own phone.
 
 Portfolio value: high. Every unit is small, has a visible result, and the auto-save one is a real
 interview question with a real wrong answer.
+
+#### MP Training Opportunities (from the 2026-10-03 silent-reader diagnosis)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|---|---|---|
+| **Diagnosing a system that failed by saying nothing** ... the only evidence was a log line repeating every 15 minutes | The hardest class of bug to teach, because there is no stack trace, no red test and no alert to start from. The entry point was a human noticing the absence of an email. Teaches that "nothing happened" is a symptom. | Advanced |
+| **Executing the check instead of reading the code** ... import the real function, feed it the real message bodies, print what it returns | The regex was *read* correctly and the conclusion was still worth nothing until it was run against all nine real emails (six parsed, three did not). One command turned an argument into evidence. Teaches the difference between a plausible explanation and a verified one. | Beginner |
+| **Asking someone to break your own finding** ... an independent reviewer briefed to attack, not confirm | It worked: the reviewer agreed the parser was broken but proved the parser was NOT why nobody got an email (the applicant's report had never been written for an unrelated reason). The correction changed what was reported to a decision-maker. Teaches that confirmation from yourself is worth less than opposition from someone else. | Intermediate |
+| **Making a failure path reachable before making it loud** | The alert could not simply be added: the early return for "no work" sat above the notifier, so the alarm was unwritable. Teaches reading control flow for what it *forbids*, not just what it does. | Intermediate |
+| **Spotting a date filter that hides unfinished work** ... `meeting_date >= today` on a to-do list | Un-hiding it revealed four people stranded for weeks. Teaches that a due date orders work but does not discharge it, and that the backlog a fix reveals is often the real finding. | Beginner |
+| **A green test suite that proves nothing** ... 37 passing tests, all written against the format the counterparty had just abandoned | A genuinely uncomfortable lesson and a memorable one. Teaches that tests encode the past, and that a reader of someone else's format needs a fixture added the moment a real input is rejected. | Intermediate |
+
+Portfolio value: very high. This is the session to show a student who thinks debugging means reading
+an error message. There was no error message, and the cost was a person.
 
 ### Google Calendar API Timestamp Gotcha (RFC3339)
 
@@ -4857,8 +4871,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.99 by generate_public_manual.py"
-generated: "2026-10-04 03:02"
+source: "Auto-generated from private manual v6.00 by generate_public_manual.py"
+generated: "2026-10-04 06:52"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13041,4 +13055,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-04 03:02 (v5.99)*
+*Last updated: 2026-10-04 06:52 (v6.00)*
