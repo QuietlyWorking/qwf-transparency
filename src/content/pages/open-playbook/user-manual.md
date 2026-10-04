@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.82 | Started: 251223 | Updated: 260906**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-09-23"
+modifiedDate: "2026-10-03"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-09-30 23:30 | Source version: 5.98
+> Generated: 2026-10-04 03:02 | Source version: 5.99
 
 # QWU Backoffice User Manual
 
@@ -4857,8 +4857,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v5.98 by generate_public_manual.py"
-generated: "2026-09-30 23:30"
+source: "Auto-generated from private manual v5.99 by generate_public_manual.py"
+generated: "2026-10-04 03:02"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6679,6 +6679,27 @@ Same register + QCM consent gates as the weekly report, imported. TIG released a
 agent-composed copy waits for his eyes.** It also writes `visitors.status='applied'` and the
 application category (never touching the visit-time `profession_category`). First live send: 10
 members, 2026-09-11.
+
+**Then the committee changed their template, and the reader went quiet (2026-10-03).** Their mail is
+prose we do not control. On 2026-10-03 a live application arrived as a labelled `PROSPECTIVE MEMBER`
+block with a Google Form link instead of the one variable sentence the reader was built for. It
+parsed to nothing, logged `skipped (not a request)` twelve times over three hours, and raised no
+alarm ... the early return for "no requests" sat above the SMS composer, so an alert was not merely
+forgotten, it was unreachable. Nobody knew until TIG forwarded a screenshot of a member's copy and
+asked whether the automation had fired. Two earlier drops (2026-09-23) had the same symptom from a
+different wording gap, but both were renewals where nothing was owed, so the first miss taught us
+nothing. **v2.2.0 reads both new shapes, and an email from the committee's own address that we cannot
+parse now texts TIG once** ... a reader of someone else's prose is allowed to miss, never to be quiet.
+The labelled template also carries the applicant's own email address, so matching now has an exact
+rail instead of guessing on a name.
+
+**A second, quieter fault surfaced underneath it.** The applicant had no report to send in any case:
+he had been waiting since his visit on one unanswered identity anchor, and the confirm screen listed
+only meetings from today forward, so he dropped off it the next morning. The day-before reminder
+skips a past meeting and the stale sweep is not scheduled ... three surfaces blind at once, with
+nothing left to surface him again. The confirm screen now keeps an UNRESOLVED hold visible for 120
+days past its meeting. Un-hiding it immediately revealed four more people stranded the same way, two
+of them for six weeks. **An unanswered question is a debt, and a debt outlives its due date.**
 
 **The Membership Committee (MC) page in Quietly Networking (built 2026-09-11, under a testing lock).**
 Every request the script detects is mirrored into QNT (`membership_requests`, `membership_request_sends`,
@@ -13020,4 +13041,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-09-30 23:30 (v5.98)*
+*Last updated: 2026-10-04 03:02 (v5.99)*
