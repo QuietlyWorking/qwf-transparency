@@ -10440,9 +10440,9 @@ Lock files (`.tmp/auto_remediation_<monitor>.lock`) prevent concurrent remediati
 ### Lessons Learned During Build
 
 1. **Claude wraps JSON in code fences** ... Even with `json_mode=True`, `thinking_call()` responses may be wrapped in `` ```json `` code fences. Script strips these before parsing.
-2. **SSH nohup for long-running LLM calls** — n8n SSH node must return immediately (webhook timeout). Use `nohup ... &` pattern with `echo` for immediate response.
-3. **Full venv path in SSH** — Non-interactive SSH doesn't source `.bashrc`, so use `.venv/bin/python3` instead of `python`.
-4. **n8n webhookId bug** — After `import:workflow`, verify `webhook_entity` table has correct `webhookId` value.
+2. **SSH nohup for long-running LLM calls** ... n8n SSH node must return immediately (webhook timeout). Use `nohup ... &` pattern with `echo` for immediate response.
+3. **Full venv path in SSH** ... Non-interactive SSH doesn't source `.bashrc`, so use `.venv/bin/python3` instead of `python`.
+4. **n8n webhookId bug** ... After `import:workflow`, verify `webhook_entity` table has correct `webhookId` value.
 
 ### Enabling Remediation Mode
 
@@ -10500,7 +10500,7 @@ User clicks link → quietlytracking.org/[slug]
     → Return rendered HTML page
 ```
 
-### Template Types (MVP — 6 pre-built)
+### Template Types (MVP ... 6 pre-built)
 
 | Type | Use Case |
 |------|----------|
@@ -10540,15 +10540,15 @@ No free tier. 30-day trial. **QWF ecosystem bundle:** Full Pro access included f
 
 | Component | Status |
 |-----------|--------|
-| Supabase project | ACTIVE_HEALTHY — `<SUPABASE_PROJECT_ID>` (us-west-1) |
-| Domain | `quietlytracking.org` — registered, DNS via Cloudflare |
+| Supabase project | ACTIVE_HEALTHY ... `<SUPABASE_PROJECT_ID>` (us-west-1) |
+| Domain | `quietlytracking.org` ... registered, DNS via Cloudflare |
 | Lovable project | `a404ee32-52c7-4781-8411-974ed9bdbaf7` |
-| Schema | v1.0.0 — 7 tables, RLS policies, indexes |
-| Auth | Configured — email/password + Google OAuth (shared QWF client) |
+| Schema | v1.0.0 ... 7 tables, RLS policies, indexes |
+| Auth | Configured ... email/password + Google OAuth (shared QWF client) |
 | QWF Passport | Secret set, edge function pending |
 | Lovable Prompts | 7 total (001-002, 006-007 executed; 003-005 written) |
 | Edge functions | Not yet deployed (render-landing-page, track-visit, track-conversion, verify-crossover-token, submit-contact-form) |
-| Landing page | Deployed — 14 sections, alpha gate, heritage, ecosystem, contact form |
+| Landing page | Deployed ... 14 sections, alpha gate, heritage, ecosystem, contact form |
 | Accent color | Teal/Cyan (#06B6D4) |
 
 ### Lovable Prompts
@@ -10586,7 +10586,7 @@ No free tier. 30-day trial. **QWF ecosystem bundle:** Full Pro access included f
 
 **Added: February 28, 2026**
 
-A living, interactive visualization of the entire Quietly Working Universe — 52 entities across 7 categories, served as an embeddable widget with Shadow DOM isolation. One JavaScript file, 17 KB gzip, drops onto any QWF website. Includes per-entity Media Kit sections (logo downloads, social links, boilerplate copy) since v2.3.0.
+A living, interactive visualization of the entire Quietly Working Universe ... 52 entities across 7 categories, served as an embeddable widget with Shadow DOM isolation. One JavaScript file, 17 KB gzip, drops onto any QWF website. Includes per-entity Media Kit sections (logo downloads, social links, boilerplate copy) since v2.3.0.
 
 ### Architecture
 
@@ -10611,7 +10611,7 @@ WordPress Site (any of 11 QWF sites)
 
 Expanding panel below clicked entity cards:
 - **Left side:** Summary, highlight bullets, live metrics (uptime, health, success rate), MP Training Ground badge, Media Kit section, CTA button
-- **Right side:** Interactive SVG connection graph — radial node-link diagram with center node (current entity) and connected entities radiating outward
+- **Right side:** Interactive SVG connection graph ... radial node-link diagram with center node (current entity) and connected entities radiating outward
 - **Graph interactions:** Hover for tooltip, click node with ↗ to open entity website, click node without ↗ to navigate to that entity's detail panel (cross-category navigation)
 
 ### Media Kit (v2.3.0)
@@ -10621,7 +10621,7 @@ Each entity detail panel can include a "Media Kit" section with:
 - **Social:** Platform icons (Instagram, Facebook, X, LinkedIn, YouTube, TikTok) with inline SVG and direct profile links.
 - **Boilerplate:** Pre-written description with one-click "Copy" button for collaborators.
 
-Media data is stored in `detail.media` in `ecosystem_registry.json`. 12 entities have media kits (all programs + apps). To add media to an entity, add a `media` object with `logos`, `social`, and/or `boilerplate` fields — no code rebuild needed.
+Media data is stored in `detail.media` in `ecosystem_registry.json`. 12 entities have media kits (all programs + apps). To add media to an entity, add a `media` object with `logos`, `social`, and/or `boilerplate` fields ... no code rebuild needed.
 
 ### Connection System
 
@@ -10645,7 +10645,7 @@ Media data is stored in `detail.media` in `ecosystem_registry.json`. 12 entities
 
 Example: `[qwf_ecosystem palette_bg="#0c1629" palette_text="#f0e6d3" accent="#d4a843"]`
 
-Overrides applied as CSS custom properties on Shadow DOM root. Partial overrides fine — unspecified tokens keep theme defaults.
+Overrides applied as CSS custom properties on Shadow DOM root. Partial overrides fine ... unspecified tokens keep theme defaults.
 
 ### All Shortcode Attributes
 
@@ -10681,7 +10681,7 @@ Overrides applied as CSS custom properties on Shadow DOM root. Partial overrides
 
 ### Entity Registry
 
-Edit `005 Operations/Data/ecosystem_registry.json` to add/remove/modify entities. No code rebuild needed — the API serves whatever is in the registry (60s cache). Identity fields (name, short_name, category, status, color_hex, emoji, tagline, website) auto-sync to `hq_app_registry` via `sync_hq_app_registry.py` v1.0.0 (runs daily in HQ Daily Sync n8n workflow v6.0.0). Operational fields in `hq_app_registry` (metrics, hosting, etc.) are preserved during sync.
+Edit `005 Operations/Data/ecosystem_registry.json` to add/remove/modify entities. No code rebuild needed ... the API serves whatever is in the registry (60s cache). Identity fields (name, short_name, category, status, color_hex, emoji, tagline, website) auto-sync to `hq_app_registry` via `sync_hq_app_registry.py` v1.0.0 (runs daily in HQ Daily Sync n8n workflow v6.0.0). Operational fields in `hq_app_registry` (metrics, hosting, etc.) are preserved during sync.
 
 7 categories: Apps (10), Programs (7), Systems (10), Infrastructure (5), Teaching (3), Content (4), Sites (11)
 
@@ -10705,13 +10705,13 @@ ssh bitnami@<WP_SERVER_IP> "sudo cp /tmp/qwf-ecosystem-widget.php /opt/bitnami/w
 - **Live URL:** `https://twin.quietlyworking.org/ecosystem/widget.js?v=2.3.0`
 - **System Status:** `002 Projects/_QWF Ecosystem Widget/Ecosystem-Widget-System-Status.md`
 - **User Manual:** `002 Projects/_QWF Ecosystem Widget/User-Manual.md`
-- **Directive (landing section):** `005 Operations/Directives/qwf_ecosystem_landing_section.md` (separate — Lovable apps only)
+- **Directive (landing section):** `005 Operations/Directives/qwf_ecosystem_landing_section.md` (separate ... Lovable apps only)
 
 ### Transparency Site Native Version (Svelte/Astro)
 
 **Added: April 11, 2026**
 
-The transparency site (`transparency.quietlyworking.org`) has its own native implementation of the ecosystem widget — a Svelte 5 island component that renders at build time using `ecosystem.json` data (no client-side API polling).
+The transparency site (`transparency.quietlyworking.org`) has its own native implementation of the ecosystem widget ... a Svelte 5 island component that renders at build time using `ecosystem.json` data (no client-side API polling).
 
 **Component:** `src/components/islands/EcosystemFooterWidget.svelte` (in `QuietlyWorking/qwf-transparency`)
 
@@ -10767,14 +10767,14 @@ The transparency site (`transparency.quietlyworking.org`) has its own native imp
 
 ### What It Does
 
-Transforms QWR from a single-user platform into a multi-user team collaboration system. Account owners can invite team members, assign them to specific brands, and control what they can do — all while maintaining backward compatibility for solo users.
+Transforms QWR from a single-user platform into a multi-user team collaboration system. Account owners can invite team members, assign them to specific brands, and control what they can do ... all while maintaining backward compatibility for solo users.
 
 ### Architecture
 
 **Roles (4-tier hierarchy):**
 | Role | Can Do | Can't Do |
 |------|--------|----------|
-| Owner | Everything + billing + team management | — |
+| Owner | Everything + billing + team management | ... |
 | Admin | Manage team, create/edit content, all brands | Billing, delete account |
 | Editor | Create/edit content for assigned brands only | Team management, settings |
 | Viewer | View content and analytics for assigned brands | Create, edit, or manage anything |
@@ -10786,21 +10786,21 @@ Transforms QWR from a single-user platform into a multi-user team collaboration 
 | Growth | 5 | $299 |
 | Agency | 15 | $799 |
 
-**Backward Compatibility:** Solo users are unaffected. The `get_account_id()` helper function returns `auth.uid()` for users who aren't members of any team — they ARE the account. This means zero migration needed for existing supporters.
+**Backward Compatibility:** Solo users are unaffected. The `get_account_id()` helper function returns `auth.uid()` for users who aren't members of any team ... they ARE the account. This means zero migration needed for existing supporters.
 
 ### Database Layer
 
 **4 new tables:**
-- `account_members` — Team roster (role, status, invite token, expiry)
-- `member_brand_access` — Which brands each member can access
-- `team_activity_log` — Audit trail of team actions
-- `approval_requests` — Content approval workflow queue
+- `account_members` ... Team roster (role, status, invite token, expiry)
+- `member_brand_access` ... Which brands each member can access
+- `team_activity_log` ... Audit trail of team actions
+- `approval_requests` ... Content approval workflow queue
 
 **4 helper functions (STABLE SECURITY DEFINER):**
-- `get_account_id()` — Returns the account a user belongs to (or self for solo users)
-- `get_user_role()` — Returns user's role within their account
-- `user_has_brand_access()` — Checks if user can access a specific brand
-- `get_team_member_count()` — Current member count for seat enforcement
+- `get_account_id()` ... Returns the account a user belongs to (or self for solo users)
+- `get_user_role()` ... Returns user's role within their account
+- `user_has_brand_access()` ... Checks if user can access a specific brand
+- `get_team_member_count()` ... Current member count for seat enforcement
 
 **RLS Migration:** All 37 existing tables migrated from `auth.uid()` to `get_account_id()` + `user_has_brand_access()` pattern. 76 old policies dropped and replaced with team-aware policies.
 
@@ -10860,7 +10860,7 @@ Every QWF app User Manual must include: (1) Table of Contents, (2) What Is [App]
 
 ### Pricing Comparison Chart (Required)
 
-Every subscription app manual includes a two-part pricing comparison: (1) "Every Tier Includes the Full Platform" — grouped feature list reinforcing full access at every tier, (2) "What Differs by Tier" — compact table showing only volume limits and access features.
+Every subscription app manual includes a two-part pricing comparison: (1) "Every Tier Includes the Full Platform" ... grouped feature list reinforcing full access at every tier, (2) "What Differs by Tier" ... compact table showing only volume limits and access features.
 
 ### Quality Checklist (12 checks)
 
@@ -10880,8 +10880,8 @@ Completeness, accuracy, consistency, terminology, pricing, diagrams, cross-refer
 |-----|------------|-------------|-------|
 | QWR (Quietly Writing) | ✅ v4.0.1 | ✅ v4 (Prompt 088) | Hand-synced by prompt; no renderer yet (the legacy path) |
 | QQT (Quietly Quoting) | ✅ v1.0.2 | ✅ LIVE at quietlyquoting.org/docs (2026-09-22) | **First SvelteKit Documentation Center and the first rendered one.** Bundle generated by `render_qqt_docs.py` from the manual, committed, drift-gated by `--check`; proof `prove_qqt_docs.py` (43 checks, chromium + webkit). Help links: office sidebar, Field eyebrow, first-sign-in alpha note |
-| QNT (Quietly Networking) | Not started | Not started | — |
-| Others | Not started | Not started | — |
+| QNT (Quietly Networking) | Not started | Not started | ... |
+| Others | Not started | Not started | ... |
 
 ### 🎓 Missing Pixel Training Opportunities
 
@@ -10899,7 +10899,7 @@ Completeness, accuracy, consistency, terminology, pricing, diagrams, cross-refer
 
 **Added: March 4, 2026**
 
-Weavy (weavy.ai) is a node-based AI creative workflow platform used for QWF visual production — product photography, lifestyle shots, character consistency, and video generation. All QWF visual production workflows are built in Weavy and documented in a dedicated user manual.
+Weavy (weavy.ai) is a node-based AI creative workflow platform used for QWF visual production ... product photography, lifestyle shots, character consistency, and video generation. All QWF visual production workflows are built in Weavy and documented in a dedicated user manual.
 
 ### Architecture
 
@@ -10968,28 +10968,28 @@ Weavy offers an App Mode that provides a simplified interface for students: sing
 
 **Added: March 18, 2026 · Major rewrite: April 17, 2026 (SvelteKit migration + health module + nutrition system) · UX pass: April 20, 2026 (user-local timezone, mobile nav, /you hub)**
 
-### April 20, 2026 — UX Pass
+### April 20, 2026 ... UX Pass
 
 Three architectural upgrades landed in rapid succession after TIG noticed a day-of-week drift bug (the tennis-day water bump fired on the wrong calendar day when Pacific and UTC disagreed late in the evening).
 
-**1. User-local timezone architecture (8 commits across Phases 1, 2, 4).** Every WHELHO user profile now carries `timezone` (IANA name), `home_city` (display-only), and `tennis_days` (SMALLINT[] of day-of-week indices). `src/lib/timezone.ts` generalized with `getLocalDayOfWeek/Hour/DayKey(tz)` helpers — Pacific is the fallback, never the assumption. Food page's `isTennisDay()`, streak day-keys, `inferMealType()`, and afternoon nudge all now read the user's tz. Onboarding auto-detects browser tz via `Intl.DateTimeFormat().resolvedOptions().timeZone` and lets the user confirm/edit. A new `<TravelBanner>` compares browser tz vs profile tz on every portal page and offers a one-tap switch when they differ (transparency-first — never silently follows device). The backoffice gained a `check_timezone_hygiene.py` guard script scanning any supporter-app `src/` for raw `new Date().getDay()/getHours()/getDate()` patterns. `timezone_standard.md` amended to document two operating modes (Pacific for backoffice, user-local for supporter apps). `qwf_app_family_standard.md` section 3 split into 3a (user-local) + 3b (Pacific legacy). WHELHO is the canonical reference.
+**1. User-local timezone architecture (8 commits across Phases 1, 2, 4).** Every WHELHO user profile now carries `timezone` (IANA name), `home_city` (display-only), and `tennis_days` (SMALLINT[] of day-of-week indices). `src/lib/timezone.ts` generalized with `getLocalDayOfWeek/Hour/DayKey(tz)` helpers ... Pacific is the fallback, never the assumption. Food page's `isTennisDay()`, streak day-keys, `inferMealType()`, and afternoon nudge all now read the user's tz. Onboarding auto-detects browser tz via `Intl.DateTimeFormat().resolvedOptions().timeZone` and lets the user confirm/edit. A new `<TravelBanner>` compares browser tz vs profile tz on every portal page and offers a one-tap switch when they differ (transparency-first ... never silently follows device). The backoffice gained a `check_timezone_hygiene.py` guard script scanning any supporter-app `src/` for raw `new Date().getDay()/getHours()/getDate()` patterns. `timezone_standard.md` amended to document two operating modes (Pacific for backoffice, user-local for supporter apps). `qwf_app_family_standard.md` section 3 split into 3a (user-local) + 3b (Pacific legacy). WHELHO is the canonical reference.
 
-**2. Navigation refactor — PlanetNav desktop breadcrumb + mobile bottom tabs + /you hub.** Deep portal pages were requiring back-back-back navigation to reach anywhere outside the current branch. New `PlanetNav.svelte` renders a sticky top bar on every portal page except `/dashboard` (custom header) and `/onboarding` — top-left Nano A orb links to dashboard, clickable breadcrumb trail reconstructed from URL segments, right-side "You" link. New `BottomTabs.svelte` pins 5 tabs to the bottom of every portal page on mobile only (`sm:hidden`): Planet · Health · Library · You · +Log. `+Log` opens a `QuickLogSheet.svelte` bottom sheet with water quick-log chips (tap container → POSTs `logFromPantry` → banner confirm → zero navigation) and a 2×2 nav tile grid (Food/Scan/Vitals/Intake). Dashboard's custom top header wrapped in `hidden sm:flex` so mobile shows only the planet; Ezer + Bug Report moved to `/you` to preserve mobile access. New `/you` route is the identity & settings hub — planet name, email, Time & Location (moved wholesale from `/health/profile`), Ezer + Bug Report, Sign out. `/health/profile` shrinks to body stats + daily nutrition targets only.
+**2. Navigation refactor ... PlanetNav desktop breadcrumb + mobile bottom tabs + /you hub.** Deep portal pages were requiring back-back-back navigation to reach anywhere outside the current branch. New `PlanetNav.svelte` renders a sticky top bar on every portal page except `/dashboard` (custom header) and `/onboarding` ... top-left Nano A orb links to dashboard, clickable breadcrumb trail reconstructed from URL segments, right-side "You" link. New `BottomTabs.svelte` pins 5 tabs to the bottom of every portal page on mobile only (`sm:hidden`): Planet · Health · Library · You · +Log. `+Log` opens a `QuickLogSheet.svelte` bottom sheet with water quick-log chips (tap container → POSTs `logFromPantry` → banner confirm → zero navigation) and a 2×2 nav tile grid (Food/Scan/Vitals/Intake). Dashboard's custom top header wrapped in `hidden sm:flex` so mobile shows only the planet; Ezer + Bug Report moved to `/you` to preserve mobile access. New `/you` route is the identity & settings hub ... planet name, email, Time & Location (moved wholesale from `/health/profile`), Ezer + Bug Report, Sign out. `/health/profile` shrinks to body stats + daily nutrition targets only.
 
 **3. Pantry + Food log polish.**
 - **Pantry one-tap log icon**: ClipboardPlus button on every pantry row's action cluster. POSTs to `logFromPantry` with meal_type inferred from user-local hour; 3s success banner; no navigation.
-- **Water bar on past days**: Navigating to any past day now shows that day's water intake, that day's goal, and that day's extra-hydration bump. Computed client-side per the user's timezone + `tennis_days`. Streak flame hidden on past days. Tap-to-log disabled — bar renders as `<div>` via `svelte:element` with opacity reduction for read-only affordance.
+- **Water bar on past days**: Navigating to any past day now shows that day's water intake, that day's goal, and that day's extra-hydration bump. Computed client-side per the user's timezone + `tennis_days`. Streak flame hidden on past days. Tap-to-log disabled ... bar renders as `<div>` via `svelte:element` with opacity reduction for read-only affordance.
 - **Day-nav arrow fix**: Day label now uses `min-w-[10rem] sm:min-w-[11rem] text-center tabular-nums` so the right chevron stops drifting as labels change width. Click-click-click forward works identically to backward.
 
-**Design principles encoded this session** (now memory feedback entries — apply to every QWF app):
-- **Meaningful WHY for every permission/data ask** — opt-in default, always-editable in settings (`feedback_meaningful_why_for_permissions.md`)
-- **Ask once on context change, always editable** — travel/locale: ask plain question, remember answer, never silently follow device (`feedback_ask_once_always_editable.md`)
+**Design principles encoded this session** (now memory feedback entries ... apply to every QWF app):
+- **Meaningful WHY for every permission/data ask** ... opt-in default, always-editable in settings (`feedback_meaningful_why_for_permissions.md`)
+- **Ask once on context change, always editable** ... travel/locale: ask plain question, remember answer, never silently follow device (`feedback_ask_once_always_editable.md`)
 
 **Added: March 18, 2026 · Major rewrite: April 17, 2026 (SvelteKit migration + health module + nutrition system)**
 
-WHELHO is a personal development app built around the planet metaphor — your life as a celestial body with 8 realms, a values-driven core, and elements that orbit between crust (where you are) and core (where you're pulled). It uses Spline 3D for real-time planet visualization and serves as both a FORGE product fuel line and the Missing Pixel pre-student pipeline gatekeeper.
+WHELHO is a personal development app built around the planet metaphor ... your life as a celestial body with 8 realms, a values-driven core, and elements that orbit between crust (where you are) and core (where you're pulled). It uses Spline 3D for real-time planet visualization and serves as both a FORGE product fuel line and the Missing Pixel pre-student pipeline gatekeeper.
 
-As of April 17, 2026 the app also ships a **full personal health management platform** within the Body realm — bloodwork intelligence, pantry-backed food logging, water tracking, body-stats-derived daily targets, chronic-condition management, surgical timeline, immunizations, allergies, insurance, family history, and emergency contacts. This module is production-used daily by TIG.
+As of April 17, 2026 the app also ships a **full personal health management platform** within the Body realm ... bloodwork intelligence, pantry-backed food logging, water tracking, body-stats-derived daily targets, chronic-condition management, surgical timeline, immunizations, allergies, insurance, family history, and emergency contacts. This module is production-used daily by TIG.
 
 ### Architecture
 
@@ -11011,15 +11011,15 @@ Migrated React 18 → SvelteKit on 2026-04-16 with zero data loss (Supabase unto
 
 WHELHO occupies a unique dual role in QWF:
 - **FORGE Fuel Line:** Premium personal development tool generating fundraising revenue alongside QWR, QQT, L4G
-- **MP Gatekeeper:** The Values Discovery journey qualifies users for Missing Pixel — "accepting 100% responsibility for everything in your life" is demonstrated through the app, not declared on a form
-- **Precious Monster Transformation:** During Values Discovery CHOICE phase, users who genuinely commit to their values become "Precious Monsters" — the bridge to Missing Pixel
+- **MP Gatekeeper:** The Values Discovery journey qualifies users for Missing Pixel ... "accepting 100% responsibility for everything in your life" is demonstrated through the app, not declared on a form
+- **Precious Monster Transformation:** During Values Discovery CHOICE phase, users who genuinely commit to their values become "Precious Monsters" ... the bridge to Missing Pixel
 
 ### Key Concepts
 
 - **Planet Metaphor:** User's life = a planet with 4 layers (Core → Mantle → Crust → Atmosphere) and 8 realms. Core values create gravitational pull. Elements orbit between crust (current state) and core (aspirational state). The Atmosphere represents external factors users can't control but must account for.
-- **Density = Stability:** The denser the core values, the more inherently stable the planet — atmospheric storms don't wobble a planet with a dense core. This is the central physics teaching: the planet *shows* users their growth without explanation.
-- **8 Realms:** Spirit, Mind, Body, Relationships, Money, Recreation, Work, Charity — each a segment on the 3D planet surface
-- **Values Discovery Flow:** Excavation → Illumination → Recognition → Choice → Commitment — AI-assisted pattern detection surfaces values from freeform responses
+- **Density = Stability:** The denser the core values, the more inherently stable the planet ... atmospheric storms don't wobble a planet with a dense core. This is the central physics teaching: the planet *shows* users their growth without explanation.
+- **8 Realms:** Spirit, Mind, Body, Relationships, Money, Recreation, Work, Charity ... each a segment on the 3D planet surface
+- **Values Discovery Flow:** Excavation → Illumination → Recognition → Choice → Commitment ... AI-assisted pattern detection surfaces values from freeform responses
 - **Two-Track Development:** Track A (React code, done by code students) and Track B (Spline 3D scene design, done by 3D art students) merge at integration
 - **Spline Integration:** Planet designed in Spline's browser editor, embedded via `@splinetool/react-spline`. Events: `onSplineMouseDown` for realm clicks, `emitEvent()` for animations, Variables API for dynamic control
 - **Own Brand:** `whelho.org` (not a "Quietly ___" app), but follows QWF App Family patterns
@@ -11028,19 +11028,19 @@ WHELHO occupies a unique dual role in QWF:
 
 | Component | Status |
 |-----------|--------|
-| Supabase project | ACTIVE_HEALTHY — `nvimpjmhiondaxtrwlny` (us-west-1, free tier) |
-| Domain | `whelho.org` — Live on CF Pages, SSL valid |
-| CF Pages project | `whelho` — GitHub Actions auto-deploy on push to main |
+| Supabase project | ACTIVE_HEALTHY ... `nvimpjmhiondaxtrwlny` (us-west-1, free tier) |
+| Domain | `whelho.org` ... Live on CF Pages, SSL valid |
+| CF Pages project | `whelho` ... GitHub Actions auto-deploy on push to main |
 | GitHub repo | `QuietlyWorking/whelho` (private) |
-| Database schema | v2 — 28+ tables with RLS |
+| Database schema | v2 ... 28+ tables with RLS |
 | Auth | `@supabase/ssr` + 1-year persistent cookies on both server + browser client |
 | Phase 0: Foundation | ✅ Complete |
 | Phase 1: Planet + Onboarding | Track A ✅ (SvelteKit rewrite), Track B (Spline scene) design brief complete, not yet built |
-| Alpha stage | ✅ Deployed — invitation-only gate, access request form, bug reports, alpha badge |
-| Contact form edge function | ✅ Deployed — `submit-contact-form` with honeypot, rate limiting, duplicate detection |
-| Health module | ✅ Production-used — 13 sections (food log + pantry + vitals + bloodwork + conditions + procedures + allergies + immunizations + insurance + family history + emergency contacts + providers + medications + referrals) |
-| Nutrition system | ✅ Production — barcode scan + OFF lookup, Claude vision label extraction, Claude text-describe, 30 quick-picks, auto-pantry, 27-key micronutrient tracking, body-stats-derived target rings, educational NOVA/Nutri-Score popups |
-| Water tracking | ✅ Production — named containers, vertical water bar on Today card, streak flame, afternoon nudge, tennis-day bump |
+| Alpha stage | ✅ Deployed ... invitation-only gate, access request form, bug reports, alpha badge |
+| Contact form edge function | ✅ Deployed ... `submit-contact-form` with honeypot, rate limiting, duplicate detection |
+| Health module | ✅ Production-used ... 13 sections (food log + pantry + vitals + bloodwork + conditions + procedures + allergies + immunizations + insurance + family history + emergency contacts + providers + medications + referrals) |
+| Nutrition system | ✅ Production ... barcode scan + OFF lookup, Claude vision label extraction, Claude text-describe, 30 quick-picks, auto-pantry, 27-key micronutrient tracking, body-stats-derived target rings, educational NOVA/Nutri-Score popups |
+| Water tracking | ✅ Production ... named containers, vertical water bar on Today card, streak flame, afternoon nudge, tennis-day bump |
 
 ### Database Schema (28+ Tables)
 
@@ -11065,7 +11065,7 @@ WHELHO occupies a unique dual role in QWF:
 
 | Table | Purpose |
 |-------|---------|
-| `health_profile` | Body stats (sex, DOB, height_cm, weight_kg, activity_level, calorie_goal, custom targets, daily_water_target_oz) — drives all daily-target rings |
+| `health_profile` | Body stats (sex, DOB, height_cm, weight_kg, activity_level, calorie_goal, custom targets, daily_water_target_oz) ... drives all daily-target rings |
 | `health_food_log` | Every eaten item with full macros + detailed fats + added sugar + cholesterol + ingredients + allergens + facility allergens + 27-key micronutrients JSONB + NOVA + Nutri-Score + photo + alignments to realm elements |
 | `health_meal_templates` | Pantry of frequently-eaten items (auto-populates on every log, dedupes by barcode/name). Shares nutrition fields with health_food_log plus photo_url, back_photo_url, emoji, use_count, last_used_at |
 | `food_element_alignments` | Many-to-many food↔realm-element linkage (supports/undermines with direction) |
@@ -11095,7 +11095,7 @@ WHELHO occupies a unique dual role in QWF:
 | 1: Planet + Onboarding | Spline 3D planet, formation animation, realm interactions | Track A (code) done; Track B (Spline scene) pending |
 | 2: Values Discovery | Excavation → Commitment arc, AI-assisted pattern detection | Not Started |
 | 3: Realms + Elements | Realm zoom, element CRUD, crust/core positions | ✅ Elements CRUD done; realm zoom + crust/core viz pending |
-| 4: Health module (inserted — Body realm went deep) | Bloodwork + food log + vitals + conditions + procedures + allergies + immunizations + insurance + family history + emergency contacts + providers + medications + referrals + water tracking + educational overlays + daily target rings | ✅ Shipped 2026-04-16 → 2026-04-17 |
+| 4: Health module (inserted ... Body realm went deep) | Bloodwork + food log + vitals + conditions + procedures + allergies + immunizations + insurance + family history + emergency contacts + providers + medications + referrals + water tracking + educational overlays + daily target rings | ✅ Shipped 2026-04-16 → 2026-04-17 |
 | 5: Living Practice + Atmosphere | Conversational check-ins, progress on planet, celebration particles, atmosphere layer | Not Started |
 | 6: Purpose Window | Work + Charity pattern detection, breadcrumb surfacing | Not Started |
 | 7: Polish + Launch | Mobile optimization, MP bridge, beta, landing page, launch | Not Started |
@@ -11146,27 +11146,27 @@ QWU uses **one** Cloudflare API token covering all operations:
 
 **History:** Session 119 (2026-03-10) created a Pages-only Account API Token for QWR's Lovable-to-CF-Pages migration. A separate DNS-only token (`CLOUDFLARE_API_TOKEN_OLD`) was kept for DNS operations. On 2026-04-19 the main token's permissions were expanded to cover everything QWU needs, and the old DNS-only token was retired.
 
-**Does NOT have:** User-scope permissions (can't revoke tokens via API — must use the dashboard). Redirect Rules (rulesets) permissions — host-based redirects go through CF Pages Functions middleware instead.
+**Does NOT have:** User-scope permissions (can't revoke tokens via API ... must use the dashboard). Redirect Rules (rulesets) permissions ... host-based redirects go through CF Pages Functions middleware instead.
 
 ### Account & Zone Registry
 
 | Domain | Zone ID | Hosting | Notes |
 |--------|---------|---------|-------|
-| `quietlyworking.org` | — | CF Pages | QWR production |
-| `quietlyquoting.org` | — | Lovable | QQT |
-| `quietlyknocking.org` | — | Lovable | QKN |
-| `quietlyspotting.org` | — | Lovable | QSP |
-| `quietlytracking.org` | — | Lovable | QTR |
-| `quietlynetworking.org` | — | CF Pages | QNT (migrated 2026-03-20) |
-| `locals4good.org` | — | CF Pages | L4G (migrated 2026-03-19) |
+| `quietlyworking.org` | ... | CF Pages | QWR production |
+| `quietlyquoting.org` | ... | Lovable | QQT |
+| `quietlyknocking.org` | ... | Lovable | QKN |
+| `quietlyspotting.org` | ... | Lovable | QSP |
+| `quietlytracking.org` | ... | Lovable | QTR |
+| `quietlynetworking.org` | ... | CF Pages | QNT (migrated 2026-03-20) |
+| `locals4good.org` | ... | CF Pages | L4G (migrated 2026-03-19) |
 | `whelho.org` | `4e73ca94aad582ed7157175b5a1f6fca` | CF Pages | WHELHO |
-| `<chapter-domain>` | — | CF Pages | [Networking Chapter] chapter site (CNAME → `aim-high-bni.pages.dev`) |
-| `preciousmonster.org` | — | — | Reserved (MP lore) |
-| `preciousmonster.com` | — | — | Reserved (MP lore) |
+| `<chapter-domain>` | ... | CF Pages | [Networking Chapter] chapter site (CNAME → `aim-high-bni.pages.dev`) |
+| `preciousmonster.org` | ... | ... | Reserved (MP lore) |
+| `preciousmonster.com` | ... | ... | Reserved (MP lore) |
 
 **Cloudflare Account ID:** see `CLOUDFLARE_ACCOUNT_ID` in `.env`
 
-**Supporter zones on the same account:** [Supporter Organization] has 40 subsite zones (e.g., `<supporter-news-domain>`, `<supporter-news-domain>`, …) on this CF account — delegated admin for a supporter system. **Do not modify [Supporter Organization] zones** unless the task is explicitly authorized for [Supporter Organization] infrastructure. See `002 Projects/_[Supporter Organization] Projects/` and `CLAUDE.md` → "Supporter Systems". [Supporter Organization] migration from Namecheap DNS to CF completed 2026-04-18 — see `[Supporter Organization]-Cloudflare-Migration.md` for the full zone list, IP-lockdown pattern, and Phase 4 hardening artifacts.
+**Supporter zones on the same account:** [Supporter Organization] has 40 subsite zones (e.g., `<supporter-news-domain>`, `<supporter-news-domain>`, …) on this CF account ... delegated admin for a supporter system. **Do not modify [Supporter Organization] zones** unless the task is explicitly authorized for [Supporter Organization] infrastructure. See `002 Projects/_[Supporter Organization] Projects/` and `CLAUDE.md` → "Supporter Systems". [Supporter Organization] migration from Namecheap DNS to CF completed 2026-04-18 ... see `[Supporter Organization]-Cloudflare-Migration.md` for the full zone list, IP-lockdown pattern, and Phase 4 hardening artifacts.
 
 ### DNS Management Script
 
@@ -11224,8 +11224,8 @@ curl -s -X POST -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/
 
 ### Known Issues
 
-- `CLOUDFLARE_API_TOKEN` does NOT have User-scope permissions (can't revoke tokens via API — must use the dashboard) or Redirect Rules (rulesets) permissions — use CF Pages Functions middleware for host-based redirects instead
-- GitHub fine-grained PATs with `admin: True` do NOT include Actions Secrets management — a separate "Secrets" permission is needed to set repo secrets via API
+- `CLOUDFLARE_API_TOKEN` does NOT have User-scope permissions (can't revoke tokens via API ... must use the dashboard) or Redirect Rules (rulesets) permissions ... use CF Pages Functions middleware for host-based redirects instead
+- GitHub fine-grained PATs with `admin: True` do NOT include Actions Secrets management ... a separate "Secrets" permission is needed to set repo secrets via API
 - WHELHO's GitHub Actions deploy workflow exists but fails until `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets are set in the repo
 
 ---
@@ -11249,11 +11249,11 @@ Centralized registry of all QWF apps with hosting, database, domain, and develop
 | **L4G** | Locals 4 Good | CF Pages | SvelteKit ✅ | `locals4good` | `locals4good.org` | `<SUPABASE_PROJECT_ID_L4G>` | Beta |
 | **HQ** | Command Center | CF Pages (off Lovable 2026-07-05) | React → SvelteKit (later) | `hq-command-center` | `hq.quietlyworking.org` | `<SUPABASE_PROJECT_ID>` (shared with QWR) | Production |
 | **WHL** | WHELHO | CF Pages | React | `whelho` | `whelho.org` | `nvimpjmhiondaxtrwlny` | Alpha |
-| **PEZ** | Pocket Ez | Lovable | — | — | — | `<SUPABASE_PROJECT_POCKET>` | Planned |
-| **QMP** | Missing Pixel | Lovable | — | — | — | `<SUPABASE_PROJECT_ID>` | Planned |
+| **PEZ** | Pocket Ez | Lovable | ... | ... | ... | `<SUPABASE_PROJECT_POCKET>` | Planned |
+| **QMP** | Missing Pixel | Lovable | ... | ... | ... | `<SUPABASE_PROJECT_ID>` | Planned |
 | **AH** | [Networking Chapter] | CF Pages | React | `aim-high-bni` | `<chapter-domain>` | `<SUPABASE_PROJECT_ID>` (shared with QNT) | Production |
-| **QWB** | Quietly Webbing | CF Pages | SvelteKit (P1) | — (planned) | `quietlywebbing.org` | — | Planned |
-| **QCP** | Quietly Capsuling | CF Pages | SvelteKit | — (planned) | — | — | Concept |
+| **QWB** | Quietly Webbing | CF Pages | SvelteKit (P1) | ... (planned) | `quietlywebbing.org` | ... | Planned |
+| **QCP** | Quietly Capsuling | CF Pages | SvelteKit | ... (planned) | ... | ... | Concept |
 | **QPN** | Quietly Planning | CF Pages | SvelteKit | `quietly-planning` | `quietlyplanning.org` | `qadtibkqekzryahqrbll` | Phase 0 (landing + auth live 2026-09-02; never the retired code QPL) |
 
 ### Frontend Development Workflow
@@ -11263,7 +11263,7 @@ Centralized registry of all QWF apps with hosting, database, domain, and develop
 | **CF Pages** (every QWF app: QWR, QSP, L4G, QNT, WHL, AH, QQT, HQ, QKN, QTR, QOS, QST, QCM, Portal, QPN) | React (current) / SvelteKit (target) | Direct code commits to GitHub repo | Push to `main` → GitHub Actions → `wrangler pages deploy` (auto). QKN + QTR were the last two wired (2026-09-21). |
 | **Lovable** | none | **Retired 2026-09-21.** No QWF app is on Lovable; subscription cancelled (Free from 2026-09-28). Never write a Lovable prompt. | none |
 
-**SvelteKit migration (decided 2026-04-11):** All supporter-facing apps migrate to SvelteKit before onboarding active supporters. Zero current supporters = zero risk window. QWB is the greenfield template app (P1). QSP migrates during Content tab build (P2). QWR migrates frontend (P3). Lovable apps (QQT/QKN/QTR) skip React entirely → go directly to SvelteKit/CF Pages (P4-6). **L4G SvelteKit migration complete (Session 216, Apr 12, 2026)** — `sveltekit-migration` branch merged to `main`, all 20 routes verified on production. SSR live (area demographics in HTML source). `deploy.yml` updated (output dir `.svelte-kit/cloudflare`, Supabase env vars as GH secrets). Host-based redirects via `hooks.server.ts`. HQ stays on Lovable. See `005 Operations/Directives/qwf_content_intelligence_platform.md`.
+**SvelteKit migration (decided 2026-04-11):** All supporter-facing apps migrate to SvelteKit before onboarding active supporters. Zero current supporters = zero risk window. QWB is the greenfield template app (P1). QSP migrates during Content tab build (P2). QWR migrates frontend (P3). Lovable apps (QQT/QKN/QTR) skip React entirely → go directly to SvelteKit/CF Pages (P4-6). **L4G SvelteKit migration complete (Session 216, Apr 12, 2026)** ... `sveltekit-migration` branch merged to `main`, all 20 routes verified on production. SSR live (area demographics in HTML source). `deploy.yml` updated (output dir `.svelte-kit/cloudflare`, Supabase env vars as GH secrets). Host-based redirects via `hooks.server.ts`. HQ stays on Lovable. See `005 Operations/Directives/qwf_content_intelligence_platform.md`.
 
 ### Content Intelligence Platform (Decided 2026-04-11)
 
@@ -11280,7 +11280,7 @@ Key features: Content tab in QSP (Wisdom Feed, Draft Queue, Calendar, Performanc
 | QNT | `QNT_SUPABASE_SERVICE_ROLE_KEY` |
 | QKN | `QKN_SUPABASE_SERVICE_ROLE_KEY` |
 | QQT | `QQT_SUPABASE_SERVICE_ROLE_KEY` |
-| QMP | `QRP_SUPABASE_SERVICE_ROLE_KEY` (naming inconsistency — QRP, not QMP) |
+| QMP | `QRP_SUPABASE_SERVICE_ROLE_KEY` (naming inconsistency ... QRP, not QMP) |
 | PEZ | `POCKET_EZ_SUPABASE_SERVICE_ROLE_KEY` |
 | L4G | `L4G_SUPABASE_SERVICE_ROLE_KEY` |
 | WHL | `WHL_SUPABASE_SERVICE_ROLE_KEY` |
@@ -11288,11 +11288,11 @@ Key features: Content tab in QSP (Wisdom Feed, Draft Queue, Calendar, Performanc
 ### Shared Infrastructure
 
 All QWF apps share:
-- **Supabase Management API:** `QWU_BACKOFFICE_SUPABASE_TOKEN` (note the `QWU_BACKOFFICE_` prefix — `grep "^SUPABASE"` misses it)
+- **Supabase Management API:** `QWU_BACKOFFICE_SUPABASE_TOKEN` (note the `QWU_BACKOFFICE_` prefix ... `grep "^SUPABASE"` misses it)
 - **Contact Form Pipeline:** `submit-contact-form` edge function → `contact_submissions` table → n8n webhook → Ezer auto-reply → Discord alert → HQ Contact Center
 - **QWF Passport (SSO):** `generate-crossover-token` + `verify-crossover-token` edge functions for one-click cross-app auth
-- **Theme System:** CSS custom properties on `:root` (dark) and `[data-theme="light"]` — dark mode default across all apps
-- **Pacific Timezone:** `src/utils/timezone.ts` in every Lovable app — never use raw `new Date()` for Supabase date queries
+- **Theme System:** CSS custom properties on `:root` (dark) and `[data-theme="light"]` ... dark mode default across all apps
+- **Pacific Timezone:** `src/utils/timezone.ts` in every Lovable app ... never use raw `new Date()` for Supabase date queries
 
 ### Animation Architecture (4-Tier System)
 
@@ -11308,16 +11308,16 @@ All QWF apps follow a 4-tier animation architecture that prevents over-engineeri
 | 4 | Hana (by Spline) | Unknown (CDN) | Interactive 2D widgets | Monitor (v1.0.x, too immature) |
 
 **Key rules:**
-- Tiers 2-4 are lazy-loaded on landing page routes only — zero impact on authenticated app routes
+- Tiers 2-4 are lazy-loaded on landing page routes only ... zero impact on authenticated app routes
 - GSAP is free for 501(c)(3) nonprofits under standard license
-- Slider Revolution stays on WordPress as a WYSIWYG design tool — design params extracted and rebuilt as GSAP code in React
+- Slider Revolution stays on WordPress as a WYSIWYG design tool ... design params extracted and rebuilt as GSAP code in React
 - All Tier 2 animations must respect `prefers-reduced-motion: reduce`
 - Tier 3 scenes must provide static image fallback when WebGL is unavailable
-- Hana (Tier 4) has no npm package, no React component, no scroll animation, no self-hosting — evaluate when it matures
+- Hana (Tier 4) has no npm package, no React component, no scroll animation, no self-hosting ... evaluate when it matures
 
 **Design tools:**
-- **Slider Revolution:** `003 Entities/Tools/Slider Revolution.md` — GSAP extraction workflow documented
-- **Spline 3D:** `003 Entities/Tools/Spline 3D.md` — React integration, Hana evaluation, pricing
+- **Slider Revolution:** `003 Entities/Tools/Slider Revolution.md` ... GSAP extraction workflow documented
+- **Spline 3D:** `003 Entities/Tools/Spline 3D.md` ... React integration, Hana evaluation, pricing
 - **App Family Standard:** `005 Operations/Directives/qwf_app_family_standard.md` Section 10
 
 ### 🎓 Missing Pixel Training Opportunities
@@ -11358,7 +11358,7 @@ Sources (meetings, LinkedIn, manual) → Extract → Score (Claude FLAGSHIP) →
 
 | Script | Purpose |
 |--------|---------|
-| `extract_testimonials.py` | Main orchestrator — extract, score, advance pipeline |
+| `extract_testimonials.py` | Main orchestrator ... extract, score, advance pipeline |
 | `extract_testimonials_meetings.py` | Second-pass LLM on meeting transcripts for praise of TIG |
 | `extract_testimonials_linkedin.py` | Apify actor scrapes LinkedIn recommendations |
 | `score_testimonial.py` | Quality score (0-1) + WHELHO realm mapping |
@@ -11426,29 +11426,29 @@ Pipeline states: extracted → giver_pending → giver_approved → tig_pending 
 
 **Added: April 7, 2026** | **TWL:** `005 Operations/Directives/puzzle_tool_wisdom.md` | **Entity:** `003 Entities/Tools/Puzzle.md`
 
-Puzzle is the visual operations layer for QWF — mapping teams, roles, processes, and tools into an interactive blueprint. Future foundation for QOP (Quietly Operating). Full operational knowledge (capabilities, gotchas, patterns, vendor relationship) lives in the Tool Wisdom Library directive.
+Puzzle is the visual operations layer for QWF ... mapping teams, roles, processes, and tools into an interactive blueprint. Future foundation for QOP (Quietly Operating). Full operational knowledge (capabilities, gotchas, patterns, vendor relationship) lives in the Tool Wisdom Library directive.
 
 ### Setup
 
 - **Plan:** AppSumo Tier 3 Optimizer Lifetime (6 seats, unlimited workspaces)
-- **Workspaces:** "Quietly Working" (6096), [Supporter Organization] (9437), [Networking Chapter] (11667) — one MCP connector per workspace, `?workspace=<id>` on the URL
+- **Workspaces:** "Quietly Working" (6096), [Supporter Organization] (9437), [Networking Chapter] (11667) ... one MCP connector per workspace, `?workspace=<id>` on the URL
 - **MCP Integration:** HTTP MCP via `https://app.puzzleapp.io/mcp`
 - **VSCode Config:** `claude-code.mcpServers.puzzle` in user `settings.json`
-- **Auth:** OAuth **once per connector, and tokens PERSIST across sessions** (corrected 2026-08-06; stored in `~/.claude/.credentials.json` under `.mcpOAuth` with a refresh token and multi-day expiry). A connector that suddenly stops working is far more likely an **approval** problem than an expiry — diagnose with `.venv/bin/python "005 Operations/Execution/check_mcp_connector.py" <name>`.
+- **Auth:** OAuth **once per connector, and tokens PERSIST across sessions** (corrected 2026-08-06; stored in `~/.claude/.credentials.json` under `.mcpOAuth` with a refresh token and multi-day expiry). A connector that suddenly stops working is far more likely an **approval** problem than an expiry ... diagnose with `.venv/bin/python "005 Operations/Execution/check_mcp_connector.py" <name>`.
 
-### VSCode Remote SSH — SUPERSEDED 2026-08-06
+### VSCode Remote SSH ... SUPERSEDED 2026-08-06
 
-~~Forward the OAuth callback port in VSCode's Ports panel before opening the auth URL.~~ **Use `claude mcp login <name> --no-browser` instead**, which prints the URL and accepts the redirect pasted back, eliminating the port-forwarding dance entirely. Note that VSCode often auto-forwards the port anyway, so an OAuth can quietly **succeed** while appearing to fail — check `.mcpOAuth` before re-running it.
+~~Forward the OAuth callback port in VSCode's Ports panel before opening the auth URL.~~ **Use `claude mcp login <name> --no-browser` instead**, which prints the URL and accepts the redirect pasted back, eliminating the port-forwarding dance entirely. Note that VSCode often auto-forwards the port anyway, so an OAuth can quietly **succeed** while appearing to fail ... check `.mcpOAuth` before re-running it.
 
-### Before touching any Puzzle canvas — read the TWL
+### Before touching any Puzzle canvas ... read the TWL
 
 The TWL is the source of truth and it now carries several rules that will cost you a session if skipped. **Read `005 Operations/Directives/puzzle_tool_wisdom.md` first.** The expensive ones, by name only:
 
-- **Confirm the connector's workspace binding before the first write** — a cross-workspace `tab_id` is silently ignored and the content lands in the connector's own workspace, returning `ok: true`.
+- **Confirm the connector's workspace binding before the first write** ... a cross-workspace `tab_id` is silently ignored and the content lands in the connector's own workspace, returning `ok: true`.
 - **A new `.mcp.json` connector is QUARANTINED until approved**, and it reports itself as an auth failure.
-- **Adding or removing a step forces a full delete + fresh `create_process`** (passing `section_id` skips auto-layout), and **that create can fail after the delete has run, leaving the canvas empty** — never call `delete` without the re-create payload in hand.
+- **Adding or removing a step forces a full delete + fresh `create_process`** (passing `section_id` skips auto-layout), and **that create can fail after the delete has run, leaving the canvas empty** ... never call `delete` without the re-create payload in hand.
 - **No horizontal-bar glyph in any step name**, and names truncate silently at ~40 chars (~30 on a diamond).
-- **Puzzle rewrites your text** on write (smart typography) — read stored values back rather than trusting the payload.
+- **Puzzle rewrites your text** on write (smart typography) ... read stored values back rather than trusting the payload.
 
 ### Sharing a canvas outside Puzzle, and what QWF does with it (added Aug 14, 2026)
 
@@ -11492,7 +11492,7 @@ be my BLESSSING right there!"*).
 | Teams | 5 | Created (QWF Leadership, QWC Creative Dept, Missing Pixel, Backoffice Operations, Product Development) |
 | Roles | 5 | Created with reporting connections |
 | Tool Groups | 5 | Created with 32 tools mapped |
-| Workflows | 7 | Created — 20 sections, 77 steps, 66 connections |
+| Workflows | 7 | Created ... 20 sections, 77 steps, 66 connections |
 
 ### Operational Workflows (Built April 9, 2026)
 
@@ -11514,9 +11514,9 @@ Section names prefixed with workflow context (e.g., "Content Pipeline: Capture")
 
 All workflows currently share one canvas tab. Feature request submitted to Puzzle team (April 9, 2026) for MCP tab creation/management. Feedback board: `feedback.puzzleapp.io`. Until available, manual tab creation in UI or wait for MCP endpoint.
 
-### MCP Usage Patterns — Duplicate Prevention (Verified April 21, 2026)
+### MCP Usage Patterns ... Duplicate Prevention (Verified April 21, 2026)
 
-Auto-layout works correctly for fresh creates — verified experimentally:
+Auto-layout works correctly for fresh creates ... verified experimentally:
 
 - `create_process` with NO connections → steps lay out in a 2x2 grid (Graphviz fallback)
 - `create_process` WITH connections → steps spread left-to-right with arrows
@@ -11540,14 +11540,14 @@ This issue was diagnosed while helping Josefa Savu in the Puzzle Circle communit
 
 ### Known Issues
 
-- `create_process` bug **RESOLVED** (April 8-9, 2026) — was caused by Anthropic timeouts on Puzzle's backend. Brian confirmed fix, we verified.
-- Static API token not yet available — OAuth per-session only. Feature request logged on Puzzle feedback board.
+- `create_process` bug **RESOLVED** (April 8-9, 2026) ... was caused by Anthropic timeouts on Puzzle's backend. Brian confirmed fix, we verified.
+- Static API token not yet available ... OAuth per-session only. Feature request logged on Puzzle feedback board.
 - Also has "Easy Mode IT" workspace (separate from QWF operations)
 
 ### Key Contacts
 
-- **Brian Ragone** — Founder/CEO (<vendor support email>), warm relationship, attended BNI
-- **Jolly Amurao** — Senior Product Operations (support@puzzleapp.io), primary support, escalates to engineering
+- **Brian Ragone** ... Founder/CEO (<vendor support email>), warm relationship, attended BNI
+- **Jolly Amurao** ... Senior Product Operations (support@puzzleapp.io), primary support, escalates to engineering
 
 ### 🎓 Missing Pixel Training Opportunities
 
@@ -11609,7 +11609,7 @@ Embed support is confirmed across all paid tiers, but the exact mechanism (ifram
 
 ### Key Contacts
 
-- **Mike Cooch** — SuiteDash founder, partnership broker for the $40/mo Business rate. Treat the deal as a SuiteDash-originated benefit; verify terms before promising it to supporters.
+- **Mike Cooch** ... SuiteDash founder, partnership broker for the $40/mo Business rate. Treat the deal as a SuiteDash-originated benefit; verify terms before promising it to supporters.
 
 ### 🎓 Missing Pixel Training Opportunities
 
@@ -11627,7 +11627,7 @@ Embed support is confirmed across all paid tiers, but the exact mechanism (ifram
 
 **Added: April 7, 2026** | **Reference:** `005 Operations/Directives/context_management.md`
 
-A UserPromptSubmit hook that automatically detects domain keywords in user messages and injects system reminders to read relevant Tool Wisdom Libraries before beginning work. Part of the self-annealing system — ensures agents consult domain-specific gotchas and patterns without relying on human reminders.
+A UserPromptSubmit hook that automatically detects domain keywords in user messages and injects system reminders to read relevant Tool Wisdom Libraries before beginning work. Part of the self-annealing system ... ensures agents consult domain-specific gotchas and patterns without relying on human reminders.
 
 ### How It Works
 
@@ -11668,7 +11668,7 @@ A UserPromptSubmit hook that auto-surfaces open HQ Issue Tracker items for any Q
 ### How It Works
 
 1. User submits a message mentioning a QWF app (acronym like "QWR" OR full name like "Quietly Writing")
-2. `.claude/hooks/hq_issues_preload.py` scans the message against a 16-app keyword map (strong triggers only — short acronyms like "HQ" or "MP" require longer phrases to fire)
+2. `.claude/hooks/hq_issues_preload.py` scans the message against a 16-app keyword map (strong triggers only ... short acronyms like "HQ" or "MP" require longer phrases to fire)
 3. For matched apps, batched query to `hq_contact_submissions` for strictly-open items (`status IN ('pending','acknowledged','in_progress')`)
 4. Per-session 5-min cache + cross-session per-app `last_seen` tracking
 5. Injects a compact `<hq-open-items>` system message with priority-coded items, stalled-item warnings, "🆕 new since last touch" highlights, and cross-app label crosslinks
@@ -11685,7 +11685,7 @@ The hook is one of three required parts. Skip any → trust breaks:
 
 | Mode | Purpose |
 |------|---------|
-| (no args, JSON stdin) | Hook mode — UserPromptSubmit |
+| (no args, JSON stdin) | Hook mode ... UserPromptSubmit |
 | `--close-the-loop` | Wrap-up: list items per app touched in last 24h |
 | `--list-apps` | Drift check: keyword map vs. `hq_app_registry` |
 | `--app <code>` | Debug: force-fetch one app |
@@ -11702,7 +11702,7 @@ The hook is one of three required parts. Skip any → trust breaks:
 
 ### Origin
 
-Session 246 (April 18, 2026). TIG had a Bugs/Ideas/Suggestions panel in HQ for capture, but items piled up unseen. A 4-week-old "decommission supporter-CC" item that had passed its target date by 18 days was discovered only when the new hook surfaced it on its first run. Same architectural family as the TWL Preload Hook (Vol 1) — same UserPromptSubmit pattern, different data plane (live DB rows vs. static docs). Documented publicly as Built from Broken Vol 5.
+Session 246 (April 18, 2026). TIG had a Bugs/Ideas/Suggestions panel in HQ for capture, but items piled up unseen. A 4-week-old "decommission supporter-CC" item that had passed its target date by 18 days was discovered only when the new hook surfaced it on its first run. Same architectural family as the TWL Preload Hook (Vol 1) ... same UserPromptSubmit pattern, different data plane (live DB rows vs. static docs). Documented publicly as Built from Broken Vol 5.
 
 ### Training Opportunities
 
@@ -11766,7 +11766,7 @@ Session 220 (April 12, 2026). Agent composed an email containing a date with the
 ### How It Works
 
 1. Loads `005 Operations/Values/QWF.values.resolved.json` (falls back to `QWF.values.json` for root files, wrapping with a trivial `_resolution` block at read time).
-2. Renders each startup-priority section per the `formatTemplate` enum — compass-block, hard-rule-block, forbidden-table, encouraged-table, filter-questions, boundaries-list.
+2. Renders each startup-priority section per the `formatTemplate` enum ... compass-block, hard-rule-block, forbidden-table, encouraged-table, filter-questions, boundaries-list.
 3. Inserts a managed block before `## Directive Structure` in `CLAUDE.md`. The `## QWF Values & Decision Filters` heading is owned by the block, so rename protection works.
 4. Wraps content in BEGIN/END marker comments with sha256 of the source payload (minus `_resolution`) for drift detection.
 5. Atomically writes the new `CLAUDE.md` after backing up the prior state to `.tmp/claude_md_backups/`.
@@ -11809,7 +11809,7 @@ The only em dash permitted in the managed block is the Pattern cell for `punctua
 
 | Component | Skills Developed | Difficulty |
 |-----------|------------------|------------|
-| Marker-block pattern | Auto-generated content blocks with sha256 drift detection — same pattern linters and code generators use | ⭐⭐ |
+| Marker-block pattern | Auto-generated content blocks with sha256 drift detection ... same pattern linters and code generators use | ⭐⭐ |
 | Atomic file writes | Write to temp, rename; backup-before-write; rollback from backups | ⭐⭐ |
 | Specimen-vs-prose distinction | Self-validating schemas where the rule-subject legitimately appears in the rule declaration | ⭐⭐ |
 | CLI + importable module pattern | Single Python file that works standalone AND as a library for future in-app use | ⭐⭐ |
@@ -11827,15 +11827,15 @@ A new QWF fundraising program for AI-managed digital presence via natural langua
 
 ### Concept
 
-QWB gives supporters a complete digital presence — website, content, SEO, analytics — managed through a chat interface that learns their brand. Uses a three-layer architecture (directives/orchestration/execution) scoped per supporter.
+QWB gives supporters a complete digital presence ... website, content, SEO, analytics ... managed through a chat interface that learns their brand. Uses a three-layer architecture (directives/orchestration/execution) scoped per supporter.
 
 ### Architecture (Updated 2026-04-11)
 
 **Frontend:** SvelteKit on CF Workers with Durable Objects (bidirectional WebSocket for real-time chat). First SvelteKit app in QWF ecosystem.
 
 **Agent Backend:** Dedicated `qwu-agents` Azure VM (B2s, 2 vCPU, 4GB, ~$30/mo). Hub-and-spoke model:
-- Backoffice (claude-dev) = **central brain** — pushes TWLs, directives, wisdom.db as read-only intelligence
-- qwu-agents = **execution** — Docker containers per supporter, isolated repos/memory/conversations
+- Backoffice (claude-dev) = **central brain** ... pushes TWLs, directives, wisdom.db as read-only intelligence
+- qwu-agents = **execution** ... Docker containers per supporter, isolated repos/memory/conversations
 - One-directional SSH: backoffice -> qwu-agents only (never reverse)
 - Learning loop: agents submit gotcha reports -> backoffice reviews -> TWLs updated -> all agents benefit
 
@@ -11858,7 +11858,7 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 - **Sandbox:** `<supporter-sandbox-domain>` (live, **29 pages** + `/about-us` 301 → `/about`)
 - **Repo:** `<supporter website repo>` (public)
 - **Stack:** Astro static + Cloudflare Pages Functions for `/api/lead` + `/api/feedback`. Zero JS at the page level (Pills/Form scripts inline-compiled); Lighthouse projected 95+.
-- **Stage:** `alpha` — PUBLIC_SITE_STAGE env var gates alpha banner + feedback pill visibility. Flip to `production` in `.github/workflows/deploy.yml` to hide widgets after sign-off.
+- **Stage:** `alpha` ... PUBLIC_SITE_STAGE env var gates alpha banner + feedback pill visibility. Flip to `production` in `.github/workflows/deploy.yml` to hide widgets after sign-off.
 - **Primitives:** 14 canonical components in `src/components/primitives/` (NavHeader, Footer, CalloutBanner, Hero, Features, Gallery, Testimonials, LogoWall, CtaBand, FaqAccordion, EmbedBlock, TeamGrid, ArticleList, RichTextContent, StatsStrip, TagCloud, LeadForm, FeedbackPill).
 - **Lead pipeline:** `/api/lead` dual-writes to QSP Supabase `website_leads` (tenant_id scoped) + MS Graph email to `<supporter contact inbox>`.
 - **Feedback pipeline (alpha-only):** `/api/feedback` dual-writes to HQ `hq_contact_submissions` (source_app=<supporter-site-id>) + private MS Graph email to TIG only. Screenshots supported (file pick / drag / paste / clipboard), client-resized to 1920px, uploaded to HQ Supabase Storage bucket `site-feedback-screenshots`, rendered inline in notification email and (after HQ prompt 127) in HQ detail view.
@@ -11879,19 +11879,19 @@ QWB gives supporters a complete digital presence — website, content, SEO, anal
 
 ## L4G Locals 4 Good Platform ⭐ NEW
 
-L4G is a nonprofit postcard fundraiser — local businesses donate to appear on EDDM postcards mailed to 10,000+ households, funding Missing Pixel student training. **NOT an advertising business.**
+L4G is a nonprofit postcard fundraiser ... local businesses donate to appear on EDDM postcards mailed to 10,000+ households, funding Missing Pixel student training. **NOT an advertising business.**
 
 ### Infrastructure
 
 | Component | Detail |
 |-----------|--------|
-| **Frontend** | SvelteKit on CF Pages — `locals4good.org` |
+| **Frontend** | SvelteKit on CF Pages ... `locals4good.org` |
 | **Backend** | Supabase `<SUPABASE_PROJECT_ID_L4G>` (Pro plan, us-west-1) |
 | **Payments** | Stripe via `create-checkout-session` edge function |
 | **Email** | MS Graph API (TIG-voiced, Ezer Aión personality) |
 | **Workflows** | 8 n8n workflows (Stripe handler, category notifier, concierge, conversation mirror, reply poller, etc.) |
-| **Print Vendor** | Printing4SuperCheap (P4SC) — full-service EDDM |
-| **GitHub** | `QuietlyWorking/locals4good` — auto-deploy via GitHub Actions |
+| **Print Vendor** | Printing4SuperCheap (P4SC) ... full-service EDDM |
+| **GitHub** | `QuietlyWorking/locals4good` ... auto-deploy via GitHub Actions |
 
 ### CX Scripts (10 in `005 Operations/Execution/`)
 
@@ -11923,7 +11923,7 @@ Milestone emails trigger at `printing` (going_to_print) and `mailed` (postcards_
 
 ### Phase 11 Dry Run Results (Apr 12, 2026)
 
-All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths verified. One bug fixed (`process_l4g_concept_choice.py` queried non-existent `notes` column → fixed to `reviewer_notes`). **Platform verified — ready for May 2026 mailing.**
+All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths verified. One bug fixed (`process_l4g_concept_choice.py` queried non-existent `notes` column → fixed to `reviewer_notes`). **Platform verified ... ready for May 2026 mailing.**
 
 **Open items:** Welcome email doesn't differentiate artwork tracks; no May 2026 bookings entered yet; background/spine images not uploaded for RPV West May 2026 postcard config.
 
@@ -11944,13 +11944,13 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 >
 > The session log is excluded from the public version because it contains specific operational details (error messages with IPs, credential rotation events, supporter-specific interactions) that would be sensitive to publish.
 >
-> **For students:** The session log demonstrates real-world iterative development — each session builds on the last, errors lead to improvements, and the system self-anneals over time. Ask your mentor about accessing the session log during supervised learning.
+> **For students:** The session log demonstrates real-world iterative development ... each session builds on the last, errors lead to improvements, and the system self-anneals over time. Ask your mentor about accessing the session log during supervised learning.
 
 ---
 
 ## Project System Status Files ⭐ NEW
 
-Projects with 2+ deployed external systems maintain a `*-System-Status.md` file in their `002 Projects/` folder. These files are the **anti-compaction memory** — they survive context loss between Claude sessions and are the first file read when resuming work.
+Projects with 2+ deployed external systems maintain a `*-System-Status.md` file in their `002 Projects/` folder. These files are the **anti-compaction memory** ... they survive context loss between Claude sessions and are the first file read when resuming work.
 
 ### Why This Exists
 
@@ -11966,7 +11966,7 @@ LLM conversations compact over time, losing operational details like URLs, crede
 | Lead Generation | `LeadGen-System-Status.md` | Apify (7 actors), Anymail, Reoon, Google Sheets, n8n |
 | Appointment Scheduling | `Scheduling-System-Status.md` | Google Calendar, SuiteDash, Discord approval, n8n |
 | Locals 4 Good | `L4G-System-Status.md` | Supabase (`<SUPABASE_PROJECT_ID_L4G>`), Lovable frontend, Stripe, n8n |
-| QWU WordPress Multisite | `QWU-WPMU-System-Status.md` | AWS Lightsail, WordPress 6.9.1, Divi 4.27.6 (Divi 5 migration HOLD — revisit May 5, 2026), 11 QWF program sites + chaplaintig.com (blog_id 10) |
+| QWU WordPress Multisite | `QWU-WPMU-System-Status.md` | AWS Lightsail, WordPress 6.9.1, Divi 4.27.6 (Divi 5 migration HOLD ... revisit May 5, 2026), 11 QWF program sites + chaplaintig.com (blog_id 10) |
 | HQ Command Center | `HQ-System-Status.md` | Supabase, Lovable frontend, API server (8766), n8n, relationship_intelligence.db |
 | [Supporter Organization] Command Center | `supporter-CC-System-Status.md` | Supabase (`<SUPABASE_PROJECT_GCC>`), Lovable frontend, Instantly, DMARC Report |
 | QMP Quietly Managing Property | `QRP-System-Status.md` | Supabase (`<SUPABASE_PROJECT_ID>`), Lovable frontend (9 prompts), n8n (bill pipeline), edge functions (submit-contact-form), Python scripts |
@@ -11982,12 +11982,12 @@ LLM conversations compact over time, losing operational details like URLs, crede
 
 Include anything that answers: *"If I lost all conversation history, what would I need to know to resume work?"*
 
-- **Access credentials & methods** — SSH clone commands, deploy key locations, credential IDs (not raw secrets)
-- **URLs & endpoints** — Project URLs, webhook paths, API endpoints
-- **What's deployed vs. planned** — Script versions, workflow status, prompt execution state
-- **Architecture decisions** — "Uses HTTP Request nodes, not Supabase nodes (buggy)"
-- **Known issues** — Active bugs with severity
-- **Session log** — What changed and when
+- **Access credentials & methods** ... SSH clone commands, deploy key locations, credential IDs (not raw secrets)
+- **URLs & endpoints** ... Project URLs, webhook paths, API endpoints
+- **What's deployed vs. planned** ... Script versions, workflow status, prompt execution state
+- **Architecture decisions** ... "Uses HTTP Request nodes, not Supabase nodes (buggy)"
+- **Known issues** ... Active bugs with severity
+- **Session log** ... What changed and when
 
 ### Maintenance Rules
 
@@ -12018,36 +12018,36 @@ Lovable Frontend (hq.quietlyworking.org)
 
 | Component | Status | Details |
 |-----------|--------|---------|
-| Supabase Project | ✅ Deployed | `<SUPABASE_PROJECT_ID>` (US West 1) — 25+ tables + 4 views (incl. `hq_quick_intel`/`hq_quick_intel_actions`/`hq_quick_intel_messages`/`hq_tool_registry` as of 2026-04-24) |
+| Supabase Project | ✅ Deployed | `<SUPABASE_PROJECT_ID>` (US West 1) ... 25+ tables + 4 views (incl. `hq_quick_intel`/`hq_quick_intel_actions`/`hq_quick_intel_messages`/`hq_tool_registry` as of 2026-04-24) |
 | API Server | ✅ Built | `hq_api_server.py` v1.0.0 on an internal port |
-| Task Sync | ✅ Built | `sync_hq_tasks.py` v1.5.0 — ~235 tasks synced (SUPERVISOR skip filter) |
-| Relationship Sync | ✅ Built | `sync_hq_relationships.py` v1.6.0 — 1,435 relationships |
-| Meeting Sync | ✅ Built | `sync_hq_meetings.py` v2.2.0 — 51 upcoming + 17 past meetings (enriched with relationship data from `hq_relationships`). Past meetings merge tracker DB + daily notes, resolve attendee emails from entity frontmatter, and clean up stale duplicate records |
+| Task Sync | ✅ Built | `sync_hq_tasks.py` v1.5.0 ... ~235 tasks synced (SUPERVISOR skip filter) |
+| Relationship Sync | ✅ Built | `sync_hq_relationships.py` v1.6.0 ... 1,435 relationships |
+| Meeting Sync | ✅ Built | `sync_hq_meetings.py` v2.2.0 ... 51 upcoming + 17 past meetings (enriched with relationship data from `hq_relationships`). Past meetings merge tracker DB + daily notes, resolve attendee emails from entity frontmatter, and clean up stale duplicate records |
 | System Health Sync | ✅ Built | `sync_hq_system_health.py` |
-| n8n Daily Sync | ✅ Deployed | `<WORKFLOW_ID>` v7.0.0 (2026-04-24) — tasks + relationships + meetings + agent efficiency + app registry + tool registry sync (6 AM, 7 parallel SSH nodes) |
-| Lovable Frontend | ✅ Built | 139 prompts total — includes Projects Intelligence Hub (101-103), L4G Operations Module (105-106), Agent Efficiency (107), Action Queue (108), Testimonials/Voices (109-111), Dynamic Issue Form (112), Content Review (113-115), Issue Tracker Complete App List + Sidebar Fix + Searchable Dropdown (116-118), Quick Intel (119-122), Issue Tracker Mobile Fix + Editable Issues (123-124), Transparency Article Cards (125-126), Issue Detail Polish (127-130), Quick Intel Tool Search (131), Quick Intel Deep Analyze + Usage Panel + Delete (132-133), Email Sources Layout + Perf + Virtualization (134-139) |
+| n8n Daily Sync | ✅ Deployed | `<WORKFLOW_ID>` v7.0.0 (2026-04-24) ... tasks + relationships + meetings + agent efficiency + app registry + tool registry sync (6 AM, 7 parallel SSH nodes) |
+| Lovable Frontend | ✅ Built | 139 prompts total ... includes Projects Intelligence Hub (101-103), L4G Operations Module (105-106), Agent Efficiency (107), Action Queue (108), Testimonials/Voices (109-111), Dynamic Issue Form (112), Content Review (113-115), Issue Tracker Complete App List + Sidebar Fix + Searchable Dropdown (116-118), Quick Intel (119-122), Issue Tracker Mobile Fix + Editable Issues (123-124), Transparency Article Cards (125-126), Issue Detail Polish (127-130), Quick Intel Tool Search (131), Quick Intel Deep Analyze + Usage Panel + Delete (132-133), Email Sources Layout + Perf + Virtualization (134-139) |
 | Quick Intel Deep Stack | ✅ Built (2026-04-24) | `process_quick_intel_deep.py` v1.2.0 (state-machine orchestrator, wisdom.db dedup, resume-aware), n8n `Quick Intel Deep Process` workflow (`<WORKFLOW_ID>`, webhook → SSH → orchestrator → Discord), edge function `quick-intel` v2.1.0 (dedup + 5-surface usage panel + Content preset + smarter `dedup_hit` gating), schema `hq_quick_intel_deep_schema.sql` (deep_status/content_status lifecycle + supabase_realtime publication) |
-| Tool Registry | ✅ Built (2026-04-24) | `hq_tool_registry` table — 25+ tools mirroring CLAUDE.md TWL catalog (slug, display_name, category, status, has_twl, twl_path, entity_path, aliases). `sync_hq_tool_registry.py` v1.0.0 (TWL directives → registry, idempotent, preserves manual curation). Used by Quick Intel TWL routing combobox (Lovable prompt 131) — alias-aware search (`cf` → Cloudflare Pages, `fusion` → DaVinci Fusion) |
-| Email Sources Module | ✅ Built | `/email-sources` page — sender table with search/filter/sort, Block Email + Block Domain buttons, skip-confirmation checkbox |
+| Tool Registry | ✅ Built (2026-04-24) | `hq_tool_registry` table ... 25+ tools mirroring CLAUDE.md TWL catalog (slug, display_name, category, status, has_twl, twl_path, entity_path, aliases). `sync_hq_tool_registry.py` v1.0.0 (TWL directives → registry, idempotent, preserves manual curation). Used by Quick Intel TWL routing combobox (Lovable prompt 131) ... alias-aware search (`cf` → Cloudflare Pages, `fusion` → DaVinci Fusion) |
+| Email Sources Module | ✅ Built | `/email-sources` page ... sender table with search/filter/sort, Block Email + Block Domain buttons, skip-confirmation checkbox |
 | Sender Tracking | ✅ Built | `outlook_pipeline.py` v1.6.0 tracks all senders in `hq_email_senders` Supabase table after classification |
-| Google Calendar Edge Function | ✅ Deployed | v3.0.0 — RFC3339 timestamps with Pacific TZ offset, DST auto-detection, dual-format private key, `auth handled in-function` |
-| Calendar Health Monitor | ✅ Deployed | `check_calendar_health.py` v1.0.0 — every 2h cron, auto-redeploy via Supabase CLI, Discord alerts |
+| Google Calendar Edge Function | ✅ Deployed | v3.0.0 ... RFC3339 timestamps with Pacific TZ offset, DST auto-detection, dual-format private key, `auth handled in-function` |
+| Calendar Health Monitor | ✅ Deployed | `check_calendar_health.py` v1.0.0 ... every 2h cron, auto-redeploy via Supabase CLI, Discord alerts |
 | Ezer Agent Edge Function | ✅ Deployed | Claude Opus 4.7, 8 tools, `auth handled in-function` |
 | Dispatch Agent Edge Function | ✅ Deployed | v1.1.0, `auth handled in-function` (fixed from `true`) |
 | Custom Domain | ✅ Live | `hq.quietlyworking.org` via Lovable |
-| Meeting Prep Emails | ✅ Built | `send_meeting_prep_email.py` v1.0.0 — 7-day emails + 30-day briefings |
+| Meeting Prep Emails | ✅ Built | `send_meeting_prep_email.py` v1.0.0 ... 7-day emails + 30-day briefings |
 | Issue Tracker | ✅ Built | Kanban + table views, detail drawer, triage badge, app sidebar cards, color-coded app borders, dynamic Source App dropdown (Prompt 112), filter fix for beta status (Prompt 116), sidebar shows all programs incl. planning (Prompt 117), searchable combobox dropdown (Prompt 118), mobile touch-scroll fix + visible search (Prompt 123), inline editing for description/subject/type/source app (Prompt 124) |
 | Notification System | ✅ Built | Unified dispatcher (SMS + Discord + Push), per-person notify toggles, Settings notification preferences |
 | App Observatory | ✅ Built | `hq_app_registry` (64 rows, synced from `ecosystem_registry.json` via `sync_hq_app_registry.py` v1.0.0), `hq_app_metrics`, collector running. Category constraint: app/program/system/infra/pedagogy/content/site. Status constraint: active/building/standby/production/beta/alpha/planning/paused. Includes QOP, QCP, Heart Draft, FORGE, EPIC, GUILD. 3 duplicates cleaned (other_epic→epic, whelho→whl, heart_draft→hd). |
 | Projects Intelligence Hub | ✅ Built | 37 projects bootstrapped, momentum scoring, 57 goal milestones, grid/table views, detail drawer |
 | Interactive Work Items | ✅ Built | Click-to-cycle status, add manual tasks, internal notes, delete, sync protection via `hq_dirty` trigger |
-| Goals Sync | ✅ Built | `sync_hq_goals.py` v1.1.0 — parses Goals doc, upserts milestones with sort_order, skips hq_dirty items |
-| Git Activity Sync | ✅ Built | `sync_hq_git_activity.py` v1.0.0 — per-project commit recency |
-| Health Computation | ✅ Built | `compute_hq_project_health.py` v1.0.0 — momentum scoring (0-100), health assessment |
-| L4G Operations Module | ✅ Built | Prompt 106 — Kanban pipeline (5 journey stages), production calendar (area×month grid), deadline alerts. Backend: `sync_hq_l4g.py` v1.1.0 syncs from L4G Supabase every 15 min |
-| L4G Sync | ✅ Built | `sync_hq_l4g.py` v1.1.0 — 14 pipeline rows, 18 production rows, 25 alerts. n8n workflow `<WORKFLOW_ID>` |
-| Agent Efficiency | ✅ Built | Prompt 107 — Dashboard card with redundancy ratio (color-coded), SVG sparkline (last 20 sessions), wasted token estimate, engram candidates list. Backend: `sync_hq_agent_efficiency.py` syncs from local QCM metrics to HQ Supabase daily |
-| Action Queue | ✅ Built | Prompt 108 — Dashboard panel showing pending decision items from `hq_action_queue`. First action type: `video_article` (chaplaintig.com pipeline). Publish/Edit Draft/Reject buttons. Real-time Supabase subscription. Write-back via `write_back_dirty_items.py` v1.1.0 |
+| Goals Sync | ✅ Built | `sync_hq_goals.py` v1.1.0 ... parses Goals doc, upserts milestones with sort_order, skips hq_dirty items |
+| Git Activity Sync | ✅ Built | `sync_hq_git_activity.py` v1.0.0 ... per-project commit recency |
+| Health Computation | ✅ Built | `compute_hq_project_health.py` v1.0.0 ... momentum scoring (0-100), health assessment |
+| L4G Operations Module | ✅ Built | Prompt 106 ... Kanban pipeline (5 journey stages), production calendar (area×month grid), deadline alerts. Backend: `sync_hq_l4g.py` v1.1.0 syncs from L4G Supabase every 15 min |
+| L4G Sync | ✅ Built | `sync_hq_l4g.py` v1.1.0 ... 14 pipeline rows, 18 production rows, 25 alerts. n8n workflow `<WORKFLOW_ID>` |
+| Agent Efficiency | ✅ Built | Prompt 107 ... Dashboard card with redundancy ratio (color-coded), SVG sparkline (last 20 sessions), wasted token estimate, engram candidates list. Backend: `sync_hq_agent_efficiency.py` syncs from local QCM metrics to HQ Supabase daily |
+| Action Queue | ✅ Built | Prompt 108 ... Dashboard panel showing pending decision items from `hq_action_queue`. First action type: `video_article` (chaplaintig.com pipeline). Publish/Edit Draft/Reject buttons. Real-time Supabase subscription. Write-back via `write_back_dirty_items.py` v1.1.0 |
 
 ### Data Sources
 
@@ -12079,14 +12079,14 @@ Focus section appears at the top of the Tasks page (collapsible, starred pending
 ### Quick Capture Prefixes (Prompt 080)
 
 Enhanced phone capture with typed prefixes:
-- **`@star [task]`** — Creates task with `starred: true` + `priority: high` (Focus module integration)
-- **`@do [task]`** — Creates task with `priority: high` (quick action items, not starred)
+- **`@star [task]`** ... Creates task with `starred: true` + `priority: high` (Focus module integration)
+- **`@do [task]`** ... Creates task with `priority: high` (quick action items, not starred)
 
 Both prefixes are detected by `process_inbox.py` and route through the standard task sync pipeline to HQ.
 
 ### QSP Discovery Funnel (Prompt 081)
 
-Unauthorized login attempts now redirect to a QSP discovery page instead of a generic error. When someone visits `hq.quietlyworking.org` without auth, they see QSP (Quietly Spotting) as the recommended entry point — routing potential users to the public product rather than a dead end.
+Unauthorized login attempts now redirect to a QSP discovery page instead of a generic error. When someone visits `hq.quietlyworking.org` without auth, they see QSP (Quietly Spotting) as the recommended entry point ... routing potential users to the public product rather than a dead end.
 
 ### Google Calendar Edge Function v3.0.0 (Prompt 084)
 
@@ -12112,27 +12112,27 @@ The `google-calendar-events` edge function was rebuilt after diagnosing a persis
 The Email Sources module provides visibility into every email address the Outlook pipeline processes, enabling bulk sender management directly from the HQ UI.
 
 **Components:**
-- **`/email-sources` page** — Full sender table with search, filter by domain, sort by email count/task count/last seen. "Pure cost waste" rows (high email count, zero task count) highlighted with yellow left-border.
-- **Block Email / Block Domain buttons** — Per-row actions that insert into `hq_email_suppressions` for immediate suppression in the next pipeline run.
-- **Skip Confirmation checkbox** — Custom AlertDialog with "Don't ask again this session" checkbox (`useRef` for persistence + `useState` for visual state). When checked, subsequent blocks execute immediately with toast-only feedback. Resets on page refresh.
-- **`hq_email_senders` table** — Supabase table tracking all scanned senders. Schema: email (unique), domain, display_name, first_seen, last_seen, email_count, task_count, last_classification. Populated by `outlook_pipeline.py` v1.6.0 via PostgREST upsert (fetch + calculate + upsert, because PostgREST cannot do atomic `SET count = count + N`).
+- **`/email-sources` page** ... Full sender table with search, filter by domain, sort by email count/task count/last seen. "Pure cost waste" rows (high email count, zero task count) highlighted with yellow left-border.
+- **Block Email / Block Domain buttons** ... Per-row actions that insert into `hq_email_suppressions` for immediate suppression in the next pipeline run.
+- **Skip Confirmation checkbox** ... Custom AlertDialog with "Don't ask again this session" checkbox (`useRef` for persistence + `useState` for visual state). When checked, subsequent blocks execute immediately with toast-only feedback. Resets on page refresh.
+- **`hq_email_senders` table** ... Supabase table tracking all scanned senders. Schema: email (unique), domain, display_name, first_seen, last_seen, email_count, task_count, last_classification. Populated by `outlook_pipeline.py` v1.6.0 via PostgREST upsert (fetch + calculate + upsert, because PostgREST cannot do atomic `SET count = count + N`).
 
-**Suppression Impact (March 2026):** 82% suppression rate (1,153/1,413 emails skipped). Email processing costs dropped from $1.17/day (Feb) to $0.22/day (Mar) — 81% reduction, ~$29/month savings.
+**Suppression Impact (March 2026):** 82% suppression rate (1,153/1,413 emails skipped). Email processing costs dropped from $1.17/day (Feb) to $0.22/day (Mar) ... 81% reduction, ~$29/month savings.
 
 ### Projects Intelligence Hub (Prompts 101-103)
 
 The Projects module provides portfolio-level visibility across the QWU project portfolio (**67 projects as of 2026-07-28**, up from the original 37), answering "Where should I invest my time?"
 
 **Backend pipeline:**
-- `bootstrap_hq_projects.py` v1.0.0 — One-time load of the original 37 projects across 6 categories (qwf_app, operational, student_program, supporter, infrastructure, planning). A **7th category, `personal`**, arrived later with the two-plane project model and is populated by `sync_personal_projects.py` (folder-scan), not by the bootstrap list. New projects are created by `create_project.py` (the canonical creator ... never a hand `mkdir`).
-- `sync_hq_goals.py` v1.1.0 — Parses `_Goals and Priorities.md`, upserts milestones with numeric `sort_order` (M1→1000, M2→2000, ... M10→10000), skips `hq_dirty` items to protect user edits
-- `sync_hq_git_activity.py` v1.0.0 — Scans git log per project folder, updates `last_commit_date` and `days_since_activity`
-- `compute_hq_project_health.py` v1.0.0 — Weighted momentum scoring (0-100): commits recency (25%), strategic priority (20%), no blockers (15%), completion momentum (15%), active work items (25%). Health: healthy (>50), needs_attention (20-50), stalled (<20 + 30d inactive)
+- `bootstrap_hq_projects.py` v1.0.0 ... One-time load of the original 37 projects across 6 categories (qwf_app, operational, student_program, supporter, infrastructure, planning). A **7th category, `personal`**, arrived later with the two-plane project model and is populated by `sync_personal_projects.py` (folder-scan), not by the bootstrap list. New projects are created by `create_project.py` (the canonical creator ... never a hand `mkdir`).
+- `sync_hq_goals.py` v1.1.0 ... Parses `_Goals and Priorities.md`, upserts milestones with numeric `sort_order` (M1→1000, M2→2000, ... M10→10000), skips `hq_dirty` items to protect user edits
+- `sync_hq_git_activity.py` v1.0.0 ... Scans git log per project folder, updates `last_commit_date` and `days_since_activity`
+- `compute_hq_project_health.py` v1.0.0 ... Weighted momentum scoring (0-100): commits recency (25%), strategic priority (20%), no blockers (15%), completion momentum (15%), active work items (25%). Health: healthy (>50), needs_attention (20-50), stalled (<20 + 30d inactive)
 
 **Frontend (Prompts 101-103):**
 - **Prompt 101:** Grid view (cards grouped by category with momentum rings, health dots, goal badges) + table view (10 sortable columns) + detail drawer (strategic context, work items, activity)
 - **Prompt 102:** Kanban card left border accent matching source app's `color_hex` from `hq_app_registry`
-- **Prompt 103:** Interactive work items — click-to-cycle status (open → in_progress → done), add manual tasks with inline form, internal notes per item, delete manual items with undo, "HQ" badges on manual items, pencil icon on edited goal milestones
+- **Prompt 103:** Interactive work items ... click-to-cycle status (open → in_progress → done), add manual tasks with inline form, internal notes per item, delete manual items with undo, "HQ" badges on manual items, pencil icon on edited goal milestones
 - **Search (added 2026-07-28, direct code commit `cc4ff20` ... no longer a Lovable prompt):** a search bar above the category pills. Matches across `display_name` + `short_name` + `project_code` + `app_code` + `description` + `tags` + category label, because the handle you remember lives in a different column per row (`MP` is a short_name; `qcm` exists ONLY as a project_code; `[Supporter Organization]` only as a display_name). Tokens are AND-ed, so "[Supporter Organization] dmarc" narrows to one. Header shows a `N of 67` match count. Helpers: `projectSearchHaystack` / `tokenizeProjectSearch` / `matchesProjectSearch` in `src/components/projects/projectConstants.ts`; input reuses the house `SearchFilter` component. Deliberate tradeoff: a flat haystack (nothing is ever hidden) over a smarter ranking that would suppress description-only matches ... so a 2-character query returns some substring noise, which one more character clears.
 - **Grid-view category bug fixed (same commit):** `ProjectGrid` derived its render order solely from `CATEGORY_CONFIG`, so the 4 `category='personal'` projects ... a category never added to that map ... **were invisible in grid view (the default), appearing only in table view.** Fixed by adding the `Personal` category AND ordering off the union of config keys + categories actually present in the data, so a future category cannot silently vanish the same way.
 
@@ -12156,9 +12156,9 @@ Pipeline creates WordPress draft
 ```
 
 **Schema changes (HQ Supabase `<SUPABASE_PROJECT_ID>`):**
-- `hq_action_queue` — `status` column (pending/completed/dismissed/expired)
-- `hq_action_log` — `processed_at` column (write-back processing tracker)
-- `hq_video_articles` — stores article metadata for the approval UI
+- `hq_action_queue` ... `status` column (pending/completed/dismissed/expired)
+- `hq_action_log` ... `processed_at` column (write-back processing tracker)
+- `hq_video_articles` ... stores article metadata for the approval UI
 - RLS policies for broadcast items (`user_id IS NULL`)
 
 **Write-back:** `write_back_dirty_items.py` v1.1.0 reads unprocessed `hq_action_log` entries, dispatches by action type (`publish` runs `tig_publish_article.py`, `reject` marks dismissed), then stamps `processed_at`. Triggered by n8n workflow.
@@ -12184,19 +12184,19 @@ Sources (meetings, LinkedIn, manual)
 ```
 
 **Backend scripts (7):**
-- `extract_testimonials.py` — Main orchestrator
-- `extract_testimonials_meetings.py` — Scans meeting transcripts for praise/endorsement
-- `extract_testimonials_linkedin.py` — Scrapes LinkedIn recommendations via Apify
-- `score_testimonial.py` — Quality scoring + WHELHO realm/theme tagging
-- `testimonial_giver_approval.py` — Ezer sends warm approval request emails (Exempt classification)
-- `sync_testimonials_to_hq.py` — Pushes to HQ action queue
-- `publish_testimonials_wp.py` — Generates display output, pushes to WordPress
+- `extract_testimonials.py` ... Main orchestrator
+- `extract_testimonials_meetings.py` ... Scans meeting transcripts for praise/endorsement
+- `extract_testimonials_linkedin.py` ... Scrapes LinkedIn recommendations via Apify
+- `score_testimonial.py` ... Quality scoring + WHELHO realm/theme tagging
+- `testimonial_giver_approval.py` ... Ezer sends warm approval request emails (Exempt classification)
+- `sync_testimonials_to_hq.py` ... Pushes to HQ action queue
+- `publish_testimonials_wp.py` ... Generates display output, pushes to WordPress
 
-**WordPress widget:** `tig-testimonials-widget.php` v1.0.1 — Dynamic testimonial slider with auto-rotating cards, progress bar, mouseover pause with "Paused" indicator, shortcode `[tig_testimonials]`. Reads from `/wp-json/tig/v1/testimonials` REST endpoint backed by JSON cache synced from Supabase.
+**WordPress widget:** `tig-testimonials-widget.php` v1.0.1 ... Dynamic testimonial slider with auto-rotating cards, progress bar, mouseover pause with "Paused" indicator, shortcode `[tig_testimonials]`. Reads from `/wp-json/tig/v1/testimonials` REST endpoint backed by JSON cache synced from Supabase.
 
 **HQ Frontend:**
-- **Prompt 109:** Voices page — Kanban pipeline view with filter tabs (Needs Review / Awaiting Giver / Approved / Published / Archived), testimonial cards with quality scores (color-coded), source type badges (LinkedIn=blue, Meeting=purple, Networking=amber, Google=green), WHELHO realm tag pills, action buttons per status, Add Testimonial slide-over form, real-time Supabase subscriptions, stats bar
-- **Prompt 110:** Inline editing — click-to-edit quote text directly on cards
+- **Prompt 109:** Voices page ... Kanban pipeline view with filter tabs (Needs Review / Awaiting Giver / Approved / Published / Archived), testimonial cards with quality scores (color-coded), source type badges (LinkedIn=blue, Meeting=purple, Networking=amber, Google=green), WHELHO realm tag pills, action buttons per status, Add Testimonial slide-over form, real-time Supabase subscriptions, stats bar
+- **Prompt 110:** Inline editing ... click-to-edit quote text directly on cards
 
 **Schema:** `hq_testimonials` table with multi-stage `pipeline_status` (extracted → giver_pending → giver_approved → approved → published), `quality_score` (0-1), `realm_tags` (WHELHO), `themes`, `dedup_hash` (SHA-256), `giver_approval_needed` boolean.
 
@@ -12229,11 +12229,11 @@ Sources (meetings, LinkedIn, manual)
 | `005 Operations/Execution/sync_testimonials_to_wp.py` | Supabase → WordPress JSON sync |
 | `005 Operations/Execution/wp-mu-plugins/tig-testimonials-widget.php` | WordPress testimonial widget v1.0.1 (slider/wall/grid/ticker/featured) |
 
-### Quick Intel — YouTube Video Analysis (Prompts 120-122)
+### Quick Intel ... YouTube Video Analysis (Prompts 120-122)
 
 **Added: April 12, 2026**
 
-Quick Intel lets TIG paste a YouTube URL into HQ and get instant AI-powered analysis about the video's relevance to the QWU backoffice stack, tools, and mission. Designed for the **mobile capture, desktop decide** workflow — triage videos on the phone, review and route on the desktop.
+Quick Intel lets TIG paste a YouTube URL into HQ and get instant AI-powered analysis about the video's relevance to the QWU backoffice stack, tools, and mission. Designed for the **mobile capture, desktop decide** workflow ... triage videos on the phone, review and route on the desktop.
 
 **How it works:**
 
@@ -12268,7 +12268,7 @@ Hot priority toggle (flame icon) bumps all selected actions to high priority.
 
 **Tables:** `hq_quick_intel` (sessions), `hq_quick_intel_actions` (routing queue), `hq_quick_intel_messages` (follow-up chat). Schema: `hq_quick_intel_schema.sql`.
 
-**Backoffice handler:** `process_quick_intel_action.py` v1.0.0 — processes pending actions from Supabase (7 action types).
+**Backoffice handler:** `process_quick_intel_action.py` v1.0.0 ... processes pending actions from Supabase (7 action types).
 
 **Mobile:** Quick Intel card pinned to top of mobile dashboard (prompt 122). Compact layout with horizontally scrollable preset chips.
 
@@ -12276,8 +12276,8 @@ Hot priority toggle (flame icon) bumps all selected actions to high priority.
 
 **Added: April 12, 2026**
 
-- **Prompt 123 (Mobile Fix)** — Fixed Source App dropdown on mobile: touch scroll was blocked by Popover component intercepting touch events, search input not visible due to Popover positioning. CSS `touch-action: manipulation` fixes + Popover `sideOffset` adjustment.
-- **Prompt 124 (Editable Issues)** — Added inline editing in the Issue Tracker detail drawer: click-to-edit description, subject, type badge, and source app. Changes save directly to Supabase without opening a separate form.
+- **Prompt 123 (Mobile Fix)** ... Fixed Source App dropdown on mobile: touch scroll was blocked by Popover component intercepting touch events, search input not visible due to Popover positioning. CSS `touch-action: manipulation` fixes + Popover `sideOffset` adjustment.
+- **Prompt 124 (Editable Issues)** ... Added inline editing in the Issue Tracker detail drawer: click-to-edit description, subject, type badge, and source app. Changes save directly to Supabase without opening a separate form.
 
 ### In-App Search Rollout (2026-07-28 → 07-30, direct code commits)
 
@@ -12340,12 +12340,12 @@ The SEO Intelligence system provides keyword research, competitive analysis, and
 
 | Component | Status | Details |
 |-----------|--------|---------|
-| Keyword Research | ✅ Built | `qwr_keyword_research.py` v1.1.0 — DataForSEO integration with null safety |
-| Opportunity Scorer | ✅ Built | `qwr_opportunity_scorer.py` — Multi-signal scoring |
-| n8n Keyword Lookup | ✅ Built | `qwr-seo-keyword-lookup.json` — On-demand webhook |
-| n8n Weekly Refresh | ✅ Built | `qwr-seo-weekly-refresh.json` — Scheduled analysis |
-| Wisdom Library Monitor | ✅ Built | `qwr-wisdom-library-monitor.json` — Source change detection |
-| Unsubscribe RPC | ✅ Built | `unsubscribe_from_wisdom_source` — Supabase RPC for Remove button (cascading cleanup of entries + source) |
+| Keyword Research | ✅ Built | `qwr_keyword_research.py` v1.1.0 ... DataForSEO integration with null safety |
+| Opportunity Scorer | ✅ Built | `qwr_opportunity_scorer.py` ... Multi-signal scoring |
+| n8n Keyword Lookup | ✅ Built | `qwr-seo-keyword-lookup.json` ... On-demand webhook |
+| n8n Weekly Refresh | ✅ Built | `qwr-seo-weekly-refresh.json` ... Scheduled analysis |
+| Wisdom Library Monitor | ✅ Built | `qwr-wisdom-library-monitor.json` ... Source change detection |
+| Unsubscribe RPC | ✅ Built | `unsubscribe_from_wisdom_source` ... Supabase RPC for Remove button (cascading cleanup of entries + source) |
 | SQL Migration | ✅ Built | `2026-02-05-seo-intelligence-tables.sql` |
 | Lovable SEO Prompts | ✅ Written | `lovable-prompt-seo-keyword-intelligence.md`, `lovable-prompt-seo-opportunities-widget.md` |
 
@@ -12384,7 +12384,7 @@ Before SSHing to ANY server:
 
 | Customer | Server | Project Folder | Guardrails |
 |----------|--------|----------------|------------|
-| [Supporter Organization] | `<SUPPORTER_SERVER_IP>` | `_[Supporter Organization] Projects/` | `<supporter deploy-guard script>` — no writes 8 AM–5 PM Pacific |
+| [Supporter Organization] | `<SUPPORTER_SERVER_IP>` | `_[Supporter Organization] Projects/` | `<supporter deploy-guard script>` ... no writes 8 AM-5 PM Pacific |
 
 ### Deploy Guard Script
 
@@ -12394,12 +12394,12 @@ Before SSHing to ANY server:
 
 On 2026-02-05, an agent SSHed to a supporter's server without permission, mistaking it for QWU infrastructure. The project folder name identified a supporter organization, but the agent ignored that signal. This safeguard system ensures supporter systems are always treated with explicit authorization.
 
-**Data Safety:** The foundational directive `supporter_data_safety.md` codifies how to safely sync and handle live supporter business data — safety gates, audit logging, soft-delete, rollback runbook, and anomaly detection. All sync scripts touching supporter data must integrate `sync_safety_gate.py`.
+**Data Safety:** The foundational directive `supporter_data_safety.md` codifies how to safely sync and handle live supporter business data ... safety gates, audit logging, soft-delete, rollback runbook, and anomaly detection. All sync scripts touching supporter data must integrate `sync_safety_gate.py`.
 
 ### Supporter Server Operations (Withheld)
 
 > [!NOTE] Withheld for supporter privacy and security
-> Four subsections documenting a specific supporter's email relay and server-hardening details (ban thresholds, blocklists, capacity figures) are excluded from the public manual: publishing a supporter's defensive configuration would hand a hostile reader an attack map. The generic patterns (fail2ban jails, iptables persistence) are standard Linux administration — the commands below remain as teaching material.
+> Four subsections documenting a specific supporter's email relay and server-hardening details (ban thresholds, blocklists, capacity figures) are excluded from the public manual: publishing a supporter's defensive configuration would hand a hostile reader an attack map. The generic patterns (fail2ban jails, iptables persistence) are standard Linux administration ... the commands below remain as teaching material.
 
 **Useful commands:**
 ```bash
@@ -12419,10 +12419,10 @@ sudo /usr/sbin/iptables-save | sudo tee /etc/iptables.rules > /dev/null
 
 ### Key Files
 
-- **CLAUDE.md** — Supporter Systems section with registry and protocol
+- **CLAUDE.md** ... Supporter Systems section with registry and protocol
 - **Script:** `005 Operations/Execution/<supporter deploy-guard script>`
 - **Script:** `005 Operations/Execution/<supporter bug-report relay script>` (email relay)
-- **MEMORY.md** — Supporter systems lesson learned
+- **MEMORY.md** ... Supporter systems lesson learned
 
 ---
 
@@ -12430,7 +12430,7 @@ sudo /usr/sbin/iptables-save | sudo tee /etc/iptables.rules > /dev/null
 
 **Added: February 9, 2026**
 
-The [Supporter Organization] Command Center is a multi-company supporter-facing dashboard for a supporter family's 4 service companies. Built as a client-facing layer powered by QWU Backoffice — all orchestration, scripts, and AI stay inside QWU while the [Supporter Organization] team sees dashboards and takes actions.
+The [Supporter Organization] Command Center is a multi-company supporter-facing dashboard for a supporter family's 4 service companies. Built as a client-facing layer powered by QWU Backoffice ... all orchestration, scripts, and AI stay inside QWU while the [Supporter Organization] team sees dashboards and takes actions.
 
 ### Architecture
 
@@ -12484,7 +12484,7 @@ Lovable Frontend (<supporter-subdomain>.quietlyworking.org)
 | `002 Projects/_[Supporter Organization] Projects/QWF-[Supporter Organization]-Ecosystem-Overview.md` | 100,000 ft view: 4 Mermaid diagrams (ecosystem rings, data pipeline, flywheel thesis, before/after) |
 | `002 Projects/_[Supporter Organization] Projects/[Supporter Organization]-SOPs/[Supporter Organization]-SOPs-System-Status.md` | SOP digitization status (40 SOPs identified across 6 categories from 34 source documents) |
 | `002 Projects/_[Supporter Organization] Projects/[Supporter Mascot]-Plushie-Weavy-Workflow.md` | [Supporter Mascot] plushie 3-phase Weavy workflow spec (vendor reference package for [Supporter Team Member]) |
-| `005 Operations/Directives/weavy_creative_workflows.md` | Weavy creative production directive (v1.5.0) — powers [Supporter Mascot] workflow |
+| `005 Operations/Directives/weavy_creative_workflows.md` | Weavy creative production directive (v1.5.0) ... powers [Supporter Mascot] workflow |
 
 ### 🎓 Missing Pixel Training Opportunities
 
@@ -12509,9 +12509,9 @@ A 7-stage deterministic pipeline for replicating existing websites as pixel-perf
 
 The pipeline strictly separates deterministic extraction (zero AI) from constrained code generation. Previous AI-only approach produced ~55% fidelity because AI hallucinated content, truncated text, and rearranged sections. The pipeline achieves this by:
 
-- **Stages 1-4 and 6: 100% deterministic** (no AI) — Playwright DOM traversal, `innerHTML` preservation, `getComputedStyle` capture, pixel-level screenshot comparison
-- **Stage 5: AI-constrained** — Generates Astro pages (was React) with content provided verbatim (not generated)
-- **Stage 7: AI-targeted** — Claude Vision reads diff images and makes specific CSS fixes
+- **Stages 1-4 and 6: 100% deterministic** (no AI) ... Playwright DOM traversal, `innerHTML` preservation, `getComputedStyle` capture, pixel-level screenshot comparison
+- **Stage 5: AI-constrained** ... Generates Astro pages (was React) with content provided verbatim (not generated)
+- **Stage 7: AI-targeted** ... Claude Vision reads diff images and makes specific CSS fixes
 
 ### Pipeline Stages
 
@@ -12529,7 +12529,7 @@ The pipeline strictly separates deterministic extraction (zero AI) from constrai
 
 **Orchestrator (Session 258):** `rebuild_page_from_production.py` is the single-command entry point that wraps `migrate_page.py` → `page_json_to_astro.py` → `npm run lint:sandbox` → `git commit` for rebuilding any page from its production URL. Makes the right thing the easy thing.
 
-**Asset authority (Session 258):** `005 Operations/Standards/site/approved-assets.json` is the central registry; `sync_approved_assets.py` pushes supporter-scoped copies into each `/<slug>-website/.approved-assets.json`. Both the converter and the sandbox lint read it — 4-tier check chain (scraped page URLs, cdnPrefixes, cdnUrls, localPathGlobs). Unauthorized URLs halt in strict mode; dev iteration uses `--allow-unregistered`.
+**Asset authority (Session 258):** `005 Operations/Standards/site/approved-assets.json` is the central registry; `sync_approved_assets.py` pushes supporter-scoped copies into each `/<slug>-website/.approved-assets.json`. Both the converter and the sandbox lint read it ... 4-tier check chain (scraped page URLs, cdnPrefixes, cdnUrls, localPathGlobs). Unauthorized URLs halt in strict mode; dev iteration uses `--allow-unregistered`.
 
 **Sign-off gate (Session 258):** Before a supporter sees the alpha feedback link, operator walks `005 Operations/Directives/qwb_supporter_site_signoff_checklist.md`. Stricter caps for pre-production (lint allowlist ≤3, parity allowlist ≤5).
 
@@ -12574,7 +12574,7 @@ The pipeline strictly separates deterministic extraction (zero AI) from constrai
 
 **Added: February 9, 2026**
 
-Pocket Ez is a mobile-first AI companion app where Ezer Aión (Ez) has "morphed into the shape of a phone." This is Ez at her most personal — a bioluminescent, emotionally intelligent companion that exists entirely for the individual user. Built with Lovable (frontend) + Supabase (backend) + Claude via OpenRouter (AI).
+Pocket Ez is a mobile-first AI companion app where Ezer Aión (Ez) has "morphed into the shape of a phone." This is Ez at her most personal ... a bioluminescent, emotionally intelligent companion that exists entirely for the individual user. Built with Lovable (frontend) + Supabase (backend) + Claude via OpenRouter (AI).
 
 ### Architecture
 
@@ -12603,7 +12603,7 @@ User (pocketez.org / pocket-ez.lovable.app)
 - **8 Quick Intents:** Just talk, Help me think, Center me (SDF), I matter (Miracle), QWU Gateway, Journal, Health check-in, My schedule
 - **Memory System:** Ez remembers facts, preferences, relationships, concerns, achievements, dates, and emotional patterns across sessions. Extracts memories via background Sonnet calls; injects top 15 by importance into each conversation.
 - **Bioluminescence:** The entire UI shifts color based on Ez's emotional state (10 emotion types with intensity and transition data)
-- **Progressive Trust Tiers:** 0 (anonymous) through 4 (operator) — nothing gated behind login
+- **Progressive Trust Tiers:** 0 (anonymous) through 4 (operator) ... nothing gated behind login
 - **Critical Safety Fallbacks:** If the API fails, mode-aware pre-written responses ensure the user always receives warmth. Someone tapping "I matter" during an outage still hears they're a miracle.
 - **Crisis Detection:** Ez detects suicidal ideation and provides 988/Crisis Text Line resources while staying in character
 
@@ -12649,7 +12649,7 @@ The words "try again", "error", "something went wrong" do not exist anywhere in 
 
 ### Purpose
 
-The QWU Backoffice User Manual contains sensitive operational data — Azure credentials, IP addresses, SSH configs, Supabase project IDs, personal names, webhook URLs, and API key patterns. The Public Manual Generation System creates a redacted version suitable for publishing to `transparency.quietlyworking.org` via Digital Garden, preserving educational and transparency value while removing all sensitive data.
+The QWU Backoffice User Manual contains sensitive operational data ... Azure credentials, IP addresses, SSH configs, Supabase project IDs, personal names, webhook URLs, and API key patterns. The Public Manual Generation System creates a redacted version suitable for publishing to `transparency.quietlyworking.org` via Digital Garden, preserving educational and transparency value while removing all sensitive data.
 
 ### Architecture
 
