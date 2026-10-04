@@ -484,6 +484,6 @@ This volume grew from 6 weeks of cascading failures in our meeting intelligence 
 
 ---
 
-*Built from Broken, Vol. 2 — Published April 2026*
+*Built from Broken, Vol. 2 ... Published April 2026*
 *Quietly Working Foundation | quietlyworking.org*
 *Written by Chaplain TIG with Claude (Anthropic)*

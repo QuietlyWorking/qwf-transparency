@@ -1,5 +1,5 @@
 ---
-title: "Architecture Blueprint — Data Flow Pipelines"
+title: "Architecture Blueprint ... Data Flow Pipelines"
 slug: "blueprint-data-flow"
 pillar: "open-playbook"
 description: "How data moves through QWF's four core pipelines... inbox processing, lead generation, email intelligence, and meeting intelligence. Every arrow is a real scrip"
@@ -8,7 +8,7 @@ tags: ["QWF", "QWU", "architecture", "data-flow", "pipelines", "automation"]
 hook: "Four pipelines. Inbox to insight. Every arrow is a script that actually runs."
 isHome: false
 ---
-# Architecture Blueprint — Data Flow Pipelines
+# Architecture Blueprint ... Data Flow Pipelines
 
 This is Page 2 of 5 in the QWU Backoffice Architecture Map series... the data flow view. Four core pipelines show how information enters the system, gets classified, enriched, and routed to the right destination. Each step names the actual script responsible.
 

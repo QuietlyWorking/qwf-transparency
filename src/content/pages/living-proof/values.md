@@ -9,7 +9,7 @@ isHome: false
 # QWU Values
 Our values create the gravity for our world. The stronger values are believed, the more effective rules of action can be created and adhered to.
 
-## The Triad — Our Immutable Core
+## The Triad ... Our Immutable Core
 These three values define who we are. They work together... remove any one and the other two lose their power. To veer from them would require a change of the person.
 
 ### Love 

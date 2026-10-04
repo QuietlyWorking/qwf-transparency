@@ -29,8 +29,8 @@ Modern AI coding agents (Claude Code, in our case) support a plugin protocol cal
 
 MCP supports two transports:
 
-- **stdio** — the agent spawns a local process for the MCP server and talks to it over pipes
-- **HTTP** — the agent makes HTTP calls to a server running somewhere (localhost, vendor-hosted, wherever)
+- **stdio** ... the agent spawns a local process for the MCP server and talks to it over pipes
+- **HTTP** ... the agent makes HTTP calls to a server running somewhere (localhost, vendor-hosted, wherever)
 
 Both work. Both deliver the same functionality from the user's point of view. You add a tool, you use it from chat, done.
 
@@ -411,11 +411,11 @@ This is why the failure surfaces at scale. One chat, one eager MCP, one idle pro
 
 Anywhere your dev environment adds a capability, ask:
 
-- **Dev server plugins** — does this plugin cost memory just by being installed, or only when it does work?
-- **LSP servers** — does my IDE spawn one per window, per project, per language? How many idle ones am I maintaining right now?
-- **Editor extensions** — how many of them are running background indexers I never use?
-- **Docker sidecars** — is this container essential, or does it sit idle 23 hours a day?
-- **Browser extensions** — how much memory are the ones I rarely use holding across every tab?
+- **Dev server plugins** ... does this plugin cost memory just by being installed, or only when it does work?
+- **LSP servers** ... does my IDE spawn one per window, per project, per language? How many idle ones am I maintaining right now?
+- **Editor extensions** ... how many of them are running background indexers I never use?
+- **Docker sidecars** ... is this container essential, or does it sit idle 23 hours a day?
+- **Browser extensions** ... how much memory are the ones I rarely use holding across every tab?
 
 The audit is the same every time: **cost on open, cost on idle, cost on use.** Lazy transports keep the first two near zero. Eager transports don't.
 
@@ -522,6 +522,6 @@ This volume is about an invisible cost that only becomes visible at scale. A sin
 
 ---
 
-*Built from Broken, Vol. 6 — Published April 2026*
+*Built from Broken, Vol. 6 ... Published April 2026*
 *Quietly Working Foundation | quietlyworking.org*
 *Written by Chaplain TIG with Claude (Anthropic)*

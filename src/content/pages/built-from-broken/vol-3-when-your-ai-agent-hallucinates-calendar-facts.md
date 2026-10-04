@@ -571,6 +571,6 @@ This volume grew from a single wrong day name in a single email... the kind of e
 
 ---
 
-*Built from Broken, Vol. 3 — Published April 2026*
+*Built from Broken, Vol. 3 ... Published April 2026*
 *Quietly Working Foundation | quietlyworking.org*
 *Written by Chaplain TIG with Claude (Anthropic)*

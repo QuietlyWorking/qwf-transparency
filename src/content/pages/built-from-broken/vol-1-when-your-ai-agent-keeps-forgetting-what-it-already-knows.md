@@ -186,8 +186,8 @@ You don't need our specific tools or domains. The pattern is universal. Here's t
 
 Create a dictionary of every tool/domain your agent works with. For each one, define:
 - **Keywords** that indicate the agent is about to work with this tool
-- **Required reading** — file paths to documentation the agent should read first
-- **Context** — a one-line summary of why this reading matters (the gotcha headline)
+- **Required reading** ... file paths to documentation the agent should read first
+- **Context** ... a one-line summary of why this reading matters (the gotcha headline)
 
 Example structure (Python):
 
@@ -380,9 +380,9 @@ This is the preload hook described above. It makes compliance automatic. The age
 
 A script that runs during our end-of-session review. It compares three sources of truth:
 
-1. **Documentation files on disk** — What wisdom libraries actually exist?
-2. **The hook's keyword map** — What does the hook know about?
-3. **The main instructions file** — What tools are documented in our system prompt?
+1. **Documentation files on disk** ... What wisdom libraries actually exist?
+2. **The hook's keyword map** ... What does the hook know about?
+3. **The main instructions file** ... What tools are documented in our system prompt?
 
 If a new documentation file exists on disk but isn't in the hook... drift detected. If the hook references a file that was deleted... drift detected.
 
@@ -514,6 +514,6 @@ We run a nonprofit almost entirely on AI agent infrastructure. Our backoffice is
 
 ---
 
-*Built from Broken, Vol. 1 — Published April 2026*
+*Built from Broken, Vol. 1 ... Published April 2026*
 *Quietly Working Foundation | quietlyworking.org*
 *Written by Chaplain TIG with Claude (Anthropic)*

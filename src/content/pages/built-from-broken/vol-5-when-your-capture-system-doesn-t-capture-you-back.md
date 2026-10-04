@@ -44,7 +44,7 @@ I'd start a working session focused on one of our apps... let's say our local-bu
 Three real incidents from the last two months:
 
 **Incident 1: The Four-Week Stale Item**
-I'd added "Decommission [legacy system] on March 31 — Phase 2 fully deployed, only need to validate data in the new UI" on March 17. I gave it a label so I'd find it later. Then I worked on that app *daily* for the next four weeks without ever reopening the panel. The decommission target date came and went. I only discovered the stale item on April 19, after building the hook this article describes... which surfaced it the first time I mentioned the app's name in a conversation.
+I'd added "Decommission [legacy system] on March 31 ... Phase 2 fully deployed, only need to validate data in the new UI" on March 17. I gave it a label so I'd find it later. Then I worked on that app *daily* for the next four weeks without ever reopening the panel. The decommission target date came and went. I only discovered the stale item on April 19, after building the hook this article describes... which surfaced it the first time I mentioned the app's name in a conversation.
 
 **Incident 2: The Captured-and-Lost Idea**
 Mid-session, I had a great idea for one of our supporter-facing apps: "page-aware button animations on the service pages... residential roofing page builds a roof, solar pages animate panels in." I knew it was good. I told my agent. Then I went back to the actual work I was doing, and the idea evaporated... because adding it required switching to the web UI, and switching meant losing my place. I rebuilt the same idea two weeks later from scratch. Twice.
@@ -112,8 +112,8 @@ A Python script that runs on every `UserPromptSubmit` event. It does five things
 
 That's the proactive surfacing. Two more pieces complete the contract:
 
-6. **A capture skill** — a slash command that inserts new items into the same database with one line, no UI switch
-7. **A close-the-loop step** — a session-wrap-up routine that lists items for apps touched this session and prompts you to mark resolved/in-progress/note
+6. **A capture skill** ... a slash command that inserts new items into the same database with one line, no UI switch
+7. **A close-the-loop step** ... a session-wrap-up routine that lists items for apps touched this session and prompts you to mark resolved/in-progress/note
 
 Capture is easy. Surface is automatic. Decay is built-in. Trust gets earned.
 
@@ -258,8 +258,8 @@ The point is consistency. Every issue you file gets tagged with one of these cod
 
 For each app in your registry, define two types of triggers:
 
-- **Acronyms** — short, unique strings matched with case-insensitive word boundaries (so "API" matches but "applies" doesn't)
-- **Phrases** — longer strings matched as case-insensitive substrings (so "backend api" or "Public Website" both work)
+- **Acronyms** ... short, unique strings matched with case-insensitive word boundaries (so "API" matches but "applies" doesn't)
+- **Phrases** ... longer strings matched as case-insensitive substrings (so "backend api" or "Public Website" both work)
 
 ```python
 APPS = {
@@ -559,7 +559,7 @@ Every capture system promises freedom. Most deliver guilt. The difference is whe
 
 ### Capture (frictionless add)
 
-If the act of capturing requires switching context — opening a web UI, filling a form, choosing from dropdowns — the capture won't happen consistently. You'll capture the loud ideas and lose the quiet ones, which is the inverse of what you want. Most quiet ideas are the ones worth keeping.
+If the act of capturing requires switching context ... opening a web UI, filling a form, choosing from dropdowns ... the capture won't happen consistently. You'll capture the loud ideas and lose the quiet ones, which is the inverse of what you want. Most quiet ideas are the ones worth keeping.
 
 Optimize for the moment of "I just thought of something." From thought to filed-and-forgotten should take less than 5 seconds. Anything slower fails the bar.
 
@@ -575,7 +575,7 @@ This is why the keyword-match-on-prompt pattern works so well. The user's prompt
 
 Without decay, the inbox is a graveyard. Items accumulate, age, become noise, and eventually train the brain to ignore the surface step. The surfacing leg fails not because it stops firing, but because the user stops trusting what fires.
 
-Decay isn't automatic — humans have to make resolution decisions. But the system can prompt for those decisions at the right moment (end of a session where the relevant app was touched), and execute the resolutions on the user's behalf with one line of confirmation.
+Decay isn't automatic ... humans have to make resolution decisions. But the system can prompt for those decisions at the right moment (end of a session where the relevant app was touched), and execute the resolutions on the user's behalf with one line of confirmation.
 
 The triad is self-reinforcing. Easy capture means more captures. Reliable surface means more captures get acted on. Built-in decay means the inbox stays trustworthy. Skip any leg, and the whole structure collapses back into the original problem... a panel that grows faster than it shrinks, that the user stops opening, that quietly fails to deliver on its promise.
 
@@ -593,7 +593,7 @@ GTD wasn't selling productivity. It was selling *peace*. We finally understood t
 
 ### Surfacing is harder than capturing because it's a coordination problem.
 
-Capture is a single user action — file the thing. Surface requires the system to know *when* the user is in the right context to receive it. That's a coordination problem between the user's mental state and the system's data.
+Capture is a single user action ... file the thing. Surface requires the system to know *when* the user is in the right context to receive it. That's a coordination problem between the user's mental state and the system's data.
 
 Most capture tools punt on this. They make the surface step manual: "you have to open the app." A few make it scheduled: "we send you a daily digest." Both are too coarse to match the moment. The keyword-match-on-prompt pattern works because the user's prompt is the most precise signal of context that exists. Use it.
 
@@ -710,6 +710,6 @@ This volume is the natural companion to Vol 1. That one made the agent read what
 
 ---
 
-*Built from Broken, Vol. 5 — Published April 2026*
+*Built from Broken, Vol. 5 ... Published April 2026*
 *Quietly Working Foundation | quietlyworking.org*
 *Written by Chaplain TIG with Claude (Anthropic)*

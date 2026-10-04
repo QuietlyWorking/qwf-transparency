@@ -19,11 +19,11 @@ This is not a sponsored list. It's operational truth from a nonprofit that actua
 ## How to Use This Guide
 
 Each program below includes:
-- **What You Get** — the actual benefit, not the marketing pitch
-- **Who Qualifies** — eligibility in plain language
-- **How to Apply** — the real process, including gatekeepers
-- **Our Experience** — what happened when WE applied
-- **Difficulty** — how hard the application actually is
+- **What You Get** ... the actual benefit, not the marketing pitch
+- **Who Qualifies** ... eligibility in plain language
+- **How to Apply** ... the real process, including gatekeepers
+- **Our Experience** ... what happened when WE applied
+- **Difficulty** ... how hard the application actually is
 
 > **Difficulty Scale:** Easy (fill a form, done in minutes) | Medium (requires documentation, 1-2 weeks) | Hard (grant application, competitive, weeks to months)
 
@@ -97,7 +97,7 @@ Before diving into individual programs, you need to know about two organizations
 |---|---|
 | **What You Get** | Free Google Workspace (Business Starter), $10,000/month Google Ad Grants, YouTube Nonprofit features, Google Earth/Maps access |
 | **Who Qualifies** | 501(c)(3) nonprofits, registered with TechSoup |
-| **How to Apply** | google.com/nonprofits — requires TechSoup validation token |
+| **How to Apply** | google.com/nonprofits ... requires TechSoup validation token |
 | **Difficulty** | Medium (TechSoup validation is the bottleneck) |
 | **Our Experience** | The Ad Grant alone ($10,000/month in free Google Ads) is worth the entire registration effort. Many nonprofits leave this on the table because they don't know about it. |
 
@@ -112,14 +112,14 @@ Before diving into individual programs, you need to know about two organizations
 | **Who Qualifies** | 501(c)(3) nonprofits |
 | **How to Apply** | Apply through GitHub's nonprofit page |
 | **Difficulty** | Easy |
-| **Our Experience** | Donated GitHub Team plan — we use it for all QWF repos including this transparency site. Application was simple. |
+| **Our Experience** | Donated GitHub Team plan ... we use it for all QWF repos including this transparency site. Application was simple. |
 
 ### Microsoft for Nonprofits
 | | |
 |---|---|
 | **What You Get** | Free/discounted Microsoft 365, Azure credits ($3,500/year), Dynamics 365, Power Platform |
 | **Who Qualifies** | 501(c)(3) nonprofits, registered with TechSoup |
-| **How to Apply** | nonprofit.microsoft.com — requires TechSoup validation |
+| **How to Apply** | nonprofit.microsoft.com ... requires TechSoup validation |
 | **Difficulty** | Medium |
 | **Our Experience** | QWF uses Microsoft 365 and Azure extensively. The Azure credits help offset our VM costs. The process requires TechSoup validation first, which adds time. |
 
@@ -260,11 +260,11 @@ A few things we've learned the hard way:
 
 This guide is a start. But reading a list doesn't solve the bandwidth problem.
 
-The **International Youth Service Registry** (IYSR) — a QWF effort — is building something bigger: a service where youth-serving organizations can register a profile, and based on their size, mission, and needs, get a personalized list of programs they pre-qualify for... with step-by-step guidance to apply for each one.
+The **International Youth Service Registry** (IYSR) ... a QWF effort ... is building something bigger: a service where youth-serving organizations can register a profile, and based on their size, mission, and needs, get a personalized list of programs they pre-qualify for... with step-by-step guidance to apply for each one.
 
 Because the issue isn't that free tech doesn't exist. The issue is that overworked nonprofit leaders don't have the bandwidth to find it, apply for it, and implement it. IYSR aims to collapse all three barriers into one relationship.
 
-Learn more at **iysr.org** — and if you're a youth-serving organization that could use a hand, we'd love to hear from you.
+Learn more at **iysr.org** ... and if you're a youth-serving organization that could use a hand, we'd love to hear from you.
 
 ---
 

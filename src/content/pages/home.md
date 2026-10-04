@@ -18,8 +18,8 @@ isHome: true
 - Privacy Statement
 - Terms of Service
 ### Quietly Working Foundation #QWF
-- [The Dream Development Framework](/open-playbook/the-dream-development-framework/) — The 10-year journey at the heart of everything QWF does
-- [QWU Values](/living-proof/values/) — Love, Courage, Focus... and the values that shape how we operate
+- [The Dream Development Framework](/open-playbook/the-dream-development-framework/) ... The 10-year journey at the heart of everything QWF does
+- [QWU Values](/living-proof/values/) ... Love, Courage, Focus... and the values that shape how we operate
 ### Quietly Working Creative #QWC
 ### International Youth Service Registry #IYSR
 ### The Missing Pixel Project #MP
@@ -31,23 +31,23 @@ isHome: true
 ## Built from Broken
 *Real problems we face running AI-powered nonprofit operations... and the real solutions we build. Every fix exists because something failed first. We show the receipts.*
 
-- [Vol 1 ... When Your AI Agent Keeps Forgetting What It Already Knows](/built-from-broken/vol-1-when-your-ai-agent-keeps-forgetting-what-it-already-knows/) — How a 50-line Python hook stopped our AI agent from repeatedly ignoring its own documentation
-- [Vol 2 ... When Your Documentation Rots Faster Than You Can Write It](/built-from-broken/vol-2-when-your-documentation-rots-faster-than-you-can-write-it/) — How we turned documentation into a deployment artifact so our runbooks stop lying about what's actually deployed
-- [Vol 3 ... When Your AI Agent Hallucinates Calendar Facts](/built-from-broken/vol-3-when-your-ai-agent-hallucinates-calendar-facts/) — How a PreToolUse hook catches fabricated day-of-week names before they reach emails, files, or any output
-- [Vol 4 ... When Your AI Agent Breaks Your Other AI Agent](/built-from-broken/vol-4-when-your-ai-agent-breaks-your-other-ai-agent/) — How self-resolving infrastructure prevents multi-agent resource collisions from becoming outages
-- [Vol 5 ... When Your Capture System Doesn't Capture You Back](/built-from-broken/vol-5-when-your-capture-system-doesn-t-capture-you-back/) — How a UserPromptSubmit hook turned a static issue tracker into a trusted GTD inbox by surfacing open items the moment you mention an app
-- [Vol 6 ... When Every New Chat Silently Spawns a Helper You Rarely Use](/built-from-broken/vol-6-when-every-new-chat-silently-spawns-a-helper-you-rarely-use/) — How swapping an MCP server from stdio to hosted HTTP transport reclaimed gigabytes of idle RAM across every concurrent chat session
-- [Vol 7 ... When You're About to Erode the Thing You Built the Framework to Protect](/built-from-broken/vol-7-when-you-re-about-to-erode-the-thing-you-built-the-framework-to-protect/) — How encoding organizational values into machine-readable schemas loaded into the agent's context every session catches leader drift before it silently re-frames the mission
-- [Vol 8 ... When Three Parallel Agents Crash and the System Still Holds](/built-from-broken/vol-8-when-three-parallel-agents-crash-and-the-system-still-holds/) — How atomic migrations, a vault auto-commit cron, and a verify-first triage runbook turned a six-hour multi-agent crash recovery into a ninety-minute forensic pass
-- [Vol 9 ... When Your AI Agent Can't See Its Own Mind](/built-from-broken/vol-9-when-your-ai-agent-can-t-see-its-own-mind/) — How transcript-JSONL ground-truth token counts, a 70/90/95 handoff ladder, a tiered emergency wrap-up, and per-session git worktrees keep long agent sessions sharp and parallel sessions structurally isolated
-- [Vol 10 ... When Your AI Agent Runs Out of Road Mid-Flow](/built-from-broken/vol-10-when-your-ai-agent-runs-out-of-road-mid-flow/) — How a fail-loud capacity poller, a weakest-link account picker, an editor switchboard, and a keep-alive let every new agent session start on the subscription with the most usable room, and never move a running one
+- [Vol 1 ... When Your AI Agent Keeps Forgetting What It Already Knows](/built-from-broken/vol-1-when-your-ai-agent-keeps-forgetting-what-it-already-knows/) ... How a 50-line Python hook stopped our AI agent from repeatedly ignoring its own documentation
+- [Vol 2 ... When Your Documentation Rots Faster Than You Can Write It](/built-from-broken/vol-2-when-your-documentation-rots-faster-than-you-can-write-it/) ... How we turned documentation into a deployment artifact so our runbooks stop lying about what's actually deployed
+- [Vol 3 ... When Your AI Agent Hallucinates Calendar Facts](/built-from-broken/vol-3-when-your-ai-agent-hallucinates-calendar-facts/) ... How a PreToolUse hook catches fabricated day-of-week names before they reach emails, files, or any output
+- [Vol 4 ... When Your AI Agent Breaks Your Other AI Agent](/built-from-broken/vol-4-when-your-ai-agent-breaks-your-other-ai-agent/) ... How self-resolving infrastructure prevents multi-agent resource collisions from becoming outages
+- [Vol 5 ... When Your Capture System Doesn't Capture You Back](/built-from-broken/vol-5-when-your-capture-system-doesn-t-capture-you-back/) ... How a UserPromptSubmit hook turned a static issue tracker into a trusted GTD inbox by surfacing open items the moment you mention an app
+- [Vol 6 ... When Every New Chat Silently Spawns a Helper You Rarely Use](/built-from-broken/vol-6-when-every-new-chat-silently-spawns-a-helper-you-rarely-use/) ... How swapping an MCP server from stdio to hosted HTTP transport reclaimed gigabytes of idle RAM across every concurrent chat session
+- [Vol 7 ... When You're About to Erode the Thing You Built the Framework to Protect](/built-from-broken/vol-7-when-you-re-about-to-erode-the-thing-you-built-the-framework-to-protect/) ... How encoding organizational values into machine-readable schemas loaded into the agent's context every session catches leader drift before it silently re-frames the mission
+- [Vol 8 ... When Three Parallel Agents Crash and the System Still Holds](/built-from-broken/vol-8-when-three-parallel-agents-crash-and-the-system-still-holds/) ... How atomic migrations, a vault auto-commit cron, and a verify-first triage runbook turned a six-hour multi-agent crash recovery into a ninety-minute forensic pass
+- [Vol 9 ... When Your AI Agent Can't See Its Own Mind](/built-from-broken/vol-9-when-your-ai-agent-can-t-see-its-own-mind/) ... How transcript-JSONL ground-truth token counts, a 70/90/95 handoff ladder, a tiered emergency wrap-up, and per-session git worktrees keep long agent sessions sharp and parallel sessions structurally isolated
+- [Vol 10 ... When Your AI Agent Runs Out of Road Mid-Flow](/built-from-broken/vol-10-when-your-ai-agent-runs-out-of-road-mid-flow/) ... How a fail-loud capacity poller, a weakest-link account picker, an editor switchboard, and a keep-alive let every new agent session start on the subscription with the most usable room, and never move a running one
 
 ## Tools
 These are the tools that the #QWU uses.
-- [What We Build With (And Why)](/open-playbook/what-we-build-with-and-why/) — Our whole tech stack explained at three levels, from Hobbit to Wizard... the trailhead for everything else here
-- [The QWU Tool Shed](/open-playbook/the-tool-shed/) — All 48+ tools we use, scored on Heart, Soul, and 12 other metrics
-- [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) — Free and discounted tech programs for nonprofits, with honest application notes
-- [[Code and Tips Swipe Page]] — Code snippets and tips from our work
+- [What We Build With (And Why)](/open-playbook/what-we-build-with-and-why/) ... Our whole tech stack explained at three levels, from Hobbit to Wizard... the trailhead for everything else here
+- [The QWU Tool Shed](/open-playbook/the-tool-shed/) ... All 48+ tools we use, scored on Heart, Soul, and 12 other metrics
+- [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) ... Free and discounted tech programs for nonprofits, with honest application notes
+- [[Code and Tips Swipe Page]] ... Code snippets and tips from our work
 
 ### QWU CRM & Family Portal
 family.quietlyworking.org

@@ -74,10 +74,10 @@ If you want to scale up later (team of 5+, heavy workflows), jump to a B4ms (4 v
 
 Before you start, have these ready:
 
-- **Azure account** — You can get a new account with $200 free credit for 30 days. If you're a nonprofit, check if you qualify for Azure for Nonprofits (up to $3,500/year in credits... yes, really).
-- **A domain name** — Even a cheap one at `.xyz` works fine. You want to run n8n at `n8n.yourdomain.com`, not an IP address.
-- **DNS control** — Ideally Cloudflare (free, fast, safe defaults). If your domain is elsewhere, you can still use it, you'll just manage DNS there.
-- **SSH client** — On Windows, use Windows Terminal or Git Bash. On Mac/Linux, your built-in terminal.
+- **Azure account** ... You can get a new account with $200 free credit for 30 days. If you're a nonprofit, check if you qualify for Azure for Nonprofits (up to $3,500/year in credits... yes, really).
+- **A domain name** ... Even a cheap one at `.xyz` works fine. You want to run n8n at `n8n.yourdomain.com`, not an IP address.
+- **DNS control** ... Ideally Cloudflare (free, fast, safe defaults). If your domain is elsewhere, you can still use it, you'll just manage DNS there.
+- **SSH client** ... On Windows, use Windows Terminal or Git Bash. On Mac/Linux, your built-in terminal.
 - **About 90 minutes** for the full walkthrough. Half that if you use the shell script.
 
 That's it. No prior Azure experience needed. No Docker deep knowledge. No networking magic. I'll explain everything you do and why you're doing it.
@@ -445,7 +445,7 @@ In the Azure portal:
 3. Storage account name: something globally unique like `n8nbackupsYOURNAME` (must be 3-24 lowercase letters + numbers only)
 4. Region: same as your VM
 5. Performance: **Standard**
-6. Redundancy: **LRS (Locally-redundant storage)** — cheapest and fine for backups
+6. Redundancy: **LRS (Locally-redundant storage)** ... cheapest and fine for backups
 7. Review + Create → Create
 
 ### 5.2 Get the Connection String
@@ -766,7 +766,7 @@ These prompts work because they front-load context. The model doesn't have to gu
 
 ---
 
-## Gotchas — The Things I Wish I'd Known
+## Gotchas ... The Things I Wish I'd Known
 
 Every one of these cost me hours. Save yourself the pain.
 

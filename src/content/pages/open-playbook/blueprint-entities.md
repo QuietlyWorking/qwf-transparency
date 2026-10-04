@@ -1,5 +1,5 @@
 ---
-title: "Architecture Blueprint — Entity Relationships"
+title: "Architecture Blueprint ... Entity Relationships"
 slug: "blueprint-entities"
 pillar: "open-playbook"
 description: "How QWF tracks 4,248 entities across people, organizations, and experts... from YAML frontmatter schemas to the 5-tier Circle system that governs relationship p"
@@ -8,7 +8,7 @@ tags: ["QWF", "QWU", "architecture", "entities", "crm", "relationships"]
 hook: "4,248 entities. 5 relationship tiers. Every contact has a lifecycle."
 isHome: false
 ---
-# Architecture Blueprint — Entity Relationships
+# Architecture Blueprint ... Entity Relationships
 
 This is Page 4 of 5 in the QWU Backoffice Architecture Map series... the entity and relationship map. Three entity types (People, Organizations, Experts) live as Markdown files with structured YAML frontmatter. The 5-tier Circle system governs how relationships progress from Aware to Inner Circle, with automated promotion and demotion triggers.
 

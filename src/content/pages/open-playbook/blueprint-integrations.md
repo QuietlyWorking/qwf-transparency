@@ -1,5 +1,5 @@
 ---
-title: "Architecture Blueprint — External Integrations"
+title: "Architecture Blueprint ... External Integrations"
 slug: "blueprint-integrations"
 pillar: "open-playbook"
 description: "Every external service QWF connects to... what we send, what we receive, what it costs. From the Quality-First LLM strategy to per-API rate limits."
@@ -8,7 +8,7 @@ tags: ["QWF", "QWU", "architecture", "integrations", "api", "llm"]
 hook: "16 APIs. Every one documented... what we send, what we get back, what it costs."
 isHome: false
 ---
-# Architecture Blueprint — External Integrations
+# Architecture Blueprint ... External Integrations
 
 This is Page 3 of 5 in the QWU Backoffice Architecture Map series... the integration hub. Every external service is mapped with what data flows in each direction, authentication method, rate limits, and costs. The AI section at the top shows our Quality-First LLM strategy... start with the best model, only downgrade with justification.
 

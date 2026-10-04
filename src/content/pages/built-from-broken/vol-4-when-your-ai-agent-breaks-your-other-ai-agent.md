@@ -108,7 +108,7 @@ You can't prevent all resource collisions between independent agents. You can ma
 
 Two layers. One at the application level, one at the OS level.
 
-**Layer 1: Application — `SO_REUSEADDR`**
+**Layer 1: Application ... `SO_REUSEADDR`**
 
 The Python `HTTPServer` class doesn't set `SO_REUSEADDR` by default. This means when the previous server process dies, the OS keeps the socket in `TIME_WAIT` state for up to 60 seconds. During that window, no new process can bind to the same port... even if it's the rightful owner trying to restart.
 
@@ -121,7 +121,7 @@ class ReusableHTTPServer(HTTPServer):
 
 This tells the OS: "I know this port was recently in use. Let me bind to it anyway." It handles the most common restart scenario... the old process died, the socket is in limbo, the new process needs to take over.
 
-**Layer 2: OS — `ExecStartPre` port cleanup**
+**Layer 2: OS ... `ExecStartPre` port cleanup**
 
 `SO_REUSEADDR` handles stale sockets. But it doesn't help when a *different, living process* is actively listening on the port. That requires eviction.
 
@@ -569,6 +569,6 @@ This volume grew from a 35-minute outage at 11:56 PM... one agent session starti
 
 ---
 
-*Built from Broken, Vol. 4 — Published April 2026*
+*Built from Broken, Vol. 4 ... Published April 2026*
 *Quietly Working Foundation | quietlyworking.org*
 *Written by Chaplain TIG with Claude (Anthropic)*

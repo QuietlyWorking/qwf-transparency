@@ -1,5 +1,5 @@
 ---
-title: "Architecture Blueprint — Mission Control Overview"
+title: "Architecture Blueprint ... Mission Control Overview"
 slug: "blueprint-mission-control"
 pillar: "open-playbook"
 description: "The full system overview of QWF's AI-powered nonprofit backoffice... 12 external integrations, 48 workflows, 7 processing subsystems, and an 8,884-file Obsidian"
@@ -8,7 +8,7 @@ tags: ["QWF", "QWU", "architecture", "infrastructure", "ai-agent", "transparency
 hook: "12 integrations. 48 workflows. 7 subsystems. One Obsidian vault running a nonprofit."
 isHome: false
 ---
-# Architecture Blueprint — Mission Control Overview
+# Architecture Blueprint ... Mission Control Overview
 
 This is Page 1 of 5 in the QWU Backoffice Architecture Map series... the 30,000-foot view of everything. External integrations at the top, orchestration layer in the middle, processing subsystems below, and the vault storage layer at the foundation. Every box on this map is a real system running in production.
 

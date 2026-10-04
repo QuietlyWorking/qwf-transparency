@@ -1,12 +1,12 @@
 ---
-title: "Claude Desktop Prompt Pack — Self-Hosted n8n on Azure"
+title: "Claude Desktop Prompt Pack ... Self-Hosted n8n on Azure"
 slug: "n8n-azure-claude-prompts"
 pillar: "open-playbook"
 description: "*Copy-paste prompts for troubleshooting, upgrades, and operations. Designed to front-load context so Claude doesn't have to guess your setup.*"
 tags: ["how-to", "n8n", "azure", "claude-desktop", "prompts"]
 isHome: false
 ---
-# Claude Desktop Prompt Pack — Self-Hosted n8n on Azure
+# Claude Desktop Prompt Pack ... Self-Hosted n8n on Azure
 
 *Copy-paste prompts for troubleshooting, upgrades, and operations. Designed to front-load context so Claude doesn't have to guess your setup.*
 

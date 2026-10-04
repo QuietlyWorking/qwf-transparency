@@ -177,13 +177,13 @@ The QWU Backoffice is an AI agent workspace running on Microsoft Azure, designed
 The QWU infrastructure is monitored at three layers, all documented in `005 Operations/Directives/infrastructure_monitoring.md`.
 
 **External Monitoring (Betterstack)**
-- **Plan:** AppSumo lifetime deal (2 stacked codes) — 200 monitors, 10 status pages, 5 members
+- **Plan:** AppSumo lifetime deal (2 stacked codes) ... 200 monitors, 10 status pages, 5 members
 - **23 HTTP monitors** (updated 2026-04-12): 10 WPMU sites, 6 QWF apps (QNT, QQT, QKN, QSP, L4G, QTR), 5 infrastructure services, QWR app, [Supporter Organization] supporter site
 - **4 heartbeat monitors:** claude-dev, n8n, WPMU VM, [Supporter Organization] VM (all every 6 hours)
 - Alerts: phone call + SMS + email + push notification
 - Outgoing webhook (ID 80218) fires on incident events → triggers auto-remediation (see [[#Auto-Remediation System ⭐ NEW]])
-- **Status page:** [status.quietlyworking.org](https://status.quietlyworking.org) — single section "QWU Infrastructure" (all QWF sites + apps + infra + heartbeats). Supporter monitors ([Supporter Organization]) run internally for alerting but are not displayed on the public status page — supporters access their status via SuiteDash portal embeds.
-- WPMU and [Supporter Organization] Lightsail CPU alarms deleted (2026-03-11) — they flapped due to WP-Cron bursts and xmlrpc attacks; Betterstack uptime monitoring is more useful
+- **Status page:** [status.quietlyworking.org](https://status.quietlyworking.org) ... single section "QWU Infrastructure" (all QWF sites + apps + infra + heartbeats). Supporter monitors ([Supporter Organization]) run internally for alerting but are not displayed on the public status page ... supporters access their status via SuiteDash portal embeds.
+- WPMU and [Supporter Organization] Lightsail CPU alarms deleted (2026-03-11) ... they flapped due to WP-Cron bursts and xmlrpc attacks; Betterstack uptime monitoring is more useful
 
 **Internal Health Checks**
 - `check_vm_health.py` runs every 6 hours via cron on both VMs
@@ -201,10 +201,10 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 
 **SEO Data Health Checks** ⭐ NEW (2026-05-27)
 - `check_seo_silent_death.py` runs daily at 13:05 PT via cron on claude-dev
-- **Deliberately VM-cron, not n8n** — the alerter must be independent of n8n itself, so an n8n outage can never silence the alarm about the n8n outage
-- Three detector families: (1) data freshness — alerts when QWR/QSP SEO tables (`seo_position_history`, `seo_citation_tracking`, `qsp_seo_health`, `qsp_analytics_traffic`) miss their expected cadence; (2) DataForSEO balance floor — alerts when the account drops below $10; (3) active-but-empty — flags any n8n workflow `active=True` whose target table is stale or empty (gated on table freshness so n8n's pruned execution history can't false-positive)
+- **Deliberately VM-cron, not n8n** ... the alerter must be independent of n8n itself, so an n8n outage can never silence the alarm about the n8n outage
+- Three detector families: (1) data freshness ... alerts when QWR/QSP SEO tables (`seo_position_history`, `seo_citation_tracking`, `qsp_seo_health`, `qsp_analytics_traffic`) miss their expected cadence; (2) DataForSEO balance floor ... alerts when the account drops below $10; (3) active-but-empty ... flags any n8n workflow `active=True` whose target table is stale or empty (gated on table freshness so n8n's pruned execution history can't false-positive)
 - Posts to Discord `#system-status` only when something trips; self-events land in `integration_events` (the alerter is itself observable)
-- Built after the 2026-05-27 audit found three live silent failures (position tracker dead 11 weeks on a DataForSEO 402, Vista Social gateway NXDOMAIN since March, GA-sync deployed-but-not-feeding). Operationalizes the "active/deployed is NOT producing — probe the output table" rule (`memory/feedback_active_deployed_not_producing_probe_output.md`).
+- Built after the 2026-05-27 audit found three live silent failures (position tracker dead 11 weeks on a DataForSEO 402, Vista Social gateway NXDOMAIN since March, GA-sync deployed-but-not-feeding). Operationalizes the "active/deployed is NOT producing ... probe the output table" rule (`memory/feedback_active_deployed_not_producing_probe_output.md`).
 
 **Agent Memory Health Checks**
 - `audit_memory_health.py` runs daily at 5 AM PT via cron on claude-dev
@@ -252,7 +252,7 @@ The `.devcontainer/` folder contains configuration for isolated development:
 - `devcontainer.json` - VS Code settings
 - `init-firewall.sh` - Network security rules
 
-### "Reopen in Container" — When to Click vs Dismiss
+### "Reopen in Container" ... When to Click vs Dismiss
 
 When you connect via VS Code Remote SSH, you may see a popup asking to "Reopen in Container." Here's when to use each option:
 
@@ -267,7 +267,7 @@ When you connect via VS Code Remote SSH, you may see a popup asking to "Reopen i
 - Run tmux sessions for overnight agent monitoring
 - General system administration
 
-**Typical daily workflow:** For most day-to-day work—checking on agents, syncing the vault, running n8n-triggered operations—you probably want to stay on the SSH connection to the VM host rather than reopening inside the container.
+**Typical daily workflow:** For most day-to-day work ... checking on agents, syncing the vault, running n8n-triggered operations ... you probably want to stay on the SSH connection to the VM host rather than reopening inside the container.
 
 **Switching between them:**
 - **To enter container:** Command Palette (`Ctrl+Shift+P`) → `Dev Containers: Reopen in Container`
@@ -651,7 +651,7 @@ Students completing this module will learn:
 
 The self-hosted n8n instance uses pinned version tags for stability.
 
-**Current Version:** 2.41.6 (live-checked 2026-10-04; the HQ masthead strip now tracks installed vs published vs vulnerable continuously. Previously 2.31.5, upgraded 2026-07-22 from 2.17.5 — catch-up security upgrade closing 45 advisories, incl. the same-morning batch of 15 that 2.31.5 was released to patch)
+**Current Version:** 2.41.6 (live-checked 2026-10-04; the HQ masthead strip now tracks installed vs published vs vulnerable continuously. Previously 2.31.5, upgraded 2026-07-22 from 2.17.5 ... catch-up security upgrade closing 45 advisories, incl. the same-morning batch of 15 that 2.31.5 was released to patch)
 
 | Property | Value |
 |----------|-------|
@@ -1048,14 +1048,14 @@ Thumbs.db
 
 ### Obsidian CLI (v1.12+, Feb 2026)
 
-Obsidian released an official CLI in v1.12. It's a **remote control for the running GUI app** — Obsidian must be running (or it auto-launches on first command). Currently Early Access ($25 Catalyst License, will go free).
+Obsidian released an official CLI in v1.12. It's a **remote control for the running GUI app** ... Obsidian must be running (or it auto-launches on first command). Currently Early Access ($25 Catalyst License, will go free).
 
 **Key commands:** `obsidian read`, `create`, `append`, `rename`, `search`, `search:context`, `daily`, `daily:append`, `files`, `unresolved`, `plugin:reload`, `dev:screenshot`.
 
 **Impact on QWU:**
 - **Does NOT help server-side (claude-dev VM):** Headless Linux, no GUI = CLI won't work
 - **Useful on TIG's Windows workstation** for quick captures and daily note appends from PowerShell
-- **`obsidian rename`** is the strongest use case — handles backlink updates across the vault (our Python `os.rename()` doesn't update `[[wikilinks]]`)
+- **`obsidian rename`** is the strongest use case ... handles backlink updates across the vault (our Python `os.rename()` doesn't update `[[wikilinks]]`)
 - **`obsidian unresolved`** beats our regex-based `extract_unresolved_links.py` for accuracy (understands aliases, embeds, block refs)
 
 **Full details:** See TWL at `005 Operations/Directives/obsidian_tool_wisdom.md`
@@ -1306,8 +1306,8 @@ Depth: `005 Operations/Directives/claude_tool_wisdom.md` §Running several Max s
 Claude Code maintains persistent memory across conversations through a layered system:
 
 **Always loaded (every conversation):**
-- `CLAUDE.md` — Operating manual, conventions, infrastructure access (~500 lines)
-- `MEMORY.md` — High-consequence behavioral rules, mission/language standards, topic file index (~104 lines, limit 200)
+- `CLAUDE.md` ... Operating manual, conventions, infrastructure access (~500 lines)
+- `MEMORY.md` ... High-consequence behavioral rules, mission/language standards, topic file index (~104 lines, limit 200)
 
 **On-demand (loaded when domain work starts via Domain Start Protocol):**
 
@@ -1333,7 +1333,7 @@ Claude Code maintains persistent memory across conversations through a layered s
 
 **Context window best practice:** Manually clear conversations at natural breakpoints (task completion, domain switches) rather than waiting for auto-compaction. Use `/session-wrap-up` before clearing. The persistent file system is designed for clean breaks.
 
-### QCM — QWU Context Manager
+### QCM ... QWU Context Manager
 
 QCM is a homegrown context management system (v2.2.1, Session 378) that drives intentional fresh-session handoff before compaction AND recovers working state if compaction happens anyway. Built as 7 Python hook scripts with zero external dependencies (no npm packages, no MCP servers).
 
@@ -1348,7 +1348,7 @@ QCM is a homegrown context management system (v2.2.1, Session 378) that drives i
 | `qcm_event_logger.py` | PostToolUse, UserPromptSubmit | Logs every tool call and user message to SQLite, classified by priority (P1-P4). Tracks Agent launches + Skill invocations as P2 |
 | `qcm_snapshot_builder.py` | Stop | Builds a <=3KB priority-budgeted markdown snapshot with Session Goal pinning, file dedup, and git status |
 | `qcm_session_restore.py` | SessionStart | Injects the snapshot as additionalContext after compaction |
-| `qcm_output_compressor.py` | PostToolUse (Bash) | Compresses large outputs (>3KB) — saves full output to disk, returns summary to context |
+| `qcm_output_compressor.py` | PostToolUse (Bash) | Compresses large outputs (>3KB) ... saves full output to disk, returns summary to context |
 | `qcm_redundancy_detector.py` | Stop (after snapshot) | Detects repeated file reads and searches within a session, tracks per-session and cross-session metrics |
 | `qcm_threshold_monitor.py` (v2.2.0) | PostToolUse | Fires 70/90/95% context-fill alerts using ground-truth token counts from transcript JSONL `usage` blocks. Drives intentional handoff before compaction |
 | `qcm_precompact_handler.py` (v2.2.0) | PreCompact | Defensive fallback: clears threshold_alerts + wrap_up_completions if compaction fires anyway (signal that handoff discipline failed) |
@@ -1360,21 +1360,21 @@ QCM is a homegrown context management system (v2.2.1, Session 378) that drives i
 | Session Goal | First user intent (pinned, never ages out) | 200 bytes (guaranteed) |
 | P1 (critical) | User requests, project focus, errors | 800 bytes |
 | P2 (high) | Decisions, script runs, directive reads, agent launches | 600 bytes |
-| P3 (medium) | File edits (deduplicated — same file edited 5x = 1 entry) | 400 bytes |
+| P3 (medium) | File edits (deduplicated ... same file edited 5x = 1 entry) | 400 bytes |
 | Git status | Uncommitted changes ("in-flight" work) | 500 bytes |
 | P4 (low) | File reads, searches | Dropped from snapshot |
 
-**Threshold ladder (v2.2.0+) — handoff before compaction:**
+**Threshold ladder (v2.2.0+) ... handoff before compaction:**
 
 | Threshold | Hook Alert | Agent Action |
 |-----------|-----------|--------------|
-| 70% | Awareness | Note marker; identify a clean commit boundary in next stretch. **No new long-running background sub-agents past this point** — they may not return before 90% handoff |
+| 70% | Awareness | Note marker; identify a clean commit boundary in next stretch. **No new long-running background sub-agents past this point** ... they may not return before 90% handoff |
 | 90% | **HANDOFF MODE** | Wrap up at next safe point. No new work. Safe = no uncommitted + no in-flight sub-agents + not mid-response. Run `/session-wrap-up` when safe |
 | 95% | **EMERGENCY** | Compaction imminent. Run `/session-wrap-up --scope=essential` (Tier 1 only; Tier 2 deferred to fresh session via Step 7 kickoff prompt) |
 
 Token counting uses ground-truth from the Anthropic API (transcript JSONL `usage` block: `input_tokens + cache_read_input_tokens + cache_creation_input_tokens`). No estimation. Context window detected via `QCM_CONTEXT_WINDOW` env var > hook stdin `context_window` field (future-proof) > `DEFAULT_CONTEXT_WINDOW = 1_000_000` constant. Per-session cache in `session_context_window` table.
 
-**Recommended all-day workflow — handoff at 90%, not marathon sessions:**
+**Recommended all-day workflow ... handoff at 90%, not marathon sessions:**
 - Let the threshold monitor drive session boundaries; trust the 90% alert
 - Run `/session-wrap-up` at the alert to write Step 7 kickoff prompt → fresh session continues with full capacity
 - Git commits + Step 7 kickoff prompt = the handoff (more reliable than any snapshot)
@@ -1394,7 +1394,7 @@ Token counting uses ground-truth from the Anthropic API (transcript JSONL `usage
 
 **Sibling system: Parallel-Session Worktrees (v1.0.0, Session 378)** ... structural fix for the parallel-session-git-collision class of bug. When 2+ Claude sessions work the same repo simultaneously, broader `git add` operations in one session can sweep uncommitted edits from another into the wrong commit. Helper: `005 Operations/Execution/qcm_worktree_spawn.py` (create/list/info/cleanup/prune subcommands). Each parallel session spawns at `/home/<VM_USER>/qwu_backOffice_worktrees/<label>/` on throwaway branch `session/<label>` (separate working tree + index, shared `.git` store). Full SOP: `005 Operations/Directives/parallel_session_worktrees.md`. Trigger criteria: any planned parallel session >15 min, any orchestrator-spawned sub-agent that will commit, any time two terminals are working the repo concurrently.
 
-**Redundancy detection (v2.1.0):** Inspired by DeepSeek's Engram paper ("Conditional Memory via Scalable Lookup"), the redundancy detector measures how often the agent re-reads the same file or re-runs the same search within a session — wasted "compute" that could be served from cache. Baseline (52 sessions): 29.2% average redundancy ratio, ~9,471 wasted tokens/session. Files read in 5+ distinct sessions are flagged as "engram candidates" for potential persistent caching. Metrics sync daily to HQ Supabase via `sync_hq_agent_efficiency.py` and display on the HQ Command Center dashboard.
+**Redundancy detection (v2.1.0):** Inspired by DeepSeek's Engram paper ("Conditional Memory via Scalable Lookup"), the redundancy detector measures how often the agent re-reads the same file or re-runs the same search within a session ... wasted "compute" that could be served from cache. Baseline (52 sessions): 29.2% average redundancy ratio, ~9,471 wasted tokens/session. Files read in 5+ distinct sessions are flagged as "engram candidates" for potential persistent caching. Metrics sync daily to HQ Supabase via `sync_hq_agent_efficiency.py` and display on the HQ Command Center dashboard.
 
 **TWL Preload Hook (v1.0.0, Session 195):** A separate UserPromptSubmit hook (`.claude/hooks/twl_preload.py`) that scans user messages for domain keywords and injects reminders to read relevant Tool Wisdom Libraries. Not part of QCM proper but follows the same hook architecture pattern. 32 domains mapped (28 TWLs on disk). See [[#TWL Preload Hook ⭐ NEW]] for details.
 
@@ -1615,7 +1615,7 @@ Skills provide domain-specific knowledge and capabilities that agents reference.
 | `qa` | Browser-based QA testing for CF Pages apps via Playwright | Playwright |
 | `canary` | Post-deploy canary monitoring via Betterstack + HTTP probes | Python |
 | `freeze` | Restrict edit scope to specific files/directories during focused work | None |
-| `pulse` | Quick VM health check — CPU, RAM, swap, disk, active Claude sessions | None |
+| `pulse` | Quick VM health check ... CPU, RAM, swap, disk, active Claude sessions | None |
 
 **Lead Generation Skills:**
 
@@ -1707,7 +1707,7 @@ The workspace uses MCP (Model Context Protocol) servers for tool access. MCP ser
 }
 ```
 
-**Settings:** `.claude/settings.local.json` has `enableAllProjectMcpServers: false` — new sessions do NOT auto-spawn MCP servers. Enable per-session via `/mcp` when needed.
+**Settings:** `.claude/settings.local.json` has `enableAllProjectMcpServers: false` ... new sessions do NOT auto-spawn MCP servers. Enable per-session via `/mcp` when needed.
 
 **Why opt-in:** Each MCP server spawns ~3 Node.js processes (~160 MB). With 5 concurrent sessions, auto-spawning Discord MCP alone consumed 786 MB. Most sessions don't need Discord access, so opt-in saves significant memory on the 16 GB VM.
 
@@ -1721,7 +1721,7 @@ The QWU Backoffice uses five domain-specific **supervisors** that orchestrate au
 
 ### Why Supervisors Exist
 
-Before supervisors, a single router agent handled all automation. As the system grew to 60+ scripts, the router became a bottleneck — errors compounded, scheduling conflicted, and failures in one domain could block others. The supervisor architecture splits responsibility into five independent domains that run in parallel.
+Before supervisors, a single router agent handled all automation. As the system grew to 60+ scripts, the router became a bottleneck ... errors compounded, scheduling conflicted, and failures in one domain could block others. The supervisor architecture splits responsibility into five independent domains that run in parallel.
 
 ### The Five Supervisors
 
@@ -1786,8 +1786,8 @@ Each supervisor maintains its own SQLite database in `005 Operations/Data/`:
 ### Escalation Routing
 
 When a supervisor detects a failure requiring human attention, it escalates via two channels:
-1. **Discord `#supervisor-alerts`** — Immediate visibility (via `escalate_to_discord()`)
-2. **Escalation file** — Audit trail in `000 Inbox/___Supervisor_Escalations/` (via `escalate_to_task()` in `error_handling.py` v2.1.0)
+1. **Discord `#supervisor-alerts`** ... Immediate visibility (via `escalate_to_discord()`)
+2. **Escalation file** ... Audit trail in `000 Inbox/___Supervisor_Escalations/` (via `escalate_to_task()` in `error_handling.py` v2.1.0)
 
 These escalation files are intentionally kept **separate** from `___Tasks/` so they don't pollute the user's HQ Command Center task list. As defense-in-depth, `sync_hq_tasks.py` v1.5.0 also skips any files with a `SUPERVISOR-` prefix.
 
@@ -1841,7 +1841,7 @@ Each supervisor has a corresponding n8n workflow:
 ### Troubleshooting
 
 **Dashboard shows "CRITICAL" but supervisors are running:**
-Supervisors with `ON_DEMAND_SCRIPTS` sets (Content Pipeline v1.1.0+, Lead Intelligence v1.1.0+) automatically skip scripts that need user-provided inputs during automated runs. If you still see failures, check for scripts missing from the `ON_DEMAND_SCRIPTS` set — they may need required arguments (`--sheet-url`, `--json-file`, etc.) that the supervisor can't provide. Fix: add the script to `ON_DEMAND_SCRIPTS` in the supervisor.
+Supervisors with `ON_DEMAND_SCRIPTS` sets (Content Pipeline v1.1.0+, Lead Intelligence v1.1.0+) automatically skip scripts that need user-provided inputs during automated runs. If you still see failures, check for scripts missing from the `ON_DEMAND_SCRIPTS` set ... they may need required arguments (`--sheet-url`, `--json-file`, etc.) that the supervisor can't provide. Fix: add the script to `ON_DEMAND_SCRIPTS` in the supervisor.
 
 **A supervisor isn't running on schedule:**
 1. Check n8n: `ssh <VM_USER>@qwu-n8n "docker exec n8n n8n list:workflow"`
@@ -2092,13 +2092,13 @@ an error message. There was no error message, and the cost was a person.
 
 ### Google Calendar API Timestamp Gotcha (RFC3339)
 
-The Google Calendar API requires **RFC3339 timestamps with explicit timezone offset** for `timeMin`/`timeMax` parameters — not bare ISO 8601 timestamps. This is a subtle but critical distinction:
+The Google Calendar API requires **RFC3339 timestamps with explicit timezone offset** for `timeMin`/`timeMax` parameters ... not bare ISO 8601 timestamps. This is a subtle but critical distinction:
 
 | Format | Example | Works? |
 |--------|---------|--------|
 | RFC3339 with offset | `2026-02-28T00:00:00-08:00` | Yes |
 | RFC3339 with Z (UTC) | `2026-02-28T00:00:00Z` | Yes |
-| Bare ISO 8601 | `2026-02-28T00:00:00` | **No — 400 Bad Request** |
+| Bare ISO 8601 | `2026-02-28T00:00:00` | **No ... 400 Bad Request** |
 
 When building Supabase Edge Functions (TypeScript/Deno) that call Google Calendar API, always include the timezone offset. For Pacific time, calculate the offset dynamically to handle DST:
 
@@ -2124,7 +2124,7 @@ The backoffice supports two-way synchronization between Obsidian markdown files 
 
 ### Use Case
 
-Share documents with non-technical collaborators (advisors, board members, partners) via Google Docs while maintaining source-of-truth in Obsidian. Format conversion ensures readers see native Google Docs formatting—not raw Markdown or YAML frontmatter.
+Share documents with non-technical collaborators (advisors, board members, partners) via Google Docs while maintaining source-of-truth in Obsidian. Format conversion ensures readers see native Google Docs formatting ... not raw Markdown or YAML frontmatter.
 
 ### Architecture
 
@@ -2137,7 +2137,7 @@ Share documents with non-technical collaborators (advisors, board members, partn
 ```
 
 **Key Design Decisions:**
-- **Bidirectional sync** via `revisionId` tracking (v1.1.0) — auto-detects remote edits and pulls them
+- **Bidirectional sync** via `revisionId` tracking (v1.1.0) ... auto-detects remote edits and pulls them
 - Google Docs wins conflicts (Obsidian backed up before overwriting)
 - YAML frontmatter stripped from Google Docs (readers never see it)
 - Obsidian syntax converted to readable format (wiki-links → plain text)
@@ -2335,7 +2335,7 @@ The pipeline auto-detects whether a video has visual value worth capturing as fr
 | `low` | Some visual value (code on screen, slides) | Key moment frames only |
 | `none` | Static setup (talking head, interview, panel) | YouTube thumbnails only |
 
-**Requirements:** `yt-dlp` + `ffmpeg` (installed in `.venv`). Cloudflare WARP Docker container (`warp-socks` on port 1080) masks Azure IP as residential — auto-detected by `extract_video_frames.py`. Falls back to YouTube auto-generated thumbnails if download fails.
+**Requirements:** `yt-dlp` + `ffmpeg` (installed in `.venv`). Cloudflare WARP Docker container (`warp-socks` on port 1080) masks Azure IP as residential ... auto-detected by `extract_video_frames.py`. Falls back to YouTube auto-generated thumbnails if download fails.
 
 **CLI overrides:** `--frames` forces extraction, `--no-frames` forces skip. No flag = auto-decide.
 
@@ -2360,11 +2360,11 @@ The pipeline auto-detects whether a video has visual value worth capturing as fr
 
 **Fixed in Session 218 (April 12, 2026):** `tig_video_pipeline_orchestrator.py` v1.5.0 → v1.6.0.
 
-**Root cause:** `run_content_router()` was called at step 2.6 (before the `hq_video_articles` row was created at step 5). The Supabase PATCH silently matched zero rows because the article record did not yet exist. Result: `content_atoms` and `program_routing` fields were never populated in HQ Content Review — all 153 existing articles were missing this data.
+**Root cause:** `run_content_router()` was called at step 2.6 (before the `hq_video_articles` row was created at step 5). The Supabase PATCH silently matched zero rows because the article record did not yet exist. Result: `content_atoms` and `program_routing` fields were never populated in HQ Content Review ... all 153 existing articles were missing this data.
 
 **Fix:** Moved `run_content_router()` to step 5.5 (immediately after HQ record insert). All future videos now correctly populate routing data at the right pipeline stage.
 
-**Backfill:** Full backfill of all 153 existing `hq_video_articles` rows completed — zero failures. `content_atoms` and `program_routing` now present on all articles in HQ Content Review.
+**Backfill:** Full backfill of all 153 existing `hq_video_articles` rows completed ... zero failures. `content_atoms` and `program_routing` now present on all articles in HQ Content Review.
 
 ### Unified Content Distribution System (v1.0.0)
 
@@ -2380,7 +2380,7 @@ After approval, content flows through 4 automated phases:
 
 **Big Why Rule:** Every cross-program share must explain why THIS content matters to THAT audience. Never generic "our founder posted this."
 
-**Complete Architecture Reference:** `004 Knowledge/Articles & Research/content_intelligence_system_architecture.md` — a comprehensive 1,500-line public-facing document covering the full pipeline (all 10 stages), the feeder network (6 automated monitors), tool wisdom libraries, gotchas/learnings, implementation recipes, and cost analysis. Includes Excalidraw visual flow diagram. Created Session 192 for the QWU Public Transparency Project.
+**Complete Architecture Reference:** `004 Knowledge/Articles & Research/content_intelligence_system_architecture.md` ... a comprehensive 1,500-line public-facing document covering the full pipeline (all 10 stages), the feeder network (6 automated monitors), tool wisdom libraries, gotchas/learnings, implementation recipes, and cost analysis. Includes Excalidraw visual flow diagram. Created Session 192 for the QWU Public Transparency Project.
 
 ### Content Lifecycle
 
@@ -2392,17 +2392,17 @@ After approval, content flows through 4 automated phases:
 000 Inbox/___Approved/{uid}/    → Approved (moved by sync_from_hq)
 ```
 
-### Article Connection Engine (v1.0.0) — Interconnected Article Universe
+### Article Connection Engine (v1.0.0) ... Interconnected Article Universe
 
 The connection engine builds a semantic knowledge graph across all chaplaintig.com articles, enabling interactive concept maps and cross-article discovery. Every article becomes a node in a living constellation that readers can explore visually.
 
 **Script:** `005 Operations/Execution/tig_connection_engine.py` v1.0.0
 
 Four capabilities in one script:
-1. **Semantic tag extraction** — Claude analyzes each article and extracts 5-8 abstract concept tags (e.g., "resilience", "identity", "trust-building"). These are *concepts*, not topics — enabling cross-domain connections (a photography article and a relationships article can both touch "presence").
-2. **Article edge computation** — Computes pairwise similarity scores between all articles using shared semantic tags. Weighted by tag specificity (rare shared tags score higher than common ones). Produces directed edges stored in `article_edges` table.
-3. **Constellation graph generation** — Per-article subgraph of the 5-7 most-connected neighbors, pre-rendered as a baked inline SVG with zero runtime cost. No D3.js or CDN dependency on article pages — the constellation is a static image that only looks dynamic.
-4. **Quote threading ("Echoes")** — Pulls thematically related quotes from other articles based on semantic overlap. Displayed in the article's Section 5 as a "Voices from the Vault" thread.
+1. **Semantic tag extraction** ... Claude analyzes each article and extracts 5-8 abstract concept tags (e.g., "resilience", "identity", "trust-building"). These are *concepts*, not topics ... enabling cross-domain connections (a photography article and a relationships article can both touch "presence").
+2. **Article edge computation** ... Computes pairwise similarity scores between all articles using shared semantic tags. Weighted by tag specificity (rare shared tags score higher than common ones). Produces directed edges stored in `article_edges` table.
+3. **Constellation graph generation** ... Per-article subgraph of the 5-7 most-connected neighbors, pre-rendered as a baked inline SVG with zero runtime cost. No D3.js or CDN dependency on article pages ... the constellation is a static image that only looks dynamic.
+4. **Quote threading ("Echoes")** ... Pulls thematically related quotes from other articles based on semantic overlap. Displayed in the article's Section 5 as a "Voices from the Vault" thread.
 
 **Database:** `005 Operations/Data/tig_graph.db`
 
@@ -2413,7 +2413,7 @@ Four capabilities in one script:
 | `article_edges` | Source post ID, target post ID, similarity weight, shared tag list |
 | `concepts` | Concept definitions and cross-domain linkage metadata |
 
-**Semantic tags are abstract concepts, not topics.** This is the key design decision. A topic tag ("photography") only connects photography articles. A concept tag ("presence") connects photography, relationships, parenting, and mindfulness articles — creating the cross-domain discovery that makes the constellation feel surprising and alive.
+**Semantic tags are abstract concepts, not topics.** This is the key design decision. A topic tag ("photography") only connects photography articles. A concept tag ("presence") connects photography, relationships, parenting, and mindfulness articles ... creating the cross-domain discovery that makes the constellation feel surprising and alive.
 
 **Integration with Article Builder (v1.2.0):**
 
@@ -2422,9 +2422,9 @@ Four capabilities in one script:
 | Section | Content | Implementation |
 |---------|---------|----------------|
 | Section 2 (2-column) | Left col: Key Takeaways / Right col: Constellation preview | Pre-baked inline SVG, no runtime cost |
-| Section 5 | "Echoes" — thematically related quotes from other articles | Quote thread pulled from `article_edges` + quote store |
+| Section 5 | "Echoes" ... thematically related quotes from other articles | Quote thread pulled from `article_edges` + quote store |
 
-**2-column Section 2 layout:** Left column shows 3-5 key takeaways as a scannable list. Right column shows the article's constellation — a small star map of connected articles with the current article as the center node. Clickable nodes link to the connected article's search page (not direct URL — routes through `/search/?semantic=tag` to show the discovery path).
+**2-column Section 2 layout:** Left column shows 3-5 key takeaways as a scannable list. Right column shows the article's constellation ... a small star map of connected articles with the current article as the center node. Clickable nodes link to the connected article's search page (not direct URL ... routes through `/search/?semantic=tag` to show the discovery path).
 
 **Constellation rendering (pre-baked SVG, zero runtime cost):** The constellation is computed once when the article is built and embedded as inline SVG in the Divi `et_pb_code` module. No D3.js loaded on the article page. This approach:
 - Zero CDN dependency (no D3 script tag on article pages)
@@ -2432,7 +2432,7 @@ Four capabilities in one script:
 - Renders identically across all devices
 - No `<br>` injection risk from WordPress `wpautop`
 
-**Search discovery via clickable nodes:** Clicking a constellation node does NOT go directly to the connected article. It goes to `/search/?semantic=tag_name`, which shows *all* articles sharing that concept tag — revealing the full cluster, not just a single connection, and rewarding exploration.
+**Search discovery via clickable nodes:** Clicking a constellation node does NOT go directly to the connected article. It goes to `/search/?semantic=tag_name`, which shows *all* articles sharing that concept tag ... revealing the full cluster, not just a single connection, and rewarding exploration.
 
 **WordPress content update pattern for Divi (critical):**
 
@@ -2450,7 +2450,7 @@ ssh bitnami@<WP_SERVER_IP> "chmod 644 /tmp/content.html && \
 # This pattern works for simple PHP updates but fails on Divi shortcode-heavy content
 ```
 
-**Why string escaping breaks:** Divi content contains hundreds of escaped quotes in shortcode attributes, inline SVG path data, and JS template literals. Escaping these for PHP string injection produces cascading corruption. The SCP pattern treats content as a raw file — no escaping needed. Discovered Session 163 (260328).
+**Why string escaping breaks:** Divi content contains hundreds of escaped quotes in shortcode attributes, inline SVG path data, and JS template literals. Escaping these for PHP string injection produces cascading corruption. The SCP pattern treats content as a raw file ... no escaping needed. Discovered Session 163 (260328).
 
 **Running the connection engine:**
 
@@ -2467,20 +2467,20 @@ ssh bitnami@<WP_SERVER_IP> "chmod 644 /tmp/content.html && \
 
 **New article builder features (v1.2.0 vs v1.1.0):**
 - 2-column Section 2 (Key Takeaways left + Constellation preview right)
-- Section 5 "Echoes" — thematically related quotes from other articles
+- Section 5 "Echoes" ... thematically related quotes from other articles
 - Semantic tags passed to `process_video_content.py` LLM prompt (v2.5.0) for consistent extraction
-- Watch/Read toggle (video embed vs. article text) — carried from v1.1.0
-- Timestamped chapter navigation — carried from v1.1.0
-- TIG Izm pull-quotes — carried from v1.1.0
-- SEO VideoObject JSON-LD — carried from v1.1.0
+- Watch/Read toggle (video embed vs. article text) ... carried from v1.1.0
+- Timestamped chapter navigation ... carried from v1.1.0
+- TIG Izm pull-quotes ... carried from v1.1.0
+- SEO VideoObject JSON-LD ... carried from v1.1.0
 
 ### Social Video Clip Generation (Remotion)
 
 Automated pipeline generating branded social media video clips from chaplaintig.com articles at scale. Each clip is a 30-60 second kinetic typography animation designed as a teaser linking back to the full article. Target: 791+ articles ready for batch rendering.
 
-**Project Location:** `/home/<VM_USER>/chaplaintig-video-clips/` (outside the vault — Node.js project)
+**Project Location:** `/home/<VM_USER>/chaplaintig-video-clips/` (outside the vault ... Node.js project)
 
-**Directive:** `005 Operations/Directives/chaplaintig_video_generation.md` — comprehensive brand generation guide with pacing rules, scene types, color/font tokens, wonder effects, and parameterized input schema.
+**Directive:** `005 Operations/Directives/chaplaintig_video_generation.md` ... comprehensive brand generation guide with pacing rules, scene types, color/font tokens, wonder effects, and parameterized input schema.
 
 **How it works:**
 ```
@@ -2490,24 +2490,24 @@ Article content files → generate_creative_brief.py (FLAGSHIP + thinking, ~$0.0
 ```
 
 **Component Library (`src/`):**
-- **Scenes:** `HookScene`, `QuoteScene`, `TurnScene`, `LandingScene`, `CloseScene` — each accepts props, auto-calculates internal timing
+- **Scenes:** `HookScene`, `QuoteScene`, `TurnScene`, `LandingScene`, `CloseScene` ... each accepts props, auto-calculates internal timing
 - **Shared:** `RevealText`, `AccentLine`, `BreathingBackground`, `Particles`, `SceneLayout`
-- **Wonder effects:** `EllipsisHeartbeat` (auto-detects "..." — TIG's signature punctuation), `ConstellationPulse` (thesis reveal)
-- **Schema:** `ArticleClipSchema` (Zod) — interface contract between Python orchestrator and React components
+- **Wonder effects:** `EllipsisHeartbeat` (auto-detects "..." ... TIG's signature punctuation), `ConstellationPulse` (thesis reveal)
+- **Schema:** `ArticleClipSchema` (Zod) ... interface contract between Python orchestrator and React components
 - **Compositions:** `ArticleClip-Reels` (1080x1920), `ArticleClip-Square` (1080x1080), `ArticleClip-Landscape` (1920x1080), `ArticleClip-Thumbnail` (PNG)
 - **Semantic Color Shift:** `accentColor` prop flows through all components. WHELHO realm routing: Work Hard = `#d4782c`, Enjoy Life = `#33e8d8`, Help Others = `#9b3d8f`
 
 **Brand Rules (locked in):**
 - **Pacing:** 10-13 seconds per scene (1-3 lines), 15-17 seconds (4+ lines), 2-3 second gaps between text reveals
 - **Colors:** Dark bg `#0a0a1a`, Aurora Teal accent `#33e8d8`, Stardust text `#e8e4f0`
-- **Fonts:** PT Serif (quotes, headlines), PT Sans (labels, CTAs) — loaded via `@remotion/google-fonts`
+- **Fonts:** PT Serif (quotes, headlines), PT Sans (labels, CTAs) ... loaded via `@remotion/google-fonts`
 - **Animation:** Spring physics for all text reveals; `random('seed')` for deterministic randomness
-- **Mood:** "Late night conversation about things that matter" — contemplative, cinematic, not flashy
+- **Mood:** "Late night conversation about things that matter" ... contemplative, cinematic, not flashy
 
 **Python Orchestration (`005 Operations/Execution/`):**
-- `generate_creative_brief.py` — AI-powered quote selection, scene assembly, WHELHO color routing
-- `render_social_clip.py` — Brief caching, Remotion render, quality gate (ffprobe), thumbnail
-- `batch_render_clips.py` — Resume-safe batch processing with progress tracking
+- `generate_creative_brief.py` ... AI-powered quote selection, scene assembly, WHELHO color routing
+- `render_social_clip.py` ... Brief caching, Remotion render, quality gate (ffprobe), thumbnail
+- `batch_render_clips.py` ... Resume-safe batch processing with progress tracking
 
 **Rendering:**
 ```bash
@@ -2526,7 +2526,7 @@ Render time: ~90 seconds for a 60-second clip on claude-dev VM (2 concurrent thr
 
 ### HeyGen AI Avatar Videos (SHELVED)
 
-**Status:** Evaluated 2026-04-13. Quality not brand-ready — shelved until rendering improves.
+**Status:** Evaluated 2026-04-13. Quality not brand-ready ... shelved until rendering improves.
 
 **What it is:** AI avatar video generation via API. A text prompt produces a complete video with avatar presenter, motion graphics, voiceover, and captions. 1,282 stock avatars available.
 
@@ -2535,12 +2535,12 @@ Render time: ~90 seconds for a 60-second clip on claude-dev VM (2 concurrent thr
 **Integration:**
 - API key: `HEYGEN_API_KEY` in `.env` (agent type, named `qwu-backoffice-agent`)
 - 11 Claude Code skills installed at `~/.claude/skills/` (create-video, avatar-video, ai-video-gen, text-to-speech, video-translate, video-edit, video-download, video-understand, faceswap, visual-style, heygen)
-- MCP server configured in `.mcp.json` (OAuth — requires browser, untested from VM)
+- MCP server configured in `.mcp.json` (OAuth ... requires browser, untested from VM)
 - TWL: `005 Operations/Directives/heygen_tool_wisdom.md`
 
 **Key findings from evaluation:**
 - Over-specifying avatar descriptions causes infinite retry loops (wasted 65 credits)
-- Let Video Agent pick avatars — simplified prompts work, detailed ones don't
+- Let Video Agent pick avatars ... simplified prompts work, detailed ones don't
 - API credits are separate from web plan credits (not obvious)
 - Actual cost: ~1 credit/second (not ~2 credits/min as docs claim)
 - Total generation time: ~11 minutes for a 64-second video
@@ -2600,7 +2600,7 @@ When the primary Gemini transcription path fails (frame limit exceeded on long v
 ### Related Files
 
 - **Directive:** `005 Operations/Directives/process_video_content.md`
-- **Scripts:** `005 Operations/Execution/process_video_content.py` (v2.7.0), `extract_video_frames.py` (v1.2.0), `process_content_review.py`, `tig_connection_engine.py` (v1.0.0), `tig_article_builder.py` (v1.2.0), `youtube_video_utils.py` (v1.1.0 — landscape gate helper), `youtube_monitor.py` (v1.3.0)
+- **Scripts:** `005 Operations/Execution/process_video_content.py` (v2.7.0), `extract_video_frames.py` (v1.2.0), `process_content_review.py`, `tig_connection_engine.py` (v1.0.0), `tig_article_builder.py` (v1.2.0), `youtube_video_utils.py` (v1.1.0 ... landscape gate helper), `youtube_monitor.py` (v1.3.0)
 - **Database:** `005 Operations/Data/tig_graph.db` (semantic_tags, article_edges, concepts tables)
 - **Workflow:** `005 Operations/Workflows/content-review-workflow.json`
 
@@ -2644,7 +2644,7 @@ Cron (2 AM Pacific, 15 videos) OR Cron (8 AM/2 PM/8 PM Pacific, 5 videos)
 1. **Phase 1 (Gemini watching video):** Identifies 5-8 key visual moments with descriptions
 2. **Phase 2 (Gemini Vision per frame):** Verifies each frame, receiving Phase 1's context to prevent false rejections
 
-**Article Template Sections (v1.3.0):** (1) Video Hero with Watch/Read toggle, (2) 2-column: Key Takeaways + Constellation preview with backlinks bar (pre-baked SVG), (3) Article body with sticky chapter nav + inline frames + clickable wiki links + "Read Next ↓" anchor in Chapters sidebar, (4) Read Next — top 3 related articles with one-liners and shared tags, (5) "Echoes" — authority-ranked wisdom from same expert, shared themes, AND full wisdom.db library (actionable wisdom gets gold #E8B833 border + lightning bolt; authority badges for vendor_official/expert_validated). Dark theme (#0a0a1a), PT Sans/PT Serif, #33e8d8 accent.
+**Article Template Sections (v1.3.0):** (1) Video Hero with Watch/Read toggle, (2) 2-column: Key Takeaways + Constellation preview with backlinks bar (pre-baked SVG), (3) Article body with sticky chapter nav + inline frames + clickable wiki links + "Read Next ↓" anchor in Chapters sidebar, (4) Read Next ... top 3 related articles with one-liners and shared tags, (5) "Echoes" ... authority-ranked wisdom from same expert, shared themes, AND full wisdom.db library (actionable wisdom gets gold #E8B833 border + lightning bolt; authority badges for vendor_official/expert_validated). Dark theme (#0a0a1a), PT Sans/PT Serif, #33e8d8 accent.
 
 **Attribution:** "Original video by [Channel Name](channel URL) -- Watch on YouTube" with both linked.
 
@@ -2655,9 +2655,9 @@ Cron (2 AM Pacific, 15 videos) OR Cron (8 AM/2 PM/8 PM Pacific, 5 videos)
 - Knowledge graph: `005 Operations/Data/tig_graph.db` (article_nodes, semantic_tags, article_edges, concepts, social_posts)
 - Wisdom engine plan: `005 Operations/Directives/chaplaintig_wisdom_engine.md`
 
-**Test Results:** Photography (post 29578), WHELHO Relationships: WIRED body language (29579), NatGeo ping pong (29580), ABC4 dad/son (29581). Session 162: 4 articles published live via HQ Action Queue (first end-to-end pipeline test). Session 163: Interconnection layer deployed — constellation + Echoes on every article. Session 164: FAA Part 107 (29586), Gaussian Splatting (29587), Houdini (29588) — all backdated to original YouTube publish dates.
+**Test Results:** Photography (post 29578), WHELHO Relationships: WIRED body language (29579), NatGeo ping pong (29580), ABC4 dad/son (29581). Session 162: 4 articles published live via HQ Action Queue (first end-to-end pipeline test). Session 163: Interconnection layer deployed ... constellation + Echoes on every article. Session 164: FAA Part 107 (29586), Gaussian Splatting (29587), Houdini (29588) ... all backdated to original YouTube publish dates.
 
-**Playlist Mapping Status (Session 164):** ALL 112 playlists mapped — zero unmapped. 10 explore clusters total (`explore-spatial-craft` added as 10th, WP category ID 109). All Creative Production playlists now tagged with `realm-mind`.
+**Playlist Mapping Status (Session 164):** ALL 112 playlists mapped ... zero unmapped. 10 explore clusters total (`explore-spatial-craft` added as 10th, WP category ID 109). All Creative Production playlists now tagged with `realm-mind`.
 
 **Full Constellation Map (Session 165):** Live at chaplaintig.com/map/ (WP post 29573). D3.js force-directed graph with 85 nodes (33 articles, 27 semantic tags, 4 experts, 10 realms, 11 clusters), 128 edges. Filter controls for realm/cluster/type. Drag, hover tooltips, click-to-navigate. Star field + glow effects. Auto-regenerated by orchestrator v1.3.0 after each pipeline run.
 
@@ -2665,11 +2665,11 @@ Cron (2 AM Pacific, 15 videos) OR Cron (8 AM/2 PM/8 PM Pacific, 5 videos)
 
 **Content-Driven Categorization (Session 167):** WordPress categories are now assigned by actual video content, not playlist membership. The orchestrator (v1.2.0) runs a scoring algorithm at step 1.5 (after content processing, before article building) that scores `topics`, `key_concepts` (from intel.md), `semantic_tags`, `summary_text`, `title`, `channel`, `visual_richness`, and `suggested_use` against signal definitions in `003 Entities/Taxonomies/chaplaintig_content_category_signals.yaml`. Playlist mapping is a +1 bonus and fallback only. Discovered 103+ miscategorized videos across 14 playlists (worst: Unreal Engine 37, DaVinci Resolve 25). All 35 existing WordPress articles recategorized. Validated against 5 known mismatches (100% correct).
 
-**Batch Processing Server Protection (Session 167):** `run_tier1_batch.py` v1.1.0 adds three safeguards after a MariaDB OOM-kill from 37 back-to-back pipeline runs: (1) 30-second inter-video delay (configurable `--delay`), (2) default `--max 10` batch cap, (3) pre-video memory check via SSH to WPMU — if available RAM < 2GB, waits 60s and retries 3 times before skipping. 4GB swap file also added to WPMU server (Session 166).
+**Batch Processing Server Protection (Session 167):** `run_tier1_batch.py` v1.1.0 adds three safeguards after a MariaDB OOM-kill from 37 back-to-back pipeline runs: (1) 30-second inter-video delay (configurable `--delay`), (2) default `--max 10` batch cap, (3) pre-video memory check via SSH to WPMU ... if available RAM < 2GB, waits 60s and retries 3 times before skipping. 4GB swap file also added to WPMU server (Session 166).
 
-**Read Next Backfill & wpautop Fix (Session 172):** `wp_post_id` was NULL for all 112 rows in tig_graph.db — the column existed but was never populated because `tig_publish_article.py` didn't write it back after publishing. Matched 41 published WP posts to graph articles via `_tig_pipeline_uid` post meta. Backfilled wp_post_id in both tig_graph.db and 41 wp_article.json files. Fixed `tig_publish_article.py` (v1.0.1 → v1.1.0) to auto-write-back wp_post_id on publish. Fixed `build_read_next_section()` to skip unpublished articles (url=None). Discovered WordPress `wpautop` breaks `<div>` inside `<a>` tags — creates empty card bars. Fix: use `<span style="display:block">` instead of `<div>` for elements inside anchor tags. Rebuilt Read Next on 37 live articles (4 skipped — no published neighbors). See `memory/feedback_wpautop_gotcha.md`.
+**Read Next Backfill & wpautop Fix (Session 172):** `wp_post_id` was NULL for all 112 rows in tig_graph.db ... the column existed but was never populated because `tig_publish_article.py` didn't write it back after publishing. Matched 41 published WP posts to graph articles via `_tig_pipeline_uid` post meta. Backfilled wp_post_id in both tig_graph.db and 41 wp_article.json files. Fixed `tig_publish_article.py` (v1.0.1 → v1.1.0) to auto-write-back wp_post_id on publish. Fixed `build_read_next_section()` to skip unpublished articles (url=None). Discovered WordPress `wpautop` breaks `<div>` inside `<a>` tags ... creates empty card bars. Fix: use `<span style="display:block">` instead of `<div>` for elements inside anchor tags. Rebuilt Read Next on 37 live articles (4 skipped ... no published neighbors). See `memory/feedback_wpautop_gotcha.md`.
 
-**Smart Linking & Cross-Referencing (Session 168):** Five interconnection enhancements deployed across all 62 articles via `tig_backfill_enhancements.py` v1.0.0: (1) **Clickable wiki links** — `[[Concept]]` resolves to article URL (`/?p=ID`) from tig_graph.db or falls back to WordPress search (`/?s=...`); teal for matched, dim for search. (2) **WordPress tags** — semantic tags from tig_graph.db auto-created as WP post_tag taxonomy via `wp_set_post_terms` in PHP eval-file; 423 tags set across 62 articles. (3) **Backlink awareness** — "Referenced by X articles" bar below constellation, queries bidirectional `article_edges` table. (4) **wisdom.db-powered Echoes** — third source in `build_quote_threads()` queries `wisdom_query.py` by article topics, deduplicates, authority-ranks (vendor_official > expert_validated > community); actionable wisdom gets gold border (#E8B833) + lightning bolt prefix. (5) **Read Next** — top 3 related articles as clickable cards with one-liners and shared tags, positioned as standalone Divi section between article body and Echoes; Chapters sidebar includes "Read Next ↓" anchor link. Backfill script fetches `wp_post_id` from HQ Supabase (not local JSON). Key gotcha: semantic tags live in `tig_graph.db`, NOT `_metadata.json`.
+**Smart Linking & Cross-Referencing (Session 168):** Five interconnection enhancements deployed across all 62 articles via `tig_backfill_enhancements.py` v1.0.0: (1) **Clickable wiki links** ... `[[Concept]]` resolves to article URL (`/?p=ID`) from tig_graph.db or falls back to WordPress search (`/?s=...`); teal for matched, dim for search. (2) **WordPress tags** ... semantic tags from tig_graph.db auto-created as WP post_tag taxonomy via `wp_set_post_terms` in PHP eval-file; 423 tags set across 62 articles. (3) **Backlink awareness** ... "Referenced by X articles" bar below constellation, queries bidirectional `article_edges` table. (4) **wisdom.db-powered Echoes** ... third source in `build_quote_threads()` queries `wisdom_query.py` by article topics, deduplicates, authority-ranks (vendor_official > expert_validated > community); actionable wisdom gets gold border (#E8B833) + lightning bolt prefix. (5) **Read Next** ... top 3 related articles as clickable cards with one-liners and shared tags, positioned as standalone Divi section between article body and Echoes; Chapters sidebar includes "Read Next ↓" anchor link. Backfill script fetches `wp_post_id` from HQ Supabase (not local JSON). Key gotcha: semantic tags live in `tig_graph.db`, NOT `_metadata.json`.
 
 ---
 
@@ -2685,24 +2685,24 @@ Cron (2 AM Pacific, 15 videos) OR Cron (8 AM/2 PM/8 PM Pacific, 5 videos)
 
 ### Homepage Sections (13 total)
 All components in `src/lib/components/home/`:
-1. HeroQuote — tagline + Firefly quote + CTAs
-2. NdeCinematic — "I died." cinematic with animated heartbeat SVG
-3. CbsInterview — original 2014 CBS Radio *Eye on the Community* interview audio player + link to `/heritage/cbs-2014/` transcript
-4. IdentityCards — 4 identity cards + weaknesses block
-5. RealmsPreview — WHELHO 10-realm color grid
-6. TestimonialsWall — masonry layout, all testimonials visible
-7. SpeakingSection — 5 speaking topic cards + CTA
-8. BigDream — dream statement, napkin sketch, 2035 goal
-9. JourneyTimeline — 8 milestones (1978-2035), realm-colored
-10. BuiltFromBroken — series callout, 4 volume cards
-11. LatestPosts — server-loaded from Supabase (4 cards)
-12. PhotoGallery — 5 clusters with filter tabs
-13. ConnectSection — 9 social links + phone + email
+1. HeroQuote ... tagline + Firefly quote + CTAs
+2. NdeCinematic ... "I died." cinematic with animated heartbeat SVG
+3. CbsInterview ... original 2014 CBS Radio *Eye on the Community* interview audio player + link to `/heritage/cbs-2014/` transcript
+4. IdentityCards ... 4 identity cards + weaknesses block
+5. RealmsPreview ... WHELHO 10-realm color grid
+6. TestimonialsWall ... masonry layout, all testimonials visible
+7. SpeakingSection ... 5 speaking topic cards + CTA
+8. BigDream ... dream statement, napkin sketch, 2035 goal
+9. JourneyTimeline ... 8 milestones (1978-2035), realm-colored
+10. BuiltFromBroken ... series callout, 4 volume cards
+11. LatestPosts ... server-loaded from Supabase (4 cards)
+12. PhotoGallery ... 5 clusters with filter tabs
+13. ConnectSection ... 9 social links + phone + email
 
 ### Key Utilities
-- `src/lib/utils/scroll-reveal.ts` — IntersectionObserver-based scroll animations (Svelte `use:action`). **Includes tall-element threshold cap** (April 2026) — for elements taller than half the viewport, effective threshold falls back to ~200px visible so reveal triggers reliably regardless of section height. Gotcha captured in `sveltekit_tool_wisdom.md`.
-- `src/routes/(public)/+page.server.ts` — Server-side Supabase data loader for latest posts
-- `src/routes/(public)/heritage/cbs-2014/+page.svelte` — Canonical primary-source page for the 2014 CBS interview. Audio player + full transcript with pull-quotes. Source MP3 lives in `static/audio/cbs-eye-on-the-community-2014.mp3` (re-encoded to mono 64kbps → 11.8MB, under CF Pages' 25MB per-file limit).
+- `src/lib/utils/scroll-reveal.ts` ... IntersectionObserver-based scroll animations (Svelte `use:action`). **Includes tall-element threshold cap** (April 2026) ... for elements taller than half the viewport, effective threshold falls back to ~200px visible so reveal triggers reliably regardless of section height. Gotcha captured in `sveltekit_tool_wisdom.md`.
+- `src/routes/(public)/+page.server.ts` ... Server-side Supabase data loader for latest posts
+- `src/routes/(public)/heritage/cbs-2014/+page.svelte` ... Canonical primary-source page for the 2014 CBS interview. Audio player + full transcript with pull-quotes. Source MP3 lives in `static/audio/cbs-eye-on-the-community-2014.mp3` (re-encoded to mono 64kbps → 11.8MB, under CF Pages' 25MB per-file limit).
 
 ### Deploy Process
 Push to `main` → GitHub → CF Pages auto-deploys (~60s)
@@ -2747,14 +2747,14 @@ Each voice profile folder contains:
 | Profile | Path | Vault Version | QWR Supabase Version | Use Case |
 |---------|------|---------------|---------------------|----------|
 | Chaplain TIG | `003 Entities/Voice Profiles/Chaplain TIG/` | v2.2 (260411) | v3 (260326) | Personal content, QWU, Missing Pixel |
-| Ezer Aión | `003 Entities/Voice Profiles/Ezer Aión/` | — | — | QWU Backoffice assistant, automated outreach, verification |
-| [Supporter Organization] | `003 Entities/Voice Profiles/[Supporter Organization]/` | — | — | Client: roofing/construction company |
+| Ezer Aión | `003 Entities/Voice Profiles/Ezer Aión/` | ... | ... | QWU Backoffice assistant, automated outreach, verification |
+| [Supporter Organization] | `003 Entities/Voice Profiles/[Supporter Organization]/` | ... | ... | Client: roofing/construction company |
 
 ### QWR Supabase Voice Profiles
 
 The Chaplain TIG voice profile is stored in QWR's Supabase `brands.voice_profile` JSON column (brand ID in Supabase). Version history is tracked in the `voice_profile_versions` table. Updates can be made via:
 1. **Direct Supabase PATCH** (preferred for precise, deterministic changes)
-2. **Voice Coach webhook** (`n8n.quietlyworking.org/webhook/voice-coach`) — AI-mediated merge, less predictable
+2. **Voice Coach webhook** (`n8n.quietlyworking.org/webhook/voice-coach`) ... AI-mediated merge, less predictable
 
 **v3 additions (260326):** Gratitude email arc, evidence-based writing principles ("Show the receipts", "Honest over dramatic"), sentence structure patterns (single-sentence emphasis, stretched words, onomatopoeia), full 17-emoji palette, 23 preferred phrases, 7 anti-patterns. Derived from TIG's actual Nick Saraev thank-you letter.
 
@@ -2876,12 +2876,12 @@ Monitor thought leaders and subject matter experts across **four platforms** (Yo
 
 | Expert | Fields | Priority | Added |
 |--------|--------|----------|-------|
-| Wes Bos | frontend dev, web dev, CSS, JavaScript | — | 2026-04-12 |
+| Wes Bos | frontend dev, web dev, CSS, JavaScript | ... | 2026-04-12 |
 | GaryVee | social media marketing, content strategy, entrepreneurship, brand-building, AI adoption | A | 2026-04-16 |
 
-**Wes Bos** (`003 Entities/Experts/Wes Bos.md`) — Frontend web developer, educator, and co-host of the Syntax podcast. Known for practical CSS/JS courses and tool tutorials. First captured via his "Pretext is a bigger deal than you think" video (UID: 20260412-200733), which triggered the Pretext TWL creation.
+**Wes Bos** (`003 Entities/Experts/Wes Bos.md`) ... Frontend web developer, educator, and co-host of the Syntax podcast. Known for practical CSS/JS courses and tool tutorials. First captured via his "Pretext is a bigger deal than you think" video (UID: 20260412-200733), which triggered the Pretext TWL creation.
 
-**GaryVee** (`003 Entities/Experts/GaryVee.md`) — Gary Vaynerchuk, Chairman of VaynerX and CEO of VaynerMedia. Social media marketing evangelist, content strategy authority, and early-platform adopter (YouTube 2006, Twitter 2007, AI 2023+). Bulk-onboarded with 20 most recent landscape (non-Shorts) videos through the content pipeline, generating ~343 wisdom entries (Stop Wasting Money on Ads — 22 entries; The Internet Changed... — 22; 1 man VS 100 Billion AI Creators — 21). Total wisdom DB footprint: 409 entries across 53 unique sources. Captures span content strategy, AI adoption urgency, brand-as-moat philosophy, social media future, and team/leadership frameworks — directly applicable to QWR product development and QWF program communications.
+**GaryVee** (`003 Entities/Experts/GaryVee.md`) ... Gary Vaynerchuk, Chairman of VaynerX and CEO of VaynerMedia. Social media marketing evangelist, content strategy authority, and early-platform adopter (YouTube 2006, Twitter 2007, AI 2023+). Bulk-onboarded with 20 most recent landscape (non-Shorts) videos through the content pipeline, generating ~343 wisdom entries (Stop Wasting Money on Ads ... 22 entries; The Internet Changed... ... 22; 1 man VS 100 Billion AI Creators ... 21). Total wisdom DB footprint: 409 entries across 53 unique sources. Captures span content strategy, AI adoption urgency, brand-as-moat philosophy, social media future, and team/leadership frameworks ... directly applicable to QWR product development and QWF program communications.
 
 ### Expert Profiles
 
@@ -2921,7 +2921,7 @@ platforms:
 
 ### Source 1: YouTube Monitoring
 
-Monitor expert YouTube channels for new full landscape 16:9 videos, then process through the content pipeline. **Shorts AND vertical clips (including 1–3 minute "long-Shorts") are automatically filtered out** — creators use these to promote pull-quotes from full content, so capturing them creates noise and duplicates in the Wisdom Library. Detection method: HEAD probe against `youtube.com/shorts/<id>` — YouTube redirects landscape videos to `/watch` (3xx) and keeps Shorts/vertical clips at `/shorts/` (200). No API quota used, ~100ms per probe, catches classic Shorts AND long-Shorts regardless of duration (v1.3.0). Direct `process_video_content.py` invocations are also gated (step 1b); `--force` overrides.
+Monitor expert YouTube channels for new full landscape 16:9 videos, then process through the content pipeline. **Shorts AND vertical clips (including 1-3 minute "long-Shorts") are automatically filtered out** ... creators use these to promote pull-quotes from full content, so capturing them creates noise and duplicates in the Wisdom Library. Detection method: HEAD probe against `youtube.com/shorts/<id>` ... YouTube redirects landscape videos to `/watch` (3xx) and keeps Shorts/vertical clips at `/shorts/` (200). No API quota used, ~100ms per probe, catches classic Shorts AND long-Shorts regardless of duration (v1.3.0). Direct `process_video_content.py` invocations are also gated (step 1b); `--force` overrides.
 
 ```bash
 # Check all channels for new videos
@@ -3011,7 +3011,7 @@ Monitor LinkedIn profiles of watched experts for new posts. LinkedIn has become 
 .venv/bin/python "005 Operations/Execution/linkedin_monitor.py" --check --process
 ```
 
-**n8n Workflow:** LinkedIn Intelligence Monitor (mX6DOn0TrNwZO5dY) — every 3 days at 1 AM Pacific. Changed from 6-hour schedule on 2026-04-04 to optimize Apify costs (~$60/mo savings). LinkedIn content persists on profiles for months, so 3-day polling captures everything without data loss. For time-sensitive checks, run manually: `python linkedin_monitor.py --expert "Name" --process`
+**n8n Workflow:** LinkedIn Intelligence Monitor (mX6DOn0TrNwZO5dY) ... every 3 days at 1 AM Pacific. Changed from 6-hour schedule on 2026-04-04 to optimize Apify costs (~$60/mo savings). LinkedIn content persists on profiles for months, so 3-day polling captures everything without data loss. For time-sensitive checks, run manually: `python linkedin_monitor.py --expert "Name" --process`
 
 **Cost:** ~$5 per 1,000 posts via Apify (`apimaestro/linkedin-profile-posts`)
 
@@ -3427,9 +3427,9 @@ All execution scripts have been updated to use qwu_datetime:
 
 **Promoted to Foundational Directive:** February 13, 2026 · **Renamed 2026-09-21** ... this was titled "Lovable Frontend Standard" when every QWF app was built in Lovable. **Lovable was cancelled 2026-09-21 and no QWF app is hosted or edited there any more** (QKN + QTR, the last two, moved to Cloudflare Pages that night). The standard below is unchanged and still mandatory ... it now applies to every QWF frontend, React and SvelteKit alike, on whatever platform. Read "Lovable project" below as "QWF frontend app".
 
-The same timezone problem affects all QWF Lovable apps. JavaScript's `new Date().toISOString()` returns UTC. After 4 PM Pacific (midnight UTC), the UTC date flips to the next calendar day. Since Supabase stores dates in Pacific time, all Supabase date-boundary queries silently return wrong results for 8 hours every day. No errors are thrown — dashboards just show empty/stale data.
+The same timezone problem affects all QWF Lovable apps. JavaScript's `new Date().toISOString()` returns UTC. After 4 PM Pacific (midnight UTC), the UTC date flips to the next calendar day. Since Supabase stores dates in Pacific time, all Supabase date-boundary queries silently return wrong results for 8 hours every day. No errors are thrown ... dashboards just show empty/stale data.
 
-**Every QWF Lovable project must include `src/utils/timezone.ts`** with 7 helper functions. This file is required in every Prompt 001 (foundation prompt) — see CLAUDE.md QWF Frontend Development.
+**Every QWF Lovable project must include `src/utils/timezone.ts`** with 7 helper functions. This file is required in every Prompt 001 (foundation prompt) ... see CLAUDE.md QWF Frontend Development.
 
 **Canonical utility functions:**
 
@@ -3457,9 +3457,9 @@ const today = getPacificToday();              // Always Pacific YYYY-MM-DD
 const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 ```
 
-**Why `en-CA`?** The Canadian English locale formats dates as `YYYY-MM-DD` (ISO 8601), matching Supabase's date column format. **Why `America/Los_Angeles`?** IANA timezone name that handles PST/PDT transitions automatically — never hardcode `-08:00`.
+**Why `en-CA`?** The Canadian English locale formats dates as `YYYY-MM-DD` (ISO 8601), matching Supabase's date column format. **Why `America/Los_Angeles`?** IANA timezone name that handles PST/PDT transitions automatically ... never hardcode `-08:00`.
 
-**History:** First identified in HQ Command Center (Feb 2026, calendar edge function showed tomorrow's events after 4 PM). Recurred in QQT (11 affected locations) and QMP (18 affected locations) before the convention was established. Root cause: the original timezone directive called frontend JS "Generally safe" — this assessment was wrong for Supabase date queries and was corrected Feb 13, 2026.
+**History:** First identified in HQ Command Center (Feb 2026, calendar edge function showed tomorrow's events after 4 PM). Recurred in QQT (11 affected locations) and QMP (18 affected locations) before the convention was established. Root cause: the original timezone directive called frontend JS "Generally safe" ... this assessment was wrong for Supabase date queries and was corrected Feb 13, 2026.
 
 **3-layer defense:**
 1. **Prevention:** Every Prompt 001 must include `timezone.ts` (CLAUDE.md QWF Frontend Development)
@@ -3507,7 +3507,7 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 
 ## Azure Cost Tracking
 
-Monitor Azure spending directly from the backoffice for cost awareness. Azure is one of 7 variable cost sources tracked by the [[#Cost Intelligence System]] — see that section for the unified cost tracking architecture including LLM, Apify, Supabase, and budget alerting.
+Monitor Azure spending directly from the backoffice for cost awareness. Azure is one of 7 variable cost sources tracked by the [[#Cost Intelligence System]] ... see that section for the unified cost tracking architecture including LLM, Apify, Supabase, and budget alerting.
 
 ### What's Tracked
 
@@ -3581,7 +3581,7 @@ Cost reporting was hardened across 5 phases on 2026-04-26. Every cost figure now
 
 **Single source of truth:** `005 Operations/Execution/cost_constants.py`. Every cost number on every surface (transparency site, Digital Twin, HQ dashboard, internal reports) reads from this file. Includes `__VERIFIED_AT__` for staleness detection (warn at 60d, gap at 90d).
 
-**Public surface:** https://transparency.quietlyworking.org/open-playbook/infrastructure-costs/ — auto-generated per-line breakdown, regenerates whenever `cost_constants.py` or `audit_trends.db` changes (per session-wrap-up step 4C).
+**Public surface:** https://transparency.quietlyworking.org/open-playbook/infrastructure-costs/ ... auto-generated per-line breakdown, regenerates whenever `cost_constants.py` or `audit_trends.db` changes (per session-wrap-up step 4C).
 
 **Credential rotation:** see `005 Operations/Directives/credential_rotation_playbook.md` for procedures; 10 credentials tracked with annual cadence in `CREDENTIAL_ROTATIONS` constant in `audit_emergency_recovery.py` (8 High tier + 2 Medium). First real-rotation precedent set 2026-04-26 with `OPENROUTER_API_KEY` (Pattern B, executed via `OPENROUTER_MGMT_KEY` provisioning API).
 
@@ -3613,36 +3613,36 @@ The backoffice includes a comprehensive lead generation and enrichment system su
 **Full L4G Technical Documentation:** `003 Entities/Organizations/Locals 4 Good.md`
 
 The L4G system includes:
-- **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026). **SvelteKit migration complete** — `sveltekit-migration` branch merged to `main` (Session 216, Apr 12, 2026). All 20 routes verified on production (200 for public, 303 for auth-guarded). SSR confirmed: area demographics render in HTML source. Host-based redirects working (www/.com → canonical .org) via `hooks.server.ts`. GitHub Actions `deploy.yml` updated: output dir `.svelte-kit/cloudflare`, `PUBLIC_SUPABASE_URL` + `PUBLIC_SUPABASE_ANON_KEY` env vars added as GitHub Actions secrets. Static assets: `sitemap.xml` + `robots.txt` in `static/`. Fixed SSR crash: `$state(() => {...})` stores function reference — changed to inline expression. Public pages + checkout + full donor-partner portal (10 pages) + admin suite (13 pages) + email mirror + push notifications. Phase 6 portal includes: dashboard with postcard tracker, bookings with conversation threads (Supabase Realtime), concept selection (3 AI concepts), proof review with approve/revision form actions, supporter-creates upload with area intelligence, brand clarity wizard, post-delivery feedback with celebration animation, settings. Two new tables: `l4g_conversations` (RLS + Realtime), `l4g_feedback`. Schema v1.3.0.
-- **Data Layer:** Supabase (`<SUPABASE_PROJECT_ID_L4G>`) — 23 tables (schema v1.3.0), migrated from Google Sheets + new tables for conversations and feedback
+- **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026). **SvelteKit migration complete** ... `sveltekit-migration` branch merged to `main` (Session 216, Apr 12, 2026). All 20 routes verified on production (200 for public, 303 for auth-guarded). SSR confirmed: area demographics render in HTML source. Host-based redirects working (www/.com → canonical .org) via `hooks.server.ts`. GitHub Actions `deploy.yml` updated: output dir `.svelte-kit/cloudflare`, `PUBLIC_SUPABASE_URL` + `PUBLIC_SUPABASE_ANON_KEY` env vars added as GitHub Actions secrets. Static assets: `sitemap.xml` + `robots.txt` in `static/`. Fixed SSR crash: `$state(() => {...})` stores function reference ... changed to inline expression. Public pages + checkout + full donor-partner portal (10 pages) + admin suite (13 pages) + email mirror + push notifications. Phase 6 portal includes: dashboard with postcard tracker, bookings with conversation threads (Supabase Realtime), concept selection (3 AI concepts), proof review with approve/revision form actions, supporter-creates upload with area intelligence, brand clarity wizard, post-delivery feedback with celebration animation, settings. Two new tables: `l4g_conversations` (RLS + Realtime), `l4g_feedback`. Schema v1.3.0.
+- **Data Layer:** Supabase (`<SUPABASE_PROJECT_ID_L4G>`) ... 23 tables (schema v1.3.0), migrated from Google Sheets + new tables for conversations and feedback
 - **APIs:** 8 Supabase Edge Functions (submit-contact-form, create-checkout-session, check-availability, expire-stale-holds, submit-category-request, subscribe-to-push, send-push-notification, ezer-chat)
 - **Payments:** Stripe Checkout via `create-checkout-session` edge function + n8n `L4G Stripe Payment Handler v1.3` webhook (E2E verified Mar 18, 2026)
 - **Automation:** n8n workflows for payment processing, hold expiry, HQ sync, category request notifications, concierge response emails, conversation email mirror (webhook), email reply polling (2-min schedule)
 - **Category Concierge:** Public category request form → admin queue at `/admin/category-requests` → approve/map/decline actions → auto-inventory population (18 months × all areas) → automated response emails via `send_l4g_concierge_response.py`. Multi-channel admin notifications (Discord + SMS via Twilio) via `dispatch_l4g_category_notification.py`
-- **HQ Visibility:** L4G Operations module in HQ Command Center — Kanban pipeline, production calendar, deadline alerts via `sync_hq_l4g.py` (every 15 min)
+- **HQ Visibility:** L4G Operations module in HQ Command Center ... Kanban pipeline, production calendar, deadline alerts via `sync_hq_l4g.py` (every 15 min)
 - **Migration:** Data migrated from Google Sheets → Supabase via `migrate_l4g_sheets_to_supabase.py` (Feb 27, 2026)
-- **Youth Protection:** `qwf_youth_protection_standard.md` (foundational directive, added 2026-04-11) — NEVER use students in marketing/promotion until pre-employment stage. No names, photos, or identifying details externally. Applies across all QWF programs (MP, L4G, ACOFH, WOH). Overrides CX framework elements that conflict.
+- **Youth Protection:** `qwf_youth_protection_standard.md` (foundational directive, added 2026-04-11) ... NEVER use students in marketing/promotion until pre-employment stage. No names, photos, or identifying details externally. Applies across all QWF programs (MP, L4G, ACOFH, WOH). Overrides CX framework elements that conflict.
 - **After-Purchase CX Vision (2026-04-11):** Two-path architecture: "Supporter Creates" (templates + upload + multi-area management) and "MP Creates" (smart wizard + brand identity + 3 concepts → 3 layouts with open conversation thread + email mirror). Merge into Postcard Tracker (package-tracking UX), celebration, feedback, physical sample + frameable thank-you. QTR integration from day one (QR codes + tracking URLs). v1: TIG creates in Photoshop; long-term: Pomelli-like AI engine.
 - **Post-Checkout Fork:** `artwork_track` ('self'|'create') on `l4g_bookings` routes donors to artwork upload or Brand Clarity Wizard
-- **Brand Clarity Wizard:** 3-step guided intake at `/portal/brand` — saves to 9 brand fields on `l4g_donor_partners`
+- **Brand Clarity Wizard:** 3-step guided intake at `/portal/brand` ... saves to 9 brand fields on `l4g_donor_partners`
 - **Journey Milestones:** `check_l4g_milestones.py` v1.2.0 (15-min n8n poll) → `send_l4g_journey_email.py` v1.2.0 (6 TIG-voice templates with portal deep links and Mailbox Walk gradient CTA buttons) + push notifications for proof_ready, proof_approved, going_to_print, postcards_mailed. Dedup via `l4g_journey_events`. v1.2.0 fires push notifications alongside journey emails.
 - **Email Mirror + Notification System (Session 215):** `send_l4g_conversation_email.py` v1.1.0 adds Reply-To headers (`l4g-reply+{booking_id}@quietlyworking.org`) and X-L4G-Booking-ID internet message header for email-to-thread routing. `poll_l4g_email_replies.py` v1.0.0 polls Ezer inbox via MS Graph for replies matching `l4g-reply+` pattern, strips quoted content, inserts into `l4g_conversations`, moves to L4G-Processed folder (state: `.tmp/l4g_reply_processed_ids.json`, runs every 2 min via n8n). `send_l4g_push_notification.py` v1.0.0 wraps `send-push-notification` edge function with 7 event templates (print_status_change, new_message_donor/team, proof_ready, concept_ready, proof_approved, feedback_submitted). Supabase `pg_net` trigger `notify_l4g_conversation_insert()` on `l4g_conversations` INSERT → POSTs to n8n webhook for real-time email mirror.
-- **CX Automation Backend (Session 207):** 6 scripts covering the full after-purchase journey — proof upload, AI concept pipeline (enrich → brand identity → 3 briefs), concept choice processing, conversation email mirror, batch print advancement, post-delivery feedback. Plus `add_l4g_donor_booking.py` for admin onboarding outside website checkout.
-- **SvelteKit Migration Scaffold (Session 207):** `sveltekit-migration` branch — adapter-cloudflare, Supabase SSR auth, Mailbox Walk CSS ported, builds in 2.4s. `L4G-Phase-Prompts.md` contains 8 copy-paste prompts for remaining migration phases 4-11.
+- **CX Automation Backend (Session 207):** 6 scripts covering the full after-purchase journey ... proof upload, AI concept pipeline (enrich → brand identity → 3 briefs), concept choice processing, conversation email mirror, batch print advancement, post-delivery feedback. Plus `add_l4g_donor_booking.py` for admin onboarding outside website checkout.
+- **SvelteKit Migration Scaffold (Session 207):** `sveltekit-migration` branch ... adapter-cloudflare, Supabase SSR auth, Mailbox Walk CSS ported, builds in 2.4s. `L4G-Phase-Prompts.md` contains 8 copy-paste prompts for remaining migration phases 4-11.
 - **AI Ad Pipeline:** `enrich_donor_company.py` → `generate_brand_identity.py` → `generate_ad_briefs.py` (Claude FLAGSHIP, 3 approaches: Trust Builder/Value Driver/Story Teller)
 - **Print Management:** `populate_l4g_postcard_config.py` (36 rows, 3 areas × 12 months) + `update_l4g_print_status.py` (7-state forward-only machine)
 - **Live Postcard Display:** Multi-size packing algorithm (XS/SM/MD/LG/XL/Massive), booking data join, dynamic grid layout. Only booked slots shown; CTA only when entire half-section is empty.
-- **Area Demographics:** `demographics` JSONB column on `l4g_areas` — full geodemographic profiles (household count, median income, education, housing, family structure, market summary). Rich card UI in `AreaDemographics.tsx` with hero stats, progress bars, and market summary footer. "EDDM Routes" renamed to "Postal Routes" with custom USPS postal truck icon. L4G heart logo (`logo_L4G_Heart_1k.png`) deployed in header, mobile menu, and footer. Footer includes phone (773-234-KIDS), mission copy, split copyright bar. Brand rule: logo must never be CSS-inverted.
-- **Admin Demographics Editor:** `/admin/demographics` — edit demographic data for any area. Area selector dropdown, 9 card sections: Hero Stats, Reach & Routes, Area Info, Household Profile, Education & Employment, Housing Profile, Family & Lifestyle, Market Intelligence (agent-generated). Each Census-sourced section has a blue "Census ACS 2022" badge; agent-generated sections have amber "Agent-generated" badge. Saves flat `demographics` JSONB and syncs column-level fields (median_income, population, total_mailboxes, eddm_routes) from JSONB values. Components: `AreaDemographicsEditor.tsx`, `useUpdateArea.ts` hook.
-- **Census ACS Enrichment:** `enrich_l4g_demographics.py` v2.0.0 pulls 42 Census ACS 5-Year variables (batched for API 50-var limit, free, no API key required) for each area's ZIP codes. Flat JSONB output (no nested `acs` sub-object). Computes: income distribution, home values, education, occupation, housing age, vehicles, household profile (median age, avg HH size, commute), family stats (married %, children %, family HH %), veterans %. Derives: Home Services Score (0–10 composite), Best For categories, market intelligence summary paragraph. Syncs column-level fields (median_income, population, total_mailboxes, eddm_routes) from JSONB values. Flags: `--slug` (single area), `--all` (all areas), `--dry-run`. Both Demographics and Market Intelligence cards read from identical flat data paths — eliminates conflicting numbers.
-- **Market Intelligence Dashboard:** `AreaMarketIntelligence.tsx` — Census-powered dashboard on area detail pages. Hero stat cards, narrative market summary, Home Services Score radial gauge, Best For category tags, income distribution bar chart, housing age bar chart, Census attribution footer.
+- **Area Demographics:** `demographics` JSONB column on `l4g_areas` ... full geodemographic profiles (household count, median income, education, housing, family structure, market summary). Rich card UI in `AreaDemographics.tsx` with hero stats, progress bars, and market summary footer. "EDDM Routes" renamed to "Postal Routes" with custom USPS postal truck icon. L4G heart logo (`logo_L4G_Heart_1k.png`) deployed in header, mobile menu, and footer. Footer includes phone (773-234-KIDS), mission copy, split copyright bar. Brand rule: logo must never be CSS-inverted.
+- **Admin Demographics Editor:** `/admin/demographics` ... edit demographic data for any area. Area selector dropdown, 9 card sections: Hero Stats, Reach & Routes, Area Info, Household Profile, Education & Employment, Housing Profile, Family & Lifestyle, Market Intelligence (agent-generated). Each Census-sourced section has a blue "Census ACS 2022" badge; agent-generated sections have amber "Agent-generated" badge. Saves flat `demographics` JSONB and syncs column-level fields (median_income, population, total_mailboxes, eddm_routes) from JSONB values. Components: `AreaDemographicsEditor.tsx`, `useUpdateArea.ts` hook.
+- **Census ACS Enrichment:** `enrich_l4g_demographics.py` v2.0.0 pulls 42 Census ACS 5-Year variables (batched for API 50-var limit, free, no API key required) for each area's ZIP codes. Flat JSONB output (no nested `acs` sub-object). Computes: income distribution, home values, education, occupation, housing age, vehicles, household profile (median age, avg HH size, commute), family stats (married %, children %, family HH %), veterans %. Derives: Home Services Score (0-10 composite), Best For categories, market intelligence summary paragraph. Syncs column-level fields (median_income, population, total_mailboxes, eddm_routes) from JSONB values. Flags: `--slug` (single area), `--all` (all areas), `--dry-run`. Both Demographics and Market Intelligence cards read from identical flat data paths ... eliminates conflicting numbers.
+- **Market Intelligence Dashboard:** `AreaMarketIntelligence.tsx` ... Census-powered dashboard on area detail pages. Hero stat cards, narrative market summary, Home Services Score radial gauge, Best For category tags, income distribution bar chart, housing age bar chart, Census attribution footer.
 - **Enhanced Route Cards:** `RouteList.tsx` route cards show spending power ("$118M in household income"), homeowner %, and housing era chips derived from Census data.
 - **Mobile Admin Navigation:** Admin bottom nav upgraded from 5 hardcoded items to a "More" bottom sheet exposing all 12 admin pages. Eliminates dead-end navigation on mobile.
 - **Postcard Capacity Validation:** 3-level check (AdSizeSelector UX, client-side guard, server-side edge function) ensures total slots_used ≤ 16 columns. Prevents postcard overflow for multi-size ad bookings.
-- **Postcard Config Admin:** `/admin/postcard-config` — upload background/spine images per area/month to Supabase Storage `l4g-assets`
-- **Ezer Chat Guide:** Conversational AI widget on all public pages. `ezer-chat` edge function streams responses via Anthropic Messages API (Claude Opus 4.8 as of 2026-07-06, SSE, max_tokens 500). 5-part system prompt: Ezer identity/voice rules, L4G knowledge base (areas, pricing, volume discounts), dynamic area demographics (from `l4g_areas.demographics` JSONB when on area pages), navigation rules with `[NAV:/path]` token pattern for ask-then-navigate, guardrails. 8 React components in `src/components/ezer/`: Widget orchestrator, FAB (custom octopus, Deep Forest gradient, pulsing glow), Panel (desktop 380x520 fixed + mobile vaul Drawer 85vh), MessageList (auto-scroll, streaming cursor, three-dot thinking animation), Message (markdown-lite rendering, internal link detection, "Take me there" navigation button), Input (textarea, 500-char limit, Enter to send), Greeting (contextual quick-start chips by page type), ezer-utils (nav token extraction, link parsing). `EzerChatContext` (React Context + useReducer) wraps PublicLayout — state survives React Router navigation. Trust Tier 0: anonymous, ephemeral, session-scoped (crypto.randomUUID). Rate limit: 20 msgs/10min/IP. Conversation cap: 60 messages. Activity logged to HQ `hq_ezer_activity`. Secrets: `ANTHROPIC_API_KEY`, `HQ_SUPABASE_URL`, `HQ_SUPABASE_SERVICE_KEY` on L4G Supabase.
-- **Postal Route Explorer:** Two-panel interactive section on area detail page (between Demographics and Benefits). Left: scrollable route card list with animated reach counter, sort toggles, demographic chips. Right: Mapbox GL map with golden delivery area boundary (#C49A3C 3-layer glow), ZIP boundaries (Census TIGER GeoJSON, 10 ZIPs), custom route markers with stagger animation, fly-to on click, styled popup cards. Lazy-loaded (separate chunk, ~472KB gz). Graceful empty state when no route data. RPV West: 23 real EDDM routes (10,786 homes across 90274 + 90275, replacing 5 placeholder routes). Admin page at `/admin/postal-routes` (CRUD + bulk CSV import). Mapbox token: `VITE_MAPBOX_TOKEN` (GitHub secret set, URL-restricted to locals4good.org). `l4g_postal_routes` table with RLS (public SELECT + authenticated INSERT/UPDATE/DELETE). Unique constraint: `(area_id, zip_code, route_code)` — fixed from `(area_id, route_code)` to support same route codes across different ZIP codes.
-- **Visual Flow Specification (v1.0.1):** Design spec at `L4G-Visual-Flow-Specification-v1.0.md` — companion to Mailbox Walk Palette defining HOW to compose sections. Four systems: (1) Section Rhythm — 4 background lanes (Rest/Engage/Focus/Act) with rule: never same lane back-to-back, max 2 Focus per page, Act bookends only. (2) Card Hierarchy — 3 weights (Primary=dominant oversized, Standard=grid with sage border, Supporting=compact). (3) CTA Repetition — 4 touchpoints with escalating commitment, unique framing each. (4) Page Blueprints — 13-section landing page restructured around visitor psychology (questions answered in order visitors ask them), 9-section area detail page. Gradient Direction Rule: all L4G gradients must be 135deg dark-to-light. Implementation CSS utility classes included. **Hero section now matches the old WordPress site design (oldl4g.quietlyworking.org):** reduced top padding, removed CTA buttons/trust line below hero headline, hero card edge-to-edge via `.l4g-hero-card` class. All 13 section cards use the old site's floating card shadow style (`box-shadow: 0 10px 40px`, `border-radius: 30px`).
+- **Postcard Config Admin:** `/admin/postcard-config` ... upload background/spine images per area/month to Supabase Storage `l4g-assets`
+- **Ezer Chat Guide:** Conversational AI widget on all public pages. `ezer-chat` edge function streams responses via Anthropic Messages API (Claude Opus 4.8 as of 2026-07-06, SSE, max_tokens 500). 5-part system prompt: Ezer identity/voice rules, L4G knowledge base (areas, pricing, volume discounts), dynamic area demographics (from `l4g_areas.demographics` JSONB when on area pages), navigation rules with `[NAV:/path]` token pattern for ask-then-navigate, guardrails. 8 React components in `src/components/ezer/`: Widget orchestrator, FAB (custom octopus, Deep Forest gradient, pulsing glow), Panel (desktop 380x520 fixed + mobile vaul Drawer 85vh), MessageList (auto-scroll, streaming cursor, three-dot thinking animation), Message (markdown-lite rendering, internal link detection, "Take me there" navigation button), Input (textarea, 500-char limit, Enter to send), Greeting (contextual quick-start chips by page type), ezer-utils (nav token extraction, link parsing). `EzerChatContext` (React Context + useReducer) wraps PublicLayout ... state survives React Router navigation. Trust Tier 0: anonymous, ephemeral, session-scoped (crypto.randomUUID). Rate limit: 20 msgs/10min/IP. Conversation cap: 60 messages. Activity logged to HQ `hq_ezer_activity`. Secrets: `ANTHROPIC_API_KEY`, `HQ_SUPABASE_URL`, `HQ_SUPABASE_SERVICE_KEY` on L4G Supabase.
+- **Postal Route Explorer:** Two-panel interactive section on area detail page (between Demographics and Benefits). Left: scrollable route card list with animated reach counter, sort toggles, demographic chips. Right: Mapbox GL map with golden delivery area boundary (#C49A3C 3-layer glow), ZIP boundaries (Census TIGER GeoJSON, 10 ZIPs), custom route markers with stagger animation, fly-to on click, styled popup cards. Lazy-loaded (separate chunk, ~472KB gz). Graceful empty state when no route data. RPV West: 23 real EDDM routes (10,786 homes across 90274 + 90275, replacing 5 placeholder routes). Admin page at `/admin/postal-routes` (CRUD + bulk CSV import). Mapbox token: `VITE_MAPBOX_TOKEN` (GitHub secret set, URL-restricted to locals4good.org). `l4g_postal_routes` table with RLS (public SELECT + authenticated INSERT/UPDATE/DELETE). Unique constraint: `(area_id, zip_code, route_code)` ... fixed from `(area_id, route_code)` to support same route codes across different ZIP codes.
+- **Visual Flow Specification (v1.0.1):** Design spec at `L4G-Visual-Flow-Specification-v1.0.md` ... companion to Mailbox Walk Palette defining HOW to compose sections. Four systems: (1) Section Rhythm ... 4 background lanes (Rest/Engage/Focus/Act) with rule: never same lane back-to-back, max 2 Focus per page, Act bookends only. (2) Card Hierarchy ... 3 weights (Primary=dominant oversized, Standard=grid with sage border, Supporting=compact). (3) CTA Repetition ... 4 touchpoints with escalating commitment, unique framing each. (4) Page Blueprints ... 13-section landing page restructured around visitor psychology (questions answered in order visitors ask them), 9-section area detail page. Gradient Direction Rule: all L4G gradients must be 135deg dark-to-light. Implementation CSS utility classes included. **Hero section now matches the old WordPress site design (oldl4g.quietlyworking.org):** reduced top padding, removed CTA buttons/trust line below hero headline, hero card edge-to-edge via `.l4g-hero-card` class. All 13 section cards use the old site's floating card shadow style (`box-shadow: 0 10px 40px`, `border-radius: 30px`).
 - **Partner Tribute Page:** Dedicated story page at `/partners/printing4supercheap` (`PartnerPage.tsx`) honoring Printing4SuperCheap (P4SC) as L4G's ultimate partner. Includes: origin story (they offered Elite pricing before L4G had a name), blockquote from Chaplain TIG, "Journey of Every Postcard" 4-step visual, Jake Lorraine bio (Structure Marketing Inc., High Response Marketing ecosystem), CTA buttons to P4SC site + High Response Marketing + L4G areas. `PartnerSpotlight.tsx` card on landing page (heart icon, "Made Possible By", both P4SC name instances link to partner page). Entity file: `003 Entities/Organizations/Printing4SuperCheap.md`. P4SC does full-service EDDM: print, bundle, prep, ship to USPS. Will support nonprofit indicia once QWF obtains it.
 
 **L4G Backend Scripts:**
@@ -3655,7 +3655,7 @@ The L4G system includes:
 | `check_l4g_milestones.py` | Polls for state changes, triggers journey emails + push notifications (v1.2.0: added push for proof_ready/approved/going_to_print/mailed) | v1.2.0 |
 | `enrich_donor_company.py` | Website scraper for brand signals | v1.0.0 |
 | `generate_brand_identity.py` | AI brand guide from intake data (Claude FLAGSHIP) | v1.0.0 |
-| `generate_ad_briefs.py` | AI brief generation — 3 concept approaches | v1.0.0 |
+| `generate_ad_briefs.py` | AI brief generation ... 3 concept approaches | v1.0.0 |
 | `populate_l4g_postcard_config.py` | Seeds postcard config rows for N months | v1.0.0 |
 | `update_l4g_print_status.py` | Advances print status through 7 stages | v1.0.0 |
 | `sync_hq_l4g.py` | HQ Operations module sync (every 15 min) | v1.1.0 |
@@ -3664,13 +3664,13 @@ The L4G system includes:
 | `import_l4g_postal_routes.py` | Import EDDM route CSV to l4g_postal_routes (--dry-run, --geocode, on_conflict upsert) | v1.1.0 |
 | `extract_l4g_zip_boundaries.py` | Extract ZIP boundary GeoJSON from Census TIGER API | v1.0.0 |
 | `enrich_l4g_demographics.py` | Census ACS 5-Year enrichment (42 vars, batched). Flat JSONB output, column sync. Income, home values, education, occupation, housing age, vehicles, household profile, family stats, veterans. Home Services Score + Best For + market summary. Flags: --slug, --all, --dry-run | v2.0.0 |
-| `add_l4g_donor_booking.py` | Admin donor onboarding — creates auth user, donor_partner, booking, ad_proof, updates inventory. For donors who commit outside website checkout (SuiteDash, phone, in-person). --dry-run, --send-welcome | v1.0.0 |
+| `add_l4g_donor_booking.py` | Admin donor onboarding ... creates auth user, donor_partner, booking, ad_proof, updates inventory. For donors who commit outside website checkout (SuiteDash, phone, in-person). --dry-run, --send-welcome | v1.0.0 |
 | `upload_l4g_proof.py` | Upload proof image to Supabase Storage, update ad_proof record to 'submitted'. --booking-id, --image-path, --dry-run | v1.0.0 |
 | `run_l4g_concept_pipeline.py` | End-to-end "MP Creates" AI pipeline: website enrichment → brand identity → 3 ad briefs → concept proof placeholders → donor notification (2x Claude FLAGSHIP) | v1.0.0 |
-| `process_l4g_concept_choice.py` | Process donor's concept selection — marks chosen proof as in_progress, others as not_selected, updates booking to design_in_progress | v1.0.0 |
+| `process_l4g_concept_choice.py` | Process donor's concept selection ... marks chosen proof as in_progress, others as not_selected, updates booking to design_in_progress | v1.0.0 |
 | `send_l4g_conversation_email.py` | Email mirror for booking conversation threads (Exempt, MS Graph). Reply-To headers for email→thread routing, X-L4G-Booking-ID header | v1.1.0 |
 | `advance_l4g_print_batch.py` | Batch print status advancement for all bookings in an area/month. Wraps update_l4g_print_status.py. 7-state forward-only machine | v1.0.0 |
-| `process_l4g_feedback.py` | Post-delivery donor feedback — stores emoji rating, response count, testimonial, would-recommend. Syncs to HQ, Discord notification | v1.0.0 |
+| `process_l4g_feedback.py` | Post-delivery donor feedback ... stores emoji rating, response count, testimonial, would-recommend. Syncs to HQ, Discord notification | v1.0.0 |
 | `poll_l4g_email_replies.py` | Polls Ezer inbox via MS Graph for l4g-reply+ replies, strips quoted content, inserts into l4g_conversations, moves to L4G-Processed folder. State: `.tmp/l4g_reply_processed_ids.json`. Runs every 2 min via n8n | v1.0.0 |
 | `send_l4g_push_notification.py` | Web Push wrapper calling send-push-notification edge function. 7 event templates (print_status_change, new_message_donor/team, proof_ready, concept_ready, proof_approved, feedback_submitted). Manual and event modes | v1.0.0 |
 
@@ -4124,7 +4124,7 @@ Every SOP includes at the bottom:
 
 Notes with `dg-publish: true` in YAML frontmatter become eligible for transparency.quietlyworking.org. Publishing is fully automated.
 
-**Architecture (v2 — migrated Apr 2026):**
+**Architecture (v2 ... migrated Apr 2026):**
 The transparency site is an **Astro 5.x** static site on **Cloudflare Pages** with Svelte interactive islands. Content syncs from the Obsidian vault via `sync_transparency_site_v2.py`, which assigns each page to one of three content pillars.
 
 | Component | Technology | Location |
@@ -4151,9 +4151,9 @@ The transparency site is an **Astro 5.x** static site on **Cloudflare Pages** wi
 6. GitHub Actions auto-deploys: fetches Digital Twin data → Astro build → wrangler deploy (~45s)
 
 **Interactive Svelte islands (loaded only when scrolled into view):**
-- **CostTicker** — Monthly operating cost breakdown with budget bar (homepage)
-- **EcosystemMap** — Filterable entity grid with health indicators (Living Proof page)
-- **ToolShedFilter** — Search, category/tier filters, multi-sort for 49 tools with QWS scores (Tool Shed page). Data extracted from vault markdown via `extract_tool_shed_data.py` during sync (Step 6b).
+- **CostTicker** ... Monthly operating cost breakdown with budget bar (homepage)
+- **EcosystemMap** ... Filterable entity grid with health indicators (Living Proof page)
+- **ToolShedFilter** ... Search, category/tier filters, multi-sort for 49 tools with QWS scores (Tool Shed page). Data extracted from vault markdown via `extract_tool_shed_data.py` during sync (Step 6b).
 
 **To publish a note:**
 1. Add `dg-publish: true` to frontmatter
@@ -4164,37 +4164,37 @@ The transparency site is an **Astro 5.x** static site on **Cloudflare Pages** wi
 - Omit the field, or set `dg-publish: false`
 
 **Automated sync:**
-- **Immediately after pushing any `dg-publish: true` file** — agents run the sync as a follow-up step (CLAUDE.md rule)
+- **Immediately after pushing any `dg-publish: true` file** ... agents run the sync as a follow-up step (CLAUDE.md rule)
 - After every `/session-wrap-up` (Step 4C)
 - Daily at 4 AM Pacific via n8n workflow `YnawyFKfnrOao12P`
 - Discord notification to `#system-status` on success/failure
 
 **Content series and collections on the transparency site:**
-- **Built from Broken** — Problems we face running AI-powered nonprofit operations and the real solutions we build. 4 volumes. Series guide at `Quietly Working Universe Public Transparency Project/Built from Broken/_Series-Guide.md` (not published). Each volume gets `dg-publish: true` + `series: Built from Broken` + `built-from-broken` tag + a PILLAR_MAP entry in the v2 sync script. Reader-first structure: Problem opens with stakes hook, no preamble sections, series context in footer.
-- **Architecture Blueprints** — 5 ASCII art architecture maps published under Open Playbook. Green terminal styling (`#00ff00`, container-query font scaling). Source: `005 Operations/Dashboards/Architecture-Map-Page*.md`. Published versions in `Quietly Working Universe Public Transparency Project/Architecture Blueprints/`.
+- **Built from Broken** ... Problems we face running AI-powered nonprofit operations and the real solutions we build. 4 volumes. Series guide at `Quietly Working Universe Public Transparency Project/Built from Broken/_Series-Guide.md` (not published). Each volume gets `dg-publish: true` + `series: Built from Broken` + `built-from-broken` tag + a PILLAR_MAP entry in the v2 sync script. Reader-first structure: Problem opens with stakes hook, no preamble sections, series context in footer.
+- **Architecture Blueprints** ... 5 ASCII art architecture maps published under Open Playbook. Green terminal styling (`#00ff00`, container-query font scaling). Source: `005 Operations/Dashboards/Architecture-Map-Page*.md`. Published versions in `Quietly Working Universe Public Transparency Project/Architecture Blueprints/`.
 
 **Frontmatter enhancements (Apr 2026):**
-- `hook` field — punchy one-liner for card display (used instead of `description` on listing pages). Sync script passes it through; content schema accepts it.
-- PillarCard filters common tags (`QWF`, `QWU`, `built-from-broken`, etc.) from card display — only topic-specific tags shown.
+- `hook` field ... punchy one-liner for card display (used instead of `description` on listing pages). Sync script passes it through; content schema accepts it.
+- PillarCard filters common tags (`QWF`, `QWU`, `built-from-broken`, etc.) from card display ... only topic-specific tags shown.
 
 **Safety features:**
-- Private User Manual (`QWU Backoffice User Manual.md`) is blocklisted by filename stem — only the `[PUBLIC]` version passes
+- Private User Manual (`QWU Backoffice User Manual.md`) is blocklisted by filename stem ... only the `[PUBLIC]` version passes
 - Leak detection scans for IP patterns, API tokens, SSH commands before pushing
 - `--dry-run` flag for previewing changes without pushing
 
 **Key files:**
 | File | Purpose |
 |------|---------|
-| `005 Operations/Execution/sync_transparency_site_v2.py` | Sync script v2 (Astro output, v2.0.0) — includes Tool Shed extraction |
+| `005 Operations/Execution/sync_transparency_site_v2.py` | Sync script v2 (Astro output, v2.0.0) ... includes Tool Shed extraction |
 | `005 Operations/Execution/extract_tool_shed_data.py` | Parses Tool Shed markdown → `src/data/tool-shed.json` (49 tools, v1.0.0) |
-| `005 Operations/Execution/sync_transparency_site.py` | **Deprecated** — v1 (Eleventy/Vercel) |
+| `005 Operations/Execution/sync_transparency_site.py` | **Deprecated** ... v1 (Eleventy/Vercel) |
 | `005 Operations/Directives/sync_transparency_site.md` | Directive/SOP |
 | `005 Operations/Workflows/transparency-site-sync.json` | n8n workflow (daily 4 AM Pacific) |
 
 **Currently published pages (21 files):**
 - Homepage (3-pillar landing), QWU Values, Tool Shed, Nonprofit Tech Access Guide, User Manual [PUBLIC]
 - QWC, Locals 4 Good, OMW, IP Rights, Content Intelligence Architecture
-- Built from Broken Vol 1–4, How to Give Your AI Agent Superpowers
+- Built from Broken Vol 1-4, How to Give Your AI Agent Superpowers
 - Architecture Blueprints (5): Mission Control, Data Flow, Integrations, Entities, Schedule
 - User Manual [PUBLIC]
 
@@ -4387,7 +4387,7 @@ cat /var/log/firewall-init.log
 
 The Meeting Intelligence System (now formally the **Meeting Experience System**) transforms Zoom meetings from isolated events into relationship intelligence nodes. Every meeting captures context, every briefing surfaces that context, and over time the system builds a comprehensive map of your professional relationships.
 
-**Evergreen Project Folder:** `002 Projects/_Meeting Experience System/` — contains full system documentation, infrastructure inventory, and architecture diagram.
+**Evergreen Project Folder:** `002 Projects/_Meeting Experience System/` ... contains full system documentation, infrastructure inventory, and architecture diagram.
 
 | File | Purpose |
 |------|---------|
@@ -4456,7 +4456,7 @@ Next Meeting with Same People
 | `send_meeting_followup.py` | Post-meeting recap **DRAFTS** in TIG's Outlook (never sends) | v3.1.0 |
 | `zoom_reconcile.py` | Reconciliation safety net; holds the exclusive per-meeting processing lock | v1.9.0 |
 | `appreciation_followup_db.py` | ⛔ Component retired 2026-08-30; DB retained read-only for audit | v1.1.0 |
-| `process_appreciation_queue.py` | ⛔ RETIRED 2026-08-30 — no-op stub | v2.0.0 |
+| `process_appreciation_queue.py` | ⛔ RETIRED 2026-08-30 ... no-op stub | v2.0.0 |
 
 **Pipeline Flowchart:** See `005 Operations/Execution/zoom_pipeline_flowchart.md` for the full 8-stage visual diagram including follow-up emails, BCC monitoring, and error handling.
 
@@ -4686,10 +4686,10 @@ Contact History (last contact date, relationship health assessment)
 ```
 
 **Key Features:**
-- **7-day lookahead emails** — Warm, concise prep email asking attendees for agenda input
-- **30-day enriched briefings** — Full attendee profiles with vault data, relationship health, outstanding actions
+- **7-day lookahead emails** ... Warm, concise prep email asking attendees for agenda input
+- **30-day enriched briefings** ... Full attendee profiles with vault data, relationship health, outstanding actions
 - **SQLite dedup** ... UNIQUE(event_id, attendee_email) prevents duplicate drafts
-- **Relationship health assessment** — thriving (≤14d) → healthy (≤30d) → stable (≤60d) → cooling (≤90d) → dormant (>90d)
+- **Relationship health assessment** ... thriving (≤14d) → healthy (≤30d) → stable (≤60d) → cooling (≤90d) → dormant (>90d)
 
 **Scripts:**
 | File | Purpose | Version |
@@ -4927,9 +4927,9 @@ Potential enhancements:
 - Morning digest (all meetings for the day)
 - Relationship health alerts ("You haven't met with X in 30 days")
 - AI-suggested meeting prep questions
-- ~~Post-meeting auto-follow-up drafts~~ → ✅ Built (`send_meeting_followup.py` v1.3.0 — personalized action items, deferred appreciation with SMS wait-for-response, preference footer, opt-out check)
-- ~~Appreciation wait-for-response (SMS retry + timeout + cancel)~~ → ✅ Built (`appreciation_followup_db.py` v1.1.0 + `process_appreciation_queue.py` v1.0.0 — T+1h/T+2h SMS reminders, T+5h fallback email, Twilio reply handler, LLM-based cancel via SMS)
-- ~~Pre-meeting prep emails~~ → ✅ Built (`send_meeting_prep_email.py` — preference footer, opt-out check)
+- ~~Post-meeting auto-follow-up drafts~~ → ✅ Built (`send_meeting_followup.py` v1.3.0 ... personalized action items, deferred appreciation with SMS wait-for-response, preference footer, opt-out check)
+- ~~Appreciation wait-for-response (SMS retry + timeout + cancel)~~ → ✅ Built (`appreciation_followup_db.py` v1.1.0 + `process_appreciation_queue.py` v1.0.0 ... T+1h/T+2h SMS reminders, T+5h fallback email, Twilio reply handler, LLM-based cancel via SMS)
+- ~~Pre-meeting prep emails~~ → ✅ Built (`send_meeting_prep_email.py` ... preference footer, opt-out check)
 - Meeting pattern analytics
 - Voice capture for quick context additions
 
@@ -5059,9 +5059,9 @@ Only apps carrying the family audit trail. QNT today (first retrofit, live 2026-
 
 | Unit | Skills taught | Level | ~Time | Why it's portfolio-worthy |
 |------|---------------|-------|-------|---------------------------|
-| **"Did we email them, and did they reply?"** ... answer it from a mail API rather than memory | REST APIs, OAuth app auth, pagination, date filtering, reading a result set critically | Beginner–Intermediate | 2–3 h | The most common real question in any org, and the one people most often answer from recall and get wrong. A student learns that *searching* a mailbox and *listing* it give different answers, and that "no reply found" is a claim needing evidence. |
-| **Reading an audit trail to find changes nobody asked for** | SQL joins, JSONB, `information_schema` introspection, distinguishing a fill from an overwrite | Intermediate | 3–4 h | Teaches that logs are only worth keeping if something reads them back, and that deriving the watch-list from the schema beats hard-coding it. |
-| **Design exercise: a shared feature for many tenants** | Multi-tenant architecture, avoiding single-customer code paths | Intermediate–Advanced | 1–2 h discussion | The original design put the check in one tenant's CRM. Moving it into the app ... where the evidence already lives ... made it work for everyone and removed the special case. A clean, small case study in "whose problem is this actually?" |
+| **"Did we email them, and did they reply?"** ... answer it from a mail API rather than memory | REST APIs, OAuth app auth, pagination, date filtering, reading a result set critically | Beginner ... Intermediate | 2-3 h | The most common real question in any org, and the one people most often answer from recall and get wrong. A student learns that *searching* a mailbox and *listing* it give different answers, and that "no reply found" is a claim needing evidence. |
+| **Reading an audit trail to find changes nobody asked for** | SQL joins, JSONB, `information_schema` introspection, distinguishing a fill from an overwrite | Intermediate | 3-4 h | Teaches that logs are only worth keeping if something reads them back, and that deriving the watch-list from the schema beats hard-coding it. |
+| **Design exercise: a shared feature for many tenants** | Multi-tenant architecture, avoiding single-customer code paths | Intermediate ... Advanced | 1-2 h discussion | The original design put the check in one tenant's CRM. Moving it into the app ... where the evidence already lives ... made it work for everyone and removed the special case. A clean, small case study in "whose problem is this actually?" |
 
 **Teaching moment worth keeping:** the first two detector designs would not have caught the incident
 they were built for. Both systems held the *same wrong value*, so comparing them found nothing. The
@@ -5225,7 +5225,7 @@ VIP contacts get immediate Discord notifications and priority processing:
 
 | File | Purpose |
 |------|---------|
-| `outlook_pipeline.py` | Main orchestrator (v1.6.0 — suppression pre-check + sender tracking to `hq_email_senders`) |
+| `outlook_pipeline.py` | Main orchestrator (v1.6.0 ... suppression pre-check + sender tracking to `hq_email_senders`) |
 | `outlook_fetch_emails.py` | Microsoft Graph API: OAuth, fetch, pagination |
 | `email_classify.py` | Claude API classification of email intent |
 | `email_entity_resolve.py` | Match sender to People/Organizations, SuiteDash CRM lookup |
@@ -5860,7 +5860,7 @@ curl -s -o /dev/null -w "%{http_code}" http://localhost:80
 - BetterStack fires "Missed heartbeat" alert for claude-dev VM
 - `systemctl status <service>` shows `failed (Result: exit-code)`
 - Journal shows `OSError: [Errno 98] Address already in use` repeated 11 times
-- Health check reports `critical` (v1.0.0 withheld heartbeat; fixed in v1.1.0 — heartbeat now always pings)
+- Health check reports `critical` (v1.0.0 withheld heartbeat; fixed in v1.1.0 ... heartbeat now always pings)
 
 **Root Cause:**
 A rogue process started outside systemd (e.g., manual run, previous session) holds the port. When systemd tries to restart its managed service, the new process can't bind and fails. After 11 rapid restart attempts (~5s each), systemd gives up.
@@ -5892,7 +5892,7 @@ systemctl status <service>
 
 **Prevention:**
 - `digital_twin_server.py` now uses `ReusableHTTPServer` with `SO_REUSEADDR` (added Feb 2026), allowing restarts even if the port is in TIME_WAIT state
-- Avoid running services manually when systemd manages them — use `systemctl restart` instead
+- Avoid running services manually when systemd manages them ... use `systemctl restart` instead
 - If you must test manually, stop the systemd service first: `sudo systemctl stop <service>`
 - `<VM_USER>` has passwordless sudo for `systemctl` (added Mar 2026), allowing the agent to self-heal service failures
 - `check_vm_health.py` v1.1.0 always pings heartbeat regardless of status, so this scenario no longer causes false "VM down" P1 alarms
@@ -5966,11 +5966,11 @@ Always include `"authentication": "privateKey"` when creating workflow JSON file
 
 **Fleet-Wide Remediation (Feb 13, 2026):**
 A comprehensive audit found this issue (or variants) in 19 of 78 active workflows. Three patterns were discovered:
-1. **Missing `authentication: privateKey`** — node defaults to password auth, looks for wrong credential type
-2. **Wrong credential key (`sshPassword` instead of `sshPrivateKey`)** — works by accident because n8n looks up credentials by ID, not key name
-3. **Redundant `sshAuthenticateWith: privateKey`** — non-standard parameter name, harmless but confusing
+1. **Missing `authentication: privateKey`** ... node defaults to password auth, looks for wrong credential type
+2. **Wrong credential key (`sshPassword` instead of `sshPrivateKey`)** ... works by accident because n8n looks up credentials by ID, not key name
+3. **Redundant `sshAuthenticateWith: privateKey`** ... non-standard parameter name, harmless but confusing
 
-All 19 workflows were fixed via nuclear export→delete→reimport→publish (SQL UPDATE doesn't affect published versions in `workflow_history`). Additionally, 2 workflows using Discord httpRequest v4.1 (form-encoded `bodyParameters`) were upgraded to v4.2 (JSON body) — Cloudflare silently blocks form-encoded Discord webhook payloads for embed-heavy messages.
+All 19 workflows were fixed via nuclear export→delete→reimport→publish (SQL UPDATE doesn't affect published versions in `workflow_history`). Additionally, 2 workflows using Discord httpRequest v4.1 (form-encoded `bodyParameters`) were upgraded to v4.2 (JSON body) ... Cloudflare silently blocks form-encoded Discord webhook payloads for embed-heavy messages.
 
 ---
 
@@ -6116,8 +6116,8 @@ All QWU Twilio numbers are under the <ADMIN_EMAIL> account with Charity A2P mess
 |--------|---------------|---------|--------------|
 | **<TWILIO_NUMBER>** | BNI-relay | [Networking Chapter] - visitor reminders, member updates, referral alerts | Webhook |
 | **<TWILIO_NUMBER>** | U2SPEAK | [Networking Chapter] - speaker reminder automations | Webhook to n8n |
-| **<TWILIO_NUMBER>** | — | Locals 4 Good (L4G) - donor-partner SMS | Studio Workflow |
-| **<TWILIO_NUMBER>** | — | VIP/Personal line → forwards to TIG's cell (<PERSONAL_NUMBER>) | Studio Transfer |
+| **<TWILIO_NUMBER>** | ... | Locals 4 Good (L4G) - donor-partner SMS | Studio Workflow |
+| **<TWILIO_NUMBER>** | ... | VIP/Personal line → forwards to TIG's cell (<PERSONAL_NUMBER>) | Studio Transfer |
 | **TBD** | EZER | Ezer AI Assistant - TIG command intake | Webhook to n8n |
 
 ```bash
@@ -6316,7 +6316,7 @@ When visitors register for a BNI meeting, generate personalized **Connection Rep
 | `validate_bni_email.py` | Quality validation for connection report emails (v1.0.0) |
 | `sync_bni_roster.py` | Roster sync: scrapes BNI website, diffs entity tags (v1.0.0) |
 
-### Roster Sync — Two Sources of Truth
+### Roster Sync ... Two Sources of Truth
 
 The roster sync system enforces a critical data governance principle:
 
@@ -6350,7 +6350,7 @@ python sync_bni_roster.py --dry-run --json
 
 ### Usage
 
-**Import members from Airtable (legacy — use sync_bni_roster.py for roster updates):**
+**Import members from Airtable (legacy ... use sync_bni_roster.py for roster updates):**
 ```bash
 python import_bni_members.py "Data Imports/aim_high_members_2024.csv"
 ```
@@ -6765,7 +6765,7 @@ python bni_visitor_pipeline.py "[Member Name]" --dry-run
 python bni_visitor_pipeline.py "[Member Name]" --test-recipient=<ADMIN_EMAIL>
 ```
 
-**v3.4.0 Change (YAML Deprecated — Phase 7 Complete):**
+**v3.4.0 Change (YAML Deprecated ... Phase 7 Complete):**
 Defense-in-depth opt-out system using the self-service Preference Center:
 - **Layer 1 (Sole Source):** SQLite database via `preference_center/db.py` v2.1.0 (`PreferenceDB`)
 - **Layer 2:** Entity file flag (`visitor_reports_opt_out: true`)
@@ -6778,7 +6778,7 @@ Defense-in-depth opt-out system using the self-service Preference Center:
 Users can manage their own preferences via:
 1. **Ezer Chat:** Say "manage my preferences" or "unsubscribe" at terminal.quietlyworking.org
 2. **Email Footer:** All automated emails include a preferences link
-3. **Direct URL:** https://preferences.quietlyworking.org (requires magic link). Root URL (`/`) serves the preferences page in landing mode. Token-based access via `/p/{token}`. (Fixed Apr 2026: root was previously redirecting to Architecture Map due to shared digital_twin_server.py — now checks `Host` header.)
+3. **Direct URL:** https://preferences.quietlyworking.org (requires magic link). Root URL (`/`) serves the preferences page in landing mode. Token-based access via `/p/{token}`. (Fixed Apr 2026: root was previously redirecting to Architecture Map due to shared digital_twin_server.py ... now checks `Host` header.)
 
 **Available Products:**
 | Code | Display Name | Description |
@@ -6851,10 +6851,10 @@ Every email script is classified as **Enhancement** or **Exempt**:
 > **Missing Pixel Training Opportunity (Tier 2: Contributor)**
 >
 > The Email Preference System teaches real-world compliance patterns:
-> - **Opt-out Architecture** — Defense-in-depth (database + entity file + self-service), fail-open vs fail-closed behavior
-> - **Magic Link Auth** — HMAC-SHA256 token generation, expiry management, rate limiting
-> - **Classification System** — Why transactional emails don't need unsubscribe links (CAN-SPAM)
-> - **Database Migration** — Auto-adding columns via ALTER TABLE, handling defaults for existing rows
+> - **Opt-out Architecture** ... Defense-in-depth (database + entity file + self-service), fail-open vs fail-closed behavior
+> - **Magic Link Auth** ... HMAC-SHA256 token generation, expiry management, rate limiting
+> - **Classification System** ... Why transactional emails don't need unsubscribe links (CAN-SPAM)
+> - **Database Migration** ... Auto-adding columns via ALTER TABLE, handling defaults for existing rows
 >
 > **Exercise:** Add a new product category to the preference center (add to db.py PRODUCTS, api.py PRODUCTS dict, email.py PRODUCT_NAMES), create a test email script that checks opt-out and appends the footer, verify with dry-run.
 
@@ -7066,7 +7066,7 @@ Each recipient receives a customized email with:
 | **Chat Champions** | Top engaged members in the Zoom chat |
 | **Trends** | Week-over-week attendance, referrals, engagement |
 
-### Slide-Augmented Recap (v2 — February 2026)
+### Slide-Augmented Recap (v2 ... February 2026)
 
 When meeting screenshots are uploaded to a Google Drive folder, the recap can be augmented with visual intelligence:
 
@@ -7092,7 +7092,7 @@ The slide intel JSON is then combined with chat analysis to produce a richer rec
 
 **Official roster verification:** The authoritative member list is at `socalbni.com` (AJAX POST to `/bnicms/v3/frontend/chapterdetail/display` with `website_type=2`, `website_id=5197`). Cross-reference entity files against this periodically to catch stale `BNI-Active` tags.
 
-### Current Path (v3 — August 2026): the QNT in-app loop
+### Current Path (v3 ... August 2026): the QNT in-app loop
 
 **The legacy path above is historical.** As of 2026-08-20 the weekly recap is produced by the
 Quietly Networking app, not by `generate_bni_meeting_recap.py`. First end-to-end edition shipped
@@ -7115,7 +7115,7 @@ qnt_recap_generator.py      16-section registry -> TWO editions (member + visito
 ```
 
 **Two editions, deliberately different audiences.** `visitor_spotlight` and `power_team_matches`
-are **member-only edition sets** in `SECTION_REGISTRY` (not config toggles) — a visitor edition
+are **member-only edition sets** in `SECTION_REGISTRY` (not config toggles) ... a visitor edition
 that lists the day's visitors publishes every visitor's email address to every other visitor, and
 several of those addresses come from the private registration sheet rather than from the person's
 own chat message. The visitor edition instead carries the **full member roster** with each
@@ -7131,7 +7131,7 @@ member's own details, gated by their `public_email` / `public_phone` flags.
 created as a DRAFT in TIG's mailbox for him to review and send. `draft_qnt_recap_emails.py` reuses
 `qnt_recap_send._compose_edition_html` so a draft cannot drift from what the sender would produce
 (and so the preference footer is never omitted), passes `tracking_id=None` (no open pixel, no click
-wrapping — a hand-sent message has no `newsletter_recipients` row to attribute), and has **no send
+wrapping ... a hand-sent message has no `newsletter_recipients` row to attribute), and has **no send
 path**. `--only` builds a second wave after a later consent decision without duplicating drafts for
 people who already received the email.
 
@@ -7252,8 +7252,8 @@ CATHIE_VISITOR_SPREADSHEET_ID="spreadsheet-id"
 | Creating referral trigger lists | Business development, market research |
 | Processing visitor data from sheets | Data entry, spreadsheet skills |
 | Testing email templates | QA, attention to detail |
-| Auditing Ezer email templates for voice consistency | QA, Python reading, pattern recognition — trace a bug from the user-facing artifact back through f-strings and data sources (Intermediate, ~1 hr) |
-| Writing defensive data normalizers (`normalize_first_name` pattern) | Python functions, edge-case design, idempotence, smoke testing — start with a naive `.capitalize()` then discover why "iPhone" breaks it (Beginner → Intermediate, ~45 min) |
+| Auditing Ezer email templates for voice consistency | QA, Python reading, pattern recognition ... trace a bug from the user-facing artifact back through f-strings and data sources (Intermediate, ~1 hr) |
+| Writing defensive data normalizers (`normalize_first_name` pattern) | Python functions, edge-case design, idempotence, smoke testing ... start with a naive `.capitalize()` then discover why "iPhone" breaks it (Beginner → Intermediate, ~45 min) |
 
 ---
 
@@ -7269,7 +7269,7 @@ As the QWU Backoffice grows in complexity (38 directives, 73 scripts, 8 agents, 
 - Where gaps exist that need attention
 - How well the layers work together
 
-This audit serves both operational health and educational purposes—providing students with a comprehensive view of how a production automation system is structured.
+This audit serves both operational health and educational purposes ... providing students with a comprehensive view of how a production automation system is structured.
 
 ### Architecture Overview
 
@@ -7645,7 +7645,7 @@ quietlyworking.org
 
 Raw first names pulled from external data sources (Google Calendar profile names, Supabase CRM rows, BNI rosters) are often stored in all-lowercase because users type their own names that way during signup. When those strings get substituted into hardcoded email f-strings, recipients see disrespectful output like "Howdy jane!".
 
-**Fix:** `005 Operations/Execution/name_utils.py` exports `normalize_first_name(raw, fallback="there")`. It only uppercases the first character when the input is entirely lowercase — preserving deliberate interior capitalization like "McKenzie", "DeShawn", "iPhone", and "JANE".
+**Fix:** `005 Operations/Execution/name_utils.py` exports `normalize_first_name(raw, fallback="there")`. It only uppercases the first character when the input is entirely lowercase ... preserving deliberate interior capitalization like "McKenzie", "DeShawn", "iPhone", and "JANE".
 
 Every Ezer-voiced email script that substitutes a first name into template text now normalizes through this helper: `send_meeting_prep_email.py`, `send_meeting_followup.py` (already used `.title()`), `generate_bni_followup_emails.py`, `ezer_respond.py`, `send_l4g_welcome_email.py`, `send_l4g_queue_notification.py`, `qwr_notify_article_ready.py`.
 
@@ -8436,9 +8436,9 @@ All error outputs route to a Discord Error Alert node.
 
 **v6.0 additions:** When `gap_opportunity_id` is present, fetches the full gap with evidence and injects it as the article's primary angle. Customer language injection from Reddit-derived terms, phrases, and questions. Keyword-matches against active gaps (score >= 40) for standard articles. Content strategy matching: if the article has a `content_strategy_id`, fetches the strategy's platform, expertise level, style guide, and target persona for strategy-aware generation.
 
-**v7.0 additions:** Content Strategy context injection — goal framing, expertise level, style guide, content themes, and avoid list from the strategy record. Strategy overrides the old hardcoded style guide when present.
+**v7.0 additions:** Content Strategy context injection ... goal framing, expertise level, style guide, content themes, and avoid list from the strategy record. Strategy overrides the old hardcoded style guide when present.
 
-**v8.0 additions (Quality Targets):** Enforces measurable quality standards — minimum word count, required heading structure (H2/H3), citation density targets, readability scoring. Store Research Results v2.0 extracts citation URLs from Perplexity annotations and inline markdown links into `research_citations` for accurate source counting. Score Article Quality node counts actual `sources_used` instead of regex phrase matching. Generate Article node strengthened with inline source attribution requirements and emoji control.
+**v8.0 additions (Quality Targets):** Enforces measurable quality standards ... minimum word count, required heading structure (H2/H3), citation density targets, readability scoring. Store Research Results v2.0 extracts citation URLs from Perplexity annotations and inline markdown links into `research_citations` for accurate source counting. Score Article Quality node counts actual `sources_used` instead of regex phrase matching. Generate Article node strengthened with inline source attribution requirements and emoji control.
 
 ### Key Details
 
@@ -8463,11 +8463,11 @@ All error outputs route to a Discord Error Alert node.
 
 Research prompts are guided by content strategy tracks stored in `research_settings.tracks`:
 
-- **sme_authority** — Authoritative primary sources for expert positioning
-- **seo_geo** — Question-based sections for AI citation and featured snippets
-- **pillar_content** — Hub-and-spoke subtopic mapping
-- **multi_post_hooks** — Narrative angles for multi-part series
-- **quick_value** — Key facts, breadth over depth
+- **sme_authority** ... Authoritative primary sources for expert positioning
+- **seo_geo** ... Question-based sections for AI citation and featured snippets
+- **pillar_content** ... Hub-and-spoke subtopic mapping
+- **multi_post_hooks** ... Narrative angles for multi-part series
+- **quick_value** ... Key facts, breadth over depth
 
 ### Supabase Article Statuses
 
@@ -8475,11 +8475,11 @@ Allowed values (enforced by check constraint): `pending`, `generating`, `ready`,
 
 ### n8n Expression Gotchas (Learned the Hard Way)
 
-- No optional chaining (`?.`) in n8n expressions — use `||` fallbacks
+- No optional chaining (`?.`) in n8n expressions ... use `||` fallbacks
 - Only ONE `respondToWebhook` node per workflow
 - Add `alwaysOutputData: true` to Supabase query nodes that may return zero rows
 - OpenRouter uses short model IDs (`anthropic/claude-sonnet-4`, not `anthropic/claude-sonnet-4-20250514`)
-- Supabase update via native node has UUID filter bugs — use httpRequest PATCH instead
+- Supabase update via native node has UUID filter bugs ... use httpRequest PATCH instead
 
 ### Related Files
 
@@ -8557,11 +8557,11 @@ The Audience Intelligence system enables persona-targeted article generation. Us
 ### Living Documents
 
 Users link Google Docs (shared as "Anyone with the link can view") categorized by type:
-- `quotes` — Favorite quotes, sayings, mantras
-- `personal_writing` — Blog posts, journal entries, essays
-- `industry_inspiration` — Thought leadership articles
-- `brand_reference` — Brand guidelines, tone documents
-- `general` — Other reference material
+- `quotes` ... Favorite quotes, sayings, mantras
+- `personal_writing` ... Blog posts, journal entries, essays
+- `industry_inspiration` ... Thought leadership articles
+- `brand_reference` ... Brand guidelines, tone documents
+- `general` ... Other reference material
 
 The weekly n8n sync workflow reads each doc, extracts voice-relevant patterns (phrases, tonal qualities, vocabulary signatures), and stores per-document `document_profile` JSONB. A combined `brands.living_document_enrichment` JSONB aggregates all docs for the brand.
 
@@ -8637,7 +8637,7 @@ Thread Tracking ← Decisions/Commitments → Opportunities
 
 ### Session Work Tracking
 
-The `/session-wrap-up` skill (Step 5) recompiles a `## What Got Done Today` section in the daily journal after each session. This provides the "EOD Summary" component shown in the architecture diagram above — a consolidated view of all Claude Code session accomplishments for the day, placed between Morning Briefing and Email Intelligence.
+The `/session-wrap-up` skill (Step 5) recompiles a `## What Got Done Today` section in the daily journal after each session. This provides the "EOD Summary" component shown in the architecture diagram above ... a consolidated view of all Claude Code session accomplishments for the day, placed between Morning Briefing and Email Intelligence.
 
 ### Related Directives
 
@@ -8794,11 +8794,11 @@ python "005 Operations/Execution/supervisor_daily_digest.py" --no-send
 
 **Added: February 4, 2026**
 
-The Relationship Intelligence Layer is a unified, person-centric system that tracks relationship health across all QWU contexts (personal, BNI, fundraising, volunteers) using half-life decay curves. It ensures every human feels known, valued, and cared about—regardless of which program brought them in.
+The Relationship Intelligence Layer is a unified, person-centric system that tracks relationship health across all QWU contexts (personal, BNI, fundraising, volunteers) using half-life decay curves. It ensures every human feels known, valued, and cared about ... regardless of which program brought them in.
 
 ### Philosophy
 
-> "Your network is not your list of connections. It's the actual strength of actual relationships with people who would actually help you." — Nate B Jones
+> "Your network is not your list of connections. It's the actual strength of actual relationships with people who would actually help you." ... Nate B Jones
 
 ### Key Concepts
 
@@ -8816,7 +8816,7 @@ The Relationship Intelligence Layer is a unified, person-centric system that tra
 |-------|------|---------|
 | 80-100 | Hot | Active relationship, mutual investment |
 | 60-79 | Warm | Healthy but needs periodic touchpoints |
-| 40-59 | Cooling | At risk—natural re-engagement window closing |
+| 40-59 | Cooling | At risk ... natural re-engagement window closing |
 | 20-39 | Cold | Requires intentional reactivation |
 | 0-19 | Dormant | Would need significant effort to revive |
 
@@ -9006,7 +9006,7 @@ results = graph.execute(dry_run=False)
 
 **Added: February 13, 2026**
 
-Quietly Knocking (QKN) is a multi-tenant AI-powered outbound outreach platform. It handles the complete pipeline from lead sourcing through personalized email campaigns to dynamic landing pages with variable-based personalization — all integrated with the QWF product ecosystem.
+Quietly Knocking (QKN) is a multi-tenant AI-powered outbound outreach platform. It handles the complete pipeline from lead sourcing through personalized email campaigns to dynamic landing pages with variable-based personalization ... all integrated with the QWF product ecosystem.
 
 ### Architecture
 
@@ -9038,13 +9038,13 @@ QKN is the outreach/conversion arm of the QWF product family:
 
 | Component | Status |
 |-----------|--------|
-| Supabase project | ACTIVE_HEALTHY — `<SUPABASE_PROJECT_ID>` |
-| Domain | `quietlyknocking.org` — Live on Lovable |
+| Supabase project | ACTIVE_HEALTHY ... `<SUPABASE_PROJECT_ID>` |
+| Domain | `quietlyknocking.org` ... Live on Lovable |
 | Lovable preview | `quietly-knocking.lovable.app` |
-| Schema | v1.0.0 deployed — tenants, profiles, campaign_purposes |
-| Auth | Configured — autoconfirm, redirect URLs for all 3 domains |
-| Lovable Prompt 001 | DEPLOYED — landing page, auth, onboarding wizard, dashboard, app layout |
-| [Supporter Organization] (tenant #1) | Planned — migration from internal pipeline |
+| Schema | v1.0.0 deployed ... tenants, profiles, campaign_purposes |
+| Auth | Configured ... autoconfirm, redirect URLs for all 3 domains |
+| Lovable Prompt 001 | DEPLOYED ... landing page, auth, onboarding wizard, dashboard, app layout |
+| [Supporter Organization] (tenant #1) | Planned ... migration from internal pipeline |
 
 ### Pricing Tiers
 
@@ -9067,7 +9067,7 @@ QKN is the outreach/conversion arm of the QWF product family:
 
 **Added: February 13, 2026**
 
-Quietly Spotting (QSP) is a multi-tenant command center for small businesses. Your **Single Point of Truth (SPOT)** — one dashboard that aggregates data from QWF products (QQT, QWR, QNT) and third-party tools into a modular, customizable dashboard.
+Quietly Spotting (QSP) is a multi-tenant command center for small businesses. Your **Single Point of Truth (SPOT)** ... one dashboard that aggregates data from QWF products (QQT, QWR, QNT) and third-party tools into a modular, customizable dashboard.
 
 ### Architecture
 
@@ -9091,12 +9091,12 @@ QSP is the aggregation hub of the QWF product family:
 ### Multi-Tenancy Model
 
 Shared Supabase database with `tenant_id` column + RLS (following QQT's proven pattern):
-- `tenants` — businesses (root entity)
-- `profiles` — users within businesses (linked to auth.users)
-- `companies` — sub-brands within a tenant (e.g., [Supporter Organization]'s 4 companies)
-- `modules` — system catalog of available features
-- `tenant_modules` — which modules each tenant has enabled
-- `integrations` — external tool connections with encrypted credentials
+- `tenants` ... businesses (root entity)
+- `profiles` ... users within businesses (linked to auth.users)
+- `companies` ... sub-brands within a tenant (e.g., [Supporter Organization]'s 4 companies)
+- `modules` ... system catalog of available features
+- `tenant_modules` ... which modules each tenant has enabled
+- `integrations` ... external tool connections with encrypted credentials
 
 ### Modules
 
@@ -9105,7 +9105,7 @@ Shared Supabase database with `tenant_id` column + RLS (following QQT's proven p
 | Lead Pipeline | Built-in | Pipeline summary | `/leads` | v1 |
 | QQT Connect | QWF product | Recent submissions | `/quoting` | v1 |
 | QWR Connect | QWF product | Content status | `/content` | v1 |
-| Contact Book | Built-in | — | `/contacts` | v1 |
+| Contact Book | Built-in | ... | `/contacts` | v1 |
 | Email Infrastructure | Third-party (Instantly + DMARC Report) | Email health summary | `/modules/email-infrastructure` | v2 |
 | Campaign Manager | Third-party (Instantly) | Campaign metrics | `/modules/campaigns` | v2 |
 
@@ -9122,30 +9122,30 @@ Shared Supabase database with `tenant_id` column + RLS (following QQT's proven p
 
 | Component | Status |
 |-----------|--------|
-| Supabase project | ACTIVE_HEALTHY — `<SUPABASE_PROJECT_ID>` (us-west-1) |
-| Domain | `quietlyspotting.org` — CNAME → `quietly-spotting.pages.dev` (Cloudflare proxied) |
-| Hosting | **Cloudflare Pages** — `quietly-spotting` project, GitHub Actions CI/CD (migrated from Lovable 2026-03-27) |
-| GitHub repo | `QuietlyWorking/quietly-spotting` — direct code commits, push-to-deploy |
-| Schema | v5.0.0 — 25 tables + confidence tracking on companies (11 core + bug_reports + 4 Phase 2 + 1 v3 func + 8 Phase 3e), RLS, triggers |
-| Auth | Working — sign-in, sign-up, redirect to /dashboard |
-| Lovable Prompts | 34 total (001-034) — ARCHIVED. All future changes are direct code commits. |
-| Storage buckets | `avatars` (2MB) + `logos` (5MB) — public read, auth upload |
-| QQT sync | Active — 12 submissions synced per tenant |
-| QWR sync | Active — 5 articles synced for [Supporter Organization] (v1.1.0) |
-| Email Infra sync | Active — 18 sending accounts + 12 DMARC domains synced |
-| Campaigns sync | Active — 1 campaign synced |
-| Reviews sync | Tested — 113 Google reviews synced for [Supporter Organization], 8 flagged. v1.1.0: confidence gate (skips low-confidence auto-matches) |
-| KPI snapshots | Tested — nightly aggregation across 6 categories |
-| Alert engine | Tested — rule eval + SMS/Discord/in-app dispatch |
-| n8n workflows | 4 active — QQT 1h, QWR 1h, Email Infra 2h, Campaigns 4h |
-| QWF test tenant | `b28692ad` — growth plan, 4 modules |
-| [Supporter Organization] tenant | `<TENANT_ID>` — growth plan, 4 companies, 6 modules, 113 reviews, 2 team accounts |
-| supporter-CC migration | Executed 2026-03-17 — 6 accounts, 6 domains, 3 campaigns ported |
+| Supabase project | ACTIVE_HEALTHY ... `<SUPABASE_PROJECT_ID>` (us-west-1) |
+| Domain | `quietlyspotting.org` ... CNAME → `quietly-spotting.pages.dev` (Cloudflare proxied) |
+| Hosting | **Cloudflare Pages** ... `quietly-spotting` project, GitHub Actions CI/CD (migrated from Lovable 2026-03-27) |
+| GitHub repo | `QuietlyWorking/quietly-spotting` ... direct code commits, push-to-deploy |
+| Schema | v5.0.0 ... 25 tables + confidence tracking on companies (11 core + bug_reports + 4 Phase 2 + 1 v3 func + 8 Phase 3e), RLS, triggers |
+| Auth | Working ... sign-in, sign-up, redirect to /dashboard |
+| Lovable Prompts | 34 total (001-034) ... ARCHIVED. All future changes are direct code commits. |
+| Storage buckets | `avatars` (2MB) + `logos` (5MB) ... public read, auth upload |
+| QQT sync | Active ... 12 submissions synced per tenant |
+| QWR sync | Active ... 5 articles synced for [Supporter Organization] (v1.1.0) |
+| Email Infra sync | Active ... 18 sending accounts + 12 DMARC domains synced |
+| Campaigns sync | Active ... 1 campaign synced |
+| Reviews sync | Tested ... 113 Google reviews synced for [Supporter Organization], 8 flagged. v1.1.0: confidence gate (skips low-confidence auto-matches) |
+| KPI snapshots | Tested ... nightly aggregation across 6 categories |
+| Alert engine | Tested ... rule eval + SMS/Discord/in-app dispatch |
+| n8n workflows | 4 active ... QQT 1h, QWR 1h, Email Infra 2h, Campaigns 4h |
+| QWF test tenant | `b28692ad` ... growth plan, 4 modules |
+| [Supporter Organization] tenant | `<TENANT_ID>` ... growth plan, 4 companies, 6 modules, 113 reviews, 2 team accounts |
+| supporter-CC migration | Executed 2026-03-17 ... 6 accounts, 6 domains, 3 campaigns ported |
 | Phase 3e | Executive Pulse DEPLOYED. Schema v4 (8 tables). Role system upgraded (Owner>Admin>Manager>Viewer). Prompts 032-033 deployed. |
 | Phase 3f | Place ID Verification. Schema v5 deployed (confidence tracking). `lookup-place-id` edge function deployed. Prompt 034 ready. Backend confidence gate active. |
-| Phase 4 (Active) | **Local Growth Engine** — BrightLocal API integration (citation sync live), citation health dashboard, geo-grid rank visualization, GBP audit/optimization queue, schema markup generator, on-page SEO audit (Lighthouse), monthly cross-product performance report. Agency white-label architecture baked in (nullable `agency_id` + `brand_config`). 4 Supabase tables deployed. First [Supporter Organization] citation sync complete (baseline synced). Directive: `qsp_local_growth_engine.md`. |
+| Phase 4 (Active) | **Local Growth Engine** ... BrightLocal API integration (citation sync live), citation health dashboard, geo-grid rank visualization, GBP audit/optimization queue, schema markup generator, on-page SEO audit (Lighthouse), monthly cross-product performance report. Agency white-label architecture baked in (nullable `agency_id` + `brand_config`). 4 Supabase tables deployed. First [Supporter Organization] citation sync complete (baseline synced). Directive: `qsp_local_growth_engine.md`. |
 
-### Local Growth Engine (Active — April 2026)
+### Local Growth Engine (Active ... April 2026)
 
 New QSP module providing local SEO services to all supporters. Replaces $1,500-3,000+/mo external SEO agency with built-in capabilities.
 
@@ -9168,30 +9168,30 @@ New QSP module providing local SEO services to all supporters. Replaces $1,500-3
 - API access (pay-per-request: ~$3/mo per location)
 
 **Built-In Features (No External Cost):**
-- Schema Markup Generator — JSON-LD from QSP business data (LocalBusiness, Service, FAQ, Review, BreadcrumbList, Organization)
-- On-Page SEO Audit — Google Lighthouse API crawl with prioritized fix list
-- Monthly Performance Report v2 — Supporter-deliverable PDF with branded supporter cover (centered logo, supporter brand color cascade), Local SEO Performance section (5 cards: composite SEO Health, Citation Health, Keyword Rankings, GBP Profile Snapshot, Multi-Site Reviews) backed by per-card 6-month TrendCharts (vanilla SVG, stoplight zones, smart-label dedup), tier-aware content sections (TransparencySection, HighlightCallouts, ActionChecklistV2 with purple QWF / supporter-brand-color ownership badges), period-bounded BL queries that respect the period selector, full chrome suppression in print, page numbers via `@page` counters. Service tier on tenants determines the engagement-model framing per supporter (vospa / diy / hybrid)
-- GBP Optimization Queue — Actionable task cards from BrightLocal audit data
-- Local Keyword Matrix — Service x city keyword combinations via QWR DataForSEO
+- Schema Markup Generator ... JSON-LD from QSP business data (LocalBusiness, Service, FAQ, Review, BreadcrumbList, Organization)
+- On-Page SEO Audit ... Google Lighthouse API crawl with prioritized fix list
+- Monthly Performance Report v2 ... Supporter-deliverable PDF with branded supporter cover (centered logo, supporter brand color cascade), Local SEO Performance section (5 cards: composite SEO Health, Citation Health, Keyword Rankings, GBP Profile Snapshot, Multi-Site Reviews) backed by per-card 6-month TrendCharts (vanilla SVG, stoplight zones, smart-label dedup), tier-aware content sections (TransparencySection, HighlightCallouts, ActionChecklistV2 with purple QWF / supporter-brand-color ownership badges), period-bounded BL queries that respect the period selector, full chrome suppression in print, page numbers via `@page` counters. Service tier on tenants determines the engagement-model framing per supporter (vospa / diy / hybrid)
+- GBP Optimization Queue ... Actionable task cards from BrightLocal audit data
+- Local Keyword Matrix ... Service x city keyword combinations via QWR DataForSEO
 
 **Agency White-Label Architecture (Built Into Phase 4, Launched Later):**
 All new tables include nullable `agency_id` column. Reports use `brand_config` object (logo, name, colors). RBAC scoped by `agency_id` + `organization_id`. Enables future Tier 2 Agency supporters (e.g., [Supporter Company]) to white-label the entire QWF stack.
 
-**Supabase Tables — Deployed (Session 195):**
-- `qsp_citation_health` — Directory-level NAP consistency (created via Management API)
-- `qsp_local_rankings` — Keyword positions + geo-grid data (created via Management API)
-- `qsp_gbp_audit` — GBP completeness score + recommendations (created via Management API)
-- `qsp_seo_health` — Overall local SEO health score (created via Management API)
+**Supabase Tables ... Deployed (Session 195):**
+- `qsp_citation_health` ... Directory-level NAP consistency (created via Management API)
+- `qsp_local_rankings` ... Keyword positions + geo-grid data (created via Management API)
+- `qsp_gbp_audit` ... GBP completeness score + recommendations (created via Management API)
+- `qsp_seo_health` ... Overall local SEO health score (created via Management API)
 
-**Supabase Tables — Planned:**
-- `qsp_onpage_audit` — Lighthouse audit results per URL
-- `qsp_monthly_reports` — Generated report data + PDF references
-- `qsp_schema_output` — Generated JSON-LD per location
-- `agency_brand_config` — White-label branding per agency
-| [Supporter CRM] sync | Active — thousands of jobs synced for [Supporter Organization]. Safety gate + audit logging + soft-delete pattern. `sync_audit_log` table deployed (immutable, RLS-protected). |
-| QWF Passport | Deployed — `generate-crossover-token` (QSP) + `verify-crossover-token` (QWR, QQT, QNT) |
-| Contact Form | Deployed — `submit-contact-form` edge function + centralized pipeline |
-| Landing Page | Deployed — Prompt 011 with heritage, ecosystem, contact sections |
+**Supabase Tables ... Planned:**
+- `qsp_onpage_audit` ... Lighthouse audit results per URL
+- `qsp_monthly_reports` ... Generated report data + PDF references
+- `qsp_schema_output` ... Generated JSON-LD per location
+- `agency_brand_config` ... White-label branding per agency
+| [Supporter CRM] sync | Active ... thousands of jobs synced for [Supporter Organization]. Safety gate + audit logging + soft-delete pattern. `sync_audit_log` table deployed (immutable, RLS-protected). |
+| QWF Passport | Deployed ... `generate-crossover-token` (QSP) + `verify-crossover-token` (QWR, QQT, QNT) |
+| Contact Form | Deployed ... `submit-contact-form` edge function + centralized pipeline |
+| Landing Page | Deployed ... Prompt 011 with heritage, ecosystem, contact sections |
 
 ### Data Sync Pipeline
 
@@ -9204,7 +9204,7 @@ Each tenant stores QQT/QWR API keys in the `integrations` table. Python sync scr
 | `sync_qsp_sending_accounts.py` | Instantly API v2 `/accounts` | `sending_accounts` | Every 2h |
 | `sync_qsp_dmarc_domains.py` | DMARC Report API v2 `/all_domains.json` | `dmarc_domains` | Every 2h |
 | `sync_qsp_campaigns.py` | Instantly API v2 `/campaigns` | `campaigns`, `campaign_metrics` | Every 4h |
-| `sync_qsp_reviews.py` | Google Maps via Apify | `reviews` | Every 6h (cron stopgap; n8n still pending — see HQ issue `935bb95b`) |
+| `sync_qsp_reviews.py` | Google Maps via Apify | `reviews` | Every 6h (cron stopgap; n8n still pending ... see HQ issue `935bb95b`) |
 | `compute_kpi_snapshots.py` | All QSP source tables | `kpi_snapshots` | Nightly (pending n8n) |
 | `check_qsp_alerts.py` | `alert_rules` → `alert_history` | SMS, Discord, in-app | Post-sync (pending n8n) |
 | `<supporter-CRM sync script>` | supporter CRM API | `<supporter_crm_jobs>`, `<supporter_crm_appointments>` | Every 4h (v1.1.0, safety gate integrated) |
@@ -9214,7 +9214,7 @@ Each tenant stores QQT/QWR API keys in the `integrations` table. Python sync scr
 
 All scripts support `--dry-run` and `--tenant-id` flags. [Supporter CRM] sync includes `--force` flag to bypass the safety gate (row-count sanity check blocks syncs where incoming rows < 50% of existing). The `<supporter-CC migration script>` script was a one-time migration from supporter-CC to QSP [Supporter Organization] tenant (executed 2026-03-17).
 
-**[Supporter CRM] Custom Fields API (discovered 2026-04-05):** [Supporter CRM] released custom fields support on 2026-03-30 (API v2.2607.0). Endpoints: `GET/PUT /api/v2/contacts/{id}/custom-fields`, `GET/PUT /api/v2/jobs/{id}/custom-fields`, `GET /api/v2/company-settings/custom-fields`. Webhooks: `contact.custom-field.value_changed`, `job.custom-field.value_changed`. [Supporter Organization] has 1 job-level field ("Confirmer"). No contact-level DNC field yet — recommendation pending with [Supporter Team Member].
+**[Supporter CRM] Custom Fields API (discovered 2026-04-05):** [Supporter CRM] released custom fields support on 2026-03-30 (API v2.2607.0). Endpoints: `GET/PUT /api/v2/contacts/{id}/custom-fields`, `GET/PUT /api/v2/jobs/{id}/custom-fields`, `GET /api/v2/company-settings/custom-fields`. Webhooks: `contact.custom-field.value_changed`, `job.custom-field.value_changed`. [Supporter Organization] has 1 job-level field ("Confirmer"). No contact-level DNC field yet ... recommendation pending with [Supporter Team Member].
 
 ### Reference
 
@@ -9226,7 +9226,7 @@ All scripts support `--dry-run` and `--tenant-id` flags. [Supporter CRM] sync in
 - **Sync Scripts:** `005 Operations/Execution/sync_qqt_submissions.py`, `sync_qwr_articles.py`, `sync_qsp_sending_accounts.py`, `sync_qsp_dmarc_domains.py`, `sync_qsp_campaigns.py`, `sync_qsp_reviews.py`, `sync_brightlocal_data.py`, `compute_kpi_snapshots.py`, `check_qsp_alerts.py`
 - **Migration Script:** `005 Operations/Execution/<supporter-CC migration script>` (one-time, executed 2026-03-17)
 - **Safety Module:** `005 Operations/Execution/sync_safety_gate.py` (pre/post-sync validation, batch checking, audit logging)
-- **Data Safety Directive:** `005 Operations/Directives/supporter_data_safety.md` (foundational — live supporter data handling)
+- **Data Safety Directive:** `005 Operations/Directives/supporter_data_safety.md` (foundational ... live supporter data handling)
 - **Edge Functions:** `generate-crossover-token` (QWF Passport), `submit-contact-form` (contact pipeline), `lookup-place-id` (Google Place ID search with confidence scoring)
 
 ---
@@ -9235,7 +9235,7 @@ All scripts support `--dry-run` and `--tenant-id` flags. [Supporter CRM] sync in
 
 **Added: February 13, 2026**
 
-Quietly Networking (QNT) is a multi-tenant AI-powered chapter management platform for BNI networking groups. It provides visitor enrichment, connection reports, meeting intelligence, relationship health scoring, inviting engine, growth analytics, Stripe billing, community events, and AI-generated recaps — built on a CF Pages + Supabase + claude-dev AI processing engine stack.
+Quietly Networking (QNT) is a multi-tenant AI-powered chapter management platform for BNI networking groups. It provides visitor enrichment, connection reports, meeting intelligence, relationship health scoring, inviting engine, growth analytics, Stripe billing, community events, and AI-generated recaps ... built on a CF Pages + Supabase + claude-dev AI processing engine stack.
 
 ### Architecture
 
@@ -9307,50 +9307,50 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 - **Webhook URL:** `qnt.quietlyworking.org` → port 8100 (systemd: `qnt-webhook.service`, v1.4.0)
 - **Visitor enrichment:** LinkedIn lookup → profile → website → reviews → Claude Opus 4.7 synthesis. Idempotency guard: `/enrich-visitor` and `/enrich-member` skip enrichment if `enrichment_status == 'complete'` (pass `force=true` to override).
 - **Connection reports:** AI-generated per-member reports for each visitor
-- **Meeting pipeline:** `qnt_meeting_pipeline.py` — chat parsing, artifact download, Vision slide analysis, recap generation
-- **Presentation media:** `process_presentation_media.py` — PDF/PPTX/video→images for Vision analysis
+- **Meeting pipeline:** `qnt_meeting_pipeline.py` ... chat parsing, artifact download, Vision slide analysis, recap generation
+- **Presentation media:** `process_presentation_media.py` ... PDF/PPTX/video→images for Vision analysis
 
 ### Current State (April 9, 2026)
 
 | Component | Status |
 |-----------|--------|
-| Supabase project | ACTIVE_HEALTHY — `<SUPABASE_PROJECT_ID>` |
-| Hosting | CF Pages — `quietlynetworking.org` (migrated from Lovable 2026-03-20) |
+| Supabase project | ACTIVE_HEALTHY ... `<SUPABASE_PROJECT_ID>` |
+| Hosting | CF Pages ... `quietlynetworking.org` (migrated from Lovable 2026-03-20) |
 | Deploy pipeline | Push to `main` → GitHub Actions → CF Pages auto-deploy |
 | Supabase auth site_url | Updated to `https://quietlynetworking.org` |
-| Backend brain | Deployed — visitor enrichment + roster sync + newsletter + meeting pipeline end-to-end |
-| Webhook receiver | v1.4.0 — idempotency guard on `/enrich-visitor` and `/enrich-member` (skips if `enrichment_status == 'complete'`) |
-| QWF Passport | Deployed — `verify-crossover-token` on QNT Supabase; QNT added as crossover target in QSP's `generate-crossover-token` |
-| Stripe | Configured (TEST MODE) — 2 products, 4 prices, webhook |
-| Alpha tenant | [Networking Chapter] — 27 members (17 active, 2 on leave, 8 alumni), 2,373 historical visitors imported |
-| Timezone fix | Prompt 021 deployed — 8 affected areas fixed |
+| Backend brain | Deployed ... visitor enrichment + roster sync + newsletter + meeting pipeline end-to-end |
+| Webhook receiver | v1.4.0 ... idempotency guard on `/enrich-visitor` and `/enrich-member` (skips if `enrichment_status == 'complete'`) |
+| QWF Passport | Deployed ... `verify-crossover-token` on QNT Supabase; QNT added as crossover target in QSP's `generate-crossover-token` |
+| Stripe | Configured (TEST MODE) ... 2 products, 4 prices, webhook |
+| Alpha tenant | [Networking Chapter] ... 27 members (17 active, 2 on leave, 8 alumni), 2,373 historical visitors imported |
+| Timezone fix | Prompt 021 deployed ... 8 affected areas fixed |
 | Database | 35 tables, 16 migrations, full RLS (added: `chapter_testimonials`, `card_shares`, `card_clicks`; per-member privacy columns `testimonials_enabled`, `card_shareable`, `card_redirect_url`) |
 | Newsletter system | 3-step composer, 11 section types, template management, send-newsletter edge function |
 | Recognition engine | "You Got Caught" member appreciation with public web archive |
 | Speaker management | Meeting templates, speaker queue, materials collection, planning timeline, message sequences, dues tracking |
 | Landing page | Botanical palette, warm cream nav, full-color logo, contact form, 50+ features showcased |
-| UX clickability | Dashboard MetricCards, visitor rows, relationship pairs, leaderboard names, inviter names — all clickable with intuitive navigation (Apr 9, 2026) |
-| Visitor Epic Profiles | Enrichment data rendered on Overview tab — summary, services, power teams, connection hooks, life hints, reviews with stars/trends, LinkedIn card, personality traits (Apr 9, 2026) |
+| UX clickability | Dashboard MetricCards, visitor rows, relationship pairs, leaderboard names, inviter names ... all clickable with intuitive navigation (Apr 9, 2026) |
+| Visitor Epic Profiles | Enrichment data rendered on Overview tab ... summary, services, power teams, connection hooks, life hints, reviews with stars/trends, LinkedIn card, personality traits (Apr 9, 2026) |
 | Connection reports | Markdown-rendered via react-markdown, RLS super admin bypass, correct column mappings (Apr 9, 2026) |
 | Card upload | Members can upload own card image (JPG/PNG/WebP, 5MB) via drag-and-drop on card builder (Apr 9, 2026) |
 | Permission controls | Edit controls respect impersonation (useEffectiveUser), card builder has ownership check (Apr 9, 2026) |
 | Alpha readiness | Alpha badge, bug reporter, landing page alpha gate (Prompt 029) |
 | Branding | Custom logo, fern icon, favicon suite, botanical palette deployed |
-| [Networking Chapter] website | `<chapter-domain>` — Astro 5 SSR on CF Pages (migrated from React SPA 2026-04-09), multi-tenant middleware, live data from QNT Supabase. Client JS: ~6KB (form islands only). |
-| Business cards | `generate_business_cards.py` — Pillow-based card generator, 18 cards, trackable sharing via `card_shares`/`card_clicks` tables |
+| [Networking Chapter] website | `<chapter-domain>` ... Astro 5 SSR on CF Pages (migrated from React SPA 2026-04-09), multi-tenant middleware, live data from QNT Supabase. Client JS: ~6KB (form islands only). |
+| Business cards | `generate_business_cards.py` ... Pillow-based card generator, 18 cards, trackable sharing via `card_shares`/`card_clicks` tables |
 | Card sharing | `/card/[slug]` Astro API route with OG meta tags for social previews, `increment_card_share_clicks` RPC |
-| Form backends | `/api/rsvp` (→ `visitors` table), `/api/testimonial` (→ `chapter_testimonials` table, slug→UUID resolution, author→member matching, triggers notification) — Astro API routes with CF runtime env |
+| Form backends | `/api/rsvp` (→ `visitors` table), `/api/testimonial` (→ `chapter_testimonials` table, slug→UUID resolution, author→member matching, triggers notification) ... Astro API routes with CF runtime env |
 | Testimonial flow | "Write a Note" clickable card on member profiles → optional email → API resolves slug/author → Postgres trigger creates notification → member approves in QNT My Testimonials page → "Show on profile" toggle → appears on website. Reciprocal: "Say thanks" email + "Write one back" link for fellow members (Apr 13, 2026) |
 | My Testimonials | QNT page (`/my-testimonials`): pending review cards, approve/dismiss, profile visibility toggle, source badges (Website, BNI Review, Google, LinkedIn, Yelp). Notification bell targeting via `target_member_id` (Apr 13, 2026) |
-| Meeting preview | `/meeting` — agenda timeline, visitor host promise, FAQs with expandable answers (Apr 13, 2026) |
-| Events page | `/events` — scattered Polaroid photo layout (alternating sides), "Here's what you missed" past events section with photo stacks. `/events/[slug]` — detail pages with photo gallery, Google Maps embed, schema.org Event structured data (Apr 13, 2026) |
+| Meeting preview | `/meeting` ... agenda timeline, visitor host promise, FAQs with expandable answers (Apr 13, 2026) |
+| Events page | `/events` ... scattered Polaroid photo layout (alternating sides), "Here's what you missed" past events section with photo stacks. `/events/[slug]` ... detail pages with photo gallery, Google Maps embed, schema.org Event structured data (Apr 13, 2026) |
 | Event photos | Upload promo photos in QNT EventForm, recap photos in EventDetail Photos tab. `event-images` storage bucket (public, 10MB, jpg/png/webp). Hero/gallery/recap cascade to public site. Series inheritance via "Apply to all" toggle (Apr 13, 2026) |
-| SEO profession pages | `/find` — directory of 18 professions. `/find/[profession]` — auto-generated landing pages per profession with member profiles, testimonials, contact links. Targets "find a [profession] in Southern California" queries (Apr 13, 2026) |
-| Recurring event mgmt | "Apply changes to entire series" toggle in QNT EventForm — updates name, time, location, format, visibility, photos across all siblings. `useUpdateRecurringSeries` mutation (Apr 13, 2026) |
-| Per-member privacy controls | Three independent boolean toggles on `members` (default true): `public_profile` (existing — appearance on public chapter website), `testimonials_enabled` (testimonial form + display), `card_shareable` (digital business card sharing). Plus `card_redirect_url` text — fallback URL when card sharing is off. Admin via `MemberForm` Privacy section; member self-service via `MyTestimonials` (testimonials) and `BusinessCardBuilder` (card). Self-service uses two SECURITY DEFINER RPCs: `set_my_testimonials_enabled(boolean)` and `set_my_card_settings(boolean, text)` — both `authenticated`-only, no broader UPDATE on members. Website enforcement: `[slug].astro` hides TestimonialForm, `/api/testimonial` returns 403, `public_chapter_testimonials` view filters approved testimonials about disabled members, `/card/<slug>` 302-redirects to `card_redirect_url` (clean URL — `?s=` token stripped) or 404s. Click tracking + sharer attribution preserved through redirects. `public_profile` audit closed two leaks (`fetchMember`, `fetchUpcomingSpeakers`) in `aim-high-bni/src/lib/supabase.ts`. First user: Mark Denali (Edward Jones) flipped all three off for regulatory compliance (Apr 16, 2026) |
-| Testimonial author bylines | Member profile testimonial cards now display "— Author Name" below each quote. Previously the author was discarded by mapping to `from: null`. Legacy renewal-review entries renamed from "Anonymous Member" → "Anonymous Fan" (14 rows) for warmer attribution (Apr 16, 2026) |
-| Notification dropdown scrolling | Replaced Radix `<ScrollArea max-h-[400px]>` with native `<div className="max-h-[400px] overflow-y-auto">`. The Radix viewport's `h-full` requires explicit parent height, not `max-h` — without it, overflow never engages and the scrollbar never appears. Native scroll is the right fit for popover lists (Apr 16, 2026) |
-| Hand-written type drift fixes | Aligned `src/types/database.ts` Member interface with actual DB columns: `instagram` → `instagram_handle`, `joined_date` → `join_date`, `last_enriched_at` → `enriched_at`. Saving member edits had been crashing with "Could not find the X column"; reads silently returned undefined (Instagram links never rendered, member tenure showed "—", enrichment recency pill missing) (Apr 16, 2026) |
+| SEO profession pages | `/find` ... directory of 18 professions. `/find/[profession]` ... auto-generated landing pages per profession with member profiles, testimonials, contact links. Targets "find a [profession] in Southern California" queries (Apr 13, 2026) |
+| Recurring event mgmt | "Apply changes to entire series" toggle in QNT EventForm ... updates name, time, location, format, visibility, photos across all siblings. `useUpdateRecurringSeries` mutation (Apr 13, 2026) |
+| Per-member privacy controls | Three independent boolean toggles on `members` (default true): `public_profile` (existing ... appearance on public chapter website), `testimonials_enabled` (testimonial form + display), `card_shareable` (digital business card sharing). Plus `card_redirect_url` text ... fallback URL when card sharing is off. Admin via `MemberForm` Privacy section; member self-service via `MyTestimonials` (testimonials) and `BusinessCardBuilder` (card). Self-service uses two SECURITY DEFINER RPCs: `set_my_testimonials_enabled(boolean)` and `set_my_card_settings(boolean, text)` ... both `authenticated`-only, no broader UPDATE on members. Website enforcement: `[slug].astro` hides TestimonialForm, `/api/testimonial` returns 403, `public_chapter_testimonials` view filters approved testimonials about disabled members, `/card/<slug>` 302-redirects to `card_redirect_url` (clean URL ... `?s=` token stripped) or 404s. Click tracking + sharer attribution preserved through redirects. `public_profile` audit closed two leaks (`fetchMember`, `fetchUpcomingSpeakers`) in `aim-high-bni/src/lib/supabase.ts`. First user: Mark Denali (Edward Jones) flipped all three off for regulatory compliance (Apr 16, 2026) |
+| Testimonial author bylines | Member profile testimonial cards now display " ...  Author Name" below each quote. Previously the author was discarded by mapping to `from: null`. Legacy renewal-review entries renamed from "Anonymous Member" → "Anonymous Fan" (14 rows) for warmer attribution (Apr 16, 2026) |
+| Notification dropdown scrolling | Replaced Radix `<ScrollArea max-h-[400px]>` with native `<div className="max-h-[400px] overflow-y-auto">`. The Radix viewport's `h-full` requires explicit parent height, not `max-h` ... without it, overflow never engages and the scrollbar never appears. Native scroll is the right fit for popover lists (Apr 16, 2026) |
+| Hand-written type drift fixes | Aligned `src/types/database.ts` Member interface with actual DB columns: `instagram` → `instagram_handle`, `joined_date` → `join_date`, `last_enriched_at` → `enriched_at`. Saving member edits had been crashing with "Could not find the X column"; reads silently returned undefined (Instagram links never rendered, member tenure showed " ... ", enrichment recency pill missing) (Apr 16, 2026) |
 
 ### Reference
 
@@ -9458,17 +9458,17 @@ PROGRESS DASHBOARD + RECOMMENDATIONS (Lovable)
 
 | Component | Type | Status |
 |-----------|------|--------|
-| `qwr_content_scorer.py` | Python script | Deployed — SEO (mechanical) + GEO (hybrid LLM) + Platform (mechanical) |
-| `qwr_position_tracker.py` | Python script | Deployed — DataForSEO SERP tracking with baseline detection |
-| `qwr_citation_tracker.py` | Python script | Deployed — Perplexity Sonar via OpenRouter, 3-method citation extraction |
-| SQL migration | Supabase | Deployed — 3 tables, 2 columns, 2 views, RLS policies |
-| `qwr-position-tracker.json` | n8n workflow `7LXfOraJ2HevC8FF` | Published — Sunday 8am UTC |
-| `qwr-citation-tracker.json` | n8n workflow `CgWmYlv0gzuJMfaO` | Published — 1st and 15th at 9am UTC |
-| Article Gen scoring hook | n8n (SSH node on `gDPgfxRqHBDvPfoa`) | Deployed — scores every new article after generation |
-| Enhanced Article Scores | Lovable prompt | Executed — 4 score rings on Article Detail sidebar |
-| Performance Dashboard | Lovable prompt | Executed — `/performance` page with 5 sections |
-| Onboarding Baseline | Lovable prompt | Executed — baseline capture after onboarding |
-| Docs Center update | Lovable prompt | Executed — Content Performance section added to `/docs` |
+| `qwr_content_scorer.py` | Python script | Deployed ... SEO (mechanical) + GEO (hybrid LLM) + Platform (mechanical) |
+| `qwr_position_tracker.py` | Python script | Deployed ... DataForSEO SERP tracking with baseline detection |
+| `qwr_citation_tracker.py` | Python script | Deployed ... Perplexity Sonar via OpenRouter, 3-method citation extraction |
+| SQL migration | Supabase | Deployed ... 3 tables, 2 columns, 2 views, RLS policies |
+| `qwr-position-tracker.json` | n8n workflow `7LXfOraJ2HevC8FF` | Published ... Sunday 8am UTC |
+| `qwr-citation-tracker.json` | n8n workflow `CgWmYlv0gzuJMfaO` | Published ... 1st and 15th at 9am UTC |
+| Article Gen scoring hook | n8n (SSH node on `gDPgfxRqHBDvPfoa`) | Deployed ... scores every new article after generation |
+| Enhanced Article Scores | Lovable prompt | Executed ... 4 score rings on Article Detail sidebar |
+| Performance Dashboard | Lovable prompt | Executed ... `/performance` page with 5 sections |
+| Onboarding Baseline | Lovable prompt | Executed ... baseline capture after onboarding |
+| Docs Center update | Lovable prompt | Executed ... Content Performance section added to `/docs` |
 
 ### Database Tables
 
@@ -9562,22 +9562,22 @@ Credits are per-account (not per-brand), never expire, and are consumed FIFO fro
 
 | Component | Type | Status |
 |-----------|------|--------|
-| `qwr_press_release_generator.py` | Python script | Built — Claude FLAGSHIP, AP-style + voice matching + SEO/GEO |
-| `qwr_pr_readiness_scorer.py` | Python script | Built — 5-dimension scoring |
-| PR Generation webhook | n8n `DugxqzUd2Eogdvg7` | Deployed — `/webhook/qwr-press-release` |
-| PR Distribution Alert | n8n `vQFSORoJR3QHuH3O` | Deployed — every 5 min check for ready PRs |
-| Stripe Webhook v1.2 | n8n `Lgj4TMhbMbZyPTrO` | Deployed — credit provisioning branch |
-| Checkout edge function | Supabase | Updated — one-time payment mode for credit bundles |
-| 4 Stripe bundle products | Stripe (LIVE) | Active — single, 3-pack, 6-pack, 12-pack |
-| Press Release UI | Lovable prompt | Executed — list, request, detail, credits, dashboard card |
-| Landing Page v2.0.0 | Lovable prompt | Executed — "Your Story. On Bloomberg." spotlight with pricing |
+| `qwr_press_release_generator.py` | Python script | Built ... Claude FLAGSHIP, AP-style + voice matching + SEO/GEO |
+| `qwr_pr_readiness_scorer.py` | Python script | Built ... 5-dimension scoring |
+| PR Generation webhook | n8n `DugxqzUd2Eogdvg7` | Deployed ... `/webhook/qwr-press-release` |
+| PR Distribution Alert | n8n `vQFSORoJR3QHuH3O` | Deployed ... every 5 min check for ready PRs |
+| Stripe Webhook v1.2 | n8n `Lgj4TMhbMbZyPTrO` | Deployed ... credit provisioning branch |
+| Checkout edge function | Supabase | Updated ... one-time payment mode for credit bundles |
+| 4 Stripe bundle products | Stripe (LIVE) | Active ... single, 3-pack, 6-pack, 12-pack |
+| Press Release UI | Lovable prompt | Executed ... list, request, detail, credits, dashboard card |
+| Landing Page v2.0.0 | Lovable prompt | Executed ... "Your Story. On Bloomberg." spotlight with pricing |
 
 ### Database Changes
 
 | Change | Details |
 |--------|---------|
 | `articles.content_type` | TEXT DEFAULT 'article' CHECK IN ('article', 'press_release') |
-| `articles.pr_metadata` | JSONB — headline, dateline, distribution_status, pr_score, readiness_checklist |
+| `articles.pr_metadata` | JSONB ... headline, dateline, distribution_status, pr_score, readiness_checklist |
 | `press_release_credits` table | Per-supporter credit tracking with FIFO consumption |
 | `get_pr_credits_remaining(UUID)` | Returns remaining credit count |
 | `use_pr_credit(UUID)` | FIFO deduction from oldest bundle |
@@ -9597,7 +9597,7 @@ Press Ranger Gold tier provides access to 500+ outlets including:
 | Backend (Python scripts) | Fully deployed |
 | Database (Supabase) | Migration complete |
 | Workflows (n8n) | 2 workflows active |
-| Payments (Stripe) | LIVE — 4 bundle products |
+| Payments (Stripe) | LIVE ... 4 bundle products |
 | Frontend (Lovable) | Prompts executed |
 | Distribution | Human-in-the-loop (Phase 2 will add API automation) |
 
@@ -9618,7 +9618,7 @@ Press Ranger Gold tier provides access to 500+ outlets including:
 
 ---
 
-### 🎓 Missing Pixel Training Opportunities — Verification & Migration Discipline (added 2026-08-11)
+### 🎓 Missing Pixel Training Opportunities ... Verification & Migration Discipline (added 2026-08-11)
 
 Drawn from the Opus 5 FLAGSHIP migration. **These are unusually good teaching material because
 the session got things WRONG and the record shows how each was caught** ... which is far more
@@ -9765,7 +9765,7 @@ OUTPUT SURFACES
 The $2,000/year Azure nonprofit sponsorship credit is tracked by `check_azure_credit_balance.py` (weekly cron, Mon 7 AM Pacific) so exhaustion never lands as a surprise credit-card charge. Key mechanics learned from the 2026-06 investigation:
 
 - **Billing structure:** MCA billing account/profile ("Chaplain TIG Heaslet"); credits are granted as 12-month lots. Past card charges traced to a **32-day gap between grant lots** (old lot expired 3/13/2026 mostly forfeited; new lot started 4/14/2026), NOT to SKU eligibility or overflow.
-- **Two modes:** `estimate` (live; `AZURE_CREDIT_GRANT_AMOUNT` + `AZURE_CREDIT_GRANT_START` in `.env`, balance = grant minus Cost Management spend since start) and `api` (exact lot data; requires the `qwu-vm-automation` SP to hold a Reader billing role, which is a separate ACL from Azure RBAC — auto-upgrades when granted).
+- **Two modes:** `estimate` (live; `AZURE_CREDIT_GRANT_AMOUNT` + `AZURE_CREDIT_GRANT_START` in `.env`, balance = grant minus Cost Management spend since start) and `api` (exact lot data; requires the `qwu-vm-automation` SP to hold a Reader billing role, which is a separate ACL from Azure RBAC ... auto-upgrades when granted).
 - **Outputs:** Discord `#system-status` (🟢/🟡 <3 mo runway/🔴 <1 mo/⛔ exhausted), HQ Ecosystem Vitals widget (via single-row `hq_azure_credit` table in HQ Supabase), structured JSON.
 - **Operational date:** re-request the nonprofit grant well before each April 14 lot expiry to avoid another gap.
 - Sponsorship credits never cover Marketplace products, support plans, or savings plans/reservations (those bill the card directly).
@@ -9828,7 +9828,7 @@ Every LLM usage log entry includes `billing_channel` to ensure correct cost attr
 
 ### Purpose-Level Attribution (v2.1.0)
 
-Purpose attribution answers "value vs waste" at the business-function level — more actionable than app-code alone. Every LLM call is tagged with a `purpose` field in `llm_usage.jsonl`.
+Purpose attribution answers "value vs waste" at the business-function level ... more actionable than app-code alone. Every LLM call is tagged with a `purpose` field in `llm_usage.jsonl`.
 
 | Purpose | Label | Example Scripts |
 |---------|-------|-----------------|
@@ -9866,7 +9866,7 @@ Report sections: Total Summary, By Purpose (primary), By Tier, Top 10 Scripts, W
 
 The email pipeline is the largest LLM cost driver (~44% of total spend). Optimization strategy:
 
-1. **Suppression pre-check** (v1.5.0→v1.6.0): `outlook_pipeline.py` loads `hq_email_suppressions` table BEFORE classification. Suppressed senders/domains get a synthetic `classification: "suppressed"` and skip Opus entirely (~$0.036/email saved). As of March 2026: **82% suppression rate** (1,153/1,413 emails skipped), reducing email processing costs from $1.17/day (Feb) to $0.22/day (Mar) — **81% reduction**. v1.6.0 also tracks all senders in `hq_email_senders` Supabase table for the HQ Email Sources module.
+1. **Suppression pre-check** (v1.5.0→v1.6.0): `outlook_pipeline.py` loads `hq_email_suppressions` table BEFORE classification. Suppressed senders/domains get a synthetic `classification: "suppressed"` and skip Opus entirely (~$0.036/email saved). As of March 2026: **82% suppression rate** (1,153/1,413 emails skipped), reducing email processing costs from $1.17/day (Feb) to $0.22/day (Mar) ... **81% reduction**. v1.6.0 also tracks all senders in `hq_email_senders` Supabase table for the HQ Email Sources module.
 2. **Newsletter short-circuit**: `email_classify.py` skips Opus for pre-detected newsletters.
 3. **Active unsubscribing**: User progressively reduces inbox volume by unsubscribing from non-essential emails.
 4. **Task creation safety net**: `email_task_create.py` Rule 0 blocks task creation for suppressed emails (defense in depth).
@@ -9879,7 +9879,7 @@ The email pipeline is the largest LLM cost driver (~44% of total spend). Optimiz
 |--------|-------------|---------------|-------------------|---------------|
 | LLM (OpenRouter) | $150 | $112.50 | $135 | $15/day |
 | Apify | $75 | $56.25 | $67.50 | $10/day |
-| Total Variable | $400 | $300 | $360 | — |
+| Total Variable | $400 | $300 | $360 | ... |
 
 Features: MTD spend tracking, end-of-month projection, daily anomaly detection, Discord `#system-status` alerts.
 
@@ -9887,13 +9887,13 @@ Features: MTD spend tracking, end-of-month projection, daily anomaly detection, 
 
 `validate_llm_costs.py` runs 7 validation checks:
 
-1. **Parse integrity** — Counts unparseable log lines
-2. **Zero-cost anomalies** — Flags $0 calls on non-FAST tiers
-3. **Cost spike detection** — Single calls exceeding $1.00
-4. **Daily trend analysis** — Flags days 3x above average
-5. **Billing channel consistency** — Verifies rates match expected ranges per channel
-6. **App attribution coverage** — Reports explicit vs derived app codes
-7. **OpenRouter Activity API cross-validation** — Compares local totals against API (requires `OPENROUTER_MGMT_KEY`)
+1. **Parse integrity** ... Counts unparseable log lines
+2. **Zero-cost anomalies** ... Flags $0 calls on non-FAST tiers
+3. **Cost spike detection** ... Single calls exceeding $1.00
+4. **Daily trend analysis** ... Flags days 3x above average
+5. **Billing channel consistency** ... Verifies rates match expected ranges per channel
+6. **App attribution coverage** ... Reports explicit vs derived app codes
+7. **OpenRouter Activity API cross-validation** ... Compares local totals against API (requires `OPENROUTER_MGMT_KEY`)
 
 Cross-validation result: **96% coverage** ($88.62 local vs $92.47 API over 30 days). The 4% gap represents calls outside `model_config.py` (other API keys, direct usage).
 
@@ -9908,7 +9908,7 @@ Cross-validation result: **96% coverage** ($88.62 local vs $92.47 API over 30 da
 | `validate_llm_costs.py` | v1.1.0 | 7-check LLM cost validation suite (pricing ranges from cost_constants) |
 | `check_budget_alerts.py` | v1.0.0 | Zero-dep budget threshold monitoring |
 | `azure_costs.py` | v1.2.0 | Azure VM cost collection (MTD always queries full month) |
-| `summarize_session.py` | — | Integrates Apify costs into daily digest |
+| `summarize_session.py` | ... | Integrates Apify costs into daily digest |
 
 ### Key Files
 
@@ -9922,7 +9922,7 @@ Cross-validation result: **96% coverage** ($88.62 local vs $92.47 API over 30 da
 
 ### Digital Twin Cost Transparency (v2.4)
 
-As of v2.4, the Digital Twin at `twin.quietlyworking.org` displays a full Operating Costs section — publicly visible, following QWF's "Show don't Tell" transparency value. The server's `/api/costs` endpoint aggregates all 7 cost sources with TTL-based caching.
+As of v2.4, the Digital Twin at `twin.quietlyworking.org` displays a full Operating Costs section ... publicly visible, following QWF's "Show don't Tell" transparency value. The server's `/api/costs` endpoint aggregates all 7 cost sources with TTL-based caching.
 
 **What's displayed publicly:**
 - Monthly burn total with per-source breakdown (LLM, Azure, Supabase, Apify, ESP)
@@ -9960,7 +9960,7 @@ As of v2.4, the Digital Twin at `twin.quietlyworking.org` displays a full Operat
 
 **Added: February 18, 2026**
 
-Reverse Benchmarking Intelligence studies what competitors are terrible at instead of copying their strengths (Rory Sutherland's concept). It uses two intelligence sources — competitor reviews (G2, Trustpilot, Capterra) and Reddit research (subreddit pain points + customer language) — to produce scored gap opportunities that feed directly into article generation.
+Reverse Benchmarking Intelligence studies what competitors are terrible at instead of copying their strengths (Rory Sutherland's concept). It uses two intelligence sources ... competitor reviews (G2, Trustpilot, Capterra) and Reddit research (subreddit pain points + customer language) ... to produce scored gap opportunities that feed directly into article generation.
 
 ### Architecture
 
@@ -9992,19 +9992,19 @@ The power is in the cross-reference: when competitor reviews say "reporting is w
 | Component | Type | Status |
 |-----------|------|--------|
 | SQL Migration (7 tables) | Supabase | Deployed |
-| `qwr_review_scraper.py` | Python script | Built — G2, Trustpilot, Capterra via Apify |
-| `qwr_review_analyzer.py` | Python script | Built — Claude FLAGSHIP with thinking |
-| `qwr_reddit_scraper.py` | Python script | Built — PRAW-based subreddit scraping |
-| `qwr_reddit_analyzer.py` | Python script | Built — pain points, unmet needs, customer language |
-| `qwr_gap_opportunity_generator.py` v2.0.0 | Python script | Built — cross-references sources → scored gaps + content strategy matching (`suggested_strategy_id`) |
+| `qwr_review_scraper.py` | Python script | Built ... G2, Trustpilot, Capterra via Apify |
+| `qwr_review_analyzer.py` | Python script | Built ... Claude FLAGSHIP with thinking |
+| `qwr_reddit_scraper.py` | Python script | Built ... PRAW-based subreddit scraping |
+| `qwr_reddit_analyzer.py` | Python script | Built ... pain points, unmet needs, customer language |
+| `qwr_gap_opportunity_generator.py` v2.0.0 | Python script | Built ... cross-references sources → scored gaps + content strategy matching (`suggested_strategy_id`) |
 | `qwr_competitor_intel.py` v2.0.0 | Extended | Added review scraping trigger |
 | `qwr_opportunity_scorer.py` v2.0.0 | Extended | Added gap opportunity scoring |
 | `qwr_update_article_gen_workflow.py` v3.0.0 | Extended | Article gen v5.0 → v8.0 (content strategy + quality targets) |
 | `qwr_fix_citation_pipeline.py` v1.0.0 | Built | Citation URL extraction, quality scorer fix, inline attribution |
-| n8n: Review Scraping + Analysis | Workflow `q9D0RU8D7eBCmq34` | Deployed — scheduled |
-| n8n: Reddit Scraping + Analysis | Workflow `DSv69vT6GfXzY6IS` | Deployed — scheduled |
-| n8n: Gap Opportunity Generator | Workflow `aEj51qiTeZl9C4tL` | Deployed — scheduled |
-| n8n: Subreddit Discovery Webhook | Workflow `wC2Yly51PIPd7Rkh` | Deployed — `/webhook/qwr-subreddit-discovery` |
+| n8n: Review Scraping + Analysis | Workflow `q9D0RU8D7eBCmq34` | Deployed ... scheduled |
+| n8n: Reddit Scraping + Analysis | Workflow `DSv69vT6GfXzY6IS` | Deployed ... scheduled |
+| n8n: Gap Opportunity Generator | Workflow `aEj51qiTeZl9C4tL` | Deployed ... scheduled |
+| n8n: Subreddit Discovery Webhook | Workflow `wC2Yly51PIPd7Rkh` | Deployed ... `/webhook/qwr-subreddit-discovery` |
 | Lovable: Source Setup UI (054) | Frontend | Executed |
 | Lovable: Intelligence Dashboard (055) | Frontend | Executed |
 | Lovable: Gap Opportunity Detail (056) | Frontend | Executed |
@@ -10027,23 +10027,23 @@ The power is in the cross-reference: when competitor reviews say "reporting is w
 The article generation workflow now includes:
 - **"Write About This Gap" flow:** When `gap_opportunity_id` is in the webhook body, fetches the full gap with evidence and injects it as the article's primary angle
 - **Standard article flow:** Keyword-matches against active gaps (score >= 40) and surfaces relevant opportunities
-- **Customer language injection:** Fetches Reddit-derived common_terms, power_phrases, questions_asked, frustration_phrases, and praise_phrases — articles use the exact words real customers use
+- **Customer language injection:** Fetches Reddit-derived common_terms, power_phrases, questions_asked, frustration_phrases, and praise_phrases ... articles use the exact words real customers use
 - **Post-generation update:** PATCHes gap status to `article_generated` after successful generation
 
 ### Dependencies
 
 | Dependency | Status | Notes |
 |------------|--------|-------|
-| PRAW 7.8.1 | Installed | `pip install praw` — in requirements.txt |
+| PRAW 7.8.1 | Installed | `pip install praw` ... in requirements.txt |
 | Reddit API credentials | **PENDING** | User creating app at reddit.com/prefs/apps → `REDDIT_CLIENT_ID`, `REDDIT_CLIENT_SECRET`, `REDDIT_USER_AGENT` in `.env` |
 
 ### Gap Scoring
 
 Each gap opportunity is scored 0-100 based on:
-- **Review evidence strength** — How many reviews mention this weakness, across how many platforms
-- **Reddit evidence strength** — How many independent pain point mentions in relevant subreddits
-- **Cross-source correlation** — Higher score when both sources identify the same gap
-- **Content viability** — Is this gap something an article can actually address?
+- **Review evidence strength** ... How many reviews mention this weakness, across how many platforms
+- **Reddit evidence strength** ... How many independent pain point mentions in relevant subreddits
+- **Cross-source correlation** ... Higher score when both sources identify the same gap
+- **Content viability** ... Is this gap something an article can actually address?
 
 Gaps scoring 40+ are surfaced to article generation. Gaps scoring 70+ trigger Discord alerts as high-value content opportunities.
 
@@ -10094,18 +10094,18 @@ ARTICLE GENERATION (v6.0)
 
 | Component | Type | Status |
 |-----------|------|--------|
-| `content_strategies` table | Supabase | Deployed — stores strategy configs per brand |
-| `qwr_gap_opportunity_generator.py` v2.0.0 | Python script | Built — adds `suggested_strategy_id` to matching gaps |
-| Article Gen v6.0 | n8n workflow `<WORKFLOW_ID>` | Deployed — reads strategy context for generation |
-| Lovable: Strategy Settings (065) | Frontend | Executed — CRUD for content strategies |
-| Lovable: Landing Page v3.0 (066) | Frontend | Executed — updated landing page with Content Strategy messaging |
+| `content_strategies` table | Supabase | Deployed ... stores strategy configs per brand |
+| `qwr_gap_opportunity_generator.py` v2.0.0 | Python script | Built ... adds `suggested_strategy_id` to matching gaps |
+| Article Gen v6.0 | n8n workflow `<WORKFLOW_ID>` | Deployed ... reads strategy context for generation |
+| Lovable: Strategy Settings (065) | Frontend | Executed ... CRUD for content strategies |
+| Lovable: Landing Page v3.0 (066) | Frontend | Executed ... updated landing page with Content Strategy messaging |
 
 ### Database Tables
 
 | Table | Purpose |
 |-------|---------|
 | `content_strategies` | Strategy configs: name, goal, persona_id, platform, expertise_level, style_guide, brand_id |
-| `gap_opportunities.suggested_strategy_id` | FK to content_strategies — set by gap generator when a gap matches a strategy |
+| `gap_opportunities.suggested_strategy_id` | FK to content_strategies ... set by gap generator when a gap matches a strategy |
 
 ### Content Strategy Fields
 
@@ -10129,7 +10129,7 @@ ARTICLE GENERATION (v6.0)
 
 **Added: February 26, 2026**
 
-The Preparation Workbook is an interactive, AI-guided pre-signup experience at `/prepare`. Visitors build their content strategy through a 6-chapter conversational journey — without creating an account. This replaces the traditional "sign up and figure it out" onboarding with a value-first approach.
+The Preparation Workbook is an interactive, AI-guided pre-signup experience at `/prepare`. Visitors build their content strategy through a 6-chapter conversational journey ... without creating an account. This replaces the traditional "sign up and figure it out" onboarding with a value-first approach.
 
 ### Architecture
 
@@ -10160,18 +10160,18 @@ POST-SIGNUP IMPORT
 
 | Component | Type | Status |
 |-----------|------|--------|
-| `workbook_sessions` table | Supabase | Deployed — anon RLS policies for public access |
-| `qwr_workbook_engine.py` v1.0.0 | Python script | Built — 4 AI chapter types, 7 commands, magic link resume |
-| n8n: Workbook Webhook | Workflow `8S3sUIaYvJXhdzPg` | Deployed — `/webhook/qwr-workbook` |
-| Lovable: Preparation Workbook (067) | Frontend | Executed — `/prepare` route with chat UI |
-| `import-workbook` | Supabase Edge Function | Deployed — converts workbook seeds to full records |
+| `workbook_sessions` table | Supabase | Deployed ... anon RLS policies for public access |
+| `qwr_workbook_engine.py` v1.0.0 | Python script | Built ... 4 AI chapter types, 7 commands, magic link resume |
+| n8n: Workbook Webhook | Workflow `8S3sUIaYvJXhdzPg` | Deployed ... `/webhook/qwr-workbook` |
+| Lovable: Preparation Workbook (067) | Frontend | Executed ... `/prepare` route with chat UI |
+| `import-workbook` | Supabase Edge Function | Deployed ... converts workbook seeds to full records |
 
 ### Database: workbook_sessions
 
 | Column | Type | Purpose |
 |--------|------|---------|
 | `id` | UUID (PK) | Session identifier |
-| `email` | text | Optional — for save-and-resume |
+| `email` | text | Optional ... for save-and-resume |
 | `supporter_id` | UUID (FK) | Set after signup/import |
 | `status` | text | `active`, `completed`, `imported`, `abandoned` |
 | `current_chapter` | int | 1-6 progress tracker |
@@ -10191,9 +10191,9 @@ POST-SIGNUP IMPORT
 
 Each AI chapter (1, 2, 3, 5) follows a 3-phase progressive methodology:
 
-1. **Discovery** — Open-ended questions to understand the visitor's situation
-2. **Clarification** — Targeted follow-ups based on extracted data gaps
-3. **Documentation** — Summary and confirmation of what was captured
+1. **Discovery** ... Open-ended questions to understand the visitor's situation
+2. **Clarification** ... Targeted follow-ups based on extracted data gaps
+3. **Documentation** ... Summary and confirmation of what was captured
 
 Phase transitions are configurable per chapter with `min_questions` and `min_completeness` thresholds. Every 4 messages (or on phase change), Claude STANDARD extracts structured data from the conversation into the chapter's seed field.
 
@@ -10245,7 +10245,7 @@ Every QWF app landing page includes a standardized "Part of Something Bigger" se
 
 ### What It Contains
 
-- **v2.0 (March 2026): Interactive SVG Orbit + 9 Cards** — replaced flat card grid with animated hub-and-spoke visualization. QSP always center node. Current app at 12 o'clock. Traveling dots along connection lines. Auto-cycle spotlight (stops on any interaction). Bidirectional hover/click linking between orbit nodes and cards. Mobile fallback: vertical hub-list.
+- **v2.0 (March 2026): Interactive SVG Orbit + 9 Cards** ... replaced flat card grid with animated hub-and-spoke visualization. QSP always center node. Current app at 12 o'clock. Traveling dots along connection lines. Auto-cycle spotlight (stops on any interaction). Bidirectional hover/click linking between orbit nodes and cards. Mobile fallback: vertical hub-list.
 - **9 items:** Quietly Spotting (FREE), Quietly Writing, Quietly Quoting (IN PRODUCTION), Quietly Tracking (IN PRODUCTION), Quietly Networking, Quietly Knocking, Quietly Managing (IN PRODUCTION), QWF Passport (ONE ACCOUNT), Your Tools (CONNECT, dashed border)
 - **Canonical icons** (match QSP sidebar): Telescope, Feather, Calculator, Link2, Handshake, DoorOpen, Home, Fingerprint, Plug
 - **Mission footer:** "Every penny of proceeds from QWF apps supports underserved youth through The Missing Pixel Project."
@@ -10330,7 +10330,7 @@ The 7-section template adapts per fuel line (same skeleton, different content bl
 
 | Phase | Scope | Status |
 |-------|-------|--------|
-| 1 | QWR supporters only (MVP) | ✅ Built — HQ tables deployed, data collection + statement generation working, test email sent |
+| 1 | QWR supporters only (MVP) | ✅ Built ... HQ tables deployed, data collection + statement generation working, test email sent |
 | 2 | Multi-app expansion + badges | ⏳ Planned |
 | 3 | QSP supporter portal (web) | ⏳ Planned |
 | 4 | FORGE fuel line integration | ⏳ Planned |
@@ -10340,7 +10340,7 @@ The 7-section template adapts per fuel line (same skeleton, different content bl
 | File | Purpose |
 |------|---------|
 | `005 Operations/Directives/unified_supporter_statement.md` | Full specification |
-| `005 Operations/Execution/collect_supporter_data.py` | Cross-app data aggregation — queries Stripe + per-app Supabase, upserts to HQ |
+| `005 Operations/Execution/collect_supporter_data.py` | Cross-app data aggregation ... queries Stripe + per-app Supabase, upserts to HQ |
 | `005 Operations/Execution/generate_supporter_statement.py` | Jinja2 template rendering + Graph API email send |
 | `005 Operations/Execution/hq_supporter_statement_migration.sql` | HQ Supabase schema (3 tables + RLS + indexes) |
 | `005 Operations/Templates/statements/` | Jinja2 HTML templates (base, sections, fuel lines) |
@@ -10439,7 +10439,7 @@ Lock files (`.tmp/auto_remediation_<monitor>.lock`) prevent concurrent remediati
 
 ### Lessons Learned During Build
 
-1. **Claude wraps JSON in code fences** — Even with `json_mode=True`, `thinking_call()` responses may be wrapped in `` ```json `` code fences. Script strips these before parsing.
+1. **Claude wraps JSON in code fences** ... Even with `json_mode=True`, `thinking_call()` responses may be wrapped in `` ```json `` code fences. Script strips these before parsing.
 2. **SSH nohup for long-running LLM calls** — n8n SSH node must return immediately (webhook timeout). Use `nohup ... &` pattern with `echo` for immediate response.
 3. **Full venv path in SSH** — Non-interactive SSH doesn't source `.bashrc`, so use `.venv/bin/python3` instead of `python`.
 4. **n8n webhookId bug** — After `import:workflow`, verify `webhook_entity` table has correct `webhookId` value.
@@ -11197,7 +11197,7 @@ The flag takes the **variable name**, never a token value. Reads on registered s
 Apps on CF Pages deploy via `wrangler pages deploy`:
 
 ```bash
-# Deploy from local build (WHELHO only — pending GH Actions secrets)
+# Deploy from local build (WHELHO only ... pending GH Actions secrets)
 cd /home/<VM_USER>/whelho && npm run build
 npx wrangler pages deploy dist --project-name=whelho
 
@@ -13051,7 +13051,7 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 > [!NOTE] Document History Redacted
 > The private version of this manual maintains a ~270-row version-history table. It is excluded from the public version because its rows weave supporter names, private individuals, and infrastructure identifiers through narrative context too densely for line-level redaction to leave readable, safely-anonymous text.
 >
-> **For students:** The history table demonstrates real versioned documentation discipline — every change dated, versioned, and reasoned. Ask your mentor about reviewing it during supervised learning.
+> **For students:** The history table demonstrates real versioned documentation discipline ... every change dated, versioned, and reasoned. Ask your mentor about reviewing it during supervised learning.
 
 ---
 

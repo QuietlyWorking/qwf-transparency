@@ -12,7 +12,7 @@ We run a 501(c)(3) nonprofit on 50+ tools. This page is a transparent look at ev
 
 Most review sites ask *"How good is the product?"* We ask a different question: **"How good is the company... and will this tool still be here in 5 years?"**
 
-That question led us to build the **QWS Scorecard** — a scoring framework that evaluates the *soul* of a company, not just its features. Because mission-driven organizations can't afford to bet on a tool that gets acquired by private equity and gutted next quarter.
+That question led us to build the **QWS Scorecard** ... a scoring framework that evaluates the *soul* of a company, not just its features. Because mission-driven organizations can't afford to bet on a tool that gets acquired by private equity and gutted next quarter.
 
 ---
 
@@ -30,8 +30,8 @@ Every tool is scored across **4 categories, 14 metrics**, each rated 1-5.
 **Soul gets the highest weight** because that's what makes this different. A beautiful product from a soulless company is still a risk.
 
 Two scores are called out in every table below:
-- **Heart** — Does this company show heart toward nonprofits and social good organizations?
-- **Child/Inv** — Is this product the founder's life work (a "child") or a venture built to flip (an "investment")?
+- **Heart** ... Does this company show heart toward nonprofits and social good organizations?
+- **Child/Inv** ... Is this product the founder's life work (a "child") or a venture built to flip (an "investment")?
 
 > Scores marked **?** mean we need more research. We only score what we can defend with evidence.
 
@@ -52,8 +52,8 @@ These tools have the broadest audience appeal, strongest stories, and highest QW
 | **Cloudflare** | DNS/Security | 4 | 4 | **4.2** | DNS and security for every QWF domain. Incredible free tier, public company but not PE. |
 | **Claude / Anthropic** | AI | 4 | 4 | **4.0** | Primary AI for all QWF operations. Safety-focused mission, Dario Amodei founder-led. |
 | **Claude Code** | AI/Dev Tools | ? | 4 | **4.0** | The agent that literally runs our backoffice. This page was synced by a script it helped build. |
-| **Lovable** | AI/Frontend | 4 | 5 | **4.2** | Builds our web apps (HQ Command Center, Quietly Spotting, and more). Founder (Anton Osika) deeply involved, early stage, genuine heart — 20% NPO discount, Valentine's Day 50% off credits, and 24 hours of free usage for *everyone* on International Women's Day 2026. |
-| **monday.com** | Project Management | 5 | ? | **4.0** | Visual project planning with Gantt baselines for supporter portfolio rollups. **10 free Pro seats** for nonprofits with full features (Gantt baselines, formula columns, GraphQL API, webhooks). Adopted late April 2026 after years of mental dismissal — the proof that "revisit, don't dismiss" matters. Founders Roy Mann + Eran Zinman; public co since 2021 (Owner Involved score pending verification). One of the strongest nonprofit programs in our entire stack. |
+| **Lovable** | AI/Frontend | 4 | 5 | **4.2** | Builds our web apps (HQ Command Center, Quietly Spotting, and more). Founder (Anton Osika) deeply involved, early stage, genuine heart ... 20% NPO discount, Valentine's Day 50% off credits, and 24 hours of free usage for *everyone* on International Women's Day 2026. |
+| **monday.com** | Project Management | 5 | ? | **4.0** | Visual project planning with Gantt baselines for supporter portfolio rollups. **10 free Pro seats** for nonprofits with full features (Gantt baselines, formula columns, GraphQL API, webhooks). Adopted late April 2026 after years of mental dismissal ... the proof that "revisit, don't dismiss" matters. Founders Roy Mann + Eran Zinman; public co since 2021 (Owner Involved score pending verification). One of the strongest nonprofit programs in our entire stack. |
 
 ---
 
@@ -141,7 +141,7 @@ As of February 2026, QWF runs on:
 
 Watching all of this coordinate is what [Quietly Spotting](https://quietlyspotting.org) exists to do. Your own **SPOT** (Single Point of Truth)... one pane where every tool you run, every metric you care about, every status you monitor lives together. We built QSP because seeing all 48 tools through one lens is what turns a collection into a stack.
 
-> **Are you a nonprofit?** Check out our [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) — a transparent, experience-based guide to every free and discounted tech program we've found, with honest notes on what the application process actually looks like.
+> **Are you a nonprofit?** Check out our [Nonprofit Tech Access Guide](/open-playbook/nonprofit-tech-access-guide/) ... a transparent, experience-based guide to every free and discounted tech program we've found, with honest notes on what the application process actually looks like.
 
 ---
 

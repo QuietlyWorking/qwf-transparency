@@ -1,5 +1,5 @@
 ---
-title: "Architecture Blueprint — Schedule Timeline"
+title: "Architecture Blueprint ... Schedule Timeline"
 slug: "blueprint-schedule"
 pillar: "open-playbook"
 description: "A 24-hour timeline of everything that runs automatically... 48 workflows across scheduled, webhook-triggered, polling, and manual categories, with cost optimiza"
@@ -8,7 +8,7 @@ tags: ["QWF", "QWU", "architecture", "scheduling", "workflows", "automation"]
 hook: "48 workflows. 24 hours. Here's when everything fires and why."
 isHome: false
 ---
-# Architecture Blueprint — Schedule Timeline
+# Architecture Blueprint ... Schedule Timeline
 
 This is Page 5 of 5 in the QWU Backoffice Architecture Map series... the schedule and timeline view. Every automated workflow mapped across a 24-hour clock... scheduled jobs at fixed times, recurring polls on intervals, and webhook-triggered responses that fire on demand. The cost optimization section shows when to run batch jobs for maximum savings.
 

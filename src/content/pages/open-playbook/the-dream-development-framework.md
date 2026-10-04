@@ -55,9 +55,9 @@ This is where we turn the WHELHO wheel... adding pressure to find breaking point
 
 ### Stage Three: Build Your Dream
 Once the student graduates from Stage Two, their **POD** is created. A POD is the team that surrounds the dream:
-- **Expert Advisors** — acting as the advisory board for the 10-year plan
-- **Boots-on-the-Ground Mentors** — holding the student accountable
-- **Community of Support** — fellow members whose dreams align with mutual encouragement and growth
+- **Expert Advisors** ... acting as the advisory board for the 10-year plan
+- **Boots-on-the-Ground Mentors** ... holding the student accountable
+- **Community of Support** ... fellow members whose dreams align with mutual encouragement and growth
 
 With the support of their POD, the student takes their first steps in faith to build their dream.
 
