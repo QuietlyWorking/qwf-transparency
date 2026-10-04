@@ -8,6 +8,10 @@ export default defineConfig({
   output: 'static',
   integrations: [svelte(), sitemap()],
   markdown: {
+    // Off deliberately: it rewrote '--' in prose into an em dash, which both
+    // breaks the QWF em-dash ban and turned published CLI flags such as
+    // --dry-run into commands that fail when a reader copies them.
+    smartypants: false,
     remarkPlugins: [remarkObsidianCallouts],
     shikiConfig: {
       theme: 'one-dark-pro',
