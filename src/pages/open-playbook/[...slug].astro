@@ -21,7 +21,7 @@ let toolShedData: Record<string, any> | null = null;
 if (page.data.slug === 'the-tool-shed') {
   try {
     toolShedData = await import('@/data/tool-shed.json');
-  } catch { /* graceful fallback — static table still renders below */ }
+  } catch { /* graceful fallback ... static table still renders below */ }
 }
 const hasToolShed = toolShedData?.tools?.length > 0;
 ---

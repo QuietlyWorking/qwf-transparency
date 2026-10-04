@@ -559,7 +559,7 @@
       "lore_connection": null,
       "public_link": true,
       "detail": {
-        "summary": "QWF's first effort, founded in 1999 as 'Children of Fallen Soldiers' and rebranded ~2010 to include first responder families. Honors the young people left behind when military members and first responders make the ultimate sacrifice. The program that started it all \u2014 and whose younglings later sparked The Missing Pixel Project.",
+        "summary": "QWF's first effort, founded in 1999 as 'Children of Fallen Soldiers' and rebranded ~2010 to include first responder families. Honors the young people left behind when military members and first responders make the ultimate sacrifice. The program that started it all ... and whose younglings later sparked The Missing Pixel Project.",
         "highlights": [
           "QWF's founding effort since 1999",
           "Serving children of fallen military and first responders",
@@ -785,7 +785,7 @@
       "sensitivity": "low",
       "student_training": true,
       "parent": "qwf",
-      "description": "Three decades of award-winning creative expertise \u2014 reborn as QWF's engine for student training, nonprofit sustainability, and youth service organization support.",
+      "description": "Three decades of award-winning creative expertise ... reborn as QWF's engine for student training, nonprofit sustainability, and youth service organization support.",
       "lore_connection": null,
       "public_link": false,
       "detail": {
@@ -963,7 +963,7 @@
       "sensitivity": "low",
       "student_training": false,
       "parent": "qwf",
-      "description": "1 penny per referral. Not about money \u2014 about telling the story. Milestones at 1, 10, 25, 100 referrals.",
+      "description": "1 penny per referral. Not about money ... about telling the story. Milestones at 1, 10, 25, 100 referrals.",
       "lore_connection": null,
       "public_link": true,
       "detail": {
@@ -1307,12 +1307,12 @@
       "detail": {
         "summary": "\"I Built That\" is the core pedagogical framework used across all Missing Pixel Project training. Six steps take a student from \"I can't\" to \"I did.\"",
         "highlights": [
-          "Step 1: Stretch Assignment \u2014 task just beyond comfort zone",
-          "Step 2: \"I Can't\" Moment \u2014 the expected wall",
-          "Step 3: SDF Moment \u2014 \"What if I totally can?\"",
-          "Step 4: Supported Struggle \u2014 mentor walks alongside",
-          "Step 5: Completion Celebration \u2014 public recognition",
-          "Step 6: Legacy Anchor \u2014 student teaches the next one"
+          "Step 1: Stretch Assignment ... task just beyond comfort zone",
+          "Step 2: \"I Can't\" Moment ... the expected wall",
+          "Step 3: SDF Moment ... \"What if I totally can?\"",
+          "Step 4: Supported Struggle ... mentor walks alongside",
+          "Step 5: Completion Celebration ... public recognition",
+          "Step 6: Legacy Anchor ... student teaches the next one"
         ],
         "connections": [
           "Missing Pixel Project",
@@ -1417,7 +1417,7 @@
       "detail": {
         "summary": "The QWF community newsletter is in seedling stage. No name, no template yet. It will connect the QWF community with stories and updates.",
         "highlights": [
-          "Seedling stage \u2014 coming soon",
+          "Seedling stage ... coming soon",
           "Will feature community stories and updates",
           "Student-created content through Missing Pixel"
         ],
@@ -1982,7 +1982,7 @@
       "detail": {
         "summary": "The Preference Center gives QWF supporters self-service control over their communication preferences. Magic link-based access means no passwords needed.",
         "highlights": [
-          "Magic link access \u2014 no passwords needed",
+          "Magic link access ... no passwords needed",
           "Control preferences across all QWF channels",
           "Respects your choices immediately"
         ],

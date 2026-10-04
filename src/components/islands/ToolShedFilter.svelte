@@ -53,7 +53,7 @@
       if (sortBy === 'tier') {
         return dir * (a.tier - b.tier);
       }
-      // Numeric sorts — nulls go last
+      // Numeric sorts ... nulls go last
       const aVal = a[sortBy];
       const bVal = b[sortBy];
       if (aVal == null && bVal == null) return 0;
