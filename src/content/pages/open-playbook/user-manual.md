@@ -2048,6 +2048,26 @@ invitation email to yourself, so a self-invite proves the mechanism and says not
 a different address that still reaches only the tester (plus-addressing works), and expect three emails
 across create, move and delete.
 
+#### MP Training Opportunities (from the 2026-10-04 Day-and-Focus build)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| `undefined` is not the same as "empty" | Google omits the `attendees` key entirely from an event nobody else is on, so a solo event and a half-fetched event look IDENTICAL to a guard. The fix is to make the caller assert it did a full read, so the ambiguity is resolved by the one place that can know it. A student who learns this stops writing `if (!x.length)` on data they did not fetch themselves | Intermediate |
+| A fail-closed rail is tested by naming what must be REFUSED | 22 fixtures, and almost none of them check the happy path: a truthy-but-not-`true` flag, a malformed list, the attendee shape Google verbatim returns, a value trying to break out of its fence. Teaches that a security test is an enumeration of refusals, not a demonstration that the feature works | Intermediate |
+| Shape-based secret detection cannot see an opaque token | Every rule in the scanner anchored on a vendor prefix. A refresh token is twelve lowercase characters with no prefix, so it was invisible ... and it was the MORE dangerous of the two, because it never expires. The fix is to stop reading the value and read the field name it was filed under. Teaches threat modelling by failure mode rather than by pattern | Advanced |
+| Redaction has to scale with the secret | Showing 4 leading + 4 trailing characters is safe on a 40-character key and discloses two thirds of a 12-character one. A rule that was correct became wrong when the data changed underneath it, with no code edit. Teaches that a security control has preconditions, and they expire | Advanced |
+| Sizing type by visual angle, not by taste | x-height read from the actual font binary (0.600 for the display face, not the assumed 0.5 ... a 20 % error), WCAG contrast computed and asserted per token, and a test that re-derives every ratio so a COMMENT can never drift into a lie. Crosses design and engineering in one exercise | Intermediate |
+| An absolute-pixel layout has never met a window | The same design was correct on paper and cut in half on a real monitor, because the page is a browser window and not the panel it was measured for. Teaches the difference between a reference install and a deployment target | Intermediate |
+| A green test suite can be wrong about the thing that matters | A type-check, 75 unit tests and a pixel-diff of a printed page were ALL green while the live screen was visibly broken in two different ways. Teaches the test pyramid honestly: each layer proves something real and none of them proves the user can use it | Advanced |
+| Proving an exemption still holds after you change the rule | After widening the secret filter, the question is not "does it catch more?" but "does it still let the PUBLIC keys through?" Sixteen real public keys in eight contexts, plus twenty-one secret ones, both directions asserted. Teaches regression thinking as a two-sided obligation | Advanced |
+
+**Most valuable MP exercise:** give a student the write path and the attendee rail, and a calendar
+containing one event with a guest on it. Ask them to add a private note to every event. The unit
+tests will pass. Then ask them to prove, against the live calendar, that the one event with a guest
+was left untouched ... and then to break their own guard by passing `attendeesRead: 'true'` as a
+string. Every step is a real lesson, and it ends on the habit that matters most here: **a rail you
+have not tried to defeat is a rail you have not tested.**
+
 #### MP Training Opportunities (from the 2026-10-04 em-dash sweep and first Claude Code mod)
 
 | Skill / Pattern | Why It Teaches | Difficulty |
@@ -4886,8 +4906,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.00 by generate_public_manual.py"
-generated: "2026-10-04 08:30"
+source: "Auto-generated from private manual v6.01 by generate_public_manual.py"
+generated: "2026-10-05 05:52"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13070,4 +13090,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-04 08:30 (v6.00)*
+*Last updated: 2026-10-05 05:52 (v6.01)*
