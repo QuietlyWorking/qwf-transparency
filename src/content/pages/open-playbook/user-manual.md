@@ -4921,8 +4921,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.02 by generate_public_manual.py"
-generated: "2026-10-06 03:51"
+source: "Auto-generated from private manual v6.03 by generate_public_manual.py"
+generated: "2026-10-06 04:32"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5200,6 +5200,74 @@ Supabase add-on and a family decision TIG has not taken.
 | SES SMTP credential derivation | AWS SigV4-derived SMTP passwords, IAM least-privilege by `ses:FromAddress`, config sets | ⭐⭐⭐ |
 | Email authentication at the receiving mailbox | SPF / DKIM / DMARC alignment, reading `Authentication-Results`, why a provider 200 is not delivery | ⭐⭐⭐ |
 | Blind-instrument discipline | Why "I could not read" must never render as "all clear" | ⭐⭐⭐ |
+
+---
+
+## Reading a Supporter's Scanned Documents ⭐ NEW
+
+Built 2026-10-05, when [Supporter Organization] delivered a new contract system as eight PDFs and nobody could
+read them. The job was not "extract the text." It was **"report what changed, and be right,"**
+which is a different and much harder thing when the reader itself makes mistakes.
+
+### The problem this solves
+
+OCR invents differences. A character-level diff of OCR output against clean text returns a list of
+"changes" that are mostly the reader's own errors, and **that list looks exactly like a list of
+real edits to the supporter's contract.** Handing that to a human, and from them to the person who
+owns the document, is the failure the whole toolchain exists to prevent.
+
+### The four tools
+
+| Script | Job |
+|---|---|
+| `ocr_pdf_pages.py` | Verbatim OCR of a scanned page via the IMAGE tier. Refuses to correct, complete or normalise anything ... a defect in the document is evidence, and repairing it destroys the evidence. |
+| `measure_ocr_error_rate.py` | How wrong the reader is, measured against a page whose true text is already known, with a stated threshold below which a difference is noise. |
+| `compare_contract_clauses.py` | Clause comparison aligned on the HEADING, not the clause number, so a renumbering cannot masquerade as a rewrite. |
+| `crop_pdf_evidence.py` | Cuts a readable picture out of a page, centred on a located phrase, so a claim can be SHOWN to the person who owns the document rather than described to them. |
+
+### Five findings worth more than the scripts
+
+1. **Check the class, not an example.** "All eight documents are scans" came from running three
+   commands against one file. Only two were scans. Per-file evidence costs seconds.
+2. **A complete text layer is not the same as a readable one.** Six of the eight PDFs had real
+   text, and every heading and column label was a **vector outline** ... visible on the page,
+   invisible to every extractor. On one form that was 39% of the content, including the headings
+   `NOTICE OF RIGHT TO CANCEL` and `NOTICE TO OWNER`. A text layer can be present and still lie
+   about what is on the page.
+3. **Measure the instrument on the real typeface before trusting it.** 2,311 known words gave a
+   0.43% miss rate, and all of it was hyphens the *text layer* drops while the OCR reads them
+   correctly. Where no ground truth existed, two different model families read the same image and
+   agreed on every content word across 2,014 words.
+4. **A reading-order difference is not an error.** The first error measurement reported up to 107%
+   and was measuring the wrong thing: a layout-preserving extractor and a reading-order OCR
+   disagree about word ORDER on every multi-column page. Order-insensitive recall is the honest
+   measure, and a recovered outlined heading is a FINDING, never an error.
+5. **A verification step that fails on its own bug is worse than none.** Two separate guards in
+   this session condemned work that was correct ... one asked Graph for a property that does not
+   exist on the type it queried, the other matched image ids against filenames after Outlook had
+   rewritten both. When a check fails, first ask whether the CHECK is broken.
+
+### MP Training Opportunities ⭐ (from the 2026-10-05 contract read)
+
+| Opportunity | Skills taught | Level | Why it is good curriculum |
+|---|---|---|---|
+| Classify a folder of PDFs: scan, born-digital, or born-digital-with-outlines | `poppler-utils`, PDF internals, content streams, evidence over assumption | Intermediate | The answer is three states, not two, and the third only appears if you look. Teaches that a clean-looking result can still be wrong. |
+| Measure an OCR error rate against known-good text | Levenshtein, precision vs recall, choosing the right denominator | Intermediate | The first measurement was wrong in a way that LOOKED alarming. Teaches reading a metric before believing it. |
+| Build a clause comparison that survives renumbering | parsing, alignment, regex discipline, mutation testing | Advanced | A naive diff calls the whole document changed. Teaches that the instrument shapes the finding. |
+| Write a test that pins what a tool DOES, not what you assumed | pytest, test design, intellectual honesty | Beginner-Intermediate | Three real bugs were caught this way, including one that named the wrong document in its own output. |
+| Verify an email actually carried its images | Microsoft Graph, MIME, Content-ID, API polymorphism | Intermediate | A 201 is not evidence. Teaches the difference between "the call succeeded" and "the thing happened." |
+
+**Prerequisite for all of the above:** comfort with the command line and Python. **Estimated
+learning time:** 2 to 3 hours per row with a mentor, except the clause comparison, which is a
+full-day project.
+
+### Note for the drafting path
+
+`create_outlook_draft.py` v1.2.2 carries `--inline` (images embedded by Content-ID), `--attach`,
+`--cc` and `--bcc`. It still has **no send path**, and a test now pins that fact rather than
+leaving it to someone remembering. Two Graph behaviours are documented in the file because both
+produce a silent wrong answer: `POST /messages` returns 201 and **drops** an `attachments` array,
+and on the SENT copy Outlook rewrites every `cid` to a GUID and renames every file.
 
 ---
 
@@ -13105,4 +13173,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-06 03:51 (v6.02)*
+*Last updated: 2026-10-06 04:32 (v6.03)*
