@@ -12,7 +12,7 @@ This page exists because we believe donor-partners deserve to see exactly where 
 
 Every figure on this page is generated automatically from the same constants file our backoffice scripts use. When infrastructure changes, this page changes. When we update a constant, an audit runs the next morning and reconciles it against the actual Azure invoice. If they disagree by more than 5%, the system raises an alert before anyone can publish a wrong number.
 
-_Last regenerated: 2026-10-03 (Pacific). Constants verified: 2026-04-25._
+_Last regenerated: 2026-10-05 (Pacific). Constants verified: 2026-10-05._
 
 ---
 
