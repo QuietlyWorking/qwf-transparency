@@ -1315,6 +1315,20 @@ Since 2026-09-09 the backoffice holds more than one Claude Max subscription (`ti
 
 Depth: `005 Operations/Directives/claude_tool_wisdom.md` §Running several Max subscriptions (gotchas, the three silent faults). Deployed state: `002 Projects/_HQ Command Center/HQ-System-Status.md` §Claude Capacity Card. Public write-up with generalized code: Built from Broken Vol. 10 (transparency site).
 
+#### MP Training Opportunities ⭐ (from the 2026-10-05 Vista Social entitlement diagnosis)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Before accepting "it used to work," grep the log for ONE success | Nine months of history, 51 responses, zero successes. One command settled a premise that two people believed. Teaches that a premise is checkable, and checking is cheaper than reasoning about it | Beginner |
+| The three-way credential probe ... real key / known-bad key / no key | A dead credential and a plan-entitlement refusal read identically until the known-bad key answers DIFFERENTLY. Ten seconds, zero cost, and it redirected the whole fix from "rotate the key" to "call the vendor." The single most reusable move in this session | Beginner |
+| Always carry a control when probing an external surface | The LinkedIn probe was only trustworthy because a known-real company returned 200 beside the four 404s. The TikTok probe reported not-found for TikTok's OWN account, which is how we knew to throw that result away instead of reporting it | Beginner |
+| "Disproven" and "unchecked" are different words, and the difference matters | Bot walls beat every Instagram/Facebook/TikTok probe. Writing "those profiles do not exist" would have been a fabricated finding. Teaches reporting the shape of your own ignorance | Intermediate |
+| A permanent configuration error can wear a transient costume | A wrapper pointed at a hostname that never resolved failed as `Max retries`, which every reader filed as a network blip. Five months of total outage produced no signal. Teaches that error CLASSIFICATION, not error presence, is what alerting depends on | Intermediate |
+| The change that improves your error message looks exactly like the change that broke you | Correcting the base URL revealed the real wall and got blamed for building it. Teaches a specific, nasty failure of causal reasoning, and why "revert the last change" can un-fix a diagnosis | Advanced |
+| Read a document's own changelog before trusting its table | The profile list said every program had active accounts. Its own first changelog entry said "verify actual connections," and nobody had, for 22 months. Teaches that documents carry their own confidence level if you look | Beginner |
+
+Depth: `005 Operations/Integration-Specs/Vista-Social-Integration-Spec.md` (status, probe output, incident timeline). Memory: `feedback_the_fix_that_revealed_the_wall_gets_blamed_for_it.md`. Program impact: `002 Projects/_Locals 4 Good/L4G-System-Status.md` §the social-channel Known Issue.
+
 ### Agent Memory Architecture
 
 Claude Code maintains persistent memory across conversations through a layered system:
@@ -1344,6 +1358,7 @@ Claude Code maintains persistent memory across conversations through a layered s
 - `/dream` skill runs mechanical audit + Claude-powered intelligent analysis (contextual staleness, semantic duplication, coverage gaps). Invoke manually between session wrap-ups.
 - Domain Start Protocol: read System Status file + topic file before beginning domain-scoped work.
 - Multi-session safe: sessions are domain-scoped, topic files are domain-scoped, parallel writes hit different files.
+- **One store for both Claude accounts (since 2026-10-05).** Memory lives per Claude config directory, so the second subscription (`~/.claude-claude002`) had quietly built its own store of 42 memories the main account never saw. They were merged into `~/.claude/projects/-home-<VM_USER>-qwu-backOffice/memory/`, and the second account's memory folder is now a symlink to it (old folder kept as `memory.pre-merge-2026-10-05`). Any future config directory gets the same link on day one.
 
 **Context window best practice:** Manually clear conversations at natural breakpoints (task completion, domain switches) rather than waiting for auto-compaction. Use `/session-wrap-up` before clearing. The persistent file system is designed for clean breaks.
 
@@ -4165,6 +4180,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.05 | 261005 | TIG + Claude | Session 714: **one memory for both Claude accounts.** The second subscription's 40 private memories were merged into the main store and indexed, the one memory both accounts had written separately was combined fact for fact, and the second account's memory folder became a symlink to the main one. Seven "running sessions" on that account turned out to be empty Untitled panels; the session registry tells the two apart. Agent Memory Architecture gained the one-store note. |
 | 6.04 | 261005 | TIG + Claude | Session 713: **the Vista Social gateway has never worked, and the fix that revealed that got blamed for it.** TIG asked whether L4G social profiles already exist. Unanswerable, and why mattered more. `vista_social_api.py` has returned **0 successes in 51 logged responses** since 2026-01-06 ... 45 DNS failures against `api.vistasocial.com` (a host that has never resolved), 5 `subscription does not offer API access`, 1 dry run. A three-way probe (real / known-bad / absent key) proved the blocker is a **plan entitlement, not the credential**: a bogus key 403s at key validation while ours 500s one layer deeper, so the key is VALID and **must not be rotated**. Reconstructed the real timeline ... the MCP connector carried Vista until Vista deactivated the key on 2026-01-05 over rate-limit violations, the replacement rate-limited wrapper shipped pointing at the nonexistent host, and the 2026-05-27 base-URL correction **unmasked** the wall rather than causing it (a permanent config error wearing a transient `Max retries` costume alarmed nothing for ~5 months; the one detector we own watches cron loops, never a rarely-invoked manual wrapper). Also disproved `.claude/skills/vista-social/profiles.md`, whose own 2024-12-22 changelog said *"verify actual connections"*: 4 of 4 QWF LinkedIn company slugs 404 against a 200 control, while Instagram/Facebook/TikTok stay **unchecked, not cleared** (bot walls false-negatived a control). Corrected: integration spec `Active` -> `BLOCKED` + probe + incident timeline (v1.1.0), `profiles.md` stamped UNVERIFIED (v1.1.0), wrapper docstring do-not-rotate note, this manual's two stale Vista rows, and a new L4G Known Issue. Memory: `feedback_the_fix_that_revealed_the_wall_gets_blamed_for_it.md`. **No deployed state changed.** Open for TIG: which Vista plan we are on. Parked to 2026-10-06 15:00 Pacific. |
 | 6.03 | 261006 | TIG + Claude | Session 712: **a supporter's new contract set, read properly, and three guards that cried wolf.** [Supporter Organization] delivered eight PDFs on 2026-09-29 and nobody had read them as text. Two things everyone believed were false: only **2 of 8 are image-only scans** (the earlier claim generalised from one file) and the set is **15 pages, not 11**. The six with text layers are INCOMPLETE ... every heading and column label is a **vector outline**, invisible to every extractor, including `NOTICE OF RIGHT TO CANCEL`. So all 15 pages were read, and the six text layers became 13 free controls in the supporter's own typeface. **Instrument measured before a single difference was reported:** 2,311 known words, 10 not reproduced (0.43%), all ten hyphens the text layer drops while the OCR reads them correctly ... substantive misread rate **0**; on the two true scans two model families agreed on every content word across 2,014. Ten legal-weight differences listed and **none decided** ... `contract_templates` was never written to. New §Reading a Supporter's Scanned Documents with four tools, five findings and an MP curriculum table. **Three separate guards condemned correct work this session** (a mid-token truncation heuristic, a Graph `$select` on a property the base type lacks, and an image check run against a sent copy after Outlook rewrote every cid) ... a lying verifier costs more than none. Commits `38138b856`, `2f049e4ca`, `0555bc882`, `b0fe3adf9`. 77 tests. |
 | 6.02 | 261006 | TIG + Claude | Session 709: **the capacity card was right and the router was reading a dead instrument.** TIG asked whether the Claude capacity card still reported correctly and still used both subscriptions. Reporting: healthy, verified against a live read. Using both: no ... 10 live sessions on one account and 0 on the other since Oct 2 22:00. The picker ranked on ONE hand-named limit (the Fable weekly pool, binding at 90%+ through September); both windows rolled over, every account read 0% on the only dimension compared, the ranking went flat, and the tie fell to list order. Rewrote §Running Several Claude Subscriptions (Capacity Routing): the ranking rule now names Anthropic's own binding mark instead of a model and carries the 3-day failure as a standing warning; added the SECOND terminal door (the bare `claude` command was never routed, only VS Code panels were); corrected the repair row to cover both doors and the two different updaters that silently remove them. Fixes + 8 order-independence tests committed `91aa8bf36`. |
@@ -4923,8 +4939,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.04 by generate_public_manual.py"
-generated: "2026-10-06 04:39"
+source: "Auto-generated from private manual v6.05 by generate_public_manual.py"
+generated: "2026-10-06 05:10"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13175,4 +13191,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-06 04:39 (v6.04)*
+*Last updated: 2026-10-06 05:10 (v6.05)*
