@@ -4,7 +4,7 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 5.82 | Started: 251223 | Updated: 260906**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-03"
+modifiedDate: "2026-10-06"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
@@ -1279,23 +1279,26 @@ Claude executes without asking "May I run this command?" each time.
 
 Since 2026-09-09 the backoffice holds more than one Claude Max subscription (`tig@` = #1, `claude002@` = #2, each in its own `~/.claude*` config directory) and a small system decides which one every NEW session starts on. Nothing ever moves a RUNNING session.
 
-**The one rule:** a Max subscription is three limits with three reset clocks (5-hour session window, weekly all-models, weekly scoped to one model). The scoped weekly limit on Fable is the one that stops development work, so routing ranks on that "weakest link," only among accounts alive on every window.
+**The one rule (corrected 2026-10-06):** a Max subscription is three limits with three reset clocks (5-hour session window, weekly all-models, weekly scoped to one model). Routing ranks on the limit **Anthropic itself marks binding for that account right now**, only among accounts alive on every window. Ties fall through to the fullest limit, then total load, then the account name ... **never to list order**.
+
+> ⚠ **Why that sentence used to name Fable, and why it must never name a limit again.** Until 2026-10-06 the rule was "rank on the weekly limit scoped to Fable." True when written ... Fable was the binding limit at 90%+ through September. Then both Fable windows rolled over, every account read **0%** on the only dimension being compared, the ranking went flat, and the tie fell to list order. **Ten live sessions ran on one paid subscription and zero on the other for three days**, while the capacity card beside it correctly named the idle account as the one with the most room. A hand-named dimension cannot report that it has gone stale; it just reads 0, which is the most attractive value in the ranking. Pinned by `tests/test_claude_account_picker_ranks_on_binding_limit.py` ... 8 cases, each run with the account list **both ways**, because an order-dependent answer is what a dead ranking signal looks like from the outside.
 
 | Piece | Script | Cadence | What it does |
 |-------|--------|---------|--------------|
 | Gauge | `poll_claude_account_limits.py` | cron `*/20` | Reads every login's real limits from Anthropic (percentages, fail-loud, three states: ok / no room / cannot read); upserts `hq_claude_account_limits`; writes `.tmp/claude_capacity.json` |
 | Card | HQ `/subscriptions` + dashboard widget + mobile | live | "Most room now: <account>", every limit, reset clocks, BINDING marker, amber "unreadable since" note |
 | Brain | `pick_claude_account.py` | on demand | Prints the config dir a new session should use; `--explain` shows every account's standing; `--resume <id>` pins a conversation to the directory that holds it; any doubt = default account |
-| Terminal door | `launch_claude_session.sh` (`1`, `2`, `claude002`, or `--explain`) | on demand | Asks the picker, sets `CLAUDE_CONFIG_DIR`, execs `claude` |
+| Terminal door | the bare `claude` command (`~/.local/bin/claude`) | every terminal session | Shim in front of the CLI's own version binary, resolved numerically at run time. **Added 2026-10-06** ... until then this path was a plain symlink, so every terminal session skipped the picker entirely and landed on the default account |
+| Terminal door, explicit | `launch_claude_session.sh` (`1`, `2`, `claude002`, or `--explain`) | on demand | Forces a named account, or asks the picker. Sets `CLAUDE_CONFIG_DIR`, which both shims honor without picking twice |
 | Editor door | `install_claude_switchboard.py` | once | Launcher in front of the VS Code extension's bundled binary (all panels share ONE extension host, so this is the only seam); `--status` / `--uninstall` |
-| Repair | `repair_claude_switchboard.py` | cron `*/10` | Reinstalls after every extension update (numeric version compare); records repairs AND failed repairs to `hq_claude_runtime` |
+| Repair | `repair_claude_switchboard.py` | cron `*/10` | Restores **both** doors and says which. A VS Code extension update removes the editor one; a `claude update` rewrites the terminal symlink. Two different updaters, same silent outcome. Records repairs AND failed repairs to `hq_claude_runtime` |
 | Config sync | `sync_claude_account_config.py` | cron `*/10` | Symlinks the user layer (settings, skills, output styles, plugins, status line) into each secondary account; credentials + history stay separate |
 | Keep-alive | `keep_claude_tokens_alive.py` | cron `*/10` | Runs the official client once (one word, Haiku) on any login within 15 min of expiry; a live-but-idle session gets 15 min past expiry, then is renewed underneath |
 | Verify | `verify_claude_account.py` | after every login | Two directories, two account uuids ... or you have one subscription signed in twice |
 
 **Adding subscription three:** log in from a browser that has NEVER signed in to Claude (private windows share a session), with `CLAUDE_CONFIG_DIR=~/.claude-claude003 claude`, using a real `claude003@` alias (not a plus-address). Run `verify_claude_account.py`. That is the only human step; the poller, sync, and keep-alive discover the new directory on their own.
 
-**When something looks wrong:** `pick_claude_account.py --explain` first. An account showing "unreadable" on the card for more than one 10-minute upkeep cycle is a real fault (login gone, or the undocumented usage endpoint changed), not idleness.
+**When something looks wrong:** `pick_claude_account.py --explain` first ... it prints every account's standing, which limit is binding, and the rank each one scores. An account showing "unreadable" on the card for more than one 10-minute upkeep cycle is a real fault (login gone, or the undocumented usage endpoint changed), not idleness. **And if one subscription is carrying everything while the card says another has room, believe the card** ... it reads the live limits, the router reads a ranking, and the router is the thing that can be stale.
 
 **Not the same thing as OpenRouter.** Scripts in the execution layer call any model per step through OpenRouter via `model_config.py` tiers. This system is for the interactive development sessions, which run on subscriptions.
 
@@ -4151,6 +4154,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.02 | 261006 | TIG + Claude | Session 709: **the capacity card was right and the router was reading a dead instrument.** TIG asked whether the Claude capacity card still reported correctly and still used both subscriptions. Reporting: healthy, verified against a live read. Using both: no ... 10 live sessions on one account and 0 on the other since Oct 2 22:00. The picker ranked on ONE hand-named limit (the Fable weekly pool, binding at 90%+ through September); both windows rolled over, every account read 0% on the only dimension compared, the ranking went flat, and the tie fell to list order. Rewrote §Running Several Claude Subscriptions (Capacity Routing): the ranking rule now names Anthropic's own binding mark instead of a model and carries the 3-day failure as a standing warning; added the SECOND terminal door (the bare `claude` command was never routed, only VS Code panels were); corrected the repair row to cover both doors and the two different updaters that silently remove them. Fixes + 8 order-independence tests committed `91aa8bf36`. |
 | 2.0 | 251229 | TIG | Added section X |
 | 1.0 | 251220 | TIG | Initial release |
 ```
@@ -4906,8 +4910,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.01 by generate_public_manual.py"
-generated: "2026-10-05 05:52"
+source: "Auto-generated from private manual v6.02 by generate_public_manual.py"
+generated: "2026-10-06 03:48"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13090,4 +13094,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-05 05:52 (v6.01)*
+*Last updated: 2026-10-06 03:48 (v6.02)*
