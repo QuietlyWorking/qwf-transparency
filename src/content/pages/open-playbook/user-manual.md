@@ -1302,6 +1302,17 @@ Since 2026-09-09 the backoffice holds more than one Claude Max subscription (`ti
 
 **Not the same thing as OpenRouter.** Scripts in the execution layer call any model per step through OpenRouter via `model_config.py` tiers. This system is for the interactive development sessions, which run on subscriptions.
 
+#### MP Training Opportunities ⭐ (from the 2026-10-06 flat-ranking diagnosis)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Read the running process, not the config ... `/proc/<pid>/environ` tells you what a program ACTUALLY got | The config said sessions were being routed. Ten processes said otherwise, in one command. Teaches the whole ground-truth habit in a single concrete move | Beginner |
+| A default value has a direction ... ask "if this field went missing, does the gap make this option look better or worse?" | A missing percent became `0`, and `0` meant "maximum room left". A sensible-looking default was a fail-open switch in disguise. One of the most transferable code-review questions there is | Beginner |
+| Test the same input in BOTH orders | The bug was not "picks the wrong one", it was "the answer depends on list order". Teaches that the right assertion often tests a PROPERTY, not a value | Intermediate |
+| A number that reads 0 can mean "none used" or "no longer measuring anything" | Same digit, opposite meanings, and nothing on screen distinguishes them. The clearest teachable example of why a metric needs provenance, not just a value | Intermediate |
+| Count the entry points before trusting a control | The router was installed on VS Code panels and not on the terminal command, so half of all launches skipped it. A control on one door is a sample, not a control | Intermediate |
+| Have someone try to break YOUR finding before you report it | An independent adversarial agent confirmed the fault AND corrected the root cause from "a 13-hour tie" to "a 3-day stale dimension". Teaches that being right about the symptom is not being right about the cause | Advanced |
+
 Depth: `005 Operations/Directives/claude_tool_wisdom.md` §Running several Max subscriptions (gotchas, the three silent faults). Deployed state: `002 Projects/_HQ Command Center/HQ-System-Status.md` §Claude Capacity Card. Public write-up with generalized code: Built from Broken Vol. 10 (transparency site).
 
 ### Agent Memory Architecture
@@ -4911,7 +4922,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v6.02 by generate_public_manual.py"
-generated: "2026-10-06 03:48"
+generated: "2026-10-06 03:51"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13094,4 +13105,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-06 03:48 (v6.02)*
+*Last updated: 2026-10-06 03:51 (v6.02)*
