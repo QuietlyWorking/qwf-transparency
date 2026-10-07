@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 5.82 | Started: 251223 | Updated: 260906**"
+description: "**Version: 6.06 | Started: 251223 | Updated: 261006**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-10-06"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -15,7 +15,7 @@ isHome: false
 
 # QWU Backoffice User Manual
 
-**Version: 5.82 | Started: 251223 | Updated: 260906**
+**Version: 6.06 | Started: 251223 | Updated: 261006**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -4939,8 +4939,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.05 by generate_public_manual.py"
-generated: "2026-10-06 05:10"
+source: "Auto-generated from private manual v6.06 by generate_public_manual.py"
+generated: "2026-10-07 03:41"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -9851,6 +9851,27 @@ entirely ... the STORM/research path, two provenance-metadata strings, and three
 in separate repos (HQ `ezer`, HQ `quick-intel`, L4G `ezer-chat`). See the Known Issues table in
 `QWU-Backoffice-System-Status.md`.
 
+### Update 2026-10-06: Opus 5.5 / Fable 5.1, session rules, and the model release intake
+
+**Current tiers:** FLAGSHIP is **Claude Opus 5.5** and APEX is **Claude Fable 5.1** (both since
+2026-10-05; thinking cannot be disabled on either, and Opus 5.5's effort default is `medium`).
+SYNTHESIS and STANDARD are still Claude Sonnet 5; Sonnet 5.5 is pending TIG's decision. The
+sections above describe the Opus 5 era and are kept as history.
+
+**Which model a Claude Code session runs in** is a separate question from script tiers. Rule
+(TIG, 2026-10-06): one model and one effort chosen up front for the kind of work, fixed for the
+session. Consequential attended work = Opus 5.5 at `xhigh`; routine attended work = Opus 5.5 at
+`high`; `max` only for a named extreme problem; Fable 5.1 only for long unattended runs.
+Full rules: `claude_tool_wisdom.md` §"Choosing a model and effort for a Claude Code session".
+
+**New models now arrive with their homework done.** `watch_claude_models.py` checks Anthropic's
+and OpenRouter's model lists every 3 hours. A new model triggers `intake_claude_model.py`: a model
+card built from the same Anthropic pages every time, where a script checks every quote word for
+word against its page; a probe of our own call path (`probe_model_call_shapes.py`); and five drafted
+decisions parked on TIG's Alerts calendar for the next 7 AM. Cards live in
+`002 Projects/_QWU Backoffice Automation/Model Cards/`. Directive:
+`claude_model_release_intake.md`. First card: Claude Sonnet 5.5 (128/128 quotes verified).
+
 ## Cost Intelligence System ⭐ NEW
 
 **Added: February 16, 2026**
@@ -13191,4 +13212,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-06 05:10 (v6.05)*
+*Last updated: 2026-10-07 03:41 (v6.06)*
