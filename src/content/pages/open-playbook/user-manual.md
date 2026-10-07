@@ -4939,8 +4939,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.06 by generate_public_manual.py"
-generated: "2026-10-07 03:41"
+source: "Auto-generated from private manual v6.07 by generate_public_manual.py"
+generated: "2026-10-07 04:13"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11441,6 +11441,23 @@ Key features: Content tab in QSP (Wisdom Feed, Draft Queue, Calendar, Performanc
 | PEZ | `POCKET_EZ_SUPABASE_SERVICE_ROLE_KEY` |
 | L4G | `L4G_SUPABASE_SERVICE_ROLE_KEY` |
 | WHL | `WHL_SUPABASE_SERVICE_ROLE_KEY` |
+| QCM | `QCM_SUPABASE_SERVICE_ROLE_KEY` (since 2026-10-06 the named secret key `backoffice`, not the legacy JWT) |
+
+### Retiring a Leaked Supabase Signing Secret (QNT B7 2026-09-26, QCM B4 2026-10-06)
+
+**Added: October 6, 2026** | **Tool:** `005 Operations/Execution/rotate_qcm_legacy_jwt.py` (QCM) / `rotate_qnt_legacy_jwt.py` (QNT) | **Pattern:** `supabase_tool_wisdom.md` §PATTERN entries
+
+When a project's legacy JWT signing secret leaks, anyone holding it can sign a `service_role` token that bypasses every row rule. The fix that works with zero downtime:
+
+1. **Census every holder by DIGEST, not by name.** Compare every project's function-secret digests, the vault, Cloudflare vars, GitHub secret names, n8n, databases and running processes with the project's keys, in memory. On QCM this found two holders no document listed.
+2. **Read the request logs for the HS256 fields** (`request.sb.jwt.{apikey,authorization}.payload.algorithm`). `supabase_mgmt.py key-usage` cannot see legacy keys at all.
+3. **Move one holder at a time to its own NAMED new-style key** (service-role consumers each get a secret key; public consumers get the publishable key), each gated on a count-only probe and proven by its real consumer in the logs.
+4. **Disable the legacy API keys, watch 15 minutes, then revoke the HS256 key.** Disabling alone still lets a forged token in as a bearer; only the revoke closes it.
+5. **Prove it:** the platform's own legacy `service_role` token refused 10 of 10, as key and as bearer.
+
+**Every step has a go word from TIG at the moment it runs.** QCM's run: 7 holder slots in 5 places, zero downtime, nobody signed out. Record: register B4; channel `qcm-b4-signing-key-retirement-20261006-1417-d83008`.
+
+**MP training opportunity (Advanced, ~6 hours supervised):** "find every holder of a credential without ever seeing it" ... digest comparison, log forensics, staged migration with rollback at every step. Prerequisites: REST APIs, Python, SQL basics. Teaches the habit that a 200 from the wrong key is not proof.
 
 ### Shared Infrastructure
 
@@ -13212,4 +13229,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-07 03:41 (v6.06)*
+*Last updated: 2026-10-07 04:13 (v6.07)*
