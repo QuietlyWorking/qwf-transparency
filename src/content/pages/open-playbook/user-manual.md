@@ -4,7 +4,7 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.06 | Started: 251223 | Updated: 261006**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-06"
+modifiedDate: "2026-10-07"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
@@ -4939,8 +4939,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.08 by generate_public_manual.py"
-generated: "2026-10-08 01:35"
+source: "Auto-generated from private manual v6.09 by generate_public_manual.py"
+generated: "2026-10-08 05:11"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5454,6 +5454,29 @@ Schedule Trigger (every 15 min)
 **Full documentation:** `005 Operations/Directives/process_outlook_email.md`
 
 ---
+
+### Watched-Sender Reply Drafter (armed 2026-10-07) ⭐ NEW
+
+**What it does:** when someone on TIG's watch list emails `tig@`, it reads the thread with read-only tools, writes a threaded reply **DRAFT** in TIG's Outlook (never a send), and texts TIG once: "<name> emailed and a response is in drafts." When it cannot draft (a refusal, missing facts, a calendar commitment), the text says why. Directive: `draft_watched_sender_replies.md`.
+
+| Piece | Where |
+|---|---|
+| Watch list | QCM switches "Watch & Respond" (contact) and "Watch & Respond to Domain" (organization), migration 062. Today: 18 active [Networking Chapter] members + `<supporter-domain>.com` |
+| Flipping a switch | The CRM site's contact and organization pages (Relationship Console build, coming). Until then, ask any session: "stop drafting for [name]" |
+| Schedule | every 15 min at :07/:22/:37/:52 (seven minutes after the Outlook pipeline sorts); member rule 06:30 Pacific |
+| Spend | $3 per email, $15 per day |
+| Stand down | set `armed: false` in `005 Operations/Execution/watched_sender_config.json` |
+| Evidence | one brief per watched email in `002 Projects/_QWU Backoffice Automation/Reply Briefs/` |
+
+**Testing tip:** a test email must ask something the sender's scope can answer, or the honest outcome is "needs your judgment." Gmail may send under a "send mail as" alias, so find a test email by subject and read its real From.
+
+#### MP Training Opportunities ⭐ (from the 2026-10-07 drafter arming)
+
+| Task | Skills taught | Prerequisites | Time | Level |
+|---|---|---|---|---|
+| Rehearse a database migration inside an always-rolled-back transaction (the migration body + a DO block of checks that ends in an unconditional RAISE, so nothing persists), then prove zero residue | SQL, PL/pgSQL, transactions, test design | basic SQL | 2-3 h | Intermediate |
+| Run a three-path end-to-end test of an AI assistant on a real inbox (a normal request, an out-of-scope request, a prompt-injection attack) and judge each outcome against the design | AI safety testing, prompt injection, evidence gathering | email basics | 1-2 h | Beginner |
+
 
 ## SuiteDash CRM Integration ⭐
 
@@ -13229,4 +13252,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-08 01:35 (v6.08)*
+*Last updated: 2026-10-08 05:11 (v6.09)*
