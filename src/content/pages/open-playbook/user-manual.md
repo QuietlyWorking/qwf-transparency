@@ -4939,8 +4939,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.07 by generate_public_manual.py"
-generated: "2026-10-07 04:13"
+source: "Auto-generated from private manual v6.08 by generate_public_manual.py"
+generated: "2026-10-08 01:35"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6805,7 +6805,7 @@ Students can learn data enrichment pipeline patterns by:
 |-------|------|--------------|
 | 1 | Discovery | Finds CANDIDATES for each of the three identity anchors. Selects nothing, spends nothing. |
 | 2 | HOLD + alert | Parks the visitor and tells the responsible human once (TODAY, or INTERRUPT within 24h of the meeting). A past meeting never alerts; the same tier is not repeated within 20 hours. |
-| 3 | Human answers | A person confirms, declares "none exists", or declares a chain, per surface. Their answer is a LOCK, never re-litigated. |
+| 3 | Human answers | A person confirms, declares "none exists", or declares a chain, per surface. On LinkedIn, "Only their company has one" (2026-10-07) records "no personal profile" AND the company's LinkedIn page beside it (`company_page`), never as the person's; a company page typed in as the person is refused. Their answer is a LOCK, never re-litigated, and a person a human declared absent is never searched for again. |
 | 4 | Depth | Only now: LinkedIn profile + posts, website content, Google reviews, AI synthesis. |
 | 5 | Fan-out gate | Blocks while ANY anchor is unanswered (v5.4.0 ... it previously watched only LinkedIn). |
 | 6 | Connection Reports | One per active member, written to Quietly Networking. No email. |
@@ -13229,4 +13229,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-07 04:13 (v6.07)*
+*Last updated: 2026-10-08 01:35 (v6.08)*
