@@ -1298,7 +1298,7 @@ Since 2026-09-09 the backoffice holds more than one Claude Max subscription (`ti
 
 **Adding subscription three:** log in from a browser that has NEVER signed in to Claude (private windows share a session), with `CLAUDE_CONFIG_DIR=~/.claude-claude003 claude`, using a real `claude003@` alias (not a plus-address). Run `verify_claude_account.py`. That is the only human step; the poller, sync, and keep-alive discover the new directory on their own.
 
-**When something looks wrong:** `pick_claude_account.py --explain` first ... it prints every account's standing, which limit is binding, and the rank each one scores. An account showing "unreadable" on the card for more than one 10-minute upkeep cycle is a real fault (login gone, or the undocumented usage endpoint changed), not idleness. **And if one subscription is carrying everything while the card says another has room, believe the card** ... it reads the live limits, the router reads a ranking, and the router is the thing that can be stale.
+**When something looks wrong:** `pick_claude_account.py --explain` first ... it prints every account's standing, which limit is binding, and the rank each one scores. An account showing "unreadable" on the card for more than one 10-minute upkeep cycle is a real fault (login gone, or the undocumented usage endpoint changed), not idleness. **If Anthropic refuses an account outright** (a past-due payment answers 403 `oauth_not_allowed_for_organization`), signing in again will not help; the router stops sending new sessions there (v1.3.0) and takes it back by itself within 20 minutes of the first good read. **And if one subscription is carrying everything while the card says another has room, believe the card** ... it reads the live limits, the router reads a ranking, and the router is the thing that can be stale.
 
 **Not the same thing as OpenRouter.** Scripts in the execution layer call any model per step through OpenRouter via `model_config.py` tiers. This system is for the interactive development sessions, which run on subscriptions.
 
@@ -4939,8 +4939,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.09 by generate_public_manual.py"
-generated: "2026-10-08 05:11"
+source: "Auto-generated from private manual v6.11 by generate_public_manual.py"
+generated: "2026-10-09 03:17"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6951,11 +6951,28 @@ Users can manage their own preferences via:
 | `all_communications` | All Communications | Turn off everything |
 
 **Key Files:**
-- `preference_center/db.py` - SQLite database operations + auto-dashboard (v2.1.0)
+- `preference_center/db.py` - SQLite database operations + auto-dashboard; also the family consent gate `check_send_permission_v2` (v2.4.0)
 - `preference_center/magic_link.py` - Token generation/verification (v1.0.0)
 - `preference_center/email.py` - Magic link + confirmation emails (v1.1.0)
 - `preference_center/api.py` - API endpoint handlers (v1.1.0)
 - `generate_preferences_dashboard.py` - Cron safety net for Obsidian dashboard (v1.0.0)
+
+**Consent gate reading rule (v2.4.0, 2026-10-08): a deleted consent record can only tighten.** The gate reads
+QCM's `contact_state_consent`. A soft-deleted `opted_in` / `never_set` row no longer permits anything; a
+soft-deleted `opted_out` row still blocks, Do-Not-Call included. In QCM a row is soft-deleted only by an operator
+"reverts to Not set" or by merge clean-up, and a withdrawal is always written as `opted_out` in place, so a
+person's stop is lifted only by an explicit, attributed `opted_in`. QCM enforces the same rule at the writer:
+`contact-state-consent` v1.1.0 refuses to DELETE an `opted_out` row (409). Pinned by
+`tests/test_consent_resolver_ignores_deleted_rows.py`; standard: `qwf_consent_and_preferences_standard.md`
+(The Universal Gate).
+
+**MP Training Opportunities (2026-10-08, Session 715):**
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Auditing what is DEPLOYED, not what is in the repo (download a function's live code, diff it, read its caller check) | Security review starts from ground truth; the code you can see is not always the code that runs | Intermediate |
+| Splitting a safety-gate change by direction (does each effect tighten or loosen?) and testing both failure modes | The first, "obviously consistent" fix here would have let one reset click lift a person's stop; a reviewer caught it | Advanced |
+| A live proof on a throwaway fixture, run before AND after a deploy, cleaned up in a `finally` | Proving behavior on production without touching anyone's real record; a test that cannot show the old behavior proves nothing | Intermediate |
 - `ez_chat_handler.py` - "preferences" intent handling (v3.8.0)
 - Dashboard: `005 Operations/Dashboards/Preference-Center-Status.md`
 - Directive: `005 Operations/Directives/preference_center.md`
@@ -13252,4 +13269,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-08 05:11 (v6.09)*
+*Last updated: 2026-10-09 03:17 (v6.11)*
