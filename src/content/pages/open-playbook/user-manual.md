@@ -165,7 +165,7 @@ The QWU Backoffice is an AI agent workspace running on Microsoft Azure, designed
 |----------|--------------|---------|
 | Resource Group | <RESOURCE_GROUP> | <RESOURCE_GROUP> |
 | Region | West US 2 | West US 2 |
-| Size | Standard D8as_v6 (8 vCPUs, 32 GB RAM, 128 GiB NVMe Premium ZRS) | Standard B2s (2 vCPUs, 4 GB RAM, ~$30/mo) |
+| Size | Standard D8as_v6 (8 vCPUs, 32 GB RAM, 128 GiB NVMe Premium ZRS) + 128 GB Standard SSD storage disk at `/mnt/storage` (added 2026-10-11, $9.60/mo) | Standard B2s (2 vCPUs, 4 GB RAM, ~$30/mo) |
 | IP | <VM_IP_CLAUDE_DEV> (static) | <VM_IP_N8N> (static) |
 | Image | Ubuntu Server 24.04 LTS | Ubuntu Server 24.04 LTS |
 | Swap | 4 GB | 6 GB (2GB + 4GB added 2026-02-23) |
@@ -192,6 +192,13 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 - Always pings Betterstack heartbeat regardless of health status (v1.1.0). The heartbeat proves "VM is alive and monitoring is running." Service-level issues are reported via Discord alerts separately. A missing heartbeat should only mean "VM is unreachable."
 - Thresholds: 80% warning, 90% critical for disk/memory
 - Systemd services monitored: `sms-webhook`, `digital-twin`, `qnt-webhook`, `caddy`
+
+**claude-dev Disk Layout & Weekly Upkeep** ⭐ NEW (2026-10-11)
+- Two disks. The fast NVMe OS disk holds everything live: the vault, live SQLite, Docker, sessions, app copies. The cheaper **storage disk** (`claude-dev-vm-storage-1`, E10, mounted at `/mnt/storage` by UUID with `nofail`) holds cold data behind symlinks at the old paths: `~/backups` (website media mirror, website DB dumps, SQLite spares), `~/call_intel/archive`, `~/call_intel/inbox/drive_exports`. No script path changed. `df /` no longer counts that data.
+- `backup_wpmu.sh` v1.1.0 measures free space on the disk the mirror lives on, in MB (`df -BG` rounds up and hid a sub-15 GB reading).
+- **Sundays 03:30 Pacific:** `tidy_vault_git.sh` packs the vault's loose git objects with a capped, non-aggressive `git gc` (`gc.auto` stays 0; auto-gc mid-session froze the VM twice in July). First run: `.git` 4.8 GB to 958 MB in 3 minutes.
+- **Sundays 03:40 Pacific:** `prune_disk_caches.py --apply` removes only what rebuilds itself: the npm download cache, superseded VS Code server builds, vault `.tmp/` entries untouched 30 days, and `node_modules` of app copies untouched 30 days. Never logs, backups, test fixtures, anything the vault or a script names, anything a running process uses, or Docker. Dry run is the default; every deleted path is logged to `.tmp/logs/disk_prune.log`. If an old app copy says a module is missing, run `npm install` (or `npm ci`) in it.
+- Result 2026-10-11: `/` went from 88% / 16 GB free to 60% / 50 GB free. Before this, `/` grew a steady 8-9 GB a month, mostly new app working copies (~0.4 GB each) and regrowing caches.
 
 **Application Health Checks**
 - `check_calendar_health.py` runs every 2 hours via cron on claude-dev
@@ -3553,6 +3560,7 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 | The Permission That Silently Does Nothing (2026-09-06) | A database row-security policy listed a role name the application had retired, so an update by a valid manager changed nothing and returned success with an empty result ... the button reported "saved" for a day. Teaches Postgres row-level security, reading `pg_policies` instead of trusting a policy's NAME, and the habit that closes it: any write whose success you are about to REPORT must return its rows and be checked by COUNT, never by the error flag. Also teaches preferring one shared helper function over the same role list copy-pasted into four policies. | Intermediate |
 | Escaping Untrusted Text for Three Different Outputs (2026-09-06) | The same name a stranger typed on a public website goes into an HTML email, a text message and a chat webhook, and each one is unsafe in a different way: HTML needs escaping, a subject line must never carry a line break, a chat embed must not be allowed to mention everyone. Teaches input sanitisation, why "clean" and "HTML-safe" are two separate steps, and writing the proof that shows the angle brackets arriving as visible text. | Beginner |
 | Guarding a Webhook with a Shared Secret (2026-09-06) | An automation webhook open to the whole internet, closed with a header check. Teaches shared-secret auth, why the check must happen BEFORE the server answers (the default mode replies 200 first, so the guard silently protects nothing), where a secret has to live to reach a container, and proving all three cases: no token refused, wrong token refused, right token accepted AND the work still happening. | Intermediate |
+| Splitting Hot and Cold Data Across Two Disks (2026-10-11) | Measuring what fills a disk (size vs 30-day writes vs net daily history), deciding what needs fast storage, moving a live folder under its job's lock with checksum verification and a symlink so no script changes, and proving each writer once before deleting the old copy. Also: why a cache should be trimmed rather than moved, and how a "safe" cleanup protects anything a script or note still names | Intermediate |
 | Reading Code for What Is CALLED, Not What EXISTS (2026-08-30) | A correct, well-documented locking function had been in the codebase for months with **zero call sites** ... and the data proved it (`status='processing'` never appeared in 94 rows). Teaches `grep` for call sites, verifying a safety mechanism by its fingerprints in the data, and the difference between "implemented" and "wired in." | Beginner |
 | Consent-Gated Sending (2026-08-20) | Resolving a permission model before any send; fail-CLOSED vs fail-OPEN and why an unreachable gate is an UNKNOWN not a yes; structurally locked-on categories (a receipt can never be suppressed); why an ungated DRAFT is still a broken opt-out. Real data-governance work, not a toy | Advanced |
 | PostgREST Query Literacy (2026-08-20) | `select=` returns ONLY named columns and omitting one fails silently; `eq.` on text is case-sensitive so a mixed-case key is invisible; `ilike.` vs indexing `lower(value)`; auditing a permission store means comparing CASE, not just presence | Intermediate |
@@ -4939,8 +4947,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.11 by generate_public_manual.py"
-generated: "2026-10-09 03:17"
+source: "Auto-generated from private manual v6.12 by generate_public_manual.py"
+generated: "2026-10-11 18:35"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13269,4 +13277,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-09 03:17 (v6.11)*
+*Last updated: 2026-10-11 18:35 (v6.12)*
