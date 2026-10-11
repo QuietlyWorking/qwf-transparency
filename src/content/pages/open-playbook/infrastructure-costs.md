@@ -12,19 +12,19 @@ This page exists because we believe donor-partners deserve to see exactly where 
 
 Every figure on this page is generated automatically from the same constants file our backoffice scripts use. When infrastructure changes, this page changes. When we update a constant, an audit runs the next morning and reconciles it against the actual Azure invoice. If they disagree by more than 5%, the system raises an alert before anyone can publish a wrong number.
 
-_Last regenerated: 2026-10-05 (Pacific). Constants verified: 2026-10-05._
+_Last regenerated: 2026-10-11 (Pacific). Constants verified: 2026-10-11._
 
 ---
 
 ## The Headline
 
-- **Fixed monthly infrastructure:** $512.96
+- **Fixed monthly infrastructure:** $527.56
 - **Variable monthly budget (LLM + scraping):** up to $400.00
-- **Grand total at full variable spend:** up to $912.96/month
+- **Grand total at full variable spend:** up to $927.56/month
 
 That funds 16 active apps, ~50 automation workflows, ~280 Python scripts, and the entire backoffice that keeps QWF running.
 
-**Most recent month-to-date Azure spend (live):** $12.24 as of 2026-10-02.
+**Most recent month-to-date Azure spend (live):** $96.31 as of 2026-10-09.
 
 ---
 
@@ -36,11 +36,12 @@ Two virtual machines + supporting infrastructure. The big one runs the backoffic
 |----------|-------------:|--------------|
 | claude-dev compute (D8as_v6, 8 vCPU, 32 GB) | $264.99 | Main backoffice VM... runs all Python scripts, hosts the Digital Twin API, manages the Obsidian vault that is QWF's brain |
 | claude-dev disk (128 GB NVMe Premium SSD) | $26.88 | Storage for the vault, databases, and execution environment |
+| claude-dev storage disk (128 GB Standard SSD) | $9.60 | Slower, cheaper disk for backups and archives, so they stop filling the fast disk (added 2026-10-11) |
 | qwu-n8n compute (B2s, 2 vCPU, 4 GB) | $30.37 | n8n workflow orchestration (~50 active workflows for emails, scheduling, monitoring) |
 | qwu-n8n disk (Standard SSD) | $4.00 | n8n workflow + execution data |
 | 2x static public IPs | $8.00 | One per VM, $4 each |
 | Pre-resize rollback snapshot | $0.72 | Safety net... deletable after stability confirmed |
-| **Azure subtotal** | **$334.96** | |
+| **Azure subtotal** | **$344.56** | |
 
 ## Supabase (databases + auth + edge functions)
 
@@ -60,6 +61,7 @@ One Supabase organization on the Pro plan. 16 apps each get their own MICRO-tier
 | RackNerd VPS (ESP) | $3.00 | Self-hosted email service provider on a $35/year VPS that actually works (annual: $35.49) |
 | Betterstack monitoring | $0.00 | Lifetime AppSumo license... no recurring cost |
 | Email (M365) | $0.00 | Included in existing M365 license |
+| Cloudflare Workers (paid plan) | $5.00 | Account-wide; gives the Quietly Quoting estimate render step the processing time it needs |
 
 ## Variable Costs (Budgets, Not Floors)
 
@@ -77,7 +79,7 @@ If we hit 75% of either budget, the system pings a Discord alert. If we hit 90%,
 
 ## The Bottom Line
 
-**Fixed:** $512.96/month. **Maximum if every variable budget hits 100%:** $912.96/month.
+**Fixed:** $527.56/month. **Maximum if every variable budget hits 100%:** $927.56/month.
 
 That covers every app, every automation, every dashboard, every email, every database, every monitor. No hidden line items. No marketing budget hidden in 'operations'. No executive compensation buried in 'professional services'.
 
@@ -93,7 +95,7 @@ Three things keep this page from drifting into marketing fiction:
 2. **Daily reconciliation.** A scheduled audit pulls our actual Azure spend each morning and compares it to the constants. Drift over 10% raises an alert.
 3. **Monthly invoice reconciliation.** On the 8th of each month, after Azure's invoice settles, we pull the finalized total for the prior month and reconcile it against the constants with a tighter 5% threshold.
 
-**Most recent monthly reconciliation:** 2026-07 (internal report; full backoffice is browseable on GitHub)
+**Most recent monthly reconciliation:** 2026-09 (internal report; full backoffice is browseable on GitHub)
 
 **Source script:** `005 Operations/Execution/generate_cost_transparency.py`
 **Constants file:** `005 Operations/Execution/cost_constants.py`
