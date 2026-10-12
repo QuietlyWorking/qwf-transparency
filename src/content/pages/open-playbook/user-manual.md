@@ -4,7 +4,7 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.06 | Started: 251223 | Updated: 261006**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-07"
+modifiedDate: "2026-10-11"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
@@ -542,6 +542,7 @@ This section documents how to migrate n8n workflows from Cloud Pro (or any expor
 | Variables UI | Built-in Settings → Variables | Server environment variables |
 | SSH credentials | May have different ID | Credential ID: `<SSH_CREDENTIAL_ID>` |
 | SSH credential name | Varies | "QWU Backoffice SSH - 20251224a" |
+| SSH credential key | Varies | n8n's OWN key (`n8n-ssh@qwu-n8n`), made on the n8n server and used only over the private network, since 2026-10-11. Never a person's key |
 
 #### Step-by-Step Migration Process
 
@@ -4947,8 +4948,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.12 by generate_public_manual.py"
-generated: "2026-10-11 18:35"
+source: "Auto-generated from private manual v6.13 by generate_public_manual.py"
+generated: "2026-10-11 23:22"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13277,4 +13278,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-11 18:35 (v6.12)*
+*Last updated: 2026-10-11 23:22 (v6.13)*
