@@ -655,6 +655,17 @@ Students completing this module will learn:
 - Debugging API responses
 - Version control for infrastructure
 
+#### MP Training Opportunities (from the 2026-10-11 n8n key move, Session 720)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Which key a client REALLY uses is in the server's log, not the key's label | A key labelled for the automation server had never been used; the automation logged in with a person's admin key. Only `Accepted publickey ... SHA256:` lines told the truth. Teaches evidence over labels | Intermediate |
+| Prove the undo on a throwaway before touching the real thing | The rollback was rehearsed on a dummy login (change, restore byte-identical, delete) before the real swap. Teaches rehearsal as a safety habit, not a formality | Intermediate |
+| Test a credential the way the real client connects | The new key was tried from inside the container with the automation's own SSH library, in both directions (allowed and refused). Teaches fidelity: a test that uses a different client proves a different thing | Advanced |
+| A check that cannot fail is not a check | The audit pinned the wrong key and would have gone green. The fix makes it read the login log itself, and mutation tests prove each rule can fail. Teaches mutation testing in one afternoon | Advanced |
+
+**Most valuable MP exercise:** give a student an `authorized_keys` file with three lines, a week of `auth.log`, and the question "which key does the automation use?" The labels point one way and the log points the other.
+
 ### n8n Version Management ⭐ NEW
 
 The self-hosted n8n instance uses pinned version tags for stability.
@@ -4949,7 +4960,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v6.13 by generate_public_manual.py"
-generated: "2026-10-11 23:22"
+generated: "2026-10-12 06:04"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13278,4 +13289,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-11 23:22 (v6.13)*
+*Last updated: 2026-10-12 06:04 (v6.13)*
