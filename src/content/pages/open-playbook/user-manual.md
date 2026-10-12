@@ -4959,8 +4959,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.13 by generate_public_manual.py"
-generated: "2026-10-12 06:04"
+source: "Auto-generated from private manual v6.14 by generate_public_manual.py"
+generated: "2026-10-12 07:01"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7115,6 +7115,34 @@ Its safety properties, in the order they matter:
    with a link in it, and it becomes a flag instead.
 
 Nine unit tests cover the decision logic and none of them reach a live writer.
+
+### The region's monthly Traffic Lights report (added Session 724, 2026-10-11)
+
+Every month the SoCal BNI office emails each chapter member a "Member Traffic Lights" report: one table with each
+member's total score, a score for each of seven activities, and a colour (green, yellow, red, grey). The first one
+arrived 2026-10-09 and nothing filed it: it came from "BNI Office" `bni.notifications@bniconnectglobal.com` (not the
+`officememo@` address the manual names), no schedule ran the reader, and it was a PDF the reader had never seen.
+
+`qnt_mentor_regional_reports.py` v1.1.0 now reads it:
+
+- **The colour is painted, not written.** In the region's PDF (a Google Sheets export) the colour exists only as a
+  cell fill. The reader records the fill on each member's Total Score cell (TIG's decision D-14, "painted"); if a paint
+  ever cannot be read, it works the colour out from the region's own cut-offs, marks the row, and texts TIG.
+- **It refuses to guess.** A row loads only when its seven scores add up to its total. A name that matches no member, or
+  matches two, is left for a person. When the email's subject and the file name a different month, nothing loads and TIG
+  is texted, because a wrong month would overwrite another month's colours.
+- **BNI Connect's sender is admitted only for a subject naming Traffic Lights**; it also sends renewals and event
+  registrations. The mailbox is read only.
+- **Schedule:** daily 12:15 Pacific (`--poll --apply`) and the 12th at 12:45 Pacific (`--check-month --apply`, a push
+  and Discord alert when nothing has loaded for the month). Log `.tmp/logs/qnt_mentor_traffic_lights.log`.
+- **Who sees it:** chapter leaders and each member's own mentor, in QNT only (the board chip, the mentor's page, and
+  section 3 of the session form). Never a public surface, never a corpus (D-8).
+
+October 2026 is loaded: 19 members. Detail and history: the [Networking Chapter] Mentor System Status.
+
+**Training opportunity (Missing Pixel):** reading a PDF table whose meaning lives in its drawing layer is a strong
+intermediate exercise in Python, PDF internals and test design (build a synthetic file that mimics the real one, so the
+tests carry no real member data). Prerequisites: Python, basic PDF structure. About 6 hours. Intermediate.
 
 ### The certification gate (SoCal BNI, per term)
 
@@ -13289,4 +13317,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-12 06:04 (v6.13)*
+*Last updated: 2026-10-12 07:01 (v6.14)*
