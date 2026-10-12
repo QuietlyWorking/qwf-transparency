@@ -1317,7 +1317,7 @@ Since 2026-09-09 the backoffice holds more than one Claude Max subscription (`ti
 
 **Adding subscription three:** log in from a browser that has NEVER signed in to Claude (private windows share a session), with `CLAUDE_CONFIG_DIR=~/.claude-claude003 claude`, using a real `claude003@` alias (not a plus-address). Run `verify_claude_account.py`. That is the only human step; the poller, sync, and keep-alive discover the new directory on their own.
 
-**When something looks wrong:** `pick_claude_account.py --explain` first ... it prints every account's standing, which limit is binding, and the rank each one scores. An account showing "unreadable" on the card for more than one 10-minute upkeep cycle is a real fault (login gone, or the undocumented usage endpoint changed), not idleness. **If Anthropic refuses an account outright** (a past-due payment answers 403 `oauth_not_allowed_for_organization`), signing in again will not help; the router stops sending new sessions there (v1.3.0) and takes it back by itself within 20 minutes of the first good read. **And if one subscription is carrying everything while the card says another has room, believe the card** ... it reads the live limits, the router reads a ranking, and the router is the thing that can be stale.
+**When something looks wrong:** `pick_claude_account.py --explain` first ... it prints every account's standing, which limit is binding, and the rank each one scores. An account showing "unreadable" on the card for more than one 10-minute upkeep cycle is a real fault (login gone, or the undocumented usage endpoint changed), not idleness. **If Anthropic refuses an account outright** (a past-due payment answers 403 `oauth_not_allowed_for_organization`), signing in again will not help; the router stops sending new sessions there (v1.3.0) and takes it back by itself within 20 minutes of the first good read. The HQ capacity card says so in plain words ("payment is past due ... signing in again will not fix that"), and its "Most room now" line ranks accounts exactly as the router does. After the payment clears, expect the card to stay unreadable until the account's next login renewal (at most 8 hours); nothing needs doing. Since 2026-10-12. **And if one subscription is carrying everything while the card says another has room, believe the card** ... it reads the live limits, the router reads a ranking, and the router is the thing that can be stale.
 
 **Not the same thing as OpenRouter.** Scripts in the execution layer call any model per step through OpenRouter via `model_config.py` tiers. This system is for the interactive development sessions, which run on subscriptions.
 
@@ -4959,8 +4959,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.14 by generate_public_manual.py"
-generated: "2026-10-12 07:01"
+source: "Auto-generated from private manual v6.15 by generate_public_manual.py"
+generated: "2026-10-12 07:44"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13317,4 +13317,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-12 07:01 (v6.14)*
+*Last updated: 2026-10-12 07:44 (v6.15)*
