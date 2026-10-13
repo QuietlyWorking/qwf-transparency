@@ -4593,6 +4593,18 @@ send path are gone from `twilio_webhook_server.py` (v3.6.0), and the n8n poller
 **Pre-meeting prep emails are drafts too** (`send_meeting_prep_email.py` v3.0.0). Both halves of
 the meeting system are draft-only.
 
+### Meeting Notes in the CRM: Daily Catch-up and Repairs
+
+**Added 2026-10-12**
+
+Every recorded meeting's notes should reach its QCM appointment (overview, transcript, insights, follow-ups). Two tools keep that true:
+
+- **Daily catch-up** (`reconcile_zoom_meeting_notes.py`, cron 06:20 Pacific): compares finished recordings with what QCM holds, fills what is missing from the saved analysis (no new model call), and holds anything it must not write (a young person attended, a near-empty recording, two recordings for one meeting, a failed analysis). One TODAY-tier alert per run, by date and time only. Dry run: run it with no flags.
+- **Failed-analysis repair** (`reanalyze_zoom_meeting.py --meeting-uuid <uuid>`, then `--live`): when a meeting's write-up reads "Analysis unavailable", this makes ONE fresh analysis from the saved transcript and replaces the placeholder in the daily note, the person notes and QCM. It refuses if the saved analysis is real, the transcript is near-empty, or the youth check fails or cannot run.
+- **"No transcript" can mean silence.** A recording with audio but no Zoom transcript may simply hold no sound. Measure the archived audio with `ffmpeg -af silencedetect=noise=-60dB:d=0.5` before paying to transcribe it.
+
+Full detail: `005 Operations/Directives/process_zoom_recording.md` (Edge Cases).
+
 ### Meeting Reconciliation System (Defense-in-Depth)
 
 **v2.0 | Updated 2026-01-26**
@@ -4959,8 +4971,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.16 by generate_public_manual.py"
-generated: "2026-10-13 04:31"
+source: "Auto-generated from private manual v6.17 by generate_public_manual.py"
+generated: "2026-10-13 04:36"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13317,4 +13329,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-13 04:31 (v6.16)*
+*Last updated: 2026-10-13 04:36 (v6.17)*
