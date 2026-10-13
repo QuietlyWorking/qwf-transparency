@@ -4,7 +4,7 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.06 | Started: 251223 | Updated: 261006**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-11"
+modifiedDate: "2026-10-12"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
@@ -4959,8 +4959,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.15 by generate_public_manual.py"
-generated: "2026-10-12 07:44"
+source: "Auto-generated from private manual v6.16 by generate_public_manual.py"
+generated: "2026-10-13 04:31"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13317,4 +13317,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-12 07:44 (v6.15)*
+*Last updated: 2026-10-13 04:31 (v6.16)*
