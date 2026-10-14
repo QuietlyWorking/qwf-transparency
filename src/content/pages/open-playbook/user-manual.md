@@ -4,7 +4,7 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.06 | Started: 251223 | Updated: 261006**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-12"
+modifiedDate: "2026-10-13"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
@@ -3617,9 +3617,7 @@ az role assignment create \
 
 ```bash
 AZURE_SUBSCRIPTION_ID="your-subscription-id"
-AZURE_TENANT_ID="your-tenant-id"
-AZURE_CLIENT_ID="your-client-id"
-AZURE_CLIENT_SECRET="your-client-secret"
+# No key: Azure sign-in is claude-dev-vm's built-in identity (qwu_azure_auth.py) since 2026-10-13
 ```
 
 ### Usage
@@ -3669,7 +3667,7 @@ Cost reporting was hardened across 5 phases on 2026-04-26. Every cost figure now
 
 **Credential rotation:** see `005 Operations/Directives/credential_rotation_playbook.md` for procedures; 10 credentials tracked with annual cadence in `CREDENTIAL_ROTATIONS` constant in `audit_emergency_recovery.py` (8 High tier + 2 Medium). First real-rotation precedent set 2026-04-26 with `OPENROUTER_API_KEY` (Pattern B, executed via `OPENROUTER_MGMT_KEY` provisioning API).
 
-**Emergency recovery:** see `005 Operations/Directives/qwu_emergency_recovery_capabilities.md`. The `qwu-vm-automation` SP has the 3 RBAC roles needed to recover the VM without human-in-the-loop authentication.
+**Emergency recovery:** see `005 Operations/Directives/qwu_emergency_recovery_capabilities.md`. claude-dev-vm's own built-in identity (a system-assigned managed identity, no key) has the 3 RBAC roles needed to recover the VM without human-in-the-loop authentication. It replaced the `qwu-vm-automation` service principal on 2026-10-13, after that account's key was found readable in the old n8n Cloud; the key was deleted.
 
 ### MP Training Opportunities ⭐
 
@@ -4971,8 +4969,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.17 by generate_public_manual.py"
-generated: "2026-10-13 04:36"
+source: "Auto-generated from private manual v6.18 by generate_public_manual.py"
+generated: "2026-10-13 23:17"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6268,9 +6266,7 @@ OPENROUTER_MGMT_KEY="sk-or-v1-..."  # Management Key for Activity API cost cross
 **Azure (VM Control + Cost Tracking):**
 ```bash
 AZURE_SUBSCRIPTION_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-AZURE_TENANT_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-AZURE_CLIENT_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-AZURE_CLIENT_SECRET="your-client-secret"
+# No key: VM control and cost reads sign in as claude-dev-vm's built-in identity since 2026-10-13
 ```
 
 **Google Services:**
@@ -10022,7 +10018,7 @@ OUTPUT SURFACES
 The $2,000/year Azure nonprofit sponsorship credit is tracked by `check_azure_credit_balance.py` (weekly cron, Mon 7 AM Pacific) so exhaustion never lands as a surprise credit-card charge. Key mechanics learned from the 2026-06 investigation:
 
 - **Billing structure:** MCA billing account/profile ("Chaplain TIG Heaslet"); credits are granted as 12-month lots. Past card charges traced to a **32-day gap between grant lots** (old lot expired 3/13/2026 mostly forfeited; new lot started 4/14/2026), NOT to SKU eligibility or overflow.
-- **Two modes:** `estimate` (live; `AZURE_CREDIT_GRANT_AMOUNT` + `AZURE_CREDIT_GRANT_START` in `.env`, balance = grant minus Cost Management spend since start) and `api` (exact lot data; requires the `qwu-vm-automation` SP to hold a Reader billing role, which is a separate ACL from Azure RBAC ... auto-upgrades when granted).
+- **Two modes:** `estimate` (live; `AZURE_CREDIT_GRANT_AMOUNT` + `AZURE_CREDIT_GRANT_START` in `.env`, balance = grant minus Cost Management spend since start) and `api` (exact lot data; requires claude-dev-vm's identity to hold a Reader billing role, which is a separate ACL from Azure RBAC ... auto-upgrades when granted).
 - **Outputs:** Discord `#system-status` (🟢/🟡 <3 mo runway/🔴 <1 mo/⛔ exhausted), HQ Ecosystem Vitals widget (via single-row `hq_azure_credit` table in HQ Supabase), structured JSON.
 - **Operational date:** re-request the nonprofit grant well before each April 14 lot expiry to avoid another gap.
 - Sponsorship credits never cover Marketplace products, support plans, or savings plans/reservations (those bill the card directly).
@@ -13329,4 +13325,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-13 04:36 (v6.17)*
+*Last updated: 2026-10-13 23:17 (v6.18)*
