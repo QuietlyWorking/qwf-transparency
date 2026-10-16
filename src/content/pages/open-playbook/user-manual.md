@@ -4,7 +4,7 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.06 | Started: 251223 | Updated: 261006**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-13"
+modifiedDate: "2026-10-15"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
@@ -4603,6 +4603,18 @@ Every recorded meeting's notes should reach its QCM appointment (overview, trans
 
 Full detail: `005 Operations/Directives/process_zoom_recording.md` (Edge Cases).
 
+### Missed Meetings: the 15-Minute Check
+
+**Added 2026-10-15**
+
+TIG waits 15 minutes past a meeting's start, then closes the room. The no-show check (`propose_qcm_no_shows.py`, cron every 15 minutes) reads the speaker record Zoom keeps with each recording. When only TIG's voice was recorded in his Zoom room from the start until 15 minutes after, it sends him ONE alert ("Possible no-show", date and time, never the name). Nothing is marked on anyone's record until he answers.
+
+- **TIG's words:** "check no-show proposals" in any Claude session shows each one; then "confirm" (records the no-show) or "hold" (never asked again). Say "hold" if the person called or messaged.
+- **What it cannot see:** Zoom tells our app who SPOKE, not who joined. Someone who joined and never spoke looks absent, which is why every proposal waits for TIG.
+- **What it never does:** write without his confirm, touch a status a person set, propose for a young person, or send anything to the person who missed.
+
+Policy of record: `002 Projects/_Quietly CRM/QCM-Appointment-Attendance-Policy.md`.
+
 ### Meeting Reconciliation System (Defense-in-Depth)
 
 **v2.0 | Updated 2026-01-26**
@@ -4969,8 +4981,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.18 by generate_public_manual.py"
-generated: "2026-10-13 23:17"
+source: "Auto-generated from private manual v6.19 by generate_public_manual.py"
+generated: "2026-10-16 00:46"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13325,4 +13337,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-13 23:17 (v6.18)*
+*Last updated: 2026-10-16 00:46 (v6.19)*
