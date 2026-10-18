@@ -12,7 +12,7 @@ This page exists because we believe donor-partners deserve to see exactly where 
 
 Every figure on this page is generated automatically from the same constants file our backoffice scripts use. When infrastructure changes, this page changes. When we update a constant, an audit runs the next morning and reconciles it against the actual Azure invoice. If they disagree by more than 5%, the system raises an alert before anyone can publish a wrong number.
 
-_Last regenerated: 2026-10-11 (Pacific). Constants verified: 2026-10-11._
+_Last regenerated: 2026-10-18 (Pacific). Constants verified: 2026-10-17._
 
 ---
 
@@ -24,7 +24,7 @@ _Last regenerated: 2026-10-11 (Pacific). Constants verified: 2026-10-11._
 
 That funds 16 active apps, ~50 automation workflows, ~280 Python scripts, and the entire backoffice that keeps QWF running.
 
-**Most recent month-to-date Azure spend (live):** $96.31 as of 2026-10-09.
+**Most recent month-to-date Azure spend (live):** $147.55 as of 2026-10-14.
 
 ---
 
