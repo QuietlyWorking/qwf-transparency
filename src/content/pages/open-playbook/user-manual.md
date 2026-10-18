@@ -2,9 +2,9 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 6.06 | Started: 251223 | Updated: 261006**"
+description: "**Version: 6.20 | Started: 251223 | Updated: 261018**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-15"
+modifiedDate: "2026-10-18"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
@@ -15,7 +15,7 @@ isHome: false
 
 # QWU Backoffice User Manual
 
-**Version: 6.06 | Started: 251223 | Updated: 261006**
+**Version: 6.20 | Started: 251223 | Updated: 261018**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -3586,6 +3586,7 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 | Offline-first as a cache, not a feature (2026-09-06) | A service worker that pre-fetches tomorrow's pages so a page opens with no signal; why the fetch must refuse to cache a login redirect, why the jobs are fetched one at a time, and why the on-screen count reads the device's own record rather than the server's. | Intermediate |
 | Grants are checked before RLS (2026-09-06) | A new Postgres table arrives with `anon` holding every privilege because of default privileges; adding a policy does not remove them. Teaches `revoke ... from public, anon, authenticated` then grant precisely, and writing a post-condition that refuses to commit the migration if the grant is still there (it fired twice this session and rolled both back). | Intermediate |
 | Two keys with the same name (2026-09-06) | An edge function compared the caller's bearer token to its own runtime `SUPABASE_SERVICE_ROLE_KEY` and refused everyone. The runtime's copy was a 41-character secret; the caller's was a 219-character token. Teaches: prove an auth check by probing lengths and first-difference, never by reasoning about what a variable 'should' hold. | Advanced |
+| Triaging cloud vendor notices (2026-10-17) | Reading every "action required" email from a cloud provider IN FULL, then checking each claim against the real setup before reacting: which region the servers are in (a price rise for Europe does not touch West US 2), which disk types exist (`az disk list`), and how busy a disk really is (operations per hour from `/proc/diskstats` times the public retail price = under $3/month worst case). Teaches that most vendor alarms are about someone else, and how to prove which ones are yours. Also: least-privilege in practice (turning off standing admin access and default-on AI agents nobody uses). | Beginner-Intermediate |
 
 ---
 
@@ -3668,6 +3669,8 @@ Cost reporting was hardened across 5 phases on 2026-04-26. Every cost figure now
 **Credential rotation:** see `005 Operations/Directives/credential_rotation_playbook.md` for procedures; 10 credentials tracked with annual cadence in `CREDENTIAL_ROTATIONS` constant in `audit_emergency_recovery.py` (8 High tier + 2 Medium). First real-rotation precedent set 2026-04-26 with `OPENROUTER_API_KEY` (Pattern B, executed via `OPENROUTER_MGMT_KEY` provisioning API).
 
 **Emergency recovery:** see `005 Operations/Directives/qwu_emergency_recovery_capabilities.md`. claude-dev-vm's own built-in identity (a system-assigned managed identity, no key) has the 3 RBAC roles needed to recover the VM without human-in-the-loop authentication. It replaced the `qwu-vm-automation` service principal on 2026-10-13, after that account's key was found readable in the old n8n Cloud; the key was deleted.
+
+**Azure portal budget and tenant posture (2026-10-18):** the portal budget `monthlyBudget` is **$425/month** (alerts at 90%, about $383). Normal spend is about $335, so a budget email now means a real jump, not ordinary spend. Azure Copilot is set to **Restrict** with all six agents off, and nobody holds the "Copilot for Azure User" role. TIG's **elevated access** (User Access Administrator at root) is **off**; if a fix ever needs root scope, turn it on in Entra ID → Properties → "Access management for Azure resources", do the fix, and turn it off again. What each Azure platform email means for our VMs is kept in `infrastructure_monitoring.md` §VM Lifecycle & Azure Platform Notifications.
 
 ### MP Training Opportunities ⭐
 
@@ -4981,8 +4984,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.19 by generate_public_manual.py"
-generated: "2026-10-16 00:46"
+source: "Auto-generated from private manual v6.20 by generate_public_manual.py"
+generated: "2026-10-18 07:56"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13337,4 +13340,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-16 00:46 (v6.19)*
+*Last updated: 2026-10-18 07:56 (v6.20)*
