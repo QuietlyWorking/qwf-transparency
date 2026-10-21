@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 6.20 | Started: 251223 | Updated: 261018**"
+description: "**Version: 6.23 | Started: 251223 | Updated: 261021**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-10-21"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -15,7 +15,7 @@ isHome: false
 
 # QWU Backoffice User Manual
 
-**Version: 6.20 | Started: 251223 | Updated: 261018**
+**Version: 6.23 | Started: 251223 | Updated: 261021**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -3596,6 +3596,7 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 | A wait that never waited (2026-09-06) | `page.wait_for_function(...)` wrapped in `except: pass` raised while the page was reloading, returned instantly, and turned a 90-second wait into a zero-second one ... three 10-minute proof runs were spent chasing an app bug that did not exist. Teaches: never swallow a wait's exception, and a test that passes too fast is a symptom. | Beginner |
 | Offline-first as a cache, not a feature (2026-09-06) | A service worker that pre-fetches tomorrow's pages so a page opens with no signal; why the fetch must refuse to cache a login redirect, why the jobs are fetched one at a time, and why the on-screen count reads the device's own record rather than the server's. | Intermediate |
 | Grants are checked before RLS (2026-09-06) | A new Postgres table arrives with `anon` holding every privilege because of default privileges; adding a policy does not remove them. Teaches `revoke ... from public, anon, authenticated` then grant precisely, and writing a post-condition that refuses to commit the migration if the grant is still there (it fired twice this session and rolled both back). | Intermediate |
+| Reading a vendor's breaking-change notice, then proving and applying it yourself (2026-10-21) | A database vendor's final notice said new tables would stop being reachable through its API on a set date. Teaches: reading the vendor's raw change page instead of a summary and finding what it leaves out (new views were covered too; one dangerous privilege stayed behind), checking every project's live settings instead of trusting the notice, scanning in-progress work for what would break, then applying the change ourselves one project at a time with a throwaway test that proves the before and the after and leaves nothing behind. Pairs with building a guard that refuses a bad migration when the file is written and again inside the database's own transaction, then asking a second reviewer to break it before trusting it. | Intermediate |
 | Two keys with the same name (2026-09-06) | An edge function compared the caller's bearer token to its own runtime `SUPABASE_SERVICE_ROLE_KEY` and refused everyone. The runtime's copy was a 41-character secret; the caller's was a 219-character token. Teaches: prove an auth check by probing lengths and first-difference, never by reasoning about what a variable 'should' hold. | Advanced |
 | Triaging cloud vendor notices (2026-10-17) | Reading every "action required" email from a cloud provider IN FULL, then checking each claim against the real setup before reacting: which region the servers are in (a price rise for Europe does not touch West US 2), which disk types exist (`az disk list`), and how busy a disk really is (operations per hour from `/proc/diskstats` times the public retail price = under $3/month worst case). Teaches that most vendor alarms are about someone else, and how to prove which ones are yours. Also: least-privilege in practice (turning off standing admin access and default-on AI agents nobody uses). | Beginner-Intermediate |
 
@@ -4995,8 +4996,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.22 by generate_public_manual.py"
-generated: "2026-10-21 08:05"
+source: "Auto-generated from private manual v6.23 by generate_public_manual.py"
+generated: "2026-10-21 19:19"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13367,4 +13368,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-21 08:05 (v6.22)*
+*Last updated: 2026-10-21 19:19 (v6.23)*
