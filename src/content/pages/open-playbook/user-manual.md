@@ -4,7 +4,7 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.20 | Started: 251223 | Updated: 261018**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-18"
+modifiedDate: "2026-10-21"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
@@ -2172,6 +2172,17 @@ interview question with a real wrong answer.
 
 Portfolio value: very high. This is the session to show a student who thinks debugging means reading
 an error message. There was no error message, and the cost was a person.
+
+#### MP Training Opportunities (from the 2026-10-21 calendar-words change, Session 765)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|---|---|---|
+| **Checking both layers before agreeing with a bug report** ... the system state AND the words on screen | TIG reported that picking a time should count as saying yes. One database read showed it already did; only the calendar entry's wording was wrong. Saying "the logic is broken" would have sent someone to fix code that worked. | Beginner |
+| **Words in a saved artifact must stay true for its whole life** | A calendar entry, a PDF or a printed sheet is a snapshot that outlives the moment it was made. The fix was an always-true sentence ("Need a different time?"), not wording that depends on the member's answer, which would have gone stale for anyone who added the entry before saying yes. | Beginner |
+| **Changing a value that two implementations share** ... edit the reference (Python), regenerate the shared fixture from it, copy it byte-identical, and let the other side's tests prove agreement | The same sentence lives in a Python email builder and a TypeScript page/server builder. The fixture is the contract, so the student never hand-edits an expected string. | Intermediate |
+| **Prove before and after on the live system** ... read the real calendar file before deploying (old words), deploy, read it again (new words), and compare the live app bundle byte-for-byte with the local build | A deploy that "succeeded" is a claim; a before/after read is evidence. | Beginner to Intermediate |
+
+Portfolio value: medium. Small and complete; the strongest unit is the first one, because it is a habit, not a tool.
 
 ### Google Calendar API Timestamp Gotcha (RFC3339)
 
@@ -4984,8 +4995,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.20 by generate_public_manual.py"
-generated: "2026-10-18 07:56"
+source: "Auto-generated from private manual v6.22 by generate_public_manual.py"
+generated: "2026-10-21 08:05"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -9436,7 +9447,7 @@ All new tables include nullable `agency_id` column. Reports use `brand_config` o
 - `qsp_schema_output` ... Generated JSON-LD per location
 - `agency_brand_config` ... White-label branding per agency
 | [Supporter CRM] sync | Active ... thousands of jobs synced for [Supporter Organization]. Safety gate + audit logging + soft-delete pattern. `sync_audit_log` table deployed (immutable, RLS-protected). |
-| QWF Passport | Deployed ... `generate-crossover-token` (QSP) + `verify-crossover-token` (QWR, QQT, QNT) |
+| QWF Passport | **CLOSED 2026-10-20** ... `generate-crossover-token` (QSP) + `verify-crossover-token` (QWR, QQT, QNT) still deployed, but each checker now holds its own random `QWF_SSO_SECRET`, so every pass is refused until the durable fix (QNT System Status, top security section) |
 | Contact Form | Deployed ... `submit-contact-form` edge function + centralized pipeline |
 | Landing Page | Deployed ... Prompt 011 with heritage, ecosystem, contact sections |
 
@@ -9567,7 +9578,7 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 | Supabase auth site_url | Updated to `https://quietlynetworking.org` |
 | Backend brain | Deployed ... visitor enrichment + roster sync + newsletter + meeting pipeline end-to-end |
 | Webhook receiver | v1.4.0 ... idempotency guard on `/enrich-visitor` and `/enrich-member` (skips if `enrichment_status == 'complete'`) |
-| QWF Passport | Deployed ... `verify-crossover-token` on QNT Supabase; QNT added as crossover target in QSP's `generate-crossover-token` |
+| QWF Passport | **CLOSED 2026-10-20** ... `verify-crossover-token` on QNT Supabase refuses every pass (its own random `QWF_SSO_SECRET`); it had auto-created confirmed logins for any free Quietly Spotting account |
 | Stripe | Configured (TEST MODE) ... 2 products, 4 prices, webhook |
 | Alpha tenant | [Networking Chapter] ... 27 members (17 active, 2 on leave, 8 alumni), 2,373 historical visitors imported |
 | Timezone fix | Prompt 021 deployed ... 8 affected areas fixed |
@@ -9611,6 +9622,22 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 - **Astro API Routes (aim-high-bni):** `/card/[slug]` (OG card sharing + click tracking), `/api/rsvp` (visitor registration), `/api/testimonial` (testimonial submission)
 - **Supabase RPC:** `increment_card_share_clicks` (atomic click counter for card shares), `set_my_testimonials_enabled(boolean)` (member self-toggle for testimonials_enabled), `set_my_card_settings(boolean, text)` (member self-toggle for card_shareable + card_redirect_url, validates `https?://` prefix)
 - **CF Pages Env Vars (aim-high-bni):** `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `AIM_HIGH_ORG_ID`, `QNT_SERVICE_ROLE_KEY` (runtime SSR + API routes)
+
+
+#### Solo tier design and the Passport close (2026-10-20, Session 763)
+
+TIG asked for a solo tier: the personal Catch features (capture, research, a follow-up series, all on the phone) for networkers with no chapter, starting with friends of his who have no CRM. The session measured QNT's monthly cost at the vendors' own records (about $70 cash, about $110 fully loaded; a new contact $0.60 to $0.80), ran a four-reviewer review that found and confirmed a live side door (a free Quietly Spotting account could sign into QNT, QWR and QQT), closed it on TIG's word by giving each checking app its own unrecorded secret, and inventoried all 179 QNT features for TIG's feature pick. Design of record: `002 Projects/_Quietly Networking/Design Docs/QNT-Solo-Tier-Brief-v0.1.md` and `QNT-Solo-Tier-Feature-Picks-v0.1.md`; channel `qnt-solo-tier-20261020-1927-3b2637`.
+
+#### MP Training Opportunities (from the 2026-10-20 QNT solo-tier session, Session 763)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Price one unit from the code's call count times the vendor's billing rule | The first estimate averaged a run's cost and assumed one search per capture; the code runs 3 to 4, and each bills even when empty, so the real cost was about double. Teaches reading the code path before multiplying | Intermediate |
+| A capability claim needs a delivered instance, not a built engine | "Already has a follow-up series" was written from "the engine exists" while nothing had ever sent. Teaches checking for a sent row before a value pitch | Beginner |
+| Compare secrets without ever seeing them | The side door was proven, and its close verified, by comparing the SHA-256 digests the API returns for each project's secret; no value was printed or stored. Teaches proof without exposure | Intermediate |
+| Build an inventory with a mark on every row | 179 features, each with status, source line and VERIFIED / ARTIFACT-ASSERTED / INFERRED, then three load-bearing rows re-read at the code. Teaches evidence discipline at scale | Intermediate |
+
+**Most valuable MP exercise:** give a student a small capture pipeline's code and a vendor price page, and ask "what does one capture cost us?" The averages in the dashboard point one way; the loop in the code points the other.
 
 ---
 
@@ -13340,4 +13367,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-18 07:56 (v6.20)*
+*Last updated: 2026-10-21 08:05 (v6.22)*
