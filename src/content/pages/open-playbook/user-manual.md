@@ -4996,8 +4996,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.23 by generate_public_manual.py"
-generated: "2026-10-21 19:19"
+source: "Auto-generated from private manual v6.24 by generate_public_manual.py"
+generated: "2026-10-21 20:37"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5522,6 +5522,7 @@ Schedule Trigger (every 15 min)
 | Flipping a switch | The CRM site's contact and organization pages (Relationship Console build, coming). Until then, ask any session: "stop drafting for [name]" |
 | Schedule | every 15 min at :07/:22/:37/:52 (seven minutes after the Outlook pipeline sorts); member rule 06:30 Pacific |
 | Spend | $3 per email, $15 per day |
+| Caching | Since v1.6.0 (2026-10-21) every call reads the whole conversation so far from Anthropic's prompt cache, which roughly halves the cost of an email that needs many look-ups. Healthy: `cached_tokens` grows call over call in `005 Operations/Data/llm_usage.jsonl`. It is ~90% of the Foundation's direct Anthropic API spend, so Anthropic's "prompt cache hit rate is low" emails point here first |
 | Stand down | set `armed: false` in `005 Operations/Execution/watched_sender_config.json` |
 | Evidence | one brief per watched email in `002 Projects/_QWU Backoffice Automation/Reply Briefs/` |
 
@@ -13368,4 +13369,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-21 19:19 (v6.23)*
+*Last updated: 2026-10-21 20:37 (v6.24)*
