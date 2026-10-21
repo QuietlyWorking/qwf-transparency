@@ -4996,8 +4996,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.24 by generate_public_manual.py"
-generated: "2026-10-21 20:37"
+source: "Auto-generated from private manual v6.25 by generate_public_manual.py"
+generated: "2026-10-21 22:15"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10012,6 +10012,26 @@ decisions parked on TIG's Alerts calendar for the next 7 AM. Cards live in
 `002 Projects/_QWU Backoffice Automation/Model Cards/`. Directive:
 `claude_model_release_intake.md`. First card: Claude Sonnet 5.5 (128/128 quotes verified).
 
+### Prompt caching is an opt-in per script (2026-10-21)
+
+`llm_call(..., system_prompt=STABLE_TEXT, cache_system=True)` marks the system text as an Anthropic
+cache breakpoint (5-minute life; `cache_ttl="1h"` for the 1-hour cache). It is OFF by default because
+a cache write costs 1.25x input and only a later read saves (0.05x on Opus 5.5): switch it on only where
+the same system text comes back within 5 minutes, and prove it with
+`probe_openrouter_prompt_caching.py` (a pair whose second call reads). Never use a top-level
+`cache_control` on one-question calls: it writes every time and reads never.
+
+| Check | Where |
+|-------|-------|
+| Reads and writes per call | `cached_tokens`, `cache_write_tokens` in `005 Operations/Data/llm_usage.jsonl` |
+| OpenRouter's own charge per call | `billed_cost` in the same row (our `cost_estimate` matches it) |
+| Healthy | one write, then reads, within a run; a write on every row with no reads is a surcharge |
+| Where it is on | `attribute_subscription_apps.py` v1.1.0 (nightly 04:30 chain) |
+| Per-script decisions | `llm_model_strategy.md` §Prompt Caching |
+
+On this fleet caching is worth a few dollars a month; the larger saving is repeat work (the same
+question asked night after night), handled by kickoff `llm-repeat-work-kickoff-2026-10-21.md`.
+
 ## Cost Intelligence System ⭐ NEW
 
 **Added: February 16, 2026**
@@ -13369,4 +13389,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-21 20:37 (v6.24)*
+*Last updated: 2026-10-21 22:15 (v6.25)*
