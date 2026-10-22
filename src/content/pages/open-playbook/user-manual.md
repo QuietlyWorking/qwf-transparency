@@ -3597,6 +3597,7 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 | Offline-first as a cache, not a feature (2026-09-06) | A service worker that pre-fetches tomorrow's pages so a page opens with no signal; why the fetch must refuse to cache a login redirect, why the jobs are fetched one at a time, and why the on-screen count reads the device's own record rather than the server's. | Intermediate |
 | Grants are checked before RLS (2026-09-06) | A new Postgres table arrives with `anon` holding every privilege because of default privileges; adding a policy does not remove them. Teaches `revoke ... from public, anon, authenticated` then grant precisely, and writing a post-condition that refuses to commit the migration if the grant is still there (it fired twice this session and rolled both back). | Intermediate |
 | Reading a vendor's breaking-change notice, then proving and applying it yourself (2026-10-21) | A database vendor's final notice said new tables would stop being reachable through its API on a set date. Teaches: reading the vendor's raw change page instead of a summary and finding what it leaves out (new views were covered too; one dangerous privilege stayed behind), checking every project's live settings instead of trusting the notice, scanning in-progress work for what would break, then applying the change ourselves one project at a time with a throwaway test that proves the before and the after and leaves nothing behind. Pairs with building a guard that refuses a bad migration when the file is written and again inside the database's own transaction, then asking a second reviewer to break it before trusting it. | Intermediate |
+| Rehearse every door of a database guard (2026-10-21) | A Quietly Quoting price book could be approved while one of its packages had no price, so the package priced as its add-ons alone (a "$950 roof"). The fix was a database trigger that refuses the approval, rehearsed against the live database inside transactions that always roll back. Teaches: proving the old code reproduces the fault before fixing it, comparing old and new code on the same real rows (never typing a number), and testing EVERY way a row can reach the guarded state: the first draft refused an update but let a book INSERTED already approved straight through, because a BEFORE INSERT trigger cannot look its own row up yet. | Intermediate |
 | Two keys with the same name (2026-09-06) | An edge function compared the caller's bearer token to its own runtime `SUPABASE_SERVICE_ROLE_KEY` and refused everyone. The runtime's copy was a 41-character secret; the caller's was a 219-character token. Teaches: prove an auth check by probing lengths and first-difference, never by reasoning about what a variable 'should' hold. | Advanced |
 | Triaging cloud vendor notices (2026-10-17) | Reading every "action required" email from a cloud provider IN FULL, then checking each claim against the real setup before reacting: which region the servers are in (a price rise for Europe does not touch West US 2), which disk types exist (`az disk list`), and how busy a disk really is (operations per hour from `/proc/diskstats` times the public retail price = under $3/month worst case). Teaches that most vendor alarms are about someone else, and how to prove which ones are yours. Also: least-privilege in practice (turning off standing admin access and default-on AI agents nobody uses). | Beginner-Intermediate |
 
@@ -4996,8 +4997,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.25 by generate_public_manual.py"
-generated: "2026-10-21 22:15"
+source: "Auto-generated from private manual v6.26 by generate_public_manual.py"
+generated: "2026-10-22 04:10"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13389,4 +13390,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-21 22:15 (v6.25)*
+*Last updated: 2026-10-22 04:10 (v6.26)*
