@@ -5001,8 +5001,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.29 by generate_public_manual.py"
-generated: "2026-10-23 23:39"
+source: "Auto-generated from private manual v6.30 by generate_public_manual.py"
+generated: "2026-10-23 23:45"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5528,6 +5528,8 @@ Schedule Trigger (every 15 min)
 | Schedule | every 15 min at :07/:22/:37/:52 (seven minutes after the Outlook pipeline sorts); member rule 06:30 Pacific |
 | Spend | $3 per email, $15 per day |
 | Caching | Since v1.6.0 (2026-10-21) every call reads the whole conversation so far from Anthropic's prompt cache, which roughly halves the cost of an email that needs many look-ups. Healthy: `cached_tokens` grows call over call in `005 Operations/Data/llm_usage.jsonl`. It is ~90% of the Foundation's direct Anthropic API spend, so Anthropic's "prompt cache hit rate is low" emails point here first |
+| Look (v1.7.0, 2026-10-23) | TIG's new email design: his greeting, then "You asked" (their own words, matched exactly) and a one-line short answer, then the reply, then his green "what happens next" line, his sign-off and one line of his card links (only for one reader with no stop). Either box simply drops out when it does not fit. Back to the plain look: `reply_design: "classic"` in the same config file |
+| Closing notes (v1.8.0, 2026-10-23) | "Thanks for the reminder!", "Got it", "Automation is amazing!" and the like get no draft and no text; the drafter judges by meaning (no word list) and drafts whenever unsure. If the thread shows something TIG still owes, he gets one text saying the reply brief has it |
 | Stand down | set `armed: false` in `005 Operations/Execution/watched_sender_config.json` |
 | Evidence | one brief per watched email in `002 Projects/_QWU Backoffice Automation/Reply Briefs/` |
 
@@ -5656,6 +5658,17 @@ SuiteDash CRM data is used by:
 - `005 Operations/Directives/circle_architecture.md` (comprehensive tier definitions)
 - `005 Operations/Directives/sync_vault_to_suitedash.md` (vault → CRM sync)
 
+
+#### MP Training Opportunities (from the 2026-10-23 email design + closing notes, Session 779)
+
+| Task | Skills taught | Prerequisites | Time | Level |
+|---|---|---|---|---|
+| Add a new feature to a live system so it can only DROP OUT, never break the main job (two optional answer fields that leave the draft exactly as before when missing or unsafe) | defensive design, schema evolution, testing | Python basics | 2 hours | Intermediate |
+| Decide when a rule must be judgment, not a word list: "Thanks, but I can't make it" looks like a thank-you and is a change of plan | AI judgment design, false-positive vs false-negative cost | none | 1 hour | Beginner |
+| After a website move, check every asset your emails still load (a signature photo went 404 the morning a site was frozen) | web debugging, HTTP status codes, email rendering | browser basics | 1 hour | Beginner |
+| Change live data through the system's own named action, then dry-run tomorrow's automation to see every email and calendar change it will cause | APIs, audit trails, safe operations | REST basics | 1-2 hours | Intermediate |
+
+Portfolio value: high. The strongest unit is the first: a nicety that can fail a draft is worse than no nicety.
 ---
 
 ## Transcript Extraction System (Planned)
@@ -13442,4 +13455,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-23 23:39 (v6.29)*
+*Last updated: 2026-10-23 23:45 (v6.30)*
