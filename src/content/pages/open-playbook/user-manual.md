@@ -4,7 +4,7 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.23 | Started: 251223 | Updated: 261021**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-22"
+modifiedDate: "2026-10-23"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
@@ -116,7 +116,8 @@ A comprehensive guide to the QWU Backoffice agent workspace, covering architectu
 91. [[#QWB Quietly Webbing ⭐ NEW]]
 92. [[#L4G Locals 4 Good Platform ⭐ NEW]]
 93. [[#Living Roadmap Delivery Pipeline ⭐ NEW]]
-94. [[#Session Log]]
+94. [[#WP Legacy Sites on Cloudflare Pages ⭐ NEW]]
+95. [[#Session Log]]
 
 ---
 
@@ -5000,8 +5001,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.27 by generate_public_manual.py"
-generated: "2026-10-23 07:26"
+source: "Auto-generated from private manual v6.28 by generate_public_manual.py"
+generated: "2026-10-23 08:08"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11473,7 +11474,7 @@ QWU uses **one** Cloudflare API token covering all operations:
 
 | Domain | Zone ID | Hosting | Notes |
 |--------|---------|---------|-------|
-| `quietlyworking.org` | ... | CF Pages | QWR production |
+| `quietlyworking.org` | ... | CF Pages | WP Legacy frozen copy since 2026-10-23 (project `quietlyworking-org`); subdomains host n8n, HQ, portal, status and more |
 | `quietlyquoting.org` | ... | Lovable | QQT |
 | `quietlyknocking.org` | ... | Lovable | QKN |
 | `quietlyspotting.org` | ... | Lovable | QSP |
@@ -11548,6 +11549,54 @@ curl -s -X POST -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/
 - `CLOUDFLARE_API_TOKEN` does NOT have User-scope permissions (can't revoke tokens via API ... must use the dashboard) or Redirect Rules (rulesets) permissions ... use CF Pages Functions middleware for host-based redirects instead
 - GitHub fine-grained PATs with `admin: True` do NOT include Actions Secrets management ... a separate "Secrets" permission is needed to set repo secrets via API
 - WHELHO's GitHub Actions deploy workflow exists but fails until `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets are set in the repo
+
+---
+
+## WP Legacy Sites on Cloudflare Pages ⭐ NEW
+
+**Added: October 23, 2026 (Session 777)**
+
+On the night of 2026-10-22, PHP2Shell (CVE-2026-109618 / 109619, pre-auth remote code execution in PHP itself) was being exploited widely, and QWF's WordPress server ran a Bitnami PHP 8.2.7 that can never be patched in place. Instead of building a new WordPress server, TIG chose to leave WordPress: every live site became an exact static copy on Cloudflare Pages, the web addresses moved, and the old server stopped answering the internet. TIG calls these sites "WP Legacy"; they will be rebuilt on the new stack at his pace, using the copies as the verbatim source.
+
+### What runs where
+
+| Site | Pages project | Notes |
+|------|---------------|-------|
+| quietlyworking.org (+ www) | `quietlyworking-org` | Security page and every other page byte-for-byte; the old Locals 4 Good Google Sheet table is a saved snapshot |
+| heroeskids.org (+ www) | `heroeskids-org` | Also answers childrenoffallensoldiers.com (301 to heroeskids.org, as before); 130 footer redirects WordPress used to do |
+| missingpixel.org (+ www) | `missingpixel-org` | Slider scroll-video frames copied whole |
+| quietlyworking.us (+ www) | `quietlyworking-us` | |
+| iysr.org, how-tosandreviews.com (+ www) | `iysr-org`, `how-tosandreviews-com` | |
+| legacy.chaplaintig.com | `legacy-chaplaintig-com` | chaplaintig.com itself is the SvelteKit site, untouched |
+| whelho.com, adventurewithheroes.com, ruapod.com | `qwf-domain-redirects` | 301 to whelho.org, heroeskids.org, chaplaintig.com (they used to dead-end) |
+
+Copies, reports and screenshots live in `/home/<VM_USER>/wp-legacy-freeze/`. The old server (`qwu-wpmu`) is private: tcp 80/443 answer only itself; SSH, WP-CLI, backups and the drift checks still work.
+
+### What changed for visitors (deliberately)
+- Pages look the same. Logins, comments and search stop; the donation thermometer, testimonials and the Sheet table show their 2026-10-23 values.
+- **Contact forms stopped lying.** WordPress had shown "Thanks for contacting us" for about three years while every message vanished (no mail path on the server). The copies now say "This form can't deliver messages right now ... please email us at <ADMIN_EMAIL>". Wiring them into the QWF contact pipeline is parked for 2026-10-24.
+- Four oversized media files were re-encoded to fit Pages' 25 MiB limit (originals kept).
+
+### Tools
+
+| Script | What it does |
+|--------|--------------|
+| `freeze_wp_site.py` | Crawls a live site (sitemaps + links the site answers 200), turns links WordPress redirects into redirect rules, copies Slider Revolution runtime folders over read-only SSH, closes asset gaps, normalizes names, restores Cloudflare-obfuscated emails, shrinks oversized media, writes `_headers` / `_redirects` / `_routes.json` |
+| `deploy_frozen_site.py` | Creates the Pages project if needed and deploys the copy with its one edge function (www and alias redirects, honest form and comment replies, noindex on `*.pages.dev`) |
+| `verify_frozen_site.js` | Loads each page live and from the deployment in Chromium, compares pixels, lists files the copy lacks |
+| `cutover_wp_legacy_to_pages.py` | Dry run by default; `--apply` moves the web records (MX and everything else untouched) and saves a rollback file; `--rollback <file>` restores in under a minute |
+
+**Editing a page now:** edit the copy under `sites/<host>/public/` and redeploy with `deploy_frozen_site.py --host <site>`. Do not use wp-admin. Re-freezing from the private WordPress is not possible yet: the freeze tool crawls the public hostname, which now answers from the copy. Full record, deliberate differences and every rollback: `002 Projects/_QWU WordPress Multisite/QWU-WPMU-Freeze-Move-Plan.md`.
+
+#### MP Training Opportunities ⭐ (from the 2026-10-23 WordPress exit)
+
+| Task | Skills taught | Prerequisites | Time | Complexity |
+|------|---------------|---------------|------|------------|
+| Freeze a CMS site into static files | HTTP, crawling with wget, finding files JavaScript loads later | Command line, basic HTML | 3-4 h | Intermediate |
+| Prove a copy matches the original | Playwright, screenshots, pixel diffs, telling a real defect from an animation | JavaScript basics | 3 h | Intermediate |
+| Move a domain with a one-command undo | DNS records, Cloudflare API, proxied CNAMEs, custom-domain validation | REST APIs, JSON | 2 h | Intermediate |
+| Teaching moment: a form that says "thanks" and delivers nothing | Tracing a message end to end; "a fallback nobody hears is a new silent failure" | None | 1 h | Beginner |
+| Teaching moment: patch, move or leave? | Reading a CVE advisory, weighing mitigation vs migration under time pressure | Some ops experience | 1-2 h | Advanced |
 
 ---
 
@@ -13393,4 +13442,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-23 07:26 (v6.27)*
+*Last updated: 2026-10-23 08:08 (v6.28)*
