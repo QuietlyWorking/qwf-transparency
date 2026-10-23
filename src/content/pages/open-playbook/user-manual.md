@@ -5001,8 +5001,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.28 by generate_public_manual.py"
-generated: "2026-10-23 08:08"
+source: "Auto-generated from private manual v6.29 by generate_public_manual.py"
+generated: "2026-10-23 23:39"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11574,8 +11574,8 @@ Copies, reports and screenshots live in `/home/<VM_USER>/wp-legacy-freeze/`. The
 
 ### What changed for visitors (deliberately)
 - Pages look the same. Logins, comments and search stop; the donation thermometer, testimonials and the Sheet table show their 2026-10-23 values.
-- **Contact forms stopped lying.** WordPress had shown "Thanks for contacting us" for about three years while every message vanished (no mail path on the server). The copies now say "This form can't deliver messages right now ... please email us at <ADMIN_EMAIL>". Wiring them into the QWF contact pipeline is parked for 2026-10-24.
-- Four oversized media files were re-encoded to fit Pages' 25 MiB limit (originals kept).
+- **Contact forms stopped lying, then started delivering.** WordPress had shown "Thanks for contacting us" for about three years while every message vanished (no mail path on the server). Since 2026-10-23 (TIG: "deliver", "bless") the 7 Divi forms on quietlyworking.org, missingpixel.org and heroeskids.org hand each message, server to server, to Quietly Webbing's `submit-site-form`, which saves it and passes it to the family contact pipeline: TIG gets a notice, the person gets the blessed reply ("Got it... <site name>", or for an email-only signup "Thank you for staying close...", which promises no newsletter). "Sent" shows only after the message is saved; any failure says "please email us" and is counted. Bots meet a hidden trap field, a signed time token and the page's math question. Discord gets the site and page only, never a person (youth rail). `check_qwf_site_forms.py` walks every form every 10 minutes and alerts TIG (TODAY) if one stops or a visitor is turned away. The old [Networking Chapter] RSVP page was removed on TIG's word. Full record: `QWU-WPMU-Freeze-Move-Plan.md` section "Forms".
+- Six oversized media files were re-encoded to fit Pages' 25 MiB limit (originals kept).
 
 ### Tools
 
@@ -13442,4 +13442,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-23 08:08 (v6.28)*
+*Last updated: 2026-10-23 23:39 (v6.29)*
