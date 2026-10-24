@@ -8,10 +8,10 @@ modifiedDate: "2026-10-23"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
-> [!WARNING] PRIVATE DOCUMENT ... DO NOT PUBLISH
-> This file contains sensitive operational data (IPs, credentials, project IDs, personal names).
-> The publishable version is `QWU Backoffice User Manual [PUBLIC].md` in this same directory.
-> Run `python "005 Operations/Execution/generate_public_manual.py"` to regenerate the public version.
+> [!INFO] PUBLIC VERSION
+> This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
+>
+> Generated: 2026-10-24 01:15 | Source version: 6.30
 
 # QWU Backoffice User Manual
 
@@ -5002,7 +5002,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v6.30 by generate_public_manual.py"
-generated: "2026-10-23 23:45"
+generated: "2026-10-24 01:15"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7424,7 +7424,7 @@ The speaker spotlight (v4.2.0+) features **all speakers** from the meeting:
 - Pulls from the speaker schedule Google Sheet for the meeting date
 - Falls back to one random member if no speakers scheduled
 - Shows member's company, Ideal Customer Profile, and "When to Refer" triggers
-- Uses fuzzy name matching to find entity files (e.g., "Kim Nguyen" → "Kim Nguyen.md")
+- Uses fuzzy name matching to find entity files (e.g., "[Member Name]" → "[Member Name].md")
 
 **Spotlight Content (from Entity Files):**
 ```markdown
@@ -7440,9 +7440,9 @@ Visitor cards now pull enriched data from entity files for **symmetric intellige
 
 | Field | Source | Example |
 |-------|--------|---------|
-| **Company** | Entity `company_name` or [Member Name]'s sheet | Bonehead Bookkeeping |
+| **Company** | Entity `company_name` or [Member Name]'s sheet | [Member Company] |
 | **BNI Category** | Entity `bni_category` | Bookkeeping |
-| **Summary** | Entity `## Professional Summary` | "Bonehead in Chief at Bonehead Bookkeeping..." |
+| **Summary** | Entity `## Professional Summary` | "[Member Title] at [Member Company]..." |
 | **Power Teams** | Entity `## Power Team Connections` | CPA, Business Broker, Financial Advisor |
 | **LinkedIn** | Entity `linkedin_url` | Clickable link |
 | **Calendly** | Entity `121_link` | "Schedule 1:1" button |
@@ -7452,9 +7452,9 @@ Visitor cards now pull enriched data from entity files for **symmetric intellige
 2. Draft files: `000 Inbox/___Review/{Name} [DRAFT].md`
 3. Fuzzy match: Files containing all significant name parts
 
-**Result:** Instead of "Benjamin Kubo - **TBD**", recaps now show:
-> **Benjamin Kubo** - Bonehead Bookkeeping | *Bookkeeping*
-> *"Bonehead in Chief at Bonehead Bookkeeping..."*
+**Result:** Instead of "[Member Name] - **TBD**", recaps now show:
+> **[Member Name]** - [Member Company] | *Bookkeeping*
+> *"[Member Title] at [Member Company]..."*
 > **Power Team:** CPA / Tax Preparer, Business Broker, Financial Advisor
 
 ### Data Extraction
@@ -9625,7 +9625,7 @@ The AI processing engine runs on claude-dev with a FastAPI webhook receiver:
 | Event photos | Upload promo photos in QNT EventForm, recap photos in EventDetail Photos tab. `event-images` storage bucket (public, 10MB, jpg/png/webp). Hero/gallery/recap cascade to public site. Series inheritance via "Apply to all" toggle (Apr 13, 2026) |
 | SEO profession pages | `/find` ... directory of 18 professions. `/find/[profession]` ... auto-generated landing pages per profession with member profiles, testimonials, contact links. Targets "find a [profession] in Southern California" queries (Apr 13, 2026) |
 | Recurring event mgmt | "Apply changes to entire series" toggle in QNT EventForm ... updates name, time, location, format, visibility, photos across all siblings. `useUpdateRecurringSeries` mutation (Apr 13, 2026) |
-| Per-member privacy controls | Three independent boolean toggles on `members` (default true): `public_profile` (existing ... appearance on public chapter website), `testimonials_enabled` (testimonial form + display), `card_shareable` (digital business card sharing). Plus `card_redirect_url` text ... fallback URL when card sharing is off. Admin via `MemberForm` Privacy section; member self-service via `MyTestimonials` (testimonials) and `BusinessCardBuilder` (card). Self-service uses two SECURITY DEFINER RPCs: `set_my_testimonials_enabled(boolean)` and `set_my_card_settings(boolean, text)` ... both `authenticated`-only, no broader UPDATE on members. Website enforcement: `[slug].astro` hides TestimonialForm, `/api/testimonial` returns 403, `public_chapter_testimonials` view filters approved testimonials about disabled members, `/card/<slug>` 302-redirects to `card_redirect_url` (clean URL ... `?s=` token stripped) or 404s. Click tracking + sharer attribution preserved through redirects. `public_profile` audit closed two leaks (`fetchMember`, `fetchUpcomingSpeakers`) in `aim-high-bni/src/lib/supabase.ts`. First user: Mark Denali (Edward Jones) flipped all three off for regulatory compliance (Apr 16, 2026) |
+| Per-member privacy controls | Three independent boolean toggles on `members` (default true): `public_profile` (existing ... appearance on public chapter website), `testimonials_enabled` (testimonial form + display), `card_shareable` (digital business card sharing). Plus `card_redirect_url` text ... fallback URL when card sharing is off. Admin via `MemberForm` Privacy section; member self-service via `MyTestimonials` (testimonials) and `BusinessCardBuilder` (card). Self-service uses two SECURITY DEFINER RPCs: `set_my_testimonials_enabled(boolean)` and `set_my_card_settings(boolean, text)` ... both `authenticated`-only, no broader UPDATE on members. Website enforcement: `[slug].astro` hides TestimonialForm, `/api/testimonial` returns 403, `public_chapter_testimonials` view filters approved testimonials about disabled members, `/card/<slug>` 302-redirects to `card_redirect_url` (clean URL ... `?s=` token stripped) or 404s. Click tracking + sharer attribution preserved through redirects. `public_profile` audit closed two leaks (`fetchMember`, `fetchUpcomingSpeakers`) in `aim-high-bni/src/lib/supabase.ts`. First user: [Member Name] flipped all three off for regulatory compliance (Apr 16, 2026) |
 | Testimonial author bylines | Member profile testimonial cards now display " ...  Author Name" below each quote. Previously the author was discarded by mapping to `from: null`. Legacy renewal-review entries renamed from "Anonymous Member" → "Anonymous Fan" (14 rows) for warmer attribution (Apr 16, 2026) |
 | Notification dropdown scrolling | Replaced Radix `<ScrollArea max-h-[400px]>` with native `<div className="max-h-[400px] overflow-y-auto">`. The Radix viewport's `h-full` requires explicit parent height, not `max-h` ... without it, overflow never engages and the scrollbar never appears. Native scroll is the right fit for popover lists (Apr 16, 2026) |
 | Hand-written type drift fixes | Aligned `src/types/database.ts` Member interface with actual DB columns: `instagram` → `instagram_handle`, `joined_date` → `join_date`, `last_enriched_at` → `enriched_at`. Saving member edits had been crashing with "Could not find the X column"; reads silently returned undefined (Instagram links never rendered, member tenure showed " ... ", enrichment recency pill missing) (Apr 16, 2026) |
@@ -11927,7 +11927,7 @@ Auto-layout works correctly for fresh creates ... verified experimentally:
 **Correct pattern for modifications:**
 
 1. `list_sections` + `list_steps` to find existing IDs
-2. Propose precise diff (mirrors Brian Ragone's "Do not make any changes yet" video pattern)
+2. Propose precise diff (mirrors [Vendor Founder]'s "Do not make any changes yet" video pattern)
 3. `update_workflow` for in-place edits (takes IDs, edits fields)
 4. `delete` for removals
 5. `create_process` ONLY for brand-new sections/steps
@@ -11946,8 +11946,8 @@ This issue was diagnosed while helping Josefa Savu in the Puzzle Circle communit
 
 ### Key Contacts
 
-- **Brian Ragone** ... Founder/CEO (<vendor support email>), warm relationship, attended BNI
-- **Jolly Amurao** ... Senior Product Operations (support@puzzleapp.io), primary support, escalates to engineering
+- **[Vendor Founder]** ... Founder/CEO (<vendor support email>), warm relationship, attended BNI
+- **[Vendor Contact]** ... Senior Product Operations (support@puzzleapp.io), primary support, escalates to engineering
 
 ### 🎓 Missing Pixel Training Opportunities
 
@@ -13455,4 +13455,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-23 23:45 (v6.30)*
+*Last updated: 2026-10-24 01:15 (v6.30)*
