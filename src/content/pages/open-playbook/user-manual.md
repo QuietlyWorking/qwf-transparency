@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-24 05:31 | Source version: 6.31
+> Generated: 2026-10-24 07:22 | Source version: 6.32
 
 # QWU Backoffice User Manual
 
@@ -671,11 +671,11 @@ Students completing this module will learn:
 
 The self-hosted n8n instance uses pinned version tags for stability.
 
-**Current Version:** 2.41.6 (live-checked 2026-10-04; the HQ masthead strip now tracks installed vs published vs vulnerable continuously. Previously 2.31.5, upgraded 2026-07-22 from 2.17.5 ... catch-up security upgrade closing 45 advisories, incl. the same-morning batch of 15 that 2.31.5 was released to patch)
+**Current Version:** 2.44.6 (upgraded 2026-10-23 9 PM Pacific from 2.41.6, closing the 11 advisories of the 2026-10-14 cohort; 2.41.6 was live-checked 2026-10-04; the HQ masthead strip now tracks installed vs published vs vulnerable continuously. Previously 2.31.5, upgraded 2026-07-22 from 2.17.5 ... catch-up security upgrade closing 45 advisories, incl. the same-morning batch of 15 that 2.31.5 was released to patch)
 
 | Property | Value |
 |----------|-------|
-| Image | `docker.n8n.io/n8nio/n8n:2.41.6` |
+| Image | `docker.n8n.io/n8nio/n8n:2.44.6` |
 | Location | `~/n8n/docker-compose.yml` on qwu-n8n |
 | Monitor | `monitor_n8n_releases.py` hourly cron :41 on backoffice VM (live version via SSH + GHSA advisories; replaced the retired "n8n Version Monitor" workflow 2026-07-21) |
 | Port Binding | `127.0.0.1:5678` (localhost only, Caddy proxies HTTPS) |
@@ -4218,6 +4218,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.32 | 261023 | TIG + Claude | Session 781: **The HQ strip's red lights, ground-truthed.** claude-dev's red was a deliberately stopped container: the old L4G WordPress container was removed after its database, the only copy, was archived to the storage disk. n8n's amber was really exposure: the strip read only GitHub's reviewed advisory feed (nothing newer than 2026-09-10), so 11 advisories naming 2.41.6 were invisible; `check_n8n_version.py` / `monitor_n8n_releases.py` v1.1.0 now read n8n's own feed too, by release line. n8n upgraded to 2.44.6 at 9 PM after a rehearsal that needed three fixes (log-decided verdict, growth-gated settle, production encryption key). L4G November taken off sale. Automatic n8n security upgrades parked for a build session 2026-10-24. |
 | 6.31 | 261023 | TIG + Claude | Session 780: **website form spam.** Three spam messages beat the WP Legacy forms' honeypot, timer and math question within five hours and got Ezer's reply. Family spam hold in the contact pipeline (every QWF form; daily held list) and Cloudflare Turnstile on all 7 WP Legacy forms, both live and verified (TIG's own test passed end to end). Shared Infrastructure contact line updated. |
 | 6.05 | 261005 | TIG + Claude | Session 714: **one memory for both Claude accounts.** The second subscription's 40 private memories were merged into the main store and indexed, the one memory both accounts had written separately was combined fact for fact, and the second account's memory folder became a symlink to the main one. Seven "running sessions" on that account turned out to be empty Untitled panels; the session registry tells the two apart. Agent Memory Architecture gained the one-store note. |
 | 6.04 | 261005 | TIG + Claude | Session 713: **the Vista Social gateway has never worked, and the fix that revealed that got blamed for it.** TIG asked whether L4G social profiles already exist. Unanswerable, and why mattered more. `vista_social_api.py` has returned **0 successes in 51 logged responses** since 2026-01-06 ... 45 DNS failures against `api.vistasocial.com` (a host that has never resolved), 5 `subscription does not offer API access`, 1 dry run. A three-way probe (real / known-bad / absent key) proved the blocker is a **plan entitlement, not the credential**: a bogus key 403s at key validation while ours 500s one layer deeper, so the key is VALID and **must not be rotated**. Reconstructed the real timeline ... the MCP connector carried Vista until Vista deactivated the key on 2026-01-05 over rate-limit violations, the replacement rate-limited wrapper shipped pointing at the nonexistent host, and the 2026-05-27 base-URL correction **unmasked** the wall rather than causing it (a permanent config error wearing a transient `Max retries` costume alarmed nothing for ~5 months; the one detector we own watches cron loops, never a rarely-invoked manual wrapper). Also disproved `.claude/skills/vista-social/profiles.md`, whose own 2024-12-22 changelog said *"verify actual connections"*: 4 of 4 QWF LinkedIn company slugs 404 against a 200 control, while Instagram/Facebook/TikTok stay **unchecked, not cleared** (bot walls false-negatived a control). Corrected: integration spec `Active` -> `BLOCKED` + probe + incident timeline (v1.1.0), `profiles.md` stamped UNVERIFIED (v1.1.0), wrapper docstring do-not-rotate note, this manual's two stale Vista rows, and a new L4G Known Issue. Memory: `feedback_the_fix_that_revealed_the_wall_gets_blamed_for_it.md`. **No deployed state changed.** Open for TIG: which Vista plan we are on. Parked to 2026-10-06 15:00 Pacific. |
@@ -5002,8 +5003,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.31 by generate_public_manual.py"
-generated: "2026-10-24 05:31"
+source: "Auto-generated from private manual v6.32 by generate_public_manual.py"
+generated: "2026-10-24 07:22"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13457,4 +13458,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-24 05:31 (v6.31)*
+*Last updated: 2026-10-24 07:22 (v6.32)*
