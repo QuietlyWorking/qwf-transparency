@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-24 07:22 | Source version: 6.32
+> Generated: 2026-10-25 05:17 | Source version: 6.33
 
 # QWU Backoffice User Manual
 
@@ -4218,6 +4218,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.33 | 261024 | TIG + Claude | Session 783: **The reply drafter's first independent review, and The Corner's remembered line.** 1 high, 7 medium, 3 low findings, all checked and fixed with a test each (drafter v1.8.1); notes with someone copied no longer carry the cards or the preferences link; "Since we last talked" built and switched on by TIG's "bless" (90 days, his "90"). |
 | 6.32 | 261023 | TIG + Claude | Session 781: **The HQ strip's red lights, ground-truthed.** claude-dev's red was a deliberately stopped container: the old L4G WordPress container was removed after its database, the only copy, was archived to the storage disk. n8n's amber was really exposure: the strip read only GitHub's reviewed advisory feed (nothing newer than 2026-09-10), so 11 advisories naming 2.41.6 were invisible; `check_n8n_version.py` / `monitor_n8n_releases.py` v1.1.0 now read n8n's own feed too, by release line. n8n upgraded to 2.44.6 at 9 PM after a rehearsal that needed three fixes (log-decided verdict, growth-gated settle, production encryption key). L4G November taken off sale. Automatic n8n security upgrades parked for a build session 2026-10-24. |
 | 6.31 | 261023 | TIG + Claude | Session 780: **website form spam.** Three spam messages beat the WP Legacy forms' honeypot, timer and math question within five hours and got Ezer's reply. Family spam hold in the contact pipeline (every QWF form; daily held list) and Cloudflare Turnstile on all 7 WP Legacy forms, both live and verified (TIG's own test passed end to end). Shared Infrastructure contact line updated. |
 | 6.05 | 261005 | TIG + Claude | Session 714: **one memory for both Claude accounts.** The second subscription's 40 private memories were merged into the main store and indexed, the one memory both accounts had written separately was combined fact for fact, and the second account's memory folder became a symlink to the main one. Seven "running sessions" on that account turned out to be empty Untitled panels; the session registry tells the two apart. Agent Memory Architecture gained the one-store note. |
@@ -5003,8 +5004,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.32 by generate_public_manual.py"
-generated: "2026-10-24 07:22"
+source: "Auto-generated from private manual v6.33 by generate_public_manual.py"
+generated: "2026-10-25 05:17"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5532,6 +5533,8 @@ Schedule Trigger (every 15 min)
 | Caching | Since v1.6.0 (2026-10-21) every call reads the whole conversation so far from Anthropic's prompt cache, which roughly halves the cost of an email that needs many look-ups. Healthy: `cached_tokens` grows call over call in `005 Operations/Data/llm_usage.jsonl`. It is ~90% of the Foundation's direct Anthropic API spend, so Anthropic's "prompt cache hit rate is low" emails point here first |
 | Look (v1.7.0, 2026-10-23) | TIG's new email design: his greeting, then "You asked" (their own words, matched exactly) and a one-line short answer, then the reply, then his green "what happens next" line, his sign-off and one line of his card links (only for one reader with no stop). Either box simply drops out when it does not fit. Back to the plain look: `reply_design: "classic"` in the same config file |
 | Closing notes (v1.8.0, 2026-10-23) | "Thanks for the reminder!", "Got it", "Automation is amazing!" and the like get no draft and no text; the drafter judges by meaning (no word list) and drafts whenever unsure. If the thread shows something TIG still owes, he gets one text saying the reply brief has it |
+| Review fixes (v1.8.1, 2026-10-24) | the first independent review's fixes: a question followed by a "Thanks!" on the same thread is still drafted (it had been marked covered by a draft that never existed); "You asked" shows only a whole sentence of the sender's own words, never TIG's; the short answer is checked with the reply; a layout error falls back to the plain body |
+| Notes' remembered line (2026-10-24) | notes drafted with `create_outlook_draft.py --design note` to ONE person carry a "Since we last talked" box quoted word for word from the newest recap TIG sent them (90 days at most), with strict rails (no youth, family, health, money, faith, hard times or other people's names); absent when unsure; `--corner none` leaves it off. Cc and Bcc count as readers |
 | Stand down | set `armed: false` in `005 Operations/Execution/watched_sender_config.json` |
 | Evidence | one brief per watched email in `002 Projects/_QWU Backoffice Automation/Reply Briefs/` |
 
@@ -13458,4 +13461,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-24 07:22 (v6.32)*
+*Last updated: 2026-10-25 05:17 (v6.33)*
