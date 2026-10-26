@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-25 05:17 | Source version: 6.33
+> Generated: 2026-10-26 00:25 | Source version: 6.34
 
 # QWU Backoffice User Manual
 
@@ -5004,8 +5004,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.33 by generate_public_manual.py"
-generated: "2026-10-25 05:17"
+source: "Auto-generated from private manual v6.34 by generate_public_manual.py"
+generated: "2026-10-26 00:25"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -10732,7 +10732,7 @@ Each monitored server has a playbook defining safe boundaries:
 
 | Playbook | Server | Monitors | Diagnostic Commands | Approved Actions |
 |----------|--------|----------|--------------------|-----------------|
-| `wpmu` | qwu-wpmu (AWS Lightsail) | quietlyworking.org | Bitnami stack status, MariaDB process/socket, disk/memory, error logs | Restart stack, restart MariaDB/Apache/PHP-FPM, clear tmp |
+| ~~`wpmu`~~ | ~~qwu-wpmu (AWS Lightsail)~~ RETIRED 2026-10-25 (`auto_remediate_server.py` v1.1.0): the server is deleted and its sites are frozen copies on Cloudflare Pages | quietlyworking.org (now no playbook: the alert gets the "no playbook" report) | ... | ... |
 | `n8n` | qwu-n8n (Azure VM) | n8n Workflow Engine | Docker containers, disk/memory, Docker logs, health endpoint, pg_isready | Restart n8n container, restart all containers, restart postgres, prune Docker |
 | `claude-dev-service` | claude-dev (local) | Ezer SMS Gateway, Digital Twin, QNT Webhook | systemd status, journalctl, port listening, disk/memory | Restart service, restart Caddy |
 
@@ -11588,7 +11588,7 @@ On the night of 2026-10-22, PHP2Shell (CVE-2026-109618 / 109619, pre-auth remote
 | legacy.chaplaintig.com | `legacy-chaplaintig-com` | chaplaintig.com itself is the SvelteKit site, untouched |
 | whelho.com, adventurewithheroes.com, ruapod.com | `qwf-domain-redirects` | 301 to whelho.org, heroeskids.org, chaplaintig.com (they used to dead-end) |
 
-Copies, reports and screenshots live in `/home/<VM_USER>/wp-legacy-freeze/`. The old server (`qwu-wpmu`) is private: tcp 80/443 answer only itself; SSH, WP-CLI, backups and the drift checks still work.
+Copies, reports and screenshots live in `/home/<VM_USER>/wp-legacy-freeze/`. The old server (`qwu-wpmu`) was DELETED on 2026-10-25 and its address released; every job that reached it is off. Everything it held is in the private Azure container `qwu-wpmu-final-archive`. To change a page, edit the copy and redeploy with `deploy_frozen_site.py`.
 
 ### What changed for visitors (deliberately)
 - Pages look the same. Logins, comments and search stop; the donation thermometer, testimonials and the Sheet table show their 2026-10-23 values.
@@ -13461,4 +13461,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-25 05:17 (v6.33)*
+*Last updated: 2026-10-26 00:25 (v6.34)*
