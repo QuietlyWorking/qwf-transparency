@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.23 | Started: 251223 | Updated: 261021**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-23"
+modifiedDate: "2026-10-26"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-26 00:25 | Source version: 6.34
+> Generated: 2026-10-27 06:45 | Source version: 6.36
 
 # QWU Backoffice User Manual
 
@@ -3604,6 +3604,11 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 | Measure the fold before you ship a picture (2026-10-22) | Adding a tall drawing above each card on a warranty page pushed the warranty words off an iPad held sideways. Teaches: measure where each line lands (bounding boxes) in the orientation people actually use, build both layouts, and hand the decision-maker the numbers. Also: search the issue tracker for standing rules ("no page may scroll") BEFORE designing, not after. | Intermediate |
 | Two keys with the same name (2026-09-06) | An edge function compared the caller's bearer token to its own runtime `SUPABASE_SERVICE_ROLE_KEY` and refused everyone. The runtime's copy was a 41-character secret; the caller's was a 219-character token. Teaches: prove an auth check by probing lengths and first-difference, never by reasoning about what a variable 'should' hold. | Advanced |
 | Triaging cloud vendor notices (2026-10-17) | Reading every "action required" email from a cloud provider IN FULL, then checking each claim against the real setup before reacting: which region the servers are in (a price rise for Europe does not touch West US 2), which disk types exist (`az disk list`), and how busy a disk really is (operations per hour from `/proc/diskstats` times the public retail price = under $3/month worst case). Teaches that most vendor alarms are about someone else, and how to prove which ones are yours. Also: least-privilege in practice (turning off standing admin access and default-on AI agents nobody uses). | Beginner-Intermediate |
+| Webhook Sender Verification (2026-10-26) | Why a webhook must prove who sent it: HMAC signatures (Twilio's `X-Twilio-Signature`), signing against the public URL behind a proxy, validating before parsing anything, and proving a protection holds with one refused unsigned request, never by attacking it | Intermediate |
+| Least-Privilege AI Agents (2026-10-26) | Giving an AI agent only the tools its job needs: an allow-list approves but does not restrict, a deny hook is proven with a decoy file and a spy callback, and a check on the agent's output comes too late to stop an action | Advanced |
+| Safe File Serving (2026-10-26) | Why a web server serves a list of pages, not a folder: directory listings, why `Path(base) / name` drops the base when `name` is absolute, and resolving a path before checking it stays inside its folder | Intermediate |
+| Upgrade on a Copy (2026-10-26) | Patching 31 Python packages safely: freeze the current set, upgrade a copy of the environment, run the full test suite on both and compare the failures, hold back an upgrade whose cost jumped, then pin | Intermediate |
+| Rotating a Secret Without Downtime (2026-10-26) | A staged swap: make the new credential, place it everywhere it lives (compare fingerprints, never values), restart what reads it, prove the new one works, then delete the old one and prove it is dead | Intermediate |
 
 ---
 
@@ -3706,6 +3711,20 @@ This cost reporting infrastructure was built across one continuous arc on 2026-0
 
 **Most valuable MP exercise:** the silent-pipeline-dead diagnostic story. It's a real situation (HQ widget displaying $20.63 for 80 days) with a clear arc (TIG noticed → trace data source → find the script → diagnose 4 layered problems → fix → cron → verify the widget updates). Includes everything: API debugging, schema migration awareness, port confusion (8765 vs 8767), credential-helper failure, and a structural fix (`check_orphaned_writers.py`) so the same pattern can't bite again.
 
+### MP Training Opportunities ⭐ (from the 2026-10-26 L4G site ship)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Writing a nonprofit program's privacy policy and terms from research (15 comparable programs; which laws bind a 501(c)(3) and which don't) | Legal research turned into plain language, where every line is a public promise | Intermediate |
+| Folding an in-flight feature's disclosure lines into a policy before it first goes public, so its own 30-day change notice never applies | Reading a document's own rules before acting; timing as a design tool | Intermediate |
+| Designing a privacy-respecting public poll: no names or emails, a ZIP code's count stays private until a person names the place, a daily-salted one-way code instead of an internet address | Privacy by design; counting without tracking | Advanced |
+| Shipping while other teams ship: merge main in, prove the release patch unchanged with a diff of diffs, push only as a fast-forward, re-read the rollback target | Release engineering on a shared repository | Intermediate |
+| Automated page checks with Playwright (status, sideways scroll, layout shift, page weight, console errors at 384 px and desktop) and axe contrast checks in both looks | Testing what a visitor actually sees, not what the code intends | Beginner |
+| Copy as code: every visible word lives in content modules, and a scanner fails on unknown placeholders and banned glyphs | Content engineering; a linter for words | Beginner |
+| A silent 1,000-row cap that appeared only when another team extended the data (2 months fine, 24 months cut off) | Debugging latent limits; reading a response's Content-Range | Intermediate |
+
+**Most valuable MP exercise:** the poll's privacy design. Students list everything a "vote" could reveal about a person, then remove each piece until only what the decision needs is left, and finally write the two policy sentences that describe what remains. Role-only throughout: no student is named.
+
 ---
 
 ## Lead Generation System
@@ -3716,6 +3735,7 @@ The backoffice includes a comprehensive lead generation and enrichment system su
 
 The L4G system includes:
 - **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026). **SvelteKit migration complete** ... `sveltekit-migration` branch merged to `main` (Session 216, Apr 12, 2026). All 20 routes verified on production (200 for public, 303 for auth-guarded). SSR confirmed: area demographics render in HTML source. Host-based redirects working (www/.com → canonical .org) via `hooks.server.ts`. GitHub Actions `deploy.yml` updated: output dir `.svelte-kit/cloudflare`, `PUBLIC_SUPABASE_URL` + `PUBLIC_SUPABASE_ANON_KEY` env vars added as GitHub Actions secrets. Static assets: `sitemap.xml` + `robots.txt` in `static/`. Fixed SSR crash: `$state(() => {...})` stores function reference ... changed to inline expression. Public pages + checkout + full donor-partner portal (10 pages) + admin suite (13 pages) + email mirror + push notifications. Phase 6 portal includes: dashboard with postcard tracker, bookings with conversation threads (Supabase Realtime), concept selection (3 AI concepts), proof review with approve/revision form actions, supporter-creates upload with area intelligence, brand clarity wizard, post-delivery feedback with celebration animation, settings. Two new tables: `l4g_conversations` (RLS + Realtime), `l4g_feedback`. Schema v1.3.0.
+- **Good-Neighbor redesign LIVE (2026-10-26, Session 818):** all 26 public pages rebuilt; checkout is inline on each area page (a bare `/checkout` 301s to `/areas`); Privacy Policy and Terms of Use v1.0 at `/privacy` and `/terms`, public for the first time (effective October 26, 2026); `/[Networking Chapter]` retired (301 home). Parts of this section describe the site before the redesign: for what is deployed now, read `002 Projects/_Locals 4 Good/L4G-System-Status.md` (top section) and check the live site. A full rewrite of this section is deferred to the round-7 kickoff.
 - **Data Layer:** Supabase (`<SUPABASE_PROJECT_ID_L4G>`) ... 23 tables (schema v1.3.0), migrated from Google Sheets + new tables for conversations and feedback
 - **APIs:** 8 Supabase Edge Functions (submit-contact-form, create-checkout-session, check-availability, expire-stale-holds, submit-category-request, subscribe-to-push, send-push-notification, ezer-chat)
 - **Payments:** Stripe Checkout via `create-checkout-session` edge function + n8n `L4G Stripe Payment Handler v1.3` webhook (E2E verified Mar 18, 2026)
@@ -4218,6 +4238,8 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.36 | 261026 | TIG + Claude | Session 819: **Backoffice security review, on TIG's "go".** Ez's text agent is now read-only (Phase 8 rewritten). The monthly security review starts 2026-11-02 (parked). 5 training opportunities added. |
+| 6.35 | 261026 | TIG + Claude | Session 818: **The new Locals 4 Good site went live, with its Privacy Policy and Terms.** TIG's "take your recs", "bless", "fold them in" and "ship" (22:59 PDT): the Good-Neighbor redesign on all 26 public pages, checkout's sales bound, Privacy and Terms v1.0 public for the first time with the area poll's two lines already in them (so no 30-day notice is owed). Two other lanes shipped during the round, so the release took two merges, each proven unchanged apart from the intended lines. The area poll is built on a preview; TIG "zip first". After the opening months, the trade check named 16 of 24 months (a 1,000-row cap, confirmed by both lanes; fix queued). L4G section note and MP training table added. |
 | 6.33 | 261024 | TIG + Claude | Session 783: **The reply drafter's first independent review, and The Corner's remembered line.** 1 high, 7 medium, 3 low findings, all checked and fixed with a test each (drafter v1.8.1); notes with someone copied no longer carry the cards or the preferences link; "Since we last talked" built and switched on by TIG's "bless" (90 days, his "90"). |
 | 6.32 | 261023 | TIG + Claude | Session 781: **The HQ strip's red lights, ground-truthed.** claude-dev's red was a deliberately stopped container: the old L4G WordPress container was removed after its database, the only copy, was archived to the storage disk. n8n's amber was really exposure: the strip read only GitHub's reviewed advisory feed (nothing newer than 2026-09-10), so 11 advisories naming 2.41.6 were invisible; `check_n8n_version.py` / `monitor_n8n_releases.py` v1.1.0 now read n8n's own feed too, by release line. n8n upgraded to 2.44.6 at 9 PM after a rehearsal that needed three fixes (log-decided verdict, growth-gated settle, production encryption key). L4G November taken off sale. Automatic n8n security upgrades parked for a build session 2026-10-24. |
 | 6.31 | 261023 | TIG + Claude | Session 780: **website form spam.** Three spam messages beat the WP Legacy forms' honeypot, timer and math question within five hours and got Ezer's reply. Family spam hold in the contact pipeline (every QWF form; daily held list) and Cloudflare Turnstile on all 7 WP Legacy forms, both live and verified (TIG's own test passed end to end). Shared Infrastructure contact line updated. |
@@ -5004,8 +5026,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.34 by generate_public_manual.py"
-generated: "2026-10-26 00:25"
+source: "Auto-generated from private manual v6.36 by generate_public_manual.py"
+generated: "2026-10-27 06:45"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -8190,69 +8212,54 @@ Reply with: BP [reading] pulse [rate]"
 "Recorded! 7-day avg: 119/79. You're on track."
 ```
 
-### Phase 8: Backoffice Agent ⭐ NEW
+### Phase 8: Backoffice Agent (read-only since 2026-10-26)
 
-**Added: Session 52 (January 26, 2026)**
+**Added: Session 52 (January 26, 2026). Made read-only: Session 819 (October 26, 2026), on TIG's "go".**
 
-Ezer can now execute full Claude Code operations via SMS, giving TIG backoffice access from anywhere.
+TIG can text Ez a question about the backoffice from anywhere and get an answer. Ez reads the vault to answer. Ez does not
+run commands, change files, deploy or restart anything from a text. Ask for a change and Ez says plainly that changes can't
+be made by text, and that TIG can make it from a Claude session at his desk.
 
-#### Why This Matters
+#### What You Can Ask
 
-Previously, fixing a broken script or checking logs required VS Code + SSH. Now TIG can text Ez to:
-- Run system audits
-- Fix errors in code
-- Check logs and system status
-- Deploy fixes
-- Execute scripts
+- "What's broken?" ... Ez reads today's logs and audit notes
+- "What did the audit find?"
+- "What's in the error logs today?"
+- "What does the WCR directive say about addendums?"
 
 #### Architecture
 
 ```
 SMS from TIG
     ↓
-Intent Classifier (BACKOFFICE_COMMAND)
+Twilio signature check (an unsigned request is refused with 403)
     ↓
-BackofficeHandler
+Intent Classifier (BACKOFFICE_COMMAND)
     ↓
 ezer_backoffice_agent.py
     ↓
-Claude Agent SDK
-    ├─ Read (always safe)
-    ├─ Glob (always safe)
-    ├─ Grep (always safe)
-    ├─ Bash (allowlisted commands)
-    ├─ Edit (safe paths only)
-    └─ Write (safe paths only)
+Claude Agent SDK, three tools only
+    ├─ Read
+    ├─ Glob
+    └─ Grep
+    (a PreToolUse hook refuses secret paths and anything outside the vault)
     ↓
 Response Summary
     ├─ SMS to TIG (concise)
-    └─ Discord #agent-log (full audit)
+    └─ Discord #agent-log (the kind of request and a masked number, never the text)
 ```
 
 #### Safety Controls
 
 | Control | Implementation |
 |---------|----------------|
-| Authentication | TIG's phone number only |
-| Working directory | `/home/<VM_USER>/qwu_backOffice` only |
-| Protected paths | `.env`, `*credentials*`, `*secret*`, `.ssh/` |
-| Dangerous commands | `rm -rf`, `push --force`, `reset --hard` blocked |
-| Risky operations | `git push`, `deploy`, `restart` require YES confirmation |
-| Cost cap | $1.00 per request |
-| Turn limit | 5 agentic turns maximum |
+| Who can ask | Twilio-signed requests from TIG's phone number only |
+| Tools | Read, Glob and Grep; no shell, no edits, no writes |
+| Where it reads | `/home/<VM_USER>/qwu_backOffice` only |
+| Protected paths | Secret files (`.env`, credentials, keys) and backup folders, refused by the hook |
+| Cost cap | $1.00 per request (`EZER_AGENT_MAX_COST_PER_REQUEST`) |
+| Turn limit | 5 agentic turns |
 | Timeout | 120 seconds |
-
-#### Confirmation Flow
-
-Risky operations require explicit confirmation:
-
-```
-TIG: "Push the latest fixes"
-Ez: "This will push code to remote repository.
-    Reply YES to confirm or NO to cancel."
-TIG: "YES"
-Ez: "Pushed to origin/main. 2 files changed."
-```
 
 #### Usage Examples
 
@@ -8261,23 +8268,6 @@ Ez: "Pushed to origin/main. 2 files changed."
 → "What's broken?"
 ← "System healthy. Last audit: 2 warnings
    (both resolved). No errors in logs."
-```
-
-**Run Audit:**
-```
-→ "Run the audit ez"
-← "Audit complete. Found 2 issues:
-   1. ✅ Fixed: model_config.py outdated tier
-   2. ✅ Fixed: 3 workflows missing publish
-   Cost: $0.67 | 5 turns | Report in Discord"
-```
-
-**Fix Error:**
-```
-→ "Fix the broken n8n workflow"
-← "Fixed workflow.json - invalid JSON on
-   line 47 (missing comma). Deployed.
-   Cost: $0.18 | 3 turns"
 ```
 
 **Check Logs:**
@@ -8295,9 +8285,9 @@ Ez: "Pushed to origin/main. 2 files changed."
 | Resource | Location |
 |----------|----------|
 | Directive | `005 Operations/Directives/ezer_backoffice_agent.md` |
-| Agent Script | `005 Operations/Execution/ezer_backoffice_agent.py` v1.1.0 |
-| Intent Classifier | `005 Operations/Execution/sms_intent_classifier.py` v1.4.0 |
-| Router | `005 Operations/Execution/twilio_webhook_server.py` v3.4.0 |
+| Agent Script | `005 Operations/Execution/ezer_backoffice_agent.py` v2.0.0 |
+| Intent Classifier | `005 Operations/Execution/sms_intent_classifier.py` v1.5.0 |
+| Router | `005 Operations/Execution/twilio_webhook_server.py` v3.8.0 |
 
 ---
 
@@ -13461,4 +13451,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-26 00:25 (v6.34)*
+*Last updated: 2026-10-27 06:45 (v6.36)*
