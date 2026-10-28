@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.23 | Started: 251223 | Updated: 261021**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-27"
+modifiedDate: "2026-10-28"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-28 05:15 | Source version: 6.40
+> Generated: 2026-10-28 07:56 | Source version: 6.41
 
 # QWU Backoffice User Manual
 
@@ -192,6 +192,14 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 - Posts health embed to Discord `#system-status`
 - Always pings Betterstack heartbeat regardless of health status (v1.1.0). The heartbeat proves "VM is alive and monitoring is running." Service-level issues are reported via Discord alerts separately. A missing heartbeat should only mean "VM is unreachable."
 - Thresholds: 80% warning, 90% critical for disk/memory
+
+**HQ header strip: disks, containers and space (updated 2026-10-27, Session 827)**
+- `report_vm_health.py` (every 5 minutes) feeds the strip. Every disk of 10GB or more has its own daily trend line and its own warning, which now comes at **45 days to full** (was 30), so a warning always leaves more than a month to act. A one-time gain bigger than a tenth of a disk (data moved off, a big clean-up, a resize) is taken out before the trend is fitted; before this, the Oct 11 storage-disk move made a filling disk read "flat or recovering".
+- A stopped Docker container turns a machine red only when its restart policy says it should be running. A throwaway test database (restart "no") shows as a grey chip.
+- The weekly Sunday trim (`prune_disk_caches.py`) clears an app copy's downloaded libraries after 7 idle days, and removes a whole app copy (agent-lane worktrees included) after 30 idle days, only when every byte of it is on GitHub and no note names it.
+- qwu-n8n: an n8n upgrade now removes old versions itself (keeping the rollback one), and its system log is capped at 500MB.
+- Main disk 128GB to 256GB (+$24.96 a month) is TIG's to run from Azure Cloud Shell, walked through by his desktop Claude: `002 Projects/_QWU Backoffice Automation/Kickoff Prompts/claude-dev-disk-resize-walkthrough-kickoff-2026-10-27.md`. Azure grows a system disk only while the machine is stopped.
+- If VS Code shows "reconnecting" while the machine is healthy, try **Reload Window** first. On 2026-10-27 a full stop and start was used for what turned out to be a client-side break: the machine's logs showed it idle and healthy throughout.
 - Systemd services monitored: `sms-webhook`, `digital-twin`, `qnt-webhook`, `caddy`
 
 **claude-dev Disk Layout & Weekly Upkeep** ⭐ NEW (2026-10-11)
@@ -3616,6 +3624,10 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 
 Monitor Azure spending directly from the backoffice for cost awareness. Azure is one of 7 variable cost sources tracked by the [[#Cost Intelligence System]] ... see that section for the unified cost tracking architecture including LLM, Apify, Supabase, and budget alerting.
 
+**Updated in Session 827:**
+- **Azure grant line:** `check_azure_credit_balance.py` v1.4.0 now refreshes the HQ figure every day at 7:20 AM Pacific (the weekly run, which keeps the Discord record, was refused by Azure's rate limit about one week in three). A spent grant shows the day it ran out, not the day of the check. Paying full price until the April 2027 renewal is accepted; the renewal window alert is the one that matters.
+- **Claude API calls are paid from the Max plan's $200 monthly API credit.** OpenRouter sends each Claude call on the Foundation's own Anthropic key first (BYOK) and falls back to the OpenRouter balance only if the key fails or the month's credit is used up. That covers the ~$137 a month our scripts spent on Claude. Never turn on OpenRouter's "BYOK-only routing". Full facts, the key's expiry and the nightly watch: `claude_tool_wisdom.md` §Who pays for our Claude API calls.
+
 ### What's Tracked
 
 | Metric | Description |
@@ -3761,6 +3773,17 @@ The whole arc of rebuilding locals4good.org, from the first private preview to t
 | Writing a user manual from the live product: every claim checked against the live pages and the word files, prices read from the live page, then an independent fact-check (the author's own first check caught eight lines written from words the site keeps on file but never shows) | Technical writing; the gap between what was designed and what shipped | Beginner |
 
 **Most valuable MP exercise:** the blind five-second test. Students run it on a real page as the same three visitors, write their top five fixes, then compare them with what the site actually changed after its own test (the neighbor's way in moved to the first screen and the menu, the price went beside the headline, the first screen got one clear action). Role-only throughout: no student is named.
+
+### MP Training Opportunities ⭐ (from the HQ strip ground-truth session, 2026-10-27, Session 827)
+
+| Task | Skills taught | Prerequisites | Time | Complexity |
+|------|---------------|---------------|------|------------|
+| **Why a trend line lied: a disk "recovering" while it filled** | Least squares by hand, step changes, reading daily data before trusting a summary | Spreadsheet basics | 2 hours | Intermediate |
+| **Was it the server or the laptop?** Diagnose a dropped remote connection from the server's own logs (scheduled jobs on time, other logins working, the session still answering keepalives) | Linux logs, SSH keepalives, evidence over hunches | Linux command line | 2 hours | Intermediate |
+| **Least-privilege keys:** a service-account API key, one workspace, a one-year expiry, stored only where it is used | Cloud security basics, key rotation, why a personal key is wrong for a shared job | None | 1 hour | Beginner |
+| **Cleaning up safely:** prove every byte of a git copy is on GitHub before removing it (uncommitted files, stashes, unpushed commits, ignored files like .env) | Git internals, writing tests against throwaway repositories | Git basics | 3 hours | Intermediate |
+
+**Most valuable MP exercise:** give students the 25 daily free-space readings from this session and ask "how many days until full?" Most fit a straight line through all of it and get "never". Then show them the Oct 11 jump and let them find the real answer (about three weeks) themselves.
 
 ---
 
@@ -4277,6 +4300,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.41 | 261028 | TIG + Claude | Session 827: **HQ strip ground-truthed; the main disk was filling, not flat.** §Infrastructure Monitoring gains "HQ header strip: disks, containers and space": per-disk trends with a 45-day warning and the one-off-gain rule, the container red rule, the 7-day / 30-day weekly trim, the n8n image clean-up and log cap, the planned 256GB resize (desktop walkthrough kickoff) and "try Reload Window first". §Azure Cost Tracking notes the grant line's daily refresh and that Claude API calls are now paid from the Max plan's $200 monthly API credit through OpenRouter BYOK. New MP Training Opportunities: a trend line that lied, server-or-laptop diagnosis, least-privilege keys, cleaning up git copies safely. |
 | 6.40 | 261027 | TIG + Claude | Session 826: **Every drafted reply now ends with one green ask card.** `create_outlook_draft.py` v1.6.0 draws TIG's blessed reply design on every threaded reply draft: his greeting, the reply, the green WHAT HAPPENS NEXT card last, his sign-off once. It refuses a reply without a next action or with its own sign-off (CLAUDE.md v1.52.0 carries the rule). The drafting-path note now names v1.6.0. New MP Training Opportunities from the same session: proving a shared folder is really empty (a Drive folder listing left out files the account could open by id), starting an inbox search at the last message actually read, and designing the one ask for a scanning reader. |
 | 6.39 | 261027 | TIG + Claude | Session 824: **Locals 4 Good's new site has its first User Manual.** The site lane's closeout after the area poll shipped: `L4G-User-Manual.md` v0.1.0 covers every public page, reserving a spot, the pages after checkout, the area poll and the pages for neighbors and referrers, written from the live site (prices read from the live Pricing page; the portal, sign-in and staff chapters stay short until their restyle lands). 10 training opportunities added from the site build, rounds 1 to 8. |
 | 6.38 | 261027 | TIG + Claude | Session 823: **Locals 4 Good's delight pass went live.** On TIG's "start with the first three", "bless" and "ship" (15:21 PDT): eleven small touches across the public site, each with a still version for reduced motion, and the thank-you page rebuilt (it said "Loading your postcard..." forever for every new donor-partner, because the database never lets a signed-out browser read the booking). 8 training opportunities added. |
@@ -5069,8 +5093,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.40 by generate_public_manual.py"
-generated: "2026-10-28 05:15"
+source: "Auto-generated from private manual v6.41 by generate_public_manual.py"
+generated: "2026-10-28 07:56"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13513,4 +13537,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-28 05:15 (v6.40)*
+*Last updated: 2026-10-28 07:56 (v6.41)*
