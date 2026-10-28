@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 6.23 | Started: 251223 | Updated: 261021**"
+description: "**Version: 6.42 | Started: 251223 | Updated: 261028**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-10-28"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -11,11 +11,11 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-28 07:56 | Source version: 6.41
+> Generated: 2026-10-28 22:51 | Source version: 6.42
 
 # QWU Backoffice User Manual
 
-**Version: 6.23 | Started: 251223 | Updated: 261021**
+**Version: 6.42 | Started: 251223 | Updated: 261028**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -4300,20 +4300,6 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
-| 6.41 | 261028 | TIG + Claude | Session 827: **HQ strip ground-truthed; the main disk was filling, not flat.** §Infrastructure Monitoring gains "HQ header strip: disks, containers and space": per-disk trends with a 45-day warning and the one-off-gain rule, the container red rule, the 7-day / 30-day weekly trim, the n8n image clean-up and log cap, the planned 256GB resize (desktop walkthrough kickoff) and "try Reload Window first". §Azure Cost Tracking notes the grant line's daily refresh and that Claude API calls are now paid from the Max plan's $200 monthly API credit through OpenRouter BYOK. New MP Training Opportunities: a trend line that lied, server-or-laptop diagnosis, least-privilege keys, cleaning up git copies safely. |
-| 6.40 | 261027 | TIG + Claude | Session 826: **Every drafted reply now ends with one green ask card.** `create_outlook_draft.py` v1.6.0 draws TIG's blessed reply design on every threaded reply draft: his greeting, the reply, the green WHAT HAPPENS NEXT card last, his sign-off once. It refuses a reply without a next action or with its own sign-off (CLAUDE.md v1.52.0 carries the rule). The drafting-path note now names v1.6.0. New MP Training Opportunities from the same session: proving a shared folder is really empty (a Drive folder listing left out files the account could open by id), starting an inbox search at the last message actually read, and designing the one ask for a scanning reader. |
-| 6.39 | 261027 | TIG + Claude | Session 824: **Locals 4 Good's new site has its first User Manual.** The site lane's closeout after the area poll shipped: `L4G-User-Manual.md` v0.1.0 covers every public page, reserving a spot, the pages after checkout, the area poll and the pages for neighbors and referrers, written from the live site (prices read from the live Pricing page; the portal, sign-in and staff chapters stay short until their restyle lands). 10 training opportunities added from the site build, rounds 1 to 8. |
-| 6.38 | 261027 | TIG + Claude | Session 823: **Locals 4 Good's delight pass went live.** On TIG's "start with the first three", "bless" and "ship" (15:21 PDT): eleven small touches across the public site, each with a still version for reduced motion, and the thank-you page rebuilt (it said "Loading your postcard..." forever for every new donor-partner, because the database never lets a signed-out browser read the booking). 8 training opportunities added. |
-| 6.37 | 261026 | TIG + Claude | Session 820: **Locals 4 Good's backend shipped with the new site, and five neighborhoods opened for donations.** On TIG's "ship", checkout's new rules went live with the site (v17, proven with no payment). On his "go", every area got 24 months of card dates and reservation spaces, USPS counts were refreshed, and two founding-promise trades were held. Coto de Caza, Newport Beach, Mission Viejo North and Anaheim Hills West joined Rancho Palos Verdes West. On his "ship" and "remove", the unused chat service and its two keys were taken down. On his "three", Mission Viejo is planned as three areas. L4G section, MP training table and Supabase TWL v1.21.0 updated. |
-| 6.36 | 261026 | TIG + Claude | Session 819: **Backoffice security review, on TIG's "go".** Ez's text agent is now read-only (Phase 8 rewritten). The monthly security review starts 2026-11-02 (parked). 5 training opportunities added. |
-| 6.35 | 261026 | TIG + Claude | Session 818: **The new Locals 4 Good site went live, with its Privacy Policy and Terms.** TIG's "take your recs", "bless", "fold them in" and "ship" (22:59 PDT): the Good-Neighbor redesign on all 26 public pages, checkout's sales bound, Privacy and Terms v1.0 public for the first time with the area poll's two lines already in them (so no 30-day notice is owed). Two other lanes shipped during the round, so the release took two merges, each proven unchanged apart from the intended lines. The area poll is built on a preview; TIG "zip first". After the opening months, the trade check named 16 of 24 months (a 1,000-row cap, confirmed by both lanes; fix queued). L4G section note and MP training table added. |
-| 6.33 | 261024 | TIG + Claude | Session 783: **The reply drafter's first independent review, and The Corner's remembered line.** 1 high, 7 medium, 3 low findings, all checked and fixed with a test each (drafter v1.8.1); notes with someone copied no longer carry the cards or the preferences link; "Since we last talked" built and switched on by TIG's "bless" (90 days, his "90"). |
-| 6.32 | 261023 | TIG + Claude | Session 781: **The HQ strip's red lights, ground-truthed.** claude-dev's red was a deliberately stopped container: the old L4G WordPress container was removed after its database, the only copy, was archived to the storage disk. n8n's amber was really exposure: the strip read only GitHub's reviewed advisory feed (nothing newer than 2026-09-10), so 11 advisories naming 2.41.6 were invisible; `check_n8n_version.py` / `monitor_n8n_releases.py` v1.1.0 now read n8n's own feed too, by release line. n8n upgraded to 2.44.6 at 9 PM after a rehearsal that needed three fixes (log-decided verdict, growth-gated settle, production encryption key). L4G November taken off sale. Automatic n8n security upgrades parked for a build session 2026-10-24. |
-| 6.31 | 261023 | TIG + Claude | Session 780: **website form spam.** Three spam messages beat the WP Legacy forms' honeypot, timer and math question within five hours and got Ezer's reply. Family spam hold in the contact pipeline (every QWF form; daily held list) and Cloudflare Turnstile on all 7 WP Legacy forms, both live and verified (TIG's own test passed end to end). Shared Infrastructure contact line updated. |
-| 6.05 | 261005 | TIG + Claude | Session 714: **one memory for both Claude accounts.** The second subscription's 40 private memories were merged into the main store and indexed, the one memory both accounts had written separately was combined fact for fact, and the second account's memory folder became a symlink to the main one. Seven "running sessions" on that account turned out to be empty Untitled panels; the session registry tells the two apart. Agent Memory Architecture gained the one-store note. |
-| 6.04 | 261005 | TIG + Claude | Session 713: **the Vista Social gateway has never worked, and the fix that revealed that got blamed for it.** TIG asked whether L4G social profiles already exist. Unanswerable, and why mattered more. `vista_social_api.py` has returned **0 successes in 51 logged responses** since 2026-01-06 ... 45 DNS failures against `api.vistasocial.com` (a host that has never resolved), 5 `subscription does not offer API access`, 1 dry run. A three-way probe (real / known-bad / absent key) proved the blocker is a **plan entitlement, not the credential**: a bogus key 403s at key validation while ours 500s one layer deeper, so the key is VALID and **must not be rotated**. Reconstructed the real timeline ... the MCP connector carried Vista until Vista deactivated the key on 2026-01-05 over rate-limit violations, the replacement rate-limited wrapper shipped pointing at the nonexistent host, and the 2026-05-27 base-URL correction **unmasked** the wall rather than causing it (a permanent config error wearing a transient `Max retries` costume alarmed nothing for ~5 months; the one detector we own watches cron loops, never a rarely-invoked manual wrapper). Also disproved `.claude/skills/vista-social/profiles.md`, whose own 2024-12-22 changelog said *"verify actual connections"*: 4 of 4 QWF LinkedIn company slugs 404 against a 200 control, while Instagram/Facebook/TikTok stay **unchecked, not cleared** (bot walls false-negatived a control). Corrected: integration spec `Active` -> `BLOCKED` + probe + incident timeline (v1.1.0), `profiles.md` stamped UNVERIFIED (v1.1.0), wrapper docstring do-not-rotate note, this manual's two stale Vista rows, and a new L4G Known Issue. Memory: `feedback_the_fix_that_revealed_the_wall_gets_blamed_for_it.md`. **No deployed state changed.** Open for TIG: which Vista plan we are on. Parked to 2026-10-06 15:00 Pacific. |
-| 6.03 | 261006 | TIG + Claude | Session 712: **a supporter's new contract set, read properly, and three guards that cried wolf.** [Supporter Organization] delivered eight PDFs on 2026-09-29 and nobody had read them as text. Two things everyone believed were false: only **2 of 8 are image-only scans** (the earlier claim generalised from one file) and the set is **15 pages, not 11**. The six with text layers are INCOMPLETE ... every heading and column label is a **vector outline**, invisible to every extractor, including `NOTICE OF RIGHT TO CANCEL`. So all 15 pages were read, and the six text layers became 13 free controls in the supporter's own typeface. **Instrument measured before a single difference was reported:** 2,311 known words, 10 not reproduced (0.43%), all ten hyphens the text layer drops while the OCR reads them correctly ... substantive misread rate **0**; on the two true scans two model families agreed on every content word across 2,014. Ten legal-weight differences listed and **none decided** ... `contract_templates` was never written to. New §Reading a Supporter's Scanned Documents with four tools, five findings and an MP curriculum table. **Three separate guards condemned correct work this session** (a mid-token truncation heuristic, a Graph `$select` on a property the base type lacks, and an image check run against a sent copy after Outlook rewrote every cid) ... a lying verifier costs more than none. Commits `38138b856`, `2f049e4ca`, `0555bc882`, `b0fe3adf9`. 77 tests. |
-| 6.02 | 261006 | TIG + Claude | Session 709: **the capacity card was right and the router was reading a dead instrument.** TIG asked whether the Claude capacity card still reported correctly and still used both subscriptions. Reporting: healthy, verified against a live read. Using both: no ... 10 live sessions on one account and 0 on the other since Oct 2 22:00. The picker ranked on ONE hand-named limit (the Fable weekly pool, binding at 90%+ through September); both windows rolled over, every account read 0% on the only dimension compared, the ranking went flat, and the tie fell to list order. Rewrote §Running Several Claude Subscriptions (Capacity Routing): the ranking rule now names Anthropic's own binding mark instead of a model and carries the 3-day failure as a standing warning; added the SECOND terminal door (the bare `claude` command was never routed, only VS Code panels were); corrected the repair row to cover both doors and the two different updaters that silently remove them. Fixes + 8 order-independence tests committed `91aa8bf36`. |
 | 2.0 | 251229 | TIG | Added section X |
 | 1.0 | 251220 | TIG | Initial release |
 ```
@@ -5093,8 +5079,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.41 by generate_public_manual.py"
-generated: "2026-10-28 07:56"
+source: "Auto-generated from private manual v6.42 by generate_public_manual.py"
+generated: "2026-10-28 22:51"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7078,6 +7064,42 @@ is rendered for its real member and delivered to TIG's inbox only; the unlock is
 committee and leadership have seen it. Committee named from the 2026-2027 Chapter Roles sheet
 (2026-09-12). Roadmap: `hq.quietlyworking.org/roadmap/aim-high-membership-committee` (public export on
 the portal). Detail: the project's System Status file under `002 Projects/`.
+
+**How a page earns its place in the weekly report.** Every member-by-visitor page is checked before
+it can be bound (`wcr_acceptance_gate.py`). A deterministic half refuses an em dash, a URL or star
+rating the record does not carry, "recommendations" on a profile with none, a missing honesty marker
+and a page outside the length band; a judged half (FLAGSHIP, thinking on) asks four questions: is it
+about THIS member, could they open a conversation from it, does it invent anything, does it sound like
+a person. A page that fails is written once more; if it fails again it is HELD, named on the confirm
+screen and in TIG's text, and never sent. Pages are written and judged the moment a visitor becomes
+ready, and the noon send only binds what already passed (`wcr_page_verdicts.py`).
+
+**What changed on 2026-10-28 (after the 10-29 send held 23 of 144 pages):**
+
+| Change | What it does | Why |
+|--------|--------------|-----|
+| **Job dates reach the writer and the judge** (K38) | Each LinkedIn job is told with its dates (`Aug 2015 to May 2022`, `to now (current role)`); a blank company is filled from the verification step's copy of the SAME profile only when exactly one role matches on start and end year; an About cut at 600 characters says WE cut it | The facts block printed a `duration` field that has been blank since August, so a TRUE "years in event sales" could not be checked and was held. About 13 of the 23 holds had this one cause |
+| **The writer reads the caller's record** | `generate_connection_report.main(record=...)`: the page is written from the same record the judge reads | Looked up by name, a repeat visitor's other week could stand in (46 of 213 records resolved to another week) |
+| **One answer covers every registration of one person** | An answer on one registration is copied whole to the same person's other UPCOMING registrations: same registration email AND a name that agrees, never the QNT visitor id (six records hold someone else's), only into unanswered anchors, never over an answer, never a past meeting, a guest or a run in flight; a copy follows its source when the source is corrected | A person registered for two meetings needed every anchor answered twice (one visitor was booked for Nov 5 and Nov 12) |
+| **One run per person at a time** | Enforced where runs start (the Run button included) and in `--pending`; when a run ends the next one starts | Two runs of one person at once would write the same pages side by side |
+| **One folder per registration** | Pages land in `<meeting YYYYMMDD>_<name>`; a person's two registrations no longer share a folder | The second registration's pages overwrote the first's |
+| **A changed answer retires the old pages** (K42) | Changing an anchor on a visitor whose pages exist sets the record back to `partial` (`reports_out_of_date`), so no send binds the old pages, and the visitor re-runs by itself | The noon send would have bound pages written from the earlier answer. A correction AFTER the report was sent cannot recall it |
+
+> **Missing Pixel Training Opportunity (Tier 2: Contributor) ... Read what the judge was told before you blame the writer**
+>
+> On 2026-10-28 the acceptance judge held 23 pages, 13 of them for "the facts give no dates". The
+> tempting fix was to tell the writer to stop guessing. The right first move was to print the exact
+> facts block the judge had read: every job showed empty brackets where its dates should be, while
+> the record held the dates all along. The judge was right about the facts it was given; the facts
+> were wrong.
+>
+> | Component | Skills Taught |
+> |-----------|---------------|
+> | Print the judge's input before reading its verdict | Debugging an AI system by its inputs; "garbage in" made concrete |
+> | Count failure causes from real verdicts before changing a prompt | Turning a pile of reasons into a ranked cause table |
+> | Mutation checking a safety rule: break each rule on purpose and prove a test fails | Why a passing test proves nothing until you have seen it fail; 22 rules checked this way that day |
+>
+> **Prerequisites:** basic Python, reading JSON. **Time:** ~3 hours. **Complexity:** Intermediate.
 
 > **Missing Pixel Training Opportunity (Tier 2: Contributor) ... Identity disambiguation**
 >
@@ -13537,4 +13559,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-28 07:56 (v6.41)*
+*Last updated: 2026-10-28 22:51 (v6.42)*
