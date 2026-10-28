@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-28 02:02 | Source version: 6.39
+> Generated: 2026-10-28 05:15 | Source version: 6.40
 
 # QWU Backoffice User Manual
 
@@ -4277,6 +4277,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.40 | 261027 | TIG + Claude | Session 826: **Every drafted reply now ends with one green ask card.** `create_outlook_draft.py` v1.6.0 draws TIG's blessed reply design on every threaded reply draft: his greeting, the reply, the green WHAT HAPPENS NEXT card last, his sign-off once. It refuses a reply without a next action or with its own sign-off (CLAUDE.md v1.52.0 carries the rule). The drafting-path note now names v1.6.0. New MP Training Opportunities from the same session: proving a shared folder is really empty (a Drive folder listing left out files the account could open by id), starting an inbox search at the last message actually read, and designing the one ask for a scanning reader. |
 | 6.39 | 261027 | TIG + Claude | Session 824: **Locals 4 Good's new site has its first User Manual.** The site lane's closeout after the area poll shipped: `L4G-User-Manual.md` v0.1.0 covers every public page, reserving a spot, the pages after checkout, the area poll and the pages for neighbors and referrers, written from the live site (prices read from the live Pricing page; the portal, sign-in and staff chapters stay short until their restyle lands). 10 training opportunities added from the site build, rounds 1 to 8. |
 | 6.38 | 261027 | TIG + Claude | Session 823: **Locals 4 Good's delight pass went live.** On TIG's "start with the first three", "bless" and "ship" (15:21 PDT): eleven small touches across the public site, each with a still version for reduced motion, and the thank-you page rebuilt (it said "Loading your postcard..." forever for every new donor-partner, because the database never lets a signed-out browser read the booking). 8 training opportunities added. |
 | 6.37 | 261026 | TIG + Claude | Session 820: **Locals 4 Good's backend shipped with the new site, and five neighborhoods opened for donations.** On TIG's "ship", checkout's new rules went live with the site (v17, proven with no payment). On his "go", every area got 24 months of card dates and reservation spaces, USPS counts were refreshed, and two founding-promise trades were held. Coto de Caza, Newport Beach, Mission Viejo North and Anaheim Hills West joined Rancho Palos Verdes West. On his "ship" and "remove", the unused chat service and its two keys were taken down. On his "three", Mission Viejo is planned as three areas. L4G section, MP training table and Supabase TWL v1.21.0 updated. |
@@ -5068,8 +5069,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.39 by generate_public_manual.py"
-generated: "2026-10-28 02:02"
+source: "Auto-generated from private manual v6.40 by generate_public_manual.py"
+generated: "2026-10-28 05:15"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5410,11 +5411,30 @@ full-day project.
 
 ### Note for the drafting path
 
-`create_outlook_draft.py` v1.2.2 carries `--inline` (images embedded by Content-ID), `--attach`,
+`create_outlook_draft.py` (v1.6.0) carries `--inline` (images embedded by Content-ID), `--attach`,
 `--cc` and `--bcc`. It still has **no send path**, and a test now pins that fact rather than
 leaving it to someone remembering. Two Graph behaviours are documented in the file because both
 produce a silent wrong answer: `POST /messages` returns 201 and **drops** an `attachments` array,
 and on the SENT copy Outlook rewrites every `cid` to a GUID and renames every file.
+
+**Every reply carries one green ask card (v1.6.0, 2026-10-27).** A threaded reply draft
+(`--reply-to-message-id`) is drawn in TIG's blessed reply design: his greeting, the reply, ONE green
+card labelled WHAT HAPPENS NEXT as the last thing before his sign-off, and the sign-off once. The
+card is required (`--next-action`); when there is nothing for the reader to do, the card says so. A
+body that already signs off is refused, so a reply can never go out signed twice. TIG asked for this
+after restyling the ask of a hand-drafted reply himself: a reader who scans should never miss the one
+thing being asked of them. Tests: `tests/test_create_outlook_draft_reply_design.py`.
+
+#### MP Training Opportunities (from the 2026-10-27 shared-folder diagnosis, Session 826)
+
+| Opportunity | Skills taught | Level | Why it is good curriculum |
+|---|---|---|---|
+| Prove a shared folder is really empty before you believe it | Google Drive API, its query language, a file's own `parents` and `owners` fields | Intermediate | A folder listing left out 31 files that the same account could open one by one. Teaches checking the thing itself, not the index of it, and combining two searches when neither finds everything. |
+| Start an inbox search at the last message you actually read | Microsoft Graph mail filters, time windows, evidence over memory | Beginner | A search that began at our own last reply missed a note that had arrived just before it. Teaches choosing the window from the other person's side. |
+| Design the one ask so a scanning reader cannot miss it | HTML email, accessibility, writing for a busy reader | Beginner | Every drafted reply now ends with one green card naming what happens next. Teaches designing for the reader's three seconds. |
+
+**Prerequisite:** comfort with Python and the command line. **Estimated learning time:** 1 to 2
+hours per row with a mentor.
 
 ---
 
@@ -13493,4 +13513,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-28 02:02 (v6.39)*
+*Last updated: 2026-10-28 05:15 (v6.40)*
