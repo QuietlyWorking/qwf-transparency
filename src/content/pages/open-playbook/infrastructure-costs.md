@@ -12,19 +12,19 @@ This page exists because we believe donor-partners deserve to see exactly where 
 
 Every figure on this page is generated automatically from the same constants file our backoffice scripts use. When infrastructure changes, this page changes. When we update a constant, an audit runs the next morning and reconciles it against the actual Azure invoice. If they disagree by more than 5%, the system raises an alert before anyone can publish a wrong number.
 
-_Last regenerated: 2026-10-18 (Pacific). Constants verified: 2026-10-17._
+_Last regenerated: 2026-10-28 (Pacific). Constants verified: 2026-10-28._
 
 ---
 
 ## The Headline
 
-- **Fixed monthly infrastructure:** $527.56
+- **Fixed monthly infrastructure:** $664.94
 - **Variable monthly budget (LLM + scraping):** up to $400.00
-- **Grand total at full variable spend:** up to $927.56/month
+- **Grand total at full variable spend:** up to $1,064.94/month
 
 That funds 16 active apps, ~50 automation workflows, ~280 Python scripts, and the entire backoffice that keeps QWF running.
 
-**Most recent month-to-date Azure spend (live):** $147.55 as of 2026-10-14.
+**Most recent month-to-date Azure spend (live):** $290.76 as of 2026-10-26.
 
 ---
 
@@ -62,6 +62,7 @@ One Supabase organization on the Pro plan. 16 apps each get their own MICRO-tier
 | Betterstack monitoring | $0.00 | Lifetime AppSumo license... no recurring cost |
 | Email (M365) | $0.00 | Included in existing M365 license |
 | Cloudflare Workers (paid plan) | $5.00 | Account-wide; gives the Quietly Quoting estimate render step the processing time it needs |
+| AWS Lightsail (one server + its snapshots) | $137.38 | WordPress hosting QWF provides for a supporter. A nonprofit AWS credit covered it until September 2026; in October we retired two servers and cut this line from about $390 a month |
 
 ## Variable Costs (Budgets, Not Floors)
 
@@ -79,7 +80,7 @@ If we hit 75% of either budget, the system pings a Discord alert. If we hit 90%,
 
 ## The Bottom Line
 
-**Fixed:** $527.56/month. **Maximum if every variable budget hits 100%:** $927.56/month.
+**Fixed:** $664.94/month. **Maximum if every variable budget hits 100%:** $1,064.94/month.
 
 That covers every app, every automation, every dashboard, every email, every database, every monitor. No hidden line items. No marketing budget hidden in 'operations'. No executive compensation buried in 'professional services'.
 
