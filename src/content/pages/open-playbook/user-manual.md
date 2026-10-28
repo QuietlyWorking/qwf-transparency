@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.23 | Started: 251223 | Updated: 261021**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-26"
+modifiedDate: "2026-10-27"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-27 07:00 | Source version: 6.37
+> Generated: 2026-10-28 01:28 | Source version: 6.38
 
 # QWU Backoffice User Manual
 
@@ -3728,6 +3728,21 @@ This cost reporting infrastructure was built across one continuous arc on 2026-0
 
 **Most valuable MP exercise:** the poll's privacy design. Students list everything a "vote" could reveal about a person, then remove each piece until only what the decision needs is left, and finally write the two policy sentences that describe what remains. Role-only throughout: no student is named.
 
+### MP Training Opportunities ⭐ (from the 2026-10-27 L4G delight pass, Session 823)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Designing small moments with taste: a card dropping into a mailbox, a flag popping, a stamp landing, each once and on purpose | Motion as meaning, not decoration; knowing when to stop | Beginner |
+| Motion that respects people: a still version of every move for visitors whose device asks for less motion, and nothing hidden at rest (if it is on screen when the page loads, it shows the finished picture) | Accessibility as a design rule, not an afterthought | Beginner |
+| Animating only position and opacity, and measuring layout shift (under 0.1) so the page never jumps | Performance budgets a visitor can feel | Intermediate |
+| Freezing every animation at exact moments in an automated browser (pause them all, set their time) to take frame-by-frame pictures for review | Testing motion on purpose instead of hoping a screenshot lands mid-move | Intermediate |
+| Reading a live database's access rules to explain a page that said "Loading..." forever (the browser was never allowed that read) | Debugging from ground truth: the rules, not the code's intent | Intermediate |
+| Data minimization: asking for the smallest private read a page needs, after checking what is already public | Privacy by design; making a security review smaller | Advanced |
+| Working beside other teams on one site: message before touching a shared file, merge their work in, re-check your pieces after each of their releases | Collaboration on a shared codebase | Intermediate |
+| Delight that never gets in the way: a note in the browser console for curious builders, special-day postmarks keyed to Pacific time (Thanksgiving computed, not typed in) | Rewarding attention without costing anyone a click; date math | Beginner |
+
+**Most valuable MP exercise:** the thank-you page. Students find out why a page waited forever (the browser was never allowed to read the booking), rebuild it to say only what is true, then design the smallest safe read that would let it show a donor-partner their own spot. Role-only throughout: no student is named.
+
 ---
 
 ## Lead Generation System
@@ -3739,6 +3754,7 @@ The backoffice includes a comprehensive lead generation and enrichment system su
 The L4G system includes:
 - **Website:** locals4good.org (Cloudflare Pages, migrated from Lovable Mar 19, 2026). **SvelteKit migration complete** ... `sveltekit-migration` branch merged to `main` (Session 216, Apr 12, 2026). All 20 routes verified on production (200 for public, 303 for auth-guarded). SSR confirmed: area demographics render in HTML source. Host-based redirects working (www/.com → canonical .org) via `hooks.server.ts`. GitHub Actions `deploy.yml` updated: output dir `.svelte-kit/cloudflare`, `PUBLIC_SUPABASE_URL` + `PUBLIC_SUPABASE_ANON_KEY` env vars added as GitHub Actions secrets. Static assets: `sitemap.xml` + `robots.txt` in `static/`. Fixed SSR crash: `$state(() => {...})` stores function reference ... changed to inline expression. Public pages + checkout + full donor-partner portal (10 pages) + admin suite (13 pages) + email mirror + push notifications. Phase 6 portal includes: dashboard with postcard tracker, bookings with conversation threads (Supabase Realtime), concept selection (3 AI concepts), proof review with approve/revision form actions, supporter-creates upload with area intelligence, brand clarity wizard, post-delivery feedback with celebration animation, settings. Two new tables: `l4g_conversations` (RLS + Realtime), `l4g_feedback`. Schema v1.3.0.
 - **Good-Neighbor redesign LIVE (2026-10-26, Session 818):** all 26 public pages rebuilt; checkout is inline on each area page (a bare `/checkout` 301s to `/areas`); Privacy Policy and Terms of Use v1.0 at `/privacy` and `/terms`, public for the first time (effective October 26, 2026); `/[Networking Chapter]` retired (301 home). Parts of this section describe the site before the redesign: for what is deployed now, read `002 Projects/_Locals 4 Good/L4G-System-Status.md` (top section) and check the live site. A full rewrite of this section is deferred to the round-7 kickoff.
+- **Delight pass LIVE (2026-10-27, Session 823):** eleven small touches on the public site (the card dropping into the mailbox, three drawings that act once, the logo preview's size and month choices, a share button and a stamped "Copied", special-day postmarks, the home card's peek, the footer heart, a lost page with a returned card, a note for developers), each with a still version for reduced motion, and the pages after checkout rebuilt in the Good-Neighbor look. The old thank-you page read the booking from the browser, which the database never allows a signed-out donor-partner, so it said "Loading your postcard..." forever; the new one makes no bookings read. Showing a donor-partner their own spot waits on a small server-side read (the backend lane) and TIG's yes. Deployed state: `002 Projects/_Locals 4 Good/L4G-System-Status.md` (the delight lane section).
 - **Data Layer:** Supabase (`<SUPABASE_PROJECT_ID_L4G>`) ... 23 tables (schema v1.3.0), migrated from Google Sheets + new tables for conversations and feedback
 - **Opening months LIVE (2026-10-26, Session 820):** five areas take donations (Rancho Palos Verdes West and Coto de Caza from 2027-01; Newport Beach, Mission Viejo North and Anaheim Hills West from 2027-03), each offering 24 monthly cards; Anaheim Hills East is dated from 2027-06 and opens once its page has its own description. `create-checkout-session` v17 refuses any month outside that window (the sales bound, shared with the site). Two founding-promise trades are held off sale. Mission Viejo is planned as three areas (North, Central, South). Record: `L4G-System-Status.md`, the 2026-10-26 23:00 paragraphs onward.
 - **APIs:** 9 Supabase Edge Functions (submit-contact-form, create-checkout-session, check-availability, expire-stale-holds, submit-category-request, subscribe-to-push, send-push-notification, provision-donor-account, record-portal-consent). `ezer-chat` was deleted 2026-10-26 (Session 820); see Ezer Chat Guide below.
@@ -4242,6 +4258,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.38 | 261027 | TIG + Claude | Session 823: **Locals 4 Good's delight pass went live.** On TIG's "start with the first three", "bless" and "ship" (15:21 PDT): eleven small touches across the public site, each with a still version for reduced motion, and the thank-you page rebuilt (it said "Loading your postcard..." forever for every new donor-partner, because the database never lets a signed-out browser read the booking). 8 training opportunities added. |
 | 6.37 | 261026 | TIG + Claude | Session 820: **Locals 4 Good's backend shipped with the new site, and five neighborhoods opened for donations.** On TIG's "ship", checkout's new rules went live with the site (v17, proven with no payment). On his "go", every area got 24 months of card dates and reservation spaces, USPS counts were refreshed, and two founding-promise trades were held. Coto de Caza, Newport Beach, Mission Viejo North and Anaheim Hills West joined Rancho Palos Verdes West. On his "ship" and "remove", the unused chat service and its two keys were taken down. On his "three", Mission Viejo is planned as three areas. L4G section, MP training table and Supabase TWL v1.21.0 updated. |
 | 6.36 | 261026 | TIG + Claude | Session 819: **Backoffice security review, on TIG's "go".** Ez's text agent is now read-only (Phase 8 rewritten). The monthly security review starts 2026-11-02 (parked). 5 training opportunities added. |
 | 6.35 | 261026 | TIG + Claude | Session 818: **The new Locals 4 Good site went live, with its Privacy Policy and Terms.** TIG's "take your recs", "bless", "fold them in" and "ship" (22:59 PDT): the Good-Neighbor redesign on all 26 public pages, checkout's sales bound, Privacy and Terms v1.0 public for the first time with the area poll's two lines already in them (so no 30-day notice is owed). Two other lanes shipped during the round, so the release took two merges, each proven unchanged apart from the intended lines. The area poll is built on a preview; TIG "zip first". After the opening months, the trade check named 16 of 24 months (a 1,000-row cap, confirmed by both lanes; fix queued). L4G section note and MP training table added. |
@@ -5031,8 +5048,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.37 by generate_public_manual.py"
-generated: "2026-10-27 07:00"
+source: "Auto-generated from private manual v6.38 by generate_public_manual.py"
+generated: "2026-10-28 01:28"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13456,4 +13473,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-27 07:00 (v6.37)*
+*Last updated: 2026-10-28 01:28 (v6.38)*
