@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-28 01:28 | Source version: 6.38
+> Generated: 2026-10-28 02:02 | Source version: 6.39
 
 # QWU Backoffice User Manual
 
@@ -3743,6 +3743,25 @@ This cost reporting infrastructure was built across one continuous arc on 2026-0
 
 **Most valuable MP exercise:** the thank-you page. Students find out why a page waited forever (the browser was never allowed to read the booking), rebuild it to say only what is true, then design the smallest safe read that would let it show a donor-partner their own spot. Role-only throughout: no student is named.
 
+### MP Training Opportunities ⭐ (from the L4G Good-Neighbor site build, rounds 1 to 8, 2026-10-24 to 2026-10-27, Session 824)
+
+The whole arc of rebuilding locals4good.org, from the first private preview to the area poll going live. The two entries above cover the policy writing, the poll's privacy design, Playwright checks, copy as code and the delight pass; these are the units they leave out.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| The copy deck and the blessing loop: every public sentence lives in word files, rendered as one deck for one review; each line marked NEW, KEPT (from the old site), LOCKED (family-standard words, word for word) or waiting on a ruling, and each open question carries one id so the owner rules once (21 calls on the first deck, 15 a few rounds later) | Editorial operations: how one person approves hundreds of sentences without reading the same question twice | Beginner |
+| The blind five-second test: a reviewer who reads nothing about the program looks only at the first screen for five seconds as three typical visitors (a roofer on a phone, an estate planning attorney on a laptop, a homeowner who got the card), answers "What is this? Who is it for? What can I do here?", then ranks five fixes | User research without a lab; designing for the visitor, not the builder | Beginner |
+| Checking research at its source: a pasted summary of mail statistics, each figure found and re-read in the original study; two dropped because the source was members-only or did not say what the summary claimed | Research honesty; why an unchecked number on a public page reads as a promise | Beginner |
+| Private previews that cannot do harm: every change goes to its own preview address first; previews are kept out of search engines, testers never submit a form or place a hold on one, and the poll only pretends to count on a preview | Safe staging; a forgotten preview is a second live site | Intermediate |
+| Gate words as the control surface: "bless" for public words, "ship" for production, "go" for data, "clean up" for deletion; the builder stops and asks with the exact word, and one person answers each | Release governance a non-engineer can run from a phone | Beginner |
+| Shipping a feature turned off: the poll went live behind an on/off flag in the code plus a pause switch on the server, so it can be stopped later without rolling back other teams' work | Feature flags and kill switches; why "roll back" stops being safe once others ship on top | Intermediate |
+| Text that moves without moving the page: TIG's cycling word in "Is my trade open?" rolls through trade, practice, firm, agency, shop, studio and clinic inside a clipped one-line window; the heading is laid out once, so it is pixel-identical at rest; screen readers hear one steady heading; it stops on a tap and skips a word that would not fit | Accessible motion; layout stability measured, not hoped for | Intermediate |
+| Removing dead code safely: walk every import out from the pages, search each candidate file's name across the whole repository, keep a file another one cites as its contract, then prove nothing visible changed (every page's height identical to main on a preview; 18 files and 2,673 lines out) | Refactoring with evidence instead of confidence | Intermediate |
+| Cleaning up after a release: list every preview, branch and working copy; dry run first; unlink a shared install before removing a working copy; check nothing links into it; name it all once and delete on one word | Operational hygiene; leaving no second live site behind | Beginner |
+| Writing a user manual from the live product: every claim checked against the live pages and the word files, prices read from the live page, then an independent fact-check (the author's own first check caught eight lines written from words the site keeps on file but never shows) | Technical writing; the gap between what was designed and what shipped | Beginner |
+
+**Most valuable MP exercise:** the blind five-second test. Students run it on a real page as the same three visitors, write their top five fixes, then compare them with what the site actually changed after its own test (the neighbor's way in moved to the first screen and the menu, the price went beside the headline, the first screen got one clear action). Role-only throughout: no student is named.
+
 ---
 
 ## Lead Generation System
@@ -4258,6 +4277,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.39 | 261027 | TIG + Claude | Session 824: **Locals 4 Good's new site has its first User Manual.** The site lane's closeout after the area poll shipped: `L4G-User-Manual.md` v0.1.0 covers every public page, reserving a spot, the pages after checkout, the area poll and the pages for neighbors and referrers, written from the live site (prices read from the live Pricing page; the portal, sign-in and staff chapters stay short until their restyle lands). 10 training opportunities added from the site build, rounds 1 to 8. |
 | 6.38 | 261027 | TIG + Claude | Session 823: **Locals 4 Good's delight pass went live.** On TIG's "start with the first three", "bless" and "ship" (15:21 PDT): eleven small touches across the public site, each with a still version for reduced motion, and the thank-you page rebuilt (it said "Loading your postcard..." forever for every new donor-partner, because the database never lets a signed-out browser read the booking). 8 training opportunities added. |
 | 6.37 | 261026 | TIG + Claude | Session 820: **Locals 4 Good's backend shipped with the new site, and five neighborhoods opened for donations.** On TIG's "ship", checkout's new rules went live with the site (v17, proven with no payment). On his "go", every area got 24 months of card dates and reservation spaces, USPS counts were refreshed, and two founding-promise trades were held. Coto de Caza, Newport Beach, Mission Viejo North and Anaheim Hills West joined Rancho Palos Verdes West. On his "ship" and "remove", the unused chat service and its two keys were taken down. On his "three", Mission Viejo is planned as three areas. L4G section, MP training table and Supabase TWL v1.21.0 updated. |
 | 6.36 | 261026 | TIG + Claude | Session 819: **Backoffice security review, on TIG's "go".** Ez's text agent is now read-only (Phase 8 rewritten). The monthly security review starts 2026-11-02 (parked). 5 training opportunities added. |
@@ -5048,8 +5068,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.38 by generate_public_manual.py"
-generated: "2026-10-28 01:28"
+source: "Auto-generated from private manual v6.39 by generate_public_manual.py"
+generated: "2026-10-28 02:02"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13473,4 +13493,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-28 01:28 (v6.38)*
+*Last updated: 2026-10-28 02:02 (v6.39)*
