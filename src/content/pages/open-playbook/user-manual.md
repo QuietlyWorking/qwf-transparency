@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-29 05:33 | Source version: 6.46
+> Generated: 2026-10-29 05:45 | Source version: 6.47
 
 # QWU Backoffice User Manual
 
@@ -3786,6 +3786,21 @@ The whole arc of rebuilding locals4good.org, from the first private preview to t
 
 **Most valuable MP exercise:** the blind five-second test. Students run it on a real page as the same three visitors, write their top five fixes, then compare them with what the site actually changed after its own test (the neighbor's way in moved to the first screen and the menu, the price went beside the headline, the first screen got one clear action). Role-only throughout: no student is named.
 
+### MP Training Opportunities ⭐ (from the L4G restyle of the sign-in, portal and staff pages, 2026-10-27 to 2026-10-28, Session 837)
+
+The sign-in pages, the donor-partner portal and the staff pages took the public site's Good-Neighbor look in two batches, then seven small fixes found along the way went live one ruling at a time.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Proving a restyle changed nothing it should not: two private copies of the site on made-up data (the old build and the new), every page photographed in full with animations frozen, both looks, phone and desktop widths, compared pixel by pixel; the words on screen compared separately | Regression testing that never touches live data | Intermediate |
+| Telling drawing noise from a real change: when a picture differs by one or two shades on a curved edge, photograph the SAME build twice; if it differs from itself in the same box, it is the browser. A read of every element's position and style then confirms nothing moved | Controls in an experiment; evidence over instinct | Advanced |
+| Accessibility against a named standard: axe-core at WCAG 2.2 AA on 33 pages, including forms that open only on a click; every text box tied to the label beside it, every icon-only button given a spoken name, every tap target 44 px | Building for screen readers, keyboards and thumbs | Beginner |
+| Moving a read from the browser to the server: the staff dashboard's numbers now arrive with the page, so nothing jumps when they fill in; the server reads as the signed-in person, so the same database rules still decide what comes back | Server rendering, layout shift, least privilege | Intermediate |
+| A date window is a boundary test: "next three months" became this Pacific month and the next two; the month math was tested across a year end and both clock changes | Off-by-one and time-zone testing | Intermediate |
+| A tool named in a handoff must outlive the session: a cleanup tool cited by four kickoffs had lived in a session's scratch folder and was gone; it was rebuilt in the lasting tools folder, dry run by default | Operational durability | Beginner |
+
+**Most valuable MP exercise:** give a student two builds of one page and a picture diff showing a few changed pixels, and ask them to prove whether anything really changed, using the photograph-it-twice control and a layout read.
+
 ### MP Training Opportunities ⭐ (from the HQ strip ground-truth session, 2026-10-27, Session 827)
 
 | Task | Skills taught | Prerequisites | Time | Complexity |
@@ -5091,8 +5106,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.46 by generate_public_manual.py"
-generated: "2026-10-29 05:33"
+source: "Auto-generated from private manual v6.47 by generate_public_manual.py"
+generated: "2026-10-29 05:45"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13590,4 +13605,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-29 05:33 (v6.46)*
+*Last updated: 2026-10-29 05:45 (v6.47)*
