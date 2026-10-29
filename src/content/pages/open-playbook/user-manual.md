@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.44 | Started: 251223 | Updated: 261028**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-28"
+modifiedDate: "2026-10-29"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-29 06:35 | Source version: 6.49
+> Generated: 2026-10-29 07:18 | Source version: 6.50
 
 # QWU Backoffice User Manual
 
@@ -691,14 +691,25 @@ Students completing this module will learn:
 
 The self-hosted n8n instance uses pinned version tags for stability.
 
-**Current Version:** 2.44.6 (upgraded 2026-10-23 9 PM Pacific from 2.41.6, closing the 11 advisories of the 2026-10-14 cohort; 2.41.6 was live-checked 2026-10-04; the HQ masthead strip now tracks installed vs published vs vulnerable continuously. Previously 2.31.5, upgraded 2026-07-22 from 2.17.5 ... catch-up security upgrade closing 45 advisories, incl. the same-morning batch of 15 that 2.31.5 was released to patch)
+**Current Version:** 2.45.5 (upgraded 2026-10-28 9 PM Pacific from 2.44.6, unattended on the armed schedule and verified at the source that night: ~20s down, 5 migrations, every workflow and timer intact, every timed workflow firing on 2.45's new durable scheduler. Upgrade history: `n8n_version_management.md` changelog. The HQ masthead strip tracks installed vs published vs vulnerable continuously.)
 
 | Property | Value |
 |----------|-------|
-| Image | `docker.n8n.io/n8nio/n8n:2.44.6` |
+| Image | `docker.n8n.io/n8nio/n8n:2.45.5` (rollback image 2.44.6 kept) |
 | Location | `~/n8n/docker-compose.yml` on qwu-n8n |
 | Monitor | `monitor_n8n_releases.py` hourly cron :41 on backoffice VM (live version via SSH + GHSA advisories; replaced the retired "n8n Version Monitor" workflow 2026-07-21) |
 | Port Binding | `127.0.0.1:5678` (localhost only, Caddy proxies HTTPS) |
+
+**The advisory light only shows what is really open (2026-10-28, Session 840):** n8n writes one fix per release line it patched, plus a 3.0.x entry since its 3.0 pre-releases. When none names our line, `check_n8n_version.py` v1.2.0 clears a warning only if an earlier line shipped the fix a day or more before our line was cut (the previous minor's first npm release, since n8n cuts the next minor when it ships one), or if a person-written check in `005 Operations/Data/n8n_advisory_code_checks.json` finds the fix in the live container (re-run on every strip refresh, so an upgrade that drops the fix turns the light red again). The hourly watcher shares the rule and re-judges a cleared advisory when n8n edits it or we roll back. Validated on n8n's whole history: 0 wrong clears in 9,501 cases where the listed line was removed and re-asked.
+
+#### MP Training Opportunities (from the 2026-10-28 n8n upgrade checkup and advisory-light fix, Session 840)
+
+| Task | Skills taught | Prerequisites | Time | Level |
+|---|---|---|---|---|
+| Verify an unattended upgrade at the source (log verdict, running version, database counts, per-workflow run counts before and after) | SQL against a live Postgres, reading a deploy log critically, `docker exec` | SSH, basic SQL | 2 h | Intermediate |
+| Find a security fix in compiled JavaScript inside a container (and learn why BusyBox `grep --include` silently finds nothing) | grep/find, reading minified Node code, tool limits | Linux shell | 1.5 h | Intermediate |
+| Test a rule that clears warnings by deleting the evidence it replaces (counterfactual validation) | data validation design, Python, thinking like an adversary | Python, JSON | 3 h | Advanced |
+| Write a test that reproduces a reviewer's finding before fixing it | pytest, monkeypatching, test-first repair | Python | 1 h | Intermediate |
 
 **Security Hardening (2026-04-04):**
 - UFW firewall enabled: ports 22 (SSH), 80 (HTTP), 443 (HTTPS) only
@@ -5120,8 +5131,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.49 by generate_public_manual.py"
-generated: "2026-10-29 06:35"
+source: "Auto-generated from private manual v6.50 by generate_public_manual.py"
+generated: "2026-10-29 07:18"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13658,4 +13669,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-29 06:35 (v6.49)*
+*Last updated: 2026-10-29 07:18 (v6.50)*
