@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-29 07:18 | Source version: 6.50
+> Generated: 2026-10-29 20:48 | Source version: 6.51
 
 # QWU Backoffice User Manual
 
@@ -5131,8 +5131,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.50 by generate_public_manual.py"
-generated: "2026-10-29 07:18"
+source: "Auto-generated from private manual v6.51 by generate_public_manual.py"
+generated: "2026-10-29 20:48"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -9911,6 +9911,35 @@ script or agent can skip it, and nobody (not even the service key) can edit or d
 | Trace one action from a button to the trail row (browser header -> PostgREST -> trigger) | web requests, HTTP headers, triggers | JavaScript basics | 2 h | Intermediate |
 | Adversarial review: find how a record could lie (forged actor, leaked label, side-door read) | security thinking, RLS | Postgres RLS | 4 h | Advanced |
 
+### Member access ... each member chooses who sees each piece (migration 060) ⭐ NEW
+
+**Added: October 29, 2026** (the expand step of the QNT member launch; no screen uses it yet)
+
+The QNT database now holds each member's own choices: for each piece of their profile (name, business, photo, phone,
+email, links, their old visitor record and so on), whether everyone, fellow members, or only the member sees it. Phones
+start hidden from fellow members; everything else starts where the public page already was. Only the member changes
+their choices, and a piece a member removes stays empty against every writer but the member.
+
+| What | Where |
+|---|---|
+| The choices | columns on `members` (`share_everyone`, `share_members`, `member_removed`, `choices_confirmed_at`), kept by the guard `trg_members_guard_member_choices` |
+| What a signed-in person reads | the views `member_directory`, `visitor_records`, `testimonial_records`, `meeting_records` and `newsletter_edition_records`: each applies the choices, and masks a hidden phone or email inside free text too |
+| The public page and the website | `public_members` and the other `public_*` views, on the same choices (unchanged on the day 060 applied) |
+| Who reads the chapter at all | `is_chapter_reader`: a current member of the chapter, its owner or an admin, or a super admin |
+
+**Operations:**
+- Prove the live schema: `.venv/bin/python "005 Operations/Execution/probe_qnt_member_access.py"` (rolled back, changes nothing; 120 checks as synthetic people).
+- Prove a change before applying it: the same script with `--migration <file>`; adding `--rollback <its ROLLBACK file>` proves the undo too.
+- The undo works only before first use: once any member makes a choice, an edit, a removal, a link or a read mark, every fix goes forward.
+- The live state in counts: `005 Operations/Handoffs/rounds/qnt-member-launch-20261027-1307-f5a71f/assets/member_launch_state.sql`.
+
+#### MP Training Opportunities (from the 2026-10-29 member access build)
+
+| Task | Skills taught | Prerequisites | Time | Level |
+|---|---|---|---|---|
+| Write an expand step for an access change: add the new beside the old, then prove "nothing changed" row by row | migrations, views, set comparison (EXCEPT both ways) | SQL, Postgres RLS | 4 h | Advanced |
+| Before asking for a go, count who loses what per login, people and test logins apart | impact analysis, SQL counting | basic SQL | 1 h | Intermediate |
+
 ## QWR Content Performance Intelligence ⭐ NEW
 
 **Added: February 14, 2026**
@@ -13669,4 +13698,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-29 07:18 (v6.50)*
+*Last updated: 2026-10-29 20:48 (v6.51)*
