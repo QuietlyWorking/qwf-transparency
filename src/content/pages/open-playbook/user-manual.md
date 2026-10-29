@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-29 05:45 | Source version: 6.47
+> Generated: 2026-10-29 05:59 | Source version: 6.48
 
 # QWU Backoffice User Manual
 
@@ -3801,6 +3801,20 @@ The sign-in pages, the donor-partner portal and the staff pages took the public 
 
 **Most valuable MP exercise:** give a student two builds of one page and a picture diff showing a few changed pixels, and ask them to prove whether anything really changed, using the photograph-it-twice control and a layout read.
 
+### MP Training Opportunities ⭐ (from the L4G site-hardening lane, 2026-10-28, Session 838)
+
+The checkout widget's space count was fixed and shipped, and a family-wide gap in sign-in email was found and measured.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| A refused read that looks like zero: the widget counted no sold space because a visitor's key may not read bookings, and the code treated "refused" as "nothing there"; the test stand-in served the read, so the miss stayed hidden until the stand-in refused it as the live database does | Testing against the real permission model, not a friendly fake | Intermediate |
+| A browser mirror of a database rule, proven against the database itself: the website check in the browser was run on 54 values next to the database's own constraint, and both had to agree on every one | Keeping two copies of one rule from drifting | Intermediate |
+| A check that cannot fail proves nothing: every check in the proof has a control (the fix taken back out) that must fail, and fail only on its own outcome | Mutation-style testing | Advanced |
+| A blind reading is not a clean reading: the spam-blocklist watch asks the list's own test name on the same resolver every round, so a broken resolver can never look like "removed from the list" | Monitoring with a known-positive control | Beginner |
+| Following a reply to where it lands: a sign-in email with no reply-to address, from a name with no mail record, means every reply bounces; the fix is a mail route on that one name only, never the root, where a setup wizard would take over the main mailbox | DNS mail records, blast radius | Intermediate |
+
+**Most valuable MP exercise:** hand a student a count that reads zero and the permission rules of the table it reads, and ask them to prove whether zero is true or the read was refused, then to write the test stand-in that would have caught it.
+
 ### MP Training Opportunities ⭐ (from the HQ strip ground-truth session, 2026-10-27, Session 827)
 
 | Task | Skills taught | Prerequisites | Time | Complexity |
@@ -5106,8 +5120,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.47 by generate_public_manual.py"
-generated: "2026-10-29 05:45"
+source: "Auto-generated from private manual v6.48 by generate_public_manual.py"
+generated: "2026-10-29 05:59"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12477,6 +12491,17 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 **Open items:** Welcome email doesn't differentiate artwork tracks; no May 2026 bookings entered yet; background/spine images not uploaded for RPV West May 2026 postcard config.
 
+### Site Hardening Proof (Oct 2026)
+
+`005 Operations/Execution/prove_l4g_site_hardening.py` (v1.6.0, 2026-10-28) is the one proof every site-hardening change must pass before TIG's "ship". It builds the site, runs the changed code in node against an in-memory stand-in of the database that refuses what the live database refuses (a visitor reading bookings gets 42501, as live does), and checks the outcome; each check has a control that must fail on its own outcome only, so a check that could never fail is caught. `--db-parity` adds read-only checks on live data: the donor-partner website check against the database's own constraint, the tables' live columns, the visitor's space count against checkout's count (5 neighborhood-months, 0 disagreements at the v1.6.0 ship), and what the public key can read.
+
+| Version | Date | What it proves |
+|---------|------|----------------|
+| v1.5.0 | 2026-10-28 | L8: the portal's settings and brand pages show "Saved!" only when the database hands the row back; the browser's website check mirrors the database constraint rule for rule (82 checks) |
+| v1.6.0 | 2026-10-28 | Queue item 0: the checkout widget counts sold spaces the way checkout does (through the public card reader, never the bookings table a visitor cannot read), refuses every size on a sold-out month, starts the 15-minute countdown only once payment exists (100 checks, 31 controls) |
+
+A run takes 8 to 10 minutes; run it in the background and run it again if main moves under it (its first check says so). Records: channel `l4g-staff-check-fix-20261026-2254-4d039e`, `r10.md` to `r12.md`.
+
 ### References
 
 - System Status: `002 Projects/_Locals 4 Good/L4G-System-Status.md`
@@ -13605,4 +13630,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-29 05:45 (v6.47)*
+*Last updated: 2026-10-29 05:59 (v6.48)*
