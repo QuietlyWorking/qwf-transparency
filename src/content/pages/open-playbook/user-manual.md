@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-29 02:17 | Source version: 6.44
+> Generated: 2026-10-29 05:26 | Source version: 6.45
 
 # QWU Backoffice User Manual
 
@@ -5079,8 +5079,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.44 by generate_public_manual.py"
-generated: "2026-10-29 02:17"
+source: "Auto-generated from private manual v6.45 by generate_public_manual.py"
+generated: "2026-10-29 05:26"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -9549,7 +9549,7 @@ Shared Supabase database with `tenant_id` column + RLS (following QQT's proven p
 
 New QSP module providing local SEO services to all supporters. Replaces $1,500-3,000+/mo external SEO agency with built-in capabilities.
 
-**External Integration:** BrightLocal Track agency account. **Paid plan activated 2026-04-21: Track, 11-20 locations, monthly billing (~$99/mo).** Monthly chosen over annual ($74/mo) to preserve cash flow flexibility until L4G ramps. Covers QWF internal properties (5) + [Supporter Organization] (4 companies) with headroom to 20 locations. QWF absorbs cost. No nonprofit discount available (confirmed via support email thread, Session 195).
+**External Integration:** BrightLocal Track agency account. **Current plan (since 2026-10-28): Track, 2-5 locations, monthly billing ($62/mo), renews on the 28th; 1 location in use ([Supporter Organization]).** The account was deactivated 2026-10-21 when the card on file was removed and the renewal failed; TIG reactivated it 2026-10-28 and every report, schedule and history survived. Before that: Track 11-20 monthly from 2026-04-21 ($99, then $104 from 2026-07-21), which never held more than 1 location. L4G stays out of BrightLocal unless it gets a Google Business Profile (ruling pending in the L4G search lane). Price list and gotchas: `brightlocal_tool_wisdom.md` READ FIRST. QWF absorbs cost. No nonprofit discount available (confirmed via support email thread, Session 195).
 
 **BrightLocal API Status (as of May 8, 2026):**
 - Single API key on all three hosts: `tools.brightlocal.com/seo-tools/api/v2/`, `/v4/`, and `api.brightlocal.com/manage/v1/`
@@ -13578,4 +13578,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-29 02:17 (v6.44)*
+*Last updated: 2026-10-29 05:26 (v6.45)*
