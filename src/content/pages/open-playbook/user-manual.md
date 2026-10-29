@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 6.42 | Started: 251223 | Updated: 261028**"
+description: "**Version: 6.43 | Started: 251223 | Updated: 261028**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-10-28"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -11,11 +11,11 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-28 22:51 | Source version: 6.42
+> Generated: 2026-10-29 00:14 | Source version: 6.43
 
 # QWU Backoffice User Manual
 
-**Version: 6.42 | Started: 251223 | Updated: 261028**
+**Version: 6.43 | Started: 251223 | Updated: 261028**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -5079,8 +5079,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.42 by generate_public_manual.py"
-generated: "2026-10-28 22:51"
+source: "Auto-generated from private manual v6.43 by generate_public_manual.py"
+generated: "2026-10-29 00:14"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7084,6 +7084,8 @@ ready, and the noon send only binds what already passed (`wcr_page_verdicts.py`)
 | **One run per person at a time** | Enforced where runs start (the Run button included) and in `--pending`; when a run ends the next one starts | Two runs of one person at once would write the same pages side by side |
 | **One folder per registration** | Pages land in `<meeting YYYYMMDD>_<name>`; a person's two registrations no longer share a folder | The second registration's pages overwrote the first's |
 | **A changed answer retires the old pages** (K42) | Changing an anchor on a visitor whose pages exist sets the record back to `partial` (`reports_out_of_date`), so no send binds the old pages, and the visitor re-runs by itself | The noon send would have bound pages written from the earlier answer. A correction AFTER the report was sent cannot recall it |
+| **The writer is told what the judge holds pages for** (K43, shipped that evening on TIG's "go") | Seven rules go into the writer's prompt: no detail the facts do not give, no guess dressed as fact, time in a role only from the printed length, nobody's words unless a line quotes them, no reviews cited back at the member, no joke at the visitor's expense (the Rapport tip is plain advice), nothing generic. The facts block both read gains each job's length, the LinkedIn location, the visitor's own posts (never a post they only shared), the Google listing answer in words, our research notes labelled as ours, and "no LinkedIn" as our own reviewer's finding. "What you already share" points to Ways in when Ways in found common ground | Most first drafts failed for causes born in what the writer was told, not in the writer. On the 23 held pages: first try 8 before, 20 after, all 23 after one rewrite; 13 other pages passed 13 of 13 on the first try. The judge did not change |
+| **A test can no longer start the real pipeline** (K44) | The repo's test guard (`conftest.py`) refuses a detached process (`systemd-run`, `setsid`) inside any test; the hold-answer tests use a fake run starter | Answering a hold starts the pipeline as a detached process, which runs outside every guard a test has. One test ran the real pipeline three times on 10-28: paid calls, member pages and a vault page built from test data, and a real hold note pointed at a temp file. Nothing failed, so nothing showed |
 
 > **Missing Pixel Training Opportunity (Tier 2: Contributor) ... Read what the judge was told before you blame the writer**
 >
@@ -13559,4 +13561,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-28 22:51 (v6.42)*
+*Last updated: 2026-10-29 00:14 (v6.43)*
