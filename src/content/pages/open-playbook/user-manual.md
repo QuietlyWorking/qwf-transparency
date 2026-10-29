@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-29 05:59 | Source version: 6.48
+> Generated: 2026-10-29 06:35 | Source version: 6.49
 
 # QWU Backoffice User Manual
 
@@ -5120,8 +5120,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.48 by generate_public_manual.py"
-generated: "2026-10-29 05:59"
+source: "Auto-generated from private manual v6.49 by generate_public_manual.py"
+generated: "2026-10-29 06:35"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7066,6 +7066,34 @@ Same register + QCM consent gates as the weekly report, imported. TIG released a
 agent-composed copy waits for his eyes.** It also writes `visitors.status='applied'` and the
 application category (never touching the visit-time `profession_category`). First live send: 10
 members, 2026-09-11.
+
+**The meeting-morning room list is a fourth script (2026-10-28).** `send_meeting_room_list.py` (v1.2.0)
+sends ONE short email to every active member at **6:00 Pacific on the meeting day**, from TIG's mailbox
+in his meeting-email design, with one line for every person registered for that meeting (visitors,
+substitutes, guests): their own registration words, plus only the LinkedIn, website, Google stars and
+round photos a person on our side confirmed. Never AI text, never a phone number or email address.
+**Who:** every active member on the roster the BNI page keeps (never the QNT test login). TIG, the same
+night: "until we receive a STOP we send to all active members". QCM "no answer on file" is a yes; an
+explicit stop or a consent check that cannot answer holds the member; a reply asking to stop becomes a
+row in the register's ROOM LIST: STOPPED table, read on every run and failing closed. **When:** cron
+every half hour; the script owns the day, time and zone; a failed copy retries every half hour until
+11:00, and a lasting failure is told twice (when it starts and when it ends), never once per run.
+**Words:** tied to TIG's "bless" by a fingerprint of the template and every list word, so a changed word
+stops the send and tells him. **Controls:** `--test-to-tig` sends one [TEST] copy to TIG only;
+`wcr_pause.py` holds a week (it holds the WCR too); remove the cron lines to stop for good. A member
+added after 06:20 the day before a meeting misses that morning's list unless added by hand (the 06:20
+membership reconciler fills a new member's email). First live send: 2026-10-29 06:00, 19 members.
+**Next (TIG "go", 2026-10-28):** the weekly report, its addendum and the applicant email move to the
+same every-member rule with a zero-pressure stop line, once he blesses the words (kickoff
+`[Networking Chapter]-wcr-all-members-kickoff-2026-10-28.md`).
+
+#### MP Training Opportunities (from the 2026-10-28 room list)
+
+| Task | Skills Developed |
+|------|------------------|
+| Proving a test suite catches each safeguard: break one safeguard on a COPY, run the tests, expect a failure (a break nobody catches is a missing test) | Python, pytest, mutation testing, careful reading (Intermediate, ~2 hrs) |
+| Reading consent like a professional: "no answer", "said no" and "could not check" are three different answers, and only the first may become a yes | Data protection, fail-safe design, reading a library's options (Intermediate, ~1 hr) |
+| Server clocks vs local time: why the server already says Thursday at 5 pm Pacific, and how a scheduled job proves it uses the right day | Linux cron, time zones, log reading (Beginner, ~1 hr) |
 
 **Then the committee changed their template, and the reader went quiet (2026-10-03).** Their mail is
 prose we do not control. On 2026-10-03 a live application arrived as a labelled `PROSPECTIVE MEMBER`
@@ -13630,4 +13658,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-29 05:59 (v6.48)*
+*Last updated: 2026-10-29 06:35 (v6.49)*
