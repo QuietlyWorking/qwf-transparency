@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-29 05:26 | Source version: 6.45
+> Generated: 2026-10-29 05:33 | Source version: 6.46
 
 # QWU Backoffice User Manual
 
@@ -198,7 +198,7 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 - A stopped Docker container turns a machine red only when its restart policy says it should be running. A throwaway test database (restart "no") shows as a grey chip.
 - The weekly Sunday trim (`prune_disk_caches.py`) clears an app copy's downloaded libraries after 7 idle days, and removes a whole app copy (agent-lane worktrees included) after 30 idle days, only when every byte of it is on GitHub and no note names it.
 - qwu-n8n: an n8n upgrade now removes old versions itself (keeping the rollback one), and its system log is capped at 500MB.
-- Main disk 128GB to 256GB (+$24.96 a month) is TIG's to run from Azure Cloud Shell, walked through by his desktop Claude: `002 Projects/_QWU Backoffice Automation/Kickoff Prompts/claude-dev-disk-resize-walkthrough-kickoff-2026-10-27.md`. Azure grows a system disk only while the machine is stopped.
+- Main disk 128GB to 256GB (+$24.96 a month) and, the same night, the machine to Standard_E8as_v7 (8 vCPUs, 64 GB, +$83.22 a month) with the interactive memory limit raised from 26G to 56G, are TIG's to run from Azure Cloud Shell, walked through by his desktop Claude: `002 Projects/_QWU Backoffice Automation/Kickoff Prompts/claude-dev-disk-resize-walkthrough-kickoff-2026-10-27.md`. Azure grows a system disk only while the machine is stopped. The desktop's three pre-checks were answered from claude-dev on 2026-10-28, all clean. A day after the night, the claude-dev session deletes the night's safety snapshot and three older ones (two of this disk, one of qwu-n8n).
 - If VS Code shows "reconnecting" while the machine is healthy, try **Reload Window** first. On 2026-10-27 a full stop and start was used for what turned out to be a client-side break: the machine's logs showed it idle and healthy throughout.
 - Systemd services monitored: `sms-webhook`, `digital-twin`, `qnt-webhook`, `caddy`
 
@@ -208,6 +208,18 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 - **Sundays 03:30 Pacific:** `tidy_vault_git.sh` packs the vault's loose git objects with a capped, non-aggressive `git gc` (`gc.auto` stays 0; auto-gc mid-session froze the VM twice in July). First run: `.git` 4.8 GB to 958 MB in 3 minutes.
 - **Sundays 03:40 Pacific:** `prune_disk_caches.py --apply` removes only what rebuilds itself: the npm download cache, superseded VS Code server builds, vault `.tmp/` entries untouched 30 days, and `node_modules` of app copies untouched 30 days. Never logs, backups, test fixtures, anything the vault or a script names, anything a running process uses, or Docker. Dry run is the default; every deleted path is logged to `.tmp/logs/disk_prune.log`. If an old app copy says a module is missing, run `npm install` (or `npm ci`) in it.
 - Result 2026-10-11: `/` went from 88% / 16 GB free to 60% / 50 GB free. Before this, `/` grew a steady 8-9 GB a month, mostly new app working copies (~0.4 GB each) and regrowing caches.
+
+#### MP Training Opportunities (from the 2026-10-28 resize-night pre-checks, Session 834)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Answer a runbook's pre-checks from the live system, read-only | The desktop Claude asked three questions before a change that stops the machine. Each answer came from a read-only command against the machine or Azure, never from memory or old notes. Teaches evidence before an action you cannot undo | Intermediate |
+| A past event can be your rehearsal | "Will the memory limit exist before anyone logs in?" was answered by the boot log of the previous restart, which showed it created before the first login. Teaches reading what already happened instead of predicting | Intermediate |
+| Check the parachute before you jump | A disk restored from a snapshot must carry the same disk-controller tag as the original, or it cannot boot on the new size. The runbook now reads the restored disk back before swapping it in. Teaches verifying a rollback path, not just having one | Advanced |
+| Reconcile what you pay for against what you think you pay for | Three old safety snapshots were still billing while the cost record counted one. Teaches inventory-versus-ledger checks | Beginner |
+| A cascade that carries numbers may not carry names | The public cost page takes its prices from the cost file but types the machine names itself, so a resize would have shown new prices beside old names. Teaches tracing every reader of a change, not only the documented ones | Intermediate |
+
+**Most valuable MP exercise:** give a student a resize runbook and read-only access to a practice subscription, and ask them to answer three pre-checks with commands, quoting the output line that proves each answer.
 
 **Application Health Checks**
 - `check_calendar_health.py` runs every 2 hours via cron on claude-dev
@@ -5079,8 +5091,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.45 by generate_public_manual.py"
-generated: "2026-10-29 05:26"
+source: "Auto-generated from private manual v6.46 by generate_public_manual.py"
+generated: "2026-10-29 05:33"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13578,4 +13590,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-29 05:26 (v6.45)*
+*Last updated: 2026-10-29 05:33 (v6.46)*
