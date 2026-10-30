@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-30 04:11 | Source version: 6.52
+> Generated: 2026-10-30 04:15 | Source version: 6.53
 
 # QWU Backoffice User Manual
 
@@ -3812,6 +3812,19 @@ The sign-in pages, the donor-partner portal and the staff pages took the public 
 
 **Most valuable MP exercise:** give a student two builds of one page and a picture diff showing a few changed pixels, and ask them to prove whether anything really changed, using the photograph-it-twice control and a layout read.
 
+### MP Training Opportunities ⭐ (from the L4G site-hardening lane, 2026-10-29, Session 845)
+
+A reply to a Locals 4 Good sign-in email used to bounce; it now reaches a person, and Microsoft trusts the forwarded copy.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Test a DNS switch on a spare domain first: Cloudflare's "subdomain only" email switch still wrote the root domain (a signing key always, an SPF line when the root had none); it was measured on an empty spare zone, then on a copy of the live records, before the live domain was touched | Change control on shared infrastructure; measuring what a vendor's switch really does, not what its label says | Intermediate |
+| An undo that runs on any surprise: the setup tool records the zone before it changes anything and puts it back if a record appears beyond the allowed list, or if the tool itself crashes | Safe automation and rollback design | Intermediate |
+| Reading a mailbox's verdict on forwarded mail: Microsoft marked forwarded replies "can't verify" (compauth 601) because forwarding breaks the original sender's checks; trusting the forwarder's ARC seal turned it to a pass (reason 130), proven on the next real copy, not on the setting | Email authentication end to end: SPF, DKIM, DMARC, ARC, reading Authentication-Results | Advanced |
+| A proof of live settings with controls: 17 read-only checks on two public resolvers and the provider's own view, then 12 controls, each a copy of the live state with one thing changed, each failing only its own check | Mutation-style testing applied to configuration | Advanced |
+
+**Most valuable MP exercise:** give a student two copies of one forwarded email's headers (compauth=fail reason=601, then compauth=pass reason=130) and ask them to explain what changed between the two and to name the one setting that did it.
+
 ### MP Training Opportunities ⭐ (from the L4G site-hardening lane, 2026-10-28, Session 838)
 
 The checkout widget's space count was fixed and shipped, and a family-wide gap in sign-in email was found and measured.
@@ -5131,8 +5144,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.52 by generate_public_manual.py"
-generated: "2026-10-30 04:11"
+source: "Auto-generated from private manual v6.53 by generate_public_manual.py"
+generated: "2026-10-30 04:15"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -5400,6 +5413,34 @@ Two HQ rules, both TODAY tier (push + Discord) via `send_notification.py`, never
 After branding, the From line, DKIM alignment, subject, body and footer are all the app's ... but the **verify link**
 in the body still resolves on the vendor's own hosted domain rather than the app's. A custom auth domain is a paid
 Supabase add-on and a family decision TIG has not taken.
+
+### Replies to sign-in mail (2026-10-29)
+
+The sign-in mail carries no Reply-To, so a reply goes to `noreply@accounts.<app>`. Until 2026-10-29 no app's
+`accounts.` name took mail, so every reply bounced (found by the L4G site-hardening lane, 2026-10-28). **L4G is
+fixed:** Cloudflare Email Routing on `accounts.locals4good.org` only (MX `route1`, `route2`, `route3`
+`.mx.cloudflare.net` and its own SPF line), with one rule forwarding `noreply@accounts.locals4good.org` to
+`support@quietlyworking.org` (an alias of TIG's mailbox) and nothing else forwarded. The root's own mail records are
+untouched.
+
+| Piece | What it does | Where |
+|---|---|---|
+| Setup tool | Turns the forward on for one app, guarded: it refuses any record beyond the allowed ones and puts the zone back on any surprise or crash. `prove --spec` is read only | `setup_signin_reply_forward.py` v1.2.0 |
+| Proof | 17 live checks on two public resolvers and on Cloudflare, plus 12 controls, each a copy of the live state with one thing changed | `prove_l4g_site_hardening.py --forward` (29/29) |
+| Microsoft's trust | Defender > Email authentication settings > ARC > Trusted ARC sealers: `cloudflare-email.net` (TIG, 2026-10-29, for the whole tenant). Without it Microsoft marks a forwarded copy "can't verify" (compauth 601); with it, compauth=pass reason=130 | TIG's Microsoft 365 tenant |
+
+**Two traps, both measured on a spare zone before the live one was touched.** Cloudflare's "subdomain only" switch
+still writes the ROOT: its signing key at `cf2024-1._domainkey.<root>` always, and an SPF line at the root when the
+root has none (a root that already has one SPF line gets no second). And never use the dashboard's first-time
+setup: it puts MX on the root and takes the root's mail.
+
+**Accepted on purpose:** a reply can quote the sign-in link, which works up to 24 hours (`mailer_otp_exp` 86400),
+and that copy lands only in TIG's own mailbox.
+
+**Still bouncing:** quietlywriting.org, quietlyquoting.org, quietlycrm.org, quietlynetworking.org and pocketez.org
+(HQ `1ecc60d7`). quietlywriting.org can take the L4G path; the four with no SPF line at the root need a decision
+first, because the switch would write one. Recipe and edge cases: `qwf_email_infrastructure.md` (the 2026-10-29
+rows).
 
 ### Missing Pixel Training Opportunities
 
@@ -12567,14 +12608,15 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ### Site Hardening Proof (Oct 2026)
 
-`005 Operations/Execution/prove_l4g_site_hardening.py` (v1.6.0, 2026-10-28) is the one proof every site-hardening change must pass before TIG's "ship". It builds the site, runs the changed code in node against an in-memory stand-in of the database that refuses what the live database refuses (a visitor reading bookings gets 42501, as live does), and checks the outcome; each check has a control that must fail on its own outcome only, so a check that could never fail is caught. `--db-parity` adds read-only checks on live data: the donor-partner website check against the database's own constraint, the tables' live columns, the visitor's space count against checkout's count (5 neighborhood-months, 0 disagreements at the v1.6.0 ship), and what the public key can read.
+`005 Operations/Execution/prove_l4g_site_hardening.py` (v1.7.0, 2026-10-29) is the one proof every site-hardening change must pass before TIG's "ship". It builds the site, runs the changed code in node against an in-memory stand-in of the database that refuses what the live database refuses (a visitor reading bookings gets 42501, as live does), and checks the outcome; each check has a control that must fail on its own outcome only, so a check that could never fail is caught. `--db-parity` adds read-only checks on live data: the donor-partner website check against the database's own constraint, the tables' live columns, the visitor's space count against checkout's count (5 neighborhood-months, 0 disagreements at the v1.6.0 ship), and what the public key can read.
 
 | Version | Date | What it proves |
 |---------|------|----------------|
 | v1.5.0 | 2026-10-28 | L8: the portal's settings and brand pages show "Saved!" only when the database hands the row back; the browser's website check mirrors the database constraint rule for rule (82 checks) |
 | v1.6.0 | 2026-10-28 | Queue item 0: the checkout widget counts sold spaces the way checkout does (through the public card reader, never the bookings table a visitor cannot read), refuses every size on a sold-out month, starts the 15-minute countdown only once payment exists (100 checks, 31 controls) |
+| v1.7.0 | 2026-10-29 | Queue item 1: `--forward` alone (no site build, under a minute) judges the sign-in reply forward: on 1.1.1.1 and 8.8.8.8, `accounts.locals4good.org` takes mail at Cloudflare only, with one SPF line; the root's Google mail, its one SPF line and the `bounce.accounts.` record unchanged; Cloudflare's signing key published; one rule, to one verified address, and nothing else forwarding (29/29: 17 checks, 12 controls) |
 
-A run takes 8 to 10 minutes; run it in the background and run it again if main moves under it (its first check says so). Records: channel `l4g-staff-check-fix-20261026-2254-4d039e`, `r10.md` to `r12.md`.
+A run takes 8 to 10 minutes; run it in the background and run it again if main moves under it (its first check says so). Records: channel `l4g-staff-check-fix-20261026-2254-4d039e`, `r10.md` to `r17.md`.
 
 ### References
 
@@ -13704,4 +13746,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-30 04:11 (v6.52)*
+*Last updated: 2026-10-30 04:15 (v6.53)*
