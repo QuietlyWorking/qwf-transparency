@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-29 20:48 | Source version: 6.51
+> Generated: 2026-10-30 04:11 | Source version: 6.52
 
 # QWU Backoffice User Manual
 
@@ -5131,8 +5131,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.51 by generate_public_manual.py"
-generated: "2026-10-29 20:48"
+source: "Auto-generated from private manual v6.52 by generate_public_manual.py"
+generated: "2026-10-30 04:11"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7061,8 +7061,12 @@ Students can learn data enrichment pipeline patterns by:
 
 **The weekly member email is a separate script.** `send_weekly_connection_reports.py` binds every
 READY visitor into one PDF per member and sends it from TIG's mailbox at **noon Pacific the day before
-the meeting**, to the members listed in `WCR-Consent-Register.md` who also pass QCM consent
-(fail-closed, holds named by SMS). A half-hourly sweep sends an **addendum** for anyone who becomes
+the meeting**, to **every active member** since TIG's "bless" on 2026-10-29 (v1.7.1, `EVERY_MEMBER = True`;
+the rule is the room list's, shared in `chapter_member_recipients.py`): QCM "no answer on file" is a yes,
+an explicit stop or a consent check that cannot answer holds the member, the register's WCR: STOPPED
+table takes a member out (failing closed), and a member with no report that week is held and named by
+SMS. Every body must carry TIG's way out ("just say so and I will take you off the list") or it is not
+sent. Before 2026-10-29 only the register's opt-ins received it. A half-hourly sweep sends an **addendum** for anyone who becomes
 ready after that, and carries the report itself late if noon passed without one. Auto-send was released
 by TIG on 2026-09-08 for those two kinds of mail only; first auto-send delivered 2026-09-09.
 
@@ -7072,7 +7076,8 @@ reads the request from TIG's inbox, decides the kind (a renewal or category chan
 member and gets nothing), matches the applicant to ONE complete QNT visitor row (zero or many holds
 for `--confirm` / `--park`), binds each opted-in member's EXISTING Visitor Connection Report into a
 one-visitor PDF at $0, and SENDS it from TIG's mailbox with the committee's own feedback-form link.
-Same register + QCM consent gates as the weekly report, imported. TIG released auto-send for it on
+Same recipient rule as the weekly report, imported (every active member since 2026-10-29; a member with
+no page about the applicant is held and named). TIG released auto-send for it on
 2026-09-11 with the rule that now governs every sender: **a blessed template sends itself; only
 agent-composed copy waits for his eyes.** It also writes `visitors.status='applied'` and the
 application category (never touching the visit-time `profession_category`). First live send: 10
@@ -7094,9 +7099,10 @@ stops the send and tells him. **Controls:** `--test-to-tig` sends one [TEST] cop
 `wcr_pause.py` holds a week (it holds the WCR too); remove the cron lines to stop for good. A member
 added after 06:20 the day before a meeting misses that morning's list unless added by hand (the 06:20
 membership reconciler fills a new member's email). First live send: 2026-10-29 06:00, 19 members.
-**Next (TIG "go", 2026-10-28):** the weekly report, its addendum and the applicant email move to the
-same every-member rule with a zero-pressure stop line, once he blesses the words (kickoff
-`[Networking Chapter]-wcr-all-members-kickoff-2026-10-28.md`).
+**Since v1.4.0 (2026-10-29)** it leaves off anyone [Member Name]'s visitor sheet marks cancelled or moved, named
+in TIG's record of the run. **Since v1.4.1 (2026-10-29) no copy is BCC'd to TIG:** "I will receive my
+own which will be my signal that they have gone out correctly." **Done (TIG "bless", 2026-10-29):** the
+weekly report, its addendum and the applicant email now follow the same every-member rule, above.
 
 #### MP Training Opportunities (from the 2026-10-28 room list)
 
@@ -13698,4 +13704,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-29 20:48 (v6.51)*
+*Last updated: 2026-10-30 04:11 (v6.52)*
