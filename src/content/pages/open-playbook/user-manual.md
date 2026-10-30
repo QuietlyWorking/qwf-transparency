@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-30 04:15 | Source version: 6.53
+> Generated: 2026-10-30 04:21 | Source version: 6.53
 
 # QWU Backoffice User Manual
 
@@ -3812,7 +3812,7 @@ The sign-in pages, the donor-partner portal and the staff pages took the public 
 
 **Most valuable MP exercise:** give a student two builds of one page and a picture diff showing a few changed pixels, and ask them to prove whether anything really changed, using the photograph-it-twice control and a layout read.
 
-### MP Training Opportunities ⭐ (from the L4G site-hardening lane, 2026-10-29, Session 845)
+### MP Training Opportunities ⭐ (from the L4G site-hardening lane, 2026-10-29, Session 846)
 
 A reply to a Locals 4 Good sign-in email used to bounce; it now reaches a person, and Microsoft trusts the forwarded copy.
 
@@ -5145,7 +5145,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v6.53 by generate_public_manual.py"
-generated: "2026-10-30 04:15"
+generated: "2026-10-30 04:21"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13746,4 +13746,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-30 04:15 (v6.53)*
+*Last updated: 2026-10-30 04:21 (v6.53)*
