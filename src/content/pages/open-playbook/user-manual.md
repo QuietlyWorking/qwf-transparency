@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 6.44 | Started: 251223 | Updated: 261028**"
+description: "**Version: 6.54 | Started: 251223 | Updated: 261029**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-10-29"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -11,11 +11,11 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-30 04:21 | Source version: 6.53
+> Generated: 2026-10-30 05:49 | Source version: 6.54
 
 # QWU Backoffice User Manual
 
-**Version: 6.44 | Started: 251223 | Updated: 261028**
+**Version: 6.54 | Started: 251223 | Updated: 261029**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -166,7 +166,7 @@ The QWU Backoffice is an AI agent workspace running on Microsoft Azure, designed
 |----------|--------------|---------|
 | Resource Group | <RESOURCE_GROUP> | <RESOURCE_GROUP> |
 | Region | West US 2 | West US 2 |
-| Size | Standard D8as_v6 (8 vCPUs, 32 GB RAM, 128 GiB NVMe Premium ZRS) + 128 GB Standard SSD storage disk at `/mnt/storage` (added 2026-10-11, $9.60/mo) | Standard B2s (2 vCPUs, 4 GB RAM, ~$30/mo) |
+| Size | Standard E8as_v7 (8 vCPUs, 64 GB RAM, 256 GiB NVMe Premium ZRS; since 2026-10-29, was D8as_v6 with 32 GB and 128 GiB) + 128 GB Standard SSD storage disk at `/mnt/storage` (added 2026-10-11, $9.60/mo) | Standard B2s (2 vCPUs, 4 GB RAM, ~$30/mo) |
 | IP | <VM_IP_CLAUDE_DEV> (static) | <VM_IP_N8N> (static) |
 | Image | Ubuntu Server 24.04 LTS | Ubuntu Server 24.04 LTS |
 | Swap | 4 GB | 6 GB (2GB + 4GB added 2026-02-23) |
@@ -193,12 +193,13 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 - Always pings Betterstack heartbeat regardless of health status (v1.1.0). The heartbeat proves "VM is alive and monitoring is running." Service-level issues are reported via Discord alerts separately. A missing heartbeat should only mean "VM is unreachable."
 - Thresholds: 80% warning, 90% critical for disk/memory
 
-**HQ header strip: disks, containers and space (updated 2026-10-27, Session 827)**
+**HQ header strip: disks, containers and space (updated 2026-10-27, Session 827; resize done 2026-10-29)**
 - `report_vm_health.py` (every 5 minutes) feeds the strip. Every disk of 10GB or more has its own daily trend line and its own warning, which now comes at **45 days to full** (was 30), so a warning always leaves more than a month to act. A one-time gain bigger than a tenth of a disk (data moved off, a big clean-up, a resize) is taken out before the trend is fitted; before this, the Oct 11 storage-disk move made a filling disk read "flat or recovering".
 - A stopped Docker container turns a machine red only when its restart policy says it should be running. A throwaway test database (restart "no") shows as a grey chip.
 - The weekly Sunday trim (`prune_disk_caches.py`) clears an app copy's downloaded libraries after 7 idle days, and removes a whole app copy (agent-lane worktrees included) after 30 idle days, only when every byte of it is on GitHub and no note names it.
 - qwu-n8n: an n8n upgrade now removes old versions itself (keeping the rollback one), and its system log is capped at 500MB.
-- Main disk 128GB to 256GB (+$24.96 a month) and, the same night, the machine to Standard_E8as_v7 (8 vCPUs, 64 GB, +$83.22 a month) with the interactive memory limit raised from 26G to 56G, are TIG's to run from Azure Cloud Shell, walked through by his desktop Claude: `002 Projects/_QWU Backoffice Automation/Kickoff Prompts/claude-dev-disk-resize-walkthrough-kickoff-2026-10-27.md`. Azure grows a system disk only while the machine is stopped. The desktop's three pre-checks were answered from claude-dev on 2026-10-28, all clean. A day after the night, the claude-dev session deletes the night's safety snapshot and three older ones (two of this disk, one of qwu-n8n).
+- **Done 2026-10-29:** TIG grew the main disk from 128GB to 256GB (+$24.96 a month) and moved the machine to Standard_E8as_v7 (8 vCPUs, 64 GB, +$83.22 a month) from Azure Cloud Shell, walked through by his desktop Claude (`002 Projects/_QWU Backoffice Automation/Kickoff Prompts/claude-dev-disk-resize-walkthrough-kickoff-2026-10-27.md`), and raised the interactive memory limit from 26G to 56G. Azure grows a system disk only while the machine is stopped, so it was off for a few minutes. Afterwards `/` read 247G with 162G free, the strip took the gain out of the trend as a one-off and read 103 days to full, and `/pulse` read green. The night's safety snapshot and three older ones (two of this disk, one of qwu-n8n) are deleted on 2026-10-31, after a full day of normal running and the first weekly restart on the new setup.
+- **The cost checks know when the setup changed** (2026-10-29): `cost_constants.AZURE_VM_MONTHLY_SINCE` names the day. The daily drift check skips that day's bill and the next one, and the month-to-date and invoice checks report the month it landed in as "not compared", because those bills still hold the old machine. Without it the morning after a resize recommends putting the old price back. A typo in the date never switches a check off: an unreadable or future date reads as no date.
 - If VS Code shows "reconnecting" while the machine is healthy, try **Reload Window** first. On 2026-10-27 a full stop and start was used for what turned out to be a client-side break: the machine's logs showed it idle and healthy throughout.
 - Systemd services monitored: `sms-webhook`, `digital-twin`, `qnt-webhook`, `caddy`
 
@@ -3727,7 +3728,7 @@ Cost reporting was hardened across 5 phases on 2026-04-26. Every cost figure now
 
 **Emergency recovery:** see `005 Operations/Directives/qwu_emergency_recovery_capabilities.md`. claude-dev-vm's own built-in identity (a system-assigned managed identity, no key) has the 3 RBAC roles needed to recover the VM without human-in-the-loop authentication. It replaced the `qwu-vm-automation` service principal on 2026-10-13, after that account's key was found readable in the old n8n Cloud; the key was deleted.
 
-**Azure portal budget and tenant posture (2026-10-18):** the portal budget `monthlyBudget` is **$425/month** (alerts at 90%, about $383). Normal spend is about $335, so a budget email now means a real jump, not ordinary spend. Azure Copilot is set to **Restrict** with all six agents off, and nobody holds the "Copilot for Azure User" role. TIG's **elevated access** (User Access Administrator at root) is **off**; if a fix ever needs root scope, turn it on in Entra ID → Properties → "Access management for Azure resources", do the fix, and turn it off again. What each Azure platform email means for our VMs is kept in `infrastructure_monitoring.md` §VM Lifecycle & Azure Platform Notifications.
+**Azure portal budget and tenant posture (2026-10-18; budget raised 2026-10-29):** the portal budget `monthlyBudget` is **$560/month** (alerts at 90%, about $504), raised from $425 the night claude-dev moved to 64 GB. Normal spend is about $453, so a budget email still means a real jump, not ordinary spend. The budget **expires 2027-02-28** and sends nothing after that; a reminder to extend it is on the Alerts calendar for 2027-02-01. Azure Copilot is set to **Restrict** with all six agents off, and nobody holds the "Copilot for Azure User" role. TIG's **elevated access** (User Access Administrator at root) is **off**; if a fix ever needs root scope, turn it on in Entra ID → Properties → "Access management for Azure resources", do the fix, and turn it off again. What each Azure platform email means for our VMs is kept in `infrastructure_monitoring.md` §VM Lifecycle & Azure Platform Notifications.
 
 ### MP Training Opportunities ⭐
 
@@ -5144,8 +5145,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.53 by generate_public_manual.py"
-generated: "2026-10-30 04:21"
+source: "Auto-generated from private manual v6.54 by generate_public_manual.py"
+generated: "2026-10-30 05:49"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13746,4 +13747,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-30 04:21 (v6.53)*
+*Last updated: 2026-10-30 05:49 (v6.54)*

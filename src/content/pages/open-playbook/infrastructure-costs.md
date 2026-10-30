@@ -12,19 +12,19 @@ This page exists because we believe donor-partners deserve to see exactly where 
 
 Every figure on this page is generated automatically from the same constants file our backoffice scripts use. When infrastructure changes, this page changes. When we update a constant, an audit runs the next morning and reconciles it against the actual Azure invoice. If they disagree by more than 5%, the system raises an alert before anyone can publish a wrong number.
 
-_Last regenerated: 2026-10-28 (Pacific). Constants verified: 2026-10-28._
+_Last regenerated: 2026-10-29 (Pacific). Constants verified: 2026-10-29._
 
 ---
 
 ## The Headline
 
-- **Fixed monthly infrastructure:** $664.94
+- **Fixed monthly infrastructure:** $773.12
 - **Variable monthly budget (LLM + scraping):** up to $400.00
-- **Grand total at full variable spend:** up to $1,064.94/month
+- **Grand total at full variable spend:** up to $1,173.12/month
 
 That funds 16 active apps, ~50 automation workflows, ~280 Python scripts, and the entire backoffice that keeps QWF running.
 
-**Most recent month-to-date Azure spend (live):** $290.76 as of 2026-10-26.
+**Most recent month-to-date Azure spend (live):** $325.82 as of 2026-10-29.
 
 ---
 
@@ -34,14 +34,14 @@ Two virtual machines + supporting infrastructure. The big one runs the backoffic
 
 | Resource | Monthly Cost | What it does |
 |----------|-------------:|--------------|
-| claude-dev compute (D8as_v6, 8 vCPU, 32 GB) | $264.99 | Main backoffice VM... runs all Python scripts, hosts the Digital Twin API, manages the Obsidian vault that is QWF's brain |
-| claude-dev disk (128 GB NVMe Premium SSD) | $26.88 | Storage for the vault, databases, and execution environment |
+| claude-dev compute (E8as_v7, 8 vCPU, 64 GB) | $348.21 | Main backoffice VM... runs all Python scripts, hosts the Digital Twin API, manages the Obsidian vault that is QWF's brain (moved to 64 GB on 2026-10-29) |
+| claude-dev disk (256 GB NVMe Premium SSD) | $51.84 | Storage for the vault, databases, and execution environment (doubled on 2026-10-29) |
 | claude-dev storage disk (128 GB Standard SSD) | $9.60 | Slower, cheaper disk for backups and archives, so they stop filling the fast disk (added 2026-10-11) |
 | qwu-n8n compute (B2s, 2 vCPU, 4 GB) | $30.37 | n8n workflow orchestration (~50 active workflows for emails, scheduling, monitoring) |
 | qwu-n8n disk (Standard SSD) | $4.00 | n8n workflow + execution data |
 | 2x static public IPs | $8.00 | One per VM, $4 each |
 | Pre-resize rollback snapshot | $0.72 | Safety net... deletable after stability confirmed |
-| **Azure subtotal** | **$344.56** | |
+| **Azure subtotal** | **$452.74** | |
 
 ## Supabase (databases + auth + edge functions)
 
@@ -80,7 +80,7 @@ If we hit 75% of either budget, the system pings a Discord alert. If we hit 90%,
 
 ## The Bottom Line
 
-**Fixed:** $664.94/month. **Maximum if every variable budget hits 100%:** $1,064.94/month.
+**Fixed:** $773.12/month. **Maximum if every variable budget hits 100%:** $1,173.12/month.
 
 That covers every app, every automation, every dashboard, every email, every database, every monitor. No hidden line items. No marketing budget hidden in 'operations'. No executive compensation buried in 'professional services'.
 
@@ -93,8 +93,8 @@ If you want to see exactly which services map to which programs, see [The Tool S
 Three things keep this page from drifting into marketing fiction:
 
 1. **Single source of truth.** Every dollar figure on this page comes from `cost_constants.py` in our public-by-default backoffice. The Digital Twin, internal dashboards, audit reports, and this transparency page all read the same constants.
-2. **Daily reconciliation.** A scheduled audit pulls our actual Azure spend each morning and compares it to the constants. Drift over 10% raises an alert.
-3. **Monthly invoice reconciliation.** On the 8th of each month, after Azure's invoice settles, we pull the finalized total for the prior month and reconcile it against the constants with a tighter 5% threshold.
+2. **Daily reconciliation.** A scheduled audit pulls our actual Azure spend each morning and compares it to the constants. Drift over 10% raises an alert. The day we change our setup and the day after are skipped, because those bills still hold the old setup.
+3. **Monthly invoice reconciliation.** On the 8th of each month, after Azure's invoice settles, we pull the finalized total for the prior month and reconcile it against the constants with a tighter 5% threshold. A month in which our setup changed is reported but not compared; the first full month after it is.
 
 **Most recent monthly reconciliation:** 2026-09 (internal report; full backoffice is browseable on GitHub)
 
