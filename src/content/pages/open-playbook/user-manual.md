@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 6.54 | Started: 251223 | Updated: 261029**"
+description: "**Version: 6.55 | Started: 251223 | Updated: 261029**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-10-29"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -11,11 +11,11 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-30 05:49 | Source version: 6.54
+> Generated: 2026-10-30 05:59 | Source version: 6.55
 
 # QWU Backoffice User Manual
 
-**Version: 6.54 | Started: 251223 | Updated: 261029**
+**Version: 6.55 | Started: 251223 | Updated: 261029**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -221,6 +221,19 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 | A cascade that carries numbers may not carry names | The public cost page takes its prices from the cost file but types the machine names itself, so a resize would have shown new prices beside old names. Teaches tracing every reader of a change, not only the documented ones | Intermediate |
 
 **Most valuable MP exercise:** give a student a resize runbook and read-only access to a practice subscription, and ask them to answer three pre-checks with commands, quoting the output line that proves each answer.
+
+#### MP Training Opportunities (from the 2026-10-29 resize night and its after-checklist, Session 847)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Verify a change from both sides | The disk, size and memory limit were each read twice: from inside the machine (`df`, `nproc`, `free`, the cgroup's `memory.max`) and from Azure with the machine's own identity. Teaches that one witness is a claim and two are a check | Beginner |
+| Change the baseline and the alarms that read it together | Raising the expected Azure cost the same night would have made the next morning's audit recommend the old price back, because yesterday's bill still held the old machine. A dated "setup changed on" value lets each check skip what it cannot fairly compare. Teaches that a monitor is only as good as the baseline it compares against | Intermediate |
+| Find when space went, then what took it | The pulse history pinned a "10 GB in a day" to two hours of one afternoon; a `find -newermt` window and `docker image inspect` (`LastTagTime`) then named the folders and the image. Teaches narrowing by time before searching by size | Intermediate |
+| Fail open toward a visible alarm | A typo in the change date reads as "no date", so the checks compare and may raise a false gap someone will look at, instead of going quiet. Teaches choosing which way a safety check fails | Intermediate |
+| Let someone try to break it | An independent reviewer broke the first draft of the cost-check change four ways (a malformed date silently turned checks off; the 1st of the month read the wrong day). Teaches adversarial review and tests that would fail without the fix | Advanced |
+| Dates on a UTC machine | The walkthrough's shell step stamped "2026-10-30" for a 2026-10-29 Pacific change. Teaches `TZ=America/Los_Angeles date +%F` | Beginner |
+
+**Most valuable MP exercise:** give a student a cost check that compares bills with a fixed monthly figure, change the figure mid-month, and ask them to predict every false alarm the next 40 days will raise, then write the tests that prove their fix.
 
 **Application Health Checks**
 - `check_calendar_health.py` runs every 2 hours via cron on claude-dev
@@ -5145,8 +5158,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.54 by generate_public_manual.py"
-generated: "2026-10-30 05:49"
+source: "Auto-generated from private manual v6.55 by generate_public_manual.py"
+generated: "2026-10-30 05:59"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13747,4 +13760,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-30 05:49 (v6.54)*
+*Last updated: 2026-10-30 05:59 (v6.55)*
