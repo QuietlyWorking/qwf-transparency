@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.55 | Started: 251223 | Updated: 261029**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-29"
+modifiedDate: "2026-10-30"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-30 05:59 | Source version: 6.55
+> Generated: 2026-10-31 05:26 | Source version: 6.57
 
 # QWU Backoffice User Manual
 
@@ -1348,9 +1348,11 @@ Since 2026-09-09 the backoffice holds more than one Claude Max subscription (`ti
 
 > ⚠ **Why that sentence used to name Fable, and why it must never name a limit again.** Until 2026-10-06 the rule was "rank on the weekly limit scoped to Fable." True when written ... Fable was the binding limit at 90%+ through September. Then both Fable windows rolled over, every account read **0%** on the only dimension being compared, the ranking went flat, and the tie fell to list order. **Ten live sessions ran on one paid subscription and zero on the other for three days**, while the capacity card beside it correctly named the idle account as the one with the most room. A hand-named dimension cannot report that it has gone stale; it just reads 0, which is the most attractive value in the ranking. Pinned by `tests/test_claude_account_picker_ranks_on_binding_limit.py` ... 8 cases, each run with the account list **both ways**, because an order-dependent answer is what a dead ranking signal looks like from the outside.
 
+**Since 2026-10-30 the plan is called Ultra, and the 5-hour window is going away.** Anthropic renamed Max 20x to Ultra (same price, same weekly limit; Max 5x is now plain "Max") and is removing the 5-hour window from Ultra accounts one at a time, each once Anthropic has verified the account. #1 lost its window on 2026-10-30 at 6:24 PM Pacific; #2 was still waiting that night. An account without the window simply reports no 5-hour limit, and the router ranks it on its weekly limits alone. Anthropic emails the account's own address when its window comes off. Both addresses land in TIG's one mailbox and Outlook shows tig@ as the recipient on every copy, so read the email's last line ("This email was sent to ...") to see which account it was for. A 5-hour row reading 0% with no reset time is an idle window, not a removed one.
+
 | Piece | Script | Cadence | What it does |
 |-------|--------|---------|--------------|
-| Gauge | `poll_claude_account_limits.py` | cron `*/20` | Reads every login's real limits from Anthropic (percentages, fail-loud, three states: ok / no room / cannot read); upserts `hq_claude_account_limits`; writes `.tmp/claude_capacity.json` |
+| Gauge | `poll_claude_account_limits.py` | cron `*/20` | Reads every login's real limits from Anthropic (percentages, fail-loud, three states: ok / no room / cannot read); upserts `hq_claude_account_limits` and deletes any limit Anthropic stops reporting (v1.9.0, so the card never shows a removed window); writes `.tmp/claude_capacity.json` |
 | Card | HQ `/subscriptions` + dashboard widget + mobile | live | "Most room now: <account>", every limit, reset clocks, BINDING marker, amber "unreadable since" note |
 | Brain | `pick_claude_account.py` | on demand | Prints the config dir a new session should use; `--explain` shows every account's standing; `--resume <id>` pins a conversation to the directory that holds it; any doubt = default account |
 | Terminal door | the bare `claude` command (`~/.local/bin/claude`) | every terminal session | Shim in front of the CLI's own version binary, resolved numerically at run time. **Added 2026-10-06** ... until then this path was a plain symlink, so every terminal session skipped the picker entirely and landed on the default account |
@@ -1379,6 +1381,16 @@ Since 2026-09-09 the backoffice holds more than one Claude Max subscription (`ti
 | Have someone try to break YOUR finding before you report it | An independent adversarial agent confirmed the fault AND corrected the root cause from "a 13-hour tie" to "a 3-day stale dimension". Teaches that being right about the symptom is not being right about the cause | Advanced |
 
 Depth: `005 Operations/Directives/claude_tool_wisdom.md` §Running several Max subscriptions (gotchas, the three silent faults). Deployed state: `002 Projects/_HQ Command Center/HQ-System-Status.md` §Claude Capacity Card. Public write-up with generalized code: Built from Broken Vol. 10 (transparency site).
+
+#### MP Training Opportunities (from the 2026-10-30 Ultra rename, Session 853)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Read an email's raw headers to learn which address it was really sent to | Two accounts' mail lands in one mailbox, and Outlook (and Graph's recipient list) showed tig@ on both. The raw `To:` line and the sender's own footer told the truth. Teaches going one layer below the display to the source | Beginner |
+| A mirror table must forget what the source forgets | The usage poller only added and updated rows, so a limit Anthropic removed stayed on the HQ card, frozen at 2%, looking live. Teaches asking "what happens when an item disappears?" of every sync | Intermediate |
+| Prove a test can fail | The new test was run against a copy of the poller with the fix switched off, and the two cases that need a delete failed, as they should. Teaches that a passing test only counts once you have seen it fail without the change | Intermediate |
+
+**Most valuable MP exercise:** give a student a small table that a script fills by upsert, remove one item from the source, and ask them to find why the old item never leaves, then fix it so an empty or failed read never wipes the table.
 
 #### MP Training Opportunities ⭐ (from the 2026-10-05 Vista Social entitlement diagnosis)
 
@@ -5158,8 +5170,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.55 by generate_public_manual.py"
-generated: "2026-10-30 05:59"
+source: "Auto-generated from private manual v6.57 by generate_public_manual.py"
+generated: "2026-10-31 05:26"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7142,7 +7154,11 @@ members, 2026-09-11.
 sends ONE short email to every active member at **6:00 Pacific on the meeting day**, from TIG's mailbox
 in his meeting-email design, with one line for every person registered for that meeting (visitors,
 substitutes, guests): their own registration words, plus only the LinkedIn, website, Google stars and
-round photos a person on our side confirmed. Never AI text, never a phone number or email address.
+round photos a person on our side confirmed. Never AI text, and never a phone number or email address taken
+from the words people typed. **Since TIG's "bless" of 2026-10-30 (v1.6.0, a member's idea)** every
+non-member on it, subs too, also shows their own phone and email from their own boxes, tappable: only one
+clean value per box, never an active member's own details (nobody's if the members cannot be read), never a
+detail typed for two people, never in a log; and an open seat leads with a green "Seat open" pill.
 **Who:** every active member on the roster the BNI page keeps (never the QNT test login). TIG, the same
 night: "until we receive a STOP we send to all active members". QCM "no answer on file" is a yes; an
 explicit stop or a consent check that cannot answer holds the member; a reply asking to stop becomes a
@@ -13760,4 +13776,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-30 05:59 (v6.55)*
+*Last updated: 2026-10-31 05:26 (v6.57)*
