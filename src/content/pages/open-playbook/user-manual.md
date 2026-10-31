@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-31 05:58 | Source version: 6.58
+> Generated: 2026-10-31 06:11 | Source version: 6.59
 
 # QWU Backoffice User Manual
 
@@ -724,6 +724,17 @@ The self-hosted n8n instance uses pinned version tags for stability.
 | Find a security fix in compiled JavaScript inside a container (and learn why BusyBox `grep --include` silently finds nothing) | grep/find, reading minified Node code, tool limits | Linux shell | 1.5 h | Intermediate |
 | Test a rule that clears warnings by deleting the evidence it replaces (counterfactual validation) | data validation design, Python, thinking like an adversary | Python, JSON | 3 h | Advanced |
 | Write a test that reproduces a reviewer's finding before fixing it | pytest, monkeypatching, test-first repair | Python | 1 h | Intermediate |
+
+**The weekly package advisory note (2026-10-30, TIG's "guard it" and "today too"):** once a week (Mondays at 06:30 Pacific), `watch_dependency_advisories.py` reads Quietly Networking `main`'s `package.json` and `package-lock.json` and runs `npm audit` on the lockfile only (never an install, never a build gate). One record note goes to #agent-log every week, even when nothing is new: each NEW critical or high advisory in plain words (package, how it comes in, title and link, production tree or development tools only, and whether a same-major fix at least 14 days old exists), then the totals in GitHub's count and npm's. A new critical or high in the production tree also goes to TIG's phone the same day (TODAY), at most once a week. A week that cannot read says so; two in a row send a TODAY alert. Betterstack heartbeat 521772 texts TIG if a week passes without a clean run (security texts go at any hour). Status: `watch_dependency_advisories.py --status`. Repo list: `005 Operations/Data/dependency_advisory_watch_repos.json` (QNT only; another repo joins after its own triage). Detail: QNT System Status, Known Issues, "Dependency security alerts"; `github_tool_wisdom.md`.
+
+#### MP Training Opportunities (from the 2026-10-30 package advisory watch)
+
+| Task | Skills taught | Prerequisites | Time | Level |
+|---|---|---|---|---|
+| Read `npm audit --json` safely (the exit code is not the verdict; the counts must add up; one advisory = one package and GHSA pair) | JSON, defensive parsing, npm | Python basics | 1.5 h | Intermediate |
+| Write a semver range evaluator and check it against npm's own library | parsing, test design, checking against a reference | Python | 3 h | Advanced |
+| Build a weekly watcher that never reads a failed check as a quiet week (retries, one time budget, a dead-man heartbeat) | reliability design, cron, alert tiers | Python, cron | 3 h | Advanced |
+| Prove an alert at the far end (read the Discord channel back; a throwaway heartbeat for the text path) | REST APIs, verification habits | REST basics | 1 h | Beginner |
 
 **Security Hardening (2026-04-04):**
 - UFW firewall enabled: ports 22 (SSH), 80 (HTTP), 443 (HTTPS) only
@@ -5185,8 +5196,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.58 by generate_public_manual.py"
-generated: "2026-10-31 05:58"
+source: "Auto-generated from private manual v6.59 by generate_public_manual.py"
+generated: "2026-10-31 06:11"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13791,4 +13802,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-31 05:58 (v6.58)*
+*Last updated: 2026-10-31 06:11 (v6.59)*
