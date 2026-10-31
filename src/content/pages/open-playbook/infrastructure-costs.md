@@ -12,15 +12,15 @@ This page exists because we believe donor-partners deserve to see exactly where 
 
 Every figure on this page is generated automatically from the same constants file our backoffice scripts use. When infrastructure changes, this page changes. When we update a constant, an audit runs the next morning and reconciles it against the actual Azure invoice. If they disagree by more than 5%, the system raises an alert before anyone can publish a wrong number.
 
-_Last regenerated: 2026-10-29 (Pacific). Constants verified: 2026-10-29._
+_Last regenerated: 2026-10-31 (Pacific). Constants verified: 2026-10-31._
 
 ---
 
 ## The Headline
 
-- **Fixed monthly infrastructure:** $773.12
+- **Fixed monthly infrastructure:** $772.40
 - **Variable monthly budget (LLM + scraping):** up to $400.00
-- **Grand total at full variable spend:** up to $1,173.12/month
+- **Grand total at full variable spend:** up to $1,172.40/month
 
 That funds 16 active apps, ~50 automation workflows, ~280 Python scripts, and the entire backoffice that keeps QWF running.
 
@@ -40,8 +40,7 @@ Two virtual machines + supporting infrastructure. The big one runs the backoffic
 | qwu-n8n compute (B2s, 2 vCPU, 4 GB) | $30.37 | n8n workflow orchestration (~50 active workflows for emails, scheduling, monitoring) |
 | qwu-n8n disk (Standard SSD) | $4.00 | n8n workflow + execution data |
 | 2x static public IPs | $8.00 | One per VM, $4 each |
-| Pre-resize rollback snapshot | $0.72 | Safety net... deletable after stability confirmed |
-| **Azure subtotal** | **$452.74** | |
+| **Azure subtotal** | **$452.02** | |
 
 ## Supabase (databases + auth + edge functions)
 
@@ -80,7 +79,7 @@ If we hit 75% of either budget, the system pings a Discord alert. If we hit 90%,
 
 ## The Bottom Line
 
-**Fixed:** $773.12/month. **Maximum if every variable budget hits 100%:** $1,173.12/month.
+**Fixed:** $772.40/month. **Maximum if every variable budget hits 100%:** $1,172.40/month.
 
 That covers every app, every automation, every dashboard, every email, every database, every monitor. No hidden line items. No marketing budget hidden in 'operations'. No executive compensation buried in 'professional services'.
 
