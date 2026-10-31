@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-31 06:11 | Source version: 6.59
+> Generated: 2026-10-31 06:19 | Source version: 6.60
 
 # QWU Backoffice User Manual
 
@@ -5196,8 +5196,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.59 by generate_public_manual.py"
-generated: "2026-10-31 06:11"
+source: "Auto-generated from private manual v6.60 by generate_public_manual.py"
+generated: "2026-10-31 06:19"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7175,6 +7175,11 @@ no page about the applicant is held and named). TIG released auto-send for it on
 agent-composed copy waits for his eyes.** It also writes `visitors.status='applied'` and the
 application category (never touching the visit-time `profession_category`). First live send: 10
 members, 2026-09-11.
+
+**Since v2.4.0 (2026-10-30) it reads every email from the committee's address, whatever the subject says.** On 2026-10-20 the committee reworded their subject to "Applicant Feedback Request for <NAME>"; the reader only kept the old
+words, so two applications went to nobody and the unreadable-email text (which sits after the reader) never fired. Now any
+non-reply email from [Networking Chapter]mc@gmail.com reaches the reader, and one it cannot read texts TIG once ([Networking Chapter]-System-Status K50).
+Lesson for any reader of someone else's format: never let a filter in front of the loud alarm read their wording.
 
 **The meeting-morning room list is a fourth script (2026-10-28).** `send_meeting_room_list.py` (v1.2.0)
 sends ONE short email to every active member at **6:00 Pacific on the meeting day**, from TIG's mailbox
@@ -13802,4 +13807,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-31 06:11 (v6.59)*
+*Last updated: 2026-10-31 06:19 (v6.60)*
