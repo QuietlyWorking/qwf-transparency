@@ -57,7 +57,7 @@ One Supabase organization on the Pro plan. 16 apps each get their own MICRO-tier
 
 | Service | Monthly Cost | What it does |
 |---------|-------------:|--------------|
-| RackNerd VPS (ESP) | $3.00 | Self-hosted email service provider on a $35/year VPS that actually works (annual: $35.49) |
+| RackNerd VPS (newsletter server) | $3.00 | Self-hosted newsletter server. Powered off 2026-10-30 because its operating system stopped getting security updates. We'll build it fresh when the newsletter needs it. Paid ahead through January 2027 (annual: $35.49) |
 | Betterstack monitoring | $0.00 | Lifetime AppSumo license... no recurring cost |
 | Email (M365) | $0.00 | Included in existing M365 license |
 | Cloudflare Workers (paid plan) | $5.00 | Account-wide; gives the Quietly Quoting estimate render step the processing time it needs |
