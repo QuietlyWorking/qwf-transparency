@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 6.55 | Started: 251223 | Updated: 261029**"
+description: "**Version: 6.58 | Started: 251223 | Updated: 261030**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-10-30"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -11,11 +11,11 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-31 05:26 | Source version: 6.57
+> Generated: 2026-10-31 05:58 | Source version: 6.58
 
 # QWU Backoffice User Manual
 
-**Version: 6.55 | Started: 251223 | Updated: 261029**
+**Version: 6.58 | Started: 251223 | Updated: 261030**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -3876,6 +3876,21 @@ The checkout widget's space count was fixed and shipped, and a family-wide gap i
 
 **Most valuable MP exercise:** give students the 25 daily free-space readings from this session and ask "how many days until full?" Most fit a straight line through all of it and get "never". Then show them the Oct 11 jump and let them find the real answer (about three weeks) themselves.
 
+### MP Training Opportunities ⭐ (from the Interactr research and the Interactive Story Videos brief, 2026-10-30, Session 858)
+
+TIG asked whether a lifetime video tool he bought (Interactr) is something we could build ourselves. The research turned into a new project, choose-your-own story videos, and a creative brief waiting on his approval. Records: `003 Entities/Tools/Interactr.md`, `002 Projects/_Interactive Story Videos/`.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Vendor due diligence before trusting a "lifetime" deal: read the terms (what "lifetime" means, the refund window), the company's public registry record (officers, filings), every help article, reviews, and the buyer's own mailbox history with the vendor | Judging a supplier from primary sources instead of its sales page | Beginner |
+| An absence in the docs is not an absence in the product: searching all 55 help articles for captions, keyboard access, an API or export, and reporting "not mentioned" rather than "not supported" | Precise claims; the difference between what you checked and what is true | Beginner |
+| Build vs buy, re-run when the goal changes: the first answer ("keep the licence, build later") flipped once TIG named the real goal (stories that remember choices and earn replays), because the bought tool caps minutes watched and has no story memory | Requirements drive tool choice; a recommendation is only as good as the goal it was made for | Intermediate |
+| Platform rules as design constraints: YouTube forbids anything drawn over its embedded player, and iPhone Safari hides overlays in its own fullscreen, so interactive video needs self-hosting and its own fullscreen mode | Reading platform policies and browser bugs before designing, not after launch | Intermediate |
+| Writing a creative brief to a standard: one page an approver reads in one sitting, every open decision with a recommendation, the three hardest tests named up front, and measures that cannot reward time-wasting ("playtime is earned by story") | Scoping creative work; designing engagement without dark patterns | Beginner |
+| Privacy by default for an anonymous audience that may include minors: progress kept on the viewer's device, anonymous counts only, no lasting ID, no IP address | Youth-safe analytics design | Intermediate |
+
+**Most valuable MP exercise:** give students one "lifetime deal" sales page and its terms of service. They list every promise on the page, then find the sentence in the terms that limits each one, and decide whether they would buy it for a nonprofit.
+
 ---
 
 ## Lead Generation System
@@ -5170,8 +5185,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.57 by generate_public_manual.py"
-generated: "2026-10-31 05:26"
+source: "Auto-generated from private manual v6.58 by generate_public_manual.py"
+generated: "2026-10-31 05:58"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13776,4 +13791,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-31 05:26 (v6.57)*
+*Last updated: 2026-10-31 05:58 (v6.58)*
