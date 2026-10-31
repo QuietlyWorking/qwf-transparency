@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-31 20:56 | Source version: 6.61
+> Generated: 2026-10-31 21:16 | Source version: 6.62
 
 # QWU Backoffice User Manual
 
@@ -5197,8 +5197,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.61 by generate_public_manual.py"
-generated: "2026-10-31 20:56"
+source: "Auto-generated from private manual v6.62 by generate_public_manual.py"
+generated: "2026-10-31 21:16"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11941,6 +11941,8 @@ Copies, reports and screenshots live in `/home/<VM_USER>/wp-legacy-freeze/`. The
 
 **Editing a page now:** edit the copy under `sites/<host>/public/` and redeploy with `deploy_frozen_site.py --host <site>`. Do not use wp-admin. Re-freezing from the private WordPress is not possible yet: the freeze tool crawls the public hostname, which now answers from the copy. Full record, deliberate differences and every rollback: `002 Projects/_QWU WordPress Multisite/QWU-WPMU-Freeze-Move-Plan.md`.
 
+**Only the live copy exists (2026-10-31).** Each form site's Pages project (quietlyworking-org, missingpixel-org, heroeskids-org) holds only its live deployment: every older one was deleted after Turnstile's first clean week, because old copies kept taking messages without the bot check at their own `pages.dev` address and none was a safe rollback. To undo a change, deploy the copy fresh (`--no-turnstile` only if the bot check itself breaks). Since `deploy_frozen_site.py` v1.3.0 a copy takes a form post only at the site's own address (a signed canary from `check_qwf_site_forms.py` excepted), so a preview cannot become a second door into TIG's inbox; prove a preview with `check_qwf_site_forms.py --base SITE=URL`.
+
 #### MP Training Opportunities ⭐ (from the 2026-10-23 WordPress exit)
 
 | Task | Skills taught | Prerequisites | Time | Complexity |
@@ -13808,4 +13810,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-31 20:56 (v6.61)*
+*Last updated: 2026-10-31 21:16 (v6.62)*
