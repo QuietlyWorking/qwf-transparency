@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-10-31 21:16 | Source version: 6.62
+> Generated: 2026-11-01 06:48 | Source version: 6.63
 
 # QWU Backoffice User Manual
 
@@ -117,7 +117,8 @@ A comprehensive guide to the QWU Backoffice agent workspace, covering architectu
 92. [[#L4G Locals 4 Good Platform ⭐ NEW]]
 93. [[#Living Roadmap Delivery Pipeline ⭐ NEW]]
 94. [[#WP Legacy Sites on Cloudflare Pages ⭐ NEW]]
-95. [[#Session Log]]
+95. [[#Security Plan and Guards ⭐ NEW]]
+96. [[#Session Log]]
 
 ---
 
@@ -5197,8 +5198,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.62 by generate_public_manual.py"
-generated: "2026-10-31 21:16"
+source: "Auto-generated from private manual v6.63 by generate_public_manual.py"
+generated: "2026-11-01 06:48"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12692,6 +12693,48 @@ A run takes 8 to 10 minutes; run it in the background and run it again if main m
 
 ---
 
+## Security Plan and Guards ⭐ NEW
+
+**Added: October 31, 2026 (Sessions on Oct 30 and 31).** A question about firewalls led TIG to ask for the late-2026 gold standard, a budget-first plan for the home office that becomes a studio, and the back office. The plan lives on a private briefing page and a wall map ("Light the Path", 35 lanterns) that update as steps finish. Decision record: memory `project_security_gold_standards_briefing.md`; research: `002 Projects/_QWU Backoffice Automation/Security-Gold-Standards-Research-2026-10-30.md`.
+
+### What is done
+- **The newsletter server is off.** It was a standby server never put to use; it was archived and powered off (Oct 30).
+- **Both Amazon owner (root) keys are switched off** (Oct 30), confirmed by a fresh credential report. TIG deletes them after a quiet week.
+- **GitHub secret scanning and push protection** are on for the 8 public code projects (Oct 31). Our GitHub key cannot read the alerts; GitHub emails the owner.
+- **n8n** is on a version that fixes every published advisory through the Oct 28 batch.
+- **Agent guards (Oct 31):** the user-level deny rules now cover every key file in the home folder; new pip and npm package versions wait 3 days before they install; an hourly **agent settings watch** tells TIG once about anything new that can run.
+
+### Package waiting periods (how to take a brand-new release on purpose)
+- pip: `~/.config/pip/pip.conf` sets `uploaded-prior-to = P3D`. Override: `pip install --uploaded-prior-to P0D <package>==<version>`.
+- npm: `~/.npmrc` `before=` is rolled to "3 days ago" every hour by the watch. `npm ci` and installs with a lockfile keep their locked versions. Override: `npm install --before=$(date -u +%Y-%m-%dT%H:%M:%SZ) <package>@<version>`.
+- Claude Code itself is the native install, so neither setting delays its updates.
+
+### Agent settings watch
+`005 Operations/Execution/watch_agent_config.py` (cron hourly at :17, Betterstack heartbeat). It watches hooks in every settings file and the code those hooks import, MCP servers, plugins, the mod, git hooks and git settings that run programs, deny rules and the permission mode. New, removed or uncommitted = a push to TIG (told only when the push got out); an edit already committed and pushed = a Discord record. Its state lives outside the vault in `~/.local/state/qwu/`. Full detail and what it does NOT watch: `infrastructure_monitoring.md`. Its first version sent one false push (a plugin list's timestamp changed); fixed the same day after an independent review.
+
+### DNS signing (DNSSEC), staged
+`005 Operations/Execution/manage_dnssec.py`: `status`, `verify`, `enable --apply`, `disable --apply`, `plan`. It refuses any domain not registered with Cloudflare (so supporter domains in the account can never pass) and any non-QWF domain without TIG's word. Cloudflare publishes the signature at the registry in one to two days. Order: a spare test domain (enabled Oct 31), then quietlyworking.org, then the other QWF domains, each verified before the next.
+
+### Email-domain policy (DMARC): read, not yet changed
+90 days of reports were read and every legitimate sender listed. Tightening goes in stages, after one more signing step on the Microsoft side, so forwarded mail keeps arriving.
+
+### TIG's workstation: Windows updates
+Updates had been paused through registry settings during a 2025 scare that was later cleared. A read-only PowerShell check (`002 Projects/_QWU Backoffice Automation/windows-update-check-2026-10-31.ps1`) finds how updates were blocked; the undo (`windows-update-undo-2026-10-31.ps1`) saves copies, makes a restore point and removes the block, after a full backup with Veeam Agent for Windows Free. The remaining Windows hardening steps are on the plan.
+
+### Training Opportunities
+
+| Task | Skills Taught | Prerequisites | Est. Time | Complexity |
+|------|---------------|---------------|-----------|------------|
+| Close password logins on a Linux server with an sshd drop-in, then prove it from outside | SSH, Linux config precedence, outside-in testing | Basic Linux | 2 hours | Intermediate |
+| Find and retire cloud owner keys (credential report, deactivate, wait, delete) | AWS IAM, least privilege, reversible change | Cloud account basics | 2 hours | Intermediate |
+| Archive and power down a server safely (dump, copy, checksum, verify, then stop) | Backups, integrity checks, change discipline | Basic Linux | 3 hours | Intermediate |
+| Read DMARC aggregate reports and list who sends as a domain | Email authentication (SPF, DKIM, DMARC), XML parsing | Python basics | 3 hours | Intermediate |
+| Stage DNSSEC on a test domain and verify with validating resolvers | DNS, DNSSEC, dig, staged rollout | DNS basics | 2 hours plus waiting | Advanced |
+| Build a "tell me once" config watcher with a dead-man heartbeat | Monitoring design, fingerprints, alert fatigue | Python | 4 hours | Advanced |
+| Diagnose a blocked Windows Update with a read-only PowerShell check | Windows registry, policies, services, PowerShell | Windows basics | 2 hours | Beginner to Intermediate |
+
+---
+
 ## Session Log
 
 > [!NOTE] Session Log Redacted
@@ -13810,4 +13853,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-10-31 21:16 (v6.62)*
+*Last updated: 2026-11-01 06:48 (v6.63)*
