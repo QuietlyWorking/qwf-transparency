@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-02 02:15 | Source version: 6.64
+> Generated: 2026-11-02 04:29 | Source version: 6.65
 
 # QWU Backoffice User Manual
 
@@ -3851,6 +3851,18 @@ The sign-in pages, the donor-partner portal and the staff pages took the public 
 
 **Most valuable MP exercise:** give a student two builds of one page and a picture diff showing a few changed pixels, and ask them to prove whether anything really changed, using the photograph-it-twice control and a layout read.
 
+### MP Training Opportunities ⭐ (from the L4G staff and portal fix-up close-out, 2026-11-01, Session 870)
+
+A screen reader can now tell which tab is chosen on six tab rows, and a donor-partner's record offers artwork only to paid reservations.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| State that shows only by color is invisible to a screen reader: six tab rows marked the chosen tab with a CSS class alone; one attribute (`aria-pressed`) driven by the same test as the class fixed every row, proven by reading both on each tab before and after a click | Accessibility basics (WCAG 1.4.1 and 4.1.2); making visual state and announced state come from one source | Beginner |
+| A repeating difference is a cause, not noise: four phone pages kept measuring 18 to 27 px apart between preview and production; production against itself matched, so the cause was traced to the area poll's per-visitor random order, and pinning its seed made the two hosts match 54 of 54 | Debugging by controlled comparison; ruling out the measuring tool before blaming it | Intermediate |
+| Find where a rule is actually enforced: "Upload to all months" reached unpaid bookings because neither the page nor the database function checked payment; the page now filters, and the database check was handed to the lane that owns it | Tracing a behavior through UI, API and database layers; defense in depth | Intermediate |
+
+**Most valuable MP exercise:** give a student a tab row whose chosen tab differs only by color and ask them to make a screen reader announce it, then prove it with an automated check that fails before their fix and passes after.
+
 ### MP Training Opportunities ⭐ (from the L4G site-hardening lane, 2026-10-29, Session 846)
 
 A reply to a Locals 4 Good sign-in email used to bounce; it now reaches a person, and Microsoft trusts the forwarded copy.
@@ -5198,8 +5210,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.64 by generate_public_manual.py"
-generated: "2026-11-02 02:15"
+source: "Auto-generated from private manual v6.65 by generate_public_manual.py"
+generated: "2026-11-02 04:29"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13863,4 +13875,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-02 02:15 (v6.64)*
+*Last updated: 2026-11-02 04:29 (v6.65)*
