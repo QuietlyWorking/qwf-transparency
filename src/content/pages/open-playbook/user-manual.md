@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.61 | Started: 251223 | Updated: 261031**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-10-31"
+modifiedDate: "2026-11-01"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-01 06:48 | Source version: 6.63
+> Generated: 2026-11-02 02:15 | Source version: 6.64
 
 # QWU Backoffice User Manual
 
@@ -5198,8 +5198,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.63 by generate_public_manual.py"
-generated: "2026-11-01 06:48"
+source: "Auto-generated from private manual v6.64 by generate_public_manual.py"
+generated: "2026-11-02 02:15"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7575,6 +7575,16 @@ first hundred matches and the reply we needed was the hundred-and-first. A confi
 looks exactly like a right one. The habit that catches it is asking what the tool was actually
 searching, then searching a key that cannot be diluted ... the exact subject line, not the word
 everyone uses.
+
+#### MP Training Opportunities (from the 2026-11-01 stale-tab diagnosis and fresh-build fix, Session 869)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Read one person's own requests | A mentor's screen said "not set up as a mentor" while every database row said she was. The server's request log, filtered to her sign-in (`request.sb.jwt.authorization.payload.subject`), showed the exact queries her browser sent, and a column only the old code asks for dated her tab to four days earlier. Teaches going to the deepest witness before touching data | Intermediate |
+| A web app keeps running the code it loaded | An open tab never fetches new code on its own; a database change that closes an old read breaks only the tabs nobody reloaded. Teaches build ids, `/version.json`, and why "it works for me" is not proof | Intermediate |
+| A failed read is not an empty answer | The page treated "the lookup failed" the same as "no record", so a refusal became a false sentence. Teaches separating error, empty and loading states in React Query | Beginner |
+| Never reload over someone's save | The first fix reloaded in the same page move that started a save-as-you-leave; a reviewer proved the save was cut off. The fix waits for every write and stands down when someone types or taps. Teaches React unmount order, counting in-flight writes, and adversarial review | Advanced |
+| Check a suggested fix before offering it | "Sign out and back in" sounded right but QNT's sign-out stays inside the same old copy of the app. Teaches reading the code path behind a help sentence | Beginner |
 
 ## BNI Meeting Recap System ⭐ NEW
 
@@ -13853,4 +13863,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-01 06:48 (v6.63)*
+*Last updated: 2026-11-02 02:15 (v6.64)*
