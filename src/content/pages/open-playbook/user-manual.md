@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-02 04:29 | Source version: 6.65
+> Generated: 2026-11-02 06:59 | Source version: 6.67
 
 # QWU Backoffice User Manual
 
@@ -3851,6 +3851,23 @@ The sign-in pages, the donor-partner portal and the staff pages took the public 
 
 **Most valuable MP exercise:** give a student two builds of one page and a picture diff showing a few changed pixels, and ask them to prove whether anything really changed, using the photograph-it-twice control and a layout read.
 
+### MP Training Opportunities ⭐ (from the QQT [Supporter Organization] calculators go-live, 2026-11-01, Session 872)
+
+A supporter's newer calculators went live on their website in one evening, one guarded step at a time, with nothing sent
+to anyone and every step undoable.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Prove a release on the real site before changing it: intercept the page's script and config inside a headless browser (Playwright `route.fulfill`), so the new version runs on the live page for the test only | Testing in production without touching production; request interception; read-only discipline | Intermediate |
+| Rehearse a database write against live and roll it back, then apply, then read back at two layers (table and public API) | Transactions, idempotent guards (fingerprints), the difference between "committed" and "proven" | Intermediate |
+| A shared row cannot be staged: when the sandbox and the live site read the same data, "put it on the sandbox" is a live change | Data modeling, blast radius, asking "who else reads this row?" | Beginner |
+| Where consent words go: above the button, full-size, the button pointing at them (Section 17), with the court case and FTC guidance behind it | Accessibility (`aria-describedby`), legal design, writing for a busy reader | Beginner |
+| `set -e` + `pipefail` + `diff` in a loop: diff returns 1 when files differ, so the loop stopped after one file and the compare silently covered a fifth of the pages | Shell exit codes, why a check must be read, not trusted | Beginner |
+
+**Most valuable MP exercise:** give a student a static page that loads a script from a CDN and ask them to prove a new
+version of that script on the live page without changing the page, then show the before and after screenshots and the
+count of requests they blocked.
+
 ### MP Training Opportunities ⭐ (from the L4G staff and portal fix-up close-out, 2026-11-01, Session 870)
 
 A screen reader can now tell which tab is chosen on six tab rows, and a donor-partner's record offers artwork only to paid reservations.
@@ -5210,8 +5227,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.65 by generate_public_manual.py"
-generated: "2026-11-02 04:29"
+source: "Auto-generated from private manual v6.67 by generate_public_manual.py"
+generated: "2026-11-02 06:59"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11280,6 +11297,50 @@ No free tier. 30-day trial. **QWF ecosystem bundle:** Full Pro access included f
 
 ---
 
+## QQT Web Calculator Release Tools ⭐ NEW (2026-11-01, Session 872)
+
+How a new version of the Quietly Quoting calculator widget reaches a supporter's live website, and the tools that make each
+step guarded, proven and undoable. First used end to end for [Supporter Organization]'s go-live on 2026-11-01 (widget v17 live on
+www.<supporter-domain>.com through the stable line). Record of every step: the calcs channel's `gate-log.md`
+(`005 Operations/Handoffs/rounds/qqt-[Supporter Organization]-calcs-golive-20261030-0937-dfd9d1/`).
+
+**The release path (each step opens on TIG's own word):** build (widget `dist-vNN`, committed) -> upload (immutable
+`widget-assets/vNN/`) -> read-only pre-proof on the live pages in a browser -> the sandbox (data on the review copies,
+then one sandbox deploy, then proofs) -> the live data steps -> the supporter site's loader on the stable line -> ONE
+repoint of the stable line -> read-only live proof. Card words are shared between live and sandbox rows, so they can
+never be "sandbox only".
+
+| Tool (`005 Operations/Execution/`) | Version | What it does | Safety |
+|---|---|---|---|
+| `upload_qqt_widget_asset.py` | v1.0.0 | Uploads one build file to `widget-assets/<dest>` | `--no-clobber`; never use it for the stable object |
+| `publish_qqt_widget_stable.py` | v1.4.0 | Repoints `widget-assets/stable/widget.js` (the shim every supporter page loads) to a release | Hand-kept release list (v11, v17) with full hashes; compare-and-swap (`--expect-current`); dry run by default, `--apply` writes; never below v11 |
+| `snapshot_rows.py` | v1.2.0 | Raw snapshot of the rows a supporter-tenant write changes (`cards`, `review-rc`, `live-rc`), straight to a file | Never prints values; refuses a redacted answer (the CLI masks hash-shaped text) |
+| `make_cards_undo.py` | v1.2.0 | Generates the exact undo for the card-words write from a raw snapshot | The undo restores only the changed fields, guarded by fingerprints |
+| `make_tier_art_update.py` | v1.2.0 | Writes the review-then-live SQL pair (and its reverse) for a new drawings folder | Validates every value; refuses non-ASCII |
+| `check_live_slug_origins.py` | v1.1.1 | Lists every host the supporter's key serves and flags any page still loading an old widget on a live slug | Fails CLOSED (any API or page error is a failure); GETs only |
+| `check_qqt_review_copy_requests.py` | v1.1.0 | Daily read-only check that names any sandbox review-copy request no proof made | NOT scheduled yet (TIG's word "schedule check" adds the cron line + Betterstack heartbeat) |
+| `prove_qqt_[Supporter Organization]_site_pages.py` | v1.8.0 | Proves [Supporter Organization]'s calculator pages in a real browser; `--channel stable`, `--drawings`, `--timing`, `--materials`, `--consent` | Read-only unless `--submit`; a live `--submit` texts [Supporter Organization]'s team, so it needs the "live proof" word and a warning first |
+| `prove_qqt_widget_hosts.py` | v1.0.0 | Proves which hosts the widget key serves (12/12) | GETs only; never prints the key |
+| `deliver_qqt_calculator_alerts.py` | v1.8.0 (LIVE) | The lead alerts; the homeowner's Timing answer leads the subject, text and Discord title | `--preview` composes without sending and hides contact details |
+| `create_outlook_draft.py` | v1.8.0 | Drafts TIG's emails; `--attach` now works on threaded replies | No send path, ever |
+
+**Writing a supporter's rows (the pattern every data step followed):** raw snapshot -> regenerate the undo and check it
+matches -> `apply_supabase_migration.py <file> --project-ref <ref> --rehearse` (runs against live, always rolls back) ->
+`apply_qqt_migration.py <file>` -> read back at the database AND at the public API. Files carry no BEGIN/COMMIT so the
+rehearsal can roll them back.
+
+**Deploying a supporter site QWF hosts ([Supporter Organization]):** a fresh worktree from `origin/main`, the change as `[skip ci]`
+commits, build with `env -i PUBLIC_SITE_STAGE=production`, prove every page byte-identical to the live build except the
+intended ones, push `HEAD:main` first, then `npx wrangler@4.147.0 pages deploy dist --project-name <project> --branch
+main --commit-hash <hash>` with the token only in the child's environment, then compare every served page to the build
+and confirm no CI run. Publish Log row each time.
+
+**Scratch tool worth knowing:** `.tmp/qqt_golive_release/r7/prove_stable_line.py` v1.1.0 swaps a new widget into the
+live pages inside the browser only (and can add a config map or preview draft words in the browser), so a release is
+proven on the real site before anything changes there.
+
+---
+
 ## QWF Ecosystem Widget ⭐ NEW
 
 **Added: February 28, 2026**
@@ -13875,4 +13936,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-02 04:29 (v6.65)*
+*Last updated: 2026-11-02 06:59 (v6.67)*
