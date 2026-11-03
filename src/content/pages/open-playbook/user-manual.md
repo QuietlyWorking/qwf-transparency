@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-03 23:13 | Source version: 6.76
+> Generated: 2026-11-03 23:24 | Source version: 6.77
 
 # QWU Backoffice User Manual
 
@@ -5275,8 +5275,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.76 by generate_public_manual.py"
-generated: "2026-11-03 23:13"
+source: "Auto-generated from private manual v6.77 by generate_public_manual.py"
+generated: "2026-11-03 23:24"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6285,9 +6285,9 @@ These could anchor a **"Security Engineering Fundamentals"** curriculum track fo
 
 **What you see:** `git fetch` or `git push` answers `could not read Username for 'https://github.com'`, on most app copies at once. Copies that use ssh, this vault among them, keep working.
 
-**Why:** this machine keeps its GitHub sign-in in one file, and git deletes it the moment GitHub refuses a login, even when the token is good. One wrong command in one session signs every session out, and nothing warns anyone. On 2026-11-03 a custom `Authorization` header in a read-only sweep did it; a throwaway copy reproduced it.
+**How it works since 2026-11-03:** git signs in to GitHub through a small helper that reads the one stored token from the settings file each time. It ignores git's request to delete a refused login, so one bad command can no longer sign everyone out, which it did three times before this fix. There is no `~/.git-credentials` any more; do not recreate it. Changing the token is one edit, in the settings file.
 
-**What to do:** check the file's size only, never its contents: `stat -c %s ~/.git-credentials`. Zero means this is it. Restoring it changes a credentials file, so it takes TIG's word. Never pass a custom Authorization header to git on this machine; a plain `git clone` already signs in. Current state: QWU Backoffice System Status, Known Issues.
+**What to do:** `check_git_health.py` already tells TIG within 5 minutes if the helper is missing, changed or not answering. Run `install_github_signin_helper.py --check` to see why, and `--apply` to repair it (always after a VM rebuild). `--undo` goes back to the old way. If the helper answers and GitHub still refuses, the token itself has expired or been revoked: see the credential rotation playbook. Never print the token (`git credential fill`, or the helper's `get`); the secret gate refuses it.
 
 #### MP Training Opportunities (from this diagnosis, 2026-11-03, Session 885)
 
@@ -14056,4 +14056,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-03 23:13 (v6.76)*
+*Last updated: 2026-11-03 23:24 (v6.77)*
