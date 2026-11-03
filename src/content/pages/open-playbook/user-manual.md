@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-03 21:35 | Source version: 6.74
+> Generated: 2026-11-03 22:40 | Source version: 6.75
 
 # QWU Backoffice User Manual
 
@@ -4477,6 +4477,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.75 | 261103 | TIG + Claude | Session 885: **Troubleshooting: every session suddenly cannot reach GitHub over https** (a refused login erases the stored sign-in; how to recognize it and who restores it). QQT's plan of record for the 2026-11-06 walkthrough lives in its kickoff; nothing deployed. |
 | 6.74 | 261103 | TIG + Claude | Session 884: **Mail Truck Dash played alone is LIVE** (L4G Play section updated), plus MP Training Opportunities from its build. |
 | 6.73 | 261103 | TIG + Claude | Session 883: **Mentor forms: a form's mentor is whoever held the meeting.** Governance note added after one form was found on the former mentor's record, plus one training row. |
 | 6.72 | 261102 | TIG + Claude | Session 878: **L4G Play gets its own section** (play.locals4good.org: the arcade, the lobby, the idea box and the live show; three lanes, one deploy rule). The SHOW lane shipped TIG's rehearsal fix (a closed room always opens new and empty) and his bop pictures (one blessed picture per trade). MP notes added. |
@@ -5260,8 +5261,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.74 by generate_public_manual.py"
-generated: "2026-11-03 21:35"
+source: "Auto-generated from private manual v6.75 by generate_public_manual.py"
+generated: "2026-11-03 22:40"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6265,6 +6266,22 @@ These could anchor a **"Security Engineering Fundamentals"** curriculum track fo
 ---
 
 ## Troubleshooting
+
+### Every session suddenly cannot reach GitHub over https
+
+**What you see:** `git fetch` or `git push` answers `could not read Username for 'https://github.com'`, on most app copies at once. Copies that use ssh, this vault among them, keep working.
+
+**Why:** this machine keeps its GitHub sign-in in one file, and git deletes it the moment GitHub refuses a login, even when the token is good. One wrong command in one session signs every session out, and nothing warns anyone. On 2026-11-03 a custom `Authorization` header in a read-only sweep did it; a throwaway copy reproduced it.
+
+**What to do:** check the file's size only, never its contents: `stat -c %s ~/.git-credentials`. Zero means this is it. Restoring it changes a credentials file, so it takes TIG's word. Never pass a custom Authorization header to git on this machine; a plain `git clone` already signs in. Current state: QWU Backoffice System Status, Known Issues.
+
+#### MP Training Opportunities (from this diagnosis, 2026-11-03, Session 885)
+
+| Component | Skills Developed | Difficulty |
+|-----------|------------------|------------|
+| Reading a file's birth time and change time to tell a replace from a truncate | Linux file metadata, evidence over guesses | ⭐⭐ |
+| Reproducing a fault on a throwaway copy, with a control before and after | Experiment design, protecting live systems while testing | ⭐⭐⭐ |
+| Diffing against a baseline the way the baseline was built | Data reconciliation, checking your own instrument | ⭐⭐ |
 
 ### Can't Connect to VM
 
@@ -14017,4 +14034,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-03 21:35 (v6.74)*
+*Last updated: 2026-11-03 22:40 (v6.75)*
