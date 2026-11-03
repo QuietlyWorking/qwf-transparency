@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-03 21:11 | Source version: 6.73
+> Generated: 2026-11-03 21:35 | Source version: 6.74
 
 # QWU Backoffice User Manual
 
@@ -3880,6 +3880,19 @@ A screen reader can now tell which tab is chosen on six tab rows, and a donor-pa
 
 **Most valuable MP exercise:** give a student a tab row whose chosen tab differs only by color and ask them to make a screen reader announce it, then prove it with an automated check that fails before their fix and passes after.
 
+### MP Training Opportunities ⭐ (from Mail Truck Dash played alone, 2026-11-03, Session 884)
+
+A new public game on a live board with prizes, from its page to its ship, plus a rendering bug TIG caught on video.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Measure a visual bug instead of eyeballing it: thin lines flickering on a turning 3D cabinet were tested at every angle in tenths of a degree, at two screen densities, counting missing pixel rows before and after the fix | Visual testing, Playwright, image analysis | Intermediate |
+| Why a line vanishes: perspective, sub-pixel depth and edge smoothing stack, and the fix (a stroke stretched along one axis) came from working out the real projection rather than guessing a number | CSS 3D, linear math, root-cause analysis | Advanced |
+| Page and server must agree: the rules both sides enforce live in one shared file, and a test proves the most a direct request can post equals the most the page can count | Client and server trust, game fairness | Intermediate |
+| Ask the system of record: whether a finger is still down comes from the browser's own answer, not a list our code keeps, so a missed event can never freeze the game | Event handling, state design | Intermediate |
+| Words are part of the design: a rule that could be read two ways was rewritten to say what actually happens, and a rule the game cannot check was never promised | UX writing, plain language | Beginner |
+| Prove the build you ship is the build you tested: two builds of one commit differ by a version stamp, so a file-by-file comparison replaces that stamp and treats anything else as a stop | Release engineering, reproducible builds | Intermediate |
+
 ### MP Training Opportunities ⭐ (from the L4G Play live show's rehearsal prep and bop pictures, 2026-11-02, Session 878)
 
 Two ships to a live game room: a closed room now always opens as a new, empty show, and every trade in the referral bop
@@ -4464,6 +4477,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.74 | 261103 | TIG + Claude | Session 884: **Mail Truck Dash played alone is LIVE** (L4G Play section updated), plus MP Training Opportunities from its build. |
 | 6.73 | 261103 | TIG + Claude | Session 883: **Mentor forms: a form's mentor is whoever held the meeting.** Governance note added after one form was found on the former mentor's record, plus one training row. |
 | 6.72 | 261102 | TIG + Claude | Session 878: **L4G Play gets its own section** (play.locals4good.org: the arcade, the lobby, the idea box and the live show; three lanes, one deploy rule). The SHOW lane shipped TIG's rehearsal fix (a closed room always opens new and empty) and his bop pictures (one blessed picture per trade). MP notes added. |
 | 6.71 | 261102 | TIG + Claude | Session 877: **The public line <TWILIO_NUMBER> is trusted at the carriers, and the L4G call kit is decided.** Twilio Phone Registry row corrected (it still said L4G SMS on a deleted Studio Flow) and now names the Trust Hub, SHAKEN/STIR, Voice Integrity and caller-name registrations. The calling rules for any QWF outbound call live in `002 Projects/_Locals 4 Good/Design Docs/L4G-Calling-Rules-Memo-v0.1.md`. |
@@ -5246,8 +5260,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.73 by generate_public_manual.py"
-generated: "2026-11-03 21:11"
+source: "Auto-generated from private manual v6.74 by generate_public_manual.py"
+generated: "2026-11-03 21:35"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12824,8 +12838,10 @@ A run takes 8 to 10 minutes; run it in the background and run it again if main m
 
 A practice-and-party arcade for Locals 4 Good, built 2026-10-31 to 2026-11-02: Grab Your Category (the real
 reservation form as a timed game, with a shared board), a lobby of classic arcade cabinets at `/`, an idea box whose
-ideas reach only TIG, and a live three-game show TIG runs from his phone at talks (a mail truck tapper, a mailbox
-guess, a referral bop where every trade has its own picture). One Cloudflare Worker, `l4g-play`, with two Durable
+ideas reach only TIG, Mail Truck Dash played alone at `/truck` (LIVE 2026-11-03: 60 seconds on one big pad, its own phone and
+computer boards, a first place is a throne), and a live three-game show TIG runs from his phone at talks (a mail truck
+tapper, a mailbox guess, a referral bop where every trade has its own picture). The show's other two games open alone one at
+a time, each with its own words, security review and ship. One Cloudflare Worker, `l4g-play`, with two Durable
 Objects (`Arcade` for the boards and ideas, `Room` for the show), built in SvelteKit and deployed by hand from `main`
 (no CI yet). Every word and picture players see is locked to TIG's bless by a fingerprint: a build whose words
 changed cannot deploy.
@@ -14001,4 +14017,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-03 21:11 (v6.73)*
+*Last updated: 2026-11-03 21:35 (v6.74)*
