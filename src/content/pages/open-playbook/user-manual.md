@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-03 00:06 | Source version: 6.69
+> Generated: 2026-11-03 06:16 | Source version: 6.72
 
 # QWU Backoffice User Manual
 
@@ -3880,6 +3880,21 @@ A screen reader can now tell which tab is chosen on six tab rows, and a donor-pa
 
 **Most valuable MP exercise:** give a student a tab row whose chosen tab differs only by color and ask them to make a screen reader announce it, then prove it with an automated check that fails before their fix and passes after.
 
+### MP Training Opportunities ⭐ (from the L4G Play live show's rehearsal prep and bop pictures, 2026-11-02, Session 878)
+
+Two ships to a live game room: a closed room now always opens as a new, empty show, and every trade in the referral bop
+has its own picture.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| A test that passes by luck is not a test: the "same trade bopped twice" check rode on a random pop order and missed about one run in ten; recording every bop with the card the server returned turned it into a check of every case on every run | Determinism, test oracles, flaky tests | Intermediate |
+| Pictures are words: each device draws its own emoji, so the pictures went under the same bless-and-fingerprint lock as the text, chosen from an older emoji set so older phones and Windows draw them | Content governance, cross-device rendering | Beginner |
+| Clipping text cleanly: a two-line clamp showed the tops of its hidden third line until the line height went from 1.05 to 1.2, settled by screenshots of six variants in a real browser | CSS layout, visual testing with Playwright | Beginner |
+| A shared repo needs one deploy rule: a checkout left 11 commits behind would have taken two other lanes' live work off the site; "only main deploys, and whoever ships second merges first" prevents it | Git workflow, release coordination | Intermediate |
+
+**Most valuable MP exercise:** give a student a test that passes nine runs in ten and ask them to find the randomness,
+then rewrite the check so it tests every case on every run.
+
 ### MP Training Opportunities ⭐ (from the L4G site-hardening lane, 2026-10-29, Session 846)
 
 A reply to a Locals 4 Good sign-in email used to bounce; it now reaches a person, and Microsoft trusts the forwarded copy.
@@ -3959,6 +3974,7 @@ The L4G system includes:
 - **Brand Clarity Wizard:** 3-step guided intake at `/portal/brand` ... saves to 9 brand fields on `l4g_donor_partners`
 - **Journey Milestones:** `check_l4g_milestones.py` v1.2.0 (15-min n8n poll) → `send_l4g_journey_email.py` v1.2.0 (6 TIG-voice templates with portal deep links and Mailbox Walk gradient CTA buttons) + push notifications for proof_ready, proof_approved, going_to_print, postcards_mailed. Dedup via `l4g_journey_events`. v1.2.0 fires push notifications alongside journey emails.
 - **Email Mirror + Notification System (Session 215):** `send_l4g_conversation_email.py` v1.1.0 adds Reply-To headers (`l4g-reply+{booking_id}@quietlyworking.org`) and X-L4G-Booking-ID internet message header for email-to-thread routing. `poll_l4g_email_replies.py` v1.0.0 polls Ezer inbox via MS Graph for replies matching `l4g-reply+` pattern, strips quoted content, inserts into `l4g_conversations`, moves to L4G-Processed folder (state: `.tmp/l4g_reply_processed_ids.json`, runs every 2 min via n8n). `send_l4g_push_notification.py` v1.0.0 wraps `send-push-notification` edge function with 7 event templates (print_status_change, new_message_donor/team, proof_ready, concept_ready, proof_approved, feedback_submitted). Supabase `pg_net` trigger `notify_l4g_conversation_insert()` on `l4g_conversations` INSERT → POSTs to n8n webhook for real-time email mirror.
+- **Replies to the receipt, journey emails and the welcome reach the thread (Session 876, 2026-11-02):** `send_l4g_receipt_email.py` v1.2.0, `send_l4g_journey_email.py` v2.4.0 and `send_l4g_welcome_email.py` v2.7.0 set Reply-To to the booking's signed `l4g-reply+<booking>.<tag>@quietlyworking.org` address (made by `l4g_reply_address.py`) plus `X-L4G-Booking-ID`, so a donor-partner's reply lands in that booking's conversation instead of Ezer's general inbox. Payment workflow v1.6.7 hands the welcome the earliest paid month's booking id. Only SES carries the header (Graph drops it). Still open: `ezer_respond.py` v2.0.1 can auto-answer a donor-partner who replies from another address or to an older email; its guard (v2.1.0) is built and waits on TIG's "ship" (L4G-System-Status Known Issues).
 - **CX Automation Backend (Session 207):** 6 scripts covering the full after-purchase journey ... proof upload, AI concept pipeline (enrich → brand identity → 3 briefs), concept choice processing, conversation email mirror, batch print advancement, post-delivery feedback. Plus `add_l4g_donor_booking.py` for admin onboarding outside website checkout.
 - **SvelteKit Migration Scaffold (Session 207):** `sveltekit-migration` branch ... adapter-cloudflare, Supabase SSR auth, Mailbox Walk CSS ported, builds in 2.4s. `L4G-Phase-Prompts.md` contains 8 copy-paste prompts for remaining migration phases 4-11.
 - **AI Ad Pipeline:** `enrich_donor_company.py` → `generate_brand_identity.py` → `generate_ad_briefs.py` (Claude FLAGSHIP, 3 approaches: Trust Builder/Value Driver/Story Teller)
@@ -4448,6 +4464,8 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.72 | 261102 | TIG + Claude | Session 878: **L4G Play gets its own section** (play.locals4good.org: the arcade, the lobby, the idea box and the live show; three lanes, one deploy rule). The SHOW lane shipped TIG's rehearsal fix (a closed room always opens new and empty) and his bop pictures (one blessed picture per trade). MP notes added. |
+| 6.71 | 261102 | TIG + Claude | Session 877: **The public line <TWILIO_NUMBER> is trusted at the carriers, and the L4G call kit is decided.** Twilio Phone Registry row corrected (it still said L4G SMS on a deleted Studio Flow) and now names the Trust Hub, SHAKEN/STIR, Voice Integrity and caller-name registrations. The calling rules for any QWF outbound call live in `002 Projects/_Locals 4 Good/Design Docs/L4G-Calling-Rules-Memo-v0.1.md`. |
 | 2.0 | 251229 | TIG | Added section X |
 | 1.0 | 251220 | TIG | Initial release |
 ```
@@ -5227,8 +5245,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.69 by generate_public_manual.py"
-generated: "2026-11-03 00:06"
+source: "Auto-generated from private manual v6.72 by generate_public_manual.py"
+generated: "2026-11-03 06:16"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6624,7 +6642,7 @@ All QWU Twilio numbers are under the <ADMIN_EMAIL> account with Charity A2P mess
 |--------|---------------|---------|--------------|
 | **<TWILIO_NUMBER>** | BNI-relay | [Networking Chapter] - visitor reminders, member updates, referral alerts | Webhook |
 | **<TWILIO_NUMBER>** | U2SPEAK | [Networking Chapter] - speaker reminder automations | Webhook to n8n |
-| **<TWILIO_NUMBER>** | ... | Locals 4 Good (L4G) - donor-partner SMS | Studio Workflow |
+| **<TWILIO_NUMBER>** | ... | **QWF's public line** (TIG 2026-07-31; L4G joins its phone tree, 2026-11-02) + general backoffice SMS sender + Ezer inbound SMS. Trusted at the carriers since 2026-11-02: Trust Hub business profile, SHAKEN/STIR, Voice Integrity, caller name "QUIETLY WORKING" (`twilio_tool_wisdom.md` v1.6.1). L4G outbound calls start from it | Webhook (`sms.quietlyworking.org/voice/inbound`) |
 | **<TWILIO_NUMBER>** | ... | VIP/Personal line → forwards to TIG's cell (<PERSONAL_NUMBER>) | Studio Transfer |
 | **TBD** | EZER | Ezer AI Assistant - TIG command intake | Webhook to n8n |
 
@@ -12795,6 +12813,27 @@ A run takes 8 to 10 minutes; run it in the background and run it again if main m
 
 ---
 
+### L4G Play (play.locals4good.org) ⭐ NEW
+
+A practice-and-party arcade for Locals 4 Good, built 2026-10-31 to 2026-11-02: Grab Your Category (the real
+reservation form as a timed game, with a shared board), a lobby of classic arcade cabinets at `/`, an idea box whose
+ideas reach only TIG, and a live three-game show TIG runs from his phone at talks (a mail truck tapper, a mailbox
+guess, a referral bop where every trade has its own picture). One Cloudflare Worker, `l4g-play`, with two Durable
+Objects (`Arcade` for the boards and ideas, `Room` for the show), built in SvelteKit and deployed by hand from `main`
+(no CI yet). Every word and picture players see is locked to TIG's bless by a fingerprint: a build whose words
+changed cannot deploy.
+
+- **Source of truth:** `002 Projects/_Locals 4 Good/L4G Play/L4G Play-System-Status.md` (deployed versions, lanes, how
+  to deploy, undo) and `L4G-Play-Design-v0.1.md` (TIG's decisions and the rails).
+- **Three lanes share one repo** (`QuietlyWorking/l4g-play`): SHOW (the live show), EMAIL (the throne email) and LOBBY
+  (the lobby and each game alone). Only `main` deploys; whoever ships second merges `origin/main` first; the lanes
+  leave each other notes in the status file's header.
+- **Keys:** the remove page `/admin` and the show's remote `/show/host` share one key held only on TIG's own devices
+  (`provision_l4g_play_admin_key.py`); the person check is Cloudflare Turnstile (`provision_l4g_play_person_check.py
+  status`).
+- **Around a talk:** TIG's remote checks the live reads from locals4good.org, he scans the board's join code, one real
+  join through the person check; afterwards he closes the room (two taps) so nobody's name stays on a public page.
+
 ## Security Plan and Guards ⭐ NEW
 
 **Added: October 31, 2026 (Sessions on Oct 30 and 31).** A question about firewalls led TIG to ask for the late-2026 gold standard, a budget-first plan for the home office that becomes a studio, and the back office. The plan lives on a private briefing page and a wall map ("Light the Path", 35 lanterns) that update as steps finish. Decision record: memory `project_security_gold_standards_briefing.md`; research: `002 Projects/_QWU Backoffice Automation/Security-Gold-Standards-Research-2026-10-30.md`.
@@ -13955,4 +13994,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-03 00:06 (v6.69)*
+*Last updated: 2026-11-03 06:16 (v6.72)*
