@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-02 06:59 | Source version: 6.67
+> Generated: 2026-11-03 00:06 | Source version: 6.69
 
 # QWU Backoffice User Manual
 
@@ -5227,8 +5227,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.67 by generate_public_manual.py"
-generated: "2026-11-02 06:59"
+source: "Auto-generated from private manual v6.69 by generate_public_manual.py"
+generated: "2026-11-03 00:06"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7321,6 +7321,25 @@ ready, and the noon send only binds what already passed (`wcr_page_verdicts.py`)
 > | Mutation checking a safety rule: break each rule on purpose and prove a test fails | Why a passing test proves nothing until you have seen it fail; 22 rules checked this way that day |
 >
 > **Prerequisites:** basic Python, reading JSON. **Time:** ~3 hours. **Complexity:** Intermediate.
+
+**What changed on 2026-11-02 (Google listings, applicant replies, a guest who applied):**
+
+| Change | What it does | Why |
+|--------|--------------|-----|
+| **A pasted Google Maps link is read into its listing** (K52) | On the confirm screen, the CLI (`--set 3 <link>`) and a member's own page, a link is read into the ONE listing it opens (`visitor_discovery.place_from_link`: a short link is followed one hop at a time and only between Google's own hosts; Google Maps reads the link itself through the places actor, about $0.0002) and stored by its place ID with its name. A link that opens no single listing is refused in TIG's words: "That Google link doesn't point to one listing. Pick it from the list, or paste its place ID." | A pasted link was stored as the place ID, the reviews read failed without a word, and 11 members read "zero Google reviews" about a listing with eleven at 5.0 |
+| **A failed reviews read is a failure, never zero** (K52) | The reviews reader refuses anything that is not a place ID, checks that the run ended SUCCEEDED, and writes `read_failed` instead of "found, 0 reviews"; a failed read keeps only the same listing's earlier reviews | The actor's `call()` returns a FAILED run without raising |
+| **A listing titled with the person's whole name is their own reviews** | `listing_names_person` in `review_facts` | A rep's own listing scored below the employer threshold and every member's page would have said her reviews belong to someone else |
+| **A reply that names a listing without a link waits for TIG, not the one rebuild** (K53) | The applicant follow-up asks whether the reply speaks of a Google listing; it searches their name once and records exactly one in-region listing carrying their whole name, or holds with what it found; the one rebuild waits; TIG's answer on the confirm screen starts it | An applicant wrote "if you google my name, the 4 reviews I have will be there" |
+| **A guest who applies gets a page by hand** (K54, open) | Her latest guest record is turned into a full visitor, discovered, answered by TIG, built once, read, and only then released to the forwarder | Guests never get a page or a QNT visitor; an applicant had visited twice as a member's guest |
+
+> **Missing Pixel Training Opportunity (Tier 2: Contributor) ... Read the link, not its name**
+>
+> A pasted Google Maps link names a business, and the tempting fix is to search that name. Two offices can share
+> a name, and a name search needs a region rule that a real listing in the next county fails. The link itself
+> opens exactly one place, so hand the link to the tool that opens it. Exercise: take three short Maps links,
+> follow each one hop at a time, write down every host it passes through, and explain why the reader refuses
+> to follow a hop that leaves Google. Skills: HTTP redirects, input validation, safe link handling.
+> Prerequisites: Python requests. About 2 hours. Intermediate.
 
 > **Missing Pixel Training Opportunity (Tier 2: Contributor) ... Prove "nothing live ran" from the record that cannot be skipped**
 >
@@ -13936,4 +13955,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-02 06:59 (v6.67)*
+*Last updated: 2026-11-03 00:06 (v6.69)*
