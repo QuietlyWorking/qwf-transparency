@@ -2,7 +2,7 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 6.61 | Started: 251223 | Updated: 261031**"
+description: "**Version: 6.76 | Started: 251223 | Updated: 261103**"
 publishDate: "2024-12-20"
 modifiedDate: "2026-11-03"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
@@ -11,11 +11,11 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-03 22:40 | Source version: 6.75
+> Generated: 2026-11-03 23:13 | Source version: 6.76
 
 # QWU Backoffice User Manual
 
-**Version: 6.61 | Started: 251223 | Updated: 261031**
+**Version: 6.76 | Started: 251223 | Updated: 261103**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -3893,6 +3893,20 @@ A new public game on a live board with prizes, from its page to its ship, plus a
 | Words are part of the design: a rule that could be read two ways was rewritten to say what actually happens, and a rule the game cannot check was never promised | UX writing, plain language | Beginner |
 | Prove the build you ship is the build you tested: two builds of one commit differ by a version stamp, so a file-by-file comparison replaces that stamp and treats anything else as a stop | Release engineering, reproducible builds | Intermediate |
 
+### MP Training Opportunities ⭐ (from the L4G Play throne email's release, 2026-11-03, Session 886)
+
+The game's throne emails went from test copies to real players on one word, after a live try turned up seven fixes.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Double opt-in by a one-button page: the email's link only opens a page, and the button on that page is the yes | A mail scanner follows every link, so a link alone could say yes for a person. The second tap also carries the 18-or-older promise, and the page names it before it comes | Email, consent, web forms |
+| "I checked the file" is not "I checked the email": counting an address in the footer's file said the emails carried it, and the function they call did not. Rendering the real email is what showed it | Look at what the reader receives, not at what the code seems to hold | Testing, ground truth |
+| A test can be fooled by its own data: "is ZZU first on the board?" passed on an earlier test's ZZU. Checking the run's own highlighted row fixed it | Tests share a board, so identify the thing itself, not something that merely looks like it | Testing |
+| Clip a moving decoration with a road, not 100vw: a road positioned from the page's own edges leaves out a vertical scroll bar, and measuring scrollWidth over a whole loop proves it | A sideways scroll bar only shows at one moment of the animation, so one screenshot misses it | CSS layout, measurement |
+| A saved default is not a choice: sound used to save as "on" even if the player never touched it, so the new muted start ignores old saved values and keeps a real choice only as long as the tab | Respecting people means knowing which of your stored values they actually chose | Product thinking, web storage |
+
+**Most valuable MP exercise:** show a student an email with a confirm link and ask what happens when a spam scanner opens it. Then have them design a confirm flow a scanner can't complete and a person can finish in two taps.
+
 ### MP Training Opportunities ⭐ (from the L4G Play live show's rehearsal prep and bop pictures, 2026-11-02, Session 878)
 
 Two ships to a live game room: a closed room now always opens as a new, empty show, and every trade in the referral bop
@@ -5261,8 +5275,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.75 by generate_public_manual.py"
-generated: "2026-11-03 22:40"
+source: "Auto-generated from private manual v6.76 by generate_public_manual.py"
+generated: "2026-11-03 23:13"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12868,6 +12882,14 @@ changed cannot deploy.
 - **Three lanes share one repo** (`QuietlyWorking/l4g-play`): SHOW (the live show), EMAIL (the throne email) and LOBBY
   (the lobby and each game alone). Only `main` deploys; whoever ships second merges `origin/main` first; the lanes
   leave each other notes in the status file's header.
+- **The throne email (RELEASED 2026-11-03):** whoever takes first place on Grab Your Category may add an email. `l4g_play_throne_mail.py`,
+  every minute from crontab, confirms it (a confirm email, then a page with one button that also says 18 or older), and emails the player
+  when someone takes their throne, up to three a day, in TIG's blessed words, from `tig@`. TIG gets a note on every change of first place,
+  with no player's address in it. A changed word turns every player email back into a test copy for his inbox. Its Betterstack heartbeat
+  (`create_l4g_play_throne_heartbeat.py`) alarms by SMS, email and push if the sender stops; the board's mail key comes from
+  `provision_l4g_play_mail_key.py`. Undo steps are in the status file.
+- **Every game's rules (TIG, 2026-11-03):** starts muted, full screen only by the player's own icon (`FullscreenToggle.svelte`), NEW BEST only on
+  the board's first place, I'm done beside Play again, the little truck on the start screen (`DriveByTruck.svelte`), no sideways scroll bar.
 - **Keys:** the remove page `/admin` and the show's remote `/show/host` share one key held only on TIG's own devices
   (`provision_l4g_play_admin_key.py`); the person check is Cloudflare Turnstile (`provision_l4g_play_person_check.py
   status`).
@@ -14034,4 +14056,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-03 22:40 (v6.75)*
+*Last updated: 2026-11-03 23:13 (v6.76)*
