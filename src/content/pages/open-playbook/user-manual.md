@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.61 | Started: 251223 | Updated: 261031**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-11-01"
+modifiedDate: "2026-11-03"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-03 06:16 | Source version: 6.72
+> Generated: 2026-11-03 21:11 | Source version: 6.73
 
 # QWU Backoffice User Manual
 
@@ -4464,6 +4464,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.73 | 261103 | TIG + Claude | Session 883: **Mentor forms: a form's mentor is whoever held the meeting.** Governance note added after one form was found on the former mentor's record, plus one training row. |
 | 6.72 | 261102 | TIG + Claude | Session 878: **L4G Play gets its own section** (play.locals4good.org: the arcade, the lobby, the idea box and the live show; three lanes, one deploy rule). The SHOW lane shipped TIG's rehearsal fix (a closed room always opens new and empty) and his bop pictures (one blessed picture per trade). MP notes added. |
 | 6.71 | 261102 | TIG + Claude | Session 877: **The public line <TWILIO_NUMBER> is trusted at the carriers, and the L4G call kit is decided.** Twilio Phone Registry row corrected (it still said L4G SMS on a deleted Studio Flow) and now names the Trust Hub, SHAKEN/STIR, Voice Integrity and caller-name registrations. The calling rules for any QWF outbound call live in `002 Projects/_Locals 4 Good/Design Docs/L4G-Calling-Rules-Memo-v0.1.md`. |
 | 2.0 | 251229 | TIG | Added section X |
@@ -5245,8 +5246,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.72 by generate_public_manual.py"
-generated: "2026-11-03 06:16"
+source: "Auto-generated from private manual v6.73 by generate_public_manual.py"
+generated: "2026-11-03 21:11"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7621,6 +7622,11 @@ replaced"* in the role. All certifications fall in September.
   Mentor AND the Chapter Vice President within 24 hours, and the Lead Mentor must confirm the VP
   received it. The VP is resolved at send time from the roster, never stored as an address, because
   the office turns over every October.
+- **A form's mentor is whoever held the meeting, and a label can be wrong.** A meeting imported
+  from a list lands on whoever the member was paired with at import time, and a form takes its
+  mentor from the meeting's pairing. So after a member moves, a new mentor's form can sit on the
+  old mentor's record. Check the typed mentor against the record before a report goes out in the
+  Lead Mentor's name, and ask the Lead Mentor whose meeting it was.
 - **A mentor's cap is the mentor's.** The system may lower one on their word and may never raise
   one. The handbook's hard ceiling is 6.
 - **Nothing reaches BNI Connect automatically.** BNI's terms forbid it. The system's job is to make
@@ -7630,6 +7636,7 @@ replaced"* in the role. All certifications fall in September.
 
 | Task | Skills taught | Level | Time |
 |---|---|---|---|
+| Trace who really wrote a record, then correct it without setting anything off | Reading an audit trail instead of trusting a label, finding what a data change triggers before making it, guarded writes that name the person and the reason | Intermediate | 2 hours |
 | Re-run a mailbox search that returned an incomplete answer | Search result caps, why a keyword that matches newsletters is a bad key, verifying a count against the source rather than trusting a tool's first answer | Beginner | 1 hour |
 | Write a database migration with its own proof inside the transaction | SQL, transactions, why an assertion that runs after the commit proves nothing | Intermediate | 3 hours |
 | Build a sender that refuses to send | Fail-closed design, why "flag the person you could not reach" beats "skip them quietly", idempotency keys | Intermediate | 4 hours |
@@ -13994,4 +14001,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-03 06:16 (v6.72)*
+*Last updated: 2026-11-03 21:11 (v6.73)*
