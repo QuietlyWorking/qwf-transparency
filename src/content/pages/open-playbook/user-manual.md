@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-04 01:40 | Source version: 6.78
+> Generated: 2026-11-04 05:46 | Source version: 6.80
 
 # QWU Backoffice User Manual
 
@@ -5288,8 +5288,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.78 by generate_public_manual.py"
-generated: "2026-11-04 01:40"
+source: "Auto-generated from private manual v6.80 by generate_public_manual.py"
+generated: "2026-11-04 05:46"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6309,6 +6309,7 @@ These could anchor a **"Security Engineering Fundamentals"** curriculum track fo
 | Reading a file's birth time and change time to tell a replace from a truncate | Linux file metadata, evidence over guesses | ⭐⭐ |
 | Reproducing a fault on a throwaway copy, with a control before and after | Experiment design, protecting live systems while testing | ⭐⭐⭐ |
 | Diffing against a baseline the way the baseline was built | Data reconciliation, checking your own instrument | ⭐⭐ |
+| Reading what a rewriter deletes | A tool that replaces its own block in a shared file must find that block's end, not the next heading. Run old and new code on every real file and compare, then run the new tests against the old code to prove they can fail. | Intermediate |
 
 ### Can't Connect to VM
 
@@ -7684,13 +7685,21 @@ replaced"* in the role. All certifications fall in September.
   from a list lands on whoever the member was paired with at import time, and a form takes its
   mentor from the meeting's pairing. So after a member moves, a new mentor's form can sit on the
   old mentor's record. Check the typed mentor against the record before a report goes out in the
-  Lead Mentor's name, and ask the Lead Mentor whose meeting it was.
+  Lead Mentor's name, and ask the Lead Mentor whose meeting it was. **Since 2026-11-03 the Vice
+  President sender does that check itself:** a form naming a different mentor than the one it is
+  filed under stays unsent, the Lead Mentor is told once with both names, and the other forms still
+  go. Once the record is right it sends itself on the next run. It cannot see a new mentor who
+  leaves the pre-filled name alone, so the Lead Mentor decided (D-16, "block it") that a mentor who
+  did not hold a meeting will not be able to file its form at all. That app change is planned, not
+  live yet; see the [Networking Chapter] Mentor System Status.
 - **A mentor's cap is the mentor's.** The system may lower one on their word and may never raise
   one. The handbook's hard ceiling is 6.
 - **Nothing reaches BNI Connect automatically.** BNI's terms forbid it. The system's job is to make
   the manual step fast and error-free, not to eliminate it.
 
 ### MP Training Opportunities
+
+**Added from the mentor mismatch hold (Session 888). Exercise:** give a student a form whose name box is pre-filled from the record it is later checked against, and ask them to find what that check can never catch. It teaches tracing where each value comes from before trusting a comparison, writing the failing test first, and saving a live script in steps that each stay safe. Intermediate, 1 to 2 hours.
 
 | Task | Skills taught | Level | Time |
 |---|---|---|---|
@@ -9369,6 +9378,8 @@ Thread Tracking ← Decisions/Commitments → Opportunities
 ### Session Work Tracking
 
 The `/session-wrap-up` skill (Step 5) recompiles a `## What Got Done Today` section in the daily journal after each session. This provides the "EOD Summary" component shown in the architecture diagram above ... a consolidated view of all Claude Code session accomplishments for the day, placed between Morning Briefing and Email Intelligence.
+
+A note added below the Email Intelligence block in a daily note stays there since 2026-11-03: each digest refresh removes only its own block, which ends at its Complete Log, and writes the new one at the bottom of the note. Before that, a refresh deleted everything below the block down to the next `## ` heading.
 
 ### Related Directives
 
@@ -14073,4 +14084,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-04 01:40 (v6.78)*
+*Last updated: 2026-11-04 05:46 (v6.80)*
