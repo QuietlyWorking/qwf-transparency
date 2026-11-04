@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-03 23:24 | Source version: 6.77
+> Generated: 2026-11-04 01:40 | Source version: 6.78
 
 # QWU Backoffice User Manual
 
@@ -3880,6 +3880,19 @@ A screen reader can now tell which tab is chosen on six tab rows, and a donor-pa
 
 **Most valuable MP exercise:** give a student a tab row whose chosen tab differs only by color and ask them to make a screen reader announce it, then prove it with an automated check that fails before their fix and passes after.
 
+### MP Training Opportunities ⭐ (from Referral Bop played alone, 2026-11-03, Session 887)
+
+A second public game on a live board, built from the first, plus a logo that replaced an idea nobody had asked for.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Prove a game's maximum by search: a small program walks every choice a player can make through the fixed pattern and reports the best score, and the build stops when the proof fails | Search, dynamic programming, build-time checks | Advanced |
+| Fair by construction: every player gets the same timing and mix, with the faces shuffled by a seed, so nobody gets an easier game and nobody can learn the answers | Seeded randomness, game design, fairness | Intermediate |
+| A wait that adapts: measure how long the connection takes and set the timeout from it, because a fixed wait can stall forever on a slow link | Networking, resilience, testing on bad connections | Intermediate |
+| Rehearse the undo: run the live code, the new code, then the live code again on one local database, so going back is proven before it is needed | Release engineering, data migrations | Intermediate |
+| Redraw a real logo in code: sample each square's color from the image file, draw it on a 4x4 grid, then check it by eye at phone size and on a big board | Image data, SVG, visual checking | Beginner |
+| Trace a surprise to its source: when someone asks "when did we come up with this?", read the record of who proposed it and when, and say so plainly | Research, version history, honest reporting | Beginner |
+
 ### MP Training Opportunities ⭐ (from Mail Truck Dash played alone, 2026-11-03, Session 884)
 
 A new public game on a live board with prizes, from its page to its ship, plus a rendering bug TIG caught on video.
@@ -5275,8 +5288,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.77 by generate_public_manual.py"
-generated: "2026-11-03 23:24"
+source: "Auto-generated from private manual v6.78 by generate_public_manual.py"
+generated: "2026-11-04 01:40"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12870,9 +12883,11 @@ A run takes 8 to 10 minutes; run it in the background and run it again if main m
 A practice-and-party arcade for Locals 4 Good, built 2026-10-31 to 2026-11-02: Grab Your Category (the real
 reservation form as a timed game, with a shared board), a lobby of classic arcade cabinets at `/`, an idea box whose
 ideas reach only TIG, Mail Truck Dash played alone at `/truck` (LIVE 2026-11-03: 60 seconds on one big pad, its own phone and
-computer boards, a first place is a throne), and a live three-game show TIG runs from his phone at talks (a mail truck
-tapper, a mailbox guess, a referral bop where every trade has its own picture). The show's other two games open alone one at
-a time, each with its own words, security review and ship. One Cloudflare Worker, `l4g-play`, with two Durable
+computer boards, a first place is a throne), Referral Bop played alone at `/bop` (LIVE 2026-11-03: 60 seconds of signs in nine
+spots, one fixed pattern with its trades, whammies and spots shuffled per run, the board checking every bop by its own clock and
+doing its own count, its own phone and computer boards, a first place is a throne), and a live three-game show TIG runs from his
+phone at talks (a mail truck tapper, a mailbox guess, a referral bop where every trade has its own picture and the Missing Pixel
+logo is the bonus). How Many Mailboxes? is the last to open alone, with its own words, security review and ship. One Cloudflare Worker, `l4g-play`, with two Durable
 Objects (`Arcade` for the boards and ideas, `Room` for the show), built in SvelteKit and deployed by hand from `main`
 (no CI yet). Every word and picture players see is locked to TIG's bless by a fingerprint: a build whose words
 changed cannot deploy.
@@ -12890,6 +12905,8 @@ changed cannot deploy.
   `provision_l4g_play_mail_key.py`. Undo steps are in the status file.
 - **Every game's rules (TIG, 2026-11-03):** starts muted, full screen only by the player's own icon (`FullscreenToggle.svelte`), NEW BEST only on
   the board's first place, I'm done beside Play again, the little truck on the start screen (`DriveByTruck.svelte`), no sideways scroll bar.
+- **A game's top score is proven, not assumed:** the page and the board stop at the same number, and for the bop `tests/bop_rules.mjs` finds its maximum by search on every build (720 today; it depends on how many trades L4G has, so a build whose proof fails does not finish). A person looks at every winning run before a prize: `/admin` shows each entry's details beside the board.
+- **Shipping a game:** the rehearsal first (`tests/rehearse_boards.py`: the live code, the new code, the live code again on one local board), the full suite on the exact build, TIG's "ship", read the room (a deploy restarts it, so it must read closed), deploy that same build, then `tests/live_browsers.py` against the live site (read only: it never posts).
 - **Keys:** the remove page `/admin` and the show's remote `/show/host` share one key held only on TIG's own devices
   (`provision_l4g_play_admin_key.py`); the person check is Cloudflare Turnstile (`provision_l4g_play_person_check.py
   status`).
@@ -14056,4 +14073,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-03 23:24 (v6.77)*
+*Last updated: 2026-11-04 01:40 (v6.78)*
