@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-04 06:33 | Source version: 6.81
+> Generated: 2026-11-04 19:58 | Source version: 6.82
 
 # QWU Backoffice User Manual
 
@@ -3906,6 +3906,26 @@ A new public game on a live board with prizes, from its page to its ship, plus a
 | Words are part of the design: a rule that could be read two ways was rewritten to say what actually happens, and a rule the game cannot check was never promised | UX writing, plain language | Beginner |
 | Prove the build you ship is the build you tested: two builds of one commit differ by a version stamp, so a file-by-file comparison replaces that stamp and treats anything else as a stop | Release engineering, reproducible builds | Intermediate |
 
+### L4G call kit: California's tax line and QCM's Do Not Call list (2026-11-03 and 04)
+
+**The tax line.** Anyone selling ad space while saying the money funds a charity must state the share deductible as a charitable contribution, or that none is (California Bus. & Prof. Code 17510.3, 17510.4). TIG's blessed statement lives in one home per system: `src/lib/content/legal/tax-statement.js` on the L4G site (the Questions answer and section 5 of the Terms) and `L4G_TAX_STATEMENT` in `preference_center/email.py` for receipts. A test pins the receipt's words to `qwf_program_framing.md`; a changed word needs his bless. The buyer's "Solicitation or Sale for Charitable Purposes Card" is built and stays off until he signs (`CARD_SIGNATURE`). The Do Not Call policy is a public page at locals4good.org/do-not-call.
+
+**The Do Not Call list.** QCM table `call_stops`, migration 079. A stop for a number, a person or a business is kept for ever; its first date and writer are locked. A number one person holds ties to that person. It comes off only on the person's own word, one row by id, by a login holding access, and an alarm goes out (`watch_qcm_call_stop_lifts.py`, every 15 minutes).
+
+- **Before a call:** `manage_qcm_call_stops.py check --phone N`. Exit 0 is a yes, as far as `checks` covers: today our own list only. Exit 2 is a no, exit 1 is no answer, also a no. `qcm_call_check` is the call gate; the email resolver never answers for a call.
+- **Someone says "please don't call":** `manage_qcm_call_stops.py stop --phone N --contact-id C --org-id O --name "what they said"`, the same day. Exit 4 means written, but a name could not be tied to a person: find them and stop them by id.
+- **Lifting:** `find`, then `lift --stop-id ID --evidence "what they said and when" --actor LOGIN --apply`.
+- **Nightly:** guard checks A24 and A25.
+- **Next:** the call log and queue (migration 081) and the calling screen.
+
+#### MP Training Opportunities ⭐ (from the L4G call kit build, 2026-11-03)
+
+| Task | Skills taught | Prerequisites | Time | Complexity |
+|---|---|---|---|---|
+| Write a rehearsal that must fail: run a migration in a transaction that always rolls back, and check every result with `IS DISTINCT FROM` | SQL, transactions, testing, why NULL hides failures | Basic SQL | 4 hours | Intermediate |
+| Prove the tests by breaking the code on purpose: 65 deliberately broken versions, each of which a test must catch, and read each miss by hand | Mutation testing, reading code critically | The above | 4 hours | Advanced |
+| Read a law from its primary source and turn it into one plain rule, with the words cited | Research, plain writing, knowing when to ask a lawyer | None | 2 hours | Beginner |
+
 ### MP Training Opportunities ⭐ (from L4G's next-areas planning, 2026-11-03, Session 889)
 
 A program had to choose its next neighborhoods from free public numbers, with no geometry library on the machine.
@@ -4519,6 +4539,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.82 | 261104 | TIG + Claude | **L4G call kit part 1.** California's tax statement live on the site's tax answer, the Terms and receipts on TIG's "ship"; the Do Not Call policy page; QCM's Do Not Call list live on his "migrate 079" (guard A24, A25, the lift alarm). See §L4G call kit. |
 | 6.75 | 261103 | TIG + Claude | Session 885: **Troubleshooting: every session suddenly cannot reach GitHub over https** (a refused login erases the stored sign-in; how to recognize it and who restores it). QQT's plan of record for the 2026-11-06 walkthrough lives in its kickoff; nothing deployed. |
 | 6.74 | 261103 | TIG + Claude | Session 884: **Mail Truck Dash played alone is LIVE** (L4G Play section updated), plus MP Training Opportunities from its build. |
 | 6.73 | 261103 | TIG + Claude | Session 883: **Mentor forms: a form's mentor is whoever held the meeting.** Governance note added after one form was found on the former mentor's record, plus one training row. |
@@ -5303,8 +5324,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.81 by generate_public_manual.py"
-generated: "2026-11-04 06:33"
+source: "Auto-generated from private manual v6.82 by generate_public_manual.py"
+generated: "2026-11-04 19:58"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14118,4 +14139,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-04 06:33 (v6.81)*
+*Last updated: 2026-11-04 19:58 (v6.82)*
