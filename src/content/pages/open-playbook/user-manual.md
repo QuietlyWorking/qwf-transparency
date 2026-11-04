@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-04 05:46 | Source version: 6.80
+> Generated: 2026-11-04 06:33 | Source version: 6.81
 
 # QWU Backoffice User Manual
 
@@ -3906,6 +3906,21 @@ A new public game on a live board with prizes, from its page to its ship, plus a
 | Words are part of the design: a rule that could be read two ways was rewritten to say what actually happens, and a rule the game cannot check was never promised | UX writing, plain language | Beginner |
 | Prove the build you ship is the build you tested: two builds of one commit differ by a version stamp, so a file-by-file comparison replaces that stamp and treats anything else as a stop | Release engineering, reproducible builds | Intermediate |
 
+### MP Training Opportunities ⭐ (from L4G's next-areas planning, 2026-11-03, Session 889)
+
+A program had to choose its next neighborhoods from free public numbers, with no geometry library on the machine.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Lay one map over another: sample points along a line, test which polygon holds each, and speed it up with a simple grid | The core idea of geographic analysis, built from first principles in plain Python, so nothing is magic | Intermediate |
+| Check the label, not the cell number: a Census table's cells moved by one, and a label check refused the run before any wrong number got through | A wrong column gives believable numbers forever. Teaches how to make a data source prove itself | Beginner |
+| One number misleads: a median misses wealth that does not arrive as a paycheck, and high income can mean mostly renters | Teaches asking what a number leaves out before ranking anything by it | Beginner |
+| Calibrate a score on known answers: the places already chosen must land high, or the score is wrong, not the choices | How to test a scoring model when there is no answer key | Intermediate |
+| Leave protected traits out by design, and write down that you did | Ethics in data work is a decision made in the code, before any result exists | Beginner |
+| Keep a page working under a strict content rule by shipping its own map tiles, inside the map server's download limit | Real work has limits from two sides at once, and both have to be read and honored | Intermediate |
+
+**Most valuable MP exercise:** give a student three neighborhoods' public numbers and ask them to rank them for a local mailer using income alone. Then add who owns their home and ask what changed and why. The conversation is the lesson. Use made-up places, so nothing real gets labeled.
+
 ### MP Training Opportunities ⭐ (from the L4G Play throne email's release, 2026-11-03, Session 886)
 
 The game's throne emails went from test copies to real players on one word, after a live try turned up seven fixes.
@@ -5288,8 +5303,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.80 by generate_public_manual.py"
-generated: "2026-11-04 05:46"
+source: "Auto-generated from private manual v6.81 by generate_public_manual.py"
+generated: "2026-11-04 06:33"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12889,6 +12904,25 @@ A run takes 8 to 10 minutes; run it in the background and run it again if main m
 
 ---
 
+### L4G next-areas planning (private) ⭐ NEW
+
+How L4G works out where to go next, before anyone says a place out loud. It is a plan on paper: nothing here touches L4G's database, site or poll, and every load of a new area is its own word from TIG. The plan of record is `002 Projects/_Locals 4 Good/Design Docs/L4G-Coast-Blocking-Plan-v0.1.md` and its JSON. Place names, income and fit stay in that private plan.
+
+**The cards** are real USPS carrier routes, 10,000 to 11,000 mailboxes each, with routes that hold more businesses than homes left out and named.
+
+**The tools, in order:**
+
+| Script | What it does |
+|--------|--------------|
+| `survey_l4g_route_fit.py` | Reads USPS's public routes one ZIP at a time and lays each route's shape over Census block groups, then adds Zillow home values and IRS income by ZIP. Free public data; caches in `.tmp/l4g/route-fit/` |
+| `score_l4g_coast_plan.py` | Gives every section its facts, a fit out of 100, the why in a sentence, and real demand (counts of leads, donor-partners, category requests and poll flags, no names) |
+| `check_l4g_coast_plan.py` | Proves the rules: every card in the band, no route twice, none on an existing card, the game's list clean. `--refresh` re-reads USPS first |
+| `build_l4g_coast_map.py` | Draws the private map page for TIG, with its own map tiles because an Artifact page cannot load images from another site |
+
+**Fit** counts money, homeowners, home value, houses over apartments, and older homes that need work. Under 30% owners reads Poor whatever the money. It never uses race, ethnicity, religion, national origin, age or family makeup.
+
+**The weekly watch:** Mondays 07:40 Pacific, `score_l4g_coast_plan.py --watch` re-ranks in memory and posts one note to #l4g-leads only when real demand moves the top of the list. It is read-only on L4G and never rewrites the plan. If the survey cache was wiped, it says so in the same channel and a session re-runs the survey. Undo: delete its crontab lines; a backup sits in `005 Operations/Data/cron_backups/`.
+
 ### L4G Play (play.locals4good.org) ⭐ NEW
 
 A practice-and-party arcade for Locals 4 Good, built 2026-10-31 to 2026-11-02: Grab Your Category (the real
@@ -14084,4 +14118,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-04 05:46 (v6.80)*
+*Last updated: 2026-11-04 06:33 (v6.81)*
