@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-04 22:01 | Source version: 6.83
+> Generated: 2026-11-04 22:37 | Source version: 6.84
 
 # QWU Backoffice User Manual
 
@@ -4064,7 +4064,13 @@ The L4G system includes:
 - **Brand Clarity Wizard:** 3-step guided intake at `/portal/brand` ... saves to 9 brand fields on `l4g_donor_partners`
 - **Journey Milestones:** `check_l4g_milestones.py` v1.2.0 (15-min n8n poll) → `send_l4g_journey_email.py` v1.2.0 (6 TIG-voice templates with portal deep links and Mailbox Walk gradient CTA buttons) + push notifications for proof_ready, proof_approved, going_to_print, postcards_mailed. Dedup via `l4g_journey_events`. v1.2.0 fires push notifications alongside journey emails.
 - **Email Mirror + Notification System (Session 215):** `send_l4g_conversation_email.py` v1.1.0 adds Reply-To headers (`l4g-reply+{booking_id}@quietlyworking.org`) and X-L4G-Booking-ID internet message header for email-to-thread routing. `poll_l4g_email_replies.py` v1.0.0 polls Ezer inbox via MS Graph for replies matching `l4g-reply+` pattern, strips quoted content, inserts into `l4g_conversations`, moves to L4G-Processed folder (state: `.tmp/l4g_reply_processed_ids.json`, runs every 2 min via n8n). `send_l4g_push_notification.py` v1.0.0 wraps `send-push-notification` edge function with 7 event templates (print_status_change, new_message_donor/team, proof_ready, concept_ready, proof_approved, feedback_submitted). Supabase `pg_net` trigger `notify_l4g_conversation_insert()` on `l4g_conversations` INSERT → POSTs to n8n webhook for real-time email mirror.
-- **Replies to the receipt, journey emails and the welcome reach the thread (Session 876, 2026-11-02):** `send_l4g_receipt_email.py` v1.2.0, `send_l4g_journey_email.py` v2.4.0 and `send_l4g_welcome_email.py` v2.7.0 set Reply-To to the booking's signed `l4g-reply+<booking>.<tag>@quietlyworking.org` address (made by `l4g_reply_address.py`) plus `X-L4G-Booking-ID`, so a donor-partner's reply lands in that booking's conversation instead of Ezer's general inbox. Payment workflow v1.6.7 hands the welcome the earliest paid month's booking id. Only SES carries the header (Graph drops it). Still open: `ezer_respond.py` v2.0.1 can auto-answer a donor-partner who replies from another address or to an older email; its guard (v2.1.0) is built and waits on TIG's "ship" (L4G-System-Status Known Issues).
+- **Replies to the receipt, journey emails and the welcome reach the thread (Session 876, 2026-11-02):** `send_l4g_receipt_email.py` v1.2.0, `send_l4g_journey_email.py` v2.4.0 and `send_l4g_welcome_email.py` v2.7.0 set Reply-To to the booking's signed `l4g-reply+<booking>.<tag>@quietlyworking.org` address (made by `l4g_reply_address.py`) plus `X-L4G-Booking-ID`, so a donor-partner's reply lands in that booking's conversation instead of Ezer's general inbox. Payment workflow v1.6.7 hands the welcome the earliest paid month's booking id. Only SES carries the header (Graph drops it).
+- **Ezer and L4G mail (Session 894, 2026-11-04):** `ezer_respond.py` v2.1.0 never answers an L4G donor-partner. Mail from an address on L4G's records, or whose subject names Locals 4 Good or L4G, is held for a person in Ezer's mailbox folder L4G-Held, and TIG is told the same day.
+- **Reply addresses have their own key (Session 894):** `l4g_reply_address.py` v1.1.0 signs with `L4G_REPLY_TAG_KEY`, with no fallback. Without the key, the reader (`poll_l4g_email_replies.py` v1.2.0) stops before it looks at any email, every reply stays unread, and TIG is told; every sender sends without the threaded Reply-To rather than not at all.
+- **Checkout and Stripe (Session 894):** `create-checkout-session` carries the email the visitor typed with `customer_creation: "if_required"`, so Stripe lists these payments under Guests, grouped by the same card, email or phone. The payment itself names the program and the typed business. New bookings leave the Stripe customer field empty. A refund by hand gets a note from us, because Stripe may not email its own on a guest payment.
+- **What a function's log may say (Session 894):** our own words and an error's code, status or class name, through `_shared/error-code.ts`. `deploy_l4g_edge_function.py` v1.3.0 refuses anything else, on an allow-list, in a log line or a `new Fail(...)`, for every L4G function; a new kind of safe value is added to the rule on purpose. For `create-checkout-session` it also refuses any code that names or makes a Stripe customer. Use that script, never a hand-run `supabase functions deploy`, which skips both.
+- **Email look (Session 894):** the journey emails and TIG's note call `l4g_email_look.dress_for_send` at send time, as the receipt and the welcome do; the note wears the header and mailbox. Both senders stay held, and on any surprise an email goes in the old look and the day's log names the sender.
+- **MP training opportunities (Session 894):** (1) *Rehearse a ship on its real path* (Intermediate, 2 hours; prerequisites: bash, git): stand in the program a step calls, never the step, then put a bug back to prove the rehearsal catches it. (2) *Allow-list versus block-list* (Beginner, 1 hour; prerequisite: reading Python): write a rule that refuses what it has not heard of, and try to get a line past it. (3) *A zero is only a zero if the query worked* (Intermediate, 1 hour; prerequisites: SQL, JSON): query a log store with a wrong table name, see the empty answer, then make the script stop on it. (4) *Read what a deploy really shipped* (Intermediate, 1 hour; prerequisite: REST APIs): list the libraries in a function's bundle before and after a redeploy, and explain what moved although the code did not.
 - **CX Automation Backend (Session 207):** 6 scripts covering the full after-purchase journey ... proof upload, AI concept pipeline (enrich → brand identity → 3 briefs), concept choice processing, conversation email mirror, batch print advancement, post-delivery feedback. Plus `add_l4g_donor_booking.py` for admin onboarding outside website checkout.
 - **SvelteKit Migration Scaffold (Session 207):** `sveltekit-migration` branch ... adapter-cloudflare, Supabase SSR auth, Mailbox Walk CSS ported, builds in 2.4s. `L4G-Phase-Prompts.md` contains 8 copy-paste prompts for remaining migration phases 4-11.
 - **AI Ad Pipeline:** `enrich_donor_company.py` → `generate_brand_identity.py` → `generate_ad_briefs.py` (Claude FLAGSHIP, 3 approaches: Trust Builder/Value Driver/Story Teller)
@@ -5339,8 +5345,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.83 by generate_public_manual.py"
-generated: "2026-11-04 22:01"
+source: "Auto-generated from private manual v6.84 by generate_public_manual.py"
+generated: "2026-11-04 22:37"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14170,4 +14176,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-04 22:01 (v6.83)*
+*Last updated: 2026-11-04 22:37 (v6.84)*
