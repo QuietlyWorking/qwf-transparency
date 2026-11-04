@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-04 19:58 | Source version: 6.82
+> Generated: 2026-11-04 22:01 | Source version: 6.83
 
 # QWU Backoffice User Manual
 
@@ -3941,6 +3941,21 @@ A program had to choose its next neighborhoods from free public numbers, with no
 
 **Most valuable MP exercise:** give a student three neighborhoods' public numbers and ask them to rank them for a local mailer using income alone. Then add who owns their home and ask what changed and why. The conversation is the lesson. Use made-up places, so nothing real gets labeled.
 
+### MP Training Opportunities ⭐ (from TIG's Road to the Live Game Show emails, 2026-11-04, Session 893)
+
+A new self-sending email went to an independent reviewer before its first send, and the review broke it in ways all 92 passing tests had missed.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Mutation testing: break the code on purpose and see which tests notice | 13 of 22 deliberate faults survived a green test run. Removing the check that stops a second copy failed nothing, because the test stopped at an earlier check | Intermediate |
+| "Done" must mean nobody is left to try | A consent store blip held all 19 people, the send list came back empty, and an empty list read as finished, so one bad minute cancelled the day's email | Intermediate |
+| A lost answer is not a failure | SES can take a message and the connection drop before the answer. The SDK's own retries then send it again, and a load balancer's 504 can follow a send too. Retry only what the service itself named as a refusal | Advanced |
+| Fixed phrases in alerts, never an error's text | A failed lookup's error text held its URL, and the URL held a person's address, spelled so that a scrub looking for an @ missed it | Intermediate |
+| Motion in an email has to stop by itself | An email has no pause button, so WCAG 2.2.2 means under 5 seconds, then rest. The first frame must be a finished sign, because older Outlook shows only that | Beginner |
+| Bless the bytes, not the words | A fingerprint of every byte a reader would see means a changed signature or card stops the send and asks again, rather than reaching 19 inboxes unseen | Intermediate |
+
+**Most valuable MP exercise:** give a student a passing test suite and a sender, and have them delete one safety line at a time until a test fails. Each line that fails nothing is a promise nobody is really keeping.
+
 ### MP Training Opportunities ⭐ (from the L4G Play throne email's release, 2026-11-03, Session 886)
 
 The game's throne emails went from test copies to real players on one word, after a live try turned up seven fixes.
@@ -5324,8 +5339,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.82 by generate_public_manual.py"
-generated: "2026-11-04 19:58"
+source: "Auto-generated from private manual v6.83 by generate_public_manual.py"
+generated: "2026-11-04 22:01"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12983,6 +12998,22 @@ changed cannot deploy.
 
 **Added: October 31, 2026 (Sessions on Oct 30 and 31).** A question about firewalls led TIG to ask for the late-2026 gold standard, a budget-first plan for the home office that becomes a studio, and the back office. The plan lives on a private briefing page and a wall map ("Light the Path", 35 lanterns) that update as steps finish. Decision record: memory `project_security_gold_standards_briefing.md`; research: `002 Projects/_QWU Backoffice Automation/Security-Gold-Standards-Research-2026-10-30.md`.
 
+#### Road to the Live Game Show Presentation emails (2026-11-05 to 2026-11-19) ⭐ NEW
+
+TIG's own countdown to his talk: seven dated emails, drawn as arcade announcements with the lobby sign's moving lights, to every active [Networking Chapter] member and nobody else. He blessed all seven on 2026-11-04.
+
+**The sender:** `send_road_to_game_show_emails.py` (cron every 5 minutes, Betterstack heartbeat). The signs are GIFs from `render_road_show_signs.py`, carried inside each email. They play once for under 5 seconds and rest with every bulb lit, because an email has no pause button (WCAG 2.2.2). Its ledger is `005 Operations/Data/road_show_mail_ledger.jsonl`, by name and a hash of the address, never an address.
+
+**What stops an email:** a changed byte (each is tied to his bless by a fingerprint of the whole email), a speaker schedule that has moved, a missing guest link (emails 4, 5 and 6), or a hold in the code. TIG hears ahead of time, while he can still act.
+
+**What stops a person:** a row in `ROAD SHOW: STOPPED` in the consent register stops these emails only. "News and ideas" off on the preferences page stops these and the throne alerts. "Staying in touch" off also stops the room list and the weekly report. A consent check that cannot answer makes that member wait, and tries again.
+
+**No second copy:** one SES call per copy (`single_attempt=True`). Only SES's own named refusals are tried again. Anything else may have followed a send, so it is told to TIG and never resent, and the next send waits 30 minutes.
+
+**TIG can say, in any session:** "guest link <url>" (then `--test nov16` so he can press the button), and "take <name> off the countdown". Check with `--preflight KEY`, which sends nothing. After the last email, remove the cron line and the heartbeat.
+
+**Not in this release:** the thank-you and the December reminder stay Outlook drafts for him to send.
+
 ### What is done
 - **The newsletter server is off.** It was a standby server never put to use; it was archived and powered off (Oct 30).
 - **Both Amazon owner (root) keys are switched off** (Oct 30), confirmed by a fresh credential report. TIG deletes them after a quiet week.
@@ -14139,4 +14170,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-04 19:58 (v6.82)*
+*Last updated: 2026-11-04 22:01 (v6.83)*
