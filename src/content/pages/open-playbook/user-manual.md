@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 6.76 | Started: 251223 | Updated: 261103**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-11-03"
+modifiedDate: "2026-11-04"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-04 22:37 | Source version: 6.84
+> Generated: 2026-11-04 22:48 | Source version: 6.85
 
 # QWU Backoffice User Manual
 
@@ -5345,8 +5345,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.84 by generate_public_manual.py"
-generated: "2026-11-04 22:37"
+source: "Auto-generated from private manual v6.85 by generate_public_manual.py"
+generated: "2026-11-04 22:48"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12317,6 +12317,18 @@ All QWF apps follow a 4-tier animation architecture that prevents over-engineeri
 - **Spline 3D:** `003 Entities/Tools/Spline 3D.md` ... React integration, Hana evaluation, pricing
 - **App Family Standard:** `005 Operations/Directives/qwf_app_family_standard.md` Section 10
 
+### Consent Words on Forms: Section 17 (Session 895, 2026-11-04)
+
+Any sentence that turns a press into agreement goes ABOVE the button it governs: the last field, then the words, then the button. Full-size, full text color, links underlined and opening in a new tab, the button pointing at the words with `aria-describedby`. Where texts are involved, the words name who will text, say message and data rates may apply, and say how to stop. The rule is App Family Standard Section 17. The research and a ready answer for anyone who asks are in `qwf_consent_and_preferences_standard.md`, "Where the consent words go on a form".
+
+**No required checkbox (TIG, 2026-11-04).** A required tick does not go on a form to prove the words were seen. The words above the button, plus the saved record of exactly what each person saw, are the proof. The upgrade for a supporter who sends sales texts in bulk is an optional, unticked box, and their team texts only the people who tick it. A required box fits only where agreeing is the deal itself (Section 3, a price that follows a count).
+
+**Checking a page.** `node "005 Operations/Execution/measure_consent_placement.js" --url <page> --out <folder>` loads the page at phone and desktop width and blocks every write at the network layer, so nothing can be saved or sent. For each button it records the words near it: where they sit, size, color, contrast, link style and `aria-describedby`, with screenshots. `--click` opens a step, `--fill` types fake values, and `--button` and `--words` measure exact elements.
+
+**The first audit (read-only, 2026-11-03)** covered every family app, the sites QWF hosts and the frozen legacy sites. Results are in a private report, each app's System Status carries its own result, and the fix items are in HQ (search "Section 17 audit"). Each fix ships on its own app's word.
+
+**MP training opportunities (Session 895):** (1) *Read a form the way a person on a phone does* (Beginner, 2 hours; prerequisite: basic HTML): run the tool on one public form, find the button that makes an agreement, and say whether the words are seen before the press. (2) *Turn a rule into a check* (Intermediate, 4 hours; prerequisites: JavaScript basics, Playwright): add one new measure to the tool and prove it on a page that passes and a page that fails. (3) *Have someone try to break your finding* (Intermediate, 1 hour; prerequisite: reading code): a second person checks a reported gap at the source and says whether it is real. In this audit that step downgraded some findings and made one worse.
+
 ### 🎓 Missing Pixel Training Opportunities
 
 | Component | Skills Developed | Difficulty |
@@ -14176,4 +14188,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-04 22:37 (v6.84)*
+*Last updated: 2026-11-04 22:48 (v6.85)*
