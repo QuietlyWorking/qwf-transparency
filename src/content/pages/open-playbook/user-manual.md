@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-05 07:27 | Source version: 6.95
+> Generated: 2026-11-05 07:29 | Source version: 6.96
 
 # QWU Backoffice User Manual
 
@@ -3958,12 +3958,27 @@ A new public game on a live board with prizes, from its page to its ship, plus a
 - **Someone says "please don't call":** `manage_qcm_call_stops.py stop --phone N --contact-id C --org-id O --name "what they said"`, the same day. Exit 4 means written, but a name could not be tied to a person: find them and stop them by id.
 - **Lifting:** `find`, then `lift --stop-id ID --evidence "what they said and when" --actor LOGIN --apply`.
 - **Nightly:** guard checks A24 and A25.
-- **Next:** the call log and queue (migration 081) and the calling screen.
 
-#### MP Training Opportunities ⭐ (from the L4G call kit build, 2026-11-03)
+**The call log and queue (migration 081, live 2026-11-04).** `call_log` keeps every try for ever and never changes; a mistaken tap is corrected by a new row. `call_queue_items` holds who to call next. One tap per outcome moves both in one transaction. "They asked us not to call" writes the stop first, so a failed log can never cost the stop. "Yes, email me" writes their email yes (source `phone_call_operator`), or says why it did not. Nobody is called more than 2 times in 7 days or 4 in 30, across all callers. `qcm_call_check` now answers the stop list, the youth hold and that limit, **and still not the national list or calling hours.** It sends nothing and calls no one. The backoffice's door is `manage_qcm_calls.py`: add, today, claim, release, log, history, mark-partner.
+
+**The calling screen (migration 083, live 2026-11-04):** `quietlycrm.org/calls`, each call's sheet, and `/calls/held`, behind the console's sign-in with MFA, phone first. The Call button asks the database first and only its yes hands back the dial link, the one `tel:` in the console, so a stale page cannot dial someone who said stop. The next call waits until the last has an outcome. TIG dials from his own phone. Nothing records, and a yes drafts nothing yet. Design: `QCM-Call-Screen-Design.md`.
+
+**The one youth rule and the mark.** `qcm_contact_youth_hold` holds a known minor, a `student` state, or a link to a youth-protected program with no adult-partner mark: no queue row, no Call button, no sheet, and the only word printed is `youth_hold`. A birth date frees nobody, because the standard's youth runs to 30. Every call that happens is still logged. A mark is TIG's word only: two taps on `/calls/held`, or `mark-partner` on his spoken word. It can be taken back and stays on the record.
+
+- **Adding a name:** only on TIG's word, one at a time. `add --program l4g --phone N --contact-id C --org-id O --campaign K --why "his words"`. The campaign must contain "coto", "rpv" or "palos", or the sheet shows a bracketed slot instead of the mailbox count.
+- **A person must exist.** With no person on the row the sheet says "[name]" and "Yes, email me" writes no yes. The only door for a new person, `inbound-contacts`, requires a program, and L4G is youth-protected, so a person created on L4G is held until he marks them.
+- **Never pick names from the CRM.** On 2026-11-04 all 70 people there with both a phone and a business came through QNT, the chapter's data, which BNI's terms keep off this use. A person he names himself is his.
+- **Testing:** a try is kept for ever, so never test the after-call taps on a real row. The dial test writes none: tap Call, see the dialer, do not press its button, then "I did not call. Give it back."
+- **On the QOS map:** the kit itself has no node, since the map tracks the standard. `p1.workspace.v1` carries its defer, and `p1.consent.v1.call-stop-subjects` tracks that `consent.v1` can only describe a person's stop. Calls feed no event on purpose: `fn_emit_event` copies the whole row into a table with no MFA check.
+- **Nightly:** guard checks A24, A25 and A26.
+- **Next:** the first real call, then the L4G layer (card progress, open trades, the trade link, the follow-up draft).
+
+#### MP Training Opportunities ⭐ (from the L4G call kit build, 2026-11-03 and 04)
 
 | Task | Skills taught | Prerequisites | Time | Complexity |
 |---|---|---|---|---|
+| Read what a design promised against what got built: take its table of promises, then read the live triggers and grants, and write down each difference with its reason. Here it found calls that never fed the event stream, and that leaving them out was the safer choice | Database introspection, reading a design critically, recording a decision | Basic SQL | 2 hours | Intermediate |
+| Let broken versions judge your rehearsal: on the call log, the first 80 let 8 through, and those 8 found a weak comparison hiding in two rehearsals that both said OK | Mutation testing, why a passing test proves little | The rehearsal task below | 3 hours | Advanced |
 | Write a rehearsal that must fail: run a migration in a transaction that always rolls back, and check every result with `IS DISTINCT FROM` | SQL, transactions, testing, why NULL hides failures | Basic SQL | 4 hours | Intermediate |
 | Prove the tests by breaking the code on purpose: 65 deliberately broken versions, each of which a test must catch, and read each miss by hand | Mutation testing, reading code critically | The above | 4 hours | Advanced |
 | Read a law from its primary source and turn it into one plain rule, with the words cited | Research, plain writing, knowing when to ask a lawyer | None | 2 hours | Beginner |
@@ -4636,6 +4651,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 6.96 | 261104 | TIG + Claude | Session 904: **L4G call kit parts 2 and 3.** The call log and queue, the calling screen, the one youth rule and the mark (part 2's deferred manual work), how a name goes on, the dial test that writes no try, and the QOS map check. List still empty; parked on TIG's first name. |
 | 6.82 | 261104 | TIG + Claude | **L4G call kit part 1.** California's tax statement live on the site's tax answer, the Terms and receipts on TIG's "ship"; the Do Not Call policy page; QCM's Do Not Call list live on his "migrate 079" (guard A24, A25, the lift alarm). See §L4G call kit. |
 | 6.75 | 261103 | TIG + Claude | Session 885: **Troubleshooting: every session suddenly cannot reach GitHub over https** (a refused login erases the stored sign-in; how to recognize it and who restores it). QQT's plan of record for the 2026-11-06 walkthrough lives in its kickoff; nothing deployed. |
 | 6.74 | 261103 | TIG + Claude | Session 884: **Mail Truck Dash played alone is LIVE** (L4G Play section updated), plus MP Training Opportunities from its build. |
@@ -5421,8 +5437,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.95 by generate_public_manual.py"
-generated: "2026-11-05 07:27"
+source: "Auto-generated from private manual v6.96 by generate_public_manual.py"
+generated: "2026-11-05 07:29"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14296,4 +14312,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-05 07:27 (v6.95)*
+*Last updated: 2026-11-05 07:29 (v6.96)*
