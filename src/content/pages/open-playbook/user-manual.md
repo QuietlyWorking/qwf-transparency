@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-05 06:30 | Source version: 6.88
+> Generated: 2026-11-05 06:38 | Source version: 6.89
 
 # QWU Backoffice User Manual
 
@@ -5358,8 +5358,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.88 by generate_public_manual.py"
-generated: "2026-11-05 06:30"
+source: "Auto-generated from private manual v6.89 by generate_public_manual.py"
+generated: "2026-11-05 06:38"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11777,6 +11777,24 @@ Transforms QWR from a single-user platform into a multi-user team collaboration 
 | Backward Compatibility | Designing systems that don't break existing users | ⭐⭐ |
 | Webhook Integration | n8n → SSH → Python → Graph API pipeline for email delivery | ⭐⭐ |
 
+
+### QWR's Stripe events and plan fields
+
+**How Stripe events reach QWR.** Stripe posts to QWR's n8n handler. Before the handler acts, it checks Stripe's signature over the exact bytes received, refuses a request older than 5 minutes, and refuses a test-mode event. A refused request gets a 400 and changes nothing. A request with no signature is refused quietly, since anyone on the internet can send one. A request with a wrong signature posts at most one alert an hour to #system-status, with a count, because it can mean the stored signing secret has gone stale.
+
+**Who may change a plan.** A signed-in person can edit only their own profile and onboarding fields. Plan, seat, credit and billing fields change only through the server, and a database trigger refuses anything else. The functions that spend or read credits check whose account it is, and the ones only the server should call are closed to everyone else.
+
+**How to re-check it.** `prove_qwr_plan_lock.py` makes real calls as a visitor, a signed-in owner and the server, inside a transaction that always rolls back, so it changes nothing and needs no test account. It reports each check as pass or fail. `tests/test_prove_qwr_plan_lock.py` guards the proof itself.
+
+#### MP Training Opportunities (from the 2026-11-03 QWR webhook and plan-field work and the 2026-11-04 home network comparison, Session 898)
+
+| Task | Skills taught | Prerequisites | Time | Level |
+|---|---|---|---|---|
+| Verify a signed webhook on a test payload: compute the signature over the raw bytes, and show why re-encoded JSON fails | HMAC, HTTP, why bytes matter | JavaScript or Python basics | 2 h | Intermediate |
+| Prove a database access rule by running real requests as each role inside a transaction that always rolls back, on a practice database | SQL, row and column rights, test design | SQL basics | 3 h | Advanced |
+| Compare three products for one job: price the whole job, read a hands-on review, and grade each claim as federal record, independent test, vendor's words, forum or your own judgment | research, evidence grading, plain writing | None | 2 h | Beginner |
+| Read a vendor's public data instead of its page: a store's product feed, a help center's article data, a federal list as JSON | REST APIs, JSON, source checking | REST basics | 1 h | Beginner |
+
 ---
 
 ## QWF Documentation Standard ⭐ NEW
@@ -14202,4 +14220,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-05 06:30 (v6.88)*
+*Last updated: 2026-11-05 06:38 (v6.89)*
