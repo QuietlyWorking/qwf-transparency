@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-05 00:30 | Source version: 6.86
+> Generated: 2026-11-05 05:45 | Source version: 6.87
 
 # QWU Backoffice User Manual
 
@@ -5349,8 +5349,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.86 by generate_public_manual.py"
-generated: "2026-11-05 00:30"
+source: "Auto-generated from private manual v6.87 by generate_public_manual.py"
+generated: "2026-11-05 05:45"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12942,15 +12942,16 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ### Site Hardening Proof (Oct 2026)
 
-`005 Operations/Execution/prove_l4g_site_hardening.py` (v1.7.0, 2026-10-29) is the one proof every site-hardening change must pass before TIG's "ship". It builds the site, runs the changed code in node against an in-memory stand-in of the database that refuses what the live database refuses (a visitor reading bookings gets 42501, as live does), and checks the outcome; each check has a control that must fail on its own outcome only, so a check that could never fail is caught. `--db-parity` adds read-only checks on live data: the donor-partner website check against the database's own constraint, the tables' live columns, the visitor's space count against checkout's count (5 neighborhood-months, 0 disagreements at the v1.6.0 ship), and what the public key can read.
+`005 Operations/Execution/prove_l4g_site_hardening.py` (v1.20.0, 2026-11-04; each version's own note is at the top of the file) is the one proof every site-hardening change must pass before TIG's "ship". It builds the site, runs the changed code in node against an in-memory stand-in of the database that refuses what the live database refuses (a visitor reading bookings gets 42501, as live does), and checks the outcome; each check has a control that must fail on its own outcome only, so a check that could never fail is caught. `--db-parity` adds read-only checks on live data: the donor-partner website check against the database's own constraint, the tables' live columns, the visitor's space count against checkout's count (5 neighborhood-months, 0 disagreements at the v1.6.0 ship), and what the public key can read.
 
 | Version | Date | What it proves |
 |---------|------|----------------|
 | v1.5.0 | 2026-10-28 | L8: the portal's settings and brand pages show "Saved!" only when the database hands the row back; the browser's website check mirrors the database constraint rule for rule (82 checks) |
 | v1.6.0 | 2026-10-28 | Queue item 0: the checkout widget counts sold spaces the way checkout does (through the public card reader, never the bookings table a visitor cannot read), refuses every size on a sold-out month, starts the 15-minute countdown only once payment exists (100 checks, 31 controls) |
 | v1.7.0 | 2026-10-29 | Queue item 1: `--forward` alone (no site build, under a minute) judges the sign-in reply forward: on 1.1.1.1 and 8.8.8.8, `accounts.locals4good.org` takes mail at Cloudflare only, with one SPF line; the root's Google mail, its one SPF line and the `bounce.accounts.` record unchanged; Cloudflare's signing key published; one rule, to one verified address, and nothing else forwarding (29/29: 17 checks, 12 controls) |
+| v1.20.0 | 2026-11-04 | A failed sign-in, a link or reset email that could not be sent, and a refused password change read in our words, never the sign-in service's, as a word-for-word table and in a real browser, whatever the service answers. A sweep of every non-staff source file refuses any line that could show a service's raw error text; staff pages keep the reason on purpose. The footer links the email promise (269 checks, 66 controls) |
 
-A run takes 8 to 10 minutes; run it in the background and run it again if main moves under it (its first check says so). Records: channel `l4g-staff-check-fix-20261026-2254-4d039e`, `r10.md` to `r17.md`.
+A run takes about 30 minutes; run it in the background and run it again if main moves under it (its first check says so). Records: channel `l4g-staff-check-fix-20261026-2254-4d039e`.
 
 ### References
 
@@ -14192,4 +14193,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-05 00:30 (v6.86)*
+*Last updated: 2026-11-05 05:45 (v6.87)*
