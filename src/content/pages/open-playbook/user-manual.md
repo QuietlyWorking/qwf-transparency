@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-05 07:46 | Source version: 7.00
+> Generated: 2026-11-05 07:51 | Source version: 7.02
 
 # QWU Backoffice User Manual
 
@@ -5493,8 +5493,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.00 by generate_public_manual.py"
-generated: "2026-11-05 07:46"
+source: "Auto-generated from private manual v7.02 by generate_public_manual.py"
+generated: "2026-11-05 07:51"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7905,12 +7905,23 @@ replaced"* in the role. All certifications fall in September.
   filed under stays unsent, the Lead Mentor is told once with both names, and the other forms still
   go. Once the record is right it sends itself on the next run. It cannot see a new mentor who
   leaves the pre-filled name alone, so the Lead Mentor decided (D-16, "block it") that a mentor who
-  did not hold a meeting will not be able to file its form at all. That app change is planned, not
-  live yet; see the [Networking Chapter] Mentor System Status.
+  did not hold a meeting will not be able to file its form at all. That app change is built and
+  proven but not live: it waits on the Lead Mentor's word on its words, parked to 2026-11-05. See the
+  [Networking Chapter] Mentor System Status.
 - **A mentor's cap is the mentor's.** The system may lower one on their word and may never raise
   one. The handbook's hard ceiling is 6.
 - **Nothing reaches BNI Connect automatically.** BNI's terms forbid it. The system's job is to make
   the manual step fast and error-free, not to eliminate it.
+
+#### MP Training Opportunities (from building the form's own-mentor rule, 2026-11-04, Session 909)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Prove a permission rule as made-up people, then roll it all back | Every login, member and form in the proof exists only inside one database transaction that is undone at the end, so a live rule is tested without touching a real record. Teaches transactions, row-level security and how to test against production safely | Advanced |
+| One person wearing three hats hides a wrong rule | In this chapter the Lead Mentor, the only owner and the only super admin are the same person, so a rule keyed to the wrong role passes every eye test. Teaches testing each role alone, and picturing the second chapter | Intermediate |
+| See the test fail first, then break the code on purpose | The proof failed 52 of 143 checks before the rule existed. Later, removing the rule from the page by hand made tests fail, while an early version of one test passed no matter what. Teaches why a test that cannot fail proves nothing | Intermediate |
+| The order of checks decides the words people read | The first draft put the new rule ahead of an older check, so a person tapping Approve read a sentence about the wrong thing. Teaches that an error message is part of the design, and how to review for it | Intermediate |
+| Commit only your own lines in a shared file | Many sessions edit one status file. A private git index built from the last commit holds just your lines, and moving the branch with a compare-and-swap refuses if anyone committed in between. Teaches what the index, a tree and a ref really are | Advanced |
 
 ### MP Training Opportunities
 
@@ -7960,6 +7971,38 @@ everyone uses.
 | Check who a rule is true for before writing it | A bold "don't delete" line sounded right for everyone, and would have told mentors something untrue. Teaches mapping each audience to the fact before writing the sentence | Beginner |
 | Find what a planned fix would not catch | A morning restore can't catch a delete made later that morning, before a meeting that day. Teaches walking a fix through the timeline and saying its limit before anyone approves it | Beginner |
 | Run the check you hand to someone else | A check written into a handoff printed nothing because its search did not fit the log's format, and the format checker still passed it. Teaches extracting and running exactly what you wrote | Beginner |
+
+### Yes and No on the new-member forms (live 2026-11-03, Session 910)
+
+Every line of the Sessions 1 to 4 forms has its own Yes and No. A second tap takes it back. A blank means not answered and never stops
+Submit. It came from a mentor's bug report: an empty box could not tell "no" from "we didn't get to it."
+
+- **The record:** no migration. Each section keeps `ticked` (the Yes lines) and gains `no`, written only when it holds a line. Forms saved
+  before read their ticks as Yes.
+- **The readers:** the form, its paste block and the Vice President's report (`qnt_mentor_form_routing.py` v1.8.0). One shared fixture pins
+  the app and the report byte for byte. A member's own page never carries the answers.
+- **Ship order:** the report first, then the app, because the old report ignored `no` and a form approved in that gap would have lost it.
+  Undo runs the other way. Never run the report by hand: it sends real email.
+- **First real use:** 2026-11-04, a real form with 30 Yes and 5 No, waiting on the Lead Mentor at this writing.
+
+**What the first Monthly Mentor Team Meeting's recording taught the recap (named, not fixed; TIG's design call).** There is one recap narrative
+per meeting, so a line from a private talk reached people who had left. A soft "it'll probably be today or tomorrow" printed as a due date. A
+Zoom name that isn't plain ASCII loses its speaker label. And drafts don't buy review time: TIG sent these about two minutes after the "drafts ready"
+text, so any check must live inside the pipeline. See `process_zoom_recording.md`, changelog 2026-11-03, and the parked kickoff `qnt-mentor-yes-no-followups-parked-kickoff-2026-11-05.md`.
+
+### MP Training Opportunities ⭐ (from Yes and No, 2026-11-03, Session 910)
+
+| Teachable unit | What happened | Level |
+|---|---|---|
+| Three answers need three states | An empty box meant both "no" and "not asked." Adding a second list made Yes, No and not answered all readable, and old records kept their meaning with no migration | Intermediate |
+| One fixture, two readers | The app and an emailed report had to print a form the same way, in two languages. One shared file of expected output pins both, and 6,000 random records came out identical | Intermediate |
+| Ship the reader first | The old report would have dropped the new answers, so the report shipped minutes before the app, and the undo order is the reverse | Advanced |
+| Know what your test can't see | The fake browser let a click through a locked form, and a scripted event isn't a real tap. Both gave wrong answers until a real browser settled them | Intermediate |
+| Read the sentence, not the summary | A recap said "due" where the person said "probably." Only the transcript showed it was a hope | Beginner |
+| A draft isn't a safety net | A person sent drafts within two minutes of being told they were ready, so the check had to move ahead of the message | Beginner |
+
+**Most valuable MP exercise:** give a student a checklist stored as ticks, and ask them to add a real "No" without changing how any old record reads. Then have them
+open the same form on an old build and find out what gets lost.
 
 ## BNI Meeting Recap System ⭐ NEW
 
@@ -14398,4 +14441,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-05 07:46 (v7.00)*
+*Last updated: 2026-11-05 07:51 (v7.02)*
