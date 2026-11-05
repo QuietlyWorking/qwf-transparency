@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-05 05:45 | Source version: 6.87
+> Generated: 2026-11-05 06:30 | Source version: 6.88
 
 # QWU Backoffice User Manual
 
@@ -737,6 +737,15 @@ The self-hosted n8n instance uses pinned version tags for stability.
 | Write a semver range evaluator and check it against npm's own library | parsing, test design, checking against a reference | Python | 3 h | Advanced |
 | Build a weekly watcher that never reads a failed check as a quiet week (retries, one time budget, a dead-man heartbeat) | reliability design, cron, alert tiers | Python, cron | 3 h | Advanced |
 | Prove an alert at the far end (read the Discord channel back; a throwaway heartbeat for the text path) | REST APIs, verification habits | REST basics | 1 h | Beginner |
+
+#### MP Training Opportunities (from the 2026-11-04 server login lock-down, Session 897)
+
+| Task | Skills taught | Prerequisites | Time | Level |
+|---|---|---|---|---|
+| Prove a firewall rule with data, not a bare connection: run throwaway listeners, one that speaks first and one that waits, and compare both ends with the vendor's log | networking, TCP, test design, reading what a result really says | Python sockets | 2 h | Intermediate |
+| Find out what an API key can do without changing anything: an invalid request answers 403 when the right is missing and 400 when it is there; an empty list proves nothing | REST APIs, least privilege, safe probing | REST basics | 1 h | Beginner |
+| Write a guarded tool for a file that can lock you out: a backup, a temp file, a re-read just before the rename, and the system's own parser as a second opinion | file safety, atomic writes, test design | Python | 3 h | Advanced |
+| Write one hands-on walkthrough where every step has an expected result and a branch for when it differs | technical writing, operations | None | 2 h | Beginner |
 
 **Security Hardening (2026-04-04):**
 - UFW firewall enabled: ports 22 (SSH), 80 (HTTP), 443 (HTTPS) only
@@ -5349,8 +5358,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.87 by generate_public_manual.py"
-generated: "2026-11-05 05:45"
+source: "Auto-generated from private manual v6.88 by generate_public_manual.py"
+generated: "2026-11-05 06:30"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14193,4 +14202,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-05 05:45 (v6.87)*
+*Last updated: 2026-11-05 06:30 (v6.88)*
