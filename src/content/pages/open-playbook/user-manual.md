@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-05 07:40 | Source version: 6.98
+> Generated: 2026-11-05 07:46 | Source version: 7.00
 
 # QWU Backoffice User Manual
 
@@ -4013,6 +4013,22 @@ A program needed a list built from public pages, where every row could be checke
 
 **Most valuable MP exercise:** give a student five made-up ads and ask for a list with a receipt on each row. Then have a second student try to break it. Use invented businesses, so nothing real gets labeled.
 
+### MP Training Opportunities ⭐ (from the wrong feedback link and the silent reply, 2026-11-04, Session 908)
+
+One member's one-line email found a wrong link that had reached a whole chapter. Tracing why nobody heard about it found a second fault that had been hiding people's replies since August.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Open a link before passing it on | A link has two addresses: the words you see and where a click goes. Copying an old email left them disagreeing, and we passed on the words. Check what the person will see on the far end | Beginner |
+| Words in an email body prove nothing about who sent it | A reply quotes the email before it, so our own footer made every person who answered us a "newsletter". Delivery headers tell you how a message was sent; the body cannot | Intermediate |
+| Compare old and new on real data, in both directions | The first cleaner rule also caught notices that had always been read. A label change must be measured for what it adds as well as what it frees | Intermediate |
+| A send loop has three outcomes | Sent, certainly not sent, and unknown. One timeout used to re-mail everyone before it, because the record was written after the loop. Ask of each person: what does a crash right here leave, and what will the next run do? | Intermediate |
+| Let someone else try to break your fix | Two independent reviews found real faults in the fixes themselves, each reproduced with sending switched off before anyone believed it | Intermediate |
+| A draft must be true whenever it is sent | A person sends in their own order and edits as they go. A note about order does not travel with the draft, so never write one that depends on a later step | Beginner |
+| Record who raised it | Most items in a tracker read as the operator's because the capture tool filled in one name. If you want to thank people, the first job is remembering them | Beginner |
+
+**Most valuable MP exercise:** give a student a folder of made-up emails (real people replying, firm footers, true newsletters) and the old rule. Have them find every honest reply it misfiles, write a better rule, then measure it both ways: who got freed, and who got newly caught.
+
 ### MP Training Opportunities ⭐ (from TIG's Road to the Live Game Show emails, 2026-11-04, Session 893)
 
 A new self-sending email went to an independent reviewer before its first send, and the review broke it in ways all 92 passing tests had missed.
@@ -5246,6 +5262,31 @@ The system ensures **zero silent failures** through 4-layer protection. With 2-5
 .venv/bin/python "005 Operations/Execution/meeting_briefing.py" --topic "Q1 Planning" --names "Sue,[Participant]" --duration 60
 ```
 
+### Pre-Meeting Agenda Builder (preview only, nothing built yet)
+
+**The goal:** before each team, board or supporter meeting, a "since we last met" agenda waits as a draft in TIG's Outlook, with a private prep note and a text so he never forgets to send it. The agenda is written by an agent, so it is always a draft: TIG reviews and sends each one. The first target is the monthly mentor team meeting.
+
+**Where it stands (2026-11-04):** two previews sit in TIG's Drafts, addressed only to him, waiting on his word about their look and content. That is the first of six questions. No script, schedule or text exists yet. State and next steps: `002 Projects/_Meeting Experience System/MES-System-Status.md`.
+
+**The rule the first team meeting taught:** an email built from a meeting's records keeps its privacy in the code that picks the facts. A person's review is a second look, never the control.
+
+- The group email lists only TIG's own items, softly worded, with no dates.
+- It carries nothing from the recap's story and nobody else's items. An item naming one person goes only in his private prep note.
+- "Done" needs proof beyond a task list: a commit, a release note or his sent mail. Anything unproven reads as still on his list.
+
+#### MP Training Opportunities (from the agenda preview, 2026-11-04, Session 907)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Allow by fact, never block by word | A private matter can appear with no name in it, so no word list can catch it. Teaches building an allow list per audience | Intermediate |
+| Sent is not the same as safe to repeat | A mistake can sit in a sent folder. Teaches asking who should know a fact, not only where it was found | Beginner |
+| A task list says what was said, not what happened | A task read as open the day after its feature shipped. Teaches finding proof at the source | Beginner |
+| A summary can harden a promise | "I said I would try" came out with a due date. Teaches checking a summary against the speaker's words, and writing softly when the words were soft | Beginner |
+| A rehearsal of the empty month | A month with no meetings would have printed a thank-you for 0. Teaches testing the zero case before anyone reads it | Beginner |
+| A shortcut can reach past your own work | One git flag set other sessions' unsaved files aside for two seconds. Teaches reading what a flag does on a shared checkout, and how to prove nothing was lost | Intermediate |
+
+**Most valuable MP exercise:** give a student a made-up meeting recap with one private remark in it. Ask them to write the group email, then have a second student try to find a way that remark could get through.
+
 ### Pre-Meeting Prep Emails ⭐ NEW
 
 **v1.0 | Added 2026-02-07**
@@ -5452,8 +5493,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.98 by generate_public_manual.py"
-generated: "2026-11-05 07:40"
+source: "Auto-generated from private manual v7.00 by generate_public_manual.py"
+generated: "2026-11-05 07:46"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6014,6 +6055,14 @@ Schedule Trigger (every 15 min)
 **Full documentation:** `005 Operations/Directives/process_outlook_email.md`
 
 ---
+
+### What Counts as a Newsletter (changed 2026-11-04)
+
+Until 2026-11-04 the pipeline searched the whole body for words like "unsubscribe" and "email preferences". A reply quotes the email before it, and our own footer says "Manage your email preferences", so **every person who answered one of our emails was filed as a newsletter**: no classifying, no reply draft, no text to TIG, and nothing in their record. About half of what watched people sent after 2026-10-23 went quiet this way, and two kind notes sat unread for 19 days.
+
+**The rule now (`email_bulk_signals.py`):** someone else's mail keeps the label only when the words AND the message's own delivery markers agree: `Precedence: bulk`, `list` or `junk`, or a List-Unsubscribe with a web link, unless it has both Re: and In-Reply-To. The label can only shrink. Our own automated sends keep the old rule on purpose, so hundreds of them a month cost nothing and stay out of people's records. On the newest 350 inbox messages: 213 still labelled, 0 newly labelled, 121 unchanged, 16 released to the classifier, about $2 a month. Replies missed since August were filed afterward by `refile_mislabeled_replies.py` (53 of them).
+
+**Known gap ([Networking Chapter]-System-Status K57):** going forward, the vault writer keeps one section per subject and date, so one email on a thread that day can hide the next one from a person's record. Directive: `process_outlook_email.md`.
 
 ### Watched-Sender Reply Drafter (armed 2026-10-07) ⭐ NEW
 
@@ -7453,6 +7502,8 @@ members, 2026-09-11.
 words, so two applications went to nobody and the unreadable-email text (which sits after the reader) never fired. Now any
 non-reply email from [Networking Chapter]mc@gmail.com reaches the reader, and one it cannot read texts TIG once ([Networking Chapter]-System-Status K50).
 Lesson for any reader of someone else's format: never let a filter in front of the loud alarm read their wording.
+
+**Since v2.5.0 (2026-11-04) a form link goes to members only after we have opened it.** A member wrote to say the feedback link for one applicant opened another applicant's form, and she was right: on 2026-11-02 every member got the wrong form in two emails. The committee had built its email from an older one, so the link's words showed the old address and a click went to the right one, and we copied the words. Now every address the email offers is opened, and the one whose own Name line names the applicant is used, through one chokepoint (`member_form_check`) shared by the sweep, the Send button and the "updated page" email. A form naming someone else or nobody never goes: the member gets their report with the reply wording, and TIG is told. Each send is written down as it happens, as sent, certainly not sent, or unknown; an unknown send is never retried by a machine, and a killed run resumes. A one-time fix for a wrong link already sent: `--set-form`, then `--preview-correction`, then `--correct-form`, whose words TIG blesses per request. First real run 2026-11-04: the right form to 18 members ([Networking Chapter]-System-Status K55).
 
 **The meeting-morning room list is a fourth script (2026-10-28).** `send_meeting_room_list.py` (v1.2.0)
 sends ONE short email to every active member at **6:00 Pacific on the meeting day**, from TIG's mailbox
@@ -14347,4 +14398,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-05 07:40 (v6.98)*
+*Last updated: 2026-11-05 07:46 (v7.00)*
