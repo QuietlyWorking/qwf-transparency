@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-05 06:38 | Source version: 6.89
+> Generated: 2026-11-05 06:50 | Source version: 6.90
 
 # QWU Backoffice User Manual
 
@@ -222,6 +222,15 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 | A cascade that carries numbers may not carry names | The public cost page takes its prices from the cost file but types the machine names itself, so a resize would have shown new prices beside old names. Teaches tracing every reader of a change, not only the documented ones | Intermediate |
 
 **Most valuable MP exercise:** give a student a resize runbook and read-only access to a practice subscription, and ask them to answer three pre-checks with commands, quoting the output line that proves each answer.
+
+#### MP Training Opportunities (from a presentation app ship and a document comparison, 2026-11-04, Session 899)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Is the app wrong, or the check? | A browser check failed mid-ship on a page nobody had changed. Pressing one button at a time, slowly, about 1,400 times, then logging presses against page turns, showed the app right and the check racing ahead of it. Teaches testing the fault before blaming the test, and never re-running until green | Intermediate |
+| Prove a check can still fail | After the fix, a walk forced to stop short had to turn the check red. Teaches that a check nobody has seen fail proves little | Beginner |
+| Search with the other side's words | A search for "deposit" reported that an app had none; the app's word was "down payment". A price list looked empty for a product filed under its category, not its item names. Teaches that a claim of absence needs both vocabularies | Beginner |
+| Compare documents with citations | Ten product sheets against a price list, live words and a contract, every claim tied to a file and page, then handed to a fresh reader to break. Teaches telling two real answers apart from two wordings of one | Intermediate |
 
 #### MP Training Opportunities (from the 2026-10-29 resize night and its after-checklist, Session 847)
 
@@ -5358,8 +5367,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.89 by generate_public_manual.py"
-generated: "2026-11-05 06:38"
+source: "Auto-generated from private manual v6.90 by generate_public_manual.py"
+generated: "2026-11-05 06:50"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14220,4 +14229,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-05 06:38 (v6.89)*
+*Last updated: 2026-11-05 06:50 (v6.90)*
