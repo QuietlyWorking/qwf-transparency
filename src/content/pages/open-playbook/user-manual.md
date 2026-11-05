@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-05 06:50 | Source version: 6.90
+> Generated: 2026-11-05 07:02 | Source version: 6.91
 
 # QWU Backoffice User Manual
 
@@ -3971,6 +3971,9 @@ A new self-sending email went to an independent reviewer before its first send, 
 | Fixed phrases in alerts, never an error's text | A failed lookup's error text held its URL, and the URL held a person's address, spelled so that a scrub looking for an @ missed it | Intermediate |
 | Motion in an email has to stop by itself | An email has no pause button, so WCAG 2.2.2 means under 5 seconds, then rest. The first frame must be a finished sign, because older Outlook shows only that | Beginner |
 | Bless the bytes, not the words | A fingerprint of every byte a reader would see means a changed signature or card stops the send and asks again, rather than reaching 19 inboxes unseen | Intermediate |
+| Audit from the deepest source, and test the auditor's own reading | Two people looked undelivered when their events were matched by address; tracing by message id showed both delivered. A wrong first reading is cheap to catch and costly to report | Intermediate |
+| Prove a promise in the real game, not in its description | A real browser on a throwaway local copy timed the tile falling asleep at 4.2 seconds and counted a held key once, against the words a hint makes to 19 people | Intermediate |
+| Mask before the first print | One raw header put a person's address in a working log. Build the mask first; nothing can unprint it | Beginner |
 
 **Most valuable MP exercise:** give a student a passing test suite and a sender, and have them delete one safety line at a time until a test fails. Each line that fails nothing is a promise nobody is really keeping.
 
@@ -5367,8 +5370,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.90 by generate_public_manual.py"
-generated: "2026-11-05 06:50"
+source: "Auto-generated from private manual v6.91 by generate_public_manual.py"
+generated: "2026-11-05 07:02"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13073,6 +13076,8 @@ TIG's own countdown to his talk: seven dated emails, drawn as arcade announcemen
 
 **Not in this release:** the thank-you and the December reminder stay Outlook drafts for him to send.
 
+**Audited before the first send (2026-11-04, Session 900):** an independent session checked all 24 items of its kickoff against the real roster, consent records, game and mailbox: no email held, no word changed. Evidence, item by item: `002 Projects/_Locals 4 Good/L4G Play/Road-Show-Ground-Truth-Audit-2026-11-04.md`. Nothing automatic adds a stop row: a member's reply reaches TIG's Inbox and, within 15 minutes, a draft and a text, and the row waits for his word. After adding a row, run `--preflight` on the next email and read the name under `stopped`, because a natural spelling refuses the whole email and tells him.
+
 ### What is done
 - **The newsletter server is off.** It was a standby server never put to use; it was archived and powered off (Oct 30).
 - **Both Amazon owner (root) keys are switched off** (Oct 30), confirmed by a fresh credential report. TIG deletes them after a quiet week.
@@ -14229,4 +14234,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-05 06:50 (v6.90)*
+*Last updated: 2026-11-05 07:02 (v6.91)*
