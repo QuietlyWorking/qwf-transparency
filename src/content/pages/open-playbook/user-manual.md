@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-05 07:18 | Source version: 6.92
+> Generated: 2026-11-05 07:27 | Source version: 6.95
 
 # QWU Backoffice User Manual
 
@@ -222,6 +222,18 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 | A cascade that carries numbers may not carry names | The public cost page takes its prices from the cost file but types the machine names itself, so a resize would have shown new prices beside old names. Teaches tracing every reader of a change, not only the documented ones | Intermediate |
 
 **Most valuable MP exercise:** give a student a resize runbook and read-only access to a practice subscription, and ask them to answer three pre-checks with commands, quoting the output line that proves each answer.
+
+#### MP Training Opportunities (from QCM's second locks and consent repairs, 2026-11-03 and 04, Session 903)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Break your own change on purpose | Each broken copy of a migration has to fail its rehearsal, or the rehearsal proves nothing. 27 of 27 were caught, and that is what makes REHEARSAL_OK mean something. Teaches testing the test. | Intermediate |
+| Ask the reader's question, not the writer's | A consent page read back "stopped" while the mail kept going: the writer was right and the sender read a different record. Teaches proving a change from where it is used. | Intermediate |
+| Hand your work to a reviewer who starts cold | A first review found two real faults the author's own rehearsal had passed; a second, on the fixes, found nothing serious. Teaches treating review as a tool, and arguing with the code rather than the reviewer. | Beginner |
+| Commit only your own lines | On a shared working copy, another person's unsaved lines sit in the same file. Teaches git's index, and why `git add -A` is a hazard. | Advanced |
+| Make the alarm reach a person, then watch the alarm | A nightly check whose failure nobody saw ran for months. Pushing it to a phone, with a monitor behind it, teaches that an alert only counts once it is seen. | Intermediate |
+
+**Most valuable MP exercise:** give a student a small database function and its test, and ask them to write three broken versions the test would miss, then fix the test.
 
 #### MP Training Opportunities (from the L4G artwork choice walk, 2026-11-04, Session 901)
 
@@ -3989,6 +4001,33 @@ A new self-sending email went to an independent reviewer before its first send, 
 
 **Most valuable MP exercise:** give a student a passing test suite and a sender, and have them delete one safety line at a time until a test fails. Each line that fails nothing is a promise nobody is really keeping.
 
+### MP Training Opportunities ⭐ (from the L4G Play live show's golden trucks, UFO and 30-second truck, 2026-11-04, Session 902)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Prove a test can fail | Each new test ran on the code live that day and failed there, with named errors. A test that has never failed has proven nothing | Beginner |
+| Read the setting's whole path | Flipping a default did nothing, because the live room carried its last saved value forward. Trace where a value comes from at run time, not where it is declared | Intermediate |
+| Measure a flaky test instead of re-running it | One check failed on a good build. 200,000 simulated games showed 1 in 140 has nothing for it to do, so the test was fixed, not the code | Intermediate |
+| Freeze an animation to look at it | The Web Animations API can pause every animation at an exact millisecond, so a two-second effect becomes twelve still frames a person can check | Intermediate |
+| Test what users do twice | A phone left open across a reopened room hung on JOIN for 10 seconds. It was found only because a new test joined a second time on the same page | Beginner |
+| Change stored data once, on purpose | A one-time step in a server's start-up, guarded by a marker row, proven by a rehearsal of old code, new code, old code on one local copy | Advanced |
+| Hold a promise against the platform | An email promised something a browser's storage rules can quietly take away. Read the vendor's own words, then decide whether the promise's wording still holds | Intermediate |
+| Name the person in the ask | "Two scores come off" was approved. "Your friend's score comes off" would not have been. The same fact, and a different decision | Beginner |
+
+**Most valuable MP exercise:** give a student a setting that "does nothing" when changed, and have them find every place between the default and the screen that could be holding the old value.
+
+### MP Training Opportunities ⭐ (from How Many Mailboxes? played alone, 2026-11-04, Session 904)
+
+| Teachable unit | What happened | Level |
+|---|---|---|
+| Measure a rule before choosing it | Two scoring rules were timed with scripts on a private copy, then simulated, before anyone chose. The numbers made the choice plain in one message | Intermediate |
+| Keep the answers on the server | A guessing game whose page never holds the answers: the server says only higher or lower. A test searches everything a browser can load for every answer, on every build, and it caught a real slip the first day | Intermediate |
+| Know what a checksum can see | A deploy's checksum stayed the same across three versions with different server code, because the deploy reads that code from source. A fingerprint of everything the deploy really follows replaced it | Advanced |
+| Doubt the test before the product | A phone looked broken on the live site. Printing the browser's own answer showed one full-page screenshot had stopped the test browser acting as a phone | Intermediate |
+| Let someone try to knock your finding down | A second reviewer corrected the first reviewer's wording, and found a case it missed | Beginner |
+
+**Most valuable MP exercise:** give a student a small higher-or-lower game and ask them to prove, by searching the built files, that the answer cannot be found in the browser. Then have them break it on purpose and watch the test catch it.
+
 ### MP Training Opportunities ⭐ (from the L4G Play throne email's release, 2026-11-03, Session 886)
 
 The game's throne emails went from test copies to real players on one word, after a live try turned up seven fixes.
@@ -5382,8 +5421,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.92 by generate_public_manual.py"
-generated: "2026-11-05 07:18"
+source: "Auto-generated from private manual v6.95 by generate_public_manual.py"
+generated: "2026-11-05 07:27"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13037,15 +13076,16 @@ How L4G works out where to go next, before anyone says a place out loud. It is a
 
 A practice-and-party arcade for Locals 4 Good, built 2026-10-31 to 2026-11-02: Grab Your Category (the real
 reservation form as a timed game, with a shared board), a lobby of classic arcade cabinets at `/`, an idea box whose
-ideas reach only TIG, Mail Truck Dash played alone at `/truck` (LIVE 2026-11-03: 60 seconds on one big pad, its own phone and
+ideas reach only TIG, Mail Truck Dash played alone at `/truck` (LIVE 2026-11-03; 30 seconds on one big pad since 2026-11-04, its own phone and
 computer boards, a first place is a throne), Referral Bop played alone at `/bop` (LIVE 2026-11-03: 60 seconds of signs in nine
 spots, one fixed pattern with its trades, whammies and spots shuffled per run, the board checking every bop by its own clock and
 doing its own count, its own phone and computer boards, a first place is a throne), and a live three-game show TIG runs from his
 phone at talks (a mail truck tapper, a mailbox guess, a referral bop where every trade has its own picture and the Missing Pixel
-logo is the bonus). How Many Mailboxes? is the last to open alone, with its own words, security review and ship. One Cloudflare Worker, `l4g-play`, with two Durable
+logo is the bonus). How Many Mailboxes? played alone at `/guess` (LIVE 2026-11-04) is the last cabinet to open: most neighborhoods found in 60 seconds, a tie to the sooner last find, three digits a guess, its answers only on the board, which says higher or lower by its own clock and shows a count only once found or at the end, its own phone and computer boards, a first place is a throne. One Cloudflare Worker, `l4g-play`, with two Durable
 Objects (`Arcade` for the boards and ideas, `Room` for the show), built in SvelteKit and deployed by hand from `main`
 (no CI yet). Every word and picture players see is locked to TIG's bless by a fingerprint: a build whose words
-changed cannot deploy.
+changed cannot deploy. Every `wrangler deploy` first runs `scripts/ship-check.mjs`, which refuses anything but a deployable build of newest
+main, clean and unchanged since its build: merge main, build, run the suite, push to main, deploy from that same folder with no rebuild.
 
 - **Source of truth:** `002 Projects/_Locals 4 Good/L4G Play/L4G Play-System-Status.md` (deployed versions, lanes, how
   to deploy, undo) and `L4G-Play-Design-v0.1.md` (TIG's decisions and the rails).
@@ -13067,6 +13107,16 @@ changed cannot deploy.
   status`).
 - **Around a talk:** TIG's remote checks the live reads from locals4good.org, he scans the board's join code, one real
   join through the person check; afterwards he closes the room (two taps) so nobody's name stays on a public page.
+- **The live show, as of 2026-11-04 (each on TIG's word):** no named prizes, only a surprise he may type on the day; nothing on the big board is
+  clickable, because people see it as video, so his remote gives him the join line to post in the Zoom chat; a golden truck in every new show for a
+  browser that played any game alone (it follows the browser on that device, not the person, and changes no points); a little saucer beams each player's
+  truck onto the board as they join (no words, no sound, nothing under reduced motion, never over the join code); and Mail Truck Dash on its own 30-second
+  clock while the mailbox guess and the bop keep 60.
+- **Nobody comes off an all-time list (TIG, 2026-11-04), even when a game's rules change.** The two scores retired when the truck went to 30 seconds
+  were put back the same night, and the code that retired them is gone. A monthly board, after the talk, is how a newcomer gets a throne they can win.
+- **Every deploy checks itself** (`scripts/ship-check.mjs`, run by `wrangler deploy`): a deployable build of newest main, a clean tree, nothing changed since
+  the build, every word and name as blessed. So: merge main, build, run the suite, push to main, deploy from that same folder with no rebuild.
+- **The blessed emails quote the show's numbers,** so `tests/show.py` fails if a default among them changes; a change goes through the email lane first.
 
 ## Security Plan and Guards ⭐ NEW
 
@@ -14246,4 +14296,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-05 07:18 (v6.92)*
+*Last updated: 2026-11-05 07:27 (v6.95)*
