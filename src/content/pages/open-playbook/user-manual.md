@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-05 07:33 | Source version: 6.96
+> Generated: 2026-11-05 07:40 | Source version: 6.98
 
 # QWU Backoffice User Manual
 
@@ -3998,6 +3998,21 @@ A program had to choose its next neighborhoods from free public numbers, with no
 
 **Most valuable MP exercise:** give a student three neighborhoods' public numbers and ask them to rank them for a local mailer using income alone. Then add who owns their home and ask what changed and why. The conversation is the lesson. Use made-up places, so nothing real gets labeled.
 
+### MP Training Opportunities ⭐ (from a private research list, 2026-11-04, Session 905)
+
+A program needed a list built from public pages, where every row could be checked by someone who was not there.
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Keep a fact apart from a guess: "seen in the November issue" against "pays for ads" | The habit that makes research trustworthy. A reader can only check what you actually saw | Beginner |
+| A receipt on every row: what was read, where and when, with a ranked kind so weak evidence looks weak | Turns a list into something a stranger can audit | Beginner |
+| Say where each fact really came from: a town from a listing is not a town printed on an ad | Mislabelled sources stay true-looking for a long time | Intermediate |
+| A chain's home page shows one location's phone, so check the location's own page | Scraped facts can be real and still wrong for the row they sit on | Beginner |
+| Keep only what the work needs: saved pages can hold private people's stories even when the list never uses them | Privacy is also about what you store, and a check has to look there too | Intermediate |
+| Ask someone to break it before anyone trusts it: sample rows at their sources and fix what falls | How to review work without being anchored on it | Intermediate |
+
+**Most valuable MP exercise:** give a student five made-up ads and ask for a list with a receipt on each row. Then have a second student try to break it. Use invented businesses, so nothing real gets labeled.
+
 ### MP Training Opportunities ⭐ (from TIG's Road to the Live Game Show emails, 2026-11-04, Session 893)
 
 A new self-sending email went to an independent reviewer before its first send, and the review broke it in ways all 92 passing tests had missed.
@@ -5437,8 +5452,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.96 by generate_public_manual.py"
-generated: "2026-11-05 07:33"
+source: "Auto-generated from private manual v6.98 by generate_public_manual.py"
+generated: "2026-11-05 07:40"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7874,6 +7889,26 @@ everyone uses.
 | A failed read is not an empty answer | The page treated "the lookup failed" the same as "no record", so a refusal became a false sentence. Teaches separating error, empty and loading states in React Query | Beginner |
 | Never reload over someone's save | The first fix reloaded in the same page move that started a save-as-you-leave; a reviewer proved the save was cut off. The fix waits for every write and stands down when someone types or taps. Teaches React unmount order, counting in-flight writes, and adversarial review | Advanced |
 | Check a suggested fix before offering it | "Sign out and back in" sounded right but QNT's sign-out stays inside the same old copy of the app. Teaches reading the code path behind a help sentence | Beginner |
+
+### What a hand delete does to a mentor meeting's calendar entry (tested 2026-11-04, Session 906)
+
+**The rule today: the calendar's owner never deletes a mentor meeting from their own calendar.** Their entry is the real one. A mentor's invitation is only a copy.
+
+- **The owner deletes:** nothing is called off, and the member still expects the meeting. Any guest's copy goes too. If the member later moves the meeting, the system's update reports success while the entry stays deleted, and the new time never shows. A Lead Mentor who mentors gets no reminder email for their own meetings, so the entry's alert is their prompt.
+- **A mentor deletes their invitation:** only their copy goes, and the meeting stands. In the tests, the next change brought the copy back. Tested through Google's API, not a press of its Delete button, and not on Outlook.
+- **Undo:** on a computer, Google Calendar, Settings, Trash, Restore, within 30 days.
+- **Open, waiting on TIG's word:** have the morning run put a deleted entry back once and say so, or add a bold line to the owner's own entries. The full record is the Known Issue "A hand delete on TIG's calendar" in the mentor System Status file. Members' and mentors' answers are in the QNT User Manual.
+
+#### MP Training Opportunities (from the calendar delete tests, 2026-11-04, Session 906)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Test a vendor's behavior on throwaway data | The question could not be answered from documents alone. Far-future entries, removed in a `finally` block and confirmed gone, proved it with no risk to a real meeting. Teaches designing a safe live experiment and cleaning up after it | Intermediate |
+| "Success" does not mean it worked | Updating a deleted entry answered 200 and changed its time while it stayed deleted. Teaches reading the state back after a write instead of trusting the response | Beginner |
+| A test that proves nothing | One round's guest copy read 404 because it had not appeared yet (more than 8 seconds). Teaches polling for slow effects, and telling "not there yet" from "not there" | Intermediate |
+| Check who a rule is true for before writing it | A bold "don't delete" line sounded right for everyone, and would have told mentors something untrue. Teaches mapping each audience to the fact before writing the sentence | Beginner |
+| Find what a planned fix would not catch | A morning restore can't catch a delete made later that morning, before a meeting that day. Teaches walking a fix through the timeline and saying its limit before anyone approves it | Beginner |
+| Run the check you hand to someone else | A check written into a handoff printed nothing because its search did not fit the log's format, and the format checker still passed it. Teaches extracting and running exactly what you wrote | Beginner |
 
 ## BNI Meeting Recap System ⭐ NEW
 
@@ -14312,4 +14347,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-05 07:33 (v6.96)*
+*Last updated: 2026-11-05 07:40 (v6.98)*
