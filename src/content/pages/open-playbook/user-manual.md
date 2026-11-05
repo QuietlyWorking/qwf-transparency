@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-05 07:02 | Source version: 6.91
+> Generated: 2026-11-05 07:18 | Source version: 6.92
 
 # QWU Backoffice User Manual
 
@@ -222,6 +222,18 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 | A cascade that carries numbers may not carry names | The public cost page takes its prices from the cost file but types the machine names itself, so a resize would have shown new prices beside old names. Teaches tracing every reader of a change, not only the documented ones | Intermediate |
 
 **Most valuable MP exercise:** give a student a resize runbook and read-only access to a practice subscription, and ask them to answer three pre-checks with commands, quoting the output line that proves each answer.
+
+#### MP Training Opportunities (from the L4G artwork choice walk, 2026-11-04, Session 901)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Walk a path as a first-time person, then say what happens in plain words | Pressing each button on a page after paying showed a choice that saved nothing and a "Welcome Back" sign-in for someone who had never signed in. Reading the code named the same facts, and walking it showed how they feel. Teaches testing from the person's side | Beginner |
+| Test a signed-in page with stand-in data | The preview talks to the real database, so a real form press would hold a real space. A private copy with made-up data ran the real page safely. Teaches knowing what a test environment is really connected to | Intermediate |
+| Trace every reader before turning a value on | A field empty for months had five readers waiting. One would have sent 12 emails to a 12-month donor-partner, because it counts rows, not payments. Teaches asking "what wakes up when this stops being empty?" | Intermediate |
+| Ask one reader without showing your answer | A second reader, given only the facts, agreed on the main call and disagreed on one point worth weighing. Teaches getting a view your own answer has not shaped | Beginner |
+| Look at the page at both widths before trusting the order | On a phone the question comes right before the pay button. On a computer the pay button stays in view and the question can sit below the fold, so a person could pay without seeing it. Teaches that layout changes what a person reads | Beginner |
+
+**Most valuable MP exercise:** give a student a live flow and a made-up account, and ask them to write what happens in five plain sentences, then name one promise on the page that nothing keeps.
 
 #### MP Training Opportunities (from a presentation app ship and a document comparison, 2026-11-04, Session 899)
 
@@ -5370,8 +5382,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v6.91 by generate_public_manual.py"
-generated: "2026-11-05 07:02"
+source: "Auto-generated from private manual v6.92 by generate_public_manual.py"
+generated: "2026-11-05 07:18"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14234,4 +14246,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-05 07:02 (v6.91)*
+*Last updated: 2026-11-05 07:18 (v6.92)*
