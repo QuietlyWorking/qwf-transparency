@@ -2,20 +2,20 @@
 title: "QWU Backoffice User Manual"
 slug: "user-manual"
 pillar: "open-playbook"
-description: "**Version: 6.76 | Started: 251223 | Updated: 261103**"
+description: "**Version: 7.03 | Started: 251223 | Updated: 261105**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-11-04"
+modifiedDate: "2026-11-05"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-05 07:52 | Source version: 7.02
+> Generated: 2026-11-06 01:15 | Source version: 7.03
 
 # QWU Backoffice User Manual
 
-**Version: 6.76 | Started: 251223 | Updated: 261103**
+**Version: 7.03 | Started: 251223 | Updated: 261105**
 
 A comprehensive guide to the QWU Backoffice agent workspace, covering architecture, daily operations, automation, and development workflows. These notes serve both as operational documentation and educational curriculum for Missing Pixel students.
 
@@ -4189,7 +4189,7 @@ The L4G system includes:
 - **What a function's log may say (Session 894):** our own words and an error's code, status or class name, through `_shared/error-code.ts`. `deploy_l4g_edge_function.py` v1.3.0 refuses anything else, on an allow-list, in a log line or a `new Fail(...)`, for every L4G function; a new kind of safe value is added to the rule on purpose. For `create-checkout-session` it also refuses any code that names or makes a Stripe customer. Use that script, never a hand-run `supabase functions deploy`, which skips both.
 - **Email look (Session 894):** the journey emails and TIG's note call `l4g_email_look.dress_for_send` at send time, as the receipt and the welcome do; the note wears the header and mailbox. Both senders stay held, and on any surprise an email goes in the old look and the day's log names the sender.
 - **MP training opportunities (Session 894):** (1) *Rehearse a ship on its real path* (Intermediate, 2 hours; prerequisites: bash, git): stand in the program a step calls, never the step, then put a bug back to prove the rehearsal catches it. (2) *Allow-list versus block-list* (Beginner, 1 hour; prerequisite: reading Python): write a rule that refuses what it has not heard of, and try to get a line past it. (3) *A zero is only a zero if the query worked* (Intermediate, 1 hour; prerequisites: SQL, JSON): query a log store with a wrong table name, see the empty answer, then make the script stop on it. (4) *Read what a deploy really shipped* (Intermediate, 1 hour; prerequisite: REST APIs): list the libraries in a function's bundle before and after a redeploy, and explain what moved although the code did not.
-- **Sign-in links (Session 896, 2026-11-04):** every L4G sign-in email and the welcome's button link to the site's own `/auth/confirm`, with the one-time token after `#`. A browser never sends that part to any server, so opening the link sends the token nowhere; the page takes it out of the address bar and spends nothing until its one button is pressed. The sign-in link and password reset emails also carry a code, typed on the page that asked for the email. The code and the link are one key: using either spends both, so the code is for someone reading on another device, or whose link arrived cut short. Links and codes last 1 hour (the sign-in service's `mailer_otp_exp`, 3600), and the emails say so; after that the person lands on the page that sends a fresh one. The vault's `005 Operations/Templates/email/l4g/` JSON files render what is live, and `audit_qwf_auth_mail.py` v1.5.0 alarms if the links or their hour go back. The rule behind all of it: `qwf_email_sending_standard.md` Part 6b.
+- **Sign-in links (Session 896, 2026-11-04):** every L4G sign-in email and the welcome's button link to the site's own `/auth/confirm`, with the one-time token after `#`. A browser never sends that part to any server, so opening the link sends the token nowhere; the page takes it out of the address bar and spends nothing until its one button is pressed. The sign-in link and password reset emails also carry a code, typed on the page that asked for the email. The code and the link are one key: using either spends both, so the code is for someone reading on another device, or whose link arrived cut short. Links and codes last 1 hour (the sign-in service's `mailer_otp_exp`, 3600), and the emails say so; after that the person lands on the page that sends a fresh one. Since 2026-11-05 the page reads the token only after `#`: an address with the token in it (`?token_hash` or `?code=`, the form before 2026-11-04) lands on that same page, the server exchanges no code, and `prove_l4g_site_hardening.py` v1.21.0 holds the page to it. The vault's `005 Operations/Templates/email/l4g/` JSON files render what is live, and `audit_qwf_auth_mail.py` v1.5.0 alarms if the links or their hour go back. The rule behind all of it: `qwf_email_sending_standard.md` Part 6b.
 - **locals4good.com (Session 896):** answers with the `.org`'s own web settings: full SSL, HTTPS always, TLS 1.2 or newer, HSTS for a year with nosniff. Both names, on http and https, send visitors to `https://locals4good.org/`.
 - **Who answers for the site proof (Session 896):** the L4G site-hardening lane answers for `prove_l4g_site_hardening.py` and `l4g_email_look.py`. Another lane may extend the proof on these terms: additions only, the diff to that lane first, one control per protection, never a weaker check, and default mode on the final tree before it is installed.
 - **MP training opportunities (Session 896):** (1) *Read the rule before designing the fix* (Beginner, 1 hour; no prerequisites): read Part 6b of the email standard, then mark a sign-in email from a test project against its four rules, met or missed, and explain why a code beside a link is another way to use the same key, not a spare one. (2) *What a server sees of a link* (Intermediate, 2 hours; prerequisites: HTML, browser developer tools): open the same link with its token after `?` and after `#` against a local server, and read what each leaves in the log. (3) *A check that can fail* (Intermediate, 3 hours; prerequisites: Python, Playwright basics): write one browser check for a page's words, then put the old words back on purpose and show the check fails on that and on nothing else.
@@ -5493,8 +5493,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.02 by generate_public_manual.py"
-generated: "2026-11-05 07:52"
+source: "Auto-generated from private manual v7.03 by generate_public_manual.py"
+generated: "2026-11-06 01:15"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14441,4 +14441,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-05 07:52 (v7.02)*
+*Last updated: 2026-11-06 01:15 (v7.03)*
