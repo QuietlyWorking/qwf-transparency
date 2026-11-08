@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 7.03 | Started: 251223 | Updated: 261105**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-11-05"
+modifiedDate: "2026-11-07"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-06 01:15 | Source version: 7.03
+> Generated: 2026-11-08 07:12 | Source version: 7.05
 
 # QWU Backoffice User Manual
 
@@ -1375,6 +1375,23 @@ Claude executes without asking "May I run this command?" each time.
 **Best for:** Trusted, repetitive tasks. Overnight agent runs. When you've already validated the workflow.
 
 **⚠️ Use with caution** - it will do exactly what it decides to do!
+
+**It still stops for a few things.** Even in this mode, Claude Code waits for your OK before some actions. The one you will meet most (since Claude Code 2.1.317): any command or web request that holds your own email address, in case it would send that address off the machine. Our sessions are told never to type your address (commits take it from git's saved identity, mailbox code reads it from settings), so when that card does appear, a session is usually about to give your address to an outside website, and declining is the right answer. The others are rare: an explicit "ask" rule, a delete aimed at a critical folder, and a question Claude asks you on purpose.
+
+**Where this mode comes from.** In the VS Code panel the starting mode comes from the extension's own settings on the server (`claudeCode.initialPermissionMode` and `claudeCode.allowDangerouslySkipPermissions`). The `defaultMode` line in the project's `.claude/settings.json` has been ignored since Claude Code 2.1.257, so a plain `claude` in the terminal starts in Normal mode unless you pass the flag above.
+
+**When a session seems stuck:** look for a waiting permission card first. To see which check asked, search the extension log for `-> ask by` (the Claude tool wisdom notes say where that log lives).
+
+#### MP Training Opportunities (from the 2026-11-07 "why is it asking me?" diagnosis, Session 933)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Read the record of the thing that decided, not the settings you hoped it read | Every setting said "never ask," yet commands stopped. The answer was one line in the editor extension's own log naming the check that asked. Teaches finding the decision point's own record instead of re-reading configuration | Intermediate |
+| Count before you conclude | All 38 stops in three days traced to one cause, and sorting them showed a third were the check doing its job (an address headed to outside websites). Teaches measuring a complaint before fixing it, so the fix keeps the protection | Beginner |
+| Fix the habit, keep the guard | Turning the check off would have ended the stops and the protection together. Removing the reasons routine work tripped it ends the noise and keeps the guard. Teaches telling a noisy safety check from a wrong one | Intermediate |
+| Read release notes as part of diagnosis | Two updates changed what this setup relied on: one added the check, an earlier one quietly stopped honoring the project-level "skip prompts" line. Teaches checking what changed underneath you before blaming your own code | Beginner |
+
+**Most valuable MP exercise:** give a student a session that "suddenly started asking permission," read access to its logs and the tool's release notes, and ask them to name the one check responsible, quoting the log line that proves it.
 
 ### Useful Commands Inside Claude Code
 
@@ -3691,6 +3708,7 @@ const weekAgo = getPacificDaysAgo(7);         // 7 days ago in Pacific
 | Tracing One Alert Back to Its Cause (2026-08-30) | Following a single SMS backwards through five independent systems ... Twilio's REST API, a SQLite queue, run logs, n8n's Postgres, and the Graph mailbox ... instead of trusting the first plausible story. The habit being taught: **read the recipient's copy, not the send result.** Two shipped bugs this session were caught only by re-reading the rendered artifact after the fix. | Beginner |
 | Proving What an Automation Actually Does (2026-09-10) | Reading an orchestrator's **per-execution node history** instead of its diagram. A workflow ran every 5 minutes and reported success every time, and its JSON clearly showed the pipeline step ... but the step sat behind a "did new input arrive?" gate, so it fired on exactly one tick and never again. Listing which nodes actually ran per execution, and contrasting the tick around the event with its neighbours, settled in one pass what reading the design could not. The habit being taught: **name the triggering event and the state change you care about out loud, and check they are the same thing.** | Intermediate |
 | Internal vs Outbound Data Boundaries (2026-08-30) | Recognizing that fields sitting side by side in one dict do not share an audience. An LLM analysis record held `{speaker, quote, significance}`; the first two were the person's, the third was our private assessment, and a template pasted all three into their inbox. Teaches trust boundaries, allowlist-not-blocklist rendering, and asking "would I say this to their face?" before interpolating. | Intermediate |
+| Proving a Parser Change Is Safe (2026-11-07) | Changing a reader that live senders share without changing what they do: pin the new code against the OLD code (a parity test that runs the old reader verbatim), compare 31,000 random rows between old and new, plant one fault at a time and prove a test fails for each (mutation testing), and hand the code (not your conclusions) to an adversarial reviewer for several passes. Ship each version by atomic file swap and check who the senders reach before and after | Advanced |
 | Race Conditions and Atomic Claims (2026-08-30) | A status field meaning BOTH "discovered" and "claimed, in flight" let two overlapping jobs process the same record. Teaches state-machine design, `BEGIN EXCLUSIVE` / compare-and-set, lease expiry so a crashed worker cannot wedge a queue forever, and proving the fix with a concurrency test (8 threads, exactly 1 winner) rather than by reasoning. Directly transferable to any job queue. | Advanced |
 | Idempotency by Design (2026-08-30) | Making a repeated run harmless instead of forbidding repeats: a composite primary key claimed inside a transaction, released on failure so a retry can pick it up. Core distributed-systems concept, high employer demand, and demonstrable in a 20-line SQLite example. | Intermediate |
 | The Permission That Silently Does Nothing (2026-09-06) | A database row-security policy listed a role name the application had retired, so an update by a valid manager changed nothing and returned success with an empty result ... the button reported "saved" for a day. Teaches Postgres row-level security, reading `pg_policies` instead of trusting a policy's NAME, and the habit that closes it: any write whose success you are about to REPORT must return its rows and be checked by COUNT, never by the error flag. Also teaches preferring one shared helper function over the same role list copy-pasted into four policies. | Intermediate |
@@ -5493,8 +5511,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.03 by generate_public_manual.py"
-generated: "2026-11-06 01:15"
+source: "Auto-generated from private manual v7.05 by generate_public_manual.py"
+generated: "2026-11-08 07:12"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7504,6 +7522,8 @@ non-reply email from [Networking Chapter]mc@gmail.com reaches the reader, and on
 Lesson for any reader of someone else's format: never let a filter in front of the loud alarm read their wording.
 
 **Since v2.5.0 (2026-11-04) a form link goes to members only after we have opened it.** A member wrote to say the feedback link for one applicant opened another applicant's form, and she was right: on 2026-11-02 every member got the wrong form in two emails. The committee had built its email from an older one, so the link's words showed the old address and a click went to the right one, and we copied the words. Now every address the email offers is opened, and the one whose own Name line names the applicant is used, through one chokepoint (`member_form_check`) shared by the sweep, the Send button and the "updated page" email. A form naming someone else or nobody never goes: the member gets their report with the reply wording, and TIG is told. Each send is written down as it happens, as sent, certainly not sent, or unknown; an unknown send is never retried by a machine, and a killed run resumes. A one-time fix for a wrong link already sent: `--set-form`, then `--preview-correction`, then `--correct-form`, whose words TIG blesses per request. First real run 2026-11-04: the right form to 18 members ([Networking Chapter]-System-Status K55).
+
+**How every stop table is read (since 2026-11-07, `chapter_member_recipients.py` v1.4.0).** The four stop tables in the consent register (WCR, ROOM LIST, ROAD SHOW and RECAP: STOPPED) are read by one shared reader that every chapter email imports. A stop row typed oddly (in backticks, behind a quote mark or a list mark, struck through, missing its first bar, inside a comment, with lookalike bars) is tidied and honored, and TIG is told once so it can be tidied (TIG: "honor and tell me"). A line that could be a stop but cannot be read stops that email for everyone and tells him: a line holding a bar that is not a row, any words under the table, words between the example row and the table, or a stop table written twice. Each table's example is the same made-up line, `Sam Example`, the only row never read. **Editing rule:** write a stop exactly like the example; keep notes above the example, without a `|`, and nothing under the table. Before 2026-11-07 a decorated stop row was skipped in silence ([Networking Chapter]-System-Status K60).
 
 **The meeting-morning room list is a fourth script (2026-10-28).** `send_meeting_room_list.py` (v1.2.0)
 sends ONE short email to every active member at **6:00 Pacific on the meeting day**, from TIG's mailbox
@@ -14441,4 +14461,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-06 01:15 (v7.03)*
+*Last updated: 2026-11-08 07:12 (v7.05)*
