@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-08 07:12 | Source version: 7.05
+> Generated: 2026-11-08 08:54 | Source version: 7.06
 
 # QWU Backoffice User Manual
 
@@ -3981,6 +3981,8 @@ A new public game on a live board with prizes, from its page to its ship, plus a
 
 **The calling screen (migration 083, live 2026-11-04):** `quietlycrm.org/calls`, each call's sheet, and `/calls/held`, behind the console's sign-in with MFA, phone first. The Call button asks the database first and only its yes hands back the dial link, the one `tel:` in the console, so a stale page cannot dial someone who said stop. The next call waits until the last has an outcome. TIG dials from his own phone. Nothing records, and a yes drafts nothing yet. Design: `QCM-Call-Screen-Design.md`.
 
+**The card and the trade on each call (live 2026-11-07 and 2026-11-08).** A call's campaign names its card (`coto-de-caza-2027-01`: a neighborhood's slug, then the month). The console's server reads that card live from `locals4good.org/api/card-progress?...&trades=all` (the site's own rules) and shows its progress below the call. Each call can carry its business's trade (migration 088 keeps only the site's trade id); right below the Call box the sheet then says whether that trade's spot is open or taken on the card, in the site's own words, or plainly that it could not check. A trade is set only on TIG's word: `manage_qcm_calls.py set-trade --item-id ID --trade "Auto Repair"` (dry run first with `--dry-run`), which finds the name in the site's own list and refuses "Other" or a trade the site does not offer.
+
 **The one youth rule and the mark.** `qcm_contact_youth_hold` holds a known minor, a `student` state, or a link to a youth-protected program with no adult-partner mark: no queue row, no Call button, no sheet, and the only word printed is `youth_hold`. A birth date frees nobody, because the standard's youth runs to 30. Every call that happens is still logged. A mark is TIG's word only: two taps on `/calls/held`, or `mark-partner` on his spoken word. It can be taken back and stays on the record.
 
 - **Adding a name:** only on TIG's word, one at a time. `add --program l4g --phone N --contact-id C --org-id O --campaign K --why "his words"`. The campaign must contain "coto", "rpv" or "palos", or the sheet shows a bracketed slot instead of the mailbox count.
@@ -5511,8 +5513,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.05 by generate_public_manual.py"
-generated: "2026-11-08 07:12"
+source: "Auto-generated from private manual v7.06 by generate_public_manual.py"
+generated: "2026-11-08 08:54"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14461,4 +14463,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-08 07:12 (v7.05)*
+*Last updated: 2026-11-08 08:54 (v7.06)*
