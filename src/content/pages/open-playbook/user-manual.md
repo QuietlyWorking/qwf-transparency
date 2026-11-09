@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 7.03 | Started: 251223 | Updated: 261105**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-11-07"
+modifiedDate: "2026-11-09"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-09 05:53 | Source version: 7.06
+> Generated: 2026-11-09 20:43 | Source version: 7.07
 
 # QWU Backoffice User Manual
 
@@ -5515,8 +5515,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.06 by generate_public_manual.py"
-generated: "2026-11-09 05:53"
+source: "Auto-generated from private manual v7.07 by generate_public_manual.py"
+generated: "2026-11-09 20:43"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -12453,10 +12453,13 @@ Copies, reports and screenshots live in `/home/<VM_USER>/wp-legacy-freeze/`. The
 |--------|--------------|
 | `freeze_wp_site.py` | Crawls a live site (sitemaps + links the site answers 200), turns links WordPress redirects into redirect rules, copies Slider Revolution runtime folders over read-only SSH, closes asset gaps, normalizes names, restores Cloudflare-obfuscated emails, shrinks oversized media, writes `_headers` / `_redirects` / `_routes.json` |
 | `deploy_frozen_site.py` | Creates the Pages project if needed and deploys the copy with its one edge function (www and alias redirects, honest form and comment replies, noindex on `*.pages.dev`) |
+| `edit_frozen_site.py` | Makes one counted edit to a frozen copy, in both of its trees (`public/` and `raw/<host>/`), from a small JSON spec: text replacements that must match an exact number of files and copies, and picture swaps that must keep each picture's format and pixel size. Dry run by default; `--apply` backs up every file it will touch, writes each one atomically, then re-checks. It never deploys |
 | `verify_frozen_site.js` | Loads each page live and from the deployment in Chromium, compares pixels, lists files the copy lacks |
 | `cutover_wp_legacy_to_pages.py` | Dry run by default; `--apply` moves the web records (MX and everything else untouched) and saves a rollback file; `--rollback <file>` restores in under a minute |
 
 **Editing a page now:** edit the copy under `sites/<host>/public/` and redeploy with `deploy_frozen_site.py --host <site>`. Do not use wp-admin. Re-freezing from the private WordPress is not possible yet: the freeze tool crawls the public hostname, which now answers from the copy. Full record, deliberate differences and every rollback: `002 Projects/_QWU WordPress Multisite/QWU-WPMU-Freeze-Move-Plan.md`.
+
+**A repeatable edit (added 2026-11-08):** for the same change across many pages, or to swap pictures, write a spec and run `edit_frozen_site.py --host <site> --spec <file>` (a dry run that prints the plan), then the same command with `--apply`, then redeploy with `deploy_frozen_site.py --host <site>`. Undo: unpack the backup it names into `sites/<host>/` and redeploy. First used on 2026-11-08 to put the new War on Hopelessness pictures and shop links on all 71 quietlyworking.org pages (142 page files and 16 pictures across the two trees).
 
 **Only the live copy exists (2026-10-31).** Each form site's Pages project (quietlyworking-org, missingpixel-org, heroeskids-org) holds only its live deployment: every older one was deleted after Turnstile's first clean week, because old copies kept taking messages without the bot check at their own `pages.dev` address and none was a safe rollback. To undo a change, deploy the copy fresh (`--no-turnstile` only if the bot check itself breaks). Since `deploy_frozen_site.py` v1.3.0 a copy takes a form post only at the site's own address (a signed canary from `check_qwf_site_forms.py` excepted), so a preview cannot become a second door into TIG's inbox; prove a preview with `check_qwf_site_forms.py --base SITE=URL`.
 
@@ -12469,6 +12472,15 @@ Copies, reports and screenshots live in `/home/<VM_USER>/wp-legacy-freeze/`. The
 | Move a domain with a one-command undo | DNS records, Cloudflare API, proxied CNAMEs, custom-domain validation | REST APIs, JSON | 2 h | Intermediate |
 | Teaching moment: a form that says "thanks" and delivers nothing | Tracing a message end to end; "a fallback nobody hears is a new silent failure" | None | 1 h | Beginner |
 | Teaching moment: patch, move or leave? | Reading a CVE advisory, weighing mitigation vs migration under time pressure | Some ops experience | 1-2 h | Advanced |
+
+#### MP Training Opportunities (from the War on Hopelessness pictures on quietlyworking.org, 2026-11-08 and 09)
+
+| Task | Skills taught | Prerequisites | Time | Complexity |
+|------|---------------|---------------|------|------------|
+| Edit a static site safely: counted, backed up, rehearsed | Exact-count find and replace, atomic writes, a backup before any write, refusing a second run, rehearsing on a full copy and undoing it | Python basics, command line | 2-3 h | Intermediate |
+| Replace pictures without breaking a page | Reading a picture's format and pixel size, rendering vector art to exactly the same size, proving the live file is byte-equal, purging a cache | Basic image editing | 2 h | Beginner |
+| A batch fix that applies exactly what was previewed | Dry runs, previewing a patch, applying that patch and nothing else, checking each changed file afterwards | Command line, git basics | 1-2 h | Intermediate |
+| Teaching moment: a check that read zeros it could never see | A web check counted 0 for "profit" because the shop sent compressed bytes; read decompressed, its 6 hits were all inside "nonprofit". Teaches testing a check against a known positive and matching whole words | None | 30 min | Beginner |
 
 ---
 
@@ -14465,4 +14477,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-09 05:53 (v7.06)*
+*Last updated: 2026-11-09 20:43 (v7.07)*
