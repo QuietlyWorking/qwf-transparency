@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-08 08:54 | Source version: 7.06
+> Generated: 2026-11-09 05:53 | Source version: 7.06
 
 # QWU Backoffice User Manual
 
@@ -4213,6 +4213,7 @@ The L4G system includes:
 - **locals4good.com (Session 896):** answers with the `.org`'s own web settings: full SSL, HTTPS always, TLS 1.2 or newer, HSTS for a year with nosniff. Both names, on http and https, send visitors to `https://locals4good.org/`.
 - **Who answers for the site proof (Session 896):** the L4G site-hardening lane answers for `prove_l4g_site_hardening.py` and `l4g_email_look.py`. Another lane may extend the proof on these terms: additions only, the diff to that lane first, one control per protection, never a weaker check, and default mode on the final tree before it is installed.
 - **MP training opportunities (Session 896):** (1) *Read the rule before designing the fix* (Beginner, 1 hour; no prerequisites): read Part 6b of the email standard, then mark a sign-in email from a test project against its four rules, met or missed, and explain why a code beside a link is another way to use the same key, not a spare one. (2) *What a server sees of a link* (Intermediate, 2 hours; prerequisites: HTML, browser developer tools): open the same link with its token after `?` and after `#` against a local server, and read what each leaves in the log. (3) *A check that can fail* (Intermediate, 3 hours; prerequisites: Python, Playwright basics): write one browser check for a page's words, then put the old words back on purpose and show the check fails on that and on nothing else.
+- **Artwork is private until approved (LIVE 2026-11-07, TIG's "migrate and ship"):** TIG's rule: all artwork is private until the donor-partner approves it, then public on the public card; a donor-partner's own ad is public when they send it. Proof drafts and message pictures go to the private bucket `l4g-private` and are shown only through 10-minute links signed with the viewer's own session. A database rule, `l4g_proof_art_rule`, refuses a public address on any version waiting for approval and a private one on art written as approved. **Scheduled job:** `publish_l4g_approved_art.py` v1.1.0 runs every minute from cron (through `safe_run.sh`, label `l4g-publish-art`, log `.tmp/logs/l4g_publish_art.log`). It copies an approved private draft to `l4g-proofs`, publishes only when the copy matches the draft byte for byte, and alarms TIG (TODAY) on an approved proof still private after 5 minutes, a waiting proof with a public address, or a public proof file no proof uses. Watchdog: Betterstack heartbeat 527759 (SMS, email and push). It uses only the new secret key and refuses a legacy one, so it ran clean through the two-factor lock and the old keys going off (2026-11-08). Record: `L4G-System-Status.md`, the private art lane's sections; design `L4G-Private-Proofs-Plan-v0.2.md`.
 - **CX Automation Backend (Session 207):** 6 scripts covering the full after-purchase journey ... proof upload, AI concept pipeline (enrich → brand identity → 3 briefs), concept choice processing, conversation email mirror, batch print advancement, post-delivery feedback. Plus `add_l4g_donor_booking.py` for admin onboarding outside website checkout.
 - **SvelteKit Migration Scaffold (Session 207):** `sveltekit-migration` branch ... adapter-cloudflare, Supabase SSR auth, Mailbox Walk CSS ported, builds in 2.4s. `L4G-Phase-Prompts.md` contains 8 copy-paste prompts for remaining migration phases 4-11.
 - **AI Ad Pipeline:** `enrich_donor_company.py` → `generate_brand_identity.py` → `generate_ad_briefs.py` (Claude FLAGSHIP, 3 approaches: Trust Builder/Value Driver/Story Teller)
@@ -4251,10 +4252,11 @@ The L4G system includes:
 | `extract_l4g_zip_boundaries.py` | Extract ZIP boundary GeoJSON from Census TIGER API | v1.0.0 |
 | `enrich_l4g_demographics.py` | Census ACS 5-Year enrichment (42 vars, batched). Flat JSONB output, column sync. Income, home values, education, occupation, housing age, vehicles, household profile, family stats, veterans. Home Services Score + Best For + market summary. Flags: `--slug`, `--all`, `--dry-run` | v2.0.0 |
 | `add_l4g_donor_booking.py` | Admin donor onboarding ... creates auth user, donor_partner, booking, ad_proof, updates inventory. For donors who commit outside website checkout (SuiteDash, phone, in-person). `--dry-run`, `--send-welcome` | v1.0.0 |
-| `upload_l4g_proof.py` | Upload proof image to Supabase Storage, update ad_proof record to 'submitted'. `--booking-id`, `--image-path`, `--dry-run` | v1.0.0 |
+| `upload_l4g_proof.py` | Upload a proof draft for review to the private bucket `l4g-private` and send it through `l4g_send_proof_for_review` (v1.3.0: drafts private until approved; GIF refused). `--booking-id`, `--image-path`, `--dry-run` | v1.3.0 |
+| `publish_l4g_approved_art.py` | Publishes approved private proof art to the public card: copies the draft to `l4g-proofs`, checks it byte for byte, points the proof at the copy; alarms TIG on art in the wrong place. Every minute via cron, Betterstack heartbeat 527759 | v1.1.0 |
 | `run_l4g_concept_pipeline.py` | End-to-end "MP Creates" AI pipeline: website enrichment → brand identity → 3 ad briefs → concept proof placeholders → donor notification (2x Claude FLAGSHIP) | v1.0.0 |
 | `process_l4g_concept_choice.py` | Process donor's concept selection ... marks chosen proof as in_progress, others as not_selected, updates booking to design_in_progress | v1.0.0 |
-| `send_l4g_conversation_email.py` | Email mirror for booking conversation threads (Exempt, MS Graph). Reply-To headers for email→thread routing, X-L4G-Booking-ID header | v1.1.0 |
+| `send_l4g_conversation_email.py` | Email mirror for booking conversation threads (Exempt, through `qwf_email_transport`: SES first, Graph fallback, since v2.0.0). Reply-To headers for email→thread routing, X-L4G-Booking-ID header (v2.4.0: no attachment link lines; names as plain text) | v2.4.0 |
 | `advance_l4g_print_batch.py` | Batch print status advancement for all bookings in an area/month. Wraps update_l4g_print_status.py. 7-state forward-only machine | v1.0.0 |
 | `process_l4g_feedback.py` | Post-delivery donor feedback ... stores emoji rating, response count, testimonial, would-recommend. Syncs to HQ, Discord notification | v1.0.0 |
 | `poll_l4g_email_replies.py` | Polls Ezer inbox via MS Graph for l4g-reply+ replies, strips quoted content, inserts into l4g_conversations, moves to L4G-Processed folder. State: `.tmp/l4g_reply_processed_ids.json`. Runs every 2 min via n8n | v1.0.0 |
@@ -5514,7 +5516,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v7.06 by generate_public_manual.py"
-generated: "2026-11-08 08:54"
+generated: "2026-11-09 05:53"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14463,4 +14465,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-08 08:54 (v7.06)*
+*Last updated: 2026-11-09 05:53 (v7.06)*
