@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-09 20:43 | Source version: 7.07
+> Generated: 2026-11-10 06:30 | Source version: 7.08
 
 # QWU Backoffice User Manual
 
@@ -4123,6 +4123,18 @@ has its own picture.
 **Most valuable MP exercise:** give a student a test that passes nine runs in ten and ask them to find the randomness,
 then rewrite the check so it tests every case on every run.
 
+### MP Training Opportunities ⭐ (from the L4G staff two-factor close, 2026-11-09, Session 949)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Believe the person, then read the system's own record | TIG reported being signed out after closing his phone's browser. The sign-in service's request logs showed he never was: what he tapped opened the sign-in page, and that page shows its form even to someone already signed in. Teaches separating what a person saw from what the system did, before fixing anything | Intermediate |
+| Prove who did what without printing who | Each request log line carries the sign-in's session and account. Comparing them inside the query, and printing only "this sign-in" or "another", traced one person's evening with no id on screen. Teaches diagnosis that keeps identities private | Advanced |
+| A record can be overwritten by a helper | The sessions table keeps the last browser name it saw, and a renewal done by the website's own server sends none, so the phone's sign-in looked like "no device". Teaches asking who last wrote a field before trusting it | Intermediate |
+| One check that covers two changes | The phone check waited until the website update was live, so one tap proved both the signing-key change and the new code. Teaches ordering tests to spend a person's time once | Beginner |
+| Review a teammate's change where it touches yours | Before the update shipped, only its sign-in hook was read against the two-factor rules: same order, same redirects, nobody new let in. Teaches scoping a review to your own boundary | Intermediate |
+
+**Most valuable MP exercise:** give a student a person's report ("it signed me out") and an hour of request logs with the identities replaced by labels, and ask them to say in three plain sentences whether the person was really signed out, quoting the log lines that prove it.
+
 ### MP Training Opportunities ⭐ (from the L4G site-hardening lane, 2026-10-29, Session 846)
 
 A reply to a Locals 4 Good sign-in email used to bounce; it now reaches a person, and Microsoft trusts the forwarded copy.
@@ -5515,8 +5527,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.07 by generate_public_manual.py"
-generated: "2026-11-09 20:43"
+source: "Auto-generated from private manual v7.08 by generate_public_manual.py"
+generated: "2026-11-10 06:30"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14477,4 +14489,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-09 20:43 (v7.07)*
+*Last updated: 2026-11-10 06:30 (v7.08)*
