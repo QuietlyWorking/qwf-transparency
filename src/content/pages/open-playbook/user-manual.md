@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 7.03 | Started: 251223 | Updated: 261105**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-11-09"
+modifiedDate: "2026-11-10"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-10 06:30 | Source version: 7.08
+> Generated: 2026-11-10 21:16 | Source version: 7.09
 
 # QWU Backoffice User Manual
 
@@ -4135,6 +4135,18 @@ then rewrite the check so it tests every case on every run.
 
 **Most valuable MP exercise:** give a student a person's report ("it signed me out") and an hour of request logs with the identities replaced by labels, and ask them to say in three plain sentences whether the person was really signed out, quoting the log lines that prove it.
 
+### MP Training Opportunities ⭐ (from the L4G deploy pipeline ship, 2026-11-10, Session 952)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Read a deploy log to the end, not its green check | The publish passed, and the log still had to show the Node version, the word check's summary line, the exact install, the deploy tool's version and the new address. A green check says a step did not fail; only the log says it did what was meant | Beginner |
+| Compare a log with the last good one | Last night's and today's build logs were compared line by line with the clock times and file hashes taken out: the same 59 warnings, so nothing new crept in. Teaches telling a new problem from an old, known one | Intermediate |
+| Prove "nothing a visitor sees changed" | The site's eight public pages were read word for word on the old deployment's own address and on the live site, and matched. Teaches checking a promise against the real pages instead of the code | Intermediate |
+| A count that disagrees with the plan | The plan expected 451 checks and the run had 454. Comparing the two runs by name showed the three new checks plus their three controls, so the plan had miscounted, not the proof. Teaches resolving a surprise at the source before moving on | Beginner |
+| Commit only your own lines in a shared file | Another team had an unsaved line in the same status page, so the commit was built from the last saved copy plus only this change, and their line stayed theirs. Teaches working in a shared repository without taking someone else's work | Advanced |
+
+**Most valuable MP exercise:** give a student two deploy logs (a good one and a new one, both from a test project) and ask them to list every line that differs, sort each into "only a clock or a name changed" or "something really changed", and say in one sentence whether the new deploy is safe.
+
 ### MP Training Opportunities ⭐ (from the L4G site-hardening lane, 2026-10-29, Session 846)
 
 A reply to a Locals 4 Good sign-in email used to bounce; it now reaches a person, and Microsoft trusts the forwarded copy.
@@ -5527,8 +5539,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.08 by generate_public_manual.py"
-generated: "2026-11-10 06:30"
+source: "Auto-generated from private manual v7.09 by generate_public_manual.py"
+generated: "2026-11-10 21:16"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13225,7 +13237,7 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 
 ### Site Hardening Proof (Oct 2026)
 
-`005 Operations/Execution/prove_l4g_site_hardening.py` (v1.20.0, 2026-11-04; each version's own note is at the top of the file) is the one proof every site-hardening change must pass before TIG's "ship". It builds the site, runs the changed code in node against an in-memory stand-in of the database that refuses what the live database refuses (a visitor reading bookings gets 42501, as live does), and checks the outcome; each check has a control that must fail on its own outcome only, so a check that could never fail is caught. `--db-parity` adds read-only checks on live data: the donor-partner website check against the database's own constraint, the tables' live columns, the visitor's space count against checkout's count (5 neighborhood-months, 0 disagreements at the v1.6.0 ship), and what the public key can read.
+`005 Operations/Execution/prove_l4g_site_hardening.py` (v1.25.0, 2026-11-10; each version's own note is at the top of the file) is the one proof every site-hardening change must pass before TIG's "ship". It builds the site, runs the changed code in node against an in-memory stand-in of the database that refuses what the live database refuses (a visitor reading bookings gets 42501, as live does), and checks the outcome; each check has a control that must fail on its own outcome only, so a check that could never fail is caught. `--db-parity` adds read-only checks on live data: the donor-partner website check against the database's own constraint, the tables' live columns, the visitor's space count against checkout's count (5 neighborhood-months, 0 disagreements at the v1.6.0 ship), and what the public key can read.
 
 | Version | Date | What it proves |
 |---------|------|----------------|
@@ -13233,8 +13245,10 @@ All 10 CX scripts validated end-to-end with `--dry-run`. Both artwork paths veri
 | v1.6.0 | 2026-10-28 | Queue item 0: the checkout widget counts sold spaces the way checkout does (through the public card reader, never the bookings table a visitor cannot read), refuses every size on a sold-out month, starts the 15-minute countdown only once payment exists (100 checks, 31 controls) |
 | v1.7.0 | 2026-10-29 | Queue item 1: `--forward` alone (no site build, under a minute) judges the sign-in reply forward: on 1.1.1.1 and 8.8.8.8, `accounts.locals4good.org` takes mail at Cloudflare only, with one SPF line; the root's Google mail, its one SPF line and the `bounce.accounts.` record unchanged; Cloudflare's signing key published; one rule, to one verified address, and nothing else forwarding (29/29: 17 checks, 12 controls) |
 | v1.20.0 | 2026-11-04 | A failed sign-in, a link or reset email that could not be sent, and a refused password change read in our words, never the sign-in service's, as a word-for-word table and in a real browser, whatever the service answers. A sweep of every non-staff source file refuses any line that could show a service's raw error text; staff pages keep the reason on purpose. The footer links the email promise (269 checks, 66 controls) |
+| v1.24.0 | 2026-11-09 | The framework update (SvelteKit 2.70.4): every redirect the site's own hook makes (the www and .com host, the second factor, the staff area) carries the four security headers and the cookies set before it, while a page's data and a form's script still get SvelteKit's own answer; the card progress answers as the built site serves them; the type check reads the site itself (it fails above 172 errors or under 600 files). New file `prove_l4g_answers_and_types.py`, loaded by the proof (448 checks, 108 controls) |
+| v1.25.0 | 2026-11-10 | The deploy pipeline: the deploy builds on the same Node as the proof (22), installs exactly the lock file (`npm ci`, never `npm install`), and runs the word check before it installs, builds or deploys anything (454 checks, 111 controls) |
 
-A run takes about 30 minutes; run it in the background and run it again if main moves under it (its first check says so). Records: channel `l4g-staff-check-fix-20261026-2254-4d039e`.
+A full run takes about an hour (65 minutes at v1.25.0); run it in the background and run it again if main moves under it (its first check says so). Records: channel `l4g-staff-check-fix-20261026-2254-4d039e`.
 
 ### References
 
@@ -14489,4 +14503,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-10 06:30 (v7.08)*
+*Last updated: 2026-11-10 21:16 (v7.09)*
