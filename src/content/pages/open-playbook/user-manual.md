@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-11 16:26 | Source version: 7.10
+> Generated: 2026-11-11 16:36 | Source version: 7.11
 
 # QWU Backoffice User Manual
 
@@ -5551,8 +5551,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.10 by generate_public_manual.py"
-generated: "2026-11-11 16:26"
+source: "Auto-generated from private manual v7.11 by generate_public_manual.py"
+generated: "2026-11-11 16:36"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -13295,7 +13295,7 @@ How L4G works out where to go next, before anyone says a place out loud. It is a
 
 A practice-and-party arcade for Locals 4 Good, built 2026-10-31 to 2026-11-02: Grab Your Category (the real
 reservation form as a timed game, with a shared board), a lobby of classic arcade cabinets at `/`, an idea box whose
-ideas reach only TIG, Mail Truck Dash played alone at `/truck` (LIVE 2026-11-03; 30 seconds on one big pad since 2026-11-04, its own phone and
+ideas reach only TIG (on the arcade's private `/admin` page, and since 2026-11-10 in his inbox within a minute: see the idea note below), Mail Truck Dash played alone at `/truck` (LIVE 2026-11-03; 30 seconds on one big pad since 2026-11-04, its own phone and
 computer boards, a first place is a throne), Referral Bop played alone at `/bop` (LIVE 2026-11-03: 60 seconds of signs in nine
 spots, one fixed pattern with its trades, whammies and spots shuffled per run, the board checking every bop by its own clock and
 doing its own count, its own phone and computer boards, a first place is a throne), and a live three-game show TIG runs from his
@@ -13311,6 +13311,13 @@ main, clean and unchanged since its build: merge main, build, run the suite, pus
 - **Three lanes share one repo** (`QuietlyWorking/l4g-play`): SHOW (the live show), EMAIL (the throne email) and LOBBY
   (the lobby and each game alone). Only `main` deploys; whoever ships second merges `origin/main` first; the lanes
   leave each other notes in the status file's header.
+- **The idea note (LIVE 2026-11-10, TIG's "alert me"):** every idea a visitor sends from the box reaches TIG's own inbox within
+  about a minute. `l4g_play_idea_note.py`, called each minute by the throne sender (its lock, cron line and heartbeat), reads the ideas
+  he has not been told about through the arcade's mail key, sends ONE note from `noreply@` carrying them (each labelled typed by a
+  visitor, with a link to the full list), then marks them told. At most 30 notes a Pacific day; a send is written down before it
+  starts, so an unsure send is never repeated and raises TIG's alarm once instead; only the live board ever sends. The ledger
+  (`005 Operations/Data/l4g_play_idea_ledger.jsonl`) holds ids only, never an idea's words. Hiding an idea on `/admin` does not
+  take back a note that already carried it.
 - **The throne email (RELEASED 2026-11-03):** whoever takes first place on Grab Your Category may add an email. `l4g_play_throne_mail.py`,
   every minute from crontab, confirms it (a confirm email, then a page with one button that also says 18 or older), and emails the player
   when someone takes their throne, up to three a day, in TIG's blessed words, from `tig@`. TIG gets a note on every change of first place,
@@ -14515,4 +14522,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-11 16:26 (v7.10)*
+*Last updated: 2026-11-11 16:36 (v7.11)*
