@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-10 21:16 | Source version: 7.09
+> Generated: 2026-11-11 16:26 | Source version: 7.10
 
 # QWU Backoffice User Manual
 
@@ -210,6 +210,18 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 - **Sundays 03:30 Pacific:** `tidy_vault_git.sh` packs the vault's loose git objects with a capped, non-aggressive `git gc` (`gc.auto` stays 0; auto-gc mid-session froze the VM twice in July). First run: `.git` 4.8 GB to 958 MB in 3 minutes.
 - **Sundays 03:40 Pacific:** `prune_disk_caches.py --apply` removes only what rebuilds itself: the npm download cache, superseded VS Code server builds, vault `.tmp/` entries untouched 30 days, and `node_modules` of app copies untouched 30 days. Never logs, backups, test fixtures, anything the vault or a script names, anything a running process uses, or Docker. Dry run is the default; every deleted path is logged to `.tmp/logs/disk_prune.log`. If an old app copy says a module is missing, run `npm install` (or `npm ci`) in it.
 - Result 2026-10-11: `/` went from 88% / 16 GB free to 60% / 50 GB free. Before this, `/` grew a steady 8-9 GB a month, mostly new app working copies (~0.4 GB each) and regrowing caches.
+
+#### MP Training Opportunities (from the L4G ad development process, 2026-11-10, Session 953)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Grade a study before you quote it | A popular marketing claim ("faces in ads lower conversion") had no source behind it, while the graded studies pointed the other way. Teaches grading evidence A to D and asking whether a study of web pages fits a mailed card. | Intermediate |
+| Read the rule at its source, not the blog that repeats it | Many marketing sites still say California lawyers must print a disclaimer beside client quotes; the State Bar's own 2019 opinion says today's rule does not require one. Teaches going to the primary source. | Beginner |
+| Read the platform's own terms before building on its data | A plan to pull reviews through Google's own connection looked clean until Google's API rules (management only, nothing kept past 30 days) ruled it out, and Google's brand guidance said a reviewer must okay their words in an ad. Teaches reading terms before building. | Intermediate |
+| Give every design choice its reason | Each choice in an ad names its source (the owner's brand, their voice, a graded finding or a trade rule) and what would change it. Teaches designing so the person you serve can understand and change anything. | Beginner |
+| Show the work where it will live | Putting an ad on the real card beside its neighbors answered the owner's worry in one picture. Teaches testing a design in its real setting. | Beginner |
+
+**Most valuable MP exercise:** give a student one advertising claim and ask them to find, read and grade two sources for it, then write one sentence on how well each fits a mailed card.
 
 #### MP Training Opportunities (from the 2026-10-28 resize-night pre-checks, Session 834)
 
@@ -5486,19 +5498,19 @@ Entity File Update
 
 # Step 2: Extract insights (preview first)
 .venv/bin/python "005 Operations/Execution/extract_121_insights.py" \
-  --file .tmp/121_transcripts/2026-01-21_Ramona_Petersen_transcript.json --preview
+  --file .tmp/121_transcripts/2026-01-21_[Supporter Person]_transcript.json --preview
 
 # Step 3: Apply to entity
 .venv/bin/python "005 Operations/Execution/extract_121_insights.py" \
-  --file .tmp/121_transcripts/2026-01-21_Ramona_Petersen_transcript.json --update-entity
+  --file .tmp/121_transcripts/2026-01-21_[Supporter Person]_transcript.json --update-entity
 
 # Step 4: Archive (after verifying entity updates)
-mkdir -p "100 Resources/Meeting Transcripts/2026/20260121-ramona-petersen-121"
-mv .tmp/121_transcripts/*Ramona* "100 Resources/Meeting Transcripts/2026/20260121-ramona-petersen-121/"
+mkdir -p "100 Resources/Meeting Transcripts/2026/20260121-[Supporter Person]-121"
+mv .tmp/121_transcripts/*[Supporter Person]* "100 Resources/Meeting Transcripts/2026/20260121-[Supporter Person]-121/"
 
 # Step 5: Upload recording to Drive
 .venv/bin/python "005 Operations/Execution/gdrive_upload.py" \
-  --file ".tmp/original.m4a" --folder "Meetings/2026/20260121-ramona-petersen-121" --name "original.m4a"
+  --file ".tmp/original.m4a" --folder "Meetings/2026/20260121-[Supporter Person]-121" --name "original.m4a"
 ```
 
 **Directive:** `005 Operations/Directives/process_121_recording.md`
@@ -5539,8 +5551,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.09 by generate_public_manual.py"
-generated: "2026-11-10 21:16"
+source: "Auto-generated from private manual v7.10 by generate_public_manual.py"
+generated: "2026-11-11 16:26"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -11761,7 +11773,7 @@ never be "sandbox only".
 | `prove_qqt_[Supporter Organization]_site_pages.py` | v1.8.0 | Proves [Supporter Organization]'s calculator pages in a real browser; `--channel stable`, `--drawings`, `--timing`, `--materials`, `--consent` | Read-only unless `--submit`; a live `--submit` texts [Supporter Organization]'s team, so it needs the "live proof" word and a warning first |
 | `prove_qqt_widget_hosts.py` | v1.0.0 | Proves which hosts the widget key serves (12/12) | GETs only; never prints the key |
 | `deliver_qqt_calculator_alerts.py` | v1.8.0 (LIVE) | The lead alerts; the homeowner's Timing answer leads the subject, text and Discord title | `--preview` composes without sending and hides contact details |
-| `create_outlook_draft.py` | v1.8.0 | Drafts TIG's emails; `--attach` now works on threaded replies | No send path, ever |
+| `create_outlook_draft.py` | v1.9.0 | Drafts TIG's emails; `--attach` and `--inline` (a picture inside the body, read back from the mailbox) now work on threaded replies | No send path, ever |
 
 **Writing a supporter's rows (the pattern every data step followed):** raw snapshot -> regenerate the undo and check it
 matches -> `apply_supabase_migration.py <file> --project-ref <ref> --rehearse` (runs against live, always rolls back) ->
@@ -14503,4 +14515,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-10 21:16 (v7.09)*
+*Last updated: 2026-11-11 16:26 (v7.10)*
