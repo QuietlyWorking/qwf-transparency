@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-11 16:40 | Source version: 7.11
+> Generated: 2026-11-15 05:37 | Source version: 7.12
 
 # QWU Backoffice User Manual
 
@@ -752,11 +752,11 @@ Students completing this module will learn:
 
 The self-hosted n8n instance uses pinned version tags for stability.
 
-**Current Version:** 2.45.5 (upgraded 2026-10-28 9 PM Pacific from 2.44.6, unattended on the armed schedule and verified at the source that night: ~20s down, 5 migrations, every workflow and timer intact, every timed workflow firing on 2.45's new durable scheduler. Upgrade history: `n8n_version_management.md` changelog. The HQ masthead strip tracks installed vs published vs vulnerable continuously.)
+**Current Version:** 2.47.7 (upgraded 2026-11-14 9 PM Pacific from 2.45.5, unattended on the armed schedule and verified at the source that night: ~19s down, 37 migrations, every workflow and timer intact. Upgrade history: `n8n_version_management.md` changelog. The HQ masthead strip tracks installed vs published vs vulnerable continuously; when it flags an advisory whose fix n8n names only on other release lines, the fix is found in the running code and pinned in `005 Operations/Data/n8n_advisory_code_checks.json` (10 such checks since 2026-11-15).)
 
 | Property | Value |
 |----------|-------|
-| Image | `docker.n8n.io/n8nio/n8n:2.45.5` (rollback image 2.44.6 kept) |
+| Image | `docker.n8n.io/n8nio/n8n:2.47.7` (rollback image 2.45.5 kept) |
 | Location | `~/n8n/docker-compose.yml` on qwu-n8n |
 | Monitor | `monitor_n8n_releases.py` hourly cron :41 on backoffice VM (live version via SSH + GHSA advisories; replaced the retired "n8n Version Monitor" workflow 2026-07-21) |
 | Port Binding | `127.0.0.1:5678` (localhost only, Caddy proxies HTTPS) |
@@ -771,6 +771,14 @@ The self-hosted n8n instance uses pinned version tags for stability.
 | Find a security fix in compiled JavaScript inside a container (and learn why BusyBox `grep --include` silently finds nothing) | grep/find, reading minified Node code, tool limits | Linux shell | 1.5 h | Intermediate |
 | Test a rule that clears warnings by deleting the evidence it replaces (counterfactual validation) | data validation design, Python, thinking like an adversary | Python, JSON | 3 h | Advanced |
 | Write a test that reproduces a reviewer's finding before fixing it | pytest, monkeypatching, test-first repair | Python | 1 h | Intermediate |
+
+#### MP Training Opportunities (from the 2026-11-14 n8n 2.47.7 upgrade, Session 962)
+
+| Task | Skills taught | Prerequisites | Time | Level |
+|---|---|---|---|---|
+| Decide whether a security advisory is reachable on OUR setup (read the advisory, then count users, roles, credential types and node types in the live database) | threat modeling, SQL on JSON columns, reading advisories | SQL basics | 1.5 h | Intermediate |
+| Compare a vendor's silent security bundle against a newer release line by line (GitHub compare and commit APIs, raw files at a tag) | git internals, REST APIs, Python, release-branch thinking | Python, git | 2 h | Advanced |
+| Explain one failed run from the server's own log (a restart's catch-up burst tripping sshd MaxStartups) | journalctl, SSH limits, correlating timestamps across two machines | Linux shell | 1 h | Intermediate |
 
 **The weekly package advisory note (2026-10-30, TIG's "guard it" and "today too"):** once a week (Mondays at 06:30 Pacific), `watch_dependency_advisories.py` reads Quietly Networking `main`'s `package.json` and `package-lock.json` and runs `npm audit` on the lockfile only (never an install, never a build gate). One record note goes to #agent-log every week, even when nothing is new: each NEW critical or high advisory in plain words (package, how it comes in, title and link, production tree or development tools only, and whether a same-major fix at least 14 days old exists), then the totals in GitHub's count and npm's. A new critical or high in the production tree also goes to TIG's phone the same day (TODAY), at most once a week. A week that cannot read says so; two in a row send a TODAY alert. Betterstack heartbeat 521772 texts TIG if a week passes without a clean run (security texts go at any hour). Status: `watch_dependency_advisories.py --status`. Repo list: `005 Operations/Data/dependency_advisory_watch_repos.json` (QNT only; another repo joins after its own triage). Detail: QNT System Status, Known Issues, "Dependency security alerts"; `github_tool_wisdom.md`.
 
@@ -5551,8 +5559,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.11 by generate_public_manual.py"
-generated: "2026-11-11 16:40"
+source: "Auto-generated from private manual v7.12 by generate_public_manual.py"
+generated: "2026-11-15 05:37"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14522,4 +14530,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-11 16:40 (v7.11)*
+*Last updated: 2026-11-15 05:37 (v7.12)*
