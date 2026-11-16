@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 7.03 | Started: 251223 | Updated: 261105**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-11-10"
+modifiedDate: "2026-11-16"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-16 05:46 | Source version: 7.13
+> Generated: 2026-11-16 22:58 | Source version: 7.15
 
 # QWU Backoffice User Manual
 
@@ -4258,6 +4258,8 @@ The L4G system includes:
 - **Who answers for the site proof (Session 896):** the L4G site-hardening lane answers for `prove_l4g_site_hardening.py` and `l4g_email_look.py`. Another lane may extend the proof on these terms: additions only, the diff to that lane first, one control per protection, never a weaker check, and default mode on the final tree before it is installed.
 - **MP training opportunities (Session 896):** (1) *Read the rule before designing the fix* (Beginner, 1 hour; no prerequisites): read Part 6b of the email standard, then mark a sign-in email from a test project against its four rules, met or missed, and explain why a code beside a link is another way to use the same key, not a spare one. (2) *What a server sees of a link* (Intermediate, 2 hours; prerequisites: HTML, browser developer tools): open the same link with its token after `?` and after `#` against a local server, and read what each leaves in the log. (3) *A check that can fail* (Intermediate, 3 hours; prerequisites: Python, Playwright basics): write one browser check for a page's words, then put the old words back on purpose and show the check fails on that and on nothing else.
 - **Artwork is private until approved (LIVE 2026-11-07, TIG's "migrate and ship"):** TIG's rule: all artwork is private until the donor-partner approves it, then public on the public card; a donor-partner's own ad is public when they send it. Proof drafts and message pictures go to the private bucket `l4g-private` and are shown only through 10-minute links signed with the viewer's own session. A database rule, `l4g_proof_art_rule`, refuses a public address on any version waiting for approval and a private one on art written as approved. **Scheduled job:** `publish_l4g_approved_art.py` v1.1.0 runs every minute from cron (through `safe_run.sh`, label `l4g-publish-art`, log `.tmp/logs/l4g_publish_art.log`). It copies an approved private draft to `l4g-proofs`, publishes only when the copy matches the draft byte for byte, and alarms TIG (TODAY) on an approved proof still private after 5 minutes, a waiting proof with a public address, or a public proof file no proof uses. Watchdog: Betterstack heartbeat 527759 (SMS, email and push). It uses only the new secret key and refuses a legacy one, so it ran clean through the two-factor lock and the old keys going off (2026-11-08). Record: `L4G-System-Status.md`, the private art lane's sections; design `L4G-Private-Proofs-Plan-v0.2.md`.
+- **The portal consent card and the daily link check (LIVE 2026-11-12 to 2026-11-16, TIG's "bless" and "ship"):** `send_l4g_journey_email.py` v2.6.0 sends the five updates about a donor-partner's ad as `transactional` (locked on, no stop link) and the check-in a week after the mail drop as `relationship_touchpoint` (fail-closed, with the footer); the portal card asks only that one question ("Yes, I'd love that" / "Not now", live on locals4good.org 2026-11-16). A yes from a login with no QCM link is refused out loud (`record-portal-consent` v13 answers 409), and `check_l4g_login_qcm_links.py` v1.1.0 looks every morning at 08:20 Pacific for any login with no link (TODAY alert by business name; Betterstack heartbeat 531352). `deploy_l4g_edge_function.py` v1.4.1 lets a log line carry `donor.id`, the record's own id, on TIG's "allow it". Records: L4G-System-Status, the 2026-11-12 and 2026-11-16 sections.
+- **One hold per neighborhood (LIVE 2026-11-16, TIG's "ship"):** the site keeps a hold key per neighborhood, so holding a second neighborhood never lets the first go; `manage-hold` v1.2.0 replaces only a group in the same neighborhood, and `expire-stale-holds` v1.2.0 marks a hold expired only if it is still active and still past its time in the same write, so a paid hold is never turned back. Proof: `prove_l4g_site_hardening.py` v1.30.0 (626 checks, 166 controls).
 - **CX Automation Backend (Session 207):** 6 scripts covering the full after-purchase journey ... proof upload, AI concept pipeline (enrich → brand identity → 3 briefs), concept choice processing, conversation email mirror, batch print advancement, post-delivery feedback. Plus `add_l4g_donor_booking.py` for admin onboarding outside website checkout.
 - **SvelteKit Migration Scaffold (Session 207):** `sveltekit-migration` branch ... adapter-cloudflare, Supabase SSR auth, Mailbox Walk CSS ported, builds in 2.4s. `L4G-Phase-Prompts.md` contains 8 copy-paste prompts for remaining migration phases 4-11.
 - **AI Ad Pipeline:** `enrich_donor_company.py` → `generate_brand_identity.py` → `generate_ad_briefs.py` (Claude FLAGSHIP, 3 approaches: Trust Builder/Value Driver/Story Teller)
@@ -4748,6 +4750,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 7.15 | 261116 | TIG + Claude | L4G self-serve push lane 1: the portal consent card and its daily link check, and one hold per neighborhood with the stale-hold cleanup's safe write (the L4G section). |
 | 6.96 | 261104 | TIG + Claude | Session 904: **L4G call kit parts 2 and 3.** The call log and queue, the calling screen, the one youth rule and the mark (part 2's deferred manual work), how a name goes on, the dial test that writes no try, and the QOS map check. List still empty; parked on TIG's first name. |
 | 6.82 | 261104 | TIG + Claude | **L4G call kit part 1.** California's tax statement live on the site's tax answer, the Terms and receipts on TIG's "ship"; the Do Not Call policy page; QCM's Do Not Call list live on his "migrate 079" (guard A24, A25, the lift alarm). See §L4G call kit. |
 | 6.75 | 261103 | TIG + Claude | Session 885: **Troubleshooting: every session suddenly cannot reach GitHub over https** (a refused login erases the stored sign-in; how to recognize it and who restores it). QQT's plan of record for the 2026-11-06 walkthrough lives in its kickoff; nothing deployed. |
@@ -5559,8 +5562,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.13 by generate_public_manual.py"
-generated: "2026-11-16 05:46"
+source: "Auto-generated from private manual v7.15 by generate_public_manual.py"
+generated: "2026-11-16 22:58"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -6981,7 +6984,7 @@ All QWU Twilio numbers are under the <ADMIN_EMAIL> account with Charity A2P mess
 |--------|---------------|---------|--------------|
 | **<TWILIO_NUMBER>** | BNI-relay | [Networking Chapter] - visitor reminders, member updates, referral alerts | Webhook |
 | **<TWILIO_NUMBER>** | U2SPEAK | [Networking Chapter] - speaker reminder automations | Webhook to n8n |
-| **<TWILIO_NUMBER>** | ... | **QWF's public line** (TIG 2026-07-31; L4G joins its phone tree, 2026-11-02) + general backoffice SMS sender + Ezer inbound SMS. Trusted at the carriers since 2026-11-02: Trust Hub business profile, SHAKEN/STIR, Voice Integrity, caller name "QUIETLY WORKING" (`twilio_tool_wisdom.md` v1.6.1). L4G outbound calls start from it | Webhook (`sms.quietlyworking.org/voice/inbound`) |
+| **<TWILIO_NUMBER>** | ... | **QWF's public line** (TIG 2026-07-31; L4G joins its phone tree, 2026-11-02) + general backoffice SMS sender + Ezer inbound SMS. Trusted at the carriers since 2026-11-02: Trust Hub business profile, SHAKEN/STIR, Voice Integrity, caller name "QUIETLY WORKING" (`twilio_tool_wisdom.md` v1.6.1). L4G outbound calls start from it. **Calls from QCM show it** through QCM's call bridge (edge function `qcm-call-bridge`, 2026-11-16): TIG taps the button, his own phone rings from this line, and at his keypress QCM re-checks the person before dialing them. Nothing is recorded; it runs in a test stage that reaches only his own phones until he widens it (design: `002 Projects/_Quietly CRM/QCM-Call-Bridge-Design.md`) | Webhook (`sms.quietlyworking.org/voice/inbound`) |
 | **<TWILIO_NUMBER>** | ... | VIP/Personal line → forwards to TIG's cell (<PERSONAL_NUMBER>) | Studio Transfer |
 | **TBD** | EZER | Ezer AI Assistant - TIG command intake | Webhook to n8n |
 
@@ -14530,4 +14533,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-16 05:46 (v7.13)*
+*Last updated: 2026-11-16 22:58 (v7.15)*
