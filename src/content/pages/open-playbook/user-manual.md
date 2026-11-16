@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-15 05:37 | Source version: 7.12
+> Generated: 2026-11-16 05:46 | Source version: 7.13
 
 # QWU Backoffice User Manual
 
@@ -5092,7 +5092,7 @@ Next Meeting with Same People
 | `meeting_entity_resolve.py` | Entity matching + SuiteDash CRM |
 | `meeting_update_vault.py` | Vault file updates |
 | `meeting_project_link.py` | Project detection |
-| `send_meeting_followup.py` | Post-meeting recap **DRAFTS** in TIG's Outlook (never sends) | v3.1.0 |
+| `send_meeting_followup.py` | Post-meeting recap **DRAFTS** in TIG's Outlook (never sends). Since 2026-11-15: everyone on the invite list and anyone let into the meeting gets one (a no-show's draft carries a note to TIG), and every copy of a group recap shows the whole meeting (`meeting_recap_look.py` v1.3.0, rule `whole_meeting`) | v3.9.0 |
 | `zoom_reconcile.py` | Reconciliation safety net; holds the exclusive per-meeting processing lock | v1.9.0 |
 | `appreciation_followup_db.py` | ⛔ Component retired 2026-08-30; DB retained read-only for audit | v1.1.0 |
 | `process_appreciation_queue.py` | ⛔ RETIRED 2026-08-30 ... no-op stub | v2.0.0 |
@@ -5559,8 +5559,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.12 by generate_public_manual.py"
-generated: "2026-11-15 05:37"
+source: "Auto-generated from private manual v7.13 by generate_public_manual.py"
+generated: "2026-11-16 05:46"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14530,4 +14530,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-15 05:37 (v7.12)*
+*Last updated: 2026-11-16 05:46 (v7.13)*
