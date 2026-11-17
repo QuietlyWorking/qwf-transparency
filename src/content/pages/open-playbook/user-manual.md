@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-16 22:58 | Source version: 7.15
+> Generated: 2026-11-17 23:09 | Source version: 7.16
 
 # QWU Backoffice User Manual
 
@@ -3986,6 +3986,34 @@ A new public game on a live board with prizes, from its page to its ship, plus a
 | Words are part of the design: a rule that could be read two ways was rewritten to say what actually happens, and a rule the game cannot check was never promised | UX writing, plain language | Beginner |
 | Prove the build you ship is the build you tested: two builds of one commit differ by a version stamp, so a file-by-file comparison replaces that stamp and treats anything else as a stop | Release engineering, reproducible builds | Intermediate |
 
+### L4G print tools: the production watcher, the layout kit and the "card won't mail" notice (2026-11-16 and 17)
+
+Three tools carry a card from booked to printed. All three only ever reach TIG; none writes to the L4G database.
+
+- **The production watcher** (`check_l4g_production_dates.py` v1.7.3, daily 08:15 Pacific): one alert a day for every
+  open deadline (artwork, print order, proofs waiting on a donor-partner, owed calls, the 13-of-16 check, promises, the
+  holidays). Since 2026-11-17 a text that holds an urgent line always names it and shows it on top, and a paid card's
+  print line says "over the holiday closing, set <date> or earlier" when its job runs over December 25 or January 1.
+  Run `--json` with no `--alert` to see what it would say; `--as-of YYYY-MM-DD` to see a future day.
+- **The layout kit** (`build_l4g_layout_kit.py` v1.0.0): `--month YYYY-MM [--dry-run]` puts everything for a hand layout
+  of that month's cards on the QWU Backoffice Drive (`L4G/Card Layout Kits/`): the printer's templates, the band, a grid
+  guide, the steps, and every approved ad named in the site's order. January 2027's kit refreshes itself December 15 and 16.
+- **The "card won't mail" notice** (`draft_l4g_card_wont_mail.py` v1.0.2, RELEASED 2026-11-17): when a card misses 13 of
+  16 on its artwork-due day and TIG decides not to mail it, `--area <slug> --month YYYY-MM --draft` puts one Outlook
+  draft per paid non-founding donor-partner in his mailbox (never a send), with each person's follow-ups: refund, two
+  credits, the swap-back, and booking a credit month (lane 2's `record_l4g_credits.py book`). Without `--draft` it is a
+  dry run. SOP: `qwf_produce_l4g_postcard.md` v1.4.0.
+
+#### MP Training Opportunities ⭐ (from the L4G print tools, 2026-11-16 and 17, Session 980)
+
+| What was done | Skills | Level |
+|---------------|--------|-------|
+| Change only what was asked: every alert after the change was proven to be the old alert plus only the new words, by stripping the words back out across 9,644 simulated days | Regression testing, invariants | Intermediate |
+| Let the new words give way first: in a text with a length limit, each old fallback step tries the line with the new words, then without, so nothing that used to fit is pushed out | Budgeted layouts, graceful degradation | Intermediate |
+| Plant bugs on purpose: each change was broken deliberately in a dozen small ways, and a test had to fail for every one, both with and without the old version beside it | Mutation testing | Advanced |
+| A fresh reviewer each round: four cold reviews of one change each found a real gap the tests missed (a swapped line, a late due-day word, a riding proof, a closing-day print date) | Code review, adversarial thinking | Intermediate |
+| A hand-written PDF writer and a layout ported from the site's own code, checked against the source on 3,003 random cards | File formats, porting, differential testing | Advanced |
+
 ### L4G call kit: California's tax line and QCM's Do Not Call list (2026-11-03 and 04)
 
 **The tax line.** Anyone selling ad space while saying the money funds a charity must state the share deductible as a charitable contribution, or that none is (California Bus. & Prof. Code 17510.3, 17510.4). TIG's blessed statement lives in one home per system: `src/lib/content/legal/tax-statement.js` on the L4G site (the Questions answer and section 5 of the Terms) and `L4G_TAX_STATEMENT` in `preference_center/email.py` for receipts. A test pins the receipt's words to `qwf_program_framing.md`; a changed word needs his bless. The buyer's "Solicitation or Sale for Charitable Purposes Card" is built and stays off until he signs (`CARD_SIGNATURE`). The Do Not Call policy is a public page at locals4good.org/do-not-call.
@@ -4750,6 +4778,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 7.16 | 261117 | TIG + Claude | L4G self-serve push lane 3: the print tools section (the production watcher v1.7.3, the layout kit, the released "card won't mail" notice) and their MP training table. |
 | 7.15 | 261116 | TIG + Claude | L4G self-serve push lane 1: the portal consent card and its daily link check, and one hold per neighborhood with the stale-hold cleanup's safe write (the L4G section). |
 | 6.96 | 261104 | TIG + Claude | Session 904: **L4G call kit parts 2 and 3.** The call log and queue, the calling screen, the one youth rule and the mark (part 2's deferred manual work), how a name goes on, the dial test that writes no try, and the QOS map check. List still empty; parked on TIG's first name. |
 | 6.82 | 261104 | TIG + Claude | **L4G call kit part 1.** California's tax statement live on the site's tax answer, the Terms and receipts on TIG's "ship"; the Do Not Call policy page; QCM's Do Not Call list live on his "migrate 079" (guard A24, A25, the lift alarm). See §L4G call kit. |
@@ -5562,8 +5591,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.15 by generate_public_manual.py"
-generated: "2026-11-16 22:58"
+source: "Auto-generated from private manual v7.16 by generate_public_manual.py"
+generated: "2026-11-17 23:09"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14533,4 +14562,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-16 22:58 (v7.15)*
+*Last updated: 2026-11-17 23:09 (v7.16)*
