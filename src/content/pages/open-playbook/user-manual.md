@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-17 23:09 | Source version: 7.16
+> Generated: 2026-11-17 23:22 | Source version: 7.17
 
 # QWU Backoffice User Manual
 
@@ -4778,6 +4778,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 7.17 | 261117 | TIG + Claude | Session 981: **QWF has ONE published phone number, <TWILIO_NUMBER>** (TIG "swap it", "one number"). The 773-234-KIDS Google Voice line is retired from publication: 263 spots on 151 pages of the five frozen sites redeployed and verified live, the fact sheet skill, legal drafts, anti-nepotism policy and L4G record swapped; the program-framing two-number split retired; the QWF-first greeting for the line blessed and parked to ship 2026-11-20. Records: QWU-WPMU and Call Intelligence System Status, 2026-11-17. |
 | 7.16 | 261117 | TIG + Claude | L4G self-serve push lane 3: the print tools section (the production watcher v1.7.3, the layout kit, the released "card won't mail" notice) and their MP training table. |
 | 7.15 | 261116 | TIG + Claude | L4G self-serve push lane 1: the portal consent card and its daily link check, and one hold per neighborhood with the stale-hold cleanup's safe write (the L4G section). |
 | 6.96 | 261104 | TIG + Claude | Session 904: **L4G call kit parts 2 and 3.** The call log and queue, the calling screen, the one youth rule and the mark (part 2's deferred manual work), how a name goes on, the dial test that writes no try, and the QOS map check. List still empty; parked on TIG's first name. |
@@ -5591,8 +5592,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.16 by generate_public_manual.py"
-generated: "2026-11-17 23:09"
+source: "Auto-generated from private manual v7.17 by generate_public_manual.py"
+generated: "2026-11-17 23:22"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14562,4 +14563,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-17 23:09 (v7.16)*
+*Last updated: 2026-11-17 23:22 (v7.17)*
