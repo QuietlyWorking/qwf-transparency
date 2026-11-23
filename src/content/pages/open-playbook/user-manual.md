@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 7.03 | Started: 251223 | Updated: 261105**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-11-16"
+modifiedDate: "2026-11-23"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-17 23:22 | Source version: 7.17
+> Generated: 2026-11-23 19:24 | Source version: 7.18
 
 # QWU Backoffice User Manual
 
@@ -4171,6 +4171,16 @@ has its own picture.
 **Most valuable MP exercise:** give a student a test that passes nine runs in ten and ask them to find the randomness,
 then rewrite the check so it tests every case on every run.
 
+### MP Training Opportunities ⭐ (from the L4G staff door watch, 2026-11-23, Session 1001)
+
+| Skill / Pattern | Why It Teaches | Difficulty |
+|-----------------|----------------|------------|
+| Pin the fact, not a counter that moves for other reasons | A platform's version number rose on every function when one secret changed, with nothing deployed. An alarm on it would have rung every night for nothing. The time of the last real deploy and the code's fingerprint move only when the code does | Intermediate |
+| Plant bugs to test your tests | Each planted bug must turn a test red. One that survives is either a missing test or a change that makes no difference, and you have to prove which | Intermediate |
+| A first reviewer finds, a second tries to break the finding | The version fault was confirmed at the source and attacked by a second reviewer before anyone was told | Beginner |
+
+**Most valuable MP exercise:** give a student three fields a platform reports about a deployed program and ask which ones change when nothing was deployed, with proof for each.
+
 ### MP Training Opportunities ⭐ (from the L4G staff two-factor close, 2026-11-09, Session 949)
 
 | Skill / Pattern | Why It Teaches | Difficulty |
@@ -4288,6 +4298,7 @@ The L4G system includes:
 - **Artwork is private until approved (LIVE 2026-11-07, TIG's "migrate and ship"):** TIG's rule: all artwork is private until the donor-partner approves it, then public on the public card; a donor-partner's own ad is public when they send it. Proof drafts and message pictures go to the private bucket `l4g-private` and are shown only through 10-minute links signed with the viewer's own session. A database rule, `l4g_proof_art_rule`, refuses a public address on any version waiting for approval and a private one on art written as approved. **Scheduled job:** `publish_l4g_approved_art.py` v1.1.0 runs every minute from cron (through `safe_run.sh`, label `l4g-publish-art`, log `.tmp/logs/l4g_publish_art.log`). It copies an approved private draft to `l4g-proofs`, publishes only when the copy matches the draft byte for byte, and alarms TIG (TODAY) on an approved proof still private after 5 minutes, a waiting proof with a public address, or a public proof file no proof uses. Watchdog: Betterstack heartbeat 527759 (SMS, email and push). It uses only the new secret key and refuses a legacy one, so it ran clean through the two-factor lock and the old keys going off (2026-11-08). Record: `L4G-System-Status.md`, the private art lane's sections; design `L4G-Private-Proofs-Plan-v0.2.md`.
 - **The portal consent card and the daily link check (LIVE 2026-11-12 to 2026-11-16, TIG's "bless" and "ship"):** `send_l4g_journey_email.py` v2.6.0 sends the five updates about a donor-partner's ad as `transactional` (locked on, no stop link) and the check-in a week after the mail drop as `relationship_touchpoint` (fail-closed, with the footer); the portal card asks only that one question ("Yes, I'd love that" / "Not now", live on locals4good.org 2026-11-16). A yes from a login with no QCM link is refused out loud (`record-portal-consent` v13 answers 409), and `check_l4g_login_qcm_links.py` v1.1.0 looks every morning at 08:20 Pacific for any login with no link (TODAY alert by business name; Betterstack heartbeat 531352). `deploy_l4g_edge_function.py` v1.4.1 lets a log line carry `donor.id`, the record's own id, on TIG's "allow it". Records: L4G-System-Status, the 2026-11-12 and 2026-11-16 sections.
 - **One hold per neighborhood (LIVE 2026-11-16, TIG's "ship"):** the site keeps a hold key per neighborhood, so holding a second neighborhood never lets the first go; `manage-hold` v1.2.0 replaces only a group in the same neighborhood, and `expire-stale-holds` v1.2.0 marks a hold expired only if it is still active and still past its time in the same write, so a paid hold is never turned back. Proof: `prove_l4g_site_hardening.py` v1.30.0 (626 checks, 166 controls).
+- **The nightly two-factor check watches the staff edge doors (LIVE 2026-11-23, TIG's "ship"):** `prove_l4g_staff_two_factor.py` v1.7.1 pins `staff-late-pass` to its reviewed deploy by `updated_at` and bundle fingerprint, and fails on any other door that names a staff function. Never pin the platform's `version`: a function secret or API key change raises it on every function with nothing deployed. `deploy_l4g_edge_function.py` v1.5.0 warns (never refuses) when it deploys a pinned door, so whoever deploys updates the pin. The refund tool (`record_l4g_refund.py` v1.2.2) says there is no money to return on a $0 month.
 - **CX Automation Backend (Session 207):** 6 scripts covering the full after-purchase journey ... proof upload, AI concept pipeline (enrich → brand identity → 3 briefs), concept choice processing, conversation email mirror, batch print advancement, post-delivery feedback. Plus `add_l4g_donor_booking.py` for admin onboarding outside website checkout.
 - **SvelteKit Migration Scaffold (Session 207):** `sveltekit-migration` branch ... adapter-cloudflare, Supabase SSR auth, Mailbox Walk CSS ported, builds in 2.4s. `L4G-Phase-Prompts.md` contains 8 copy-paste prompts for remaining migration phases 4-11.
 - **AI Ad Pipeline:** `enrich_donor_company.py` → `generate_brand_identity.py` → `generate_ad_briefs.py` (Claude FLAGSHIP, 3 approaches: Trust Builder/Value Driver/Story Teller)
@@ -4778,6 +4789,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 7.18 | 261123 | TIG + Claude | Session 1001: L4G push lane 2: the nightly two-factor check watches the staff edge doors (v1.7.1), the deploy tool's warning, the refund tool's $0 words, and an MP training table. |
 | 7.17 | 261117 | TIG + Claude | Session 981: **QWF has ONE published phone number, <TWILIO_NUMBER>** (TIG "swap it", "one number"). The 773-234-KIDS Google Voice line is retired from publication: 263 spots on 151 pages of the five frozen sites redeployed and verified live, the fact sheet skill, legal drafts, anti-nepotism policy and L4G record swapped; the program-framing two-number split retired; the QWF-first greeting for the line blessed and parked to ship 2026-11-20. Records: QWU-WPMU and Call Intelligence System Status, 2026-11-17. |
 | 7.16 | 261117 | TIG + Claude | L4G self-serve push lane 3: the print tools section (the production watcher v1.7.3, the layout kit, the released "card won't mail" notice) and their MP training table. |
 | 7.15 | 261116 | TIG + Claude | L4G self-serve push lane 1: the portal consent card and its daily link check, and one hold per neighborhood with the stale-hold cleanup's safe write (the L4G section). |
@@ -5592,8 +5604,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.17 by generate_public_manual.py"
-generated: "2026-11-17 23:22"
+source: "Auto-generated from private manual v7.18 by generate_public_manual.py"
+generated: "2026-11-23 19:24"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14563,4 +14575,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-17 23:22 (v7.17)*
+*Last updated: 2026-11-23 19:24 (v7.18)*
