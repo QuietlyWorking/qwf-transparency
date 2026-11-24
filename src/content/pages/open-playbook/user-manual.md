@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-23 19:24 | Source version: 7.18
+> Generated: 2026-11-24 06:53 | Source version: 7.20
 
 # QWU Backoffice User Manual
 
@@ -277,6 +277,7 @@ The QWU infrastructure is monitored at three layers, all documented in `005 Oper
 | Find when space went, then what took it | The pulse history pinned a "10 GB in a day" to two hours of one afternoon; a `find -newermt` window and `docker image inspect` (`LastTagTime`) then named the folders and the image. Teaches narrowing by time before searching by size | Intermediate |
 | Fail open toward a visible alarm | A typo in the change date reads as "no date", so the checks compare and may raise a false gap someone will look at, instead of going quiet. Teaches choosing which way a safety check fails | Intermediate |
 | Know what your check actually reads (added 2026-10-31, Session 860) | Before deleting the last rollback snapshots, the disk-error check came back with two "hits": both were the kernel's own boot settings (`nvme_core.io_timeout=240`), not errors, and `journalctl -k` had read only the newest boot, missing the day that mattered. Rerun per boot with the boot line dropped, it was clean. Teaches checking that a check looks where you think, before an action you cannot undo | Intermediate |
+| Prove a change touches only the log (added 2026-11-23, Session 1002) | A phone server's error lines held callers' numbers. The fix was proven three ways: the two files' parsed code is identical once log lines are removed, 53,586 simulated calls answered byte for byte the same, and 38 deliberately broken copies were all caught. Teaches AST comparison, differential and mutation testing | Advanced |
 | Let someone try to break it | An independent reviewer broke the first draft of the cost-check change four ways (a malformed date silently turned checks off; the 1st of the month read the wrong day). Teaches adversarial review and tests that would fail without the fix | Advanced |
 | Dates on a UTC machine | The walkthrough's shell step stamped "2026-10-30" for a 2026-10-29 Pacific change. Teaches `TZ=America/Los_Angeles date +%F` | Beginner |
 
@@ -4607,7 +4608,7 @@ the file it wrote ... the audit trail read as a clean success.
 (2026-07-31) found the module's own "one resolution path" claim was false. These still
 resolve entities WITHOUT the resolver and are tracked in
 `002 Projects/_QWU Backoffice Automation/Kickoff Prompts/entity-resolution-remaining-ladders-2026-07-31.md`:
-`entity_lookup.py` · `zoom_pipeline._append_action_item_to_entity` (**writes**) ·
+`entity_lookup.py` ·
 `meeting_entity_resolve.create_draft_person` · `prepare_verification_batch.find_entity_file` ·
 `enrich_member_{instagram,linkedin}.update_entity_file` (**write**). Also unguarded:
 `meeting_update_vault.append_to_person_file` and `email_update_vault.append_to_person_file`.
@@ -4789,6 +4790,8 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 7.20 | 261123 | TIG + Claude | Session 1005: Meeting action items go on the right person's file or are named to TIG (`place_meeting_action_item.py`). **MP teaching moment** (Intermediate, about 1 hour; needs basic Python and log reading): a failed step is not a lost record. Read the log, then open the destination; 54 logged failures were not 54 losses, because another step had written 22 of them. |
+| 7.19 | 261123 | TIG + Claude | Session 1002: L4G push lane 7: the phone server's log keeps the last four digits and the kind of error only, on texts and calls (live in phone server 3.13.1, with the held call alarm); the phone line's registry row and an MP training task. |
 | 7.18 | 261123 | TIG + Claude | Session 1001: L4G push lane 2: the nightly two-factor check watches the staff edge doors (v1.7.1), the deploy tool's warning, the refund tool's $0 words, and an MP training table. |
 | 7.17 | 261117 | TIG + Claude | Session 981: **QWF has ONE published phone number, <TWILIO_NUMBER>** (TIG "swap it", "one number"). The 773-234-KIDS Google Voice line is retired from publication: 263 spots on 151 pages of the five frozen sites redeployed and verified live, the fact sheet skill, legal drafts, anti-nepotism policy and L4G record swapped; the program-framing two-number split retired; the QWF-first greeting for the line blessed and parked to ship 2026-11-20. Records: QWU-WPMU and Call Intelligence System Status, 2026-11-17. |
 | 7.16 | 261117 | TIG + Claude | L4G self-serve push lane 3: the print tools section (the production watcher v1.7.3, the layout kit, the released "card won't mail" notice) and their MP training table. |
@@ -5126,7 +5129,7 @@ Next Meeting with Same People
 6. **Person Insights** - Extract and update Person files with intelligence, action items, quotes
 7. **Update Vault** - Append meeting section to daily note (dedup-aware, replaces stale sections)
 8. **Link Projects** - Detect and link to relevant project files (word-boundary matching, stop words)
-9. **HQ Tasks** - Owner-based routing: TIG's action items → `___Tasks/` files (sync to HQ), other people's items → entity files (`003 Entities/People/[Name].md` under "Their Commitments") + Discord notification
+9. **HQ Tasks** - Owner-based routing: TIG's action items → `___Tasks/` files (sync to HQ), other people's items → entity files (`003 Entities/People/[Name].md` under "Their Commitments") + Discord notification. Since 2026-11-23 `place_meeting_action_item.py` decides whose file: the exact invite address, the exact whole name, or a first name only one person in the room can be. Anything else is refused and named to TIG (in that person's own draft note or one text), unless the meeting notes already put it on that person's file. Rules: `process_zoom_recording.md`
 
 **Scripts:**
 | File | Purpose |
@@ -5273,7 +5276,7 @@ The system ensures **zero silent failures** through 4-layer protection. With 2-5
 **Scripts:**
 | File | Purpose | Version |
 |------|---------|---------|
-| `zoom_pipeline.py` | Main processing orchestrator | v1.12.0 |
+| `zoom_pipeline.py` | Main processing orchestrator | v1.17.0 |
 | `zoom_transcript_download.py` | OAuth + VTT parsing (inline speaker support) | v1.2.0 |
 | `meeting_intel_analyze.py` | Claude API analysis | v1.1.0 |
 | `meeting_entity_resolve.py` | Entity matching + SuiteDash CRM | v1.0.0 |
@@ -5604,8 +5607,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.18 by generate_public_manual.py"
-generated: "2026-11-23 19:24"
+source: "Auto-generated from private manual v7.20 by generate_public_manual.py"
+generated: "2026-11-24 06:53"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7026,7 +7029,7 @@ All QWU Twilio numbers are under the <ADMIN_EMAIL> account with Charity A2P mess
 |--------|---------------|---------|--------------|
 | **<TWILIO_NUMBER>** | BNI-relay | [Networking Chapter] - visitor reminders, member updates, referral alerts | Webhook |
 | **<TWILIO_NUMBER>** | U2SPEAK | [Networking Chapter] - speaker reminder automations | Webhook to n8n |
-| **<TWILIO_NUMBER>** | ... | **QWF's public line** (TIG 2026-07-31; L4G joins its phone tree, 2026-11-02) + general backoffice SMS sender + Ezer inbound SMS. Trusted at the carriers since 2026-11-02: Trust Hub business profile, SHAKEN/STIR, Voice Integrity, caller name "QUIETLY WORKING" (`twilio_tool_wisdom.md` v1.6.1). L4G outbound calls start from it. **Calls from QCM show it** through QCM's call bridge (edge function `qcm-call-bridge`, 2026-11-16): TIG taps the button, his own phone rings from this line, and at his keypress QCM re-checks the person before dialing them. Nothing is recorded; it runs in a test stage that reaches only his own phones until he widens it (design: `002 Projects/_Quietly CRM/QCM-Call-Bridge-Design.md`) | Webhook (`sms.quietlyworking.org/voice/inbound`) |
+| **<TWILIO_NUMBER>** | ... | **QWF's public line** (TIG 2026-07-31; L4G joins its phone tree, 2026-11-02) + general backoffice SMS sender + Ezer inbound SMS. Trusted at the carriers since 2026-11-02: Trust Hub business profile, SHAKEN/STIR, Voice Integrity, caller name "QUIETLY WORKING" (`twilio_tool_wisdom.md` v1.6.1). L4G outbound calls start from it. **Calls from QCM show it** through QCM's call bridge (edge function `qcm-call-bridge`, 2026-11-16): TIG taps the button, his own phone rings from this line, and at his keypress QCM re-checks the person before dialing them. Nothing is recorded; it runs in a test stage that reaches only his own phones until he widens it (design: `002 Projects/_Quietly CRM/QCM-Call-Bridge-Design.md`). **The server's log** keeps only the last four digits and the kind of error since 2026-11-23 (phone server 3.13.1; `twilio_tool_wisdom.md` gotcha 31); the protected records keep full detail | Webhook (`sms.quietlyworking.org/voice/inbound`) |
 | **<TWILIO_NUMBER>** | ... | VIP/Personal line → forwards to TIG's cell (<PERSONAL_NUMBER>) | Studio Transfer |
 | **TBD** | EZER | Ezer AI Assistant - TIG command intake | Webhook to n8n |
 
@@ -14575,4 +14578,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-23 19:24 (v7.18)*
+*Last updated: 2026-11-24 06:53 (v7.20)*
