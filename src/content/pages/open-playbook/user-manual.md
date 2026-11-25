@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-25 05:14 | Source version: 7.23
+> Generated: 2026-11-25 05:20 | Source version: 7.23
 
 # QWU Backoffice User Manual
 
@@ -4797,6 +4797,7 @@ Every SOP includes at the bottom:
 | 7.23 | 261124 | TIG + Claude | Session 1008: L4G push lane 2: the money tools, the words for a month that ended, and the date reading on HQ's board and task screens (§Locals 4 Good); three MP teaching moments. |
 | 7.22 | 261124 | TIG + Claude | Session 1007: L4G push lane 7: the phone line's stop safety net (phone server 3.14.0). **MP teaching moment** (Advanced, about 1 hour; needs basic Python and tests): when two systems read the same message, name what happens when they disagree, and test it by breaking the code on purpose. 124 broken copies were made; the first run's one survivor showed a missing check. |
 | 7.22 | 261124 | TIG + Claude | Session 1008: the chapter's visitor sheet is read signed in, the open link as backup (`read_cathie_visitor_sheet.py` v1.4.0); QNT privacy page and terms drafted (v0.3), not published. **MP teaching moment** (Intermediate, about 1 hour): before closing a shared link, list who is named on the file, so the fix does not lock out the people who use it. |
+| 7.23 | 261124 | TIG + Claude | Session 1009: new member welcome packet section added (v1.2.0: no line about a page that was never sent, the hand hold), with the watcher that adds new members. |
 | 7.21 | 261124 | TIG + Claude | Session 1006: QNT Catch uses each person's own calendar, chapter and area, TIG's included (details in QNT System Status). **MP teaching moment** (Intermediate, about 45 min): a safe default can hide what a rehearsal needs to see. A fixed area answered before the card was read, so the first rehearsal could not show that the card named a place, or that saved addresses were stored in a box nobody read. Run the rehearsal again with the default removed. |
 | 7.20 | 261123 | TIG + Claude | Session 1005: Meeting action items go on the right person's file or are named to TIG (`place_meeting_action_item.py`). **MP teaching moment** (Intermediate, about 1 hour; needs basic Python and log reading): a failed step is not a lost record. Read the log, then open the destination; 54 logged failures were not 54 losses, because another step had written 22 of them. |
 | 7.19 | 261123 | TIG + Claude | Session 1002: L4G push lane 7: the phone server's log keeps the last four digits and the kind of error only, on texts and calls (live in phone server 3.13.1, with the held call alarm); the phone line's registry row and an MP training task. |
@@ -5616,7 +5617,7 @@ Format: Searchable markdown with YAML frontmatter
 type: meeting-transcript
 tags: [transcript, imported]
 source: "Auto-generated from private manual v7.23 by generate_public_manual.py"
-generated: "2026-11-25 05:14"
+generated: "2026-11-25 05:20"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7654,6 +7655,24 @@ in TIG's record of the run. **Since v1.4.1 (2026-10-29) no copy is BCC'd to TIG:
 own which will be my signal that they have gone out correctly." **Done (TIG "bless", 2026-10-29):** the
 weekly report, its addendum and the applicant email now follow the same every-member rule, above.
 
+#### The new member welcome packet (live 2026-11-22, v1.2.0 2026-11-24)
+
+`draft_qnt_new_member_welcome.py` runs at 07:30 Pacific (heartbeat 538041). For each member newly active on
+the roster it re-checks the email's 48 promises, then leaves ONE Outlook DRAFT: TIG's blessed words and a Meet
+Your Chapter PDF. It never sends and has no send path (pinned by a test). Changed words make no draft. Since
+v1.2.0 a member whose applicant page was never sent gets the paragraph without the sentence that says it was;
+a record that cannot be read still holds. **Commands:** `--check`; `--member NAME --preview DIR`;
+`--member NAME --apply`; `--member NAME --hold REASON` keeps one person's draft waiting on TIG (it beats
+`--apply --force`); `--member NAME --release` ends it. The ledger is `005 Operations/Data/qnt_welcome_packet_ledger.json`.
+
+**Where new members come from:** `add_qnt_new_members_from_bni.py` (7, 22, 37 and 52 past each hour, heartbeat
+538072) reads BNI's own welcome email in TIG's mailbox, adds the member, and holds and tells TIG anything
+it cannot be sure of.
+
+| MP training task | Skills | Prerequisites | Time | Level |
+|---|---|---|---|---|
+| Write two truthful versions of one email paragraph and the test that picks between them | Conditional content, test writing, why a false sentence is a bug | Python basics | 2 hours | Beginner |
+
 #### MP Training Opportunities (from the 2026-10-28 room list)
 
 | Task | Skills Developed |
@@ -8287,6 +8306,11 @@ qnt_recap_generator.py      16-section registry -> TWO editions (member + visito
   OR      draft_qnt_recap_emails.py --create   <- CURRENT PRACTICE
                                           one Outlook DRAFT per recipient; NO send path
 ```
+
+**Only public messages are saved (live 2026-11-24, migration 069).** A database trigger keeps only messages to Everyone on
+every save of `meetings.chat_raw`. The keeper's own private messages go to a sealed holding table no login or service key can
+read; anyone else's are dropped for good. The AI summary is for officers and the owner. Only Zoom's saved chat file can be
+read: any other pasted format is stored empty, with no warning on screen yet. The Aug 13 and Aug 20 pieces are held until rebuilt.
 
 **Two editions, deliberately different audiences.** `visitor_spotlight` and `power_team_matches`
 are **member-only edition sets** in `SECTION_REGISTRY` (not config toggles) ... a visitor edition
@@ -14586,4 +14610,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-25 05:14 (v7.23)*
+*Last updated: 2026-11-25 05:20 (v7.23)*
