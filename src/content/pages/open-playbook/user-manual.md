@@ -11,7 +11,7 @@ isHome: false
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-25 01:54 | Source version: 7.21
+> Generated: 2026-11-25 05:14 | Source version: 7.23
 
 # QWU Backoffice User Manual
 
@@ -4300,6 +4300,9 @@ The L4G system includes:
 - **The portal consent card and the daily link check (LIVE 2026-11-12 to 2026-11-16, TIG's "bless" and "ship"):** `send_l4g_journey_email.py` v2.6.0 sends the five updates about a donor-partner's ad as `transactional` (locked on, no stop link) and the check-in a week after the mail drop as `relationship_touchpoint` (fail-closed, with the footer); the portal card asks only that one question ("Yes, I'd love that" / "Not now", live on locals4good.org 2026-11-16). A yes from a login with no QCM link is refused out loud (`record-portal-consent` v13 answers 409), and `check_l4g_login_qcm_links.py` v1.1.0 looks every morning at 08:20 Pacific for any login with no link (TODAY alert by business name; Betterstack heartbeat 531352). `deploy_l4g_edge_function.py` v1.4.1 lets a log line carry `donor.id`, the record's own id, on TIG's "allow it". Records: L4G-System-Status, the 2026-11-12 and 2026-11-16 sections.
 - **One hold per neighborhood (LIVE 2026-11-16, TIG's "ship"):** the site keeps a hold key per neighborhood, so holding a second neighborhood never lets the first go; `manage-hold` v1.2.0 replaces only a group in the same neighborhood, and `expire-stale-holds` v1.2.0 marks a hold expired only if it is still active and still past its time in the same write, so a paid hold is never turned back. Proof: `prove_l4g_site_hardening.py` v1.30.0 (626 checks, 166 controls).
 - **The nightly two-factor check watches the staff edge doors (LIVE 2026-11-23, TIG's "ship"):** `prove_l4g_staff_two_factor.py` v1.7.1 pins `staff-late-pass` to its reviewed deploy by `updated_at` and bundle fingerprint, and fails on any other door that names a staff function. Never pin the platform's `version`: a function secret or API key change raises it on every function with nothing deployed. `deploy_l4g_edge_function.py` v1.5.0 warns (never refuses) when it deploys a pinned door, so whoever deploys updates the pin. The refund tool (`record_l4g_refund.py` v1.2.2) says there is no money to return on a $0 month.
+- **L4G money tools (Session 1008; each live write waits on TIG's "go"):** `record_l4g_credits.py` v1.2.4 (grant, preview, book and give back credit months), `move_l4g_booking_month.py` v1.0.4 (a booking and its space move together), `open_l4g_card_late.py` v1.0.2 (a late pass on one card; staff also have the button on the Production page), `record_l4g_refund.py` v1.2.2 (writes down a refund a person made; it refunds nothing), `draft_l4g_card_wont_mail.py` v1.0.5 (drafts only). `check_l4g_production_dates.py` v1.8.0 honors a late pass.
+- **Words for a month that ended (LIVE 2026-11-24, TIG's "ship and save"):** `sync_l4g_status_to_qcm.py` v1.4.0 says a given-back credit month is "credit returned" on QCM's caller card, and a bookings list too long for QCM is cut by kind, never the next card, and says so. HQ's L4G board (`sync_hq_l4g.py` v1.8.0) shows "Refund due", "Refunded" or "Credit returned" instead of "lead", and HQ's board and task screens read a bare day as that day in Pacific. The portal still says "Refunded" for a given-back month.
+- **MP training opportunities (Session 1008):** (1) *A date with no time* (Beginner, 1 hour; basic JavaScript): print `new Date("2027-01-01")` in Pacific and UTC, then fix a due-date list with tests in three time zones. (2) *A safety stop that did not stop* (Intermediate, 1 hour; bash): break a check on purpose and prove the script stops there. (3) *Do the parts add up?* (Beginner, 30 minutes): 384 + 2 + 15 = 401 leaves no room for "4 more"; check a status line's numbers before repeating it.
 - **CX Automation Backend (Session 207):** 6 scripts covering the full after-purchase journey ... proof upload, AI concept pipeline (enrich → brand identity → 3 briefs), concept choice processing, conversation email mirror, batch print advancement, post-delivery feedback. Plus `add_l4g_donor_booking.py` for admin onboarding outside website checkout.
 - **SvelteKit Migration Scaffold (Session 207):** `sveltekit-migration` branch ... adapter-cloudflare, Supabase SSR auth, Mailbox Walk CSS ported, builds in 2.4s. `L4G-Phase-Prompts.md` contains 8 copy-paste prompts for remaining migration phases 4-11.
 - **AI Ad Pipeline:** `enrich_donor_company.py` → `generate_brand_identity.py` → `generate_ad_briefs.py` (Claude FLAGSHIP, 3 approaches: Trust Builder/Value Driver/Story Teller)
@@ -4331,7 +4334,7 @@ The L4G system includes:
 | `generate_ad_briefs.py` | AI brief generation ... 3 concept approaches | v1.0.0 |
 | `populate_l4g_postcard_config.py` | Seeds postcard config rows for N months | v1.0.0 |
 | `update_l4g_print_status.py` | Advances print status through 7 stages | v1.0.0 |
-| `sync_hq_l4g.py` | HQ Operations module sync (every 15 min) | v1.1.0 |
+| `sync_hq_l4g.py` | HQ Operations module sync (every 15 min) | v1.8.0 |
 | `dispatch_l4g_category_notification.py` | Multi-channel admin notification (Discord + SMS) | v1.0.0 |
 | `send_l4g_concierge_response.py` | Auto-response email after category request resolution (Exempt, MS Graph) | v1.0.0 |
 | `import_l4g_postal_routes.py` | Import EDDM route CSV to l4g_postal_routes (`--dry-run`, `--geocode`, on_conflict upsert) | v1.1.0 |
@@ -4790,6 +4793,10 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 7.23 | 261124 | TIG + Claude | Session 1008: QNT membership payments designed, built and tested on a branch, not live (details in QNT System Status). **MP teaching moment** (Intermediate, about 1 hour; needs basic testing): break each rule in a copy of the code on purpose, one at a time, and see whether a test notices. A rule no test notices has no test, however green the suite is. |
+| 7.23 | 261124 | TIG + Claude | Session 1008: L4G push lane 2: the money tools, the words for a month that ended, and the date reading on HQ's board and task screens (§Locals 4 Good); three MP teaching moments. |
+| 7.22 | 261124 | TIG + Claude | Session 1007: L4G push lane 7: the phone line's stop safety net (phone server 3.14.0). **MP teaching moment** (Advanced, about 1 hour; needs basic Python and tests): when two systems read the same message, name what happens when they disagree, and test it by breaking the code on purpose. 124 broken copies were made; the first run's one survivor showed a missing check. |
+| 7.22 | 261124 | TIG + Claude | Session 1008: the chapter's visitor sheet is read signed in, the open link as backup (`read_cathie_visitor_sheet.py` v1.4.0); QNT privacy page and terms drafted (v0.3), not published. **MP teaching moment** (Intermediate, about 1 hour): before closing a shared link, list who is named on the file, so the fix does not lock out the people who use it. |
 | 7.21 | 261124 | TIG + Claude | Session 1006: QNT Catch uses each person's own calendar, chapter and area, TIG's included (details in QNT System Status). **MP teaching moment** (Intermediate, about 45 min): a safe default can hide what a rehearsal needs to see. A fixed area answered before the card was read, so the first rehearsal could not show that the card named a place, or that saved addresses were stored in a box nobody read. Run the rehearsal again with the default removed. |
 | 7.20 | 261123 | TIG + Claude | Session 1005: Meeting action items go on the right person's file or are named to TIG (`place_meeting_action_item.py`). **MP teaching moment** (Intermediate, about 1 hour; needs basic Python and log reading): a failed step is not a lost record. Read the log, then open the destination; 54 logged failures were not 54 losses, because another step had written 22 of them. |
 | 7.19 | 261123 | TIG + Claude | Session 1002: L4G push lane 7: the phone server's log keeps the last four digits and the kind of error only, on texts and calls (live in phone server 3.13.1, with the held call alarm); the phone line's registry row and an MP training task. |
@@ -5608,8 +5615,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.21 by generate_public_manual.py"
-generated: "2026-11-25 01:54"
+source: "Auto-generated from private manual v7.23 by generate_public_manual.py"
+generated: "2026-11-25 05:14"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -7030,7 +7037,7 @@ All QWU Twilio numbers are under the <ADMIN_EMAIL> account with Charity A2P mess
 |--------|---------------|---------|--------------|
 | **<TWILIO_NUMBER>** | BNI-relay | [Networking Chapter] - visitor reminders, member updates, referral alerts | Webhook |
 | **<TWILIO_NUMBER>** | U2SPEAK | [Networking Chapter] - speaker reminder automations | Webhook to n8n |
-| **<TWILIO_NUMBER>** | ... | **QWF's public line** (TIG 2026-07-31; L4G joins its phone tree, 2026-11-02) + general backoffice SMS sender + Ezer inbound SMS. Trusted at the carriers since 2026-11-02: Trust Hub business profile, SHAKEN/STIR, Voice Integrity, caller name "QUIETLY WORKING" (`twilio_tool_wisdom.md` v1.6.1). L4G outbound calls start from it. **Calls from QCM show it** through QCM's call bridge (edge function `qcm-call-bridge`, 2026-11-16): TIG taps the button, his own phone rings from this line, and at his keypress QCM re-checks the person before dialing them. Nothing is recorded; it runs in a test stage that reaches only his own phones until he widens it (design: `002 Projects/_Quietly CRM/QCM-Call-Bridge-Design.md`). **The server's log** keeps only the last four digits and the kind of error since 2026-11-23 (phone server 3.13.1; `twilio_tool_wisdom.md` gotcha 31); the protected records keep full detail | Webhook (`sms.quietlyworking.org/voice/inbound`) |
+| **<TWILIO_NUMBER>** | ... | **QWF's public line** (TIG 2026-07-31; L4G joins its phone tree, 2026-11-02) + general backoffice SMS sender + Ezer inbound SMS. Trusted at the carriers since 2026-11-02: Trust Hub business profile, SHAKEN/STIR, Voice Integrity, caller name "QUIETLY WORKING" (`twilio_tool_wisdom.md` v1.6.1). L4G outbound calls start from it. **Calls from QCM show it** through QCM's call bridge (edge function `qcm-call-bridge`, 2026-11-16): TIG taps the button, his own phone rings from this line, and at his keypress QCM re-checks the person before dialing them. Nothing is recorded; it runs in a test stage that reaches only his own phones until he widens it (design: `002 Projects/_Quietly CRM/QCM-Call-Bridge-Design.md`). **The server's log** keeps only the last four digits and the kind of error since 2026-11-23 (phone server 3.13.1; `twilio_tool_wisdom.md` gotcha 31); the protected records keep full detail. **The stop safety net** (phone server 3.14.0, 2026-11-24): when Twilio marks a text as a stop and our reader read it as anything else, the stop is saved anyway and TIG gets a "Text line" alarm naming a missed word; TIG's own number only alarms (gotcha 30) | Webhook (`sms.quietlyworking.org/voice/inbound`) |
 | **<TWILIO_NUMBER>** | ... | VIP/Personal line → forwards to TIG's cell (<PERSONAL_NUMBER>) | Studio Transfer |
 | **TBD** | EZER | Ezer AI Assistant - TIG command intake | Webhook to n8n |
 
@@ -8188,7 +8195,7 @@ After each BNI meeting, generate a comprehensive recap email that:
 | `process_bni_chat.py` | Parse Zoom chat export, extract participants, referrals, 1-2-1 requests, announcements |
 | `generate_bni_meeting_recap.py` | Generate personalized HTML recap emails |
 | `read_speaker_schedule.py` | Read speaker assignments from Google Sheets |
-| `read_cathie_visitor_sheet.py` | Read visitor attendance/interest from [Member Name]'s tracking sheet |
+| `read_cathie_visitor_sheet.py` | Read visitor attendance/interest from [Member Name]'s tracking sheet. Since v1.4.0 it reads signed in (read-only), with the open link as backup; `--access` says when that link may be closed |
 | `extract_slide_intel.py` | Analyze meeting screenshots via Claude Vision (multimodal). Downloads from Google Drive shared folder, analyzes each image, synthesizes presentations + attendees + notable moments into unified JSON intelligence. |
 
 ### Usage
@@ -14579,4 +14586,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-25 01:54 (v7.21)*
+*Last updated: 2026-11-25 05:14 (v7.23)*
