@@ -4,14 +4,14 @@ slug: "user-manual"
 pillar: "open-playbook"
 description: "**Version: 7.03 | Started: 251223 | Updated: 261105**"
 publishDate: "2024-12-20"
-modifiedDate: "2026-11-23"
+modifiedDate: "2026-11-24"
 tags: ["operations", "pkm", "automation", "azure", "docker", "calendar", "leads", "wisdom", "experts", "l4g", "content-calendar", "relationships"]
 isHome: false
 ---
 > [!INFO] PUBLIC VERSION
 > This is the public, redacted version of the QWU Backoffice User Manual. Sensitive data (IPs, credentials, project IDs, personal names) has been replaced with descriptive placeholders like `<VM_IP>` or `[Member Name]`. The structure and educational content are preserved for transparency and Missing Pixel student training.
 >
-> Generated: 2026-11-24 06:53 | Source version: 7.20
+> Generated: 2026-11-25 01:54 | Source version: 7.21
 
 # QWU Backoffice User Manual
 
@@ -4790,6 +4790,7 @@ Every SOP includes at the bottom:
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
+| 7.21 | 261124 | TIG + Claude | Session 1006: QNT Catch uses each person's own calendar, chapter and area, TIG's included (details in QNT System Status). **MP teaching moment** (Intermediate, about 45 min): a safe default can hide what a rehearsal needs to see. A fixed area answered before the card was read, so the first rehearsal could not show that the card named a place, or that saved addresses were stored in a box nobody read. Run the rehearsal again with the default removed. |
 | 7.20 | 261123 | TIG + Claude | Session 1005: Meeting action items go on the right person's file or are named to TIG (`place_meeting_action_item.py`). **MP teaching moment** (Intermediate, about 1 hour; needs basic Python and log reading): a failed step is not a lost record. Read the log, then open the destination; 54 logged failures were not 54 losses, because another step had written 22 of them. |
 | 7.19 | 261123 | TIG + Claude | Session 1002: L4G push lane 7: the phone server's log keeps the last four digits and the kind of error only, on texts and calls (live in phone server 3.13.1, with the held call alarm); the phone line's registry row and an MP training task. |
 | 7.18 | 261123 | TIG + Claude | Session 1001: L4G push lane 2: the nightly two-factor check watches the staff edge doors (v1.7.1), the deploy tool's warning, the refund tool's $0 words, and an MP training table. |
@@ -5607,8 +5608,8 @@ Format: Searchable markdown with YAML frontmatter
 ---
 type: meeting-transcript
 tags: [transcript, imported]
-source: "Auto-generated from private manual v7.20 by generate_public_manual.py"
-generated: "2026-11-24 06:53"
+source: "Auto-generated from private manual v7.21 by generate_public_manual.py"
+generated: "2026-11-25 01:54"
 date: 2025-07-18
 topic: "Time with Sue & [Participant]"
 duration_minutes: 69
@@ -14578,4 +14579,4 @@ Log: `.tmp/logs/call_intel_ingest.log`. All three are dry-run by default and ide
 
 ---
 
-*Last updated: 2026-11-24 06:53 (v7.20)*
+*Last updated: 2026-11-25 01:54 (v7.21)*
